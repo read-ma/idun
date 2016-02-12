@@ -6,7 +6,7 @@ const initialState = {
     }
 };
 
-export function main(state = initialState, action) {
+function main(state = initialState, action) {
     return state;
     switch (action.type) {
 
@@ -14,3 +14,8 @@ export function main(state = initialState, action) {
             return state;
     }
 }
+
+import article from './article';
+import articles from './articles';
+
+export {article, articles, main}
