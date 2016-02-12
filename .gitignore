@@ -1,5 +1,7 @@
 /node_modules
 /bower_components
-public/bundle.js
-public/style.css
+public/*.js
+public/*.css
+/dist/bundle.js
+/dist/public/style.css
 public/bundle.js

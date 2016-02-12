@@ -3,8 +3,9 @@ const initialState = {
 };
 
 export default function article(state = initialState, action) {
-    return state;
     switch (action.type) {
+    case 'ARTICLE_LOADED':
+        return Object.assign({}, state, action.article);
 
         default:
             return state;

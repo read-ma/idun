@@ -3,12 +3,12 @@ const initialState = [
     {title: 'last article', content: 'last article content', id: 'e3e4'}
 ];
 
-
 export default function articles(state = initialState, action) {
-    return state;
     switch (action.type) {
+    case 'ARTICLES_LOADED':
+        return action.items;
 
-        default:
-            return state;
+    default:
+        return state;
     }
 }
