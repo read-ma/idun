@@ -2,7 +2,8 @@ import * as types from '../constants/ActionTypes';
 
 const initialState = {
     profile: {
-        name: 'Artur'
+        name: 'Hubert Blaine Wolfeschlegelsteinhausenbergerdorff, Sr.',
+        role: 'anonymous'
     }
 };
 

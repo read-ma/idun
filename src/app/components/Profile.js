@@ -10,7 +10,10 @@ function mapStateToProps(state) {
 class Profile extends Component {
     render() {
         return (
-            <h2>Hello {this.props.profile.name}</h2>
+            <div>
+              <h2>Hello {this.props.profile.name}</h2>
+              <p>You are logged in as {this.props.profile.role}</p>
+            </div>
         );
     }
 }

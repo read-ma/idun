@@ -18,7 +18,6 @@ function ArticleLink(id, title){
 class Articles extends Component {
 
     componentDidMount() {
-        console.log('init');
         this.props.dispatch(loadArticles());
     }
 

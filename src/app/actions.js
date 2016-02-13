@@ -18,8 +18,7 @@ function loadArticles() {
 
 function loadArticle(articleId){
     return (dispatch) => {
-        console.log('loadArticle', articleId);
-        dispatch(articleLoaded(getArticle(articleId)));
+        getArticle(articleId, (article) => { dispatch(articleLoaded(article))});
     };
 }
 
@@ -35,6 +34,11 @@ export {loadArticles, loadArticle}
 const ARTICLES_END_POINT = 'http://localhost:3000/api/articles.json';
 
 function getArticles(params, handleSuccess){
+    let articles = store.getState().articles;
+
+    if (articles.length >0) {
+        return handleSuccess(articles);
+    }
     return request
         .get(ARTICLES_END_POINT).accept('application/json')
         .end((err, response) => {
@@ -43,6 +47,13 @@ function getArticles(params, handleSuccess){
         });
 }
 
-function getArticle(id) {
-    return store.getState().articles.filter((article) => { return article.id == id;})[0];
+function getLocalArticle(id) {
+    return store.getState().articles.filter((article) => {
+        return article.id == id;})[0];
+}
+
+function getArticle(id, handleSuccess) {
+    return handleSuccess(
+        getLocalArticle(id)
+    );
 }
