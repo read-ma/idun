@@ -1,21 +1,47 @@
 require('./Article.scss');
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { loadArticle } from '../actions';
+import { loadArticle, textSelected } from '../actions';
 import { Link } from 'react-router';
 import { highlightSearch, getSelectedText } from '../highlight';
+import { Sidebar } from '../components';
 
-function mapStateToProps(state) {
-    return {
-        article: state.article
-    };
-};
-
-class Article extends Component {
+class ArticleContent extends Component {
     constructor(props) {
         super(props);
         this.state = {};
     }
+
+    componentWillReceiveProps(nextProps){
+        if (nextProps.selectedText)
+            this.setState(
+                { text: highlightSearch(nextProps.text, [nextProps.selectedText], 'selection') }
+            );
+        else
+            this.setState( { text: nextProps.text } )
+    }
+
+    render(){
+        return (
+            <div onMouseUp={this.props.onTextSelected} dangerouslySetInnerHTML={{__html: this.state.text}}></div>
+        );
+    }
+};
+
+const ArticleTitle = ({title, source_url}) => {
+    return (
+        <div className="article-title">
+          <h2>
+            <Link to='articles'>articles</Link>
+            /
+            {title}
+          </h2>
+          <h3>{source_url}</h3>
+        </div>
+    );
+};
+
+class Article extends Component {
 
     componentDidMount(){
         this.props.dispatch(
@@ -23,32 +49,30 @@ class Article extends Component {
         );
     }
 
-    getSelectedText() {
-        return getSelectedText();
-    }
-
-    handleSelected(){
+    onTextSelected(){
         if (!getSelectedText()) return;
+        console.log(getSelectedText());
 
-        this.setState({content: highlightSearch(this.props.article.content, [this.getSelectedText()], 'selection') });
-    }
-
-    componentWillReceiveProps(nextProps){
-        this.setState({ content: nextProps.article.content });
+        this.props.dispatch(
+            textSelected(getSelectedText())
+        );
     }
 
     render() {
         return (
-            <article>
-              <h2>
-                <Link to='articles'>{"<< "}</Link>
-                                          {this.props.article.title} {this.props.params.id}
-                                          </h2>
-              <h3>{this.props.article.sourceUrl}</h3>
-              <div onMouseUp={this.handleSelected.bind(this)} dangerouslySetInnerHTML={{__html: this.state.content}}></div>
-            </article>
+            <div className='with-sidebar'>
+              <article>
+                <ArticleTitle title={this.props.title} source_url={this.props.source_url} />
+                <ArticleContent text={this.props.content} onTextSelected={this.onTextSelected.bind(this)} selectedText={this.props.selectedText} />
+              </article>
+              <Sidebar />
+            </div>
         );
     }
 }
+
+function mapStateToProps(state) {
+    return state.article
+};
 
 export default connect(mapStateToProps)(Article);

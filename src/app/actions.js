@@ -1,6 +1,13 @@
 import request from 'superagent';
 import store from './store';
 
+function textSelected(text) {
+    return {
+        type: 'TEXT_SELECTED',
+        text: text
+    }
+};
+
 function articlesLoaded(items) {
     return {
         type: 'ARTICLES_LOADED',
@@ -29,7 +36,7 @@ function articleLoaded(article){
     };
 }
 
-export {loadArticles, loadArticle}
+export {loadArticles, loadArticle, textSelected}
 
 const ARTICLES_END_POINT = 'http://localhost:3000/api/articles.json';
 

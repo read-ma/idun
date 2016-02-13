@@ -1,7 +1,6 @@
 require('./Main.scss');
 import React from 'react';
 import { Link } from 'react-router';
-import { Sidebar } from '../components';
 
 const Main = ({children, history}) => {
     return (
@@ -10,7 +9,6 @@ const Main = ({children, history}) => {
           <div className="container">
             {children}
           </div>
-          <Sidebar />
         </div>
     );
 };
