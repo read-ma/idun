@@ -13,12 +13,12 @@ class ArticleContent extends Component {
     }
 
     componentWillReceiveProps(nextProps){
+        var text = nextProps.text;
+
         if (nextProps.selectedText)
-            this.setState(
-                { text: highlightSearch(nextProps.text, [nextProps.selectedText], 'selection') }
-            );
-        else
-            this.setState( { text: nextProps.text } )
+            text = highlightSearch(nextProps.text, [nextProps.selectedText], 'selection');
+
+        this.setState( { text: text } )
     }
 
     render(){
@@ -32,9 +32,7 @@ const ArticleTitle = ({title, source_url}) => {
     return (
         <div className="article-title">
           <h2>
-            <Link to='articles'>articles</Link>
-            /
-            {title}
+            <Link to='articles'>articles</Link> / {title}
           </h2>
           <h3>{source_url}</h3>
         </div>
@@ -51,7 +49,6 @@ class Article extends Component {
 
     onTextSelected(){
         if (!getSelectedText()) return;
-        console.log(getSelectedText());
 
         this.props.dispatch(
             textSelected(getSelectedText())
