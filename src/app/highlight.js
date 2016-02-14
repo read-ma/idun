@@ -9,7 +9,7 @@ function getSelectedText() {
     return "";
 };
 
-function highlightSearch(text, words, className) {
+function markWords(text, words, className) {
     return text.replace(buildRegex(words.join('|')), "<mark class='"+className+"'>$1</mark>");
 };
 
@@ -21,4 +21,21 @@ function cleanUpHighlighting(text) {
     return text.replace(/(<mark class="[a-z]*">|<\/mark>)/igm, "");
 };
 
-export { highlightSearch, getSelectedText }
+// Dictionary
+// {
+//     enabled: boolean,
+//     words: <String>[],
+//     name: String
+// }
+function highlightText({text, dictionaries}) {
+    let result = text;
+
+    dictionaries.forEach((dict) => {
+        if (dict.enabled && dict.words.length > 0)
+            result = markWords(result, dict.words, dict.name);
+    });
+    return result;
+}
+
+
+export { highlightText, getSelectedText }

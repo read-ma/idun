@@ -3,24 +3,18 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { loadArticle, textSelected } from '../actions';
 import { Link } from 'react-router';
-import { highlightSearch, getSelectedText } from '../highlight';
-import Sidebar from '../containers/Sidebar'
+import { highlightText, getSelectedText } from '../highlight';
+import Sidebar from '../containers/Sidebar';
 
 class ArticleContent extends Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {text: highlightText(props)};
     }
 
+
     componentWillReceiveProps(nextProps){
-        var text = nextProps.text;
-
-        nextProps.dictionaries.forEach((dict) => {
-            if (dict.enabled && dict.words.length > 0)
-                text = highlightSearch(text, dict.words, dict.name);
-        });
-
-        this.setState( { text: text } )
+        this.setState( { text: highlightText(nextProps) } );
     }
 
     render(){
@@ -63,8 +57,8 @@ class Article extends Component {
               <article>
                 <ArticleTitle title={this.props.title} source_url={this.props.source_url} />
                 <ArticleContent text={this.props.content} onTextSelected={this.onTextSelected.bind(this)} dictionaries={this.props.dictionaries} />
-                </article>
-                <Sidebar />
+              </article>
+              <Sidebar />
             </div>
         );
     }
