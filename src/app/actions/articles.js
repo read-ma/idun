@@ -1,12 +1,6 @@
 import request from 'superagent';
-import store from './store';
+import store from '../store';
 
-function textSelected(text) {
-    return {
-        type: 'TEXT_SELECTED',
-        text: text
-    }
-};
 
 function articlesLoaded(items) {
     return {
@@ -25,7 +19,7 @@ function loadArticles() {
 
 function loadArticle(articleId){
     return (dispatch) => {
-        getArticle(articleId, (article) => { dispatch(articleLoaded(article))});
+        getArticle(articleId, (article) => { dispatch(articleLoaded(article)); });
     };
 }
 
@@ -35,8 +29,6 @@ function articleLoaded(article){
         article: article
     };
 }
-
-export {loadArticles, loadArticle, textSelected}
 
 const ARTICLES_END_POINT = 'http://localhost:3000/api/articles.json';
 
@@ -64,3 +56,5 @@ function getArticle(id, handleSuccess) {
         getLocalArticle(id)
     );
 }
+
+export { loadArticle, loadArticles }

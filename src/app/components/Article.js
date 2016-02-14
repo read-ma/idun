@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { loadArticle, textSelected } from '../actions';
 import { Link } from 'react-router';
 import { highlightSearch, getSelectedText } from '../highlight';
-import { Sidebar } from '../components';
+import Sidebar from '../containers/Sidebar'
 
 class ArticleContent extends Component {
     constructor(props) {
@@ -15,7 +15,7 @@ class ArticleContent extends Component {
     componentWillReceiveProps(nextProps){
         var text = nextProps.text;
 
-        if (nextProps.selectedText)
+        if (nextProps.selectedText && nextProps.selectedText.trim())
             text = highlightSearch(nextProps.text, [nextProps.selectedText], 'selection');
 
         this.setState( { text: text } )
@@ -61,8 +61,8 @@ class Article extends Component {
               <article>
                 <ArticleTitle title={this.props.title} source_url={this.props.source_url} />
                 <ArticleContent text={this.props.content} onTextSelected={this.onTextSelected.bind(this)} selectedText={this.props.selectedText} />
-              </article>
-              <Sidebar />
+                </article>
+                <Sidebar />
             </div>
         );
     }

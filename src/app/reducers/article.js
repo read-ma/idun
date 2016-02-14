@@ -1,6 +1,4 @@
-const initialState = {
-    title: 'blank'
-};
+const initialState = {};
 
 export default function article(state = initialState, action) {
     switch (action.type) {
