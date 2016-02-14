@@ -14,4 +14,4 @@ function toggleHighlighting(dictionary) {
     };
 }
 
-export {loadArticles, loadArticle, textSelected, toggleHighlighting}
+export { loadArticles, loadArticle, textSelected, toggleHighlighting }

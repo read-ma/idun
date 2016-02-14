@@ -4,6 +4,7 @@ import request from 'superagent';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { toggleHighlighting } from '../actions';
+import * as player from '../actions/tts';
 
 class Dictionaries extends Component {
 
@@ -14,6 +15,22 @@ class Dictionaries extends Component {
               <button name='user' onClick={this.props.handleSelected}>user</button>
             </div>
         );
+    }
+}
+
+class TtsPlayer extends Component {
+    play(){
+        player.start(this.props.selection);
+    }
+
+    render(){
+        return (
+            <nav>
+              <button onClick={this.play.bind(this)}>play</button>
+              <button onClick={player.pause}>pause</button>
+              <button onClick={player.resume}>resume</button>
+              <button onClick={player.stop}>stop</button>
+            </nav>);
     }
 }
 
@@ -29,6 +46,7 @@ class Sidebar extends Component {
         return (
             <div className='sidebar'>
               <h3>{this.props.selectedText}</h3>
+              <TtsPlayer selection={this.props.selectedText}/>
               <Dictionaries handleSelected={this.handleSelected.bind(this)} />
             </div>);
     }
