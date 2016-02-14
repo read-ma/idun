@@ -1,7 +1,19 @@
-mark.selection {
-    background-color: pink;
-};
+mark {
+    background-color: inherit;
+    color: inherit;
 
+    &.selection {
+        background-color: pink;
+    };
+
+    &.user {
+        border-bottom: solid 3px red;
+    }
+
+    &.d3k{
+        color: green;
+    }
+}
 .with-sidebar {
     width: 65%;
     padding: 10px;

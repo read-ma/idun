@@ -1,8 +1,10 @@
+import {words as d3k} from '../constants/d3k';
+
 const initialState = [
-    {name: 'd3k', enabled: false, words: ['yes', 'is', 'the'] },
-    {name: 'user', enabled: false, words: ['user'] },
-    {name: 'selection', enabled: true, words: []}
-]
+    {name: 'selection', enabled: true, words: []},
+    {name: 'd3k', enabled: false, words: d3k },
+    {name: 'user', enabled: false, words: ['user', 'positive', 'recognition', 'the', 'first','be involved', 'win'] },
+];
 
 export default function dictionaries(state = initialState, action) {
 
