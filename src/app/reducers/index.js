@@ -1,6 +1,7 @@
 import * as types from '../constants/ActionTypes';
 import article from './article';
 import articles from './articles';
+import dictionaries from './dictionaries';
 
 const initialState = {
     profile: {
@@ -17,15 +18,5 @@ function main(state = initialState, action) {
     }
 }
 
-function dictionaries(state = {}, action) {
-    switch (action.type) {
-
-    case 'TOGGLE_HIGHLIGHTING':
-        return Object.assign({}, state, { [action.dictionary]: !state[action.dictionary] })
-
-    default:
-        return state;
-    }
-}
 
 export {article, articles, main, dictionaries}

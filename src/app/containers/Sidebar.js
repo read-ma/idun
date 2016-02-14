@@ -1,38 +1,18 @@
 require('./Sidebar.scss');
 
 import request from 'superagent';
+import classnames from 'classnames';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { toggleHighlighting } from '../actions';
-import * as player from '../actions/tts';
+import { TTSPlayer } from '../components';
 
-class Dictionaries extends Component {
-
-    render(){
-        return (
-            <div>
-              <button name='3k' onClick={this.props.handleSelected}>3k</button>
-              <button name='user' onClick={this.props.handleSelected}>user</button>
-            </div>
-        );
-    }
-}
-
-class TtsPlayer extends Component {
-    play(){
-        player.start(this.props.selection);
-    }
-
-    render(){
-        return (
-            <nav>
-              <button onClick={this.play.bind(this)}>play</button>
-              <button onClick={player.pause}>pause</button>
-              <button onClick={player.resume}>resume</button>
-              <button onClick={player.stop}>stop</button>
-            </nav>);
-    }
-}
+const Dictionaries = ({dictionaries, handleSelected}) => {
+    let buttons = dictionaries.map((dict) => {
+        return <button className={classnames({active: dict.enabled})} name={dict.name} onClick={handleSelected}>{dict.name}</button>;
+    });
+    return (<div> {buttons} </div>);
+};
 
 class Sidebar extends Component {
 
@@ -46,8 +26,8 @@ class Sidebar extends Component {
         return (
             <div className='sidebar'>
               <h3>{this.props.selectedText}</h3>
-              <TtsPlayer selection={this.props.selectedText}/>
-              <Dictionaries handleSelected={this.handleSelected.bind(this)} />
+              <TTSPlayer selection={this.props.selectedText}/>
+              <Dictionaries handleSelected={this.handleSelected.bind(this)} dictionaries={this.props.dictionaries}/>
             </div>);
     }
 }

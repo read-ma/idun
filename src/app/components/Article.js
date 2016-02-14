@@ -15,8 +15,10 @@ class ArticleContent extends Component {
     componentWillReceiveProps(nextProps){
         var text = nextProps.text;
 
-        if (nextProps.selectedText && nextProps.selectedText.trim())
-            text = highlightSearch(nextProps.text, [nextProps.selectedText], 'selection');
+        nextProps.dictionaries.forEach((dict) => {
+            if (dict.enabled && dict.words.length > 0)
+                text = highlightSearch(text, dict.words, dict.name);
+        });
 
         this.setState( { text: text } )
     }
@@ -48,7 +50,7 @@ class Article extends Component {
     }
 
     onTextSelected(){
-        if (!getSelectedText()) return;
+        if (!getSelectedText().trim()) return;
 
         this.props.dispatch(
             textSelected(getSelectedText())
@@ -60,7 +62,7 @@ class Article extends Component {
             <div className='with-sidebar'>
               <article>
                 <ArticleTitle title={this.props.title} source_url={this.props.source_url} />
-                <ArticleContent text={this.props.content} onTextSelected={this.onTextSelected.bind(this)} selectedText={this.props.selectedText} />
+                <ArticleContent text={this.props.content} onTextSelected={this.onTextSelected.bind(this)} dictionaries={this.props.dictionaries} />
                 </article>
                 <Sidebar />
             </div>
@@ -69,7 +71,8 @@ class Article extends Component {
 }
 
 function mapStateToProps(state) {
-    return state.article
+    return Object.assign({}, state.article, {dictionaries: state.dictionaries});
+
 };
 
 export default connect(mapStateToProps)(Article);
