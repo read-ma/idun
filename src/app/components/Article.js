@@ -55,7 +55,7 @@ class Article extends Component {
             <div className='with-sidebar'>
               <article>
                 <ArticleTitle title={this.props.title} source_url={this.props.source_url} />
-                <ArticleContent text={this.props.content} onTextSelected={this.onTextSelected.bind(this)} dictionaries={this.props.dictionaries} />
+                <ArticleContent text={this.props.content} onTextSelected={this.onTextSelected.bind(this)} wordlists={this.props.wordlists} />
               </article>
               <Sidebar />
             </div>
@@ -64,7 +64,7 @@ class Article extends Component {
 }
 
 function mapStateToProps(state) {
-    return Object.assign({}, state.article, {dictionaries: state.dictionaries});
+    return Object.assign({}, state.article, {wordlists: state.wordlists});
 
 };
 

@@ -26,11 +26,11 @@ class TTSPlayer extends Component {
     }
 }
 
-const Dictionaries = ({dictionaries, handleSelected}) => {
-    let buttons = dictionaries.map((dict) => {
-        return <button key={dict.name} className={classnames({active: dict.enabled})} name={dict.name} onClick={handleSelected}>{dict.name}</button>;
+const Wordlists = ({wordlists, handleSelected}) => {
+    let buttons = wordlists.map((list) => {
+        return <button key={list.name} className={classnames({active: list.enabled})} name={list.name} onClick={handleSelected}>{list.name}</button>;
     });
     return (<div> {buttons} </div>);
 };
 
-export {Home, Profile, Articles, Article, Main, TTSPlayer, Dictionaries, UserDefinitions};
+export {Home, Profile, Articles, Article, Main, TTSPlayer, Wordlists, UserDefinitions};

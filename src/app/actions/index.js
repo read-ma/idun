@@ -8,10 +8,10 @@ function textSelected(text) {
     };
 };
 
-function toggleHighlighting(dictionary) {
+function toggleHighlighting(wordlist) {
     return {
         type: 'TOGGLE_HIGHLIGHTING',
-        dictionary: dictionary
+        wordlist: wordlist
     };
 }
 

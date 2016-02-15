@@ -1,7 +1,7 @@
 import * as types from '../constants/ActionTypes';
 import article from './article';
 import articles from './articles';
-import dictionaries from './dictionaries';
+import wordlists from './wordlists';
 
 const initialState = {
     profile: {
@@ -26,4 +26,4 @@ function main(state = initialState, action) {
 }
 
 
-export {article, articles, main, dictionaries}
+export {article, articles, main, wordlists}

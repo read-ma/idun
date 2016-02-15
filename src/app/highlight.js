@@ -23,18 +23,18 @@ function cleanUpHighlighting(text) {
     return text.replace(/(<mark class="[a-z]*">|<\/mark>)/igm, "");
 };
 
-// Dictionary
+// Wordlist
 // {
 //     enabled: boolean,
 //     words: <String>[],
 //     name: String
 // }
-function highlightText({text, dictionaries}) {
+function highlightText({text, wordlists}) {
     let result = text;
 
-    dictionaries.forEach((dict) => {
-        if (dict.enabled && dict.words.length > 0)
-            result = markWords(result, dict.words, dict.name);
+    wordlists.forEach((list) => {
+        if (list.enabled && list.words.length > 0)
+            result = markWords(result, list.words, list.name);
     });
     return result;
 }
