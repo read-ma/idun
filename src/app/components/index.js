@@ -1,11 +1,14 @@
 import Home from './Home';
 import Profile from './Profile';
+import UserDefinitions from './UserDefinitions';
 import Articles from './Articles';
 import Article from './Article';
 import Main from './Main';
 
 import React, { Component } from 'react';
 import * as player from '../actions/tts';
+
+import classnames from 'classnames';
 
 class TTSPlayer extends Component {
     play(){
@@ -23,4 +26,11 @@ class TTSPlayer extends Component {
     }
 }
 
-export {Home, Profile, Articles, Article, Main, TTSPlayer};
+const Dictionaries = ({dictionaries, handleSelected}) => {
+    let buttons = dictionaries.map((dict) => {
+        return <button key={dict.name} className={classnames({active: dict.enabled})} name={dict.name} onClick={handleSelected}>{dict.name}</button>;
+    });
+    return (<div> {buttons} </div>);
+};
+
+export {Home, Profile, Articles, Article, Main, TTSPlayer, Dictionaries, UserDefinitions};

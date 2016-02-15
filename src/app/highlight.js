@@ -10,7 +10,9 @@ function getSelectedText() {
 };
 
 function markWords(text, words, className) {
-    return text.replace(buildRegex(words.join('|')), "<mark class='"+className+"'>$1</mark>");
+    if (words instanceof Array) words = words.join('|');
+
+    return text.replace(buildRegex(words), "<mark class='"+className+"'>$1</mark>");
 };
 
 function buildRegex(words) {

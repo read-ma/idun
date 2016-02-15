@@ -1,20 +1,19 @@
 require('./Sidebar.scss');
 
 import request from 'superagent';
-import classnames from 'classnames';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { toggleHighlighting } from '../actions';
-import { TTSPlayer } from '../components';
-
-const Dictionaries = ({dictionaries, handleSelected}) => {
-    let buttons = dictionaries.map((dict) => {
-        return <button className={classnames({active: dict.enabled})} name={dict.name} onClick={handleSelected}>{dict.name}</button>;
-    });
-    return (<div> {buttons} </div>);
-};
+import { textSelected, toggleHighlighting } from '../actions';
+import { TTSPlayer, Dictionaries } from '../components';
 
 class Sidebar extends Component {
+    constructor(props) {
+        super(props);
+        this.state = { selectedText: 'dupa'};
+
+        this.handleSelected = this.handleSelected.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+    }
 
     handleSelected(event){
         this.props.dispatch(
@@ -22,12 +21,30 @@ class Sidebar extends Component {
         );
     }
 
+    componentWillReceiveProps(nextProps) {
+        this.setState(
+            { selectedText: nextProps.selectedText }
+        );
+    }
+
+    handleChange(event){
+        this.props.dispatch(
+            textSelected(event.target.value)
+        );
+
+        this.setState(
+            Object.assign({}, this.state, {
+                [event.target.name] : event.target.value
+            })
+        );
+    }
+
     render() {
         return (
             <div className='sidebar'>
-              <h3>{this.props.selectedText}</h3>
               <TTSPlayer selection={this.props.selectedText}/>
-              <Dictionaries handleSelected={this.handleSelected.bind(this)} dictionaries={this.props.dictionaries}/>
+              <Dictionaries handleSelected={this.handleSelected} dictionaries={this.props.dictionaries}/>
+              <textarea id="selectedText" name='selectedText' onChange={this.handleChange} value={this.state.selectedText}></textarea>
             </div>);
     }
 }

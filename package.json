@@ -24,6 +24,7 @@
     "webpack-dev-server": "^1.14.1"
   },
   "dependencies": {
+    "axios": "^0.9.1",
     "classnames": "^2.2.3",
     "history": "^1.17.0",
     "react": "^0.14.7",

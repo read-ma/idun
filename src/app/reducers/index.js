@@ -7,11 +7,18 @@ const initialState = {
     profile: {
         name: 'Hubert Blaine Wolfeschlegelsteinhausenbergerdorff, Sr.',
         role: 'anonymous'
-    }
+    },
+    userDefinitions: []
 };
 
 function main(state = initialState, action) {
     switch (action.type) {
+    case 'USER_DEFINITIONS_LOADED':
+        return Object.assign(
+            {},
+            state,
+            { userDefinitions: Array.from(action.userDefinitions)}
+        );
 
     default:
         return state;

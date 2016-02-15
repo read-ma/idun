@@ -10,6 +10,15 @@ export default function dictionaries(state = initialState, action) {
 
     switch (action.type) {
 
+    case 'USER_DEFINITIONS_LOADED':
+        return state.map ((dict) => {
+            if (dict.name === 'user') {
+                return Object.assign({}, dict, {words: action.userDefinitions.map((d) => {return d.word;})});
+            }
+            else
+                return dict;
+        });
+
     case 'TEXT_SELECTED':
         return state.map ((dict) => {
             if (dict.name === 'selection') {

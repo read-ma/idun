@@ -12,7 +12,6 @@ class ArticleContent extends Component {
         this.state = {text: highlightText(props)};
     }
 
-
     componentWillReceiveProps(nextProps){
         this.setState( { text: highlightText(nextProps) } );
     }
