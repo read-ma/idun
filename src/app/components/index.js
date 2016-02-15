@@ -4,6 +4,7 @@ import UserDefinitions from './UserDefinitions';
 import Articles from './Articles';
 import Article from './Article';
 import Main from './Main';
+import DefinitionBoxes from './DefinitionBoxes';
 
 import React, { Component } from 'react';
 import * as player from '../actions/tts';
@@ -33,4 +34,7 @@ const Wordlists = ({wordlists, handleSelected}) => {
     return (<div> {buttons} </div>);
 };
 
-export {Home, Profile, Articles, Article, Main, TTSPlayer, Wordlists, UserDefinitions};
+export {
+    Home, Profile, Articles, Article, Main, TTSPlayer, Wordlists, UserDefinitions,
+    DefinitionBoxes
+};

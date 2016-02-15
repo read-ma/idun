@@ -4,34 +4,7 @@ import request from 'superagent';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { textSelected, toggleHighlighting } from '../actions';
-import { TTSPlayer, Wordlists } from '../components';
-
-class DefinitionList extends  Component {
-
-    render() {
-        var items = this.props.items.map((item) => {
-            return <li dangerouslySetInnerHTML={{__html:item}}></li>;
-        });
-
-        return (<ul> {items} </ul>);
-    }
-};
-
-class SidebarBox extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {};
-    }
-
-    render() {
-
-        return (
-            <div>
-              <DefinitionList items={this.props.items} className={this.props.label}/>
-            </div>
-        );
-    }
-};
+import { TTSPlayer, Wordlists, DefinitionBoxes } from '../components';
 
 class Sidebar extends Component {
     constructor(props) {
@@ -49,7 +22,7 @@ class Sidebar extends Component {
 
         this.handleSelected = this.handleSelected.bind(this);
         this.handleChange = this.handleChange.bind(this);
-    }
+    };
 
     handleSelected(event){
         this.props.dispatch(
@@ -81,6 +54,7 @@ class Sidebar extends Component {
               <TTSPlayer selection={this.props.selectedText}/>
               <Wordlists handleSelected={this.handleSelected} wordlists={this.props.wordlists}/>
               <textarea id="selectedText" name='selectedText' onChange={this.handleChange} value={this.state.selectedText}></textarea>
+              <DefinitionBoxes />
             </div>);
     }
 }

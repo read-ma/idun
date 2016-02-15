@@ -1,10 +1,11 @@
 import { loadArticles, loadArticle } from './articles';
+import { findTextDefinitions } from './definitions';
 import api from '../api';
 
 function textSelected(text) {
     return {
         type: 'TEXT_SELECTED',
-        text: text
+        text: text.trim()
     };
 };
 
@@ -33,4 +34,4 @@ function loadUserDefinitions(definitions){
     };
 }
 
-export { loadArticles, loadArticle, textSelected, toggleHighlighting, loadUserDefinitions }
+export { loadArticles, loadArticle, textSelected, toggleHighlighting, loadUserDefinitions, findTextDefinitions }
