@@ -1,7 +1,8 @@
 import axios from 'axios';
+import Config from  'Config';
 
 var instance = axios.create({
-    baseURL: 'http://ms-dashboard.herokuapp.com/api',
+    baseURL: Config.apiUrl,
     timeout: 1000,
     headers: {
         'X-Custom-Header': 'foobar'

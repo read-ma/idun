@@ -1,6 +1,6 @@
 import request from 'superagent';
 import store from '../store';
-
+import Config from 'Config';
 
 function articlesLoaded(items) {
     return {
@@ -30,7 +30,7 @@ function articleLoaded(article){
     };
 }
 
-const ARTICLES_END_POINT = 'http://ms-dashboard.herokuapp.com/api/articles.json';
+const ARTICLES_END_POINT = Config.apiUrl + '/articles.json';
 
 function getArticles(params, handleSuccess){
     let articles = store.getState().articles;
