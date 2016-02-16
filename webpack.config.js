@@ -5,6 +5,9 @@ module.exports = {
     output: {
         filename: "public/bundle.js"
     },
+    externals: {
+        'Config': JSON.stringify({ apiUrl: 'http://localhost:3000/api' })
+    },
     module: {
         loaders: [
             {
@@ -12,7 +15,7 @@ module.exports = {
                 exclude: /(node_modules|bower_components)/,
                 loader: 'babel-loader',
                 query: {
-                  presets: ['react', 'es2015']
+                    presets: ['react', 'es2015']
                 }
             },
             {
@@ -41,4 +44,4 @@ module.exports = {
             allChunks: true
         })
     ]
-}
+};
