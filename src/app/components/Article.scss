@@ -1,28 +1,20 @@
-mark {
-    background-color: inherit;
-    color: inherit;
-
-    &.selection {
-        background-color: pink;
-    };
-
-    &.user {
-        border-bottom: solid 3px red;
-    }
-
-    &.d3k{
-        color: darkgreen;
-    }
-}
-.with-sidebar {
-    width: 65%;
-    padding: 10px;
-}
-
 .article {
     h1 {
         font-size: 1.64rem;
         line-height: 1.804rem;
         margin: 0.82rem 0 0.656rem 0;
-    }
-}
+    };
+    mark {
+        background-color: inherit;
+        color: inherit;
+        &.selection {
+            background-color: #f8bbd0;
+        };
+        &.user {
+            border-bottom: solid 3px #ef5350;
+        };
+        &.d3k {
+            background-color: #b2dfdb;
+        };
+    };
+};

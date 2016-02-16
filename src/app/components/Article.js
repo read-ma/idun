@@ -65,11 +65,15 @@ class Article extends Component {
                     </nav>
                 </div>
                 <div className="row">
-                    <article className="article">
-                        <ArticleTitle title={this.props.title} source_url={this.props.source_url} />
-                        <ArticleContent text={this.props.content} onTextSelected={this.onTextSelected.bind(this)} wordlists={this.props.wordlists} />
-                    </article>
-                    <Sidebar />
+                    <div className="col s9">
+                        <article className="article">
+                            <ArticleTitle title={this.props.title} source_url={this.props.source_url} />
+                            <ArticleContent text={this.props.content} onTextSelected={this.onTextSelected.bind(this)} wordlists={this.props.wordlists} />
+                        </article>
+                    </div>
+                    <div className="col s3">
+                        <Sidebar />
+                    </div>
                 </div>
             </div>
         );
