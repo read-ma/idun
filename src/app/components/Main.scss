@@ -1,6 +1,8 @@
 $roboto-font-path: "~materialize-sass/font/roboto/";
 $icons-font-path: "~materialize-sass/font/material-design-icons/";
 
-
+nav ul a {
+    color: black !important;
+};
 
 @import "~materialize-sass/sass/materialize.scss";

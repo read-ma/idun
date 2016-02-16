@@ -18,7 +18,7 @@ const Main = ({children, history}) => {
 
 const Navigator = () => {
     return (
-        <nav>
+        <nav className="white">
             <div className="nav-wrapper container">
                 <ul id="nav-mobile" className="left hide-on-med-and-down">
                     <li><Link to='/'>Home</Link></li>
@@ -32,7 +32,7 @@ const Navigator = () => {
 
 const Footer = () => {
     return (
-        <footer className="page-footer">
+        <footer className="page-footer teal">
             <div className="container">
                 <div className="row">
                     <div className="col s12">
