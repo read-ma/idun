@@ -18,19 +18,19 @@ class ArticleContent extends Component {
 
     render(){
         return (
-            <div onMouseUp={this.props.onTextSelected} dangerouslySetInnerHTML={{__html: this.state.text}}></div>
+            <p onMouseUp={this.props.onTextSelected} dangerouslySetInnerHTML={{__html: this.state.text}}></p>
         );
     }
 };
 
 const ArticleTitle = ({title, source_url}) => {
     return (
-        <div className="article-title">
-          <h2>
-            <Link to='articles'>articles</Link> / {title}
-          </h2>
-          <h3>{source_url}</h3>
-        </div>
+        <header>
+            <h1>{title}</h1>
+            <blockquote>
+                <a href={source_url} target="blank" alt="article link">{source_url}</a>
+            </blockquote>
+        </header>
     );
 };
 
@@ -52,12 +52,25 @@ class Article extends Component {
 
     render() {
         return (
-            <div className='with-sidebar'>
-              <article>
-                <ArticleTitle title={this.props.title} source_url={this.props.source_url} />
-                <ArticleContent text={this.props.content} onTextSelected={this.onTextSelected.bind(this)} wordlists={this.props.wordlists} />
-              </article>
-              <Sidebar />
+            <div>
+                <div className="row">
+                    <nav className="breadcrumbs white">
+                        <div className="nav-wrapper">
+                            <div className="col s12">
+                                <Link to='/' lassName="breadcrumb">Home</Link>
+                                <Link to='articles' lassName="breadcrumb">Articles</Link>
+                                <a href="#!" className="breadcrumb">{this.props.title}</a>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+                <div className="row">
+                    <article className="article">
+                        <ArticleTitle title={this.props.title} source_url={this.props.source_url} />
+                        <ArticleContent text={this.props.content} onTextSelected={this.onTextSelected.bind(this)} wordlists={this.props.wordlists} />
+                    </article>
+                    <Sidebar />
+                </div>
             </div>
         );
     }

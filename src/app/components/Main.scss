@@ -1,8 +1,27 @@
 $roboto-font-path: "~materialize-sass/font/roboto/";
 $icons-font-path: "~materialize-sass/font/material-design-icons/";
 
-nav ul a {
-    color: black !important;
+nav ul a, nav .brand-logo {
+    @extend .black-text;
 };
+
+nav.breadcrumbs a {
+    @extend .teal-text;
+    &:first-child:before {
+        content: none;
+        margin: 0px;
+    };
+    &:before {
+        content: '\E5CC';
+        vertical-align: top;
+        display: inline-block;
+        font-family: 'Material Icons';
+        font-weight: normal;
+        font-style: normal;
+        font-size: 25px;
+        margin: 0 10px 0 8px;
+        -webkit-font-smoothing: antialiased;
+    }
+}
 
 @import "~materialize-sass/sass/materialize.scss";

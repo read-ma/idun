@@ -1,3 +1,4 @@
+require('./Articles.scss');
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
@@ -11,7 +12,7 @@ function mapStateToProps(state) {
 
 function ArticleLink(id, title){
     return (
-        <li key={id}><Link to={`/article/${id}`}>{title}</Link></li>
+        <li key={id}><Link to={`/article/${id}`} className="collection-item">{title}</Link></li>
     );
 };
 
@@ -28,13 +29,10 @@ class Articles extends Component {
 
 
         return (
-            <div>
-              {this.props.children}
-              <ul>
-                <h3>Article list</h3>
-              {articleLinks}
+            <ul className="collection with-header articles">
+                <li className="collection-header"><h4>Article list</h4></li>
+                {articleLinks}
             </ul>
-            </div>
         );
     }
 }

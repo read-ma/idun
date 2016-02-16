@@ -20,7 +20,8 @@ const Navigator = () => {
     return (
         <nav className="white">
             <div className="nav-wrapper container">
-                <ul id="nav-mobile" className="left hide-on-med-and-down">
+                <a href="#!" className="brand-logo">Logo</a>
+                <ul id="nav-mobile" className="right hide-on-med-and-down">
                     <li><Link to='/'>Home</Link></li>
                     <li><a href="#/profile">Profile</a></li>
                     <li><Link to='/articles'>Articles</Link></li>
