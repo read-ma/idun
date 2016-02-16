@@ -30,7 +30,7 @@ function articleLoaded(article){
     };
 }
 
-const ARTICLES_END_POINT = 'http://localhost:3000/api/articles.json';
+const ARTICLES_END_POINT = 'http://ms-dashboard.herokuapp.com/api';
 
 function getArticles(params, handleSuccess){
     let articles = store.getState().articles;

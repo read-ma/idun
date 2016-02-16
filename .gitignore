@@ -6,3 +6,7 @@ public/*.css
 /dist/public/style.css
 public/bundle.js
 /public/*.js
+*.ttf
+*.woff
+*.svg
+*.eot
