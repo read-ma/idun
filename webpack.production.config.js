@@ -13,27 +13,44 @@ var config = {
     },
 
     module: {
-        loaders: [{
-            test: /\.jsx?$/,
+        loaders: [
+            {
+                test: /\.jsx?$/,
 
-            // There is not need to run the loader through
-            // vendors
-            exclude: [node_modules_dir],
-            loader: 'babel-loader',
-            query: {
-                presets: ['react', 'es2015']
-            }},
-                  {
-                      test: /\.scss$/,
-                      loader: ExtractTextPlugin.extract('css!sass')
-                  }]
+                // There is not need to run the loader through
+                // vendors
+                exclude: [node_modules_dir],
+                loader: 'babel-loader',
+                query: {
+                    presets: ['react', 'es2015']
+                }
+            },
+            {
+                test: /\.scss$/,
+                loader: ExtractTextPlugin.extract('css!sass')
+            },
+            {
+                test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
+                loader: "url?limit=10000&mimetype=application/font-woff"},
+            {
+                test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+                loader: "url?limit=10000&mimetype=application/octet-stream"
+            },
+            {
+                test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+                loader: "file"
+            },
+            {
+                test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+                loader: "url?limit=10000&mimetype=image/svg+xml"
+            }
+        ]
     },
     plugins: [
         new ExtractTextPlugin('public/style.css', {
             allChunks: true
         })
     ]
-
 };
 
-module.exports = config;
+    module.exports = config;
