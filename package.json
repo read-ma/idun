@@ -1,43 +1,44 @@
 {
-    "name": "mybabel",
-    "version": "1.0.0",
-    "description": "",
-    "main": "index.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "deploy": "NODE_ENV=production webpack -p --config webpack.production.config.js",
-        "dev": "webpack-dev-server --progress --colors --hot --inline",
-        "postdeploy": "s3cmd sync . s3://idun-app"
-    },
-    "author": "",
-    "license": "ISC",
-    "devDependencies": {
-        "babel-core": "^6.5.1",
-        "babel-loader": "^6.2.2",
-        "babel-preset-es2015": "^6.5.0",
-        "babel-preset-react": "^6.5.0",
-        "css-loader": "^0.23.1",
-        "extract-text-webpack-plugin": "^1.0.1",
-        "file-loader": "^0.8.5",
-        "materialize-sass": "^0.95.2",
-        "node-sass": "^3.4.2",
-        "sass-loader": "^3.1.2",
-        "style-loader": "^0.13.0",
-        "url-loader": "^0.5.7",
-        "webpack": "^1.12.13",
-        "webpack-dev-server": "^1.14.1"
-    },
-    "dependencies": {
-        "axios": "^0.9.1",
-        "classnames": "^2.2.3",
-        "history": "^1.17.0",
-        "react": "^0.14.7",
-        "react-dom": "^0.14.7",
-        "react-redux": "^4.4.0",
-        "react-router": "^1.0.3",
-        "redux": "^3.3.1",
-        "redux-thunk": "^1.0.3",
-        "request": "^2.69.0",
-        "superagent": "^1.7.2"
-    }
+  "name": "mybabel",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "NODE_ENV=production webpack -p --config webpack.production.config.js",
+    "dev": "webpack-dev-server --progress --colors --hot --inline",
+    "postdeploy": "s3cmd sync dist/. s3://idun-app"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^6.5.1",
+    "babel-loader": "^6.2.2",
+    "babel-preset-es2015": "^6.5.0",
+    "babel-preset-react": "^6.5.0",
+    "css-loader": "^0.23.1",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "file-loader": "^0.8.5",
+    "materialize-sass": "^0.95.2",
+    "node-sass": "^3.4.2",
+    "sass-loader": "^3.1.2",
+    "style-loader": "^0.13.0",
+    "url-loader": "^0.5.7",
+    "webpack": "^1.12.13",
+    "webpack-dev-server": "^1.14.1"
+  },
+  "dependencies": {
+    "axios": "^0.9.1",
+    "classnames": "^2.2.3",
+    "history": "^1.17.0",
+    "lodash": "^4.5.0",
+    "react": "^0.14.7",
+    "react-dom": "^0.14.7",
+    "react-redux": "^4.4.0",
+    "react-router": "^1.0.3",
+    "redux": "^3.3.1",
+    "redux-thunk": "^1.0.3",
+    "request": "^2.69.0",
+    "superagent": "^1.7.2"
+  }
 }

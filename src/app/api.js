@@ -3,7 +3,7 @@ import Config from  'Config';
 
 var instance = axios.create({
     baseURL: Config.apiUrl,
-    timeout: 1000,
+    timeout: 3000,
     headers: {
         'X-Custom-Header': 'foobar'
     }

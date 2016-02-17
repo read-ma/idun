@@ -1,33 +1,36 @@
 import api from '../api';
 
-function findTextDefinitions(text, params = {}) {
-    return dispatch => {
-        loadTranslation(text, params, response => dispatch(translationLoaded(response.data)));
+function loadTranslation(text, params){
+    return (dispatch) => {
+        api.get(`/translate/${text}.json`, {params: params})
+            .then( response => dispatch(contentLoaded('translations', response.data)));
     };
+}
 
+function contentLoaded(type, data){
     return {
-        type: 'LOAD_DEFINITION', text: text
+        type: 'CONTENT_LOADED',
+        data: data,
+        content_type: type
     };
-};
+}
 
-function translationLoaded(data){
-    return {
-        type: 'TRANSLATION_LOADED', data: data
+function loadDefinitions(text, params={type: 'definitions'}){
+    return (dispatch) => {
+        api.get(`/translate/${text}.json`, {params: params})
+            .then( response => dispatch(contentLoaded('definitions', response.data)));
     };
-};
-
-
-function loadTranslation(text, params, success){
-    api.get(`/translate/${text}.json`, {params: params}).then(success);
 }
 
-function loadDefinitions(text){
+function loadPictures(text, params= {type: 'graphics'}){
+    return (dispatch) => {
+        api.get(`/translate/${text}.json`, {params: params})
+            .then( response => dispatch(contentLoaded('graphics', response.data)));
+    };
+
 }
 
-function loadPictures(text){
-}
-
-export { findTextDefinitions }
+export { loadTranslation, loadPictures, loadDefinitions }
 
 
 // dispatch(requestStarted('translations'));

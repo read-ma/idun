@@ -1,20 +1,20 @@
-const initialState = [
-    {key: 'definitions', label: 'Definitions', items: [], component: 'SimpleList'},
-    {key: 'translations', label: 'Translations', items: [], component: 'SimpleList'},
-    {key: 'related-words', label: 'Related Words', items: [], component: 'SimpleList'},
-    {key: 'pictures', label: 'Pictures', items: [], component: 'PictureList'},
-]
+const initialState = {
+    config: [
+        {key: 'definitions', label: 'Definitions', component: 'SimpleList'},
+        {key: 'translations', label: 'Translations', component: 'SimpleList'},
+        {key: 'related_words', label: 'Related Words', component: 'SimpleList'},
+        {key: 'examples', label: 'Examples', component: 'SimpleList'},
+        {key: 'graphics', label: 'Pictures', component: 'PictureList'},
+    ],
+
+    data: {}
+};
 
 export default function definitions(state = initialState, action) {
     switch (action.type) {
 
-    case 'TRANSLATION_LOADED':
-        return state.map((list) => {
-            if (list.key == 'translations')
-                return Object.assign({}, list, {items: action.data.translations})
-            else
-                return list
-        });
+    case 'CONTENT_LOADED':
+        return Object.assign({}, state, {data: Object.assign({}, state.data, action.data)})
 
     default:
         return state;
