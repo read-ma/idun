@@ -1,4 +1,4 @@
-require('./Article.scss');
+require('./ArticlePage.scss');
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { loadArticle, textSelected } from '../actions';
@@ -34,7 +34,7 @@ const ArticleTitle = ({title, source_url}) => {
     );
 };
 
-class Article extends Component {
+class ArticlePage extends Component {
 
     componentDidMount(){
         this.props.dispatch(
@@ -57,8 +57,8 @@ class Article extends Component {
                     <nav className="breadcrumbs white">
                         <div className="nav-wrapper">
                             <div className="col s12">
-                                <Link to='/' lassName="breadcrumb">Home</Link>
-                                <Link to='articles' lassName="breadcrumb">Articles</Link>
+                                <Link to='/' className="breadcrumb">Home</Link>
+                                <Link to='articles' className="breadcrumb">Articles</Link>
                                 <a href="#!" className="breadcrumb">{this.props.title}</a>
                             </div>
                         </div>
@@ -85,4 +85,4 @@ function mapStateToProps(state) {
 
 };
 
-export default connect(mapStateToProps)(Article);
+export default connect(mapStateToProps)(ArticlePage);

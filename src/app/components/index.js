@@ -2,7 +2,7 @@ import Home from './Home';
 import Profile from './Profile';
 import UserDefinitions from './UserDefinitions';
 import Articles from './Articles';
-import Article from './Article';
+import ArticlePage from './ArticlePage';
 import Main from './Main';
 import DefinitionBoxes from './DefinitionBoxes';
 
@@ -35,6 +35,6 @@ const Wordlists = ({wordlists, handleSelected}) => {
 };
 
 export {
-    Home, Profile, Articles, Article, Main, TTSPlayer, Wordlists, UserDefinitions,
+    Home, Profile, Articles, ArticlePage, Main, TTSPlayer, Wordlists, UserDefinitions,
     DefinitionBoxes
 };

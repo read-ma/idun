@@ -63,4 +63,4 @@ class UserDefinitions extends Component {
     }
 }
 
-export default connect(mapStateToProps)(UserDefinitions)
+export default connect(mapStateToProps)(UserDefinitions);
