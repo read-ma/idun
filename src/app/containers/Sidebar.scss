@@ -1,11 +1,11 @@
 .sidebar {
-    //position: fixed;
-    //top:0;
-    //right: 0;
-    //width: 30%;
-    //height: 100%;
+    position: fixed;
+    top:0;
+    right: 0;
+    width: 30%;
+    height: 100%;
     overflow: auto;
-    //padding: 10px;
+    padding: 10px;
     background-color: #eee;
     margin: solid 1px #aaa;
     color: #444;
@@ -23,6 +23,8 @@
         list-style: none;
         padding: 5px;
         margin: 0;
+        height: 200px;
+        overflow: hidden;
         li {
             margin: 0 0 5px;
         }
