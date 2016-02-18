@@ -8,7 +8,7 @@ class UserCustomDefinitionForm extends Component {
         this.state = {word: props.selectedText};
 
         this.handleFormInputChanged = this.handleFormInputChanged.bind(this);
-        this.submit = this.submit.bind(this);
+        this.search = this.search.bind(this);
         this.saveUserDefinition = this.saveUserDefinition.bind(this);
     }
 
@@ -18,8 +18,10 @@ class UserCustomDefinitionForm extends Component {
         );
     }
 
-    submit(event){
-        if (!event.keycode || event.keycode === 13)
+    search(event){
+        event.preventDefault();
+
+        if (!event.keyCode || event.keyCode === 13)
             this.props.dispatch( textSelected(this.state.word) );
     }
 
@@ -36,17 +38,29 @@ class UserCustomDefinitionForm extends Component {
 
     render() {
         return (
-            <div className='userCustomDefinition'>
-              <form>
-                <fieldset>
-                  <textarea name='word' onKeyUp={this.submit} onChange={this.handleFormInputChanged} value={this.state.word}></textarea>
-                  <textarea name='translation' placeholder='translation' onChange={this.handleFormInputChanged} value={this.state.translation}></textarea>
-                  <textarea name='definition' placeholder='definition' onChange={this.handleFormInputChanged} value={this.state.definition}></textarea>
-                  <textarea name='tags' placeholder='tags' onChange={this.handleFormInputChanged} value={this.state.tags}></textarea>
+            <div className='userCustomDefinition row' onSubmit={this.search}>
+              <form className='col s12'>
+                <div className='row'>
+                  <input type='text' className='col s10' placeholder='selection' name='word' onKeyUp={this.search} onChange={this.handleFormInputChanged} value={this.state.word} />
+                  <a className='col s1 btn' onClick={this.submit}><i class="material-icons">add</i></a>
+                  <a className='col s1 btn' onClick={this.toggleForm}><i class="material-icons">+</i></a>
+                </div>
 
-                  <input type='submit' onClick={this.saveUserDefinition} />
-                </fieldset>
+                <div className='row'>
+                  <textarea className='col s12 materialize-textarea' name='translation' placeholder='translation' onChange={this.handleFormInputChanged} value={this.state.translation}></textarea>
+                </div>
+
+                <div className='row'>
+                  <textarea className='col s12 materialize-textarea' name='definition' placeholder='definition' onChange={this.handleFormInputChanged} value={this.state.definition}></textarea>
+                </div>
+
+                <div className='row'>
+                  <input type='text' className='col s12 materialize-textarea' name='tags' placeholder='tags' onChange={this.handleFormInputChanged} value={this.state.tags} />
+                </div>
+
+
               </form>
+                <input className='btn' type='submit' onClick={this.saveUserDefinition} value='save your definition'/>
             </div>
 
         );
@@ -56,7 +70,7 @@ class UserCustomDefinitionForm extends Component {
 function mapStateToProps(state) {
     return {
         selectedText: state.article.selectedText
-    }
+    };
 }
 
 
