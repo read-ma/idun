@@ -1,7 +1,7 @@
 const initialState = {
     config: [
-        {key: 'definitions', label: 'Definitions', component: 'SimpleList'},
         {key: 'translations', label: 'Translations', component: 'SimpleList'},
+        {key: 'definitions', label: 'Definitions', component: 'SimpleList'},
         {key: 'related_words', label: 'Related Words', component: 'SimpleList'},
         {key: 'examples', label: 'Examples', component: 'SimpleList'},
         {key: 'graphics', label: 'Pictures', component: 'PictureList'},

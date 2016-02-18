@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {Home,Main, Articles, Article, UserDefinitions} from '../components';
+import {Home,Main, Articles, ArticlePage, UserDefinitions} from '../components';
 
 import Profile from '../components/Profile';
 import { Route, IndexRoute } from 'react-router';
@@ -12,7 +12,7 @@ export default (
         <IndexRoute component={UserDefinitions} />
       </Route>
       <Route path="/articles" component={Articles}/>
-      <Route path="/article/:id" component={Article} />
+      <Route path="/article/:id" component={ArticlePage} />
       <IndexRoute component={Home} />
     </Route>
 );

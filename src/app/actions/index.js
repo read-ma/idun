@@ -23,6 +23,13 @@ function userDefinitionsLoaded(definitions) {
     };
 }
 
+function saveUserDefinition(definition){
+    return dispatch => {
+        api.post('/user_definitions.json', {user_definition: definition})
+            .then( response => console.log(response));
+    }
+}
+
 function loadUserDefinitions(definitions){
     return (dispatch) => {
         api.get('/user_definitions.json')
@@ -34,4 +41,8 @@ function loadUserDefinitions(definitions){
     };
 }
 
-export { loadArticles, loadArticle, textSelected, toggleHighlighting, loadUserDefinitions, findTextDefinitions }
+export { loadArticles, loadArticle,
+         textSelected,
+         toggleHighlighting,
+         loadUserDefinitions, saveUserDefinition,
+         findTextDefinitions }

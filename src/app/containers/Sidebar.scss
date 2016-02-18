@@ -14,15 +14,6 @@ aside.sidebar {
     margin: solid 1px #aaa;
     color: #444;
 
-    textarea#selectedText {
-        width: 100%;
-        font-size: 14px;
-        font-weight: bold;
-        color: #777;
-        background-color: inherit;
-        border: solid 1px #fff;
-    }
-
     ul {
         list-style: none;
         padding: 5px;
@@ -34,6 +25,8 @@ aside.sidebar {
         }
     }
 }
+
+.userCustomDefinition { padding: 10px }
 
 button {
     background-color: #eee;

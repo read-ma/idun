@@ -63,7 +63,7 @@ class DefinitionList extends  Component {
               <ul>
                 {items}
               </ul>
-              <h4>more / less </h4>
+              <h4>more / less</h4>
             </span>);
     }
 };
