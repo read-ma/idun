@@ -65,13 +65,13 @@ class ArticlePage extends Component {
                     </nav>
                 </div>
                 <div className="row">
-                    <div className="col s8">
+                    <div className="col l8 m12">
                         <article className="article">
                             <ArticleTitle title={this.props.title} source_url={this.props.source_url} />
                             <ArticleContent text={this.props.content} onTextSelected={this.onTextSelected.bind(this)} wordlists={this.props.wordlists} />
                         </article>
                     </div>
-                    <div className="col s4">
+                    <div className="col l4 m12">
                         <Sidebar />
                     </div>
                 </div>

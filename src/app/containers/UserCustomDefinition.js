@@ -42,8 +42,8 @@ class UserCustomDefinitionForm extends Component {
               <form className='col s12'>
                 <div className='row'>
                   <input type='text' className='col s10' placeholder='selection' name='word' onKeyUp={this.search} onChange={this.handleFormInputChanged} value={this.state.word} />
-                  <a className='col s1 btn' onClick={this.submit}><i class="material-icons">add</i></a>
-                  <a className='col s1 btn' onClick={this.toggleForm}><i class="material-icons">+</i></a>
+                  <a className='col s1 btn' onClick={this.submit}><i className="material-icons">add</i></a>
+                  <a className='col s1 btn' onClick={this.toggleForm}><i className="material-icons">+</i></a>
                 </div>
 
                 <div className='row'>

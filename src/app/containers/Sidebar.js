@@ -26,18 +26,25 @@ class Sidebar extends Component {
 
     render() {
         return (
-            <aside className='sidebar'>
-                <TTSPlayer selection={this.props.selectedText}/>
-                <Wordlists handleSelected={this.handleWordListSelected} wordlists={this.props.wordlists}/>
-                <UserCustomDefinitionForm />
-                <DefinitionBoxes />
-            </aside>
+            <div className="wrapper">
+                <aside className='sidebar' id="sidebar-sticker">
+                    <ul className="collapsible" data-collapsible="accordion">
+                        <TTSPlayer selection={this.props.selectedText}/>
+                        <Wordlists handleSelected={this.handleWordListSelected} wordlists={this.props.wordlists}/>
+                        <UserCustomDefinitionForm />
+                        <DefinitionBoxes />
+                    </ul>
+                </aside>
+            </div>
         );
     }
 }
 
 $(function() {
-    $('aside.sidebar').pushpin({ top: '-100px' });
+    $("#sidebar-sticker").sticky({ topSpacing: 10, className: 'sticked' });
+    $('.collapsible').collapsible({
+        accordion : false
+    });
 });
 
 function mapStateToProps(state){

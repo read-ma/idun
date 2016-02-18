@@ -18,20 +18,59 @@ class TTSPlayer extends Component {
 
     render(){
         return (
-            <nav>
-              <button onClick={this.play.bind(this)}>play</button>
-              <button onClick={player.pause}>pause</button>
-              <button onClick={player.resume}>resume</button>
-              <button onClick={player.stop}>stop</button>
-            </nav>);
+            <li>
+                <div className="collapsible-header">
+                    <i className="material-icons">volume_mute</i>
+                    Player
+                </div>
+                <div className="collapsible-body white">
+                    <p className="left-align">
+                        <button className="btn-floating waves-effect waves-light" onClick={this.play.bind(this)}>
+                            <i className="material-icons">play_arrow</i>
+                        </button>
+                        <button className="btn-floating waves-effect waves-light" onClick={player.pause}>
+                            <i className="material-icons">pause</i>
+                        </button>
+                        <button className="btn-floating waves-effect waves-light" onClick={player.resume}>
+                            <i className="material-icons">skip_next</i>
+                        </button>
+                        <button className="btn-floating waves-effect waves-light" onClick={player.stop}>
+                            <i className="material-icons">stop</i>
+                        </button>
+                    </p>
+                </div>
+            </li>
+            // {/*<nav>
+            //   <button onClick={this.play.bind(this)}>play</button>
+            //   <button onClick={player.pause}><i className="material-icons">pause</i>pause</button>
+            //   <button onClick={player.resume}>resume</button>
+            //   <button onClick={player.stop}>stop</button>
+            // </nav>*/}
+        );
     }
 }
 
 const Wordlists = ({wordlists, handleSelected}) => {
     let buttons = wordlists.map((list) => {
-        return <button key={list.name} className={classnames({active: list.enabled})} name={list.name} onClick={handleSelected}>{list.name}</button>;
+        return  <button key={list.name}
+                        className={classnames({active: list.enabled})}
+                        name={list.name} onClick={handleSelected}>
+                    {list.name}
+                </button>;
     });
-    return (<div> {buttons} </div>);
+    return (
+        <li>
+            <div className="collapsible-header">
+                <i className="material-icons">toc</i>
+                Word Lists
+            </div>
+            <div className="collapsible-body white">
+                <p className="left-align">
+                    {buttons}
+                </p>
+            </div>
+        </li>
+    );
 };
 
 export {
