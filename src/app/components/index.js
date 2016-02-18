@@ -40,12 +40,6 @@ class TTSPlayer extends Component {
                     </p>
                 </div>
             </li>
-            // {/*<nav>
-            //   <button onClick={this.play.bind(this)}>play</button>
-            //   <button onClick={player.pause}><i className="material-icons">pause</i>pause</button>
-            //   <button onClick={player.resume}>resume</button>
-            //   <button onClick={player.stop}>stop</button>
-            // </nav>*/}
         );
     }
 }

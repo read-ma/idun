@@ -9,8 +9,11 @@
                 padding: 0 .5rem;
             };
             button {
-                margin-right: 1rem;
+                margin-right: 0.5rem;
                 border: 1px solid #aaa;
+                &:last-child {
+                    margin-right: 0px;
+                }
                 &[type="submit"] {
                     margin-right: 0;
                 }
@@ -18,35 +21,6 @@
         };
     };
 };
-
-.sidebar {
-    //ul {
-    //    list-style: none;
-    //    padding: 5px;
-    //    margin: 0;
-    //    height: 200px;
-    //    overflow: hidden;
-    //    li {
-    //        margin: 0 0 5px;
-    //    }
-    //}
-}
-
-//.userCustomDefinition { padding: 10px }
-
-//button {
-//    background-color: #eee;
-//    color: #aaa;
-//    border-radius: 10px;
-//    border: 1px solid #aaa;
-//}
-//
-//button.active {
-//    color: #222;
-//    background-color: white;
-//    border-radius: 10px;
-//    border: 1px solid #aaa;
-//}
 
 .hidden {
     display: none;

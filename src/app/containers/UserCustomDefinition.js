@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
 import { textSelected, saveUserDefinition} from '../actions';
+import { DefinitionBoxes } from '../components';
+
 
 class UserCustomDefinitionForm extends Component {
     constructor(props){
@@ -57,26 +59,26 @@ class UserCustomDefinitionForm extends Component {
                 <div className="collapsible-body white">
                     <div className="row" onSubmit={this.search}>
                         <form>
-                            <div className='col s12'>
-                                <button className='btn-floating waves-effect waves-light' onClick={this.search}><i className="small material-icons">search</i></button>
-                                <button className='btn-floating waves-effect waves-light' onClick={this.toggleForm}><i className="small material-icons">add</i></button>
+                            <div className='input-field col s12'>
+                                <button className='btn-floating waves-effect waves-light left' onClick={this.search}><i className="small material-icons">search</i></button>
+                                <button className='btn-floating waves-effect waves-light right' onClick={this.toggleForm}><i className="small material-icons">add</i></button>
                             </div>
-                            <div className='col s12 center-align'>
+                            <div className='input-field col s12 center-align'>
                                 <input type='text' placeholder='selection' name='word' onKeyUp={this.search} onChange={this.handleFormInputChanged} value={this.state.word} />
                             </div>
                             <span className={classnames({hidden: this.state.collapsed})}>
-                                <div className='col s12 center-align'>
+                                <div className='input-field col s12 center-align'>
                                     <textarea className='materialize-textarea' name='translation' placeholder='translation' onChange={this.handleFormInputChanged} value={this.state.translation}></textarea>
                                 </div>
 
-                                <div className='col s12 center-align'>
+                                <div className='input-field col s12 center-align'>
                                     <textarea className='materialize-textarea' name='definition' placeholder='definition' onChange={this.handleFormInputChanged} value={this.state.definition}></textarea>
                                 </div>
 
-                                <div className='col s12 center-align'>
+                                <div className='input-field col s12 center-align'>
                                     <input type='text' name='tags' placeholder='tags' onChange={this.handleFormInputChanged} value={this.state.tags} />
                                 </div>
-                                <div className='col s12 right-align'>
+                                <div className='input-field col s12 right-align'>
                                     <button className="btn waves-effect waves-light" type="submit" name="action" onClick={this.saveUserDefinition}>
                                         Submit
                                         <i className="material-icons right">send</i>
@@ -85,6 +87,7 @@ class UserCustomDefinitionForm extends Component {
                             </span>
                         </form>
                     </div>
+                    <DefinitionBoxes />
                 </div>
             </li>
         );

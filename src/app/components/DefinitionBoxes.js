@@ -50,7 +50,13 @@ class DefinitionBoxes extends Component {
                 .map( box =>
                       <SidebarBox label={box.label} items={this.props.data[box.key]} /> );
 
-        return (<div>{boxes}</div>);
+        return (
+            <div className='row'>
+                <div className='col s12'>
+                    {boxes}
+                </div>
+            </div>
+        );
     }
 };
 
@@ -81,7 +87,8 @@ class DefinitionList extends  Component {
                 {items}
               </ul>
               <h4>more / less</h4>
-            </span>);
+            </span>
+        );
     }
 };
 
@@ -95,12 +102,13 @@ class SidebarBox extends Component {
 
     render() {
         return (
-            <div>
-              <h3>
-                {this.props.label}
-              </h3>
-
-              <DefinitionList items={this.props.items} />
+            <div className="card">
+                <div className="card-content teal lighten-2">
+                    <span className="card-title">{this.props.label}</span>
+                </div>
+                <div className="card-action">
+                    <DefinitionList items={this.props.items} />
+                </div>
             </div>
         );
     }

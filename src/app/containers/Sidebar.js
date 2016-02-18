@@ -27,12 +27,12 @@ class Sidebar extends Component {
     render() {
         return (
             <div className="wrapper">
-                <aside className='sidebar' id="sidebar-sticker">
+                <aside className='sidebar scrollspy' id="sidebar-sticker">
                     <ul className="collapsible" data-collapsible="accordion">
                         <TTSPlayer selection={this.props.selectedText}/>
                         <Wordlists handleSelected={this.handleWordListSelected} wordlists={this.props.wordlists}/>
                         <UserCustomDefinitionForm />
-                        <DefinitionBoxes />
+                        {/*<DefinitionBoxes />*/}
                     </ul>
                 </aside>
             </div>
@@ -45,6 +45,7 @@ $(function() {
     $('.collapsible').collapsible({
         accordion : false
     });
+    $('.scrollspy').scrollSpy();
 });
 
 function mapStateToProps(state){
