@@ -11,18 +11,35 @@ function currentSelectionSelector(state){
 
 var cachedSelection = currentSelectionSelector(store.getState());
 
-function onSelectionChanged(selection){
-        store.dispatch(loadTranslation(selection, {from:'en', to: 'pl'}));
-        store.dispatch(loadPictures(selection));
-        store.dispatch(loadDefinitions(selection));
-};
+function updateSelectionCache(selection){
+    cachedSelection = selection;
+}
 
+function getCachedSelection(){
+    return cachedSelection;
+}
+
+function selectionChanged(selection){
+    return selection != getCachedSelection();
+}
+
+function searchingAllowed(selection){
+    return selection.length < 20;
+}
 
 store.subscribe( () => {
-    if (cachedSelection != currentSelectionSelector(store.getState())){
-        cachedSelection = currentSelectionSelector(store.getState());
+    let selection = currentSelectionSelector(store.getState());
 
-        onSelectionChanged(currentSelectionSelector(store.getState()));
+    if (selectionChanged(selection)) {
+        updateSelectionCache(selection);
+
+        if (searchingAllowed(selection)){
+
+            store.dispatch(loadTranslation(selection, {from:'en', to: 'pl'}));
+            store.dispatch(loadPictures(selection));
+            store.dispatch(loadDefinitions(selection));
+
+        }
     }
 });
 

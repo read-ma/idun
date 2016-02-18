@@ -1,17 +1,17 @@
 import api from '../api';
 
-function loadTranslation(text, params){
-    return (dispatch) => {
-        api.get(`/translate/${text}.json`, {params: params})
-            .then( response => dispatch(contentLoaded('translations', response.data)));
-    };
-}
-
 function contentLoaded(type, data){
     return {
         type: 'CONTENT_LOADED',
         data: data,
         content_type: type
+    };
+}
+
+function loadTranslation(text, params){
+    return (dispatch) => {
+        api.get(`/translate/${text}.json`, {params: params})
+            .then( response => dispatch(contentLoaded('translations', response.data)));
     };
 }
 
