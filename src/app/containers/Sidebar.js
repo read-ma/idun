@@ -5,6 +5,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { textSelected, toggleHighlighting } from '../actions';
 import { TTSPlayer, Wordlists, DefinitionBoxes } from '../components';
+import 'lodash';
 
 class Sidebar extends Component {
     constructor(props) {
@@ -22,6 +23,8 @@ class Sidebar extends Component {
 
         this.handleSelected = this.handleSelected.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.handleSearchSubmittion = this.handleSearchSubmittion.bind(this);
+
     };
 
     handleSelected(event){
@@ -36,11 +39,7 @@ class Sidebar extends Component {
         );
     }
 
-    handleChange(event){
-        this.props.dispatch(
-            textSelected(event.target.value)
-        );
-
+    handleChange(event) {
         this.setState(
             Object.assign({}, this.state, {
                 [event.target.name] : event.target.value
@@ -48,12 +47,21 @@ class Sidebar extends Component {
         );
     }
 
+    handleSearchSubmittion(event){
+
+        this.props.dispatch(
+            textSelected(this.state.selectedText)
+        )
+
+    }
+
     render() {
         return (
             <aside className='sidebar'>
               <TTSPlayer selection={this.props.selectedText}/>
               <Wordlists handleSelected={this.handleSelected} wordlists={this.props.wordlists}/>
-              <textarea id="selectedText" name='selectedText' onChange={this.handleChange} value={this.state.selectedText}></textarea>
+                <textarea id="selectedText" name='selectedText' onChange={this.handleChange} value={this.state.selectedText}></textarea>
+                <button onClick={this.handleSearchSubmittion}>search</button>
               <DefinitionBoxes />
             </aside>);
     }

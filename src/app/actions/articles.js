@@ -1,6 +1,7 @@
 import request from 'superagent';
 import store from '../store';
 import Config from 'Config';
+import api from '../api';
 
 function articlesLoaded(items) {
     return {
@@ -52,9 +53,14 @@ function getLocalArticle(id) {
 }
 
 function getArticle(id, handleSuccess) {
-    return handleSuccess(
-        getLocalArticle(id)
-    );
+    if (getLocalArticle(id))
+        return handleSuccess( getLocalArticle(id) );
+    else {
+        api.get(`/articles/${id}.json`)
+            .then( (response) => {
+                handleSuccess(response.data.article);
+            });
+    };
 }
 
 export { loadArticle, loadArticles }
