@@ -27,15 +27,18 @@ class Sidebar extends Component {
     render() {
         return (
             <aside className='sidebar'>
-              <TTSPlayer selection={this.props.selectedText}/>
-
-              <Wordlists handleSelected={this.handleWordListSelected} wordlists={this.props.wordlists}/>
-
-              <UserCustomDefinitionForm />
-              <DefinitionBoxes />
-            </aside>);
+                <TTSPlayer selection={this.props.selectedText}/>
+                <Wordlists handleSelected={this.handleWordListSelected} wordlists={this.props.wordlists}/>
+                <UserCustomDefinitionForm />
+                <DefinitionBoxes />
+            </aside>
+        );
     }
 }
+
+$(function() {
+    $('aside.sidebar').pushpin({ top: '-100px' });
+});
 
 function mapStateToProps(state){
     return {
