@@ -21,6 +21,12 @@ function main(state = initialState, action) {
             { userDefinitions: Array.from(action.userDefinitions)}
         );
 
+    case 'USER_DEFINITION_SAVED':
+        return Object.assign(
+            {},
+            state,
+            { userDefinitions: [...state.userDefinitions, action.definition] });
+
     default:
         return state;
     }

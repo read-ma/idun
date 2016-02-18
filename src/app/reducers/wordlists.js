@@ -3,7 +3,7 @@ import {words as d3k} from '../constants/d3k';
 const initialState = [
     {name: 'selection', enabled: true, words: []},
     {name: 'd3k', enabled: false, words: d3k },
-    {name: 'user', enabled: false, words: ['user', 'positive', 'recognition', 'the', 'first','be involved', 'win'] },
+    {name: 'user', enabled: false, words: [] },
 ];
 
 export default function wordlists(state = initialState, action) {
@@ -14,6 +14,15 @@ export default function wordlists(state = initialState, action) {
         return state.map ((list) => {
             if (list.name === 'user') {
                 return Object.assign({}, list, {words: action.userDefinitions.map((d) => {return d.word;})});
+            }
+            else
+                return list;
+        });
+
+    case 'USER_DEFINITION_SAVED':
+        return state.map ((list) => {
+            if (list.name === 'user') {
+                return Object.assign({}, list, {words: [...list.words, action.definition.word]});
             }
             else
                 return list;

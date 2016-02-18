@@ -1,7 +1,7 @@
 require('./ArticlePage.scss');
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { loadArticle, textSelected } from '../actions';
+import { loadArticle, textSelected, loadUserDefinitions } from '../actions';
 import { Link } from 'react-router';
 import { highlightText, getSelectedText } from '../highlight';
 import Sidebar from '../containers/Sidebar';
@@ -37,9 +37,8 @@ const ArticleTitle = ({title, source_url}) => {
 class ArticlePage extends Component {
 
     componentDidMount(){
-        this.props.dispatch(
-            loadArticle(this.props.params.id)
-        );
+        this.props.dispatch(loadArticle(this.props.params.id));
+        this.props.dispatch(loadUserDefinitions());
     }
 
     onTextSelected(){
