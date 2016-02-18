@@ -58,14 +58,19 @@ class Sidebar extends Component {
     render() {
         return (
             <aside className='sidebar'>
-              <TTSPlayer selection={this.props.selectedText}/>
-              <Wordlists handleSelected={this.handleSelected} wordlists={this.props.wordlists}/>
+                <TTSPlayer selection={this.props.selectedText}/>
+                <Wordlists handleSelected={this.handleSelected} wordlists={this.props.wordlists}/>
                 <textarea id="selectedText" name='selectedText' onChange={this.handleChange} value={this.state.selectedText}></textarea>
                 <button onClick={this.handleSearchSubmittion}>search</button>
-              <DefinitionBoxes />
-            </aside>);
+                <DefinitionBoxes />
+            </aside>
+        );
     }
 }
+
+$(function() {
+    $('aside.sidebar').pushpin({ top: '-100px' });
+});
 
 function mapStateToProps(state){
     return {
