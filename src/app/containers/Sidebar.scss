@@ -1,33 +1,38 @@
 .wrapper {
     position: relative;
     aside.sidebar {
-        background-color: #e0e0e0;
         .collapsible-body {
             p {
                 padding: 1rem;
-                button {
-                    margin-right: 1rem;
-                    border: 1px solid #aaa;
-                }
             };
+            form {
+                padding: 0 .5rem;
+            };
+            button {
+                margin-right: 1rem;
+                border: 1px solid #aaa;
+                &[type="submit"] {
+                    margin-right: 0;
+                }
+            }
         };
     };
 };
 
 .sidebar {
-    ul {
-        list-style: none;
-        padding: 5px;
-        margin: 0;
-        height: 200px;
-        overflow: hidden;
-        li {
-            margin: 0 0 5px;
-        }
-    }
+    //ul {
+    //    list-style: none;
+    //    padding: 5px;
+    //    margin: 0;
+    //    height: 200px;
+    //    overflow: hidden;
+    //    li {
+    //        margin: 0 0 5px;
+    //    }
+    //}
 }
 
-.userCustomDefinition { padding: 10px }
+//.userCustomDefinition { padding: 10px }
 
 //button {
 //    background-color: #eee;

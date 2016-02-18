@@ -49,33 +49,44 @@ class UserCustomDefinitionForm extends Component {
 
     render() {
         return (
-            <div className='userCustomDefinition row' onSubmit={this.search}>
-              <form className='col s12'>
-                <div className='row'>
-                  <input type='text' className='col s10' placeholder='selection' name='word' onKeyUp={this.search} onChange={this.handleFormInputChanged} value={this.state.word} />
-                  <a className='col s1 btn' onClick={this.search}><i className="small material-icons">search</i></a>
-                  <a className='col s1 btn' onClick={this.toggleForm}><i className="small material-icons">add</i></a>
+            <li>
+                <div className="collapsible-header">
+                    <i className="material-icons">library_books</i>
+                    Definition
                 </div>
+                <div className="collapsible-body white">
+                    <div className="row" onSubmit={this.search}>
+                        <form>
+                            <div className='col s12'>
+                                <button className='btn-floating waves-effect waves-light' onClick={this.search}><i className="small material-icons">search</i></button>
+                                <button className='btn-floating waves-effect waves-light' onClick={this.toggleForm}><i className="small material-icons">add</i></button>
+                            </div>
+                            <div className='col s12 center-align'>
+                                <input type='text' placeholder='selection' name='word' onKeyUp={this.search} onChange={this.handleFormInputChanged} value={this.state.word} />
+                            </div>
+                            <span className={classnames({hidden: this.state.collapsed})}>
+                                <div className='col s12 center-align'>
+                                    <textarea className='materialize-textarea' name='translation' placeholder='translation' onChange={this.handleFormInputChanged} value={this.state.translation}></textarea>
+                                </div>
 
-                <span className={classnames({hidden: this.state.collapsed})}>
+                                <div className='col s12 center-align'>
+                                    <textarea className='materialize-textarea' name='definition' placeholder='definition' onChange={this.handleFormInputChanged} value={this.state.definition}></textarea>
+                                </div>
 
-                  <div className='row'>
-                    <textarea className='col s12 materialize-textarea' name='translation' placeholder='translation' onChange={this.handleFormInputChanged} value={this.state.translation}></textarea>
-                  </div>
-
-                  <div className='row'>
-                    <textarea className='col s12 materialize-textarea' name='definition' placeholder='definition' onChange={this.handleFormInputChanged} value={this.state.definition}></textarea>
-                  </div>
-
-                  <div className='row'>
-                    <input type='text' className='col s12 materialize-textarea' name='tags' placeholder='tags' onChange={this.handleFormInputChanged} value={this.state.tags} />
-                  </div>
-
-                  <input className='btn' type='submit' onClick={this.saveUserDefinition} value='save your definition'/>
-                </span>
-              </form>
-            </div>
-
+                                <div className='col s12 center-align'>
+                                    <input type='text' name='tags' placeholder='tags' onChange={this.handleFormInputChanged} value={this.state.tags} />
+                                </div>
+                                <div className='col s12 right-align'>
+                                    <button className="btn waves-effect waves-light" type="submit" name="action" onClick={this.saveUserDefinition}>
+                                        Submit
+                                        <i className="material-icons right">send</i>
+                                    </button>
+                                </div>
+                            </span>
+                        </form>
+                    </div>
+                </div>
+            </li>
         );
     }
 }
