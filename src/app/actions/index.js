@@ -26,7 +26,14 @@ function userDefinitionsLoaded(definitions) {
 function saveUserDefinition(definition){
     return dispatch => {
         api.post('/user_definitions.json', {user_definition: definition})
-            .then( response => console.log(response));
+            .then(response => dispatch(userDefinitionSaved(response.data)));
+    }
+}
+
+function userDefinitionSaved(definition){
+    return {
+        type: 'USER_DEFINITION_SAVED',
+        definition: definition
     }
 }
 
