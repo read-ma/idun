@@ -50,12 +50,12 @@ class Sidebar extends Component {
 
     render() {
         return (
-            <div className='sidebar'>
+            <aside className='sidebar'>
               <TTSPlayer selection={this.props.selectedText}/>
               <Wordlists handleSelected={this.handleSelected} wordlists={this.props.wordlists}/>
               <textarea id="selectedText" name='selectedText' onChange={this.handleChange} value={this.state.selectedText}></textarea>
               <DefinitionBoxes />
-            </div>);
+            </aside>);
     }
 }
 
