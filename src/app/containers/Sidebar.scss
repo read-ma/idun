@@ -1,6 +1,8 @@
 .wrapper {
     position: relative;
     aside.sidebar {
+        max-height: 550px;
+        overflow: auto;
         .collapsible-body {
             p {
                 padding: 1rem;
