@@ -51,17 +51,12 @@ class UserCustomDefinitionForm extends Component {
 
     render() {
         return (
-            <li>
-                <div className="collapsible-header">
-                    <i className="material-icons">library_books</i>
-                    Definition
-                </div>
-                <div className="collapsible-body white">
+                <div className="box-body white">
                     <div className="row" onSubmit={this.search}>
                         <form>
                             <div className='input-field col s12'>
                                 <button className='btn-floating waves-effect waves-light left' onClick={this.search}><i className="small material-icons">search</i></button>
-                                <button className='btn-floating waves-effect waves-light right' onClick={this.toggleForm}><i className="small material-icons">add</i></button>
+                                <button className='btn-floating waves-effect waves-light left' onClick={this.toggleForm}><i className="small material-icons">add</i></button>
                             </div>
                             <div className='input-field col s12 center-align'>
                                 <input type='text' placeholder='selection' name='word' onKeyUp={this.search} onChange={this.handleFormInputChanged} value={this.state.word} />
@@ -78,18 +73,16 @@ class UserCustomDefinitionForm extends Component {
                                 <div className='input-field col s12 center-align'>
                                     <input type='text' name='tags' placeholder='tags' onChange={this.handleFormInputChanged} value={this.state.tags} />
                                 </div>
-                                <div className='input-field col s12 right-align'>
+                                <div className='input-field col s12'>
                                     <button className="btn waves-effect waves-light" type="submit" name="action" onClick={this.saveUserDefinition}>
-                                        Submit
-                                        <i className="material-icons right">send</i>
+                                        Save you definition
+                                        <i className="material-icons">send</i>
                                     </button>
                                 </div>
                             </span>
                         </form>
                     </div>
-                    <DefinitionBoxes />
                 </div>
-            </li>
         );
     }
 }

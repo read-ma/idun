@@ -18,12 +18,8 @@ class TTSPlayer extends Component {
 
     render(){
         return (
-            <li>
-                <div className="collapsible-header">
-                    <i className="material-icons">volume_mute</i>
-                    Player
-                </div>
-                <div className="collapsible-body white">
+            <div>
+                <div className="box-body white">
                     <p className="left-align">
                         <button className="btn-floating waves-effect waves-light" onClick={this.play.bind(this)}>
                             <i className="material-icons">play_arrow</i>
@@ -39,7 +35,7 @@ class TTSPlayer extends Component {
                         </button>
                     </p>
                 </div>
-            </li>
+            </div>
         );
     }
 }

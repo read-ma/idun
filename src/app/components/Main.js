@@ -39,10 +39,6 @@ const Navigator = () => {
     );
 };
 
-$(function() {
-    $(".button-collapse").sideNav({ closeOnClick: true });
-});
-
 const Footer = () => {
     return (
         <footer className="page-footer teal">
