@@ -27,14 +27,14 @@ class Sidebar extends Component {
     render() {
         return (
             <div className="wrapper">
-                <aside className='sidebar' id="sidebar-sticker">
-                    <ul className="collapsible">
-                        <TTSPlayer selection={this.props.selectedText}/>
-                        <Wordlists handleSelected={this.handleWordListSelected} wordlists={this.props.wordlists}/>
-                        <UserCustomDefinitionForm />
-                        <DefinitionBoxes />
-                    </ul>
-                </aside>
+              <aside className='sidebar' id="sidebar-sticker">
+                <ul className="collapsible">
+                  <TTSPlayer selection={this.props.selectedText}/>
+                  <Wordlists handleSelected={this.handleWordListSelected} wordlists={this.props.wordlists}/>
+                  <UserCustomDefinitionForm />
+                  <DefinitionBoxes />
+                </ul>
+              </aside>
             </div>
         );
     }

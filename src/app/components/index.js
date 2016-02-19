@@ -18,23 +18,21 @@ class TTSPlayer extends Component {
 
     render(){
         return (
-            <div>
-                <div className="box-body white">
-                    <p className="left-align">
-                        <button className="btn-floating waves-effect waves-light" onClick={this.play.bind(this)}>
-                            <i className="material-icons">play_arrow</i>
-                        </button>
-                        <button className="btn-floating waves-effect waves-light" onClick={player.pause}>
-                            <i className="material-icons">pause</i>
-                        </button>
-                        <button className="btn-floating waves-effect waves-light" onClick={player.resume}>
-                            <i className="material-icons">skip_next</i>
-                        </button>
-                        <button className="btn-floating waves-effect waves-light" onClick={player.stop}>
-                            <i className="material-icons">stop</i>
-                        </button>
-                    </p>
-                </div>
+            <div className="box-body white">
+              <p className="left-align">
+                <button className="btn-floating waves-effect waves-light" onClick={this.play.bind(this)}>
+                  <i className="material-icons">play_arrow</i>
+                </button>
+                <button className="btn-floating waves-effect waves-light" onClick={player.pause}>
+                  <i className="material-icons">pause</i>
+                </button>
+                <button className="btn-floating waves-effect waves-light" onClick={player.resume}>
+                  <i className="material-icons">skip_next</i>
+                </button>
+                <button className="btn-floating waves-effect waves-light" onClick={player.stop}>
+                  <i className="material-icons">stop</i>
+                </button>
+              </p>
             </div>
         );
     }
@@ -42,23 +40,24 @@ class TTSPlayer extends Component {
 
 const Wordlists = ({wordlists, handleSelected}) => {
     let buttons = wordlists.map((list) => {
-        return  <button key={list.name}
-                        className={classnames({active: list.enabled})}
-                        name={list.name} onClick={handleSelected}>
-                    {list.name}
-                </button>;
+        return (
+            <span>
+              <input id={list.name} key={list.name} type="checkbox" onChange={handleSelected} checked={list.enabled} name={list.name} className='filled-in'/>
+              <label htmlFor={list.name}>{list.name}</label>
+            </span>
+        );
     });
     return (
         <li>
-            <div className="collapsible-header">
-                <i className="material-icons">toc</i>
-                Word Lists
-            </div>
-            <div className="collapsible-body white">
-                <p className="left-align">
-                    {buttons}
-                </p>
-            </div>
+          <div className="collapsible-header">
+            <i className="material-icons">toc</i>
+            Word Lists
+          </div>
+          <div className="box-body white">
+            <form className="left-align">
+              {buttons}
+            </form>
+          </div>
         </li>
     );
 };
