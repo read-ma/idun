@@ -7,6 +7,15 @@
         height: 100%;
         margin-right: 10px;
 
+        ul.collection {
+            border: 0
+        }
+
+        .collapsed {
+            height: 300px;
+            overflow: hidden;
+        }
+
         .box-body {
             p {
                 padding: 1rem;

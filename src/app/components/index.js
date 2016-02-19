@@ -11,6 +11,15 @@ import * as player from '../actions/tts';
 
 import classnames from 'classnames';
 
+
+const TTSPlayerButton = ({handleClick, label}) => {
+    return (
+        <button className="btn-floating" onClick={handleClick}>
+          <i className="tiny material-icons">{label}</i>
+        </button>
+    );
+};
+
 class TTSPlayer extends Component {
     play(){
         player.start(this.props.selection);
@@ -19,20 +28,10 @@ class TTSPlayer extends Component {
     render(){
         return (
             <div className="box-body white">
-              <p className="left-align">
-                <button className="btn-floating waves-effect waves-light" onClick={this.play.bind(this)}>
-                  <i className="material-icons">play_arrow</i>
-                </button>
-                <button className="btn-floating waves-effect waves-light" onClick={player.pause}>
-                  <i className="material-icons">pause</i>
-                </button>
-                <button className="btn-floating waves-effect waves-light" onClick={player.resume}>
-                  <i className="material-icons">skip_next</i>
-                </button>
-                <button className="btn-floating waves-effect waves-light" onClick={player.stop}>
-                  <i className="material-icons">stop</i>
-                </button>
-              </p>
+                <TTSPlayerButton label="play_arrow" handleClick={this.play.bind(this)} />
+                <TTSPlayerButton label="pause" handleClick={player.pause} />
+                <TTSPlayerButton label="skip_next" handleClick={player.resume} />
+                <TTSPlayerButton label="stop" handleClick={player.stop} />
             </div>
         );
     }
@@ -41,24 +40,17 @@ class TTSPlayer extends Component {
 const Wordlists = ({wordlists, handleSelected}) => {
     let buttons = wordlists.map((list) => {
         return (
-            <span>
+            <li className='collection-item'>
               <input id={list.name} key={list.name} type="checkbox" onChange={handleSelected} checked={list.enabled} name={list.name} className='filled-in'/>
-              <label htmlFor={list.name}>{list.name}</label>
-            </span>
+              <label htmlFor={list.name}>{list.label}</label>
+            </li>
         );
     });
     return (
-        <li>
-          <div className="collapsible-header">
-            <i className="material-icons">toc</i>
-            Word Lists
-          </div>
-          <div className="box-body white">
-            <form className="left-align">
-              {buttons}
-            </form>
-          </div>
-        </li>
+        <ul className='collection with-header'>
+          <li className='collection-header'><h4>Settings</h4></li>
+          {buttons}
+        </ul>
     );
 };
 

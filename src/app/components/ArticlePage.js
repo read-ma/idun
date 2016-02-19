@@ -18,7 +18,7 @@ class ArticleContent extends Component {
 
     render(){
         return (
-            <p onMouseUp={this.props.onTextSelected} dangerouslySetInnerHTML={{__html: this.state.text}}></p>
+            <div onMouseUp={this.props.onTextSelected} dangerouslySetInnerHTML={{__html: this.state.text}}></div>
         );
     }
 };
@@ -27,12 +27,20 @@ const ArticleTitle = ({title, source_url}) => {
     return (
         <header>
             <h1>{title}</h1>
-            <blockquote>
-                <a href={source_url} target="blank" alt="article link">{source_url}</a>
-            </blockquote>
         </header>
     );
 };
+
+const ArticleFooter = ({source_url}) => {
+    return (
+        <footer>
+          <blockquote>
+            <span>Source: </span>
+            <a href={source_url} target="blank" alt="article link">{source_url}</a>
+          </blockquote>
+        </footer>
+    );
+}
 
 class ArticlePage extends Component {
 
@@ -53,21 +61,11 @@ class ArticlePage extends Component {
         return (
             <div>
                 <div className="row">
-                    <nav className="breadcrumbs white">
-                        <div className="nav-wrapper">
-                            <div className="col s12">
-                                <Link to='/' className="breadcrumb">Home</Link>
-                                <Link to='articles' className="breadcrumb">Articles</Link>
-                                <a href="#!" className="breadcrumb">{this.props.title}</a>
-                            </div>
-                        </div>
-                    </nav>
-                </div>
-                <div className="row">
                     <div className="col l8 m12">
                         <article className="article">
-                            <ArticleTitle title={this.props.title} source_url={this.props.source_url} />
+                            <ArticleTitle title={this.props.title} />
                             <ArticleContent text={this.props.content} onTextSelected={this.onTextSelected.bind(this)} wordlists={this.props.wordlists} />
+                            <ArticleFooter source_url={this.props.source_url} />
                         </article>
                     </div>
                     <div className="col l4 m12">
