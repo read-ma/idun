@@ -63,15 +63,15 @@ class DefinitionBoxes extends Component {
 function DefinitionListItem({text, language, url}) {
     if (url)
         return (
-            <li>
-              <img src={url} alt={text} />
-            </li>
+            <tr>
+                <td><img className="materialboxed" data-caption={text} width="100%" src={url} alt={text} /></td>
+            </tr>
         );
     else
         return (
-            <li>
-              <span dangerouslySetInnerHTML={{__html: text}}></span>
-            </li>
+            <tr>
+                <td><div dangerouslySetInnerHTML={{__html: text}}></div></td>
+            </tr>
         );
 }
 
@@ -82,12 +82,18 @@ class DefinitionList extends  Component {
                 .map( item => DefinitionListItem(Object.assign({}, item)));
 
         return (
-            <span>
-              <ul>
-                {items}
-              </ul>
-              <h4>more / less</h4>
-            </span>
+            <div className="col s12">
+                <table className="responsive-table bordered">
+                    <tbody>
+                        {items}
+                    </tbody>
+                </table>
+                <br />
+                <button className="btn waves-effect waves-light right">
+                    More / Less
+                    <i className="material-icons right">play_for_work</i>
+                </button>
+            </div>
         );
     }
 };
