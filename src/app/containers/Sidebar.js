@@ -24,10 +24,17 @@ class Sidebar extends Component {
         );
     }
 
+    componentDidMount() {
+        $("#sidebar-sticker").sticky({ topSpacing: 10, className: 'sticked' });
+        $('.collapsible').collapsible({
+            accordion : false
+        });
+    };
+
     render() {
         return (
             <div className="wrapper">
-                <aside className='sidebar scrollspy' id="sidebar-sticker">
+                <aside className='sidebar' id="sidebar-sticker">
                     <ul className="collapsible" data-collapsible="accordion">
                         <TTSPlayer selection={this.props.selectedText}/>
                         <Wordlists handleSelected={this.handleWordListSelected} wordlists={this.props.wordlists}/>
@@ -40,13 +47,12 @@ class Sidebar extends Component {
     }
 }
 
-$(function() {
-    $("#sidebar-sticker").sticky({ topSpacing: 10, className: 'sticked' });
-    $('.collapsible').collapsible({
-        accordion : false
-    });
-    $('.scrollspy').scrollSpy();
-});
+// $(function() {
+//     $("#sidebar-sticker").sticky({ topSpacing: 10, className: 'sticked' });
+//     $('.collapsible').collapsible({
+//         accordion : false
+//     });
+// });
 
 function mapStateToProps(state){
     return {
