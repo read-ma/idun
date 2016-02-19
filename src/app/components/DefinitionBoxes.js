@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import store from '../store';
-import { loadTranslation, loadDefinitions, loadPictures } from '../actions/definitions';
+import { findWordData } from '../actions/definitions';
 import classnames from 'classnames';
 import 'lodash';
 
@@ -35,9 +35,10 @@ store.subscribe( () => {
 
         if (searchingAllowed(selection)){
 
-            store.dispatch(loadTranslation(selection, {from:'en', to: 'pl'}));
-            store.dispatch(loadPictures(selection));
-            store.dispatch(loadDefinitions(selection));
+            store.dispatch(findWordData(selection,'translations', {from:'en', to: 'pl'}));
+            store.dispatch(findWordData(selection,'definitions'));
+            store.dispatch(findWordData(selection,'examples'));
+            store.dispatch(findWordData(selection,'graphics'));
 
         }
     }

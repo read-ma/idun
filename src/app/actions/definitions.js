@@ -8,40 +8,17 @@ function contentLoaded(type, data){
     };
 }
 
-function loadTranslation(text, params){
+function findWordData(text, type, options={}){
+    let params = Object.assign({}, options, {type: type})
+
     return (dispatch) => {
         api.get(`/translate/${text}.json`, {params: params})
-            .then( response => dispatch(contentLoaded('translations', response.data)));
+            .then( response => dispatch(contentLoaded(type, response.data)));
     };
 }
 
-function loadDefinitions(text, params={type: 'definitions'}){
-    return (dispatch) => {
-        api.get(`/translate/${text}.json`, {params: params})
-            .then( response => dispatch(contentLoaded('definitions', response.data)));
-    };
-}
+export { findWordData }
 
-function loadPictures(text, params= {type: 'graphics'}){
-    return (dispatch) => {
-        api.get(`/translate/${text}.json`, {params: params})
-            .then( response => dispatch(contentLoaded('graphics', response.data)));
-    };
-
-}
-
-export { loadTranslation, loadPictures, loadDefinitions }
-
-
-// dispatch(requestStarted('translations'));
-// $.get('/api/translate/'+word+'.json', languageSelector(store.getState())).then(function(response) {
-//     dispatch(translationFound(word,response));
-// });
-
-// dispatch(requestStarted('graphics'));
-// $.get('/api/translate/'+word+'.json', {type: 'graphics'}).then(function(response) {
-//     dispatch(graphicsFound(word,response.graphics));
-// });
 
 // dispatch(requestStarted('definitions'));
 // $.get('/api/translate/'+word+'.json', {type: 'definitions'}).then(function(response) {
