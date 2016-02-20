@@ -34,6 +34,9 @@ class Sidebar extends Component {
                                 <button className="btn-floating btn-large red">
                                     <i className="large material-icons">mode_edit</i>
                                 </button>
+                                <ul>
+                                    
+                                </ul>
                             </div>
                             <div className="box-body white">
                                 <TTSPlayer selection={this.props.selectedText}/>

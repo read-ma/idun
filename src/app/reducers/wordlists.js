@@ -1,9 +1,9 @@
 import {words as d3k} from '../constants/d3k';
 
 const initialState = [
-    {name: 'selection', enabled: true, words: []},
-    {name: 'd3k', enabled: false, words: d3k },
-    {name: 'user', enabled: false, words: [] },
+    {label: 'Show selected phrase', name: 'selection', enabled: true, words: []},
+    {label: 'Dick-tionary', name: 'd3k', enabled: false, words: d3k },
+    {label: 'Your words', name: 'user', enabled: false, words: [] },
 ];
 
 export default function wordlists(state = initialState, action) {

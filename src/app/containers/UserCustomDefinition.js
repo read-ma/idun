@@ -52,14 +52,15 @@ class UserCustomDefinitionForm extends Component {
     render() {
         return (
                 <div className="box-body white">
+                  <h4>Your Definition</h4>
                     <div className="row" onSubmit={this.search}>
                         <form>
                             <div className='input-field col s12'>
-                                <button className='btn-floating waves-effect waves-light left' onClick={this.search}><i className="small material-icons">search</i></button>
                                 <button className='btn-floating waves-effect waves-light left' onClick={this.toggleForm}><i className="small material-icons">add</i></button>
                             </div>
                             <div className='input-field col s12 center-align'>
-                                <input type='text' placeholder='selection' name='word' onKeyUp={this.search} onChange={this.handleFormInputChanged} value={this.state.word} />
+                                <input className='left' type='text' placeholder='selection' name='word' onKeyUp={this.search} onChange={this.handleFormInputChanged} value={this.state.word} />
+                                <button className='btn-floating waves-effect waves-light right' onClick={this.search}><i className="small material-icons">search</i></button>
                             </div>
                             <span className={classnames({hidden: this.state.collapsed})}>
                                 <div className='input-field col s12 center-align'>

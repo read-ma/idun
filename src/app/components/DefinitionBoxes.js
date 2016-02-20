@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import store from '../store';
-import { loadTranslation, loadDefinitions, loadPictures } from '../actions/definitions';
+import { findWordData } from '../actions/definitions';
 import classnames from 'classnames';
 import 'lodash';
 
@@ -35,9 +35,10 @@ store.subscribe( () => {
 
         if (searchingAllowed(selection)){
 
-            store.dispatch(loadTranslation(selection, {from:'en', to: 'pl'}));
-            store.dispatch(loadPictures(selection));
-            store.dispatch(loadDefinitions(selection));
+            store.dispatch(findWordData(selection,'translations', {from:'en', to: 'pl'}));
+            store.dispatch(findWordData(selection,'definitions'));
+            store.dispatch(findWordData(selection,'examples'));
+            store.dispatch(findWordData(selection,'graphics'));
 
         }
     }
@@ -60,18 +61,16 @@ class DefinitionBoxes extends Component {
     }
 };
 
-function DefinitionListItem({text, language, url}) {
+function DefinitionListItem({text, language, url, typeOfSpeech}) {
     if (url)
         return (
-            <tr>
-                <td><img className="materialboxed" data-caption={text} width="100%" src={url} alt={text} /></td>
-            </tr>
+            <li className="collection-item"><img className="materialboxed" data-caption={text} width="100%" src={url} alt={text} /></li>
         );
     else
         return (
-            <tr>
-                <td><div dangerouslySetInnerHTML={{__html: text}}></div></td>
-            </tr>
+            <li className="collection-item">
+              <div dangerouslySetInnerHTML={{__html: text}}></div>
+            </li>
         );
 }
 
@@ -82,17 +81,11 @@ class DefinitionList extends  Component {
                 .map( item => DefinitionListItem(Object.assign({}, item)));
 
         return (
-            <div className="col s12">
-                <table className="responsive-table bordered">
-                    <tbody>
-                        {items}
-                    </tbody>
-                </table>
-                <br />
-                <button className="btn waves-effect waves-light right">
-                    More / Less
-                    <i className="material-icons right">play_for_work</i>
-                </button>
+            <div>
+              <ul className="collection with-header">
+                <li className="collection-header"><h4>{this.props.label}</h4></li>
+                {items}
+              </ul>
             </div>
         );
     }
@@ -108,13 +101,16 @@ class SidebarBox extends Component {
 
     render() {
         return (
-            <div className="card">
-                <div className="card-content teal lighten-2">
-                    <span className="card-title">{this.props.label}</span>
-                </div>
-                <div className="card-action">
-                    <DefinitionList items={this.props.items} />
-                </div>
+            <div className="row">
+              <div className="col s12 collapsed">
+                <DefinitionList items={this.props.items} label={this.props.label}/>
+              </div>
+              <div className="col s12">
+                <button className="btn-flat">
+                  More / Less
+                  <i className="material-icons">play_for_work</i>
+                </button>
+              </div>
             </div>
         );
     }
