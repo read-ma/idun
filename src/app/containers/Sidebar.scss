@@ -2,17 +2,39 @@
     position: relative;
     max-width: 500px;
     aside.sidebar {
-        //position: fixed;
-        //overflow: scroll;
-        //height: 100%;
-        //margin-right: 10px;
+        overflow: scroll;
+        position: fixed;
+        min-height: 200px;
+        height: 100%;
+
+        max-width: inherit;
+        width: 100%;
+
+        margin-right: 10px;
+        padding: 10px;
 
         ul.collection {
-            border: 0
+            border: 0;
         }
 
+        .btn-small {
+            padding: 0 5px;
+        }
+
+        .card .card-content {
+            padding: 0;
+        }
+
+        input.selectedText {
+            font-size: 1.64rem;
+            line-height: 1;
+            margin: 0;
+            border: 0;
+        }
+
+
         .collapsed {
-            height: 300px;
+            max-height: 400px;
             overflow: hidden;
         }
 

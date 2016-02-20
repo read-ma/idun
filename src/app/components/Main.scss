@@ -55,15 +55,6 @@ nav ul a, nav .brand-logo {
     };
 };
 
-.sidebar {
-    overflow: scroll;
-    position: fixed;
-    min-height: 200px;
-    max-height: 550px;
-    max-width: inherit;
-    width: 100%;
-};
-
 .tts-player {
     height: 60px;
     .fixed-action-btn {

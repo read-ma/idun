@@ -51,51 +51,36 @@ class UserCustomDefinitionForm extends Component {
 
     render() {
         return (
-            <ul className='collection with-header'>
-                <li className="collection-header"><h5>Your Definition</h5></li>
-                <li className="row collection-item" onSubmit={this.search}>
-                    <form className="col s12">
-                        <div className='row'>
-                            <div className="input-field col s12">
-                                <button className='btn-floating waves-effect waves-light left' onClick={this.toggleForm}><i className="small material-icons">add</i></button>
-                            </div>
-                        </div>
-                        <div className='row'>
-                            <div className="input-field col s10">
-                                <input className='left' type='text' placeholder='selection' name='word' onKeyUp={this.search} onChange={this.handleFormInputChanged} value={this.state.word} />
-                            </div>
-                            <div className="input-field col s2">
-                                <button className='btn-floating waves-effect waves-light' onClick={this.search}><i className="small material-icons">search</i></button>
-                            </div>
-                        </div>
-                        <span className={classnames({hidden: this.state.collapsed})}>
-                            <div className='row'>
-                                <div className='input-field col s12'>
-                                    <textarea className='materialize-textarea' name='translation' placeholder='translation' onChange={this.handleFormInputChanged} value={this.state.translation}></textarea>
-                                </div>
-                            </div>
-                            <div className='row'>
-                                <div className='input-field col s12'>
-                                    <textarea className='materialize-textarea' name='definition' placeholder='definition' onChange={this.handleFormInputChanged} value={this.state.definition}></textarea>
-                                </div>
-                            </div>
-                            <div className='row'>
-                                <div className='input-field col s12'>
-                                    <input type='text' name='tags' placeholder='tags' onChange={this.handleFormInputChanged} value={this.state.tags} />
-                                </div>
-                            </div>
-                            <div className='row'>
-                                <div className='input-field col s12'>
-                                    <button className="btn waves-effect waves-light" type="submit" name="action" onClick={this.saveUserDefinition}>
-                                        Save you definition
-                                        <i className="material-icons">send</i>
-                                    </button>
-                                </div>
-                            </div>
-                        </span>
-                    </form>
-                </li>
-            </ul>
+            <div className="card">
+              <div className='row'>
+                <div className="col s12">
+                  <div className="input-field col s9">
+                    <input className="selectedText" type='text' placeholder='Quick search...' name='word' onKeyUp={this.search} onChange={this.handleFormInputChanged} value={this.state.word} />
+                  </div>
+                  <div className="input-field col s3">
+                    <button className="btn-flat btn-small white" onClick={this.search}><i className="material-icons">search</i></button>
+                    <button className="btn-flat btn-small white" onClick={this.toggleForm}><i className="material-icons">add</i></button>
+                  </div>
+                </div>
+              </div>
+
+              <div className="card-content">
+                <div className='row' className={classnames({hidden: this.state.collapsed})}>
+                  <div className='input-field col s12'>
+                    <textarea className='materialize-textarea' name='translation' placeholder='translation' onChange={this.handleFormInputChanged} value={this.state.translation}></textarea>
+                  </div>
+                  <div className='input-field col s12'>
+                    <textarea className='materialize-textarea' name='definition' placeholder='definition' onChange={this.handleFormInputChanged} value={this.state.definition}></textarea>
+                  </div>
+                  <div className='input-field col s12'>
+                    <input type='text' name='tags' placeholder='tags' onChange={this.handleFormInputChanged} value={this.state.tags} />
+                  </div>
+                </div>
+              </div>
+              <div className="card-action">
+                {(!this.state.collapsed ?  <a onClick={this.saveUserDefinition}>Save</a> : '')}
+              </div>
+            </div>
         );
     }
 }

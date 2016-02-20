@@ -62,7 +62,7 @@ class DefinitionBoxes extends Component {
 function DefinitionListItem({text, language, url, typeOfSpeech}) {
     if (url)
         return (
-            <li className="collection-item"><img className="materialboxed" data-caption={text} width="100%" src={url} alt={text} /></li>
+            <li className="collection-item"><img className="materialboxed" data-caption={text} src={url} alt={text} /></li>
         );
     else
         return (
@@ -97,14 +97,15 @@ class SidebarBox extends Component {
 
     render() {
         return (
-            <div className="row">
+            <div className="card">
+              <div className="collapsed">
                 <DefinitionList items={this.props.items} label={this.props.label}/>
-                <div className="col s12">
-                    <button className="btn-flat">
-                        More / Less
-                        <i className="material-icons">play_for_work</i>
-                    </button>
-                </div>
+              </div>
+              <div className="card-action">
+                <a>
+                  More / Less <i className="material-icons">play_for_work</i>
+                </a>
+              </div>
             </div>
         );
     }
