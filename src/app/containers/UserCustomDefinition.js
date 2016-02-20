@@ -51,39 +51,51 @@ class UserCustomDefinitionForm extends Component {
 
     render() {
         return (
-                <div className="box-body white">
-                  <h4>Your Definition</h4>
-                    <div className="row" onSubmit={this.search}>
-                        <form>
-                            <div className='input-field col s12'>
+            <ul className='collection with-header'>
+                <li className="collection-header"><h5>Your Definition</h5></li>
+                <li className="row collection-item" onSubmit={this.search}>
+                    <form className="col s12">
+                        <div className='row'>
+                            <div className="input-field col s12">
                                 <button className='btn-floating waves-effect waves-light left' onClick={this.toggleForm}><i className="small material-icons">add</i></button>
                             </div>
-                            <div className='input-field col s12 center-align'>
+                        </div>
+                        <div className='row'>
+                            <div className="input-field col s10">
                                 <input className='left' type='text' placeholder='selection' name='word' onKeyUp={this.search} onChange={this.handleFormInputChanged} value={this.state.word} />
-                                <button className='btn-floating waves-effect waves-light right' onClick={this.search}><i className="small material-icons">search</i></button>
                             </div>
-                            <span className={classnames({hidden: this.state.collapsed})}>
-                                <div className='input-field col s12 center-align'>
+                            <div className="input-field col s2">
+                                <button className='btn-floating waves-effect waves-light' onClick={this.search}><i className="small material-icons">search</i></button>
+                            </div>
+                        </div>
+                        <span className={classnames({hidden: this.state.collapsed})}>
+                            <div className='row'>
+                                <div className='input-field col s12'>
                                     <textarea className='materialize-textarea' name='translation' placeholder='translation' onChange={this.handleFormInputChanged} value={this.state.translation}></textarea>
                                 </div>
-
-                                <div className='input-field col s12 center-align'>
+                            </div>
+                            <div className='row'>
+                                <div className='input-field col s12'>
                                     <textarea className='materialize-textarea' name='definition' placeholder='definition' onChange={this.handleFormInputChanged} value={this.state.definition}></textarea>
                                 </div>
-
-                                <div className='input-field col s12 center-align'>
+                            </div>
+                            <div className='row'>
+                                <div className='input-field col s12'>
                                     <input type='text' name='tags' placeholder='tags' onChange={this.handleFormInputChanged} value={this.state.tags} />
                                 </div>
+                            </div>
+                            <div className='row'>
                                 <div className='input-field col s12'>
                                     <button className="btn waves-effect waves-light" type="submit" name="action" onClick={this.saveUserDefinition}>
                                         Save you definition
                                         <i className="material-icons">send</i>
                                     </button>
                                 </div>
-                            </span>
-                        </form>
-                    </div>
-                </div>
+                            </div>
+                        </span>
+                    </form>
+                </li>
+            </ul>
         );
     }
 }

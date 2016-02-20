@@ -27,12 +27,12 @@ class TTSPlayer extends Component {
 
     render(){
         return (
-            <div className="box-body white">
-                <TTSPlayerButton label="play_arrow" handleClick={this.play.bind(this)} />
-                <TTSPlayerButton label="pause" handleClick={player.pause} />
-                <TTSPlayerButton label="skip_next" handleClick={player.resume} />
-                <TTSPlayerButton label="stop" handleClick={player.stop} />
-            </div>
+            <ul>
+                <li><TTSPlayerButton label="play_arrow" handleClick={this.play.bind(this)} /></li>
+                <li><TTSPlayerButton label="pause" handleClick={player.pause} /></li>
+                <li><TTSPlayerButton label="skip_next" handleClick={player.resume} /></li>
+                <li><TTSPlayerButton label="stop" handleClick={player.stop} /></li>
+            </ul>
         );
     }
 }
@@ -48,7 +48,7 @@ const Wordlists = ({wordlists, handleSelected}) => {
     });
     return (
         <ul className='collection with-header'>
-          <li className='collection-header'><h4>Settings</h4></li>
+          <li className='collection-header'><h5>Settings</h5></li>
           {buttons}
         </ul>
     );

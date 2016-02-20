@@ -58,9 +58,30 @@ nav ul a, nav .brand-logo {
 .sidebar {
     overflow: scroll;
     position: fixed;
+    min-height: 200px;
+    max-height: 550px;
+    max-width: inherit;
+    width: 100%;
 };
 
 .tts-player {
+    height: 60px;
+    .fixed-action-btn {
+        bottom: inherit;
+        top: inherit;
+        padding-top: 0px;
+    };
+    ul {
+        display: inline-block;
+        position: relative;
+        bottom: 0;
+        li {
+            display: inline-block;
+            margin-top: 8px;
+            margin-bottom: 0px;
+            margin-right: 10px;
+        }
+    }
     button {
         margin-right: 0.5rem;
         border: 1px solid #aaa;
