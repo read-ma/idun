@@ -12,7 +12,7 @@ nav ul a, nav .brand-logo {
     @extend .black-text;
 };
 
-nav.breadcrumbs {
+.breadcrumbs {
     box-shadow: none;
     a {
         @extend .teal-text;
@@ -32,4 +32,40 @@ nav.breadcrumbs {
             -webkit-font-smoothing: antialiased;
         }
     }
-}
+};
+
+.article {
+    h1 {
+        font-size: 1.64rem;
+        line-height: 1.804rem;
+        margin: 0.82rem 0 0.656rem 0;
+    };
+    mark {
+        background-color: inherit;
+        color: inherit;
+        &.selection {
+            background-color: #f8bbd0;
+        };
+        &.user {
+            border-bottom: solid 3px #ef5350;
+        };
+        &.d3k {
+            background-color: #b2dfdb;
+        };
+    };
+};
+
+.sidebar {
+    overflow: scroll;
+    position: fixed;
+};
+
+.tts-player {
+    button {
+        margin-right: 0.5rem;
+        border: 1px solid #aaa;
+        &:last-child {
+            margin-right: 0px;
+        }
+    };
+};

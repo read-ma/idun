@@ -1,18 +1,19 @@
 .wrapper {
     position: relative;
+    height: 100%;
+    width: 100%;
     aside.sidebar {
-        position: fixed;
-        top:0;
+        //position: fixed;
         overflow: scroll;
-        height: 100%;
-        margin-right: 10px;
+        //height: 100%;
+        //margin-right: 10px;
 
         .box-body {
             p {
                 padding: 1rem;
             };
             form {
-                padding: 0 .5rem;
+                padding: 0.5rem;
             };
             button {
                 margin-right: 0.5rem;

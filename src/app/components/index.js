@@ -18,24 +18,20 @@ class TTSPlayer extends Component {
 
     render(){
         return (
-            <div>
-                <div className="box-body white">
-                    <p className="left-align">
-                        <button className="btn-floating waves-effect waves-light" onClick={this.play.bind(this)}>
-                            <i className="material-icons">play_arrow</i>
-                        </button>
-                        <button className="btn-floating waves-effect waves-light" onClick={player.pause}>
-                            <i className="material-icons">pause</i>
-                        </button>
-                        <button className="btn-floating waves-effect waves-light" onClick={player.resume}>
-                            <i className="material-icons">skip_next</i>
-                        </button>
-                        <button className="btn-floating waves-effect waves-light" onClick={player.stop}>
-                            <i className="material-icons">stop</i>
-                        </button>
-                    </p>
-                </div>
-            </div>
+            <p className="left-align tts-player">
+                <button className="btn-floating waves-effect waves-light" onClick={this.play.bind(this)}>
+                    <i className="material-icons">play_arrow</i>
+                </button>
+                <button className="btn-floating waves-effect waves-light" onClick={player.pause}>
+                    <i className="material-icons">pause</i>
+                </button>
+                <button className="btn-floating waves-effect waves-light" onClick={player.resume}>
+                    <i className="material-icons">skip_next</i>
+                </button>  
+                <button className="btn-floating waves-effect waves-light" onClick={player.stop}>
+                    <i className="material-icons">stop</i>
+                </button>
+            </p>
         );
     }
 }
