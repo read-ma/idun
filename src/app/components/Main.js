@@ -20,7 +20,7 @@ const Navigator = () => {
     return (
         <nav className="white">
             <div className="nav-wrapper container">
-                <a href="#!" className="brand-logo right">Language Assistant | Tutor | Coach</a>
+                <a href="#!" className="black-text right">Language Assistant | Tutor | Coach</a>
                 <a href="#" data-activates="mobile-demo" className="button-collapse">
                     <i className="material-icons teal-text">menu</i>
                 </a>

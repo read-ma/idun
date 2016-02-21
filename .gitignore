@@ -4,9 +4,3 @@ public/*.js
 public/*.css
 /dist/bundle.js
 /dist/public/style.css
-public/bundle.js
-/public/*.js
-*.ttf
-*.woff
-*.svg
-*.eot
