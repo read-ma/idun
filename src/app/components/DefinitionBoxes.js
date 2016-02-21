@@ -59,14 +59,28 @@ class DefinitionBoxes extends Component {
     }
 };
 
+const LanguageIcon = ({lang}) => {
+    let language = lang === 'en' ? 'gb' : lang;
+
+    if (language)
+        return (
+            <span className={`left flag-icon flag-icon-${language}`}></span>
+        );
+    else
+        return <span></span>;
+};
+
 function DefinitionListItem({text, language, url, typeOfSpeech}) {
     if (url)
         return (
-            <li className="collection-item"><img className="materialboxed" data-caption={text} src={url} alt={text} /></li>
+            <li className="collection-item">
+              <img className="materialboxed" data-caption={text} src={url} alt={text} />
+            </li>
         );
     else
         return (
             <li className="collection-item">
+              <LanguageIcon lang={language} />
               <div dangerouslySetInnerHTML={{__html: text}}></div>
             </li>
         );

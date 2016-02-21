@@ -29,16 +29,11 @@ class Sidebar extends Component {
             <div className="wrapper">
               <aside className='sidebar'>
                 <ul>
-                  <li className="tts-player hidden">
-                    <div className="fixed-action-btn active">
-                      <a className="btn-floating btn-large red right">
-                        <i className="large material-icons">speaker_notes</i>
-                      </a>
-                      <TTSPlayer selection={this.props.selectedText}/>
-                    </div>
+                  <li className="tts-player">
+                    <TTSPlayer selection={this.props.selectedText}/>
                   </li>
-                  <li className="card hidden">
-                    <Wordlists handleSelected={this.handleWordListSelected} wordlists={this.props.wordlists}/>
+                  <li className="card">
+                    <Wordlists handleSelected={this.handleWordListSelected} wordlists={this.props.wordlists} header="Settings"/>
                   </li>
                   <li><UserCustomDefinitionForm /></li>
                   <li><DefinitionBoxes /></li>

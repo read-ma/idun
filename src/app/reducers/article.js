@@ -1,4 +1,6 @@
-const initialState = {};
+const initialState = {
+    selectedText: ''
+};
 
 export default function article(state = initialState, action) {
     switch (action.type) {

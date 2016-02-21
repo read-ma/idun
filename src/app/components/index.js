@@ -37,7 +37,7 @@ class TTSPlayer extends Component {
     }
 }
 
-const Wordlists = ({wordlists, handleSelected}) => {
+const Wordlists = ({header, wordlists, handleSelected}) => {
     let buttons = wordlists.map((list) => {
         return (
             <li className='collection-item'>
@@ -48,8 +48,8 @@ const Wordlists = ({wordlists, handleSelected}) => {
     });
     return (
         <ul className='collection with-header'>
-          <li className='collection-header'><h5>Settings</h5></li>
-          {buttons}
+            <li className='collection-header'><h5>{header}</h5></li>
+            {buttons}
         </ul>
     );
 };
