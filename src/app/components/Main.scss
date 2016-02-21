@@ -13,7 +13,18 @@ $flag-icon-css-path: '~flag-icon-css/flags' !default;
 
 @media #{$medium-and-down} {
     .wrapper {
+        position: fixed;
+        text-align: center;
+        bottom: 0px;
+        left: 0;
+        right: 0;
         max-width: 100% !important;
+        .mobile-sidebar-link {
+            padding: 1rem 0;
+            -webkit-box-shadow: 0px -10px 5px -6px rgba(0,0,0,0.26);
+            -moz-box-shadow: 0px -10px 5px -6px rgba(0,0,0,0.26);
+            box-shadow: 0px -10px 5px -6px rgba(0,0,0,0.26);
+        }
         .sidebar {
             position: relative !important;
         }

@@ -27,51 +27,25 @@ class Sidebar extends Component {
     render() {
         return (
             <div className="wrapper">
-              <aside className='sidebar'>
-                <ul>
-                  <li className="tts-player">
-                    <TTSPlayer selection={this.props.selectedText}/>
-                  </li>
-                  <li className="card">
-                    <Wordlists handleSelected={this.handleWordListSelected} wordlists={this.props.wordlists} header="Settings"/>
-                  </li>
-                  <li><UserCustomDefinitionForm /></li>
-                  <li><DefinitionBoxes /></li>
-                </ul>
-              </aside>
+                <div className="hide-on-large-only mobile-sidebar-link">
+                    <div className="">Show Sidebar</div>
+                </div>
+                <aside className='sidebar hide-on-med-and-down'>
+                    <ul>
+                        <li className="tts-player">
+                            <TTSPlayer selection={this.props.selectedText}/>
+                        </li>
+                        <li className="card">
+                            <Wordlists handleSelected={this.handleWordListSelected} wordlists={this.props.wordlists} header="Settings"/>
+                        </li>
+                        <li><UserCustomDefinitionForm /></li>
+                        <li><DefinitionBoxes /></li>
+                    </ul>
+                </aside>
             </div>
         );
     }
 }
-
-// document.addEventListener("DOMContentLoaded", function() {
-//     console.log('dziala');
-//     let h = document.getElementById("sidebar-sticker");
-//     let stuck = false;
-//     let stickPoint = getDistance();
-//     console.log('hhh:');
-//     console.log(h);
-//
-//     function getDistance() {
-//         let topDist = h.offsetTop;
-//         return topDist;
-//     }
-//
-//     window.onscroll = function(e) {
-//         let distance = getDistance() - window.pageYOffset;
-//         let offset = window.pageYOffset;
-//
-//         if ( (distance <= 0) && !stuck) {
-//             h.style.position = 'fixed';
-//             h.style.top = '0px';
-//             stuck = true;
-//         } else if (stuck && (offset <= stickPoint)){
-//             h.style.position = 'static';
-//             stuck = false;
-//         }
-//     }
-// });
-
 
 function mapStateToProps(state){
     return {
