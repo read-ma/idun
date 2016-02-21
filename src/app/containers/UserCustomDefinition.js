@@ -77,8 +77,8 @@ class UserCustomDefinitionForm extends Component {
                   </div>
                 </div>
               </div>
-              <div className="card-action">
-                {(!this.state.collapsed ?  <a onClick={this.saveUserDefinition}>Save</a> : '')}
+              <div className={classnames('card-action', {hidden: this.state.collapsed})}>
+                <a onClick={this.saveUserDefinition}>Save</a>
               </div>
             </div>
         );
