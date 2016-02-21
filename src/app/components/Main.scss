@@ -11,6 +11,15 @@ $flag-icon-css-path: '~flag-icon-css/flags' !default;
   }
 }
 
+@media #{$medium-and-down} {
+    .wrapper {
+        max-width: 100% !important;
+        .sidebar {
+            position: relative !important;
+        }
+    }
+}
+
 nav ul a, nav .brand-logo {
     @extend .black-text;
 };
@@ -36,6 +45,13 @@ nav ul a, nav .brand-logo {
         }
     }
 };
+
+.articles li {
+    border-bottom: 1px solid #e0e0e0;
+    &:last-child {
+        border-bottom: none;
+    }
+}
 
 .article {
     h1 {
