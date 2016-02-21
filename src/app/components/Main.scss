@@ -19,6 +19,8 @@ $flag-icon-css-path: '~flag-icon-css/flags' !default;
         left: 0;
         right: 0;
         max-width: 100% !important;
+        background-color: white;
+        height: 50px;
         .mobile-sidebar-link {
             padding: 1rem 0;
             -webkit-box-shadow: 0px -10px 5px -6px rgba(0,0,0,0.26);
@@ -26,6 +28,7 @@ $flag-icon-css-path: '~flag-icon-css/flags' !default;
             box-shadow: 0px -10px 5px -6px rgba(0,0,0,0.26);
         }
         .sidebar {
+            height: 0px;
             position: relative !important;
         }
     }
