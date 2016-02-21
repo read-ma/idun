@@ -6,7 +6,7 @@ var config = {
     entry: path.resolve(__dirname, './src/app/app.js'),
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: 'bundle.js'
+        filename: 'public/bundle.js'
     },
     externals: {
         'Config': JSON.stringify({ apiUrl: 'http://ms-dashboard.herokuapp.com/api' })
