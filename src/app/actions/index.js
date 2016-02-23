@@ -52,4 +52,5 @@ export { loadArticles, loadArticle,
          textSelected,
          toggleHighlighting,
          loadUserDefinitions, saveUserDefinition,
-         findTextDefinitions }
+         findTextDefinitions
+       }

@@ -32,5 +32,15 @@ function main(state = initialState, action) {
     }
 }
 
+function auth(state = {}, action){
+    switch(action.type){
 
-export {article, articles, main, wordlists, definitions}
+    case 'USER_LOGGED_IN':
+        return Object.assign({}, state, {isAuthenticated: true});
+
+    default:
+        return state;
+    }
+}
+
+export {article, articles, main, wordlists, definitions, auth}

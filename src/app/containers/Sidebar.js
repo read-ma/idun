@@ -111,21 +111,26 @@ class Sidebar extends Component {
     render() {
         return (
             <div className="wrapper">
-                <div className="hide-on-large-only mobile-sidebar-link">
-                    <div className="">Show Sidebar</div>
-                </div>
-                <aside className='sidebar'>
-                    <ul>
-                        <li className="tts-player">
-                            <TTSPlayer selection={this.props.selectedText}/>
-                        </li>
-                        <li className="card">
-                            <Wordlists handleSelected={this.handleWordListSelected} wordlists={this.props.wordlists} header="Settings"/>
-                        </li>
-                        <li><UserCustomDefinitionForm /></li>
-                        <li><DefinitionBoxes /></li>
-                    </ul>
-                </aside>
+              <div className="hide-on-large-only mobile-sidebar-link">
+                <div className="">Show Sidebar</div>
+              </div>
+              <aside className='sidebar'>
+                <ul>
+
+                  <li className="tts-player">
+                    <TTSPlayer selection={this.props.selectedText}/>
+                  </li>
+
+                  <li className="card">
+                    <Wordlists handleSelected={this.handleWordListSelected} wordlists={this.props.wordlists} header="Highlighting"/>
+                  </li>
+
+                  <li><UserCustomDefinitionForm /></li>
+
+                  <li><DefinitionBoxes /></li>
+
+                </ul>
+              </aside>
             </div>
         );
     }
@@ -137,20 +142,20 @@ $(document).ready(function(){
 
 
     var $ = document.querySelector.bind(document),
-    $$ = document.querySelectorAll.bind(document),
-    getPointerEvent = function(event) {
-        return event.targetTouches ? event.targetTouches[0] : event;
-    },
+        $$ = document.querySelectorAll.bind(document),
+        getPointerEvent = function(event) {
+            return event.targetTouches ? event.targetTouches[0] : event;
+        },
 
-    setListener = function (elm,events,callback) {
-        var eventsArray = events.split(' '),
-            i = eventsArray.length;
-        while(i--){
-            if(elm) {
-                elm.addEventListener( eventsArray[i], callback, false );
+        setListener = function (elm,events,callback) {
+            var eventsArray = events.split(' '),
+                i = eventsArray.length;
+            while(i--){
+                if(elm) {
+                    elm.addEventListener( eventsArray[i], callback, false );
+                }
             }
-        }
-    };
+        };
 
     var $touchArea = $('.wrapper'),
         $sidebar = $('.sidebar'),
@@ -199,10 +204,10 @@ $(document).ready(function(){
         // console.log(currY);
         var h = cachedY - currY;
         if(touchStarted && (currY > 250) && h > 0) {
-             // here you are swiping
+            // here you are swiping
             //  console.log(h);
-             $touchArea.style.height = h + 50 + 'px';
-             $sidebar.style.height = h + 'px';
+            $touchArea.style.height = h + 50 + 'px';
+            $sidebar.style.height = h + 'px';
             //  console.log("Swiping");
         }
         // if(touchStarted && (currY > 250) && h > 0) {

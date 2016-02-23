@@ -11,12 +11,15 @@ var instance = axios.create({
 });
 
 instance.interceptors.request.use(function (config) {
-    config.params = Object.assign({}, config.params, {auth_token: 'secret'});
+
+    if (!config.url.match(/api\/login/))
+        config.params = Object.assign({}, config.params, {auth_token: 'secret'});
 
     return config;
+
+
 }, function (error) {
     return Promise.reject(error);
 });
-
 
 export default instance;
