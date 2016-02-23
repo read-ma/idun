@@ -12,8 +12,11 @@ var instance = axios.create({
 
 instance.interceptors.request.use(function (config) {
 
-    if (!config.url.match(/api\/login/))
-        config.params = Object.assign({}, config.params, {auth_token: 'secret'});
+    if (!config.url.match(/api\/login/)) {
+        let auth_token = store.getState().auth.auth_token;
+
+        config.params = Object.assign({}, config.params, {auth_token: auth_token});
+    }
 
     return config;
 

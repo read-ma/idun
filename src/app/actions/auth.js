@@ -24,7 +24,7 @@ const loginAttempt = (email, password) => {
 const userLoggedIn = (userData) => {
     return {
         type: 'USER_LOGGED_IN',
-        data: userData
+        payload: userData
     };
 };
 

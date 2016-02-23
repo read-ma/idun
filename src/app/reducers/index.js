@@ -36,7 +36,12 @@ function auth(state = {}, action){
     switch(action.type){
 
     case 'USER_LOGGED_IN':
-        return Object.assign({}, state, {isAuthenticated: true});
+        return Object.assign(
+            {},
+            state,
+            {isAuthenticated: true},
+            action.payload
+        );
 
     default:
         return state;
