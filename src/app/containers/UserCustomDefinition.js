@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
 import { textSelected, saveUserDefinition} from '../actions';
@@ -22,6 +23,10 @@ class UserCustomDefinitionForm extends Component {
         this.setState(
             { word: nextProps.selectedText }
         );
+    }
+
+    componentDidUpdate(){
+        ReactDOM.findDOMNode(this.refs.selectedText).focus();
     }
 
     search(event){
@@ -54,7 +59,7 @@ class UserCustomDefinitionForm extends Component {
               <div className='row'>
                 <div className="col s12">
                   <div className="input-field col s9">
-                    <input className="selectedText" type='text' placeholder='Quick search...' name='word' onKeyUp={this.search} onChange={this.handleFormInputChanged} value={this.state.word} />
+                    <input className="selectedText" ref="selectedText" type='text' placeholder='Quick search...' name='word' onKeyUp={this.search} onChange={this.handleFormInputChanged} value={this.state.word} />
                   </div>
                   <div className="input-field col s3">
                     <button className="btn-flat btn-small white" onClick={this.search}><i className="material-icons">search</i></button>
