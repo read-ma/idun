@@ -6,7 +6,7 @@ module.exports = {
         filename: "public/bundle.js"
     },
     externals: {
-        'Config': JSON.stringify({ apiUrl: 'http://localhost:3000/api' })
+        'Config': JSON.stringify({ apiUrl: 'http://idun.herokuapp.com/api' })
     },
     module: {
         loaders: [

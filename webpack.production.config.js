@@ -9,31 +9,29 @@ var config = {
         filename: 'bundle.js'
     },
     externals: {
-        'Config': JSON.stringify({ apiUrl: 'http://idun.herokuapp.com/api' })
+        'Config': JSON.stringify({
+            apiUrl: 'http://idun.herokuapp.com/api'
+        })
     },
 
     module: {
-        loaders: [
-            {
-                test: /\.jsx?$/,
+        loaders: [{
+            test: /\.jsx?$/,
 
-                // There is not need to run the loader through
-                // vendors
-                exclude: [node_modules_dir],
-                loader: 'babel-loader',
-                query: {
-                    presets: ['react', 'es2015']
-                }
-            },
-            {
-                test: /\.scss$/,
-                loader: ExtractTextPlugin.extract('css!sass')
-            },
-            {
-                test: /\.(eot|woff|woff2|ttf|svg|png|jpg)$/,
-                loader: 'url-loader?limit=30000&name=[name]-[hash].[ext]'
+            // There is not need to run the loader through
+            // vendors
+            exclude: [node_modules_dir],
+            loader: 'babel-loader',
+            query: {
+                presets: ['react', 'es2015']
             }
-        ]
+        }, {
+            test: /\.scss$/,
+            loader: ExtractTextPlugin.extract('css!sass')
+        }, {
+            test: /\.(eot|woff|woff2|ttf|svg|png|jpg)$/,
+            loader: 'url-loader?limit=30000&name=[name]-[hash].[ext]'
+        }]
     },
     plugins: [
         new ExtractTextPlugin('style.css', {
@@ -42,4 +40,4 @@ var config = {
     ]
 };
 
-    module.exports = config;
+module.exports = config;
