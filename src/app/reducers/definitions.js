@@ -2,11 +2,11 @@ import _ from 'lodash';
 
 const initialState = {
     config: [
+        {key: 'graphics', label: 'Pictures', component: 'PictureList'},
         {key: 'translations', label: 'Translations', component: 'SimpleList'},
         {key: 'definitions', label: 'Definitions', component: 'SimpleList'},
         {key: 'related_words', label: 'Related Words', component: 'SimpleList'},
         {key: 'examples', label: 'Examples', component: 'SimpleList'},
-        {key: 'graphics', label: 'Pictures', component: 'PictureList'},
     ],
 
     data: {}
