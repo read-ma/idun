@@ -10,6 +10,12 @@ var instance = axios.create({
     }
 });
 
+instance.interceptors.response.use(function (config) {
+    return config;
+}, function (error) {
+    return Promise.reject(error);
+});
+
 instance.interceptors.request.use(function (config) {
 
     if (!config.url.match(/api\/login/)) {

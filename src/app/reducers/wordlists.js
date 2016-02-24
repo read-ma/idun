@@ -2,7 +2,7 @@ import {words as d3k} from '../constants/d3k';
 
 const initialState = [
     {label: 'Show selected phrase', name: 'selection', enabled: true, words: []},
-    {label: 'Dick-tionary', name: 'd3k', enabled: false, words: d3k },
+    {label: 'Most frequent', name: 'd3k', enabled: false, words: d3k },
     {label: 'Your words', name: 'user', enabled: false, words: [] },
 ];
 

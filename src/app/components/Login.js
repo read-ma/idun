@@ -2,12 +2,32 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { loginAttempt } from '../actions/auth';
 
+class SignUpForm extends React.Component {
+    render(){
+        return (
+            <div className="signupform">
+              <h2>Sign up</h2>
+              <p>We send out a limited number of invitations, based on several criteria. Customer service cannot assist with beta access, but if you’re interested you’ll want to sign up here.</p>
+              <p>if you are selected to participate in a beta test, you'll receive an email with information on how to use the app and provide feedback.</p>
+              <form>
+                <div className="input-field">
+                  <input name='signUpEmail' type='email' required='true' className="validate"/>
+                  <label htmlFor='signUpEmail'>Your email</label>
+                </div>
+                <input className="btn" type="submit" value="Sign-up"/>
+              </form>
+            </div>
+        );
+    };
+};
+
+
 class Login extends React.Component {
     constructor(props){
         super(props);
         this.state = {};
         this.handleFormInputChanged = this.handleFormInputChanged.bind(this);
-    }
+    };
 
     handleFormInputChanged(event) {
         this.setState(
@@ -20,6 +40,10 @@ class Login extends React.Component {
         this.props.dispatch(
             loginAttempt(this.state.email, this.state.password)
         );
+    };
+
+    lastError() {
+        return this.props.auth.error && this.props.auth.error.statusText;
     }
 
     render() {
@@ -27,33 +51,30 @@ class Login extends React.Component {
             <div className="row">
               <div className="col s5">
                 <h2>Login</h2>
-                <form>
+                <span className="error">{this.lastError()}</span>
+                <form onSubmit={this.login.bind(this)}>
                   <div className="input-field">
-                    <input name='email' type='email' onChange={this.handleFormInputChanged}/>
+                    <input name='email' className="validate" type='email' onChange={this.handleFormInputChanged} required='true' aria-required="true"/>
                     <label htmlFor='email'>Your email</label>
                   </div>
                   <div className="input-field">
-                    <input name='password' type='password' onChange={this.handleFormInputChanged}/>
+                    <input name='password' type='password' onChange={this.handleFormInputChanged} className="validate" require='true'/>
                     <label htmlFor='password'>Your password</label>
                   </div>
-
-                  <input className="btn" type="submit" value="Login" onClick={this.login.bind(this)}/>
+                  <input className="btn" type="submit" value="Login"/>
                 </form>
               </div>
               <div className="col s5 right">
-                <h2>Sign up</h2>
-                <p>We send out a limited number of invitations, based on several criteria. Customer service cannot assist with beta access, but if you’re interested you’ll want to sign up here.</p>
-                <p>if you are selected to participate in a beta test, you'll receive an email with information on how to use the app and provide feedback.</p>
-                <form>
-                  <div className="input-field">
-                    <input name='signUpEmail' type='email' />
-                    <label htmlFor='signUpEmail'>Your email</label>
-                  </div>
-                  <input className="btn" type="submit" value="Sign-up"/>
-                </form>
+                <SignUpForm />
               </div>
             </div>
-  );
-};}
+        );
+    }};
 
-export default connect()(Login);
+let mapStateToProps = (state) => {
+    return {
+        auth: state.auth
+    };
+};
+
+export default connect(mapStateToProps)(Login);

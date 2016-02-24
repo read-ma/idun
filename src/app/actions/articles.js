@@ -47,20 +47,13 @@ function getArticles(params, handleSuccess){
         });
 }
 
-function getLocalArticle(id) {
-    return store.getState().articles.filter((article) => {
-        return article.id == id;})[0];
-}
 
 function getArticle(id, handleSuccess) {
-    if (getLocalArticle(id))
-        return handleSuccess( getLocalArticle(id) );
-    else {
-        api.get(`/articles/${id}.json`)
-            .then( (response) => {
-                handleSuccess(response.data.article);
-            });
-    };
+    api.get(`/articles/${id}.json`)
+        .then( (response) => {
+            handleSuccess(response.data.article);
+        });
+
 }
 
 export { loadArticle, loadArticles }

@@ -9,7 +9,7 @@ var config = {
         filename: 'bundle.js'
     },
     externals: {
-        'Config': JSON.stringify({ apiUrl: 'http://ms-dashboard.herokuapp.com/api' })
+        'Config': JSON.stringify({ apiUrl: 'http://idun.herokuapp.com/api' })
     },
 
     module: {

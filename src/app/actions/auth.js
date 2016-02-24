@@ -17,7 +17,11 @@ const loginAttempt = (email, password) => {
                 }
                 else
                     dispatch(push('/profile'));
+            })
+            .catch(function (response) {
+                dispatch(userSigningInError(response));
             });
+        ;
     };
 };
 
@@ -28,5 +32,15 @@ const userLoggedIn = (userData) => {
     };
 };
 
+const userSigningInError = (payload) => {
+    return error('USER_SIGNING_IN_ERROR', payload);
+};
 
-export { loginAttempt }
+const error = (type, payload) => {
+    return {
+        type: 'USER_SIGNING_IN_ERROR',
+        payload: payload
+    };
+}
+
+export { loginAttempt, error }
