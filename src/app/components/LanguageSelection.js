@@ -1,23 +1,47 @@
-import React, { Component } from 'reackt';
+import React, { Component } from 'react';
+import {connect} from 'react-redux';
+import { changeLanguage } from '../actions';
 
 class LanguageBar extends Component {
+    constructor(props){
+        super(props);
+        this.state = props.language;
+        this.languageChange = this.languageChange.bind(this);
+    };
+
+    languageChange(event) {
+        this.setState(Object.assign({}, this.state, {[event.target.name] : event.target.value}));
+
+        this.props.dispatch( changeLanguage(event.target.name, event.target.value) );
+    }
+
     render() {
+        let languages = this.props.languages.map(lang => (<option value={lang.key}>{lang.name}</option>));
 
         return (
-            <div className="fixed-action-btn horizontal" style="bottom: 45px; right: 24px;">
-              <a className="btn-floating btn-large red">
-                <i className="large material-icons">mode_edit</i>
-              </a>
-              <ul>
-                <li><a className="btn-floating red"><i className="material-icons">insert_chart</i></a></li>
-                <li><a className="btn-floating yellow darken-1"><i className="material-icons">format_quote</i></a></li>
-                <li><a className="btn-floating green"><i className="material-icons">publish</i></a></li>
-                <li><a className="btn-floating blue"><i className="material-icons">attach_file</i></a></li>
-              </ul>
-            </div>
+            <ul className="collection with-header">
+              <li className='collection-header'><h5>Language selection</h5></li>
+              <li className="collection-item">
+                <div className="input-field">
+                  <select onChange={this.languageChange} name='from' className="browser-default icons" value={this.state.from}>{languages}</select>
+                </div>
+              </li>
+              <li className="collection-item">
+                <div className="input-field">
+                  <select onChange={this.languageChange} name='to' className="browser-default icons" value={this.state.to}>{languages}</select>
+                </div>
+              </li>
+            </ul>
         );
     }
 }
 
+function mapStateToProps(state){
+    return {
+        languages: state.settings.languages,
+        language: state.settings.language,
+    };
+}
 
-export { LanguageBar }
+
+export default connect(mapStateToProps)(LanguageBar);

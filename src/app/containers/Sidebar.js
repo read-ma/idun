@@ -8,6 +8,7 @@ import { TTSPlayer, Wordlists, DefinitionBoxes, MobileSidebar } from '../compone
 import UserCustomDefinitionForm from './UserCustomDefinition';
 import 'lodash';
 import { MobileSidebarMixin } from './MobileSidebar';
+import LanguageBar from '../components/LanguageSelection';
 
 const Sidebar = React.createClass({
     mixins: [MobileSidebarMixin],
@@ -48,7 +49,6 @@ const Sidebar = React.createClass({
               </div>
               <aside className='sidebar'>
                 <ul>
-
                   <li className="tts-player">
                     <TTSPlayer selection={this.props.selectedText}/>
                   </li>
@@ -56,6 +56,7 @@ const Sidebar = React.createClass({
                   <li className="card">
                     <BoxesOrder header='Pictures box position' handleUpdate={this.handlePicturesBoxOrderUpdated} />
                     <Wordlists handleSelected={this.handleWordListSelected} wordlists={this.props.wordlists} header="Highlighting"/>
+                    <LanguageBar />
                   </li>
 
                   <li><UserCustomDefinitionForm /></li>
@@ -94,7 +95,7 @@ class BoxesOrder extends Component {
 function mapStateToProps(state){
     return {
         selectedText: state.article.selectedText,
-        wordlists: state.wordlists
+        wordlists: state.wordlists,
     };
 }
 

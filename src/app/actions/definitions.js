@@ -18,9 +18,3 @@ function findWordData(text, type, options={}){
 }
 
 export { findWordData }
-
-
-// dispatch(requestStarted('definitions'));
-// $.get('/api/translate/'+word+'.json', {type: 'definitions'}).then(function(response) {
-//     dispatch(definitionFound(word,response));
-// });

@@ -56,10 +56,19 @@ function loadUserDefinitions(definitions){
     };
 }
 
+function changeLanguage(type, key){
+    return {
+        type: 'CHANGE_LANGUAGE',
+        langType: type,
+        key: key
+    }
+}
+
 export { loadArticles, loadArticle,
          textSelected,
          toggleHighlighting,
          loadUserDefinitions, saveUserDefinition,
          findTextDefinitions,
-         changeBoxOrder
+         changeBoxOrder,
+         changeLanguage
        }

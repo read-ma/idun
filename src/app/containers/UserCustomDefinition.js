@@ -4,7 +4,6 @@ import classnames from 'classnames';
 import { textSelected, saveUserDefinition} from '../actions';
 import { DefinitionBoxes } from '../components';
 
-
 class UserCustomDefinitionForm extends Component {
     constructor(props){
         super(props);

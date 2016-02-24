@@ -4,3 +4,4 @@ public/*.js
 public/*.css
 /dist/bundle.js
 /dist/public/style.css
+/dist/*

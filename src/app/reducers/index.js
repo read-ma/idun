@@ -3,6 +3,7 @@ import article from './article';
 import articles from './articles';
 import wordlists from './wordlists';
 import definitions from './definitions';
+import settings from './settings';
 
 const initialState = {
     profile: {
@@ -56,4 +57,4 @@ function auth(state = {error: ""}, action){
     }
 }
 
-export {article, articles, main, wordlists, definitions, auth}
+export {article, articles, main, wordlists, definitions, auth, settings}
