@@ -3,7 +3,7 @@ require('./Sidebar.scss');
 import request from 'superagent';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { textSelected, toggleHighlighting } from '../actions';
+import { textSelected, toggleHighlighting, changeBoxOrder } from '../actions';
 import { TTSPlayer, Wordlists, DefinitionBoxes, MobileSidebar } from '../components';
 import UserCustomDefinitionForm from './UserCustomDefinition';
 import 'lodash';
@@ -16,13 +16,21 @@ class Sidebar extends Component {
         };
         // this.MobileSidebar = new MobileSidebar();
         this.handleWordListSelected = this.handleWordListSelected.bind(this);
+        this.handlePicturesBoxOrderUpdated = this.handlePicturesBoxOrderUpdated.bind(this);
     };
 
     handleWordListSelected(event){
         this.props.dispatch(
             toggleHighlighting(event.target.name)
         );
-    }
+    };
+
+    handlePicturesBoxOrderUpdated(event){
+        this.props.dispatch(
+            changeBoxOrder('graphics', event.target.value)
+        );
+    };
+
 
     initMobileSidebar() {
         var $ = document.querySelector.bind(document),
@@ -122,6 +130,7 @@ class Sidebar extends Component {
                   </li>
 
                   <li className="card">
+                    <BoxesOrder header='Pictures box position' handleUpdate={this.handlePicturesBoxOrderUpdated} />
                     <Wordlists handleSelected={this.handleWordListSelected} wordlists={this.props.wordlists} header="Highlighting"/>
                   </li>
 
@@ -133,6 +142,28 @@ class Sidebar extends Component {
               </aside>
             </div>
         );
+    }
+}
+
+class BoxesOrder extends Component {
+    render() {
+
+        return (
+            <ul className="collection">
+              <li className="collection-item">
+                <h5>{this.props.header}</h5>
+              </li>
+              <li className="collection-item">
+                <input name="picturesBoxPosition" type="radio" id="pictureFirst" value='first' onChange={this.props.handleUpdate} />
+                <label htmlFor="pictureFirst">First</label>
+              </li>
+              <li className="collection-item">
+                <input name="picturesBoxPosition" type="radio" id="pictureLast" value='last' onChange={this.props.handleUpdate} />
+                <label htmlFor="pictureLast">Last</label>
+              </li>
+            </ul>
+        );
+
     }
 }
 

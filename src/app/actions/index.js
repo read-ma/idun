@@ -16,6 +16,14 @@ function toggleHighlighting(wordlist) {
     };
 }
 
+function changeBoxOrder(key, position){
+    return {
+        type: 'CHANGE_BOX_ORDER',
+        key: key,
+        position: position
+    }
+}
+
 function userDefinitionsLoaded(definitions) {
     return {
         type: 'USER_DEFINITIONS_LOADED',
@@ -52,5 +60,6 @@ export { loadArticles, loadArticle,
          textSelected,
          toggleHighlighting,
          loadUserDefinitions, saveUserDefinition,
-         findTextDefinitions
+         findTextDefinitions,
+         changeBoxOrder
        }
