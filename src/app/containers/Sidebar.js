@@ -7,6 +7,7 @@ import { textSelected, toggleHighlighting, changeBoxOrder } from '../actions';
 import { TTSPlayer, Wordlists, DefinitionBoxes, MobileSidebar } from '../components';
 import UserCustomDefinitionForm from './UserCustomDefinition';
 import 'lodash';
+import classnames from 'classnames';
 import { MobileSidebarMixin } from './MobileSidebar';
 import LanguageBar from '../components/LanguageSelection';
 
@@ -31,6 +32,12 @@ const Sidebar = React.createClass({
         );
     },
 
+    toggleSettingsPanelVisible: function(event) {
+        this.setState(
+            Object.assign({}, this.state, {settingVisible: !this.state.settingVisible})
+        );
+    },
+
     componentDidUpdate: function() {
         this.initMobileSidebar();
     },
@@ -48,12 +55,16 @@ const Sidebar = React.createClass({
                 <div className="">Show Sidebar</div>
               </div>
               <aside className='sidebar'>
+                <div className="right">
+                  <a className="btn-floating" onClick={this.toggleSettingsPanelVisible}><i className="material-icons">settings</i></a>
+                </div>
+
                 <ul>
                   <li className="tts-player">
                     <TTSPlayer selection={this.props.selectedText}/>
                   </li>
 
-                  <li className="card">
+                  <li className={classnames('card',{hidden: !this.state.settingVisible})} ref="settingsPanel" >
                     <BoxesOrder header='Pictures box position' handleUpdate={this.handlePicturesBoxOrderUpdated} />
                     <Wordlists handleSelected={this.handleWordListSelected} wordlists={this.props.wordlists} header="Highlighting"/>
                     <LanguageBar />

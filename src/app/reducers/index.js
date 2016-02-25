@@ -33,7 +33,7 @@ function main(state = initialState, action) {
     }
 }
 
-function auth(state = {error: ""}, action){
+function auth(state = {}, action){
     switch(action.type){
 
     case 'USER_SIGNING_IN_ERROR':
