@@ -4,6 +4,7 @@ import articles from './articles';
 import wordlists from './wordlists';
 import definitions from './definitions';
 import settings from './settings';
+import auth from './auth';
 
 const initialState = {
     profile: {
@@ -27,30 +28,6 @@ function main(state = initialState, action) {
             {},
             state,
             { userDefinitions: [...state.userDefinitions, action.definition] });
-
-    default:
-        return state;
-    }
-}
-
-function auth(state = {}, action){
-    switch(action.type){
-
-    case 'USER_SIGNING_IN_ERROR':
-        return Object.assign(
-            {},
-            state,
-            {isAuthenticated: false},
-            {error: action.payload}
-        );
-
-    case 'USER_LOGGED_IN':
-        return Object.assign(
-            {},
-            state,
-            {isAuthenticated: true},
-            action.payload
-        );
 
     default:
         return state;

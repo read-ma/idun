@@ -45,28 +45,6 @@ nav ul a, nav .brand-logo {
     @extend .black-text;
 };
 
-.breadcrumbs {
-    box-shadow: none;
-    a {
-        @extend .teal-text;
-        &:first-child:before {
-            content: none;
-            margin: 0px;
-        };
-        &:before {
-            content: '\E5CC';
-            vertical-align: top;
-            display: inline-block;
-            font-family: 'Material Icons';
-            font-weight: normal;
-            font-style: normal;
-            font-size: 25px;
-            margin: 0 10px 0 8px;
-            -webkit-font-smoothing: antialiased;
-        }
-    }
-};
-
 .articles li {
     border-bottom: 1px solid #e0e0e0;
     &:last-child {
@@ -94,7 +72,7 @@ nav ul a, nav .brand-logo {
             border-bottom: solid 3px #ef5350;
         };
         &.d3k {
-            background-color: #b2dfdb;
+            background-color: #e5ffe5;
         };
     };
 };
@@ -128,4 +106,9 @@ nav ul a, nav .brand-logo {
 
 .error {
     color: red;
+}
+
+input.selectedText {
+    font-weight: bold;
+    color: #555;
 }

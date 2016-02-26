@@ -2,7 +2,17 @@ import api from '../api';
 import store from '../store';
 import {push} from 'react-router-redux';
 
+const ReturnTo = (state) => {
+    try {
+        return state.routing.locationBeforeTransitions.query.next;
+    }
+    catch(e) {
+        return '/profile';
+    };
+};
+
 const loginAttempt = (email, password) => {
+
     return (dispatch) => {
         api.post(
             '/login.json',
@@ -10,13 +20,10 @@ const loginAttempt = (email, password) => {
         )
             .then( (response) => {
                 dispatch(userLoggedIn(response.data));
-                let next = store.getState().routing.locationBeforeTransitions.query.next;
 
-                if (next){
-                    dispatch(push(next));
-                }
-                else
-                    dispatch(push('/profile'));
+                dispatch(
+                    push(ReturnTo(store.getState()))
+                );
             })
             .catch(function (response) {
                 dispatch(userSigningInError(response));
@@ -26,6 +33,8 @@ const loginAttempt = (email, password) => {
 };
 
 const userLoggedIn = (userData) => {
+    localStorage.setItem('AUTH_TOKEN', userData.auth_token);
+    localStorage.setItem('IS_AUTHENTICATED', true);
     return {
         type: 'USER_LOGGED_IN',
         payload: userData

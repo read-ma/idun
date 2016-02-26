@@ -10,6 +10,10 @@ var instance = axios.create({
     }
 });
 
+function getAuthToken() {
+    return store.getState().auth.auth_token;
+};
+
 instance.interceptors.response.use(function (config) {
     return config;
 }, function (error) {
@@ -19,9 +23,7 @@ instance.interceptors.response.use(function (config) {
 instance.interceptors.request.use(function (config) {
 
     if (!config.url.match(/api\/login/)) {
-        let auth_token = store.getState().auth.auth_token;
-
-        config.params = Object.assign({}, config.params, {auth_token: auth_token});
+        config.params = Object.assign({}, config.params, {auth_token: getAuthToken()});
     }
 
     return config;
