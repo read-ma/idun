@@ -49,24 +49,24 @@ class Login extends React.Component {
     render() {
         return (
             <div className="row">
-              <div className="col s5">
-                <h2>Login</h2>
-                <span className="error">{this.lastError()}</span>
-                <form onSubmit={this.login.bind(this)}>
-                  <div className="input-field">
-                    <input name='email' className="validate" type='email' onChange={this.handleFormInputChanged} required='true' aria-required="true"/>
-                    <label htmlFor='email'>Your email</label>
-                  </div>
-                  <div className="input-field">
-                    <input name='password' type='password' onChange={this.handleFormInputChanged} className="validate" require='true'/>
-                    <label htmlFor='password'>Your password</label>
-                  </div>
-                  <input className="btn" type="submit" value="Login"/>
-                </form>
-              </div>
-              <div className="col s5 right">
-                <SignUpForm />
-              </div>
+                <div className="col s12 m6">
+                    <h2>Login</h2>
+                    <span className="error">{this.lastError()}</span>
+                    <form onSubmit={this.login.bind(this)}>
+                        <div className="input-field">
+                            <input name='email' className="validate" type='email' onChange={this.handleFormInputChanged} required='true' aria-required="true"/>
+                            <label htmlFor='email'>Your email</label>
+                        </div>
+                        <div className="input-field">
+                            <input name='password' type='password' onChange={this.handleFormInputChanged} className="validate" require='true'/>
+                            <label htmlFor='password'>Your password</label>
+                        </div>
+                        <input className="btn" type="submit" value="Login"/>
+                    </form>
+                </div>
+                <div className="col s12 m5 offset-m1">
+                    <SignUpForm />
+                </div>
             </div>
         );
     }};
