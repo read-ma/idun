@@ -20,13 +20,14 @@ class UserCustomDefinitionForm extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
+        ReactDOM.findDOMNode(this.refs.selectedText).focus();
+
         this.setState(
             { word: nextProps.selectedText }
         );
     }
 
     componentDidUpdate(){
-        ReactDOM.findDOMNode(this.refs.selectedText).focus();
     }
 
     search(event){
