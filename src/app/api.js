@@ -5,9 +5,7 @@ import store from './store';
 var instance = axios.create({
     baseURL: Config.apiUrl,
     timeout: 10000,
-    headers: {
-        'X-Custom-Header': 'foobar'
-    }
+    headers: {}
 });
 
 function getAuthToken() {
