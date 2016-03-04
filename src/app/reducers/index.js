@@ -7,11 +7,6 @@ import settings from './settings';
 import auth from './auth';
 
 const initialState = {
-    profile: {
-        name: 'Hubert Blaine Wolfeschlegelsteinhausenbergerdorff, Sr.',
-        role: 'anonymous'
-    },
-    userDefinitions: []
 };
 
 function main(state = initialState, action) {

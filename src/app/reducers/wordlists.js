@@ -13,7 +13,7 @@ export default function wordlists(state = initialState, action) {
     case 'USER_DEFINITIONS_LOADED':
         return state.map ((list) => {
             if (list.name === 'user') {
-                return Object.assign({}, list, {words: action.userDefinitions.map((d) => {return d.word;})});
+                return Object.assign({}, list, {definitions: action.userDefinitions, words: action.userDefinitions.map(d => d.word)});
             }
             else
                 return list;

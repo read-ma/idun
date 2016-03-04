@@ -13,6 +13,22 @@ const reducer = combineReducers(
     ));;
 
 const middleware = routerMiddleware(hashHistory);
-const store = createStore(reducer, applyMiddleware(thunk,middleware));
+const createStoreWithMiddleware = applyMiddleware(middleware, thunk)(createStore);
 
+function loadDbFromLocalStoraget() {
+    return {
+        main: {
+            profile: {
+                name: 'your name'
+            },
+            userDefinitions: []
+        },
+        auth: {
+            isAuthenticated: !!localStorage.getItem('IS_AUTHENTICATED'),
+            auth_token:        localStorage.getItem('AUTH_TOKEN')
+        },
+    };
+};
+
+const store = createStoreWithMiddleware(reducer, loadDbFromLocalStoraget());
 export default store;
