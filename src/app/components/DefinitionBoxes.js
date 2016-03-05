@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import store from '../store';
 import { findWordData } from '../actions/definitions';
 import classnames from 'classnames';
-import 'lodash';
+import _ from  'lodash';
 
 function currentSelectionSelector(state){
     return state.article.selectedText;
@@ -78,8 +78,8 @@ const LanguageIcon = ({lang}) => {
 function DefinitionListItem({text, language, url, typeOfSpeech}) {
     if (url)
         return (
-            <li className="collection-item">
-              <img className="materialboxed center" data-caption={text} src={url} alt={text} />
+            <li className="collection-item col m6 white">
+              <img className="materialboxed center white" data-caption={text} src={url} alt={text} />
             </li>
         );
     else
@@ -99,7 +99,7 @@ class DefinitionList extends  Component {
                 .map( item => DefinitionListItem(Object.assign({}, item)));
 
         return (
-            <ul className="collection with-header">
+            <ul className="collection with-header white">
                 <li className="collection-header"><h5>{this.props.label}</h5></li>
                 {items}
             </ul>
@@ -114,40 +114,15 @@ const FilterButton = ({active, name, value, onClick}) => {
 };
 
 class SidebarBox extends Component {
-    constructor(props) {
-        super(props);
 
-        this.state = {
-            collapsed: true,
-            collapsable: this.props.items.length > 4
-        };
-    }
-
-    componentWillReceiveProps(nextProps) {
-
-        this.setState( {
-            collapsed: true,
-            collapsable: this.props.items.length > 4
-        });
-
-    }
-
-    toggleCollapsed(event) {
-        event.preventDefault();
-        this.setState(Object.assign({}, {collapsed: !this.state.collapsed}));
+    getItems() {
+        return _.slice(this.props.items, 0, 10);
     }
 
     render() {
         return (
             <div className="card">
-              <div className={classnames({collapsed: this.state.collapsed})}>
-                <DefinitionList items={this.props.items} label={this.props.label}/>
-              </div>
-              <div className={classnames('card-action', {hidden: !this.state.collapsable})}>
-                <a href="#" onClick={this.toggleCollapsed.bind(this)}>
-                  More / Less <i className="material-icons">play_for_work</i>
-                </a>
-              </div>
+              <DefinitionList items={this.getItems()} label={this.props.label}/>
             </div>
         );
     }

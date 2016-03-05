@@ -15,7 +15,7 @@ class UserDefinitionBox extends Component {
     render() {
         return (
             <div className="userdefinitionbox card col m3" key={this.props.item.id}>
-              <div className='card-content'>
+              <div className='card-content row'>
                 <span className='card-title blue-text'>{this.props.item.word}</span>
                 <div className='translation'>{this.props.item.translation}</div>
                 <div className='definition'>{this.props.item.definition}</div>
