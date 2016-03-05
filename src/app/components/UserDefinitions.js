@@ -8,13 +8,15 @@ function mapStateToProps(state) {
     };
 }
 
-function UserDefinitionRow({id, word, translation, definition}) {
+function UserDefinition({id, word, translation, definition}) {
     return (
-        <tr key={id}>
-          <td className='word'>{word}</td>
-          <td className='translation'>{translation}</td>
-          <td className='definition'>{definition}</td>
-        </tr>
+        <div className="card col m3" key={id}>
+          <div className='card-content'>
+            <span className='card-title blue-text'>{word}</span>
+            <div className='translation'>{translation}</div>
+            <div className='definition'>{definition}</div>
+          </div>
+        </div>
     );
 }
 
@@ -44,20 +46,18 @@ class UserDefinitions extends Component {
     }
 
     render(){
+        let items =  this.state.items.map( (item) => {
+            return UserDefinition(item);
+        });
+
         return (
-            <table>
-              <thead>
-                <tr>
-                  <td colSpan='3'>
-                    <input type='search' onChange={this.handleFilterChange} name='word' placeholder='quick search...'/></td>
-                </tr>
-              </thead>
-              <tbody>
-                {this.state.items.map( (item) => {
-                    return UserDefinitionRow(item);
-                })}
-              </tbody>
-            </table>
+
+            <div>
+              <input type='search' onChange={this.handleFilterChange} name='word' placeholder='quick search...'/>
+              <div className="row">
+                {items}
+              </div>
+            </div>
 
         );
     }

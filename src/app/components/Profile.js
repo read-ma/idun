@@ -13,9 +13,6 @@ class Profile extends Component {
     render() {
         return (
             <div>
-              <h2>Hello {this.props.profile.name}</h2>
-              <p>You are logged in as {this.props.profile.role}</p>
-
               {this.props.children}
             </div>
         );
