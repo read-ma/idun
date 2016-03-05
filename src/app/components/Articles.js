@@ -23,7 +23,7 @@ function ArticleLink({id, title, source_url,tags, content_type, created_at}){
         <li key={id} className="collection-item">
 
           <div className="secondary-content badge">
-            <small class="badge">{extractDomain(source_url)}</small>
+            <small className="badge">{extractDomain(source_url)}</small>
           </div>
           <span className="title">
             <Link to={`/article/${id}`}>

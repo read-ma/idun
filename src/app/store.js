@@ -15,14 +15,5 @@ const reducer = combineReducers(
 const middleware = routerMiddleware(hashHistory);
 const createStoreWithMiddleware = applyMiddleware(middleware, thunk)(createStore);
 
-function stateFromLocalStorage() {
-    return {
-        auth: {
-            isAuthenticated: !!localStorage.getItem('IS_AUTHENTICATED'),
-            auth_token:        localStorage.getItem('AUTH_TOKEN')
-        },
-    };
-};
-
-const store = createStoreWithMiddleware(reducer, stateFromLocalStorage());
+const store = createStoreWithMiddleware(reducer);
 export default store;

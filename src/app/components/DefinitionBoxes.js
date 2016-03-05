@@ -29,7 +29,6 @@ function searchingAllowed(selection){
 
 store.subscribe( () => {
     let config = store.getState().definitions.config;
-
     localStorage.setItem('DEFINITIONS_CONFIG', JSON.stringify(config));
 });
 

@@ -1,7 +1,13 @@
-const initialState = {
+import ls from '../localStore';
+
+function stateFromLocalStorage() {
+    return {
+        isAuthenticated: !!ls.get('IS_AUTHENTICATED'),
+        auth_token:        ls.get('AUTH_TOKEN')
+    };
 };
 
-export default function auth(state = {}, action){
+export default function auth(state = stateFromLocalStorage(), action){
     switch(action.type){
 
     case 'USER_SIGNING_IN_ERROR':

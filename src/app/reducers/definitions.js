@@ -1,19 +1,18 @@
 import _ from 'lodash';
+import ls from '../localStore';
 
-const defaultConfig = {
-    config: [
-        {key: 'graphics', label: 'Pictures', component: 'PictureList'},
-        {key: 'translations', label: 'Translations', component: 'SimpleList'},
-        {key: 'definitions', label: 'Definitions', component: 'SimpleList'},
-        {key: 'related_words', label: 'Related Words', component: 'SimpleList'},
-        {key: 'examples', label: 'Examples', component: 'SimpleList'},
-    ],
+const defaultConfig = [
+    {key: 'graphics', label: 'Pictures', component: 'PictureList'},
+    {key: 'translations', label: 'Translations', component: 'SimpleList'},
+    {key: 'definitions', label: 'Definitions', component: 'SimpleList'},
+    {key: 'related_words', label: 'Related Words', component: 'SimpleList'},
+    {key: 'examples', label: 'Examples', component: 'SimpleList'},
+];
 
+const initialState = {
+    config: definitionsConfigFromLS() || defaultConfig,
     data: {}
 };
-
-const initialState = Object.assign({}, defaultConfig, definitionsConfigFromLS());
-
 
 function config(state, action) {
     state = state || initialState.config;
@@ -43,9 +42,10 @@ function config(state, action) {
 
 
 function definitionsConfigFromLS(){
-    return {
-        config: JSON.parse(localStorage.getItem('DEFINITIONS_CONFIG'))
+    function getDefinitions(){
+        return ls.get('DEFINITIONS_CONFIG');
     };
+    return JSON.parse(getDefinitions());
 }
 
 export default function definitions(state = initialState, action) {
