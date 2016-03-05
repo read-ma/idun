@@ -27,6 +27,7 @@ function searchingAllowed(selection){
     return selection.length < 20;
 }
 
+//TODO do not sync store on every store change
 store.subscribe( () => {
     let config = store.getState().definitions.config;
     localStorage.setItem('DEFINITIONS_CONFIG', JSON.stringify(config));
@@ -84,6 +85,7 @@ function DefinitionListItem({text, language, url, typeOfSpeech}) {
     else
         return (
             <li className="collection-item">
+              <div className="secondary-content badge"><i className="material-icons">add</i></div>
               <LanguageIcon lang={language} />
               <div dangerouslySetInnerHTML={{__html: text}}></div>
             </li>
@@ -121,6 +123,15 @@ class SidebarBox extends Component {
         };
     }
 
+    componentWillReceiveProps(nextProps) {
+
+        this.setState( {
+            collapsed: true,
+            collapsable: this.props.items.length > 4
+        });
+
+    }
+
     toggleCollapsed(event) {
         event.preventDefault();
         this.setState(Object.assign({}, {collapsed: !this.state.collapsed}));
@@ -129,11 +140,6 @@ class SidebarBox extends Component {
     render() {
         return (
             <div className="card">
-
-              <a className={classnames('secondary-content', {hidden: !this.state.collapsable})} onClick={this.toggleCollapsed.bind(this)}>
-                <i className="material-icons">play_for_work</i>
-              </a>
-
               <div className={classnames({collapsed: this.state.collapsed})}>
                 <DefinitionList items={this.props.items} label={this.props.label}/>
               </div>

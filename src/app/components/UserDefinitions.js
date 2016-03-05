@@ -8,16 +8,21 @@ function mapStateToProps(state) {
     };
 }
 
-function UserDefinition({id, word, translation, definition}) {
-    return (
-        <div className="card col m3" key={id}>
-          <div className='card-content'>
-            <span className='card-title blue-text'>{word}</span>
-            <div className='translation'>{translation}</div>
-            <div className='definition'>{definition}</div>
-          </div>
-        </div>
-    );
+class UserDefinitionBox extends Component {
+    handleMouseOver(event) {
+    }
+
+    render() {
+        return (
+            <div className="userdefinitionbox card col m3" key={this.props.item.id}>
+              <div className='card-content'>
+                <span className='card-title blue-text'>{this.props.item.word}</span>
+                <div className='translation'>{this.props.item.translation}</div>
+                <div className='definition'>{this.props.item.definition}</div>
+              </div>
+            </div>
+        );
+    }
 }
 
 class UserDefinitions extends Component {
@@ -46,13 +51,12 @@ class UserDefinitions extends Component {
     }
 
     render(){
-        let items =  this.state.items.map( (item) => {
-            return UserDefinition(item);
-        });
+        let items =  this.state.items.map( item => <UserDefinitionBox item={item}/>);
+
 
         return (
 
-            <div>
+            <div className="articles">
               <input type='search' onChange={this.handleFilterChange} name='word' placeholder='quick search...'/>
               <div className="row">
                 {items}

@@ -28,8 +28,8 @@ const Navigator = () => {
                 </a>
                 <ul className="left hide-on-med-and-down">
                     <li><Link to='/'>Home</Link></li>
-                    <li><Link to='/profile'>Profile</Link></li>
                     <li><Link to='/articles'>Articles</Link></li>
+                    <li><Link to='/profile'>Learn</Link></li>
                 </ul>
                 <ul className="side-nav" id="mobile-demo">
                     <li><Link to='/'>Home</Link></li>
