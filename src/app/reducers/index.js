@@ -7,6 +7,8 @@ import settings from './settings';
 import auth from './auth';
 
 const initialState = {
+    profile: '',
+    userDefinitions: []
 };
 
 function main(state = initialState, action) {

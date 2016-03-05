@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { loadArticles } from '../actions';
 import _ from 'lodash';
+import moment from 'moment';
 
 function mapStateToProps(state) {
     return {
@@ -10,7 +11,7 @@ function mapStateToProps(state) {
     };
 }
 
-function ArticleLink({id, title, source_url,tags, content_type}){
+function ArticleLink({id, title, source_url,tags, content_type, created_at}){
     function extractDomain(sourceUrl){
         let matches = sourceUrl.match(/^https?\:\/\/(?:www\.)?([^\/?#]+)(?:[\/?#]|$)/i);
 
@@ -19,12 +20,19 @@ function ArticleLink({id, title, source_url,tags, content_type}){
 
 
     return (
-        <li key={id} className="collection-item avatar">
-          <i className="material-icons circle">{content_type == 'video' ? "videocam" : "subject"}</i>
-          <Link to={`/article/${id}`}>
-            {title}
-            <span className="badge">{extractDomain(source_url)}</span>
-          </Link>
+        <li key={id} className="collection-item">
+
+          <div className="secondary-content badge">
+            <small class="badge">{extractDomain(source_url)}</small>
+          </div>
+          <span className="title">
+            <Link to={`/article/${id}`}>
+              {title}
+            </Link>
+          </span>
+          <div>
+            <small>{moment(created_at).fromNow()}</small>
+          </div>
           <div>
             <small>{tags}</small>
           </div>

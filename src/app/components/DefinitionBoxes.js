@@ -28,6 +28,12 @@ function searchingAllowed(selection){
 }
 
 store.subscribe( () => {
+    let config = store.getState().definitions.config;
+
+    localStorage.setItem('DEFINITIONS_CONFIG', JSON.stringify(config));
+});
+
+store.subscribe( () => {
     let selection = currentSelectionSelector(store.getState());
 
     if (selectionChanged(selection)) {
@@ -51,7 +57,7 @@ class DefinitionBoxes extends Component {
                       <SidebarBox label={box.label} items={this.props.data[box.key]} /> );
 
         return (
-            <div>
+            <div id="definitionboxes">
                 {boxes}
             </div>
         );
@@ -73,7 +79,7 @@ function DefinitionListItem({text, language, url, typeOfSpeech}) {
     if (url)
         return (
             <li className="collection-item">
-              <img className="materialboxed" data-caption={text} src={url} alt={text} />
+              <img className="materialboxed center" data-caption={text} src={url} alt={text} />
             </li>
         );
     else
@@ -107,15 +113,33 @@ const FilterButton = ({active, name, value, onClick}) => {
 };
 
 class SidebarBox extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            collapsed: true,
+            collapsable: this.props.items.length > 4
+        };
+    }
+
+    toggleCollapsed(event) {
+        event.preventDefault();
+        this.setState(Object.assign({}, {collapsed: !this.state.collapsed}));
+    }
 
     render() {
         return (
             <div className="card">
-              <div className="collapsed">
+
+              <a className={classnames('secondary-content', {hidden: !this.state.collapsable})} onClick={this.toggleCollapsed.bind(this)}>
+                <i className="material-icons">play_for_work</i>
+              </a>
+
+              <div className={classnames({collapsed: this.state.collapsed})}>
                 <DefinitionList items={this.props.items} label={this.props.label}/>
               </div>
-              <div className="card-action">
-                <a>
+              <div className={classnames('card-action', {hidden: !this.state.collapsable})}>
+                <a href="#" onClick={this.toggleCollapsed.bind(this)}>
                   More / Less <i className="material-icons">play_for_work</i>
                 </a>
               </div>

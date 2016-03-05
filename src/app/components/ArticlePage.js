@@ -17,7 +17,7 @@ class ArticleContent extends Component {
 
     render(){
         return (
-            <div className="content" onMouseUp={this.props.onTextSelected} dangerouslySetInnerHTML={{__html: this.state.text}}></div>
+            <div className="content flow-text" onMouseUp={this.props.onTextSelected} dangerouslySetInnerHTML={{__html: this.state.text}}></div>
         );
     }
 };

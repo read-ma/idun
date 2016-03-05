@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-const initialState = {
+const defaultConfig = {
     config: [
         {key: 'graphics', label: 'Pictures', component: 'PictureList'},
         {key: 'translations', label: 'Translations', component: 'SimpleList'},
@@ -12,8 +12,12 @@ const initialState = {
     data: {}
 };
 
+const initialState = Object.assign({}, defaultConfig, definitionsConfigFromLS());
 
-function config(state = initialState.config, action) {
+
+function config(state, action) {
+    state = state || initialState.config;
+
     switch (action.type){
     case 'CHANGE_BOX_ORDER':
         function isGraphicsBox(box){
@@ -36,6 +40,13 @@ function config(state = initialState.config, action) {
         }
     }
 };
+
+
+function definitionsConfigFromLS(){
+    return {
+        config: JSON.parse(localStorage.getItem('DEFINITIONS_CONFIG'))
+    };
+}
 
 export default function definitions(state = initialState, action) {
     switch (action.type) {
