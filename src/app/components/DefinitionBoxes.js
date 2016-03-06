@@ -40,7 +40,7 @@ store.subscribe( () => {
         updateSelectionCache(selection);
 
         if (searchingAllowed(selection)){
-            store.dispatch(findWordData(selection,'translations', store.getState().settings.language));
+            store.dispatch(findWordData(selection,'translations'));
             store.dispatch(findWordData(selection,'definitions'));
             store.dispatch(findWordData(selection,'examples'));
             store.dispatch(findWordData(selection,'graphics'));

@@ -2,12 +2,12 @@ import _ from 'lodash';
 
 const initialState = {
     languages: [
-        { key: 'pl', name: 'Polish'},
-        { key: 'en', name: 'English' },
-        { key: 'fr', name: 'French' },
-        { key: 'pt', name: 'Portuguese' }
+        { code: 'pl-PL', key: 'pl', name: 'Polish'},
+        { code: 'en-GB', key: 'en', name: 'English' },
+        { code: 'fr-FR', key: 'fr', name: 'French' },
+        { code: 'pt-BR', key: 'pt', name: 'Portuguese' }
     ],
-    language: { from: 'en', to: 'pl' }
+    language: { from: 'en-GB', to: 'pl-PL' }
 };
 
 function language(state = initialState.language, action){
@@ -19,8 +19,7 @@ function language(state = initialState.language, action){
     default:
         return state;
     }
-}
-
+};
 
 export default function settings(state = initialState, action) {
     switch (action.type){

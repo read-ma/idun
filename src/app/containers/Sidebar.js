@@ -4,15 +4,13 @@ import request from 'superagent';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { textSelected, toggleHighlighting, changeBoxOrder } from '../actions';
-import { TTSPlayer, Wordlists, DefinitionBoxes, MobileSidebar } from '../components';
+import { Wordlists, DefinitionBoxes } from '../components';
 import UserCustomDefinitionForm from './UserCustomDefinition';
 import 'lodash';
 import classnames from 'classnames';
-import { MobileSidebarMixin } from './MobileSidebar';
 import LanguageBar from '../components/LanguageSelection';
 
 const Sidebar = React.createClass({
-    mixins: [MobileSidebarMixin],
 
     getInitialState: function() {
         return {
@@ -38,32 +36,18 @@ const Sidebar = React.createClass({
         );
     },
 
-    componentDidUpdate: function() {
-        this.initMobileSidebar();
-    },
-
-    componentDidMount: function() {
-        window.addEventListener('load', function(){
-            this.initMobileSidebar();
-        });
-    },
-
     render: function() {
         return (
             <div className="wrapper">
-              <div className="hide-on-large-only mobile-sidebar-link">
+              <div className="hide-on-large-only">
                 <div className="">Show Sidebar</div>
               </div>
               <aside className='sidebar'>
-                <div className="right">
-                  <a className="btn-floating" onClick={this.toggleSettingsPanelVisible}><i className="material-icons">settings</i></a>
+                <div className="row">
+                  <a className="right btn-floating" onClick={this.toggleSettingsPanelVisible}><i className="material-icons">settings</i></a>
                 </div>
 
                 <ul>
-                  <li className="tts-player">
-                    <TTSPlayer selection={this.props.selectedText}/>
-                  </li>
-
                   <li className={classnames('card',{hidden: !this.state.settingVisible})} ref="settingsPanel" >
                     <BoxesOrder header='Pictures box position' handleUpdate={this.handlePicturesBoxOrderUpdated} />
                     <Wordlists handleSelected={this.handleWordListSelected} wordlists={this.props.wordlists} header="Highlighting"/>

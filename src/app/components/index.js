@@ -7,35 +7,8 @@ import Main from './Main';
 import DefinitionBoxes from './DefinitionBoxes';
 
 import React, { Component } from 'react';
-import * as player from '../actions/tts';
 
 import classnames from 'classnames';
-
-
-const TTSPlayerButton = ({handleClick, label}) => {
-    return (
-        <button className="btn-floating" onClick={handleClick}>
-          <i className="tiny material-icons">{label}</i>
-        </button>
-    );
-};
-
-class TTSPlayer extends Component {
-    play(){
-        player.start(this.props.selection);
-    }
-
-    render(){
-        return (
-            <ul>
-                <li><TTSPlayerButton label="play_arrow" handleClick={this.play.bind(this)} /></li>
-                <li><TTSPlayerButton label="pause" handleClick={player.pause} /></li>
-                <li><TTSPlayerButton label="skip_next" handleClick={player.resume} /></li>
-                <li><TTSPlayerButton label="stop" handleClick={player.stop} /></li>
-            </ul>
-        );
-    }
-}
 
 const Wordlists = ({header, wordlists, handleSelected}) => {
     let buttons = wordlists.map((list) => {
@@ -55,6 +28,6 @@ const Wordlists = ({header, wordlists, handleSelected}) => {
 };
 
 export {
-    Home, Profile, Articles, ArticlePage, Main, TTSPlayer, Wordlists, UserDefinitions,
+    Home, Profile, Articles, ArticlePage, Main, Wordlists, UserDefinitions,
     DefinitionBoxes
 };

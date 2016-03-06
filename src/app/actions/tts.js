@@ -7,9 +7,13 @@ function start(text, lang) {
 
 function createUtterance(text,lang){
     var tts = new window.SpeechSynthesisUtterance(text);
-//    tts.voice = _.find(instance.getVoices(), {voiceURI: 'Google UK English Male'});
+    tts.voice = findVoice(lang);
     return tts;
 };
+
+function findVoice(lang){
+    return _.find(instance.getVoices(), {lang: lang});
+}
 
 function stop(){
     instance.cancel();

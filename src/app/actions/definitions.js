@@ -1,4 +1,5 @@
 import api from '../api';
+import Language from '../LanguageManager';
 
 function contentLoaded(type, data){
     return {
@@ -9,7 +10,7 @@ function contentLoaded(type, data){
 }
 
 function findWordData(text, type, options={}){
-    let params = Object.assign({}, options, {type: type})
+    let params = Object.assign({}, options, {type: type}, Language.keysOfCurrent());
 
     return (dispatch) => {
         api.get(`/translate/${text}.json`, {params: params})
