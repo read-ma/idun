@@ -56,6 +56,10 @@ const Sidebar = React.createClass({
 
                   <li><UserCustomDefinitionForm /></li>
 
+                  <li className="card">
+                    <UserCustomDefinition userDefinitions={this.props.userDefinitions} selectedText={this.props.selectedText} />
+                  </li>
+
                   <li><DefinitionBoxes /></li>
 
                 </ul>
@@ -65,6 +69,38 @@ const Sidebar = React.createClass({
     }
 });
 
+class UserCustomDefinition extends Component {
+
+    constructor(props){
+        super(props);
+        this.state = {userDefinition: {}};
+    }
+
+    componentWillReceiveProps(nextProps){
+        let userDefinition = _.find(nextProps.userDefinitions, {word: nextProps.selectedText});
+        if (userDefinition)
+            this.setState({userDefinition:  userDefinition});
+        else
+            this.setState({userDefinition:  {}});
+    }
+
+    render() {
+        if (this.state.userDefinition.translation)
+            return (
+                <ul className="collection with-header">
+                  <li className="collection-header">
+                    <h5>Your definition</h5>
+                  </li>
+                  <li className="collection-item" dangerouslySetInnerHTML={{__html: this.state.userDefinition.translation}}></li>
+                  <li className="collection-item" dangerouslySetInnerHTML={{__html: this.state.userDefinition.definition}}></li>
+                </ul>
+            );
+        else
+            return false;
+    }
+}
+
+// todo move to setings
 class BoxesOrder extends Component {
     render() {
 
@@ -91,7 +127,9 @@ function mapStateToProps(state){
     return {
         selectedText: state.article.selectedText,
         wordlists: state.wordlists,
+        userDefinitions: state.main.userDefinitions
     };
+
 }
 
 export default connect(mapStateToProps)(Sidebar);

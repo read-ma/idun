@@ -3,7 +3,7 @@ $icons-font-path: "~materialize-sass/font/material-design-icons/";
 @import "~materialize-sass/sass/materialize.scss";
 
 $flag-icon-css-path: '~flag-icon-css/flags' !default;
-@import "~flag-icon-css/sass/flag-icon.scss";
+@import "~flag-icon-css/css/flag-icon.min.css";
 
 @media #{$large-and-up} {
     .container {
@@ -105,4 +105,8 @@ ul.ttsplayer {
         display: inline;
 
     }
+}
+
+a {
+    cursor: pointer
 }
