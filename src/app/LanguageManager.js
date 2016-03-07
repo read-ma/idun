@@ -1,23 +1,20 @@
 import store from './store';
 
 class LanguageManager {
-    constructor(){
-        this.settings = store.getState().settings;
-    }
-
-    current() {
-        return this.settings.language;
+    settings() {
+        return store.getState().settings
     }
 
     keysOfCurrent(){
+
         return {
-            to: this.byCode(this.current().to).key,
-            from: this.byCode(this.current().from).key
+            to: this.byCode(this.settings().language.to).key,
+            from: this.byCode(this.settings().language.from).key
         };
     }
 
     all(){
-        return this.settings.languages;
+        return this.settings().languages;
     }
 
     byCode(code){
