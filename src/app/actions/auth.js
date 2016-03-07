@@ -15,6 +15,39 @@ const ReturnTo = (state) => {
     };
 };
 
+function invitationRequestSent(data) {
+  return {
+    type: 'INVITATION_REQUEST_SENT',
+    payload: data.invitation_request
+  };
+};
+
+function userSigningUpError(error){
+  console.log(error);
+
+  return {
+    type: 'SIGNUP_ERROR',
+    payload: error
+  };
+};
+
+const signupAttempt = (email) => {
+
+    return (dispatch) => {
+        api.post(
+            '/invitation_requests.json',
+            {invitation_request: {email: email}}
+        )
+            .then( (response) => {
+                dispatch(invitationRequestSent(response.data));
+            })
+            .catch(function (response) {
+                dispatch(userSigningUpError(response));
+            });
+        ;
+    };
+}
+
 const loginAttempt = (email, password) => {
 
     return (dispatch) => {
@@ -70,4 +103,4 @@ const logout = () => {
 
 };
 
-export { loginAttempt, logout, error }
+export { loginAttempt, signupAttempt, logout, error }
