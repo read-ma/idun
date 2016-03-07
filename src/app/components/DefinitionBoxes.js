@@ -25,7 +25,7 @@ function selectionChanged(selection){
 }
 
 function searchingAllowed(selection){
-    return selection.length < 20;
+    return selection.split(" ").length < 4;
 }
 
 //TODO do not sync store on every store change

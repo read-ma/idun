@@ -16,7 +16,7 @@ class LanguageBar extends Component {
     }
 
     render() {
-        let languages = this.props.languages.map(lang => (<option value={lang.key}>{lang.name}</option>));
+        let languages = this.props.languages.map(lang => (<option value={lang.code}>{lang.name}</option>));
 
         return (
             <ul className="collection with-header">
