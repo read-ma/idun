@@ -18,6 +18,14 @@ export default function auth(state = stateFromLocalStorage(), action){
             {error: action.payload}
         );
 
+    case 'USER_LOGGED_OUT':
+        return Object.assign(
+            {},
+            state,
+            action.payload
+        );
+
+
     case 'USER_LOGGED_IN':
         return Object.assign(
             {},

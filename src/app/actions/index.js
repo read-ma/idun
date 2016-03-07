@@ -49,7 +49,6 @@ function loadUserDefinitions(definitions){
     return (dispatch) => {
         api.get('/user_definitions.json')
             .then((response) => {
-                console.log(response);
                 dispatch(userDefinitionsLoaded(response.data.user_definitions));
             })
             .catch((error) => console.log(error));

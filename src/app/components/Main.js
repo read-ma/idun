@@ -1,12 +1,19 @@
 require('./Main.scss');
 import React from 'react';
 import { Link } from 'react-router';
+import { connect } from 'react-redux';
+import { logout } from '../actions/auth';
 
 class Main extends React.Component {
+
+    logout(){
+        this.props.dispatch(logout());
+    }
+
     render() {
         return (
             <div>
-              <Navigator />
+              <Navigator isAuthenticated={this.props.isAuthenticated} handleLogout={this.logout.bind(this)}/>
               <main className="container">
                 <div className="section">
                   {this.props.children}
@@ -18,11 +25,19 @@ class Main extends React.Component {
     }
 };
 
-const Navigator = () => {
+const LoginLogoutButton = ({isAuthenticated,handleLogout}) => {
+    if (isAuthenticated)
+        return <li><a onClick={handleLogout}>Logout</a></li>;
+    else
+        return <li><Link to='/login'>Login</Link></li>;
+
+}
+
+const Navigator = (props) => {
     return (
         <nav className="white">
             <div className="nav-wrapper container">
-                <a href="/" className="black-text right">BETA | Language Assistant | Tutor | Coach | BETA</a>
+                <a href="/" className="black-text right">Language Assistant [BETA]</a>
                 <a href="#" data-activates="mobile-demo" className="button-collapse">
                     <i className="material-icons teal-text">menu</i>
                 </a>
@@ -30,6 +45,7 @@ const Navigator = () => {
                     <li><Link to='/'>Home</Link></li>
                     <li><Link to='/articles'>Articles</Link></li>
                     <li><Link to='/profile'>Learn</Link></li>
+                    <LoginLogoutButton isAuthenticated={props.isAuthenticated} handleLogout={props.handleLogout} />
                 </ul>
                 <ul className="side-nav" id="mobile-demo">
                     <li><Link to='/'>Home</Link></li>
@@ -43,7 +59,7 @@ const Navigator = () => {
 
 $(document).ready(function(){
     $(".button-collapse").sideNav({ closeOnClick: true });
-})
+});
 
 const Footer = () => {
     return (
@@ -61,7 +77,13 @@ const Footer = () => {
                 </div>
             </div>
         </footer>
-    )
+    );
+};
+
+function mapStateToProps(state){
+    return {
+        isAuthenticated: state.auth.isAuthenticated
+    }
 }
 
-export default Main;
+export default connect(mapStateToProps)(Main);

@@ -1,13 +1,17 @@
 import api from '../api';
 import store from '../store';
 import {push} from 'react-router-redux';
+import ls from '../localStore';
+
+const DEFAULT_RETURN_TO = '/articles';
+
 
 const ReturnTo = (state) => {
     try {
-        return state.routing.locationBeforeTransitions.query.next;
+        return state.routing.locationBeforeTransitions.query.next || DEFAULT_RETURN_TO;
     }
     catch(e) {
-        return '/profile';
+        return DEFAULT_RETURN_TO;
     };
 };
 
@@ -33,8 +37,8 @@ const loginAttempt = (email, password) => {
 };
 
 const userLoggedIn = (userData) => {
-    localStorage.setItem('AUTH_TOKEN', userData.auth_token);
-    localStorage.setItem('IS_AUTHENTICATED', true);
+    ls.set('AUTH_TOKEN', userData.auth_token);
+    ls.set('IS_AUTHENTICATED', true);
     return {
         type: 'USER_LOGGED_IN',
         payload: userData
@@ -50,6 +54,20 @@ const error = (type, payload) => {
         type: 'USER_SIGNING_IN_ERROR',
         payload: payload
     };
-}
+};
 
-export { loginAttempt, error }
+const logout = () => {
+    ls.clear('AUTH_TOKEN');
+    ls.clear('IS_AUTHENTICATED');
+
+    return {
+        type: 'USER_LOGGED_OUT',
+        payload: {
+            auth_token: undefined,
+            isAuthenticated: false
+        }
+    };
+
+};
+
+export { loginAttempt, logout, error }

@@ -9,6 +9,10 @@ $flag-icon-css-path: '~flag-icon-css/flags' !default;
     .container {
         width: 95%;
     }
+    .wrapper {
+        position: fixed;
+        top: 5px;
+    }
 }
 
 @media #{$medium-and-down} {
