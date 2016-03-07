@@ -57,7 +57,7 @@ class DefinitionBoxes extends Component {
         var boxes = this.props.boxes
                 .filter( box => !_.isEmpty(this.props.data[box.key]) )
                 .map( box =>
-                      <SidebarBox selectedText={this.props.selectedText} dispatch={this.props.dispatch} label={box.label} items={this.props.data[box.key]} /> );
+                      <SidebarBox key={_.uniqueId('definitionboxe')} selectedText={this.props.selectedText} dispatch={this.props.dispatch} label={box.label} items={this.props.data[box.key]} /> );
 
         return (
             <div id="definitionboxes">
@@ -78,7 +78,7 @@ const LanguageIcon = ({lang}) => {
         return <span></span>;
 };
 
-function DefinitionListItem({text, language, url, partOfSpeech, handleClick}) {
+function DefinitionListItem({text, language, url, partOfSpeech, handleClick, key}) {
 
     function add(){
         handleClick({translation: text});
@@ -86,13 +86,13 @@ function DefinitionListItem({text, language, url, partOfSpeech, handleClick}) {
 
     if (url)
         return (
-            <li className="collection-item col m6 white">
+            <li className="collection-item col m6 white" key={key}>
               <img className="materialboxed center white" data-caption={text} src={url} alt={text} />
             </li>
         );
     else
         return (
-            <li className="collection-item">
+            <li className="collection-item" key={key}>
               <a className="secondary-content badge"><i className="material-icons" onClick={add}>add</i></a>
               <LanguageIcon lang={language} />
               <small>{partOfSpeech}</small>
@@ -104,7 +104,7 @@ function DefinitionListItem({text, language, url, partOfSpeech, handleClick}) {
 class DefinitionList extends  Component {
     render() {
         var items = this.props.items
-                .map( item => DefinitionListItem(Object.assign({}, item, {handleClick: this.props.handleClick})));
+                .map( item => DefinitionListItem(Object.assign({}, item, {key: _.uniqueId('definitionlist')}, {handleClick: this.props.handleClick})));
 
         return (
             <ul className="collection with-header white">

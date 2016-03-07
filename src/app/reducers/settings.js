@@ -5,7 +5,8 @@ const initialState = {
         { code: 'pl-PL', key: 'pl', name: 'Polish'},
         { code: 'en-GB', key: 'en', name: 'English' },
         { code: 'fr-FR', key: 'fr', name: 'French' },
-        { code: 'pt-BR', key: 'pt', name: 'Portuguese' }
+        { code: 'pt-BR', key: 'pt', name: 'Portuguese' },
+        { code: 'nb-NO', key: 'no', name: 'Norsk' }
     ],
     language: { from: 'en-GB', to: 'pl-PL' }
 };
