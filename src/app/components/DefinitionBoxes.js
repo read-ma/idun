@@ -6,58 +6,17 @@ import { saveUserDefinition } from '../actions';
 import classnames from 'classnames';
 import _ from  'lodash';
 
-function currentSelectionSelector(state){
-    return state.article.selectedText;
-}
-
-var cachedSelection = currentSelectionSelector(store.getState());
-
-function updateSelectionCache(selection){
-    cachedSelection = selection;
-}
-
-function getCachedSelection(){
-    return cachedSelection;
-}
-
-function selectionChanged(selection){
-    return selection != getCachedSelection();
-}
-
-function searchingAllowed(selection){
-    return selection.split(" ").length < 4;
-}
-
 //TODO do not sync store on every store change
 store.subscribe( () => {
     let config = store.getState().definitions.config;
     localStorage.setItem('DEFINITIONS_CONFIG', JSON.stringify(config));
 });
 
-// TODO not sure if it is correct approach
-// calling dispach in subscribe
-store.subscribe( () => {
-    let selection = currentSelectionSelector(store.getState());
-
-    if (selectionChanged(selection)) {
-        updateSelectionCache(selection);
-
-        if (searchingAllowed(selection)){
-            store.dispatch(findWordData(selection,'translations'));
-            store.dispatch(findWordData(selection,'definitions'));
-            store.dispatch(findWordData(selection,'examples'));
-            store.dispatch(findWordData(selection,'graphics'));
-
-        }
-    }
-});
-
 class DefinitionBoxes extends Component {
     render(){
         var boxes = this.props.boxes
-                .filter( box => !_.isEmpty(this.props.data[box.key]) )
                 .map( box =>
-                      <SidebarBox key={_.uniqueId('definitionboxe')} selectedText={this.props.selectedText} dispatch={this.props.dispatch} label={box.label} items={this.props.data[box.key]} /> );
+                      <SidebarBox boxKey={box.key} selectedText={this.props.selectedText} dispatch={this.props.dispatch} label={box.label} items={this.props.data[box.key]} /> );
 
         return (
             <div id="definitionboxes">
@@ -123,22 +82,29 @@ const FilterButton = ({active, name, value, onClick}) => {
 
 class SidebarBox extends Component {
 
+    loadDefinition(props){
+        props.dispatch(findWordData(props.selectedText, props.boxKey))
+    }
+
+    componentWillReceiveProps(nextProps){
+        if (this.props.selectedText != nextProps.selectedText)
+            this.loadDefinition(nextProps);
+    };
+
     saveUserDefinition(userDefinition){
         this.props.dispatch(
             saveUserDefinition(Object.assign({}, {word: this.props.selectedText}, userDefinition))
         );
     }
 
-    getItems() {
-        return _.slice(this.props.items, 0, 10);
-    }
-
     render() {
+        if (this.props.items)
         return (
             <div className="card">
-              <DefinitionList items={this.getItems()} label={this.props.label} handleClick={this.saveUserDefinition.bind(this)}/>
+              <DefinitionList items={this.props.items} label={this.props.label} handleClick={this.saveUserDefinition.bind(this)}/>
             </div>
         );
+        else return false;
     }
 };
 
