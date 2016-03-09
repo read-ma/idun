@@ -74,10 +74,10 @@ class UserCustomDefinitionForm extends Component {
               <div className="card-content">
                 <div className='row' className={classnames({hidden: this.state.collapsed})}>
                   <div className='input-field col s12'>
-                    <textarea className='materialize-textarea' name='translation' placeholder='translation' onChange={this.handleFormInputChanged} value={this.state.translation}></textarea>
+                    <input type='text' name='translation' placeholder='translation' onChange={this.handleFormInputChanged} value={this.state.translation} />
                   </div>
                   <div className='input-field col s12'>
-                    <textarea className='materialize-textarea' name='definition' placeholder='definition' onChange={this.handleFormInputChanged} value={this.state.definition}></textarea>
+                    <input type='text' name='definition' placeholder='definition' onChange={this.handleFormInputChanged} value={this.state.definition} />
                   </div>
                   <div className='input-field col s12'>
                     <input type='text' name='tags' placeholder='tags' onChange={this.handleFormInputChanged} value={this.state.tags} />

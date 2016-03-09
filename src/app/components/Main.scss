@@ -1,9 +1,6 @@
-$roboto-font-path: "~materialize-sass/font/roboto/";
-$icons-font-path: "~materialize-sass/font/material-design-icons/";
-@import "~materialize-sass/sass/materialize.scss";
+@import "./src/assets/sass/materialize.scss";
+@import "./src/assets/sass/vendor_overrides.scss";
 
-$flag-icon-css-path: '~flag-icon-css/flags' !default;
-@import "~flag-icon-css/css/flag-icon.min.css";
 
 @media #{$large-and-up} {
     .container {
