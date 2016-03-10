@@ -10,13 +10,13 @@ const history = syncHistoryWithStore(hashHistory, store);
 
 class App extends Component {
   render() {
-      return (
-          <Provider store={store}>
-            <Router history={history}>
-              {routes}
-            </Router>
-          </Provider>
-      );
+    return (
+      <Provider store={store}>
+        <Router history={history}>
+          {routes}
+        </Router>
+      </Provider>
+    );
   }
 }
 

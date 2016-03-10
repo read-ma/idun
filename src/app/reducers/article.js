@@ -1,17 +1,17 @@
 const initialState = {
-    selectedText: ''
+  selectedText: ''
 };
 
 export default function article(state = initialState, action) {
-    switch (action.type) {
+  switch (action.type) {
 
-    case 'TEXT_SELECTED':
-        return Object.assign({}, state, {selectedText: action.text});
+  case 'TEXT_SELECTED':
+    return Object.assign({}, state, {selectedText: action.text});
 
-    case 'ARTICLE_LOADED':
-        return Object.assign({}, state, action.article);
+  case 'ARTICLE_LOADED':
+    return Object.assign({}, state, action.article);
 
-    default:
-        return state;
-    }
+  default:
+    return state;
+  }
 }

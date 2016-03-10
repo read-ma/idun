@@ -35,20 +35,20 @@ class SignUpForm extends React.Component {
         <form onSubmit={this.handleSignUp.bind(this)}>
           <div className="input-field">
             <input
-               name='email'
-               type='email'
-               required='true'
-               onChange={this.handleFormInputChanged.bind(this)}
-               className="validate"/>
+              name='email'
+              type='email'
+              required='true'
+              onChange={this.handleFormInputChanged.bind(this)}
+              className="validate"/>
             <label htmlFor='signUpEmail'>
               Your email
             </label>
           </div>
           <h5 className="green-text">{this.props.messages}</h5>
           <input
-             className="btn"
-             type="submit"
-             value="Sign-up"/>
+            className="btn"
+            type="submit"
+            value="Sign-up"/>
         </form>
       </div>
     );
@@ -97,31 +97,31 @@ class Login extends React.Component {
           <form onSubmit={this.login.bind(this)}>
             <div className="input-field">
               <input
-                 name='email'
-                 className="validate"
-                 type='email'
-                 onChange={this.handleFormInputChanged}
-                 required='true'
-                 aria-required="true"/>
+                name='email'
+                className="validate"
+                type='email'
+                onChange={this.handleFormInputChanged}
+                required='true'
+                aria-required="true"/>
               <label htmlFor='email'>
                 Your email
               </label>
             </div>
             <div className="input-field">
               <input
-                 name='password'
-                 type='password'
-                 onChange={this.handleFormInputChanged}
-                 className="validate"
-                 require='true'/>
+                name='password'
+                type='password'
+                onChange={this.handleFormInputChanged}
+                className="validate"
+                require='true'/>
               <label htmlFor='password'>
                 Your password
               </label>
             </div>
             <input
-               className="btn"
-               type="submit"
-               value="Login"/>
+              className="btn"
+              type="submit"
+              value="Login"/>
           </form>
         </div>
         <div className="col s12 m5 offset-m1">
@@ -131,11 +131,11 @@ class Login extends React.Component {
     );
   }};
 
-  let mapStateToProps = (state) => {
-    return {
-      auth: state.auth,
-      signupMessage: state.auth.signupMessage
-    };
+let mapStateToProps = (state) => {
+  return {
+    auth: state.auth,
+    signupMessage: state.auth.signupMessage
   };
+};
 
-  export default connect(mapStateToProps)(Login);
+export default connect(mapStateToProps)(Login);

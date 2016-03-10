@@ -6,3 +6,6 @@ public/*.css
 /dist/public/style.css
 /dist/*
 npm-debug.log
+/.tern-port
+/src/app/.tern-port
+/src/app/reducers/.tern-port

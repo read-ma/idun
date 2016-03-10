@@ -6,11 +6,11 @@ import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 
 const reducer = combineReducers(
-    Object.assign(
-        {},
-        reducers,
-        {routing: routerReducer}
-    ));;
+  Object.assign(
+    {},
+    reducers,
+    {routing: routerReducer}
+  ));;
 
 const middleware = routerMiddleware(hashHistory);
 const createStoreWithMiddleware = applyMiddleware(middleware, thunk)(createStore);

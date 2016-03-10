@@ -96,7 +96,7 @@ class UserCustomDefinition extends Component {
     }
     else
       return false;
-    }
+  }
 }
 
 // todo move to setings
