@@ -34,7 +34,15 @@ function userDefinitionsLoaded(definitions) {
 function saveUserDefinition(definition){
   return dispatch => {
     api.post('/user_definitions.json', {user_definition: definition})
-      .then(response => dispatch(userDefinitionSaved(response.data)));
+      .then(response => dispatch(userDefinitionSaved(response.data)))
+      .catch(error => dispatch(userDefinitionSavingFailed(error)));
+  };
+}
+
+function userDefinitionSavingFailed(error){
+  return {
+    type: 'USER_DEFINITION_SAVING_FAILED',
+    payload: error
   };
 }
 

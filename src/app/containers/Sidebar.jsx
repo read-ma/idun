@@ -84,7 +84,7 @@ class UserCustomDefinition extends Component {
 
   render() {
     if (this.state.userDefinitions.length > 0){
-      let definitions = this.state.userDefinitions.map(def => <li className="collection-item" dangerouslySetInnerHTML={{__html: def.translation}} />);
+      let definitions = this.state.userDefinitions.map(def => <li key={def.translation} className="collection-item" dangerouslySetInnerHTML={{__html: def.translation}} />);
       return (
         <ul className="collection with-header">
           <li className="collection-header">
