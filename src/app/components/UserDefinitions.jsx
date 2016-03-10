@@ -14,11 +14,11 @@ class UserDefinitionBox extends Component {
 
   render() {
     return (
-      <div className="userdefinitionbox card col m3" key={this.props.item.id}>
-        <div className='card-content row'>
-          <span className='card-title blue-text'>{this.props.item.word}</span>
-          <div className='translation'>{this.props.item.translation}</div>
-          <div className='definition'>{this.props.item.definition}</div>
+      <div className="userdefinitionbox card-item" key={this.props.item.id}>
+        <div className='card-content'>
+          <h5 className='card-title blue-text'>{this.props.item.word}</h5>
+          <h6 className='card-subtitle'>{this.props.item.translation}</h6>
+          <div className='card-description'>{this.props.item.definition}</div>
         </div>
       </div>
     );
@@ -58,7 +58,7 @@ class UserDefinitions extends Component {
 
       <div className="articles">
         <input type='search' onChange={this.handleFilterChange} name='word' placeholder='quick search...'/>
-        <div className="row">
+        <div className="cards-container">
           {items}
         </div>
       </div>
