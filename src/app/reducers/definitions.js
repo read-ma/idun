@@ -2,11 +2,11 @@ import _ from 'lodash';
 import ls from '../localStore';
 
 const defaultConfig = [
-  {key: 'graphics', label: 'Pictures', component: 'PictureList'},
-  {key: 'translations', label: 'Translations', component: 'SimpleList'},
-  {key: 'definitions', label: 'Definitions', component: 'SimpleList'},
+  {key: 'graphics', label: 'Pictures', component: 'RemoteList'},
+  {key: 'translations', label: 'Translations', component: 'RemoteList'},
+  {key: 'definitions', label: 'Definitions', component: 'RemoteList'},
   {key: 'related_words', label: 'Related Words', component: 'SimpleList'},
-  {key: 'examples', label: 'Examples', component: 'SimpleList'},
+  {key: 'examples', label: 'Examples', component: 'RemoteList'},
 ];
 
 const initialState = {
