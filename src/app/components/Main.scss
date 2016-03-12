@@ -1,6 +1,7 @@
-@import "./src/assets/sass/materialize.scss";
-@import "./src/assets/sass/flags/flag-icon.scss";
-@import "./src/assets/sass/vendor_overrides.scss";
+@import "./src/assets/sass/materialize/materialize";
+@import "./src/assets/sass/flags/flag-icon";
+@import "./src/assets/sass/vendor_overrides";
+@import "./src/assets/sass/custom";
 
 
 @media #{$large-and-up} {

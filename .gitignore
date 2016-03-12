@@ -1,8 +1,11 @@
 /node_modules
 /bower_components
-public/*.js
-public/*.css
+/public/*.js
+/public/*.css
 /dist/bundle.js
 /dist/public/style.css
 /dist/*
 npm-debug.log
+/.tern-port
+/src/app/.tern-port
+/src/app/reducers/.tern-port
