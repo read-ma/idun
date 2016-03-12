@@ -20,6 +20,11 @@ class UserDefinitionBox extends Component {
                 <div className='translation'>{this.props.item.translation}</div>
                 <div className='definition'>{this.props.item.definition}</div>
               </div>
+              <div className="row">
+                <a className="btn">Easy></a>
+                <a className="btn">Middle</a>
+                <a className="btn">Hard</a>
+              </div>
             </div>
         );
     }
