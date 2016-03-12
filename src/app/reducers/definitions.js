@@ -1,5 +1,5 @@
-import _ from 'lodash';
 import ls from '../localStore';
+import _ from '../../lodash.custom';
 
 const defaultConfig = [
   {key: 'graphics', label: 'Pictures', component: 'RemoteList'},

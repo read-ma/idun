@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import _ from 'lodash';
+import _ from '../../../lodash.custom';
+
 
 const LanguageIcon = ({lang}) => {
   let language = lang === 'en' ? 'gb' : lang;

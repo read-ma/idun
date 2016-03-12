@@ -1,3 +1,5 @@
+import _ from '../../lodash.custom';
+
 const instance = window.speechSynthesis;
 
 function start(text, lang) {

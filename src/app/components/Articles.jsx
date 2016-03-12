@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { loadArticles } from '../actions';
-import _ from 'lodash';
 import moment from 'moment';
 
 function mapStateToProps(state) {

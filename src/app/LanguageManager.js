@@ -1,5 +1,5 @@
 import store from './store';
-
+import _ from '../lodash.custom'
 class LanguageManager {
   settings() {
     return store.getState().settings;
