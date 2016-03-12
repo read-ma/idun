@@ -8,8 +8,7 @@
 
 * `git clone git@bitbucket.org:mskills/idun.git`
 * `cd idun`
-* `npm install -g ied`
-* `ied install`
+* `npm install`
 * in case of problems with node-sass run `npm rebuild node-sass`
 * Visit on http://localhost:8080
 
