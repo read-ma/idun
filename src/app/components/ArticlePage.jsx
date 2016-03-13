@@ -8,16 +8,23 @@ import Sidebar from '../containers/Sidebar';
 class ArticleContent extends Component {
   constructor(props) {
     super(props);
-    this.state = {text: highlightText(props)};
+    this.state = {
+      text: (highlightText(props) || '')
+    };
   }
 
   componentWillReceiveProps(nextProps){
     this.setState( { text: highlightText(nextProps) } );
   }
 
-  render(){
+  render() {
+    const text ="Idun (pronounced “EE-done;” from Old Norse Iðunn, “The Rejuvenating One”[1]) is a goddess who belongs to the Aesir tribe of deities. Her role in the pre-Christian mythology and religion of the Norse and other Germanic peoples is unfortunately obscure, but she features prominently in one of the best-known mythological tales, The Kidnapping of Idun. In this tale, which comes to us from the skaldic poem Haustlöng and the Prose Edda, Idun is depicted as the owner and dispenser of a fruit that imparts immortality. In modern books on Norse mythology, these fruits are almost invariably considered to be apples, but this wasn’t necessarily the case in heathen times. The Old Norse word for “apple,” epli, was often used to denote any fruit or nut, and “apples” in the modern English sense didn’t arrive in Scandinavia until late in the Middle Ages.[2] Whatever species Idun’s produce belongs to, its ability to sustain the immortality of the gods and goddesses makes Idun an indispensable presence in Asgard."
+    const words = text.split(/(<([^>]+)>| )/);
+    const wordComponents = this.state.text.split(' ').map((word => <span key={word}>{word}</span>));
     return (
-      <div className="content flow-text" onMouseUp={this.props.onTextSelected} dangerouslySetInnerHTML={{__html: this.state.text}}></div>
+      <div className="content flow-text" onMouseUp={this.props.onTextSelected}>
+        {words}
+      </div>
     );
   }
 };
