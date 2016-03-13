@@ -62,8 +62,18 @@ nav ul a, nav .brand-logo {
 
 .article {
     .content {
-        line-height: 185%;
-        font-size: 1.13em;
+      line-height: 185%;
+      font-size: 1.13em;
+      .word {
+        cursor: pointer;
+        &:hover{
+          background-color: lighten(#f8bbd0, 10%);
+          border-radius: 5px;
+        }
+        &.selected {
+          background-color: #f8bbd0;
+        }
+      }
     };
     h1 {
         font-size: 1.64rem;
