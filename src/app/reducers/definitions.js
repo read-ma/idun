@@ -1,5 +1,7 @@
-import _ from 'lodash';
 import ls from '../localStore';
+import _ from 'lodash';
+import { reject } from 'lodash/reject';
+import { filter } from 'lodash/filter';
 
 const defaultConfig = [
   {key: 'graphics', label: 'Pictures', component: 'RemoteList'},

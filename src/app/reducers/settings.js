@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 const initialState = {
   languages: [
     { code: 'pl-PL', key: 'pl', name: 'Polish'},

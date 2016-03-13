@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import store from '../store';
 import sidebarBoxRegistry from './boxes';
 import classnames from 'classnames';
-import _ from  'lodash';
 
 //TODO do not sync store on every store change
 store.subscribe( () => {

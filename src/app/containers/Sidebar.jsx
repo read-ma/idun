@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 import { textSelected, toggleHighlighting, changeBoxOrder } from '../actions';
 import { Wordlists, DefinitionBoxes } from '../components';
 import UserCustomDefinitionForm from './UserCustomDefinition';
-import _ from 'lodash';
 import classnames from 'classnames';
 import LanguageBar from '../components/LanguageSelection';
 
