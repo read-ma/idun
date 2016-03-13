@@ -106,9 +106,16 @@ class UserDefinitions extends Component {
   }
 
   markItem(item, markValue) {
-    // this.setState changeattribute for item and change all state?
+    const items = this.state.items;
+    const itemIndex = items.indexOf(item);
+    item.mastered = markValue == 'easy';
+    const newItems = items.slice();
+    newItems.splice(itemIndex, 1, item);
 
-    this.setState({currentItem: this.fetchNextElement(this.state.items, this.state.currentItem)});
+    this.setState({
+      currentItem: this.fetchNextElement(this.state.items, this.state.currentItem),
+      items: newItems
+    });
   }
 
   fetchNextElement(list, element) {
@@ -137,11 +144,18 @@ class UserDefinitions extends Component {
     return result;
   }
 
+  masteredWords() {
+    return this.state.items.filter(item => item.mastered).length;
+  }
+
   render() {
     const items = this.state.items.map(item => <UserDefinitionBox item={item} />);
 
     return (
       <div className="articles">
+        <p className="right-align">
+          Mastered {this.masteredWords()}
+        </p>
         <div className="cards-container">
           {this.renderFlashcard()}
         </div>
