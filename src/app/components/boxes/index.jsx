@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { findWordData } from '../../actions/definitions';
 import { saveUserDefinition } from '../../actions';
 import DefinitionList from './list';
+import _ from 'lodash';
 
 class SimpleList extends Component {
 
@@ -12,7 +13,7 @@ class SimpleList extends Component {
   }
 
   render() {
-    if (this.props.items)
+    if (this.props.items && !_.isEmpty(this.props.items))
       return (
         <div className="card">
           <DefinitionList items={this.props.items} label={this.props.label} handleClick={this.saveUserDefinition.bind(this)}/>
