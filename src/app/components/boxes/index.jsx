@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { findWordData } from '../../actions/definitions';
+import { findWordData, contentCleared } from '../../actions/definitions';
 import { saveUserDefinition } from '../../actions';
 import DefinitionList from './list';
 import _ from 'lodash';
@@ -27,10 +27,15 @@ class SimpleList extends Component {
 class RemoteList extends SimpleList {
 
   loadDefinition(props){
-    props.dispatch(findWordData(props.selectedText, props.boxKey));
+    if (!!props.selectedText) {
+      props.dispatch(findWordData(props.selectedText, props.boxKey));
+    } else {
+      props.dispatch(contentCleared());
+    }
   }
 
   componentWillReceiveProps(nextProps){
+    console.log("SELECTED TEXT" + this.props.selectedText);
     if (this.props.selectedText != nextProps.selectedText)
       this.loadDefinition(nextProps);
   };
