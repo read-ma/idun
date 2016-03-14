@@ -4,7 +4,7 @@ import * as player from '../actions/tts';
 
 const TTSPlayerButton = ({handleClick, label}) => {
   return (
-    <a className="" onClick={handleClick}>
+    <a onClick={handleClick}>
       <i className="material-icons">{label}</i>
     </a>
   );

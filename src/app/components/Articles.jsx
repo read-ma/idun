@@ -23,19 +23,22 @@ function ArticleLink({id, title, source_url,tags, content_type, created_at}){
     <li key={id} className="collection-item">
 
       <div className="secondary-content badge">
-        <small className="badge">{extractDomain(source_url)}</small>
+        <small className="badge">{moment(created_at).fromNow()}</small>
       </div>
+
       <span className="title flow-text">
         <Link to={`/article/${id}`}>
           {title}
         </Link>
       </span>
-      <div>
-        <small>{moment(created_at).fromNow()}</small>
-      </div>
-      <div>
+
+      <p>
+        <small>Source: <strong>{extractDomain(source_url)}</strong></small>
+      </p>
+
+      <p>
         <small>{tags}</small>
-      </div>
+      </p>
     </li>
   );
 };
@@ -49,7 +52,7 @@ class ArticleList extends Component {
 
 
     return (
-      <ul className="collection articles">
+      <ul className="collection">
         {articleLinks}
       </ul>
     );
@@ -62,12 +65,10 @@ class ArticleFilter extends Component {
   }
   render() {
     return (
-      <form>
-        <div className="col s8">
-          <div className="input-field col s12">
-            <input type="text" placeholder="Article title" onChange={this.onChange.bind(this)}/>
-            <label>Search for article</label>
-          </div>
+      <form className="row">
+        <div className="input-field col s6">
+          <input type="text" onChange={this.onChange.bind(this)}/>
+          <label>Search for article</label>
         </div>
       </form>
     );
@@ -103,19 +104,19 @@ class ArticleAdd extends Component {
   render () {
     let result;
     if (!this.state.entering) {
-      result = <a className="btn-floating btn-large waves-effect waves-light green" onClick={this.enterUrl}><i className="material-icons">add</i></a>;
+      result = <a className="btn-floating btn-large green" onClick={this.enterUrl}><i className="material-icons">add</i></a>;
     } else {
       result = (
         <div className="row">
           <form onSubmit={this.addUrl}>
-            <div className="col s8">
-              <div className="input-field col s12">
-                <input type="url" className="validate" ref="urlInput" placeholder="Enter url for article" />
-                <label data-error="Enter valid url" data-success="Looks good">Url</label>
+            <div className="col s10">
+              <div className="input-field">
+                <input type="url" className="validate" ref="urlInput" />
+                <label>Article url</label>
               </div>
             </div>
-            <div className="col s4">
-              <button type="submit" className="btn-floating btn-large waves-effect waves-light green">
+            <div className="col s2">
+              <button type="submit" className="btn-floating btn-large green">
                 <i className="material-icons">save</i>
               </button>
             </div>
@@ -158,7 +159,7 @@ class Articles extends Component {
     return (
       <div className="articles">
         <div className="row">
-          <div className="col s8">
+          <div className="col s8 left-align">
             <ArticleFilter onChange={this.handleFilterChange} />
           </div>
           <div className="col s4 right-align">

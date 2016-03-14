@@ -33,7 +33,6 @@ const Navigator = (props) => {
           {/* FIXME 1: "Navigator" Placeholder #1 */}
 
           <ul className="left hide-on-med-and-down">
-            <li><Link to='/'>Home</Link></li>
             <li><Link to='/articles'>Articles</Link></li>
             <li><Link to='/profile'>Learn</Link></li>
           </ul>
@@ -45,7 +44,6 @@ const Navigator = (props) => {
           </ul>
 
           <ul className="side-nav" id="mobile-demo">
-            <li><Link to='/'>Home</Link></li>
             <li><Link to='/profile'>Profile</Link></li>
             <li><Link to='/articles'>Articles</Link></li>
           </ul>

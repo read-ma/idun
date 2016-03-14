@@ -29,6 +29,14 @@ nav ul a, nav .brand-logo {
     }
 }
 
+body {
+  overflow: hidden;
+  .article-wrapper {
+    max-height: 100vh;
+    overflow-y: scroll;
+  }
+}
+
 .article {
     h1 {
         font-size: 1.64rem;

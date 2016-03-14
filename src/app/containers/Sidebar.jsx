@@ -38,9 +38,7 @@ const Sidebar = React.createClass({
   render: function() {
     return (
       <div className='sidebar'>
-        <div className="row">
-          <a className="right btn-floating" onClick={this.toggleSettingsPanelVisible}><i className="material-icons">settings</i></a>
-        </div>
+        <a className="right btn-floating" onClick={this.toggleSettingsPanelVisible}><i className="material-icons">settings</i></a>
 
         <ul>
           <li className={classnames('card',{hidden: !this.state.settingVisible})} ref="settingsPanel" >
