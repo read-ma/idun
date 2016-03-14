@@ -19,66 +19,53 @@ class Main extends React.Component {
             {this.props.children}
           </div>
         </main>
-        {/*<Footer />*/}
       </div>
     );
   }
 };
 
-const LoginLogoutButton = ({isAuthenticated,handleLogout}) => {
-  if (isAuthenticated)
-    return <li><a onClick={handleLogout}>Logout</a></li>;
-  else
-    return <li><Link to='/login'>Login</Link></li>;
-
-}
-
 const Navigator = (props) => {
   return (
-    <nav className="white">
-      <div className="nav-wrapper container">
-        <a href="/" className="black-text right">Language Assistant [BETA]</a>
-        <a href="#" data-activates="mobile-demo" className="button-collapse">
-          <i className="material-icons teal-text">menu</i>
-        </a>
-        <ul className="left hide-on-med-and-down">
-          <li><Link to='/'>Home</Link></li>
-          <li><Link to='/articles'>Articles</Link></li>
-          <li><Link to='/profile'>Learn</Link></li>
-          <LoginLogoutButton isAuthenticated={props.isAuthenticated} handleLogout={props.handleLogout} />
-        </ul>
-        <ul className="side-nav" id="mobile-demo">
-          <li><Link to='/'>Home</Link></li>
-          <li><Link to='/profile'>Profile</Link></li>
-          <li><Link to='/articles'>Articles</Link></li>
-        </ul>
-      </div>
-    </nav>
+    <div className="navbar-fixed">
+      <nav className="white">
+        <div className="nav-wrapper container">
+
+          {/* FIXME 1: "Navigator" Placeholder #1 */}
+
+          <ul className="left hide-on-med-and-down">
+            <li><Link to='/'>Home</Link></li>
+            <li><Link to='/articles'>Articles</Link></li>
+            <li><Link to='/profile'>Learn</Link></li>
+          </ul>
+
+          {/* why the fuck isnt it just working like a normal piece of shit cocksucker */}
+          {/* if (props.isAuthenticated) */}
+          <ul className="right">
+            <li><a onClick={props.handleLogout}><i className="material-icons">power_settings_new</i></a></li>
+          </ul>
+
+          <ul className="side-nav" id="mobile-demo">
+            <li><Link to='/'>Home</Link></li>
+            <li><Link to='/profile'>Profile</Link></li>
+            <li><Link to='/articles'>Articles</Link></li>
+          </ul>
+
+          <form className="right s10 m8 l6">
+            <div className="input-field">
+              <input id="search" type="search" required />
+              <label htmlFor="search"><i className="material-icons">search</i></label>
+              <i className="material-icons">close</i>
+            </div>
+          </form>
+        </div>
+      </nav>
+    </div>
   );
 };
 
 $(document).ready(function(){
   $(".button-collapse").sideNav({ closeOnClick: true });
 });
-
-const Footer = () => {
-  return (
-    <footer className="page-footer teal">
-      <div className="container">
-        <div className="row">
-          <div className="col s12">
-            <h5 className="white-text">Links:</h5>
-            <ul className="left hide-on-med-and-down">
-              <li><Link to='/'>Home</Link></li>
-              <li><a href="#/profile">Profile</a></li>
-              <li><Link to='/articles'>Articles</Link></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </footer>
-  );
-};
 
 function mapStateToProps(state){
   return {

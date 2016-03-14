@@ -25,7 +25,7 @@ function ArticleLink({id, title, source_url,tags, content_type, created_at}){
       <div className="secondary-content badge">
         <small className="badge">{extractDomain(source_url)}</small>
       </div>
-      <span className="title">
+      <span className="title flow-text">
         <Link to={`/article/${id}`}>
           {title}
         </Link>
@@ -63,7 +63,12 @@ class ArticleFilter extends Component {
   render() {
     return (
       <form>
-        <input type="search" placeholder="search articles" onChange={this.onChange.bind(this)}/>
+        <div className="col s8">
+          <div className="input-field col s12">
+            <input type="text" placeholder="Article title" onChange={this.onChange.bind(this)}/>
+            <label>Search for article</label>
+          </div>
+        </div>
       </form>
     );
   }

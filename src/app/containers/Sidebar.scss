@@ -1,67 +1,61 @@
-.wrapper {
-    position: relative;
-    max-width: 420px;
-    .sidebar {
-        overflow: scroll;
-        position: fixed;
-        min-height: 200px;
-        max-width: inherit;
-        height: 100%;
-        width: 100%;
-        right: 10px;
-        padding: 10px;
+.sidebar {
+  background-color: #fff;
+  overflow: scroll;
+  max-width: inherit;
+  max-height: 100%;
+  top: 64px;
+  position: fixed;
+  right: 0;
+  padding: 10px;
+}
 
-        ul.collection {
-            border: 0;
-        }
+.sidebar {
 
-        .btn-small {
-            padding: 0 5px;
-        }
+    ul.collection {
+        border: 0;
+    }
 
-        .card {
-          @extend .z-depth-1;
-          .card-content {
-            padding: 0;
-          }
-        }
+    .card {
+      @extend .z-depth-1;
+      .card-content {
+        padding: 0;
+      }
+    }
 
-        input.selectedText {
-            font-size: 1.64rem;
-            line-height: 1;
-            margin: 0;
-            border: 0;
-        }
+    input.selectedText {
+        font-size: 1.64rem;
+        line-height: 1;
+        margin: 0;
+        border: 0;
+    }
 
+    .collapsed {
+        max-height: 350px;
+        overflow: hidden;
+    }
 
-        .collapsed {
-            max-height: 350px;
-            overflow: hidden;
-        }
+    .collection-item .flag-icon {
+        margin: 1px 5px 0 0;
+    }
 
-        .collection-item .flag-icon {
-            margin: 1px 5px 0 0;
-        }
+    .box-body {
 
-        .box-body {
-
-            p {
-                padding: 1rem;
-            };
-            form {
-                padding: 0.5rem;
-            };
-            button {
-                margin-right: 0.5rem;
-                border: 1px solid #aaa;
-                &:last-child {
-                    margin-right: 0px;
-                }
-                &[type="submit"] {
-                    margin-right: 0;
-                }
-            }
+        p {
+            padding: 1rem;
         };
+        form {
+            padding: 0.5rem;
+        };
+        button {
+            margin-right: 0.5rem;
+            border: 1px solid #aaa;
+            &:last-child {
+                margin-right: 0px;
+            }
+            &[type="submit"] {
+                margin-right: 0;
+            }
+        }
     };
 };
 

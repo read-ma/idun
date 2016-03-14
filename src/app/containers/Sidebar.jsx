@@ -37,32 +37,27 @@ const Sidebar = React.createClass({
 
   render: function() {
     return (
-      <div className="wrapper">
-        <div className="hide-on-large-only">
-          <div className="">Show Sidebar</div>
+      <div className='sidebar'>
+        <div className="row">
+          <a className="right btn-floating" onClick={this.toggleSettingsPanelVisible}><i className="material-icons">settings</i></a>
         </div>
-        <aside className='sidebar'>
-          <div className="row">
-            <a className="right btn-floating" onClick={this.toggleSettingsPanelVisible}><i className="material-icons">settings</i></a>
-          </div>
 
-          <ul>
-            <li className={classnames('card',{hidden: !this.state.settingVisible})} ref="settingsPanel" >
-              <BoxesOrder header='Pictures box position' handleUpdate={this.handlePicturesBoxOrderUpdated} />
-              <Wordlists handleSelected={this.handleWordListSelected} wordlists={this.props.wordlists} header="Highlighting"/>
-              <LanguageBar />
-            </li>
+        <ul>
+          <li className={classnames('card',{hidden: !this.state.settingVisible})} ref="settingsPanel" >
+            <BoxesOrder header='Pictures box position' handleUpdate={this.handlePicturesBoxOrderUpdated} />
+            <Wordlists handleSelected={this.handleWordListSelected} wordlists={this.props.wordlists} header="Highlighting"/>
+            <LanguageBar />
+          </li>
 
-            <li><UserCustomDefinitionForm /></li>
+          <li><UserCustomDefinitionForm /></li>
 
-            <li className="card">
-              <UserCustomDefinition userDefinitions={this.props.userDefinitions} selectedText={this.props.selectedText} />
-            </li>
+          <li className="card">
+            <UserCustomDefinition userDefinitions={this.props.userDefinitions} selectedText={this.props.selectedText} />
+          </li>
 
-            <li><DefinitionBoxes /></li>
+          <li><DefinitionBoxes /></li>
 
-          </ul>
-        </aside>
+        </ul>
       </div>
     );
   }

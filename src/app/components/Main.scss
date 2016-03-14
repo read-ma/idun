@@ -8,37 +8,6 @@
     .container {
         width: 95%;
     }
-    .wrapper {
-        position: fixed;
-        top: 5px;
-    }
-}
-
-@media #{$medium-and-down} {
-    .wrapper {
-        -webkit-backface-visibility: hidden;
-        -webkit-overflow-scrolling: touch;
-        position: fixed;
-        text-align: center;
-        bottom: 0px;
-        left: 0;
-        right: 0;
-        max-width: 100% !important;
-        background-color: white;
-        height: 50px;
-        .mobile-sidebar-link {
-            -webkit-backface-visibility: hidden;
-            -webkit-overflow-scrolling: touch;
-            padding: 1rem 0;
-            -webkit-box-shadow: 0px -10px 5px -6px rgba(0,0,0,0.26);
-            -moz-box-shadow: 0px -10px 5px -6px rgba(0,0,0,0.26);
-            box-shadow: 0px -10px 5px -6px rgba(0,0,0,0.26);
-        }
-        .sidebar {
-            height: 0px;
-            position: relative !important;
-        }
-    }
 }
 
 nav ul a, nav .brand-logo {
@@ -61,10 +30,6 @@ nav ul a, nav .brand-logo {
 }
 
 .article {
-    .content {
-        line-height: 185%;
-        font-size: 1.13em;
-    };
     h1 {
         font-size: 1.64rem;
         line-height: 1.804rem;
@@ -92,14 +57,6 @@ nav ul a, nav .brand-logo {
 input.selectedText {
     font-weight: bold;
     color: #555;
-}
-
-
-.collection {
-    .collection-item {
-        padding: 10px;
-        text-align: left;
-    }
 }
 
 ul.ttsplayer {

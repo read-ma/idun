@@ -60,14 +60,14 @@ class ArticlePage extends Component {
     return (
       <div>
         <div className="row">
-          <div className="col l8 m12">
+          <div className="col s12 m7 article-wrapper">
             <article className="article">
               <ArticleTitle title={this.props.title} />
               <ArticleContent text={this.props.content} onTextSelected={this.onTextSelected.bind(this)} wordlists={this.props.wordlists} />
               <ArticleFooter source_url={this.props.source_url} />
             </article>
           </div>
-          <div className="col l4 m12">
+          <div className="col right s12 m5 sidebar-wrapper">
             <Sidebar />
           </div>
         </div>
