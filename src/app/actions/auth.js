@@ -100,7 +100,51 @@ const logout = () => {
       isAuthenticated: false
     }
   };
-
 };
 
-export { loginAttempt, signupAttempt, logout, error }
+const resetPassword = (email) => {
+  return (dispatch) => {
+    api
+      .post('/reset_password', {email})
+      .then((response) => dispatch(changePasswordRequeted(response)))
+      .catch((error) => dispatch(changePasswordRequetError(error)));
+  };
+};
+
+const updatePassword = ({reset_password_token, password, password_confirmation}) => {
+  return (dispatch) => {
+    api.
+      patch('/reset_password/by.json', {reset_password: {reset_password_token, password, password_confirmation} })
+      .then((respone) => dispatch(passwordUpdated()))
+      .catch((error) => dispatch(updatePasswordError(error)));
+  };
+};
+
+const updatePasswordError = (error) => {
+  return {
+    type: 'UPDATE_PASSWORD_ERROR',
+    payload: error.data
+  };
+};
+
+const passwordUpdated = () => {
+  return {
+    type: 'PASSWORD_UPDATED'
+  };
+};
+
+const changePasswordRequeted = (response) => {
+  return {
+    type: 'CHANGE_PASSWORD_REQUESTED',
+    payload: response
+  };
+};
+
+const changePasswordRequetError = (error) => {
+  return {
+    type: 'CHANGE_PASSWORD_REQUEST_ERROR',
+    payload: error.data
+  };
+}
+
+export { loginAttempt, signupAttempt, logout, error, resetPassword, updatePassword }

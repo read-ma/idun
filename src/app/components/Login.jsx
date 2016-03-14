@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { loginAttempt, signupAttempt } from '../actions/auth';
 
@@ -123,6 +124,7 @@ class Login extends React.Component {
               type="submit"
               value="Login"/>
           </form>
+          <Link to='forgot_password'>I forgot my password</Link>
         </div>
         <div className="col s12 m5 offset-m1">
           <SignUpForm handleSignUp={this.signup.bind(this)} messages={this.props.signupMessage} />

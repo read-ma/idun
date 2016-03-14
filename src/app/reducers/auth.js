@@ -10,6 +10,33 @@ function stateFromLocalStorage() {
 export default function auth(state = stateFromLocalStorage(), action){
   switch(action.type){
 
+  case 'PASSWORD_UPDATED':
+    return Object.assign(
+      {},
+      state,
+      {message: 'Your password has been updated. Please log in.' }
+    );
+
+  case 'UPDATE_PASSWORD_ERROR':
+    return Object.assign(
+      {},
+      state,
+      {message: action.payload.errors.reset_password_token ? "Token is invalid. Visit reset token page again.":"Check new password and confirmation"}
+    );
+
+    return Object.assign(
+      {},
+      state,
+      {message: action.payload.message}
+    );
+
+  case 'CHANGE_PASSWORD_REQUESTED':
+    return Object.assign(
+      {},
+      state,
+      {message: "check your email for a reset password link"}
+    );
+
   case 'USER_SIGNING_IN_ERROR':
     return Object.assign(
       {},
