@@ -79,12 +79,7 @@ class ArticleAdd extends Component {
   constructor(props) {
     super(props);
     this.state = {entering: false};
-    this.enterUrl = this.enterUrl.bind(this);
     this.addUrl = this.addUrl.bind(this);
-  }
-
-  enterUrl() {
-    this.setState({entering: true})
   }
 
   addUrl(event) {
@@ -97,35 +92,28 @@ class ArticleAdd extends Component {
 
   urlAdded() {
     this.setState(
-      {entering: false}
+      {}
     );
   }
 
   render () {
-    let result;
-    if (!this.state.entering) {
-      result = <a className="btn-floating btn-large green" onClick={this.enterUrl}><i className="material-icons">add</i></a>;
-    } else {
-      result = (
-        <div className="row">
-          <form onSubmit={this.addUrl}>
-            <div className="col s10">
-              <div className="input-field">
-                <input type="url" className="validate" ref="urlInput" />
-                <label>Article url</label>
-              </div>
+    return (
+      <div className="row">
+        <form onSubmit={this.addUrl}>
+          <div className="col s10">
+            <div className="input-field">
+              <input type="url" className="validate" ref="urlInput" defaultValue="http://" />
+              <label>Add new article</label>
             </div>
-            <div className="col s2">
-              <button type="submit" className="btn-floating btn-large green">
-                <i className="material-icons">save</i>
-              </button>
-            </div>
-          </form>
-        </div>
-      )
-    }
-
-    return result;
+          </div>
+          <div className="col s2">
+            <button type="submit" className="btn-floating btn-large green">
+              <i className="material-icons">add</i>
+            </button>
+          </div>
+        </form>
+      </div>
+    )
   }
 }
 
