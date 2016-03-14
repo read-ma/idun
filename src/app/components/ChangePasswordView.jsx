@@ -30,6 +30,7 @@ class ChangePasswordView extends React.Component {
       <div>
         <h4>Change your password</h4>
         <h4 className="green-text">{this.props.message}</h4>
+        <h4 className="red-text">{this.props.error}</h4>
         <form onSubmit={this.updatePassword.bind(this)}>
           <label onChange={this.handleInputChange} htmlFor="password">Password<input type="password" name="password"></input></label>
           <label onChange={this.handleInputChange} htmlFor="password_confirmation">Confirm password<input type="password" name="password_confirmation"></input></label>
@@ -39,7 +40,10 @@ class ChangePasswordView extends React.Component {
   }
 }
 const mapStateToProps = (state) => {
-  return {message: state.auth.message};
+  return {
+    message: state.auth.message,
+    error: state.auth.error
+  };
 };
 
 export default connect(mapStateToProps)(ChangePasswordView);

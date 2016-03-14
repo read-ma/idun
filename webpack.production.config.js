@@ -10,7 +10,7 @@ var config = {
   },
   externals: {
     'Config': JSON.stringify({
-      apiUrl: 'http://idun.herokuapp.com/api'
+      apiUrl: 'http://api.readma.com/api'
     })
   },
 

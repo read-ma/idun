@@ -113,8 +113,8 @@ const resetPassword = (email) => {
 
 const updatePassword = ({reset_password_token, password, password_confirmation}) => {
   return (dispatch) => {
-    api.
-      patch('/reset_password/by.json', {reset_password: {reset_password_token, password, password_confirmation} })
+    api
+      .patch('/reset_password/by.json', {reset_password: {reset_password_token, password, password_confirmation} })
       .then((respone) => dispatch(passwordUpdated()))
       .catch((error) => dispatch(updatePasswordError(error)));
   };

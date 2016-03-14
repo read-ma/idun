@@ -6,9 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "deploy": "NODE_ENV=production webpack -p --config webpack.production.config.js",
-    "predeploy": "s3cmd del --recursive --force s3://idun-app",
+    "predeploy": "s3cmd del --recursive --force s3://beta.readma.com",
     "dev": "webpack-dev-server --progress --colors --hot --inline --content-base public",
-    "postdeploy": "s3cmd sync dist/. s3://idun-app"
+    "postdeploy": "s3cmd sync dist/. s3://beta.readma.com"
   },
   "author": "",
   "license": "ISC",

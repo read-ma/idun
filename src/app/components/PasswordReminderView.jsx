@@ -20,9 +20,9 @@ class PasswordReminder extends React.Component {
   }
 
   render(){
-    console.log(this.props);
     return (<div className="card">
       <h4 className="green-text">{this.props.message}</h4>
+      <h4 className="red-text">{this.props.error}</h4>
       <form className="card-content" onSubmit={this.resetPassword}>
       <input onChange={this.handleInputChange} name="email" type="email" placeholder="Your email" required="required"/>
       <input type="submit" className="btn" onClick={this.props.resetPassword} value='Remind me my password' />
@@ -37,13 +37,14 @@ class PasswordReminderViewBase extends React.Component {
       resetPassword(email));
   }
   render() {
-    return (<PasswordReminder message={ this.props.message } onSubmit={this.resetPassword.bind(this)}/>);
+    return (<PasswordReminder error={this.props.error} message={ this.props.message } onSubmit={this.resetPassword.bind(this)}/>);
   }
 }
 
 const mapStateToProps = (state) => {
   return {
-    message: state.auth.message
+    message: state.auth.message,
+    error: state.auth.error
   };
 };
 

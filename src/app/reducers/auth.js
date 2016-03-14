@@ -17,24 +17,25 @@ export default function auth(state = stateFromLocalStorage(), action){
       {message: 'Your password has been updated. Please log in.' }
     );
 
+  case 'CHANGE_PASSWORD_REQUEST_ERROR':
+    return Object.assign(
+      {},
+      state,
+      {error: 'We could find it. Your email does not exist in the system.' }
+    );
+
   case 'UPDATE_PASSWORD_ERROR':
     return Object.assign(
       {},
       state,
-      {message: action.payload.errors.reset_password_token ? "Token is invalid. Visit reset token page again.":"Check new password and confirmation"}
-    );
-
-    return Object.assign(
-      {},
-      state,
-      {message: action.payload.message}
+      {error: action.payload.errors.reset_password_token ? "Token is invalid. Visit reset token page again.":"Check new password and confirmation"}
     );
 
   case 'CHANGE_PASSWORD_REQUESTED':
     return Object.assign(
       {},
       state,
-      {message: "check your email for a reset password link"}
+      {message: "Check your email for a reset password link"}
     );
 
   case 'USER_SIGNING_IN_ERROR':
