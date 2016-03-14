@@ -118,7 +118,7 @@ const updatePassword = ({reset_password_token, password, password_confirmation})
       .then((respone) => dispatch(passwordUpdated()))
       .catch((error) => dispatch(updatePasswordError(error)));
   };
-};
+  };
 
 const updatePasswordError = (error) => {
   return {

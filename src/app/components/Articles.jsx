@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { loadArticles } from '../actions';
+import { addArticle } from '../actions/articles';
 import moment from 'moment';
 
 function mapStateToProps(state) {
@@ -68,6 +69,60 @@ class ArticleFilter extends Component {
   }
 };
 
+class ArticleAdd extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {entering: false};
+    this.enterUrl = this.enterUrl.bind(this);
+    this.addUrl = this.addUrl.bind(this);
+  }
+
+  enterUrl() {
+    this.setState({entering: true})
+  }
+
+  addUrl(event) {
+    event.preventDefault();
+    let url = this.refs.urlInput.value;
+    console.log("URL add: " + url);
+    this.urlAdded();
+    this.props.dispatch(addArticle({url: url}));
+  }
+
+  urlAdded() {
+    this.setState(
+      {entering: false}
+    );
+  }
+
+  render () {
+    let result;
+    if (!this.state.entering) {
+      result = <a className="btn-floating btn-large waves-effect waves-light green" onClick={this.enterUrl}><i className="material-icons">add</i></a>;
+    } else {
+      result = (
+        <div className="row">
+          <form onSubmit={this.addUrl}>
+            <div className="col s8">
+              <div className="input-field col s12">
+                <input type="url" className="validate" ref="urlInput" placeholder="Enter url for article" />
+                <label data-error="Enter valid url" data-success="Looks good">Url</label>
+              </div>
+            </div>
+            <div className="col s4">
+              <button type="submit" className="btn-floating btn-large waves-effect waves-light green">
+                <i className="material-icons">save</i>
+              </button>
+            </div>
+          </form>
+        </div>
+      )
+    }
+
+    return result;
+  }
+}
+
 class Articles extends Component {
 
   constructor(props) {
@@ -97,7 +152,14 @@ class Articles extends Component {
   render() {
     return (
       <div className="articles">
-        <ArticleFilter onChange={this.handleFilterChange} />
+        <div className="row">
+          <div className="col s8">
+            <ArticleFilter onChange={this.handleFilterChange} />
+          </div>
+          <div className="col s4 right-align">
+            <ArticleAdd dispatch={this.props.dispatch} />
+          </div>
+        </div>
         <ArticleList articles={this.state.articles} />
       </div>
     );
