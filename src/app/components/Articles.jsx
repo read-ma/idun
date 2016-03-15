@@ -82,12 +82,15 @@ class ArticleAdd extends Component {
     this.addUrl = this.addUrl.bind(this);
   }
 
+  enterUrl() {
+    this.setState({entering: true});
+  }
+
   addUrl(event) {
     event.preventDefault();
-    let url = this.refs.urlInput.value;
-    console.log("URL add: " + url);
+    let source_url = this.refs.urlInput.value;
     this.urlAdded();
-    this.props.dispatch(addArticle({url: url}));
+    this.props.dispatch(addArticle({source_url: source_url}));
   }
 
   urlAdded() {
