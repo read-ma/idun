@@ -3,7 +3,7 @@ require('./Sidebar.scss');
 import request from 'superagent';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { textSelected, toggleHighlighting, changeBoxOrder } from '../actions';
+import { textSelected, toggleHighlighting } from '../actions';
 import { Wordlists, DefinitionBoxes } from '../components';
 import UserCustomDefinitionForm from './UserCustomDefinition';
 import classnames from 'classnames';
@@ -23,12 +23,6 @@ const Sidebar = React.createClass({
     );
   },
 
-  handlePicturesBoxOrderUpdated: function(event){
-    this.props.dispatch(
-      changeBoxOrder('graphics', event.target.value)
-    );
-  },
-
   toggleSettingsPanelVisible: function(event) {
     this.setState(
       Object.assign({}, this.state, {settingVisible: !this.state.settingVisible})
@@ -42,7 +36,6 @@ const Sidebar = React.createClass({
 
         <ul>
           <li className={classnames('card',{hidden: !this.state.settingVisible})} ref="settingsPanel" >
-            <BoxesOrder header='Pictures box position' handleUpdate={this.handlePicturesBoxOrderUpdated} />
             <Wordlists handleSelected={this.handleWordListSelected} wordlists={this.props.wordlists} header="Highlighting"/>
             <LanguageBar />
           </li>
@@ -88,29 +81,6 @@ class UserCustomDefinition extends Component {
     }
     else
       return false;
-  }
-}
-
-// todo move to setings
-class BoxesOrder extends Component {
-  render() {
-
-    return (
-      <ul className="collection">
-        <li className="collection-item">
-          <h5>{this.props.header}</h5>
-        </li>
-        <li className="collection-item">
-          <input name="picturesBoxPosition" type="radio" id="pictureFirst" value='first' onChange={this.props.handleUpdate} />
-          <label htmlFor="pictureFirst">First</label>
-        </li>
-        <li className="collection-item">
-          <input name="picturesBoxPosition" type="radio" id="pictureLast" value='last' onChange={this.props.handleUpdate} />
-          <label htmlFor="pictureLast">Last</label>
-        </li>
-      </ul>
-    );
-
   }
 }
 
