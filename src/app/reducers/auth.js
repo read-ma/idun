@@ -21,7 +21,7 @@ export default function auth(state = stateFromLocalStorage(), action){
     return Object.assign(
       {},
       state,
-      {error: 'We could find it. Your email does not exist in the system.' }
+      {error: 'We could not find it. Your email does not exist in the system.' }
     );
 
   case 'UPDATE_PASSWORD_ERROR':
