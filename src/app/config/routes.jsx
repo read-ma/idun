@@ -22,7 +22,7 @@ export default (
 
     <Route path="/articles" component={requireAuthentication(Articles)}/>
     <Route path="/article/:id" component={requireAuthentication(ArticlePage)} />
-    <IndexRoute component={Home} />
+    <IndexRoute component={requireAuthentication(Articles)} />
   </Route>
 
 );
