@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 import { loadArticles } from '../actions';
 import { addArticle } from '../actions/articles';
 import moment from 'moment';
+import classnames from 'classnames';
 
 function mapStateToProps(state) {
   return {
@@ -11,7 +12,7 @@ function mapStateToProps(state) {
   };
 }
 
-function ArticleLink({id, title, source_url,tags, content_type, created_at}){
+function ArticleLink({id, title, source_url,tags, content_type, created_at, privy, metrics}){
   function extractDomain(sourceUrl){
     let matches = sourceUrl.match(/^https?\:\/\/(?:www\.)?([^\/?#]+)(?:[\/?#]|$)/i);
 
@@ -20,22 +21,26 @@ function ArticleLink({id, title, source_url,tags, content_type, created_at}){
 
 
   return (
-    <li key={id} className="collection-item">
+    <li key={id} className='collection-item avatar'>
+      <i className={classnames('material-icons circle', {blue: privy, 'green lighten-5': !privy})}>{ privy ? 'lock_outline' : ''}</i>
 
       <div className="secondary-content badge">
-        <small className="badge">{moment(created_at).fromNow()}</small>
+        <i className="material-icons">grade</i>
       </div>
 
-      <span className="title flow-text">
+      <span className='title flow-text'>
         <Link to={`/article/${id}`}>
           {title}
         </Link>
       </span>
 
-      <p>
+       <p>
         <small>Source: <strong>{extractDomain(source_url)}</strong></small>
       </p>
 
+      <p>
+        <strong className="">{metrics}</strong>
+      </p>
       <p>
         <small><strong>{tags}</strong></small>
       </p>
