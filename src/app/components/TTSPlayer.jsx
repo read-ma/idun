@@ -19,9 +19,6 @@ class TTSPlayer extends Component {
     return (
       <ul className="ttsplayer">
         <li><TTSPlayerButton label="play_arrow" handleClick={this.play.bind(this)} /></li>
-        <li><TTSPlayerButton label="pause" handleClick={player.pause} /></li>
-        <li><TTSPlayerButton label="skip_next" handleClick={player.resume} /></li>
-        <li><TTSPlayerButton label="stop" handleClick={player.stop} /></li>
       </ul>
     );
   }
