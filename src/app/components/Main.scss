@@ -12,7 +12,7 @@
 
 nav ul a, nav .brand-logo {
     @extend .black-text;
-};
+}
 
 .articles {
     .userdefinitionbox{
@@ -35,15 +35,15 @@ nav ul a, nav .brand-logo {
         color: inherit;
         &.selection {
             background-color: #f8bbd0;
-        };
+        }
         &.user {
             border-bottom: solid 3px #ef5350;
-        };
+        }
         &.d3k {
             background-color: lightgreen;
-        };
-    };
-};
+        }
+    }
+}
 
 .error {
     color: red;
