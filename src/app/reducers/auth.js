@@ -14,6 +14,7 @@ export default function auth(state = stateFromLocalStorage(), action){
     return Object.assign(
       {},
       state,
+      {error: undefined},
       {message: 'Your password has been updated. Please log in.' }
     );
 
@@ -21,6 +22,7 @@ export default function auth(state = stateFromLocalStorage(), action){
     return Object.assign(
       {},
       state,
+      {message: undefined},
       {error: 'We could not find it. Your email does not exist in the system.' }
     );
 
@@ -28,13 +30,15 @@ export default function auth(state = stateFromLocalStorage(), action){
     return Object.assign(
       {},
       state,
-      {error: action.payload.errors.reset_password_token ? "Token is invalid. Visit reset token page again.":"Check new password and confirmation"}
+      {message: undefined},
+      {error: action.payload}
     );
 
   case 'CHANGE_PASSWORD_REQUESTED':
     return Object.assign(
       {},
       state,
+      {error: undefined},
       {message: "Check your email for a reset password link"}
     );
 

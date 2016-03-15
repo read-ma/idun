@@ -104,8 +104,8 @@ class ArticleAdd extends Component {
         <form onSubmit={this.addUrl}>
           <div className="col s10">
             <div className="input-field">
-              <input type="url" name="sourceUrl" className="validate" ref="urlInput" defaultValue="http://" />
-              <label htmlFor="sourceUrl">Add new article</label>
+              <input type="url" name="sourceUrl" className="validate" ref="urlInput" />
+              <label htmlFor="sourceUrl">Add article from url</label>
             </div>
           </div>
           <div className="col s2">

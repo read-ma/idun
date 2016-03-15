@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { updatePassword, resetPassword } from '../actions/auth';
+import NotificationBox from './NotificationBox';
 
 class ChangePasswordView extends React.Component {
   constructor(props){
@@ -29,8 +30,7 @@ class ChangePasswordView extends React.Component {
     return (
       <div>
         <h4>Change your password</h4>
-        <h4 className="green-text">{this.props.message}</h4>
-        <h4 className="red-text">{this.props.error}</h4>
+        {NotificationBox(this.props.error, 'error')}
         <form onSubmit={this.updatePassword.bind(this)}>
           <label onChange={this.handleInputChange} htmlFor="password">Password<input type="password" name="password"></input></label>
           <label onChange={this.handleInputChange} htmlFor="password_confirmation">Confirm password<input type="password" name="password_confirmation"></input></label>

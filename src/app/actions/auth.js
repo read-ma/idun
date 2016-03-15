@@ -2,7 +2,7 @@ import api from '../api';
 import store from '../store';
 import {push} from 'react-router-redux';
 import ls from '../localStore';
-
+import map from 'lodash/map';
 const DEFAULT_RETURN_TO = '/articles';
 
 
@@ -111,25 +111,29 @@ const resetPassword = (email) => {
   };
 };
 
+const humanize = str => str.replace(/_/g,' ').toLocaleLowerCase();
+
+const extractErrors = (errors) => {
+  return map(errors, (err, key) => {
+    return map(err, e => humanize([key, e].join(' ')));
+  });
+};
+
 const updatePassword = ({reset_password_token, password, password_confirmation}) => {
   return (dispatch) => {
     api
       .patch('/reset_password/by.json', {reset_password: {reset_password_token, password, password_confirmation} })
-      .then((respone) => dispatch(passwordUpdated()))
-      .catch((error) => dispatch(updatePasswordError(error)));
+      .then((respone) => dispatch(push('login', {q: 'updated'})))
+      .catch( ( error ) => {
+        dispatch (updatePasswordError(extractErrors(error.data.errors)));
+      });
   };
-  };
+};
 
 const updatePasswordError = (error) => {
   return {
     type: 'UPDATE_PASSWORD_ERROR',
-    payload: error.data
-  };
-};
-
-const passwordUpdated = () => {
-  return {
-    type: 'PASSWORD_UPDATED'
+    payload: error
   };
 };
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { resetPassword } from '../actions/auth';
+import NotificationBox from './NotificationBox';
 
 class PasswordReminder extends React.Component {
   constructor(props){
@@ -21,8 +22,8 @@ class PasswordReminder extends React.Component {
 
   render(){
     return (<div className="card">
-      <h4 className="green-text">{this.props.message}</h4>
-      <h4 className="red-text">{this.props.error}</h4>
+      {NotificationBox(this.props.error, 'error')}
+      {NotificationBox(this.props.message, 'green-text')}
       <form className="card-content" onSubmit={this.resetPassword}>
       <input onChange={this.handleInputChange} name="email" type="email" placeholder="Your email" required="required"/>
       <input type="submit" className="btn" onClick={this.props.resetPassword} value='Remind me my password' />
