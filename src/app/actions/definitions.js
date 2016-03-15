@@ -9,12 +9,6 @@ function contentLoaded(type, data){
   };
 }
 
-function contentCleared() {
-  return {
-    type: 'CONTENT_CLEARED'
-  }
-}
-
 function findWordData(text, type, options={}){
   let params = Object.assign({}, options, {type: type}, Language.keysOfCurrent());
 
@@ -24,4 +18,4 @@ function findWordData(text, type, options={}){
   };
 }
 
-export { findWordData, contentCleared }
+export { findWordData }

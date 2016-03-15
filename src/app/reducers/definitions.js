@@ -59,7 +59,7 @@ export default function definitions(state = initialState, action) {
   case 'CONTENT_LOADED':
     return Object.assign({}, state, {data: Object.assign({}, state.data, action.data)});
 
-  case 'CONTENT_CLEARED':
+  case 'ARTICLES_LOADED':
     return Object.assign({}, state, {data: {}});
 
   default:
