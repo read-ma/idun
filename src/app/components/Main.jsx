@@ -27,7 +27,7 @@ class Main extends React.Component {
 const Navigator = (props) => {
   return (
     <div className="navbar-fixed">
-      <nav className="white">
+      <nav className="white row">
         <div className="nav-wrapper container">
 
           {/* FIXME 1: "Navigator" Placeholder #1 */}
@@ -44,15 +44,15 @@ const Navigator = (props) => {
           </ul>
 
           <ul className="side-nav" id="mobile-demo">
-            <li><Link to='/profile'>Profile</Link></li>
+            <li><Link to='/profile'>Learn</Link></li>
             <li><Link to='/articles'>Articles</Link></li>
           </ul>
 
-          <form className="right s10 m8 l6">
+          <form className="right col s4">
             <div className="input-field">
-              <input id="search" type="search" required />
+              <input id="search" type="search" required defaultValue="Search or translate" />
               <label htmlFor="search"><i className="material-icons">search</i></label>
-              <i className="material-icons">close</i>
+              <i className="material-icons" title="Read phrase">play_arrow</i>
             </div>
           </form>
         </div>

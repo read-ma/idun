@@ -37,7 +37,7 @@ function ArticleLink({id, title, source_url,tags, content_type, created_at}){
       </p>
 
       <p>
-        <small>{tags}</small>
+        <small><strong>{tags}</strong></small>
       </p>
     </li>
   );
@@ -65,7 +65,7 @@ class ArticleFilter extends Component {
   render() {
     return (
       <form className="row">
-        <div className="input-field col s6">
+        <div className="input-field col s12">
           <input type="text" onChange={this.onChange.bind(this)}/>
           <label>Search for article</label>
         </div>
@@ -104,8 +104,8 @@ class ArticleAdd extends Component {
         <form onSubmit={this.addUrl}>
           <div className="col s10">
             <div className="input-field">
-              <input type="url" className="validate" ref="urlInput" defaultValue="http://" />
-              <label>Add new article</label>
+              <input type="url" name="sourceUrl" className="validate" ref="urlInput" defaultValue="http://" />
+              <label htmlFor="sourceUrl">Add new article</label>
             </div>
           </div>
           <div className="col s2">
@@ -149,10 +149,10 @@ class Articles extends Component {
     return (
       <div className="articles">
         <div className="row">
-          <div className="col s8 left-align">
+          <div className="col s5 left-align">
             <ArticleFilter onChange={this.handleFilterChange} />
           </div>
-          <div className="col s4 right-align">
+          <div className="col s5 offset-s1 right right-align">
             <ArticleAdd dispatch={this.props.dispatch} />
           </div>
         </div>

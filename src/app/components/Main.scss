@@ -4,9 +4,9 @@
 @import "./src/assets/sass/custom";
 
 
-@media #{$large-and-up} {
+@media #{$medium-and-up} {
     .container {
-        width: 95%;
+        width: 90%;
     }
 }
 
@@ -29,20 +29,7 @@ nav ul a, nav .brand-logo {
     }
 }
 
-body {
-  overflow: hidden;
-  .article-wrapper {
-    max-height: 100vh;
-    overflow-y: scroll;
-  }
-}
-
 .article {
-    h1 {
-        font-size: 1.64rem;
-        line-height: 1.804rem;
-        margin: 0.82rem 0 0.656rem 0;
-    };
     mark {
         background-color: inherit;
         color: inherit;

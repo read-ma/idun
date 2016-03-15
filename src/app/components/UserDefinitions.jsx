@@ -57,8 +57,13 @@ class UserDefinitions extends Component {
     return (
 
       <div className="articles">
-        <input type='search' onChange={this.handleFilterChange} name='word' placeholder='quick search...'/>
-        <div className="cards-container">
+        <form className="row">
+          <div className="input-field col s4">
+            <input type='text' onChange={this.handleFilterChange} name='word' />
+            <label htmlFor="word">Quick search...</label>
+          </div>
+        </form>
+        <div className="cards-container row">
           {items}
         </div>
       </div>

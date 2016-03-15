@@ -67,7 +67,7 @@ class ArticlePage extends Component {
               <ArticleFooter source_url={this.props.source_url} />
             </article>
           </div>
-          <div className="col s12 m5 sidebar-wrapper">
+          <div className="hide-on-small-only sidebar-wrapper">
             <Sidebar />
           </div>
         </div>

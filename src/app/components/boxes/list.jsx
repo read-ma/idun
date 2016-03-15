@@ -23,7 +23,7 @@ function DefinitionListItem({text, language, url, partOfSpeech, handleClick, key
   if (url)
     return (
       <li className="collection-item col m6 white" key={key}>
-        <img className="materialboxed center white" data-caption={text} src={url} alt={text} />
+        <img data-caption={text} src={url} alt={text} />
       </li>
     );
   else
@@ -75,7 +75,7 @@ class DefinitionList extends Component {
     }
 
     return (
-      <ul className="collection with-header white">
+      <ul className="collection with-header">
         <li className="collection-header"><h5>{this.props.label}</h5></li>
         {visibleItems}
         {collapseBox}
