@@ -1,3 +1,5 @@
+require('./ArticlePage.scss');
+
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { loadArticle, textSelected, loadUserDefinitions } from '../actions';
