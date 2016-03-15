@@ -44,17 +44,11 @@ function articleLoaded(article){
 }
 
 function getArticles(params, handleSuccess){
-  let articles = store.getState().articles;
-
-  if (articles.length >0) {
-    return handleSuccess(articles);
-  }
   return api.get('/articles.json')
     .then((response) => {
       handleSuccess(response.data.articles);
     });
 }
-
 
 function getArticle(id, handleSuccess) {
   api.get(`/articles/${id}.json`)
