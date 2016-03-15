@@ -50,7 +50,6 @@ class ArticleList extends Component {
       return ArticleLink(article);
     });
 
-
     return (
       <ul className="collection">
         {articleLinks}
@@ -116,7 +115,7 @@ class ArticleAdd extends Component {
           </div>
         </form>
       </div>
-    )
+    );
   }
 }
 
