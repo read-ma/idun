@@ -1,6 +1,7 @@
 var path = require('path');
 var node_modules_dir = path.resolve(__dirname, 'node_modules');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var CompressionPlugin = require("compression-webpack-plugin");
 
 var config = {
   entry: path.resolve(__dirname, './src/app/app.js'),
@@ -40,6 +41,11 @@ var config = {
     new ExtractTextPlugin('style.css', {
       allChunks: true
     })
+    // ,
+    // new CompressionPlugin({
+    //   asset: "[path]",
+    //   algorithm: "zopfli"
+    // })
   ]
 };
 
