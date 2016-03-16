@@ -37,7 +37,10 @@ class Settings extends Component {
   }
 
   logout() {
-    this.props.dispatch(logout());
+    this.setState(
+      Object.assign({}, this.state, {settingVisible: false}),
+      ()=> {this.props.dispatch(logout())}
+    );
   }
 
   render() {
