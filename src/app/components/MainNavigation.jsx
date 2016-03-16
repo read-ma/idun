@@ -15,8 +15,6 @@ const MainNavigation = (props) => {
             <li><Link to='/profile'>Learn</Link></li>
           </ul>
 
-          {/* why the fuck isnt it just working like a normal piece of shit cocksucker */}
-          {/* if (props.isAuthenticated) */}
           <ul className="right">
             <Settings />
           </ul>
