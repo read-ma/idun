@@ -19,6 +19,21 @@ function ArticleLink({id, title, source_url,tags, content_type, created_at, priv
     return matches && matches[1];
   };
 
+  function difficultyLevel(metric){
+    let description;
+    let cssClass;
+    if (metric < 70) {
+      description = 'hard';
+      cssClass = 'red-text text-lighten-3';
+    } else if (metric < 80) {
+      description = 'medium';
+      cssClass = 'orange-text text-lighten-3';
+    } else {
+      description = 'easy';
+      cssClass = 'green-text text-lighten-3'
+    }
+    return (<strong className={cssClass}>{description}</strong>);
+  };
 
   return (
     <li key={id} className='collection-item avatar'>
@@ -39,7 +54,7 @@ function ArticleLink({id, title, source_url,tags, content_type, created_at, priv
       </p>
 
       <p>
-        <strong className="">{metrics}</strong>
+        {difficultyLevel(metrics)}
       </p>
       <p>
         <small><strong>{tags}</strong></small>
