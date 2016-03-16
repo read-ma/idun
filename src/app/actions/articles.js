@@ -13,9 +13,9 @@ function addArticle({source_url}) {
   return (dispatch) => {
     postArticle(
       source_url,
-      (article) => { Materialize.toast('Article will be loaded in couple of minutes', 4000); },
+      (article) => { Materialize.toast('Article will be added to list after a short while', 6000); },
       (error) => {
-        Materialize.toast('There was a problem with adding article', 4000);
+        Materialize.toast('There was a problem with adding your article', 6000);
         throw new Error('READMA: article not added' + error.message);
       }
     );
