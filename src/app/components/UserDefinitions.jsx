@@ -17,7 +17,7 @@ class UserDefinitionBox extends Component {
       <div className="userdefinitionbox card-item" key={this.props.item.id}>
         <div className='card-content'>
           <h5 className='card-title blue-text'>{this.props.item.word}</h5>
-          <h6 className='card-subtitle'>{this.props.item.translation}</h6>
+          <h6 className='card-subtitle' dangerouslySetInnerHTML={{__html: this.props.item.translation}}></h6>
           <div className='card-description'>{this.props.item.definition}</div>
         </div>
       </div>
