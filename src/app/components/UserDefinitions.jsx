@@ -59,8 +59,8 @@ class UserDefinitions extends Component {
       <div className="articles">
         <form className="row">
           <div className="input-field col s4">
-            <input type='text' onChange={this.handleFilterChange} name='word' />
-            <label htmlFor="word">Quick search...</label>
+            <input type='text' onChange={this.handleFilterChange} name='wordSearch' name='wordSearch' />
+            <label htmlFor="wordSearch">Quick search...</label>
           </div>
         </form>
         <div className="cards-container row">

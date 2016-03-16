@@ -37,6 +37,7 @@ class SignUpForm extends React.Component {
           <div className="input-field">
             <input
               name='email'
+              id='signUpEmail'
               type='email'
               required='true'
               onChange={this.handleFormInputChanged.bind(this)}
@@ -99,6 +100,7 @@ class Login extends React.Component {
             <div className="input-field">
               <input
                 name='email'
+                id='email'
                 className="validate"
                 type='email'
                 onChange={this.handleFormInputChanged}
@@ -111,6 +113,7 @@ class Login extends React.Component {
             <div className="input-field">
               <input
                 name='password'
+                id='password'
                 type='password'
                 onChange={this.handleFormInputChanged}
                 className="validate"
