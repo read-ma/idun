@@ -23,21 +23,21 @@ function ArticleLink({id, title, source_url,tags, content_type, created_at, priv
     let description;
     let cssClass;
     if (metric < 70) {
-      description = 'hard';
+      description = 'Hard';
       cssClass = 'red-text text-lighten-3';
     } else if (metric < 80) {
-      description = 'medium';
+      description = 'Medium';
       cssClass = 'orange-text text-lighten-3';
     } else {
-      description = 'easy';
+      description = 'Easy';
       cssClass = 'green-text text-lighten-3'
     }
     return (<strong className={cssClass}>{description}</strong>);
   };
 
   return (
-    <li key={id} className='collection-item avatar'>
-      <i className={classnames('material-icons circle', {blue: privy, 'green lighten-5': !privy})}>{ privy ? 'lock_outline' : ''}</i>
+    <li key={id} className='collection-item'>
+      <i className='material-icons'>{ privy ? 'lock_outline' : ''}</i>
 
       <div className="secondary-content badge">
         <i className="material-icons">grade</i>
@@ -45,17 +45,14 @@ function ArticleLink({id, title, source_url,tags, content_type, created_at, priv
 
       <span className='title flow-text'>
         <Link to={`/article/${id}`}>
-          {title}
+         {title}
         </Link>
       </span>
 
-       <p>
-        <small>Source: <strong>{extractDomain(source_url)}</strong></small>
+      <p>
+        level: {difficultyLevel(metrics)}
       </p>
 
-      <p>
-        {difficultyLevel(metrics)}
-      </p>
       <p>
         <small><strong>{tags}</strong></small>
       </p>
@@ -86,8 +83,8 @@ class ArticleFilter extends Component {
     return (
       <form className="row">
         <div className="input-field col s12">
-          <input type="text" onChange={this.onChange.bind(this)}/>
-          <label>Search for article</label>
+          <input type="text" id="articleSearch" name="articleSearch" onChange={this.onChange.bind(this)}/>
+          <label htmlFor="articleSearch">Search for article</label>
         </div>
       </form>
     );
