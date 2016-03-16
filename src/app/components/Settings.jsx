@@ -16,18 +16,37 @@ class Settings extends Component {
     this.logout = this.logout.bind(this);
   };
 
-  componentDidMount() {
-    $('.modal-trigger').leanModal({
-        dismissible: true,
-        opacity: 0,
-        in_duration: 100,
-        out_duration: 100,
-        ready: function() {
-          /* Dirty hack to prevent BG overlapping modal */
-          $('.lean-overlay').remove();
-        },
-      }
-    );
+  /* Workaround
+    Dirty hack to prevent BG overlapping modal
+  */
+  removeModalBackground() {
+    $('.lean-overlay').remove();
+  }
+
+  getModalSettings() {
+    return {
+      dismissible: true,
+      opacity: 0,
+      in_duration: 100,
+      out_duration: 100,
+      ready: this.removeModalBackground
+    }
+  }
+
+  toggleVisibilityState() {
+    this.setState(Object.assign({}, this.state, {settingVisible: !this.state.settingVisible}) );
+  }
+
+  toggleSettingsModal() {
+    let $modal = $('#settingsModal');
+
+    if (!this.state.settingVisible) {
+      $modal.openModal(this.getModalSettings());
+    } else {
+      $modal.closeModal(this.getModalSettings());
+    }
+
+    this.toggleVisibilityState();
   }
 
   handleWordListSelected(event){
@@ -49,7 +68,7 @@ class Settings extends Component {
 
     return (
       <li>
-        <i className="material-icons modal-trigger settings-trigger grey-text" data-target="settingsModal">settings</i>
+        <i onClick={this.toggleSettingsModal.bind(this)} className="material-icons settings-trigger grey-text">settings</i>
 
         <div id="settingsModal" className="modal modal-fixed-footer">
           <div className='modal-content'>
@@ -62,7 +81,7 @@ class Settings extends Component {
             </ul>
           </div>
           <div className="modal-footer">
-            <button href="#!" className="btn modal-action modal-close">Close</button>
+            <span onClick={this.toggleSettingsModal.bind(this)} className="btn">Close</span>
           </div>
         </div>
       </li>
