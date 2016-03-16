@@ -22,14 +22,14 @@ function ArticleLink({id, title, source_url,tags, content_type, created_at, priv
   function difficultyLevel(metric){
     let description;
     let cssClass;
-    if (metric < 70) {
-      description = 'Hard';
+    if (metric < 85) {
+      description = 'Advanced';
       cssClass = 'red-text text-lighten-3';
-    } else if (metric < 80) {
-      description = 'Medium';
+    } else if (metric < 95) {
+      description = 'Upper-intermediate';
       cssClass = 'orange-text text-lighten-3';
     } else {
-      description = 'Easy';
+      description = 'Intermediate';
       cssClass = 'green-text text-lighten-3'
     }
     return (<strong className={cssClass}>{description}</strong>);
@@ -49,9 +49,7 @@ function ArticleLink({id, title, source_url,tags, content_type, created_at, priv
         </Link>
       </span>
 
-      <p>
-        level: {difficultyLevel(metrics)}
-      </p>
+      <p>{difficultyLevel(metrics)}</p>
 
       <p>
         <small><strong>{tags}</strong></small>
