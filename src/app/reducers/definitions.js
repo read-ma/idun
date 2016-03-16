@@ -1,7 +1,4 @@
 import ls from '../localStore';
-import _ from 'lodash';
-import { reject } from 'lodash/reject';
-import { filter } from 'lodash/filter';
 
 const defaultConfig = [
   {key: 'graphics', label: 'Pictures', component: 'RemoteList'},
@@ -20,7 +17,7 @@ function config(state, action) {
   state = state || initialState.config;
 
   switch (action.type){
-  case 'CHANGE_BOX_ORDER':
+    case 'CHANGE_BOX_ORDER':
   }
 };
 

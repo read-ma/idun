@@ -2,6 +2,7 @@ import api from '../api';
 import store from '../store';
 import {push} from 'react-router-redux';
 import ls from '../localStore';
+import _ from 'lodash';
 import map from 'lodash/map';
 const DEFAULT_RETURN_TO = '/articles';
 
@@ -114,8 +115,8 @@ const resetPassword = (email) => {
 const humanize = str => str.replace(/_/g,' ').toLocaleLowerCase();
 
 const extractErrors = (errors) => {
-  return map(errors, (err, key) => {
-    return map(err, e => humanize([key, e].join(' ')));
+  return _.map(errors, (err, key) => {
+    return _.map(err, e => humanize([key, e].join(' ')));
   });
 };
 
