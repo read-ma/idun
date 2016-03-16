@@ -7,3 +7,12 @@ p {
 .article-wrapper {
   word-spacing: 8px;
 }
+
+.clearfix:before, .clearfix:after {
+  content: " ";
+  display: table;
+}
+
+.clearfix:after {
+  clear: both;
+}

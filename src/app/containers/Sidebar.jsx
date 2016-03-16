@@ -36,15 +36,13 @@ const Sidebar = React.createClass({
 
         <ul>
           <li className={classnames('card',{hidden: !this.state.settingVisible})} ref="settingsPanel" >
-            <Wordlists handleSelected={this.handleWordListSelected} wordlists={this.props.wordlists} header="Highlighting"/>
+            <Wordlists handleSelected={this.handleWordListSelected} wordlists={this.props.wordlists} header="Choose highlighting"/>
             <LanguageBar />
           </li>
 
           <li><UserCustomDefinitionForm /></li>
 
-          <li className="card">
-            <UserCustomDefinition userDefinitions={this.props.userDefinitions} selectedText={this.props.selectedText} />
-          </li>
+          <UserCustomDefinition userDefinitions={this.props.userDefinitions} selectedText={this.props.selectedText} />
 
           <li><DefinitionBoxes /></li>
 
@@ -71,12 +69,14 @@ class UserCustomDefinition extends Component {
     if (this.state.userDefinitions.length > 0){
       let definitions = this.state.userDefinitions.map(def => <li key={def.translation} className="collection-item" dangerouslySetInnerHTML={{__html: def.translation}} />);
       return (
-        <ul className="collection with-header">
-          <li className="collection-header">
-            <h5>Your definition</h5>
-          </li>
-          {definitions}
-        </ul>
+        <li className="card">
+          <ul className="collection with-header">
+            <li className="collection-header">
+              <h5>Your definition</h5>
+            </li>
+            {definitions}
+          </ul>
+        </li>
       );
     }
     else

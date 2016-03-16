@@ -9,9 +9,6 @@ function mapStateToProps(state) {
 }
 
 class UserDefinitionBox extends Component {
-  handleMouseOver(event) {
-  }
-
   render() {
     return (
       <div className="userdefinitionbox card-item" key={this.props.item.id}>
@@ -51,11 +48,9 @@ class UserDefinitions extends Component {
   }
 
   render(){
-    let items =  this.state.items.map( item => <UserDefinitionBox item={item}/>);
-
+    let items = this.state.items.map(item => <UserDefinitionBox item={item}/>);
 
     return (
-
       <div className="articles">
         <form className="row">
           <div className="input-field col s4">
@@ -67,7 +62,6 @@ class UserDefinitions extends Component {
           {items}
         </div>
       </div>
-
     );
   }
 }
