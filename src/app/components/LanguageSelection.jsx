@@ -27,7 +27,11 @@ class LanguageBar extends Component {
             <label>Source language</label>
             <select onChange={this.languageChange} name='from' className="browser-default icons" value={this.state.from}>{languages}</select>
           </div>
-          <div className="language-direction"><i className="material-icons grey-text lighten-2">trending_flat</i></div>
+          <div className="language-direction">
+            <i className="material-icons grey-text lighten-2">trending_flat</i>
+            <br/>
+            <i className="material-icons grey-text lighten-2">trending_flat</i>
+          </div>
           <div className="language-item target-language">
             <label>Target language</label>
             <select onChange={this.languageChange} name='to' className="browser-default icons" value={this.state.to}>{languages}</select>
