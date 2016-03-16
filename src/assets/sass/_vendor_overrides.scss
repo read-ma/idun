@@ -1,14 +1,13 @@
-#definitionboxes {
-  .card {
-    border-left: 1px solid #eee;
-    border-right: 1px solid #eee;
+.card {
+  border-left: 1px solid #eee;
+  border-right: 1px solid #eee;
+  .collection-item {
+    border-bottom: 0;
   }
+}
 
+#definitionboxes {
   .collection {
-    .collection-item {
-      border-bottom: 0;
-    }
-
     .item-image {
       margin: .5em 0;
       img {
@@ -27,6 +26,7 @@
     font-size: 85%;
   }
 }
+
 .articles .collection-item {
   padding: 1em;
 }
