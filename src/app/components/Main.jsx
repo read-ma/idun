@@ -1,11 +1,10 @@
 require('./Main.scss');
 import React from 'react';
-import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { logout } from '../actions/auth';
+import MainNavigaton from './MainNavigation'
 
 class Main extends React.Component {
-
   logout(){
     this.props.dispatch(logout());
   }
@@ -13,7 +12,7 @@ class Main extends React.Component {
   render() {
     return (
       <div>
-        <Navigator isAuthenticated={this.props.isAuthenticated} handleLogout={this.logout.bind(this)}/>
+        <MainNavigaton isAuthenticated={this.props.isAuthenticated} handleLogout={this.logout.bind(this)}/>
         <main className="container">
           <div className="section">
             {this.props.children}
@@ -23,47 +22,6 @@ class Main extends React.Component {
     );
   }
 };
-
-const Navigator = (props) => {
-  return (
-    <div className="navbar-fixed">
-      <nav className="white row">
-        <div className="nav-wrapper container">
-
-          {/* FIXME 1: "Navigator" Placeholder #1 */}
-
-          <ul className="left hide-on-med-and-down">
-            <li><Link to='/articles'>Articles</Link></li>
-            <li><Link to='/profile'>Learn</Link></li>
-          </ul>
-
-          {/* why the fuck isnt it just working like a normal piece of shit cocksucker */}
-          {/* if (props.isAuthenticated) */}
-          <ul className="right">
-            <li><a onClick={props.handleLogout}><i className="material-icons">power_settings_new</i></a></li>
-          </ul>
-
-          <ul className="side-nav" id="mobile-demo">
-            <li><Link to='/profile'>Learn</Link></li>
-            <li><Link to='/articles'>Articles</Link></li>
-          </ul>
-
-          <form className="right col s4">
-            <div className="input-field">
-              <input id="search" type="search" required defaultValue="Search or translate" />
-              <label htmlFor="search"><i className="material-icons">search</i></label>
-              <i className="material-icons" title="Read phrase">play_arrow</i>
-            </div>
-          </form>
-        </div>
-      </nav>
-    </div>
-  );
-};
-
-$(document).ready(function(){
-  $(".button-collapse").sideNav({ closeOnClick: true });
-});
 
 function mapStateToProps(state){
   return {
