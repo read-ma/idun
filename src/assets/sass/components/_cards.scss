@@ -1,5 +1,9 @@
 // Cards
 
+.card {
+  @extend .z-depth-1;
+}
+
 .cards-container {
   display: flex;
   flex-wrap: wrap;
