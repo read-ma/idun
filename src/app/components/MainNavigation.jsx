@@ -1,3 +1,4 @@
+require('./MainNavigation.scss')
 import { Link } from 'react-router';
 import React, { Component } from 'react';
 import classnames from 'classnames';
@@ -56,10 +57,10 @@ class SelectedTextInput extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.search} className="right col s4">
-        <div className="input-field">
-          <input id="search" type="search" required name="text" value={this.state.text} onChange={this.handleInputChange.bind(this)} defaultValue="Search or translate" />
-          <label htmlFor="search"><i className="material-icons">search</i></label>
+      <form onSubmit={this.search} className="right col s4 main-navigation">
+        <div className="input-field black-text">
+          <input id="search" type="search" required name="text" value={this.state.text} onChange={this.handleInputChange.bind(this)} />
+          <label htmlFor="search"><i className="material-icons black-text">search</i></label>
           <TTSPlayer />
 
         </div>

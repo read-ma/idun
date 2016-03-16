@@ -17,7 +17,7 @@ class TTSPlayer extends Component {
 
   render(){
     return (
-      <i className="material-icons" onClick={this.play.bind(this)} title="Read phrase">play_arrow</i>
+      <i className="material-icons grey-text tts-player-icon" onClick={this.play.bind(this)} title="Read phrase">play_arrow</i>
     );
   }
 }

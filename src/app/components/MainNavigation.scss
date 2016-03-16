@@ -1,0 +1,10 @@
+.main-navigation {
+  margin-right: 25px;
+  .input-field input[type=search],  {
+    font-size: 1.2em;
+    &, &:focus {
+      border-left: 1px solid #ccc;
+      border-right: 1px solid #ccc;
+    }
+  }
+}
