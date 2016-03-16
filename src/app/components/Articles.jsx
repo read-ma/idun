@@ -82,25 +82,24 @@ class ArticleFilter extends Component {
 class ArticleAdd extends Component {
   constructor(props) {
     super(props);
-    this.state = {entering: false};
+    this.state = {inputValue: ''};
     this.addUrl = this.addUrl.bind(this);
-  }
-
-  enterUrl() {
-    this.setState({entering: true});
+    this.onChange = this.onChange.bind(this);
   }
 
   addUrl(event) {
     event.preventDefault();
-    let source_url = this.refs.urlInput.value;
+    let sourceUrl = this.state.inputValue;
     this.urlAdded();
-    this.props.dispatch(addArticle({source_url: source_url}));
+    this.props.dispatch(addArticle({source_url: sourceUrl}));
   }
 
   urlAdded() {
-    this.setState(
-      {}
-    );
+    this.setState({inputValue: ''});
+  }
+
+  onChange(e) {
+   this.setState({ inputValue: e.target.value });
   }
 
   render () {
@@ -109,7 +108,7 @@ class ArticleAdd extends Component {
         <form onSubmit={this.addUrl}>
           <div className="col s10">
             <div className="input-field">
-              <input type="url" name="sourceUrl" className="validate" ref="urlInput" id="sourceUrl" />
+              <input type="url" name="sourceUrl" className="validate" ref="urlInput" id="sourceUrl" required="required" onChange={this.onChange} value={this.state.inputValue} />
               <label htmlFor="sourceUrl">Add article from url</label>
             </div>
           </div>
