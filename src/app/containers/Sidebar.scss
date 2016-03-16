@@ -2,10 +2,9 @@ $header-height: 64px;
 
 .sidebar-wrapper {
   position: fixed;
-  right: 10px;
+  right: 5%;
   top: $header-height;
   width: 33.333333%;
-  margin-left: 8.3333%;
   margin-right: auto;
   background-color: #fff;
   height: calc(100vh - #{$header-height});
@@ -17,7 +16,7 @@ $header-height: 64px;
 .sidebar {
 
   ul.collection {
-      border: 0;
+    border: 0;
   }
 
   .card {
@@ -28,42 +27,42 @@ $header-height: 64px;
   }
 
   input.selectedText {
-      font-size: 1.64rem;
-      line-height: 1;
-      margin: 0;
-      border: 0;
+    font-size: 1.64rem;
+    line-height: 1;
+    margin: 0;
+    border: 0;
   }
 
   .collapsed {
-      max-height: 350px;
-      overflow: hidden;
+    max-height: 350px;
+    overflow: hidden;
   }
 
   .collection-item .flag-icon {
-      margin: 1px 5px 0 0;
+    margin: 1px 5px 0 0;
   }
 
   .box-body {
 
-      p {
-          padding: 1rem;
+    p {
+      padding: 1rem;
+    }
+    form {
+      padding: 0.5rem;
+    }
+    button {
+      margin-right: 0.5rem;
+      border: 1px solid #aaa;
+      &:last-child {
+        margin-right: 0px;
       }
-      form {
-          padding: 0.5rem;
+      &[type="submit"] {
+        margin-right: 0;
       }
-      button {
-          margin-right: 0.5rem;
-          border: 1px solid #aaa;
-          &:last-child {
-              margin-right: 0px;
-          }
-          &[type="submit"] {
-              margin-right: 0;
-          }
-      }
+    }
   }
 }
 
 .hidden {
-    display: none;
+  display: none;
 }

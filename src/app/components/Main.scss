@@ -5,9 +5,9 @@
 
 
 @media #{$medium-and-up} {
-    .container {
-        width: 95%;
-    }
+  .container {
+    width: 90%;
+  }
 }
 
 p {
@@ -15,57 +15,57 @@ p {
 }
 
 nav ul a, nav .brand-logo {
-    @extend .black-text;
+  @extend .black-text;
 }
 
 .articles {
-    .userdefinitionbox{
-        color: white;
-        &:hover {
-            color: black;
-        }
+  .userdefinitionbox{
+    color: white;
+    &:hover {
+      color: black;
     }
-    li {
-        border-bottom: 1px solid #e0e0e0;
-        &:last-child {
-            border-bottom: none;
-        }
+  }
+  li {
+    border-bottom: 1px solid #e0e0e0;
+    &:last-child {
+      border-bottom: none;
     }
+  }
 }
 
 .article {
-    mark {
-        background-color: inherit;
-        color: inherit;
-        &.selection {
-            background-color: #f8bbd0;
-        }
-        &.user {
-            border-bottom: solid 3px #ef5350;
-        }
-        &.d3k {
-            background-color: lightgreen;
-        }
+  mark {
+    background-color: inherit;
+    color: inherit;
+    &.selection {
+      background-color: #f8bbd0;
     }
+    &.user {
+      border-bottom: solid 3px #ef5350;
+    }
+    &.d3k {
+      background-color: lightgreen;
+    }
+  }
 }
 
 .error {
-    color: red;
+  color: red;
 }
 
 input.selectedText {
-    font-weight: bold;
-    color: #555;
+  font-weight: bold;
+  color: #555;
 }
 
 ul.ttsplayer {
-    margin-top: 15px;
-    li {
-        display: inline;
+  margin-top: 15px;
+  li {
+    display: inline;
 
-    }
+  }
 }
 
 a {
-    cursor: pointer
+  cursor: pointer
 }
