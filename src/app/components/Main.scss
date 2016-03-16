@@ -6,8 +6,12 @@
 
 @media #{$medium-and-up} {
     .container {
-        width: 90%;
+        width: 95%;
     }
+}
+
+p {
+  margin-bottom: 15px;
 }
 
 nav ul a, nav .brand-logo {

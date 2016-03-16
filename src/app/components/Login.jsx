@@ -24,14 +24,11 @@ class SignUpForm extends React.Component {
   render(){
     return (
       <div className="signupform">
-        <h2>
-          Sign up
-        </h2>
-        <p>
-          We send out a limited number of invitations, based on several criteria. Customer service cannot assist with beta access, but if you’re interested you’ll want to sign up here.
-        </p>
-        <p>
-          if you are selected to participate in a beta test, you\'ll receive an email with information on how to use the app and provide feedback.
+        <h2>Sign up</h2>
+        <p className="flow-text">
+          If you are interested in beta testing of ReadMa, <br/>
+          let us know using form below. <br/>
+          We will get back to you as soon as we can.
         </p>
         <form onSubmit={this.handleSignUp.bind(this)}>
           <div className="input-field">
@@ -41,16 +38,12 @@ class SignUpForm extends React.Component {
               type='email'
               required='true'
               onChange={this.handleFormInputChanged.bind(this)}
-              className="validate"/>
-            <label htmlFor='signUpEmail'>
-              Your email
-            </label>
+              className="validate" />
+            <label htmlFor='signUpEmail'>Your email</label>
           </div>
           <h5 className="green-text">{this.props.messages}</h5>
-          <input
-            className="btn"
-            type="submit"
-            value="Sign-up"/>
+          <input className="btn" type="submit" value="Sign up" />
+          <small className="right">We don't spam, promise.</small>
         </form>
       </div>
     );
@@ -91,8 +84,9 @@ class Login extends React.Component {
   render() {
     return (
       <div className="row">
-        <div className="col s12 m6">
+        <div className="col s12 m5">
           <h2>Login</h2>
+          <p className="flow-text">If you already have an account, please log in:</p>
           <span className="error">
             {this.lastError()}
           </span>
@@ -126,9 +120,10 @@ class Login extends React.Component {
               className="btn"
               type="submit"
               value="Login"/>
+            <Link to='forgot_password' className="right">I forgot my password</Link>
           </form>
-          <Link to='forgot_password'>I forgot my password</Link>
         </div>
+
         <div className="col s12 m5 offset-m1">
           <SignUpForm handleSignUp={this.signup.bind(this)} messages={this.props.signupMessage} />
         </div>

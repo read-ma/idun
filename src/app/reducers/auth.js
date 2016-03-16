@@ -15,7 +15,7 @@ export default function auth(state = stateFromLocalStorage(), action){
       {},
       state,
       {error: undefined},
-      {message: 'Your password has been updated. Please log in.' }
+      {message: 'Your password has been updated. You can now log in.' }
     );
 
   case 'CHANGE_PASSWORD_REQUEST_ERROR':
@@ -23,7 +23,7 @@ export default function auth(state = stateFromLocalStorage(), action){
       {},
       state,
       {message: undefined},
-      {error: 'We could not find it. Your email does not exist in the system.' }
+      {error: 'Email you entered does not exist in our database.' }
     );
 
   case 'UPDATE_PASSWORD_ERROR':
@@ -39,7 +39,7 @@ export default function auth(state = stateFromLocalStorage(), action){
       {},
       state,
       {error: undefined},
-      {message: "Check your email for a reset password link"}
+      {message: "Instructions has been sent to your email."}
     );
 
   case 'USER_SIGNING_IN_ERROR':
@@ -69,7 +69,7 @@ export default function auth(state = stateFromLocalStorage(), action){
     return Object.assign(
       {},
       state,
-      {signupMessage: 'Thank you! We have received your request and we will be back to you shortly!'}
+      {signupMessage: 'Thank you! We have received your request and we will get back to you shortly!'}
     );
 
   default:

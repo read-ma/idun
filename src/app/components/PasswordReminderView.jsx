@@ -1,3 +1,4 @@
+require('./PasswordReminderView.scss');
 import React from 'react';
 import { connect } from 'react-redux';
 import { resetPassword } from '../actions/auth';
@@ -21,12 +22,17 @@ class PasswordReminder extends React.Component {
   }
 
   render(){
-    return (<div className="card">
+    return (<div className="card forgot-password">
+      <h1>Reset password</h1>
+      <p className="flow-text">Enter your email. We will send you instructions how to reset your password.</p>
       {NotificationBox(this.props.error, 'error')}
       {NotificationBox(this.props.message, 'green-text')}
-      <form className="card-content" onSubmit={this.resetPassword}>
-      <input onChange={this.handleInputChange} name="email" type="email" placeholder="Your email" required="required"/>
-      <input type="submit" className="btn" onClick={this.props.resetPassword} value='Remind me my password' />
+      <form onSubmit={this.resetPassword}>
+        <div className="input-field">
+          <input onChange={this.handleInputChange} name="email" type="email" id="emailAddress" required="required"/>
+          <label htmlFor="emailAddress">Email</label>
+        </div>
+        <input type="submit" className="btn" onClick={this.props.resetPassword} value='Send instructions' />
       </form>
     </div>);
   }

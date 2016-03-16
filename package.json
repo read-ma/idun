@@ -1,7 +1,7 @@
 {
   "name": "mybabel",
   "version": "1.0.0",
-  "description": "",
+  "description": "* Api in rails * Website in react.js",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -44,5 +44,11 @@
     "redux-thunk": "^1.0.3",
     "request": "^2.69.0",
     "superagent": "^1.7.2"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/readma-team/idun.git"
+  },
+  "keywords": [],
+  "homepage": "https://bitbucket.org/readma-team/idun#readme"
 }
