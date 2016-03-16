@@ -15,7 +15,7 @@ export default (
     <Route path="forgot_password" component={PasswordReminderView}/>
     <Route path="reset_password" component={ChangePasswordView}/>
 
-    <Route path="/profile" component={requireAuthentication(Profile)}>
+    <Route path="/learn" component={requireAuthentication(Profile)}>
       <Route path="/definitions" component={UserDefinitions} />
       <IndexRoute component={UserDefinitions} />
     </Route>

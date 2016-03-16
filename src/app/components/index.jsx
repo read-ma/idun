@@ -11,7 +11,8 @@ import React, { Component } from 'react';
 import classnames from 'classnames';
 
 const Wordlists = ({header, wordlists, handleSelected}) => {
-  const lists = wordlists.filter((list) => { return list.name !== 'selection' });
+  const lists = wordlists.filter(list => list.name !== 'selection');
+
   let buttons = lists.map((list) => {
     return (
       <li className='collection-item' key={list.name}>
