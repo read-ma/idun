@@ -1,11 +1,14 @@
 import { Link } from 'react-router';
-import React from 'react';
+import React, { Component } from 'react';
+import classnames from 'classnames';
+import { connect } from 'react-redux';
+import Settings from './Settings';
 
 const MainNavigation = (props) => {
   return (
     <div className="navbar-fixed">
       <nav className="white row">
-        <div className="nav-wrapper container">
+        <div className="nav-wrapper container" style={{position: 'relative'}}>
           {/* FIXME 1: "Navigator" Placeholder #1 */}
           <ul className="left hide-on-med-and-down">
             <li><Link to='/articles'>Articles</Link></li>
@@ -15,7 +18,7 @@ const MainNavigation = (props) => {
           {/* why the fuck isnt it just working like a normal piece of shit cocksucker */}
           {/* if (props.isAuthenticated) */}
           <ul className="right">
-            <li><a onClick={props.handleLogout}><i className="material-icons">power_settings_new</i></a></li>
+            <Settings />
           </ul>
 
           <ul className="side-nav" id="mobile-demo">
@@ -40,4 +43,4 @@ $(document).ready(function(){
   $(".button-collapse").sideNav({ closeOnClick: true });
 });
 
-export default MainNavigation
+export default MainNavigation;
