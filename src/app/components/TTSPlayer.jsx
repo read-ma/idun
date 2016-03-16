@@ -17,9 +17,7 @@ class TTSPlayer extends Component {
 
   render(){
     return (
-      <ul className="ttsplayer">
-        <li><TTSPlayerButton label="play_arrow" handleClick={this.play.bind(this)} /></li>
-      </ul>
+      <i className="material-icons" onClick={this.play.bind(this)} title="Read phrase">play_arrow</i>
     );
   }
 }

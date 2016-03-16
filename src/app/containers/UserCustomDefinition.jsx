@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import classnames from 'classnames';
 import { textSelected, saveUserDefinition} from '../actions';
 import { DefinitionBoxes } from '../components';
-import TTSPlayer from '../components/TTSPlayer';
 
 class UserCustomDefinitionForm extends Component {
   constructor(props){
