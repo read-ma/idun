@@ -8,7 +8,7 @@ const MainNavigation = (props) => {
   return (
     <div className="navbar-fixed">
       <nav className="white row">
-        <div className="nav-wrapper container" style={{position: 'relative'}}>
+        <div className="nav-wrapper container">
           {/* FIXME 1: "Navigator" Placeholder #1 */}
           <ul className="left hide-on-med-and-down">
             <li><Link to='/articles'>Articles</Link></li>

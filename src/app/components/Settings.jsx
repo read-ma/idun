@@ -1,3 +1,4 @@
+require('./Settings.scss');
 import { Link } from 'react-router';
 import React, { Component } from 'react';
 import classnames from 'classnames';
@@ -11,14 +12,21 @@ class Settings extends Component {
   constructor(props){
     super(props);
     this.state = {};
-    this.toggleSettingsPanelVisible = this.toggleSettingsPanelVisible.bind(this);
     this.handleWordListSelected = this.handleWordListSelected.bind(this);
     this.logout = this.logout.bind(this);
   };
 
-  toggleSettingsPanelVisible(event) {
-    this.setState(
-      Object.assign({}, this.state, {settingVisible: !this.state.settingVisible})
+  componentDidMount() {
+    $('.modal-trigger').leanModal({
+        dismissible: true,
+        opacity: 0,
+        in_duration: 100,
+        out_duration: 100,
+        ready: function() {
+          /* Dirty hack to prevent BG overlapping modal */
+          $('.lean-overlay').remove();
+        },
+      }
     );
   }
 
@@ -38,20 +46,22 @@ class Settings extends Component {
 
     return (
       <li>
-        <a onClick={this.toggleSettingsPanelVisible}><i className="material-icons">settings</i></a>
+        <i className="material-icons modal-trigger settings-trigger grey-text" data-target="settingsModal">settings</i>
 
-        <ul style={{position: 'absolute', left: '0px', background: 'white'}}  className={classnames({hidden: false})}>
-          <li className={classnames('card',{hidden: !this.state.settingVisible})}>
+        <div id="settingsModal" className="modal modal-fixed-footer">
+          <div className='modal-content'>
+            <h3>Settings</h3>
             <Wordlists handleSelected={this.handleWordListSelected} wordlists={this.props.wordlists} header="Choose highlighting"/>
             <LanguageBar />
-            <p>
-              <a onClick={this.logout}>
-                Log out
-                <i className="material-icons">power_settings_new</i>
-              </a>
-            </p>
-          </li>
-        </ul>
+            <ul className="collection with-header">
+              <li className='collection-header'><h5>Other</h5></li>
+              <li className='collection-item' onClick={this.logout}>Log out</li>
+            </ul>
+          </div>
+          <div className="modal-footer">
+            <button href="#!" className="btn modal-action modal-close">Close</button>
+          </div>
+        </div>
       </li>
     )
   }

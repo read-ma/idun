@@ -22,14 +22,12 @@ class LanguageBar extends Component {
     return (
       <ul className="collection with-header language-select">
         <li className='collection-header'><h5>Select languages</h5></li>
-        <li className="collection-item clearfix">
+        <li className="collection-item">
           <div className="language-item source-language">
             <label>Source language</label>
             <select onChange={this.languageChange} name='from' className="browser-default icons" value={this.state.from}>{languages}</select>
           </div>
           <div className="language-direction">
-            <i className="material-icons grey-text lighten-2">trending_flat</i>
-            <br/>
             <i className="material-icons grey-text lighten-2">trending_flat</i>
           </div>
           <div className="language-item target-language">

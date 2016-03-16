@@ -3,6 +3,9 @@
 @import "./src/assets/sass/vendor_overrides";
 @import "./src/assets/sass/custom";
 
+#app > div > .container {
+  position: relative;
+}
 
 @media #{$medium-and-up} {
   .container {
