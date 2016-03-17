@@ -1,5 +1,32 @@
-textarea.materialize-textarea {
-  padding: .2em .4em;
-  height: 1.4em;
-  min-height: 1.4em;
+.card {
+  border-left: 1px solid #eee;
+  border-right: 1px solid #eee;
+  .collection-item {
+    border-bottom: 0;
+  }
+}
+
+#definitionboxes {
+  .collection {
+    .item-image {
+      margin: .5em 0;
+      img {
+        max-height: 100px;
+      }
+    }
+
+    .collection-header {
+      h5 {
+        margin: 0;
+      }
+    }
+  }
+
+  small {
+    font-size: 85%;
+  }
+}
+
+.articles .collection-item {
+  padding: 1em;
 }

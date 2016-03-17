@@ -9,7 +9,10 @@ export default function article(state = initialState, action) {
     return Object.assign({}, state, {selectedText: action.text});
 
   case 'ARTICLE_LOADED':
-    return Object.assign({}, state, action.article);
+    return Object.assign({}, state, action.article );
+
+  case 'ARTICLES_LOADED':
+    return Object.assign({}, state, {selectedText: ''});
 
   default:
     return state;

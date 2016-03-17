@@ -63,7 +63,7 @@ class UserDefinitionBox extends Component {
       <div className="userdefinitionbox card-item" key={this.props.item.id}>
         <div className='card-content'>
           <h5 className='card-title blue-text'>{this.props.item.word}</h5>
-          <h6 className='card-subtitle'>{this.props.item.translation}</h6>
+          <h6 className='card-subtitle' dangerouslySetInnerHTML={{__html: this.props.item.translation}}></h6>
           <div className='card-description'>
             {this.props.item.definition}
           </div>
@@ -105,6 +105,7 @@ class UserDefinitions extends Component {
     );
   }
 
+<<<<<<< HEAD
   markItem(item, markValue) {
     const items = this.state.items;
     const itemIndex = items.indexOf(item);
@@ -153,14 +154,22 @@ class UserDefinitions extends Component {
 
     return (
       <div className="articles">
-        <p className="right-align">
-          Mastered {this.masteredWords()}
-        </p>
-        <div className="cards-container">
-          {this.renderFlashcard()}
+        <div className="row">
+          <p className="right-align">
+            Mastered {this.masteredWords()}
+          </p>
+          <div className="cards-container">
+            {this.renderFlashcard()}
+          </div>
         </div>
-        <input type='search' onChange={this.handleFilterChange} name='word' placeholder='quick search...'/>
-        <div className="cards-container">
+
+        <form className="row">
+          <div className="input-field col s4">
+            <input type='text' onChange={this.handleFilterChange} name='wordSearch' name='wordSearch' />
+            <label htmlFor="wordSearch">Quick search...</label>
+          </div>
+        </form>
+        <div className="cards-container row">
           {items}
         </div>
       </div>

@@ -16,14 +16,6 @@ function toggleHighlighting(wordlist) {
   };
 }
 
-function changeBoxOrder(key, position){
-  return {
-    type: 'CHANGE_BOX_ORDER',
-    key: key,
-    position: position
-  };
-}
-
 function userDefinitionsLoaded(definitions) {
   return {
     type: 'USER_DEFINITIONS_LOADED',
@@ -47,6 +39,7 @@ function userDefinitionSavingFailed(error){
 }
 
 function userDefinitionSaved(definition){
+  Materialize.toast('Definition added', 4000);  
   return {
     type: 'USER_DEFINITION_SAVED',
     definition: definition
@@ -76,6 +69,5 @@ export { loadArticles, loadArticle,
          toggleHighlighting,
          loadUserDefinitions, saveUserDefinition,
          findTextDefinitions,
-         changeBoxOrder,
          changeLanguage
        }

@@ -1,0 +1,20 @@
+.language-select {
+  .collection-item {
+    padding-left: 0;
+    display: flex;
+
+    div {
+      flex-basis: 45%;
+    }
+
+    .language-direction {
+      flex-basis: 20%;
+      text-align: center;
+      @extend .grey;
+      @extend .lighten-2;
+    }
+  }
+
+  .source-language {}
+  .target-language {}
+}

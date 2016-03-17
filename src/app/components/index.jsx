@@ -11,7 +11,9 @@ import React, { Component } from 'react';
 import classnames from 'classnames';
 
 const Wordlists = ({header, wordlists, handleSelected}) => {
-  let buttons = wordlists.map((list) => {
+  const lists = wordlists.filter(list => list.name !== 'selection');
+
+  let buttons = lists.map((list) => {
     return (
       <li className='collection-item' key={list.name}>
         <input id={list.name} key={list.name} type="checkbox" onChange={handleSelected} checked={list.enabled} name={list.name} className='filled-in'/>

@@ -1,3 +1,5 @@
+require('./ArticlePage.scss');
+
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { loadArticle, textSelected, loadUserDefinitions } from '../actions';
@@ -56,18 +58,21 @@ class ArticlePage extends Component {
     );
   }
 
+  getArticleContent(){
+    return ['<h1>', this.props.title, '</h1>', this.props.content].join(' ');
+  }
+
   render() {
     return (
       <div>
         <div className="row">
-          <div className="col l8 m12">
+          <div className="col s12 m7 article-wrapper">
             <article className="article">
-              <ArticleTitle title={this.props.title} />
-              <ArticleContent text={this.props.content} onTextSelected={this.onTextSelected.bind(this)} wordlists={this.props.wordlists} />
+              <ArticleContent text={this.getArticleContent()} onTextSelected={this.onTextSelected.bind(this)} wordlists={this.props.wordlists} />
               <ArticleFooter source_url={this.props.source_url} />
             </article>
           </div>
-          <div className="col l4 m12">
+          <div className="hide-on-small-only sidebar-wrapper">
             <Sidebar />
           </div>
         </div>

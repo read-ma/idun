@@ -1,6 +1,6 @@
 class LocalStore {
   constructor(){
-    this.store = localStorage;
+    this.store = window.localStorage;
   }
 
   set(key, value){
@@ -13,6 +13,10 @@ class LocalStore {
 
   clear(key) {
     this.store.removeItem(key);
+  }
+
+  clearAll(key){
+    this.store.clear();
   }
 }
 

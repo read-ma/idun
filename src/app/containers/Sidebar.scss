@@ -1,67 +1,68 @@
-.wrapper {
-    position: relative;
-    max-width: 420px;
-    .sidebar {
-        overflow: scroll;
-        position: fixed;
-        min-height: 200px;
-        max-width: inherit;
-        height: 100%;
-        width: 100%;
-        right: 10px;
-        padding: 10px;
+$header-height: 64px;
 
-        ul.collection {
-            border: 0;
-        }
+.sidebar-wrapper {
+  position: fixed;
+  right: 5%;
+  top: $header-height;
+  width: 33.333333%;
+  margin-right: auto;
+  background-color: #fff;
+  height: calc(100vh - #{$header-height});
+  @extend .z-depth-1;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
 
-        .btn-small {
-            padding: 0 5px;
-        }
+.sidebar {
 
-        .card .card-content {
-            padding: 0;
-        }
+  ul.collection {
+    border: 0;
+  }
 
-        input.selectedText {
-            font-size: 1.64rem;
-            line-height: 1;
-            margin: 0;
-            border: 0;
-        }
+  .card {
+    @extend .z-depth-1;
+    .card-content {
+      padding: 0;
+    }
+  }
 
+  input.selectedText {
+    font-size: 1.64rem;
+    line-height: 1;
+    margin: 0;
+    border: 0;
+  }
 
-        .collapsed {
-            max-height: 350px;
-            overflow: hidden;
-        }
+  .collapsed {
+    max-height: 350px;
+    overflow: hidden;
+  }
 
-        .collection-item .flag-icon {
-            margin: 1px 5px 0 0;
-        }
+  .collection-item .flag-icon {
+    margin: 1px 5px 0 0;
+  }
 
-        .box-body {
+  .box-body {
 
-            p {
-                padding: 1rem;
-            };
-            form {
-                padding: 0.5rem;
-            };
-            button {
-                margin-right: 0.5rem;
-                border: 1px solid #aaa;
-                &:last-child {
-                    margin-right: 0px;
-                }
-                &[type="submit"] {
-                    margin-right: 0;
-                }
-            }
-        };
-    };
-};
+    p {
+      padding: 1rem;
+    }
+    form {
+      padding: 0.5rem;
+    }
+    button {
+      margin-right: 0.5rem;
+      border: 1px solid #aaa;
+      &:last-child {
+        margin-right: 0px;
+      }
+      &[type="submit"] {
+        margin-right: 0;
+      }
+    }
+  }
+}
 
 .hidden {
-    display: none;
+  display: none;
 }

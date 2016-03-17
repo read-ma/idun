@@ -4,7 +4,7 @@ import * as player from '../actions/tts';
 
 const TTSPlayerButton = ({handleClick, label}) => {
   return (
-    <a className="" onClick={handleClick}>
+    <a onClick={handleClick}>
       <i className="material-icons">{label}</i>
     </a>
   );
@@ -17,12 +17,7 @@ class TTSPlayer extends Component {
 
   render(){
     return (
-      <ul className="ttsplayer">
-        <li><TTSPlayerButton label="play_arrow" handleClick={this.play.bind(this)} /></li>
-        <li><TTSPlayerButton label="pause" handleClick={player.pause} /></li>
-        <li><TTSPlayerButton label="skip_next" handleClick={player.resume} /></li>
-        <li><TTSPlayerButton label="stop" handleClick={player.stop} /></li>
-      </ul>
+      <i className="material-icons grey-text tts-player-icon" onClick={this.play.bind(this)} title="Read phrase">play_arrow</i>
     );
   }
 }
