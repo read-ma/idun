@@ -14,6 +14,10 @@ class LocalStore {
   clear(key) {
     this.store.removeItem(key);
   }
+
+  clearAll(key){
+    this.store.clear();
+  }
 }
 
 export default new LocalStore();

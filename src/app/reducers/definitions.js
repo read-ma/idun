@@ -1,11 +1,12 @@
 import ls from '../localStore';
 
 const defaultConfig = [
-  {key: 'graphics', label: 'Pictures', component: 'RemoteList'},
-  {key: 'translations', label: 'Translations', component: 'RemoteList'},
-  {key: 'definitions', label: 'Definitions', component: 'RemoteList'},
-  {key: 'related_words', label: 'Related Words', component: 'SimpleList'},
-  {key: 'examples', label: 'Examples', component: 'RemoteList'},
+  {key: 'graphics', label: 'Pictures', component: 'RemoteList', wordLimit: 5},
+  {key: 'translation', label: 'Translation', component: 'RemoteList', wordLimit: 10},
+  {key: 'translations', label: 'Translations', component: 'RemoteList', wordLimit: 3},
+  {key: 'definitions', label: 'Definitions', component: 'RemoteList', wordLimit: 4},
+  {key: 'related_words', label: 'Related Words', component: 'SimpleList', wordLimit: 2},
+  {key: 'examples', label: 'Examples', component: 'RemoteList', wordLimit: 2},
 ];
 
 const initialState = {
@@ -21,7 +22,6 @@ function config(state, action) {
   }
 };
 
-
 function definitionsConfigFromLS(){
   function getDefinitions(){
     return ls.get('DEFINITIONS_CONFIG');
@@ -36,6 +36,7 @@ export default function definitions(state = initialState, action) {
     return Object.assign({}, state, {data: Object.assign({}, state.data, action.data)});
 
   case 'ARTICLES_LOADED':
+  case 'TEXT_SELECTED':
     return Object.assign({}, state, {data: {}});
 
   default:

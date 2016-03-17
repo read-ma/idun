@@ -27,13 +27,14 @@ class SimpleList extends Component {
 class RemoteList extends SimpleList {
 
   loadDefinition(props){
-    if (!!props.selectedText) {
-      props.dispatch(findWordData(props.selectedText, props.boxKey));
-    }
+    props.dispatch(findWordData(props.selectedText, props.boxKey));
   }
 
   componentWillReceiveProps(nextProps){
-    if (this.props.selectedText != nextProps.selectedText)
+    if (!!nextProps.selectedText
+     && this.props.selectedText != nextProps.selectedText
+     && nextProps.selectedText.split(' ').length <= this.props.wordLimit
+    )
       this.loadDefinition(nextProps);
   };
 };

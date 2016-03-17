@@ -24,8 +24,6 @@ function invitationRequestSent(data) {
 };
 
 function userSigningUpError(error){
-  console.log(error);
-
   return {
     type: 'SIGNUP_ERROR',
     payload: error
@@ -91,9 +89,7 @@ const error = (type, payload) => {
 };
 
 const logout = () => {
-  ls.clear('AUTH_TOKEN');
-  ls.clear('IS_AUTHENTICATED');
-
+  ls.clearAll();
   return {
     type: 'USER_LOGGED_OUT',
     payload: {

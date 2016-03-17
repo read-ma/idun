@@ -30,7 +30,7 @@ class Settings extends Component {
       in_duration: 100,
       out_duration: 100,
       ready: this.removeModalBackground
-    }
+    };
   }
 
   toggleVisibilityState() {
@@ -58,7 +58,7 @@ class Settings extends Component {
   logout() {
     this.setState(
       Object.assign({}, this.state, {settingVisible: false}),
-      ()=> {this.props.dispatch(logout())}
+      ()=> {this.props.dispatch(logout());}
     );
   }
 

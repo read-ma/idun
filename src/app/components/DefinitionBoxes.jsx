@@ -16,6 +16,7 @@ class DefinitionBoxes extends Component {
                     .map( box =>
                           React.createElement(sidebarBoxRegistry.get(box.component),{
                             key: box.key,
+                            wordLimit: box.wordLimit,
                             boxKey: box.key,
                             selectedText: this.props.selectedText,
                             dispatch: this.props.dispatch,
