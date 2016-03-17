@@ -67,14 +67,14 @@ class DefinitionList extends Component {
         <div className={classnames({hide: !this.state.collapsed})}>
           {hiddenItems}
         </div>
-      )
+      );
     }
 
     return (
       <ul className="collection with-header">
         <li className="collection-header">
           <a className="right" onClick={this.toggle}>
-            {!this.state.collapsed ? 'Show more' : 'Show less'}
+            <i className="material-icons">{!this.state.collapsed ? 'expand_more' : 'expand_less'}</i>
           </a>
           <h5>{this.props.label}</h5>
         </li>
