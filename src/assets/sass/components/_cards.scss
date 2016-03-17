@@ -1,9 +1,13 @@
 // Cards
 
+.card {
+  @extend .z-depth-1;
+}
+
 .cards-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: space-between;
   align-content: stretch;
   .card-item {
     padding: 10px;

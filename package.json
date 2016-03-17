@@ -1,40 +1,42 @@
 {
-  "name": "mybabel",
+  "name": "ReadMa",
   "version": "1.0.0",
-  "description": "",
+  "description": "* Api in rails * Website in react.js",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "deploy": "NODE_ENV=production webpack -p --config webpack.production.config.js",
-    "predeploy": "s3cmd del --recursive --force s3://idun-app",
+    "deploy": "set NODE_ENV=production node node_modules/webpack/bin/webpack.js -p --config webpack.production.config.js",
+    "predeploy": "s3cmd del --recursive --force s3://beta.readma.com",
     "dev": "webpack-dev-server --progress --colors --hot --inline --content-base public",
-    "postdeploy": "s3cmd sync dist/. s3://idun-app"
-  },
+    "postdeploy": "sh deploy.sh"  },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "babel-core": "^6.5.1",
     "babel-loader": "^6.2.2",
+    "babel-plugin-lodash": "^2.2.1",
     "babel-preset-es2015": "^6.5.0",
     "babel-preset-react": "^6.5.0",
+    "compression-webpack-plugin": "^0.3.0",
     "css-loader": "^0.23.1",
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.8.5",
     "node-sass": "^3.4.2",
+    "node-zopfli": "^1.4.0",
     "sass-loader": "^3.1.2",
     "style-loader": "^0.13.0",
     "url-loader": "^0.5.7",
     "webpack": "^1.12.13",
+    "classnames": "^2.2.3",
     "webpack-dev-server": "^1.14.1"
   },
   "dependencies": {
     "axios": "^0.9.1",
     "chokidar": "^1.4.3",
-    "classnames": "^2.2.3",
     "history": "^1.17.0",
-    "lodash": "^4.5.0",
     "moment": "^2.12.0",
     "react": "^0.14.7",
+    "lodash": "^4.6.1",
     "react-dom": "^0.14.7",
     "react-redux": "^4.4.0",
     "react-router": "^2.0.0",
@@ -43,5 +45,11 @@
     "redux-thunk": "^1.0.3",
     "request": "^2.69.0",
     "superagent": "^1.7.2"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/readma-team/idun.git"
+  },
+  "keywords": [],
+  "homepage": "https://bitbucket.org/readma-team/idun#readme"
 }

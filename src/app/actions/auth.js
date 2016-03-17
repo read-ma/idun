@@ -2,7 +2,8 @@ import api from '../api';
 import store from '../store';
 import {push} from 'react-router-redux';
 import ls from '../localStore';
-
+import _ from 'lodash';
+import map from 'lodash/map';
 const DEFAULT_RETURN_TO = '/articles';
 
 
@@ -23,8 +24,6 @@ function invitationRequestSent(data) {
 };
 
 function userSigningUpError(error){
-  console.log(error);
-
   return {
     type: 'SIGNUP_ERROR',
     payload: error
@@ -90,9 +89,7 @@ const error = (type, payload) => {
 };
 
 const logout = () => {
-  ls.clear('AUTH_TOKEN');
-  ls.clear('IS_AUTHENTICATED');
-
+  ls.clearAll();
   return {
     type: 'USER_LOGGED_OUT',
     payload: {
@@ -100,7 +97,55 @@ const logout = () => {
       isAuthenticated: false
     }
   };
-
 };
 
-export { loginAttempt, signupAttempt, logout, error }
+const resetPassword = (email) => {
+  return (dispatch) => {
+    api
+      .post('/reset_password', {email})
+      .then((response) => dispatch(changePasswordRequeted(response)))
+      .catch((error) => dispatch(changePasswordRequetError(error)));
+  };
+};
+
+const humanize = str => str.replace(/_/g,' ').toLocaleLowerCase();
+
+const extractErrors = (errors) => {
+  return _.map(errors, (err, key) => {
+    return _.map(err, e => humanize([key, e].join(' ')));
+  });
+};
+
+const updatePassword = ({reset_password_token, password, password_confirmation}) => {
+  return (dispatch) => {
+    api
+      .patch('/reset_password/by.json', {reset_password: {reset_password_token, password, password_confirmation} })
+      .then((respone) => dispatch(push('login', {q: 'updated'})))
+      .catch( ( error ) => {
+        dispatch (updatePasswordError(extractErrors(error.data.errors)));
+      });
+  };
+};
+
+const updatePasswordError = (error) => {
+  return {
+    type: 'UPDATE_PASSWORD_ERROR',
+    payload: error
+  };
+};
+
+const changePasswordRequeted = (response) => {
+  return {
+    type: 'CHANGE_PASSWORD_REQUESTED',
+    payload: response
+  };
+};
+
+const changePasswordRequetError = (error) => {
+  return {
+    type: 'CHANGE_PASSWORD_REQUEST_ERROR',
+    payload: error.data
+  };
+}
+
+export { loginAttempt, signupAttempt, logout, error, resetPassword, updatePassword }

@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import classnames from 'classnames';
 import { textSelected, saveUserDefinition} from '../actions';
 import { DefinitionBoxes } from '../components';
-import TTSPlayer from '../components/TTSPlayer';
 
 class UserCustomDefinitionForm extends Component {
   constructor(props){
@@ -61,7 +60,9 @@ class UserCustomDefinitionForm extends Component {
         <div className='row'>
           <div className="col s12">
             <div className="input-field col s9">
-              <input className="selectedText" ref="selectedText" type='text' placeholder='Quick search...' name='word' onKeyUp={this.search} onChange={this.handleFormInputChanged} value={this.state.word} />
+              {/* FIXME 1: Move to "Navigator" placeholder #1 */}
+              <input className="selectedText" ref="selectedText" type='text' placeholder='Search and translate word' name='word' onKeyUp={this.search} onChange={this.handleFormInputChanged} value={this.state.word} />
+
               <TTSPlayer />
             </div>
             <div className="input-field col s3">
