@@ -2,6 +2,7 @@ var path = require('path');
 var node_modules_dir = path.resolve(__dirname, 'node_modules');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var CompressionPlugin = require("compression-webpack-plugin");
+var webpack = require('webpack');
 
 var config = {
   entry: path.resolve(__dirname, './src/app/app.js'),
@@ -45,6 +46,11 @@ var config = {
       asset: "[path]",
       algorithm: "zopfli",
       test: /\.js$|\.css$/
+    }),
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify('production')
+      }
     })
   ]
 };
