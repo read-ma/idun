@@ -39,6 +39,7 @@ function userDefinitionSavingFailed(error){
 }
 
 function userDefinitionSaved(definition){
+  Materialize.toast('Definition added', 4000);  
   return {
     type: 'USER_DEFINITION_SAVED',
     definition: definition
