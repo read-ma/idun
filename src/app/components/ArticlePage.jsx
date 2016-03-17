@@ -24,10 +24,10 @@ class ArticleContent extends Component {
   }
 };
 
-const ArticleTitle = ({title, source_url}) => {
+const ArticleTitle = ({title, source_url, onTextSelected}) => {
   return (
     <header>
-      <h1>{title}</h1>
+      <h1 onMouseUp={onTextSelected}>{title}</h1>
     </header>
   );
 };
@@ -64,7 +64,7 @@ class ArticlePage extends Component {
         <div className="row">
           <div className="col s12 m7 article-wrapper">
             <article className="article">
-              <ArticleTitle title={this.props.title} />
+              <ArticleTitle title={this.props.title} onTextSelected={this.onTextSelected.bind(this)}/>
               <ArticleContent text={this.props.content} onTextSelected={this.onTextSelected.bind(this)} wordlists={this.props.wordlists} />
               <ArticleFooter source_url={this.props.source_url} />
             </article>

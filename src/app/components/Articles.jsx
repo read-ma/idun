@@ -30,7 +30,7 @@ function ArticleLink({id, title, source_url,tags, content_type, created_at, priv
       cssClass = 'orange-text text-lighten-3';
     } else {
       description = 'Intermediate';
-      cssClass = 'green-text text-lighten-3'
+      cssClass = 'green-text text-lighten-3';
     }
     return (<strong className={cssClass}>{description}</strong>);
   };
