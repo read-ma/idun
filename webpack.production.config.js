@@ -40,12 +40,12 @@ var config = {
   plugins: [
     new ExtractTextPlugin('style.css', {
       allChunks: true
+    }),
+    new CompressionPlugin({
+      asset: "[path]",
+      algorithm: "zopfli",
+      test: /\.js$|\.css$/
     })
-    // ,
-    // new CompressionPlugin({
-    //   asset: "[path]",
-    //   algorithm: "zopfli"
-    // })
   ]
 };
 
