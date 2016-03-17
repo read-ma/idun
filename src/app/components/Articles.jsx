@@ -39,9 +39,9 @@ function ArticleLink({id, title, source_url,tags, content_type, created_at, priv
     <li key={id} className='collection-item'>
       <i className='material-icons'>{ privy ? 'lock_outline' : ''}</i>
 
-      <div className="secondary-content badge">
+      {/*<div className="secondary-content badge">
         <i className="material-icons">grade</i>
-      </div>
+      </div>*/}
 
       <span className='title flow-text'>
         <Link to={`/article/${id}`}>
