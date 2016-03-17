@@ -9,8 +9,10 @@ function contentLoaded(type, data){
   };
 }
 
-
-const sanitizeText = text => escape(text).replace(/\./g, ' ');
+const sanitizeText = text =>
+        escape(text
+               .replace(/’/g, '\'')
+               .replace(/\./g, ' '));
 
 function findWordData(text, type, options={}){
   let params = Object.assign({}, options, {type: type}, Language.keysOfCurrent());
