@@ -16,3 +16,13 @@ p {
 .clearfix:after {
   clear: both;
 }
+
+.login-screenshot {
+  margin-top: 25px;
+  clear: both;
+
+  img {
+    @extend .z-depth-1;
+    max-width: 40%;
+  }
+}

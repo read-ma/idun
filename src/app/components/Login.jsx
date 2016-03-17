@@ -127,6 +127,12 @@ class Login extends React.Component {
         <div className="col s12 m5 offset-m1">
           <SignUpForm handleSignUp={this.signup.bind(this)} messages={this.props.signupMessage} />
         </div>
+
+        <div className="row">
+          <div className="col s12 center-align login-screenshot">
+            <img src="/images/readma-screenshot.jpg" alt="Screenshot showing article view of ReadMa application" />
+          </div>
+        </div>
       </div>
     );
   }};
