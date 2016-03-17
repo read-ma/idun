@@ -13,7 +13,7 @@ class SimpleList extends Component {
   }
 
   render() {
-    if (this.props.items && !_.isEmpty(this.props.items))
+    if (!_.isEmpty(this.props.items))
       return (
         <div className="card">
           <DefinitionList items={this.props.items} label={this.props.label} handleClick={this.saveUserDefinition.bind(this)}/>
@@ -30,12 +30,10 @@ class RemoteList extends SimpleList {
     props.dispatch(findWordData(props.selectedText, props.boxKey));
   }
 
-  checkWordLimit(text, limit = [1,3]){
+  checkWordLimit(text, limit){
     let wordsNumber = text.split(' ').length;
 
-    if (text.length < 2) return false;
-
-    return wordsNumber <= limit[1] && wordsNumber >= limit[0];
+    return text.length > 1 && wordsNumber <= limit[1] && wordsNumber >= limit[0];
   }
 
   componentWillReceiveProps(nextProps){
