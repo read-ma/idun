@@ -40,52 +40,49 @@ function DefinitionListItem({text, language, url, partOfSpeech, handleClick, key
     );
 }
 
+const LOW_LIMIT = 2;
+const TOP_LIMIT = 10;
+
 class DefinitionList extends Component {
+
   constructor(props) {
     super(props);
-    this.state = {collapsed: false};
+    this.state = {collapsed: false, itemsToShowNumber: LOW_LIMIT};
     this.toggle = this.toggle.bind(this);
   }
 
   toggle() {
-    this.setState({collapsed: !this.state.collapsed});
+    this.setState({
+      collapsed: !this.state.collapsed,
+      itemsToShowNumber: (!this.state.collapsed ? TOP_LIMIT : LOW_LIMIT)
+    });
   }
 
   render() {
-    const itemsToShowNumber = 2;
-    let visibleItems = this.props.items.slice(0, itemsToShowNumber).map( (item) =>
+    let items = this.props.items.slice(0, this.state.itemsToShowNumber).map( (item) =>
       DefinitionListItem(Object.assign({}, item, {key: _.uniqueId('definitionlist')}, {handleClick: this.props.handleClick}))
     );
-
-    let hiddenItems = this.props.items.slice(itemsToShowNumber).map( (item) =>
-      DefinitionListItem(Object.assign({}, item, {key: _.uniqueId('definitionlist')}, {handleClick: this.props.handleClick}))
-    );
-
-    let collapseBox;
-    if (hiddenItems.length > 0) {
-      collapseBox = (
-        <div className={classnames({hide: !this.state.collapsed})}>
-          {hiddenItems}
-        </div>
-      );
-    }
 
     return (
       <ul className="collection with-header">
         <li className="collection-header">
           <h5>{this.props.label}</h5>
         </li>
-
-        {collapseBox}
-        {visibleItems}
-        <li className="center">
-          <a onClick={this.toggle}>
-            <i className="material-icons">{!this.state.collapsed ? 'expand_more' : 'expand_less'}</i>
-        </a>
-        </li>
+        {items}
+        { this.props.items.length > LOW_LIMIT ? ( <MoreLessButton onClick={this.toggle} collapsed={this.state.collapsed} /> ) : false}
       </ul>
     );
   }
 };
+
+const MoreLessButton = ({collapsed, onClick}) => {
+    return (
+      <li className="center col12">
+        <a onClick={onClick} className='center'>
+          <i className="material-icons">{collapsed ? 'expand_less' : 'expand_more'}</i>
+        </a>
+      </li>
+    );
+}
 
 export default DefinitionList;
