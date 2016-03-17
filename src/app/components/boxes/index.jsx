@@ -30,10 +30,18 @@ class RemoteList extends SimpleList {
     props.dispatch(findWordData(props.selectedText, props.boxKey));
   }
 
+  checkWordLimit(text, limit = [1,3]){
+    let wordsNumber = text.split(' ').length;
+
+    if (text.length < 2) return false;
+
+    return wordsNumber <= limit[1] && wordsNumber >= limit[0];
+  }
+
   componentWillReceiveProps(nextProps){
     if (!!nextProps.selectedText
      && this.props.selectedText != nextProps.selectedText
-     && nextProps.selectedText.split(' ').length <= this.props.wordLimit
+     && this.checkWordLimit(nextProps.selectedText, this.props.wordLimit)
     )
       this.loadDefinition(nextProps);
   };
