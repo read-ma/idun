@@ -27,13 +27,22 @@ class SimpleList extends Component {
 class RemoteList extends SimpleList {
 
   loadDefinition(props){
-    if (!!props.selectedText) {
-      props.dispatch(findWordData(props.selectedText, props.boxKey));
-    }
+    props.dispatch(findWordData(props.selectedText, props.boxKey));
+  }
+
+  checkWordLimit(text, limit = [1,3]){
+    let wordsNumber = text.split(' ').length;
+
+    if (text.length < 2) return false;
+
+    return wordsNumber <= limit[1] && wordsNumber >= limit[0];
   }
 
   componentWillReceiveProps(nextProps){
-    if (this.props.selectedText != nextProps.selectedText)
+    if (!!nextProps.selectedText
+     && this.props.selectedText != nextProps.selectedText
+     && this.checkWordLimit(nextProps.selectedText, this.props.wordLimit)
+    )
       this.loadDefinition(nextProps);
   };
 };

@@ -48,7 +48,7 @@ class DefinitionList extends Component {
   }
 
   toggle() {
-    this.setState({collapsed: !this.state.collapsed})
+    this.setState({collapsed: !this.state.collapsed});
   }
 
   render() {
@@ -67,20 +67,22 @@ class DefinitionList extends Component {
         <div className={classnames({hide: !this.state.collapsed})}>
           {hiddenItems}
         </div>
-      )
+      );
     }
 
     return (
       <ul className="collection with-header">
         <li className="collection-header">
-          <a className="right" onClick={this.toggle}>
-            {!this.state.collapsed ? 'Show more' : 'Show less'}
-          </a>
           <h5>{this.props.label}</h5>
         </li>
 
         {collapseBox}
         {visibleItems}
+        <li className="center">
+          <a onClick={this.toggle}>
+            <i className="material-icons">{!this.state.collapsed ? 'expand_more' : 'expand_less'}</i>
+        </a>
+        </li>
       </ul>
     );
   }

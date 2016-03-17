@@ -4,18 +4,13 @@ import store from '../store';
 import sidebarBoxRegistry from './boxes';
 import classnames from 'classnames';
 
-//TODO do not sync store on every store change
-store.subscribe( () => {
-  let config = store.getState().definitions.config;
-  localStorage.setItem('DEFINITIONS_CONFIG', JSON.stringify(config));
-});
-
 class DefinitionBoxes extends Component {
   render(){
     let boxes = this.props.boxes
                     .map( box =>
                           React.createElement(sidebarBoxRegistry.get(box.component),{
                             key: box.key,
+                            wordLimit: box.wordLimit,
                             boxKey: box.key,
                             selectedText: this.props.selectedText,
                             dispatch: this.props.dispatch,
