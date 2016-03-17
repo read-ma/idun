@@ -1,6 +1,6 @@
 class LocalStore {
   constructor(){
-    this.store = localStorage;
+    this.store = window.localStorage;
   }
 
   set(key, value){
