@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import _ from 'lodash';
 import classnames from 'classnames';
 import { uniqueId } from 'lodash/uniqueId';
+import { ShowIf } from '../../components';
 
 const LanguageIcon = ({lang}) => {
   let language = lang === 'en' ? 'gb' : lang;
@@ -69,7 +70,9 @@ class DefinitionList extends Component {
           <h5>{this.props.label}</h5>
         </li>
         {items}
-        { this.props.items.length > LOW_LIMIT ? ( <MoreLessButton onClick={this.toggle} collapsed={this.state.collapsed} /> ) : false}
+        <ShowIf condition={this.props.items.length > LOW_LIMIT}>
+          <MoreLessButton onClick={this.toggle} collapsed={this.state.collapsed} />
+        </ShowIf>
       </ul>
     );
   }

@@ -6,8 +6,9 @@ import { connect } from 'react-redux';
 import Settings from './Settings';
 import { textSelected } from '../actions';
 import TTSPlayer from '../components/TTSPlayer';
+import {ShowIf} from '../components';
 
-const MainNavigation = ({selectedText, handleSearch}) => {
+const MainNavigation = ({selectedText, handleSearch, displaySearchBar}) => {
   return (
     <div className="navbar-fixed">
       <nav className="white row">
@@ -27,7 +28,9 @@ const MainNavigation = ({selectedText, handleSearch}) => {
             <li><Link to='/articles'>Articles</Link></li>
           </ul>
 
-          <SelectedTextInput text={selectedText} search={handleSearch} />
+          <ShowIf condition={displaySearchBar}>
+            <SelectedTextInput text={selectedText} search={handleSearch} />
+          </ShowIf>
 
         </div>
       </nav>
