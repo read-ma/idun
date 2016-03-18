@@ -24,7 +24,7 @@
   <script>
      window.mySettings = {
        // TODO put here real email and created_at
-       email: 'abc@example.com',
+       email: localStorage.getItem('CURRENT_USER_EMAIL') || '',
        created_at: (new Date()).getTime(),
        app_id: '391128a6fcfcffd35dc3d70abf155e1c'
      };

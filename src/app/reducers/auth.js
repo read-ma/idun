@@ -10,6 +10,14 @@ function stateFromLocalStorage() {
 export default function auth(state = stateFromLocalStorage(), action){
   switch(action.type){
 
+  case "@@router/LOCATION_CHANGE":
+    return Object.assign(
+      {},
+      state,
+      {message: undefined},
+      {error: undefined}
+    );
+
   case 'PASSWORD_UPDATED':
     return Object.assign(
       {},
