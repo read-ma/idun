@@ -21,6 +21,20 @@
     };
     (function() {var wf = document.createElement('script'); wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js'; wf.type = 'text/javascript'; wf.async = 'true'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(wf, s); })();
   </script>
+  <script>
+     window.mySettings = {
+       // TODO put here real email and created_at
+       email: localStorage.getItem('CURRENT_USER_EMAIL') || '',
+       created_at: (new Date()).getTime(),
+       app_id: '391128a6fcfcffd35dc3d70abf155e1c'
+     };
+     (function() {
+       var interakt = document.createElement('script');
+       interakt.type = 'text/javascript'; interakt.async = true;
+       interakt.src = "//cdn.interakt.co/interakt/391128a6fcfcffd35dc3d70abf155e1c.js";
+       var scrpt = document.getElementsByTagName('script')[0];
+       scrpt.parentNode.insertBefore(interakt, scrpt);
+     })()
+    </script>
 </body>
-
 </html>
