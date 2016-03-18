@@ -9,6 +9,9 @@
 #definitionboxes {
   .collection {
     .item-image {
+      &:nth-child(even) {
+        clear: both;
+      }
       margin: .5em 0;
       img {
         max-height: 100px;
