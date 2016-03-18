@@ -26,3 +26,17 @@ p {
     max-width: 40%;
   }
 }
+
+.expand-collapse-trigger {
+  clear: both;
+  margin-top: 1em;
+  cursor: pointer;
+  i {
+    color: #26a69a;
+  }
+  &:hover {
+    i {
+      color: darken(#26a69a, 15%);
+    }
+  }
+}
