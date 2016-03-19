@@ -56,10 +56,7 @@ const loginAttempt = (email, password) => {
     )
       .then( (response) => {
         dispatch(userLoggedIn(response.data));
-
-        dispatch(
-          push(ReturnTo(store.getState()))
-        );
+        dispatch(push(ReturnTo(store.getState())));
       })
       .catch(function (response) {
         dispatch(userSigningInError(response));
@@ -72,6 +69,7 @@ const userLoggedIn = (userData) => {
   ls.set('AUTH_TOKEN', userData.auth_token);
   ls.set('IS_AUTHENTICATED', true);
   ls.set('CURRENT_USER_EMAIL', userData.email);
+
   return {
     type: 'USER_LOGGED_IN',
     payload: userData
