@@ -26,8 +26,8 @@ class SignUpForm extends React.Component {
       <div className="signupform">
         <h2>Sign up</h2>
         <p className="flow-text">
-          If you are interested in beta testing of ReadMa, <br/>
-          let us know using form below. <br/>
+          If you are interested in the beta testing of ReadMa, <br/>
+          let us know using the form below. <br/>
           We will get back to you as soon as we can.
         </p>
         <form onSubmit={this.handleSignUp.bind(this)}>
