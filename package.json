@@ -6,7 +6,6 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "deploy": "NODE_ENV=production node node_modules/webpack/bin/webpack.js -p --config webpack.production.config.js",
-    "predeploy": "s3cmd del --recursive --force s3://beta.readma.com",
     "dev": "webpack-dev-server --progress --colors --hot --inline --content-base public",
     "postdeploy": "sh deploy.sh"  },
   "author": "",

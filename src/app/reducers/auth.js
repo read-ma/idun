@@ -47,7 +47,7 @@ export default function auth(state = stateFromLocalStorage(), action){
       {},
       state,
       {error: undefined},
-      {message: "Instructions has been sent to your email."}
+      {message: "Furhter instructions will be sent to your email within 10 minutes"}
     );
 
   case 'USER_SIGNING_IN_ERROR':
