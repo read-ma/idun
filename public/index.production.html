@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <title>ReadMa - Your learning assistant</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" media="screen" title="style" charset="utf-8">
+  </head>
+
+  <body>
+    <div id="app"></div>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+    <script src="bundle.js" type="text/javascript"></script>
+    <script type="text/javascript">
+     WebFontConfig = {
+       google: { families: [ 'Roboto:400,300,500,700:latin,latin-ext' ] }
+     };
+     (function() {var wf = document.createElement('script'); wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js'; wf.type = 'text/javascript'; wf.async = 'true'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(wf, s); })();
+    </script>
+    <script>
+     (function() {
+       var interakt = document.createElement('script');
+       interakt.type = 'text/javascript'; interakt.async = true;
+       interakt.src = "//cdn.interakt.co/interakt/391128a6fcfcffd35dc3d70abf155e1c.js";
+       var scrpt = document.getElementsByTagName('script')[0];
+       scrpt.parentNode.insertBefore(interakt, scrpt);
+     })()
+    </script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/airbrake-js/0.5.8/client.min.js"></script>
+    <script>
+     window.airbrake = new airbrakeJs.Client({
+       projectId: '8a87ad8854a89f8e33a221b692d5c3b4',
+       projectKey: '8a87ad8854a89f8e33a221b692d5c3b4',
+       reporter: 'xhr',
+       host: 'http://errbit.logdock.com'
+     });
+     window.onerror = airbrake.onerror;
+    </script>
+
+
+  </body>
+
+</html>
