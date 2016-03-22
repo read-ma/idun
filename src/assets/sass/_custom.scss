@@ -16,3 +16,27 @@ p {
 .clearfix:after {
   clear: both;
 }
+
+.login-screenshot {
+  margin-top: 25px;
+  clear: both;
+
+  img {
+    @extend .z-depth-1;
+    max-width: 40%;
+  }
+}
+
+.expand-collapse-trigger {
+  clear: both;
+  margin-top: 1em;
+  cursor: pointer;
+  i {
+    color: #26a69a;
+  }
+  &:hover {
+    i {
+      color: darken(#26a69a, 15%);
+    }
+  }
+}

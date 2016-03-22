@@ -2,7 +2,7 @@ import ls from '../localStore';
 
 const defaultConfig = [
   {key: 'graphics', label: 'Pictures', component: 'RemoteList', wordLimit: [1,5]},
-  {key: 'translation', label: 'Smart Translation', component: 'RemoteList', wordLimit: [3,20]},
+  {key: 'translation', label: 'Smart Translation', component: 'RemoteList', wordLimit: [2,20]},
   {key: 'translations', label: 'Dictionary', component: 'RemoteList', wordLimit: [1,3]},
   {key: 'definitions', label: 'Definitions', component: 'RemoteList', wordLimit: [1,4]},
   {key: 'related_words', label: 'Related Words', component: 'SimpleList', wordLimit: [1,2]},

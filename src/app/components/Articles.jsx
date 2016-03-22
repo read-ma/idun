@@ -144,7 +144,7 @@ class Articles extends Component {
   handleFilterChange(query) {
     this.setState(
       {
-        articles: this.props.articles.filter(article => article.title.match(query, 'gim'))
+        articles: this.props.articles.filter(article => article.title.match(new RegExp(query,'gim')))
       }
     );
   }

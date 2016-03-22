@@ -56,10 +56,7 @@ const loginAttempt = (email, password) => {
     )
       .then( (response) => {
         dispatch(userLoggedIn(response.data));
-
-        dispatch(
-          push(ReturnTo(store.getState()))
-        );
+        dispatch(push(ReturnTo(store.getState())));
       })
       .catch(function (response) {
         dispatch(userSigningInError(response));
@@ -71,6 +68,8 @@ const loginAttempt = (email, password) => {
 const userLoggedIn = (userData) => {
   ls.set('AUTH_TOKEN', userData.auth_token);
   ls.set('IS_AUTHENTICATED', true);
+  ls.set('CURRENT_USER_EMAIL', userData.email);
+
   return {
     type: 'USER_LOGGED_IN',
     payload: userData
@@ -78,13 +77,9 @@ const userLoggedIn = (userData) => {
 };
 
 const userSigningInError = (payload) => {
-  return error('USER_SIGNING_IN_ERROR', payload);
-};
-
-const error = (type, payload) => {
   return {
     type: 'USER_SIGNING_IN_ERROR',
-    payload: payload
+    payload: 'We could not let you in with entered credentials. No way.'
   };
 };
 
@@ -148,4 +143,4 @@ const changePasswordRequetError = (error) => {
   };
 }
 
-export { loginAttempt, signupAttempt, logout, error, resetPassword, updatePassword }
+export { loginAttempt, signupAttempt, logout, resetPassword, updatePassword }

@@ -43,6 +43,7 @@ class PasswordReminderViewBase extends React.Component {
     this.props.dispatch(
       resetPassword(email));
   }
+
   render() {
     return (<PasswordReminder error={this.props.error} message={ this.props.message } onSubmit={this.resetPassword.bind(this)}/>);
   }

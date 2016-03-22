@@ -29,7 +29,13 @@ const Wordlists = ({header, wordlists, handleSelected}) => {
   );
 };
 
+class ShowIf extends React.Component {
+  render(){
+    return this.props.condition ? this.props.children : false;
+  }
+}
+
 export {
   Home, Profile, Articles, ArticlePage, Main, Wordlists, UserDefinitions,
-  DefinitionBoxes
+  DefinitionBoxes, ShowIf
 };

@@ -13,8 +13,8 @@
     max-width: 90%;
   }
   @media #{$large-and-up} {
-    top: 10%;
-    right: 7%;
+    bottom: 7%;
+    left: 7%;
     max-width: 86%;
   }
 }
@@ -22,7 +22,7 @@
 .toast {
   @extend .z-depth-1;
   border-radius: 2px;
-  top: 0;
+  bottom: 0;
   width: auto;
   clear: both;
   margin-top: 10px;

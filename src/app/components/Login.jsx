@@ -26,8 +26,8 @@ class SignUpForm extends React.Component {
       <div className="signupform">
         <h2>Sign up</h2>
         <p className="flow-text">
-          If you are interested in beta testing of ReadMa, <br/>
-          let us know using form below. <br/>
+          If you are interested in the beta testing of ReadMa, <br/>
+          let us know using the form below. <br/>
           We will get back to you as soon as we can.
         </p>
         <form onSubmit={this.handleSignUp.bind(this)}>
@@ -77,10 +77,6 @@ class Login extends React.Component {
     );
   }
 
-  lastError() {
-    return this.props.auth.error && this.props.auth.error.statusText;
-  }
-
   render() {
     return (
       <div className="row">
@@ -88,7 +84,7 @@ class Login extends React.Component {
           <h2>Login</h2>
           <p className="flow-text">If you already have an account, please log in:</p>
           <span className="error">
-            {this.lastError()}
+            {this.props.error}
           </span>
           <form onSubmit={this.login.bind(this)}>
             <div className="input-field">
@@ -134,7 +130,8 @@ class Login extends React.Component {
 let mapStateToProps = (state) => {
   return {
     auth: state.auth,
-    signupMessage: state.auth.signupMessage
+    signupMessage: state.auth.signupMessage,
+    error: state.auth.error
   };
 };
 
