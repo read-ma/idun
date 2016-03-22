@@ -2,6 +2,9 @@ echo 'cleaning up the bucket'
 #TODO make a backup before deleting
 s3cmd del --recursive --force s3://beta.readma.com
 
+echo "Copying index.html"
+cp public/index.production.html dist/index.html
+
 echo "Uploading html"
 s3cmd --exclude '*' --include '*.html' --mime-type="text/html"  --add-header='Cache-Control: max-age=259200' sync dist/* s3://beta.readma.com/
 
