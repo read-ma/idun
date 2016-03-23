@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ReadMa - Your learning assistant</title>
+  <style>
+    main {
+      font-family: Roboto, Tahoma, Verdana, sans-serif;
+      width: 75%;
+      display: flex;
+      flex-wrap: nowrap;
+      margin: 5% auto;
+      border: 1px solid #26a69a;
+    }
+    h3 {
+      padding-left: 1em;
+      color: #26a69a;
+    }
+    nav { flex-basis: 300px; border-right: 1px solid #acece6; }
+    nav ol { list-style-type: none; padding: 0; margin: 0;}
+    nav ol li {
+      cursor: pointer;
+      line-height: 160%;
+      padding: 1em;
+      color: #26a69a;
+    }
+    .active { background-color: #26a69a; color: #fff; }
+    .content { color: #26a69a; }
+    .content ul { list-style: none; }
+    .content h2 { margin-top: 0; }
+
+
+
+    .hide { display: none; }
+  </style>
+</head>
+<body>
+
+  <main class="container">
+    <nav>
+      <h3>ReadMa Features</h3>
+      <ol>
+        <li data-slide-source="1" class="active">Dictionary</li>
+        <li data-slide-source="2">Adding your own articles</li>
+        <li data-slide-source="3">Highlighting frequent words</li>
+        <li data-slide-source="4">Saving words to learn</li>
+        <li data-slide-source="5">Repeating words to learn</li>
+      </ol>
+    </nav>
+    <div class="content">
+      <ul>
+        <li data-slide-target="1">
+          <h2 class="slide-header">Feature 1</h2>
+          <p class="slide-description">Describe feature 1</p>
+          <img class="slide-image" src="http://placekitten.com.s3.amazonaws.com/homepage-samples/408/287.jpg" />
+        </li>
+        <li data-slide-target="2" class="hide">
+          <h2 class="slide-header">Feature 2</h2>
+          <p class="slide-description">Describe feature 2</p>
+          <img class="slide-image" src="http://placekitten.com.s3.amazonaws.com/homepage-samples/200/286.jpg" />
+        </li>
+        <li data-slide-target="3" class="hide">
+          <h2 class="slide-header">Feature 3</h2>
+          <p class="slide-description">Describe feature 3</p>
+          <img class="slide-image" src="http://placekitten.com.s3.amazonaws.com/homepage-samples/200/140.jpg" />
+        </li>
+      </ul>
+    </div>
+  </main>
+
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+
+  <script>
+    $(function(){
+      var _activateSlide = function(no) {
+        $('[data-slide-target]').hide();
+        $('[data-slide-source]').removeClass('active');
+
+        $('[data-slide-target="'+no+'"]').show();
+      }
+
+      $('[data-slide-source]').on('click', function() {
+        var slideNo = $(this).data('slide-source');
+        _activateSlide(slideNo);
+        $(this).addClass('active');
+      });
+
+      // _activateSlide(1)
+    });
+  </script>
+</body>
+</html>
