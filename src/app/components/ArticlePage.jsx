@@ -38,6 +38,7 @@ class ArticleContent extends Component {
     this.state = {
       text: (highlightText(props) || '')
     };
+    this.getTextFromSelection = this.getTextFromSelection.bind(this);
   }
 
   componentWillReceiveProps(nextProps){
@@ -46,7 +47,17 @@ class ArticleContent extends Component {
 
   includeWordFrom(word, wordlistName) {
     const wordlist = _.find(this.props.wordlists, ['name', wordlistName]);
-    return wordlist && wordlist.enabled && _.includes(wordlist.words, word);
+    if (wordlistName === 'selection') {
+      const words = wordlist.words[0] ? wordlist.words[0].split(' ') : [];
+      return wordlist && wordlist.enabled && _.includes(words, word);
+    } else {
+      return wordlist && wordlist.enabled && _.includes(wordlist.words, word);
+    }
+  }
+
+  getTextFromSelection() {
+    if (!getSelectedText().trim()) return;
+    this.props.onTextSelected(getSelectedText());
   }
 
   render() {
@@ -59,7 +70,7 @@ class ArticleContent extends Component {
       return (<Word word={word} selected={selected} marked={marked} userSelected={userSelected} onTextSelected={this.props.onTextSelected} />);
     }));
     return (
-      <div className="content flow-text">
+      <div className="content flow-text" onMouseUp={this.getTextFromSelection}>
         {wordComponents}
       </div>
     );
