@@ -19,7 +19,10 @@ function findWordData(text, type, options={}){
 
   return (dispatch) => {
     api.get(`/translate/${sanitizeText(text)}.json`, {params: params})
-      .then( response => dispatch(contentLoaded(type, response.data)));
+      .then( response => dispatch(contentLoaded(type, response.data)))
+      .catch( error => {
+        console.log(error);
+      });
   };
 }
 

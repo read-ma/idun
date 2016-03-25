@@ -47,7 +47,8 @@ function getArticles(params, handleSuccess){
   return api.get('/articles.json')
     .then((response) => {
       handleSuccess(response.data.articles);
-    });
+    })
+    .catch(err => console.log(err));
 }
 
 function getArticle(id, handleSuccess) {
