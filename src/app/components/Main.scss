@@ -43,11 +43,17 @@ nav ul a, nav .brand-logo {
     .word {
       cursor: pointer;
       &:hover{
-        background-color: lighten(#f8bbd0, 10%);
+        background-color: lighten(#f8bbd0, 10%) !important;
         border-radius: 5px;
       }
       &.selected {
-        background-color: #f8bbd0;
+        background-color: #f8bbd0 !important;
+      }
+      &.marked{
+        background-color: lightgreen;
+      }
+      &.user-selected {
+        border-bottom: solid 3px #ef5350;
       }
     }
   };

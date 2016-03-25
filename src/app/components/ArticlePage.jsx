@@ -22,8 +22,13 @@ class Word extends Component{
 
   render() {
     const word = this.props.word;
-    const klass = classnames('word', {selected: this.props.selected, marked: this.props.marked});
-    return (<span className={klass} key={word} onClick={this.selectWord}>{word} </span>);
+    const klass = classnames('word', {selected: this.props.selected, marked: this.props.marked, 'user-selected': this.props.userSelected });
+    return (
+      <span>
+        <span className={klass} key={word} onClick={this.selectWord}>{word}</span>
+        <span> </span>
+      </span>
+    );
   }
 }
 
@@ -39,16 +44,19 @@ class ArticleContent extends Component {
     this.setState( { text: highlightText(nextProps) } );
   }
 
-  selectedWords(){
-    return this.props.wordlists[0].words;
+  includeWordFrom(word, wordlistName) {
+    const wordlist = _.find(this.props.wordlists, ['name', wordlistName]);
+    return wordlist && wordlist.enabled && _.includes(wordlist.words, word);
   }
 
   render() {
     const text ="Idun (pronounced “EE-done;” from Old Norse Iðunn, “The Rejuvenating One”[1]) is a goddess who belongs to the Aesir tribe of deities. Her role in the pre-Christian mythology and religion of the Norse and other Germanic peoples is unfortunately obscure, but she features prominently in one of the best-known mythological tales, The Kidnapping of Idun. In this tale, which comes to us from the skaldic poem Haustlöng and the Prose Edda, Idun is depicted as the owner and dispenser of a fruit that imparts immortality. In modern books on Norse mythology, these fruits are almost invariably considered to be apples, but this wasn’t necessarily the case in heathen times. The Old Norse word for “apple,” epli, was often used to denote any fruit or nut, and “apples” in the modern English sense didn’t arrive in Scandinavia until late in the Middle Ages.[2] Whatever species Idun’s produce belongs to, its ability to sustain the immortality of the gods and goddesses makes Idun an indispensable presence in Asgard."
     const words = text.split(/(<([^>]+)>| )/);
     const wordComponents = text.split(' ').map((word => {
-      const selected = _.includes(this.selectedWords(), word);
-      return (<Word word={word} selected={selected} onTextSelected={this.props.onTextSelected} />);
+      const selected = this.includeWordFrom(word, 'selection');
+      const marked = this.includeWordFrom(word, 'd3k');
+      const userSelected = this.includeWordFrom(word, 'user');
+      return (<Word word={word} selected={selected} marked={marked} userSelected={userSelected} onTextSelected={this.props.onTextSelected} />);
     }));
     return (
       <div className="content flow-text">
@@ -95,9 +103,6 @@ class ArticlePage extends Component {
   }
 
   render() {
-    if (this.props) {
-      console.log("selectetext" + this.props.selectedText);
-    }
     return (
       <div>
         <div className="row">
