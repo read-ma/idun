@@ -10,7 +10,7 @@ function contentLoaded(type, data){
 }
 
 const sanitizeText = text =>
-        escape(text
+        (text
                .replace(/’/g, '\'')
                .replace(/\./g, ' '));
 
