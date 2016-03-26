@@ -6,6 +6,7 @@ import { loadArticle, textSelected, loadUserDefinitions } from '../actions';
 import { Link } from 'react-router';
 import { highlightText, getSelectedText } from '../highlight';
 import Sidebar from '../containers/Sidebar';
+import PositioningWidget from './PositioningWidget';
 
 class ArticleContent extends Component {
   constructor(props) {
@@ -65,6 +66,7 @@ class ArticlePage extends Component {
   render() {
     return (
       <div>
+        <PositioningWidget pageId={this.props.params.id}/>
         <div className="row">
           <div className="col s12 m7 article-wrapper">
             <article className="article">

@@ -2,6 +2,16 @@ import store from '../store';
 import Config from 'Config';
 import api from '../api';
 
+function pageScrolled(pageId, position){
+  return {
+    type: 'PAGE_SCROLLED',
+    payload: {
+      position: position,
+      pageId: pageId
+    }
+  };
+};
+
 function articlesLoaded(items) {
   return {
     type: 'ARTICLES_LOADED',
@@ -64,4 +74,4 @@ function postArticle(source_url, handleSuccess, handleFail) {
     .catch(handleFail);
 }
 
-export { loadArticle, loadArticles, addArticle }
+export { loadArticle, loadArticles, addArticle, pageScrolled }
