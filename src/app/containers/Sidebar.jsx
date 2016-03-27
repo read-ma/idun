@@ -64,9 +64,11 @@ class UserCustomDefinition extends Component {
       <li className="card">
         <ul className="collection with-header">
           <li className="collection-header">
-            <h5>Your definitions</h5>
-            <input type="text" onChange={this.handleInputChange} name="translation" value={this.state.translation} placeholder='add your own translation here'/>
-            <i className="material-icons" onClick={this.saveUserDefinition}>add</i>
+            <h5>Add your definition</h5>
+          </li>
+          <li className="collection-item">
+            <input className="col s11" type="text" onChange={this.handleInputChange} name="translation" value={this.state.translation} placeholder='My definition' />
+            <i className="material-icons col s1 add-definition-button" onClick={this.saveUserDefinition}>add</i>
           </li>
           {definitions}
         </ul>
