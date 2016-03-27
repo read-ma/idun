@@ -7,6 +7,11 @@ import { textSelected } from '../actions';
 import { Wordlists, DefinitionBoxes } from '../components';
 import classnames from 'classnames';
 import LanguageBar from '../components/LanguageSelection';
+import {saveUserDefinition} from '../actions';
+
+const ProgressBar = () => {
+  return (<div className="progress"> <div className="indeterminate"></div> </div>);
+}
 
 const Sidebar = React.createClass({
   getInitialState: function() {
@@ -19,12 +24,7 @@ const Sidebar = React.createClass({
     return (
       <div className='sidebar'>
         <ul>
-          <li className={classnames('card',{hidden: !this.state.settingVisible})} ref="settingsPanel" >
-            <Wordlists handleSelected={this.handleWordListSelected} wordlists={this.props.wordlists} header="Choose highlighting"/>
-            <LanguageBar />
-          </li>
-
-          <UserCustomDefinition userDefinitions={this.props.userDefinitions} selectedText={this.props.selectedText} />
+          <UserCustomDefinition userDefinitions={this.props.userDefinitions} selectedText={this.props.selectedText} saveUserDefinition={this.props.saveUserDefinition}/>
           <li><DefinitionBoxes /></li>
         </ul>
       </div>
@@ -37,6 +37,8 @@ class UserCustomDefinition extends Component {
   constructor(props){
     super(props);
     this.state = {userDefinitions: []};
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.saveUserDefinition = this.saveUserDefinition.bind(this);
   }
 
   componentWillReceiveProps(nextProps){
@@ -45,22 +47,31 @@ class UserCustomDefinition extends Component {
     this.setState({userDefinitions:  definitions});
   }
 
+  saveUserDefinition(){
+    this.props.saveUserDefinition(this.props.selectedText, {translation: this.state.translation});
+    this.setState(Object.assign({},this.state, {translation: ''}));
+  }
+
+  handleInputChange(event){
+    this.setState({[event.target.name] : event.target.value});
+  }
+
   render() {
-    if (this.state.userDefinitions.length > 0){
-      let definitions = this.state.userDefinitions.map(def => <li key={def.translation} className="collection-item" dangerouslySetInnerHTML={{__html: def.translation}} />);
-      return (
-        <li className="card">
-          <ul className="collection with-header">
-            <li className="collection-header">
-              <h5>Your definition</h5>
-            </li>
-            {definitions}
-          </ul>
-        </li>
-      );
-    }
-    else
-      return false;
+    if (!this.props.selectedText) return false;
+
+    let definitions = this.state.userDefinitions.map(def => <li key={def.translation} className="collection-item" dangerouslySetInnerHTML={{__html: def.translation}} />);
+    return (
+      <li className="card">
+        <ul className="collection with-header">
+          <li className="collection-header">
+            <h5>Your definitions</h5>
+            <input type="text" onChange={this.handleInputChange} name="translation" value={this.state.translation} placeholder='add your own translation here'/>
+            <i className="material-icons" onClick={this.saveUserDefinition}>add</i>
+          </li>
+          {definitions}
+        </ul>
+      </li>
+    );
   }
 }
 
@@ -70,7 +81,16 @@ function mapStateToProps(state){
     wordlists: state.wordlists,
     userDefinitions: state.main.userDefinitions
   };
-
 }
 
-export default connect(mapStateToProps)(Sidebar);
+const mapActionsToProps = (dispatch) => {
+  return {
+    saveUserDefinition(word, definition) {
+      dispatch(
+        saveUserDefinition(Object.assign({}, {word: word}, definition))
+      );
+    }
+  };
+}
+
+export default connect(mapStateToProps, mapActionsToProps)(Sidebar);
