@@ -47,7 +47,8 @@ class UserCustomDefinition extends Component {
     this.setState({userDefinitions:  definitions});
   }
 
-  saveUserDefinition(){
+  saveUserDefinition(event){
+    event.preventDefault();
     this.props.saveUserDefinition(this.props.selectedText, {translation: this.state.translation});
     this.setState(Object.assign({},this.state, {translation: ''}));
   }
@@ -66,9 +67,12 @@ class UserCustomDefinition extends Component {
           <li className="collection-header">
             <h5>Add your definition</h5>
           </li>
-          <li className="collection-item">
-            <input className="col s11" type="text" onChange={this.handleInputChange} name="translation" value={this.state.translation} placeholder='My definition' />
-            <i className="material-icons col s1 add-definition-button" onClick={this.saveUserDefinition}>add</i>
+          <li className="collection-item row">
+            <form onSubmit={this.saveUserDefinition}>
+              <input className="col s11" type="text" onChange={this.handleInputChange} name="translation" value={this.state.translation} placeholder='My definition' required='required' />
+              <i className="settings-trigger material-icons col s1 add-definition-button" onClick={this.saveUserDefinition}>add</i>
+              <input className='hidden' type="submit" />
+            </form>
           </li>
           {definitions}
         </ul>
@@ -88,6 +92,7 @@ function mapStateToProps(state){
 const mapActionsToProps = (dispatch) => {
   return {
     saveUserDefinition(word, definition) {
+      if (!definition.translation) return;
       dispatch(
         saveUserDefinition(Object.assign({}, {word: word}, definition))
       );
