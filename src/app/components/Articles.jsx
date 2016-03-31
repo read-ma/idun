@@ -149,6 +149,10 @@ class Articles extends Component {
     );
   }
 
+  restorePagePosition() {
+    window.scrollTo(0,0);
+  }
+
   componentWillReceiveProps(nextProps){
     this.setState({
       articles: nextProps.articles
@@ -157,6 +161,7 @@ class Articles extends Component {
 
   componentDidMount() {
     this.props.dispatch(loadArticles());
+    this.restorePagePosition();
   }
 
   render() {

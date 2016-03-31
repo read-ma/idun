@@ -10,15 +10,20 @@ function contentLoaded(type, data){
 }
 
 const sanitizeText = text =>
-        escape(text
+        (text
                .replace(/’/g, '\'')
                .replace(/\./g, ' '));
 
 function findWordData(text, type, options={}){
-  let params = Object.assign({}, options, {type: type}, Language.keysOfCurrent());
+  let params = Object.assign(
+    {},
+    options,
+    {query: sanitizeText(text)},
+    {type: type},
+    Language.keysOfCurrent());
 
   return (dispatch) => {
-    api.get(`/translate/${sanitizeText(text)}.json`, {params: params})
+    api.get(`/translate/${type}.json`, {params: params})
       .then( response => dispatch(contentLoaded(type, response.data)))
       .catch( error => {
         console.log(error);

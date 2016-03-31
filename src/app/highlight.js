@@ -29,6 +29,7 @@ function cleanUpHighlighting(text) {
 //     words: <String>[],
 //     name: String
 // }
+
 function highlightText({text, wordlists}) {
   let result = text;
 

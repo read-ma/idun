@@ -12,7 +12,7 @@ var config = {
   },
   externals: {
     'Config': JSON.stringify({
-      apiUrl: 'http://idun-eu-2.herokuapp.com/api'
+      apiUrl: 'http://readma.logdock.com/api'
     })
   },
 

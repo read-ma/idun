@@ -39,7 +39,7 @@ $header-height: 64px;
   }
 
   .collection-item .flag-icon {
-    margin: 1px 5px 0 0;
+    margin: 3px 5px 0 0;
   }
 
   .box-body {
@@ -61,6 +61,10 @@ $header-height: 64px;
       }
     }
   }
+}
+
+.add-definition-button {
+  line-height: 50px;
 }
 
 .hidden {
