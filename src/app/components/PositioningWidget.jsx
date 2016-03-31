@@ -24,7 +24,8 @@ class PositioningWidget extends Component {
   }
 
   handleScroll(event){
-    this.props.pageScrolled(this.props.pageId, event.srcElement.body.scrollTop);
+    let target = event.target || event.srcElement;
+    this.props.pageScrolled(this.props.pageId, target.body.scrollTop);
   }
 
   render(){

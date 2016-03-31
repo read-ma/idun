@@ -9,3 +9,4 @@ npm-debug.log
 /.tern-port
 /src/app/.tern-port
 /src/app/reducers/.tern-port
+/.projectile
