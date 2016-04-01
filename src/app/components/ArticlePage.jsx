@@ -24,7 +24,7 @@ class Word extends Component{
   render() {
     const word = this.props.word;
     const klass = classnames('word', {selected: this.props.selected, marked: this.props.marked, 'user-selected': this.props.userSelected });
-    if (word.match(/(\.?\,? )|(\.)/) || word.length === 0){
+    if (word.match(/(\.?\,?\s)|(\.)/) || word.length === 0){
       let separator = word;
       return <span>{separator}</span>;
     } else {
@@ -78,7 +78,7 @@ class ArticleContent extends Component {
   convertTextIntoWords(text) {
     let wordsRegex = new RegExp(''
       + /[\w|'|*|-]+/.source     //words
-      + /|(\.?\,? )/.source      //seperators
+      + /|(\.?\,?\s)/.source      //seperators
       + /|(\.)/.source           //dot on end of sentence
       , 'g'
     );
