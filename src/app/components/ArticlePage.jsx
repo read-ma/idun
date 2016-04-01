@@ -97,7 +97,12 @@ class ArticleContent extends Component {
 
   render() {
     let articleText = this.props.text;
-    let articleHtml = $.parseXML(`<div id='tmpArticle'>${this.props.text}</div>`);
+    let articleHtml;
+    if (DOMParser) {
+      articleHtml = (new DOMParser()).parseFromString(`<div id='tmpArticle'>${this.props.text}</div>`, 'text/html');
+    } else {
+      articleHtml = $.parseXML(`<div id='tmpArticle'>${this.props.text}</div>`);
+    }
     let article = this.walkTheDOM(articleHtml.getElementById("tmpArticle"), this.convertTextIntoWords);
 
     return (
