@@ -28,7 +28,7 @@ class Word extends Component{
       let separator = word;
       return <span>{separator}</span>;
     } else {
-      return (<span className={klass} key={word} onClick={this.selectWord}>{word}</span>);
+      return (<span className={klass} onClick={this.selectWord}>{word}</span>);
     }
   }
 }
@@ -64,11 +64,15 @@ class ArticleContent extends Component {
         return this.walkTheDOM(childNode, func);
       }
     });
-    return (
-      <node.nodeName>
-        {childsContent}
-      </node.nodeName>
-    )
+    let attributes = {};
+    Array.from(node.attributes).map(attr => {
+      attributes[attr.name] = attr.value;
+    })
+    if (node.nodeName === 'img') {
+      return React.createElement(node.nodeName, attributes);
+    } else {
+      return React.createElement(node.nodeName, attributes, childsContent);
+    }
   }
 
   convertTextIntoWords(text) {
@@ -78,14 +82,17 @@ class ArticleContent extends Component {
       + /|(\.)/.source           //dot on end of sentence
       , 'g'
     );
+    //'
     let words = text.match(wordsRegex);
-    const wordComponents = words.map((word => {
-      const selected = this.includeWordFrom(word, 'selection');
-      const marked = this.includeWordFrom(word, 'd3k');
-      const userSelected = this.includeWordFrom(word, 'user');
-      return (<Word word={word} selected={selected} marked={marked} userSelected={userSelected} onTextSelected={this.props.onTextSelected} />);
-    }));
-    return wordComponents;
+    if (words) {
+      const wordComponents = words.map((word) => {
+        const selected = this.includeWordFrom(word, 'selection');
+        const marked = this.includeWordFrom(word, 'd3k');
+        const userSelected = this.includeWordFrom(word, 'user');
+        return (<Word word={word} selected={selected} marked={marked} userSelected={userSelected} onTextSelected={this.props.onTextSelected} />);
+      });
+      return wordComponents;
+    }
   }
 
   render() {
