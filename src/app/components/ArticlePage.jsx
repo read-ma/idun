@@ -40,6 +40,8 @@ class ArticleContent extends Component {
       text: (highlightText(props) || '')
     };
     this.getTextFromSelection = this.getTextFromSelection.bind(this);
+    this.walkTheDOM = this.walkTheDOM.bind(this);
+    this.convertTextIntoWords = this.convertTextIntoWords.bind(this);
   }
 
   componentWillReceiveProps(nextProps){
@@ -61,18 +63,40 @@ class ArticleContent extends Component {
     this.props.onTextSelected(getSelectedText());
   }
 
-  render() {
-    const text ="Idun (pronounced “EE-done;” from Old Norse Iðunn, “The Rejuvenating One”[1]) is a goddess who belongs to the Aesir tribe of deities. Her role in the pre-Christian mythology and religion of the Norse and other Germanic peoples is unfortunately obscure, but she features prominently in one of the best-known mythological tales, The Kidnapping of Idun. In this tale, which comes to us from the skaldic poem Haustlöng and the Prose Edda, Idun is depicted as the owner and dispenser of a fruit that imparts immortality. In modern books on Norse mythology, these fruits are almost invariably considered to be apples, but this wasn’t necessarily the case in heathen times. The Old Norse word for “apple,” epli, was often used to denote any fruit or nut, and “apples” in the modern English sense didn’t arrive in Scandinavia until late in the Middle Ages.[2] Whatever species Idun’s produce belongs to, its ability to sustain the immortality of the gods and goddesses makes Idun an indispensable presence in Asgard."
-    const words = text.split(/(<([^>]+)>| )/);
+  walkTheDOM(node, func) {
+    let childsContent = Array.from(node.childNodes).map( (childNode) => {
+      if (childNode.nodeType == document.TEXT_NODE){
+        return func(childNode.nodeValue);
+      } else {
+        return this.walkTheDOM(childNode, func);
+      }
+    });
+    return (
+      <node.nodeName>
+        {childsContent}
+      </node.nodeName>
+    )
+  }
+
+  convertTextIntoWords(text) {
     const wordComponents = text.split(' ').map((word => {
       const selected = this.includeWordFrom(word, 'selection');
       const marked = this.includeWordFrom(word, 'd3k');
       const userSelected = this.includeWordFrom(word, 'user');
       return (<Word word={word} selected={selected} marked={marked} userSelected={userSelected} onTextSelected={this.props.onTextSelected} />);
     }));
+    return wordComponents;
+  }
+
+  render() {
+    let articleText = this.props.text;
+    let parser= new DOMParser();
+    let articleHtml = parser.parseFromString(`<div id='tmpArticle'>${this.props.text}</div>`, "text/html");
+    let article = this.walkTheDOM(articleHtml.getElementById("tmpArticle"), this.convertTextIntoWords);
+
     return (
       <div className="content flow-text" onMouseUp={this.getTextFromSelection}>
-        {wordComponents}
+        {article}
       </div>
     );
   }
