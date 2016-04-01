@@ -9,6 +9,7 @@ import Sidebar from '../containers/Sidebar';
 import PositioningWidget from './PositioningWidget';
 import classnames from 'classnames';
 import _ from 'lodash';
+import moment from 'moment';
 
 class Word extends Component{
   constructor(props) {
@@ -88,11 +89,17 @@ class ArticleContent extends Component {
     return wordComponents;
   }
 
+  benchmark(label) {
+    console.log(label + moment().format("h:mm:ss SS"));
+  }
+
   render() {
     let articleText = this.props.text;
-    let parser= new DOMParser();
-    let articleHtml = parser.parseFromString(`<div id='tmpArticle'>${this.props.text}</div>`, "text/html");
+    // this.benchmark("Render start   ");
+    let articleHtml = $.parseXML(`<div id='tmpArticle'>${this.props.text}</div>`);
+    // this.benchmark("Render parsexml");
     let article = this.walkTheDOM(articleHtml.getElementById("tmpArticle"), this.convertTextIntoWords);
+    // this.benchmark("Render words   ");
 
     return (
       <div className="content flow-text" onMouseUp={this.getTextFromSelection}>
