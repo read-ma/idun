@@ -68,7 +68,7 @@ class ArticleContent extends Component {
     Array.from(node.attributes).map(attr => {
       attributes[attr.name] = attr.value;
     })
-    if (node.nodeName === 'img') {
+    if (node.nodeName.toLowerCase() === 'img') {
       return React.createElement(node.nodeName, attributes);
     } else {
       return React.createElement(node.nodeName, attributes, childsContent);
