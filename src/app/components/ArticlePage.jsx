@@ -24,12 +24,12 @@ class Word extends Component{
   render() {
     const word = this.props.word;
     const klass = classnames('word', {selected: this.props.selected, marked: this.props.marked, 'user-selected': this.props.userSelected });
-    return (
-      <span>
-        <span className={klass} key={word} onClick={this.selectWord}>{word}</span>
-        <span> </span>
-      </span>
-    );
+    if (word.match(/(\.?\,? )/)){
+      let separator = word;
+      return <span>{separator}</span>;
+    } else {
+      return (<span className={klass} key={word} onClick={this.selectWord}>{word}</span>);
+    }
   }
 }
 
@@ -72,7 +72,8 @@ class ArticleContent extends Component {
   }
 
   convertTextIntoWords(text) {
-    const wordComponents = text.split(' ').map((word => {
+    let words = text.match(/[\w|']+|(\.?\,? )/g);
+    const wordComponents = words.map((word => {
       const selected = this.includeWordFrom(word, 'selection');
       const marked = this.includeWordFrom(word, 'd3k');
       const userSelected = this.includeWordFrom(word, 'user');
