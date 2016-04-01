@@ -46,20 +46,45 @@ nav ul a, nav .brand-logo {
 }
 
 .article {
+  .content {
+    line-height: 185%;
+    font-size: 1.13em;
+    .word {
+      cursor: pointer;
+      &:hover{
+        background-color: lighten(#f8bbd0, 10%) !important;
+        border-radius: 5px;
+      }
+      &.selected {
+        background-color: #f8bbd0 !important;
+      }
+      &.marked{
+        background-color: lightgreen;
+      }
+      &.user-selected {
+        border-bottom: solid 3px #ef5350;
+      }
+    }
+  };
+  h1 {
+      font-size: 1.64rem;
+      line-height: 1.804rem;
+      margin: 0.82rem 0 0.656rem 0;
+  };
   mark {
-    background-color: inherit;
-    color: inherit;
-    &.selection {
-      background-color: #f8bbd0;
-    }
-    &.user {
-      border-bottom: solid 3px #ef5350;
-    }
-    &.d3k {
-      background-color: lightgreen;
-    }
-  }
-}
+      background-color: inherit;
+      color: inherit;
+      &.selection {
+          background-color: #f8bbd0;
+      };
+      &.user {
+          border-bottom: solid 3px #ef5350;
+      };
+      &.d3k {
+          background-color: lightgreen;
+      };
+  };
+};
 
 .error {
   color: red;

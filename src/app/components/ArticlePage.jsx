@@ -7,20 +7,104 @@ import { Link } from 'react-router';
 import { highlightText, getSelectedText } from '../highlight';
 import Sidebar from '../containers/Sidebar';
 import PositioningWidget from './PositioningWidget';
+import classnames from 'classnames';
+import _ from 'lodash';
+import moment from 'moment';
+
+class Word extends Component{
+  constructor(props) {
+    super(props);
+    this.state = {selected: false};
+    this.selectWord = this.selectWord.bind(this);
+  }
+
+  selectWord() {
+    this.props.onTextSelected(this.props.word)
+  }
+
+  render() {
+    const word = this.props.word;
+    const klass = classnames('word', {selected: this.props.selected, marked: this.props.marked, 'user-selected': this.props.userSelected });
+    return (
+      <span>
+        <span className={klass} key={word} onClick={this.selectWord}>{word}</span>
+        <span> </span>
+      </span>
+    );
+  }
+}
 
 class ArticleContent extends Component {
   constructor(props) {
     super(props);
-    this.state = {text: highlightText(props)};
+    this.state = {
+      text: (highlightText(props) || '')
+    };
+    this.getTextFromSelection = this.getTextFromSelection.bind(this);
+    this.walkTheDOM = this.walkTheDOM.bind(this);
+    this.convertTextIntoWords = this.convertTextIntoWords.bind(this);
   }
 
   componentWillReceiveProps(nextProps){
     this.setState( { text: highlightText(nextProps) } );
   }
 
-  render(){
+  includeWordFrom(word, wordlistName) {
+    const wordlist = _.find(this.props.wordlists, ['name', wordlistName]);
+    if (wordlistName === 'selection') {
+      const words = wordlist.words[0] ? wordlist.words[0].split(' ') : [];
+      return wordlist && wordlist.enabled && _.includes(words, word);
+    } else {
+      return wordlist && wordlist.enabled && _.includes(wordlist.words, word);
+    }
+  }
+
+  getTextFromSelection() {
+    if (!getSelectedText().trim()) return;
+    this.props.onTextSelected(getSelectedText());
+  }
+
+  walkTheDOM(node, func) {
+    let childsContent = Array.from(node.childNodes).map( (childNode) => {
+      if (childNode.nodeType == document.TEXT_NODE){
+        return func(childNode.nodeValue);
+      } else {
+        return this.walkTheDOM(childNode, func);
+      }
+    });
     return (
-      <div className="content flow-text" onMouseUp={this.props.onTextSelected} dangerouslySetInnerHTML={{__html: this.state.text}}></div>
+      <node.nodeName>
+        {childsContent}
+      </node.nodeName>
+    )
+  }
+
+  convertTextIntoWords(text) {
+    const wordComponents = text.split(' ').map((word => {
+      const selected = this.includeWordFrom(word, 'selection');
+      const marked = this.includeWordFrom(word, 'd3k');
+      const userSelected = this.includeWordFrom(word, 'user');
+      return (<Word word={word} selected={selected} marked={marked} userSelected={userSelected} onTextSelected={this.props.onTextSelected} />);
+    }));
+    return wordComponents;
+  }
+
+  benchmark(label) {
+    console.log(label + moment().format("h:mm:ss SS"));
+  }
+
+  render() {
+    let articleText = this.props.text;
+    // this.benchmark("Render start   ");
+    let articleHtml = $.parseXML(`<div id='tmpArticle'>${this.props.text}</div>`);
+    // this.benchmark("Render parsexml");
+    let article = this.walkTheDOM(articleHtml.getElementById("tmpArticle"), this.convertTextIntoWords);
+    // this.benchmark("Render words   ");
+
+    return (
+      <div className="content flow-text" onMouseUp={this.getTextFromSelection}>
+        {article}
+      </div>
     );
   }
 };
@@ -51,11 +135,9 @@ class ArticlePage extends Component {
     this.props.dispatch(loadUserDefinitions());
   }
 
-  onTextSelected(){
-    if (!getSelectedText().trim()) return;
-
+  onTextSelected(text){
     this.props.dispatch(
-      textSelected(getSelectedText())
+      textSelected(text)
     );
   }
 
@@ -84,7 +166,7 @@ class ArticlePage extends Component {
 }
 
 function mapStateToProps(state) {
-  return Object.assign({}, state.article, {wordlists: state.wordlists});
+  return Object.assign({}, state.article, {wordlists: state.wordlists, selectedText: state.selectedText});
 
 };
 
