@@ -4,12 +4,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { loadArticle, textSelected, loadUserDefinitions } from '../actions';
 import { Link } from 'react-router';
-import { highlightText, getSelectedText } from '../highlight';
+import { getSelectedText } from '../highlight';
 import Sidebar from '../containers/Sidebar';
 import PositioningWidget from './PositioningWidget';
 import classnames from 'classnames';
 import _ from 'lodash';
-import moment from 'moment';
 
 class Word extends Component{
   constructor(props) {
@@ -37,16 +36,9 @@ class Word extends Component{
 class ArticleContent extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      text: (highlightText(props) || '')
-    };
     this.getTextFromSelection = this.getTextFromSelection.bind(this);
     this.walkTheDOM = this.walkTheDOM.bind(this);
     this.convertTextIntoWords = this.convertTextIntoWords.bind(this);
-  }
-
-  componentWillReceiveProps(nextProps){
-    this.setState( { text: highlightText(nextProps) } );
   }
 
   includeWordFrom(word, wordlistName) {
@@ -89,17 +81,10 @@ class ArticleContent extends Component {
     return wordComponents;
   }
 
-  benchmark(label) {
-    console.log(label + moment().format("h:mm:ss SS"));
-  }
-
   render() {
     let articleText = this.props.text;
-    // this.benchmark("Render start   ");
     let articleHtml = $.parseXML(`<div id='tmpArticle'>${this.props.text}</div>`);
-    // this.benchmark("Render parsexml");
     let article = this.walkTheDOM(articleHtml.getElementById("tmpArticle"), this.convertTextIntoWords);
-    // this.benchmark("Render words   ");
 
     return (
       <div className="content flow-text" onMouseUp={this.getTextFromSelection}>
