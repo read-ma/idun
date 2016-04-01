@@ -77,7 +77,7 @@ class ArticleContent extends Component {
 
   convertTextIntoWords(text) {
     let wordsRegex = new RegExp(''
-      + /[\w|']+/.source         //words
+      + /[\w|'|*|-]+/.source     //words
       + /|(\.?\,? )/.source      //seperators
       + /|(\.)/.source           //dot on end of sentence
       , 'g'
