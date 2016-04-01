@@ -50,9 +50,12 @@ nav ul a, nav .brand-logo {
     line-height: 185%;
     .word {
       cursor: pointer;
+      &:hover, &.selected, &.marked {
+        padding: 1px 4px;
+        margin: 0 -4px;
+      }
       &:hover{
         background-color: lighten(#f8bbd0, 10%) !important;
-        border-radius: 5px;
       }
       &.selected {
         background-color: #f8bbd0 !important;
