@@ -24,7 +24,7 @@ class Word extends Component{
   render() {
     const word = this.props.word;
     const klass = classnames('word', {selected: this.props.selected, marked: this.props.marked, 'user-selected': this.props.userSelected });
-    if (word.match(/(\.?\,? )/)){
+    if (word.match(/(\.?\,? )|(\.)/) || word.length === 0){
       let separator = word;
       return <span>{separator}</span>;
     } else {
@@ -72,7 +72,13 @@ class ArticleContent extends Component {
   }
 
   convertTextIntoWords(text) {
-    let words = text.match(/[\w|']+|(\.?\,? )/g);
+    let wordsRegex = new RegExp(''
+      + /[\w|']+/.source         //words
+      + /|(\.?\,? )/.source      //seperators
+      + /|(\.)/.source           //dot on end of sentence
+      , 'g'
+    );
+    let words = text.match(wordsRegex);
     const wordComponents = words.map((word => {
       const selected = this.includeWordFrom(word, 'selection');
       const marked = this.includeWordFrom(word, 'd3k');
