@@ -84,14 +84,14 @@ class ArticleContent extends Component {
   }
 
   componentWillReceiveProps(nextProps){
-    let article = prepareArticle(nextProps.text, this.tokenize, nextProps.wordlists);
-    this.setState({ article: article })
+    //this.setState({ article: article })
   }
 
   render() {
+    let article = prepareArticle(this.props.text, this.tokenize, this.props.wordlists);
     return (
       <div className="content flow-text" onMouseUp={this.getTextFromSelection}>
-        {this.state.article}
+        {article}
       </div>
     );
   }
