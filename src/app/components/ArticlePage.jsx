@@ -4,63 +4,77 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { loadArticle, textSelected, loadUserDefinitions } from '../actions';
 import { Link } from 'react-router';
-import { getSelectedText } from '../highlight';
+import { getSelectedText, highlightText } from '../highlight';
+import { walkTheDOM } from '../DOMUtils';
 import Sidebar from '../containers/Sidebar';
 import PositioningWidget from './PositioningWidget';
 import classnames from 'classnames';
 import _ from 'lodash';
 
 class Word extends Component{
-  constructor(props) {
+  constructor(props){
     super(props);
     this.state = {selected: false};
-    this.selectWord = this.selectWord.bind(this);
+  }
+  render() {
+    return (
+      <span className={classnames('word', this.props.className, {selected: this.state.selected})} onClick={this.selectWord.bind(this)}>
+        {this.props.word}
+      </span>);
   }
 
   selectWord() {
-    this.props.onTextSelected(this.props.word)
-  }
-
-  render() {
-    const word = this.props.word;
-    const klass = classnames('word', {selected: this.props.selected, marked: this.props.marked, 'user-selected': this.props.userSelected });
-    return (<span className={klass} onClick={this.selectWord}>{word}</span>);
+    this.setState({selected: true});
+    this.props.onClick(this.props.word);
   }
 }
+
+const WORDS_REGEX = /[\w|'|*|-|\’—]+/;
+const SEPARATOR_REGEX = /|(.?\,?\s)/;
+const STOP_REGEX = /|(\.)/;
+const SENTENCE_REGEX = new RegExp(WORDS_REGEX.source + SEPARATOR_REGEX.source + STOP_REGEX.source, 'g');
+
+const domParser = html => DOMParser ? (new DOMParser()).parseFromString(html, 'text/html') : $.parseXML(html);
+const isSeparator = token => token.match(/([\,\.\—\—]?\s)/) || token.length === 0;
+
+const prepareArticle = (text, tokenize, wordlists) => {
+  let articleHtml = domParser(`<div id='tmpArticle'>${highlightText({ text,wordlists })}</div>`);
+  return walkTheDOM(articleHtml.getElementById("tmpArticle"), tokenize);
+};
 
 class ArticleContent extends Component {
   constructor(props) {
     super(props);
     this.getTextFromSelection = this.getTextFromSelection.bind(this);
-    this.walkTheDOM = this.walkTheDOM.bind(this);
-    this.convertTextIntoWords = this.convertTextIntoWords.bind(this);
+    this.tokenize = this.tokenize.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+    this.wrapToken = this.wrapToken.bind(this);
+
+    this.currentTimeout = undefined;
+    this.state = {selection: []};
   }
 
-  includeWordFrom(word, wordlistName) {
-    const wordlist = _.find(this.props.wordlists, ['name', wordlistName]);
-    return wordlist && wordlist.enabled && _.includes(wordlist.words, word);
+  handleClick(word) {
+    this.setState({selection: [...this.state.selection, word]});
+
+    window.clearTimeout(this.currentTimeout);
+    this.currentTimeout = window.setTimeout(() => {
+      let selectedText = this.state.selection.join(' ');
+
+      this.setState({selection: []});
+      this.props.onTextSelected(selectedText);
+    }, 1000);
   }
 
-  hasManyWordsSelected(wordlistName) {
-    const wordlist = _.find(this.props.wordlists, ['name', wordlistName]);
-    return wordlist.words[0] && wordlist.words[0].split(' ').length > 1
-  }
+  tokenize(text){
+    return text.match(SENTENCE_REGEX).map(this.wrapToken);
+  };
 
-  includeSentenceFrom(word, words, startPoint, wordlistName) {
-    const wordlist = _.find(this.props.wordlists, ['name', wordlistName]);
-    const selectedWords = wordlist.words[0] ? wordlist.words[0].split(' ') : [];
-    if (this.selectedWordsLeft.length > 0) {
-      if (word === this.selectedWordsLeft[0]) {
-        this.selectedWordsLeft = this.selectedWordsLeft.slice(1);
-        return true;
-      } else {
-        console.log("Multi word selection: there is something wrong");
-      }
-    } else {
-      if (words.slice(startPoint).join('').indexOf(wordlist.words[0]) == 0){
-        this.selectedWordsLeft = selectedWords.slice(1);
-        return true;
-      }
+  wrapToken(token) {
+    if (isSeparator(token))
+      return (<span>{token}</span>);
+    else {
+      return (<Word word={token} onClick={this.handleClick} />);
     }
   }
 
@@ -69,68 +83,23 @@ class ArticleContent extends Component {
     this.props.onTextSelected(getSelectedText());
   }
 
-  walkTheDOM(node, func) {
-    let childsContent = Array.from(node.childNodes).map( (childNode) => {
-      if (childNode.nodeType == document.TEXT_NODE){
-        return func(childNode.nodeValue);
-      } else {
-        return this.walkTheDOM(childNode, func);
-      }
-    });
-    let attributes = {};
-    Array.from(node.attributes).map(attr => {
-      attributes[attr.name] = attr.value;
-    })
-    if (node.nodeName.toLowerCase() === 'img') {
-      return React.createElement(node.nodeName, attributes);
-    } else {
-      return React.createElement(node.nodeName, attributes, childsContent);
-    }
-  }
-
-  convertTextIntoWords(text) {
-    let wordsRegex = new RegExp(''
-      + /[\w|'|*|-]+/.source     //words
-      + /|(\.?\,?\s)/.source      //seperators
-      + /|(\.)/.source           //dot on end of sentence
-      , 'g'
-    );
-    //'
-    let words = text.match(wordsRegex);
-    if (words) {
-      const wordComponents = words.map((word, i, words) => {
-        if (word.match(/(\.?\,?\s)|(\.)/) || word.length === 0){
-          let separator = word;
-          return <span>{separator}</span>;
-        } else {
-          const selected = this.hasManyWordsSelected('selection') ? this.includeSentenceFrom(word, words, i, 'selection') : this.includeWordFrom(word, 'selection');
-          const marked = this.includeWordFrom(word, 'd3k');
-          const userSelected = this.includeWordFrom(word, 'user');
-          return (<Word word={word} selected={selected} marked={marked} userSelected={userSelected} onTextSelected={this.props.onTextSelected} />);
-        }
-      });
-      this.selectedWordsLeft = [];
-      return wordComponents;
-    }
+  componentWillReceiveProps(nextProps){
+    let article = prepareArticle(nextProps.text, this.tokenize, nextProps.wordlists);
+    this.setState({ article: article })
   }
 
   render() {
-    let articleText = this.props.text;
-    let articleHtml;
-    if (DOMParser) {
-      articleHtml = (new DOMParser()).parseFromString(`<div id='tmpArticle'>${this.props.text}</div>`, 'text/html');
-    } else {
-      articleHtml = $.parseXML(`<div id='tmpArticle'>${this.props.text}</div>`);
-    }
-    let article = this.walkTheDOM(articleHtml.getElementById("tmpArticle"), this.convertTextIntoWords);
-
     return (
       <div className="content flow-text" onMouseUp={this.getTextFromSelection}>
-        {article}
+        {this.state.article}
       </div>
     );
   }
 };
+ArticleContent.propTypes = {
+  text: React.PropTypes.string.isRequired
+};
+
 
 const ArticleTitle = ({title, source_url}) => {
   return (
@@ -158,12 +127,6 @@ class ArticlePage extends Component {
     this.props.dispatch(loadUserDefinitions());
   }
 
-  onTextSelected(text){
-    this.props.dispatch(
-      textSelected(text)
-    );
-  }
-
   getArticleContent(){
     return ['<h1>', this.props.title, '</h1>', this.props.content].join(' ');
   }
@@ -175,7 +138,7 @@ class ArticlePage extends Component {
         <div className="row">
           <div className="col s12 m7 article-wrapper">
             <article className="article">
-              <ArticleContent text={this.getArticleContent()} onTextSelected={this.onTextSelected.bind(this)} wordlists={this.props.wordlists} />
+              <ArticleContent text={this.getArticleContent()} onTextSelected={this.props.onTextSelected} wordlists={this.props.wordlists} />
               <ArticleFooter source_url={this.props.source_url} />
             </article>
           </div>
@@ -188,9 +151,15 @@ class ArticlePage extends Component {
   }
 }
 
+const mapActionsToProps = (dispatch) => {
+  return {
+    onTextSelected: (text) => { dispatch(textSelected(text)); }
+  };
+};
+
 function mapStateToProps(state) {
   return Object.assign({}, state.article, {wordlists: state.wordlists, selectedText: state.selectedText});
 
 };
 
-export default connect(mapStateToProps)(ArticlePage);
+export default connect(mapStateToProps, mapActionsToProps)(ArticlePage);
