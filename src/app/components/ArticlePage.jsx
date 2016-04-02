@@ -36,18 +36,41 @@ class Word extends Component{
 class ArticleContent extends Component {
   constructor(props) {
     super(props);
+    this.restOfSentence = [];
     this.getTextFromSelection = this.getTextFromSelection.bind(this);
     this.walkTheDOM = this.walkTheDOM.bind(this);
     this.convertTextIntoWords = this.convertTextIntoWords.bind(this);
+    // this.includeWordOrSentenceFrom = this.includeWordOrSentenceFrom.bind(this);
   }
 
   includeWordFrom(word, wordlistName) {
     const wordlist = _.find(this.props.wordlists, ['name', wordlistName]);
-    if (wordlistName === 'selection') {
-      const words = wordlist.words[0] ? wordlist.words[0].split(' ') : [];
-      return wordlist && wordlist.enabled && _.includes(words, word);
+    return wordlist && wordlist.enabled && _.includes(wordlist.words, word);
+  }
+
+
+  includeWordOrSentenceFrom(word, words, startPoint, wordlistName) {
+    const wordlist = _.find(this.props.wordlists, ['name', wordlistName]);
+    const selectedWords = wordlist.words[0] ? wordlist.words[0].split(' ') : [];
+    if (selectedWords.length > 1) {
+      let beginingOfSentence;
+      let paragraphWords = this.restOfSentence.length > 0 ? this.restOfSentence : words.slice(startPoint);
+      if (this.restOfSentence.length > 0 && this.selectedWords.length > 0) {
+        if (word === this.selectedWords[0]) {
+          this.restOfSentence = paragraphWords.slice(2);
+          this.selectedWords = this.selectedWords.slice(1);
+          return true;
+        }
+      } else {
+        beginingOfSentence = paragraphWords.join('').indexOf(wordlist.words[0]) == 0;
+        if (beginingOfSentence){
+          this.selectedWords = selectedWords.slice(1);
+          this.restOfSentence = paragraphWords.slice(2);
+          return true;
+        }
+      }
     } else {
-      return wordlist && wordlist.enabled && _.includes(wordlist.words, word);
+      return wordlist && wordlist.enabled && _.includes(selectedWords, word);
     }
   }
 
@@ -85,12 +108,14 @@ class ArticleContent extends Component {
     //'
     let words = text.match(wordsRegex);
     if (words) {
-      const wordComponents = words.map((word) => {
-        const selected = this.includeWordFrom(word, 'selection');
+      const wordComponents = words.map((word, i, words) => {
+        const selected = this.includeWordOrSentenceFrom(word, words, i, 'selection');
         const marked = this.includeWordFrom(word, 'd3k');
         const userSelected = this.includeWordFrom(word, 'user');
         return (<Word word={word} selected={selected} marked={marked} userSelected={userSelected} onTextSelected={this.props.onTextSelected} />);
       });
+      this.restOfSentence = [];
+      this.selectedWords = [];
       return wordComponents;
     }
   }
