@@ -24,23 +24,16 @@ class Word extends Component{
   render() {
     const word = this.props.word;
     const klass = classnames('word', {selected: this.props.selected, marked: this.props.marked, 'user-selected': this.props.userSelected });
-    if (word.match(/(\.?\,?\s)|(\.)/) || word.length === 0){
-      let separator = word;
-      return <span>{separator}</span>;
-    } else {
-      return (<span className={klass} onClick={this.selectWord}>{word}</span>);
-    }
+    return (<span className={klass} onClick={this.selectWord}>{word}</span>);
   }
 }
 
 class ArticleContent extends Component {
   constructor(props) {
     super(props);
-    this.restOfSentence = [];
     this.getTextFromSelection = this.getTextFromSelection.bind(this);
     this.walkTheDOM = this.walkTheDOM.bind(this);
     this.convertTextIntoWords = this.convertTextIntoWords.bind(this);
-    // this.includeWordOrSentenceFrom = this.includeWordOrSentenceFrom.bind(this);
   }
 
   includeWordFrom(word, wordlistName) {
@@ -48,29 +41,26 @@ class ArticleContent extends Component {
     return wordlist && wordlist.enabled && _.includes(wordlist.words, word);
   }
 
+  hasManyWordsSelected(wordlistName) {
+    const wordlist = _.find(this.props.wordlists, ['name', wordlistName]);
+    return wordlist.words[0] && wordlist.words[0].split(' ').length > 1
+  }
 
-  includeWordOrSentenceFrom(word, words, startPoint, wordlistName) {
+  includeSentenceFrom(word, words, startPoint, wordlistName) {
     const wordlist = _.find(this.props.wordlists, ['name', wordlistName]);
     const selectedWords = wordlist.words[0] ? wordlist.words[0].split(' ') : [];
-    if (selectedWords.length > 1) {
-      let beginingOfSentence;
-      let paragraphWords = this.restOfSentence.length > 0 ? this.restOfSentence : words.slice(startPoint);
-      if (this.restOfSentence.length > 0 && this.selectedWords.length > 0) {
-        if (word === this.selectedWords[0]) {
-          this.restOfSentence = paragraphWords.slice(2);
-          this.selectedWords = this.selectedWords.slice(1);
-          return true;
-        }
+    if (this.selectedWordsLeft.length > 0) {
+      if (word === this.selectedWordsLeft[0]) {
+        this.selectedWordsLeft = this.selectedWordsLeft.slice(1);
+        return true;
       } else {
-        beginingOfSentence = paragraphWords.join('').indexOf(wordlist.words[0]) == 0;
-        if (beginingOfSentence){
-          this.selectedWords = selectedWords.slice(1);
-          this.restOfSentence = paragraphWords.slice(2);
-          return true;
-        }
+        console.log("Multi word selection: there is something wrong");
       }
     } else {
-      return wordlist && wordlist.enabled && _.includes(selectedWords, word);
+      if (words.slice(startPoint).join('').indexOf(wordlist.words[0]) == 0){
+        this.selectedWordsLeft = selectedWords.slice(1);
+        return true;
+      }
     }
   }
 
@@ -109,13 +99,17 @@ class ArticleContent extends Component {
     let words = text.match(wordsRegex);
     if (words) {
       const wordComponents = words.map((word, i, words) => {
-        const selected = this.includeWordOrSentenceFrom(word, words, i, 'selection');
-        const marked = this.includeWordFrom(word, 'd3k');
-        const userSelected = this.includeWordFrom(word, 'user');
-        return (<Word word={word} selected={selected} marked={marked} userSelected={userSelected} onTextSelected={this.props.onTextSelected} />);
+        if (word.match(/(\.?\,?\s)|(\.)/) || word.length === 0){
+          let separator = word;
+          return <span>{separator}</span>;
+        } else {
+          const selected = this.hasManyWordsSelected('selection') ? this.includeSentenceFrom(word, words, i, 'selection') : this.includeWordFrom(word, 'selection');
+          const marked = this.includeWordFrom(word, 'd3k');
+          const userSelected = this.includeWordFrom(word, 'user');
+          return (<Word word={word} selected={selected} marked={marked} userSelected={userSelected} onTextSelected={this.props.onTextSelected} />);
+        }
       });
-      this.restOfSentence = [];
-      this.selectedWords = [];
+      this.selectedWordsLeft = [];
       return wordComponents;
     }
   }
