@@ -35,7 +35,7 @@ const STOP_REGEX = /|(\.)/;
 const SENTENCE_REGEX = new RegExp(WORDS_REGEX.source + SEPARATOR_REGEX.source + STOP_REGEX.source, 'g');
 
 const domParser = html => DOMParser ? (new DOMParser()).parseFromString(html, 'text/html') : $.parseXML(html);
-const isSeparator = token => token.match(/([\,\.\—\—]?\s)/) || token.length === 0;
+const isSeparator = token => token.match(/([\,\.]?\s)/) || token.length === 0;
 
 const prepareArticle = (text, tokenize, wordlists) => {
   let articleHtml = domParser(`<div id='tmpArticle'>${highlightText({ text,wordlists })}</div>`);
