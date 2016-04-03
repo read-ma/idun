@@ -18,7 +18,7 @@ class Word extends Component{
   }
   render() {
     return (
-      <span className={classnames('word', this.props.className, {selected: this.state.selected})} onClick={this.selectWord.bind(this)}>
+      <span className={classnames('word', this.props.className, {selected2: this.state.selected})} onClick={this.selectWord.bind(this)}>
         {this.props.word}
       </span>);
   }
@@ -38,7 +38,7 @@ const domParser = html => DOMParser ? (new DOMParser()).parseFromString(html, 't
 const isSeparator = token => token.match(/([\,\.]?\s)/) || token.length === 0;
 
 const prepareArticle = (text, tokenize, wordlists) => {
-  let articleHtml = domParser(`<div id='tmpArticle'>${highlightText({ text,wordlists })}</div>`);
+  let articleHtml = domParser(`<div id='tmpArticle'>${text}</div>`);
   return walkTheDOM(articleHtml.getElementById("tmpArticle"), tokenize);
 };
 
@@ -70,11 +70,11 @@ class ArticleContent extends Component {
     return text.match(SENTENCE_REGEX).map(this.wrapToken);
   };
 
-  wrapToken(token) {
+  wrapToken(token, i) {
     if (isSeparator(token))
       return (<span>{token}</span>);
     else {
-      return (<Word word={token} onClick={this.handleClick} />);
+      return (<Word key={`word-${i}-${token}`} word={token} onClick={this.handleClick} />);
     }
   }
 
@@ -84,14 +84,15 @@ class ArticleContent extends Component {
   }
 
   componentWillReceiveProps(nextProps){
-    //this.setState({ article: article })
+    let text = highlightText(nextProps);
+    let article = prepareArticle(text, this.tokenize, nextProps.wordlists);
+    this.setState({ article: article })
   }
 
   render() {
-    let article = prepareArticle(this.props.text, this.tokenize, this.props.wordlists);
     return (
       <div className="content flow-text" onMouseUp={this.getTextFromSelection}>
-        {article}
+        {this.state.article}
       </div>
     );
   }
