@@ -13,6 +13,11 @@ class Main extends React.Component {
     return (
       <div>
         <MainNavigaton displaySearchBar={this.displaySearchBar()} isAuthenticated={this.props.isAuthenticated} />
+
+        <div className="progress hidden">
+          <div className="indeterminate"></div>
+        </div>
+
         <main className="container">
           <div className="section">
             {this.props.children}
