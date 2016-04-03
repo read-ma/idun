@@ -55,10 +55,7 @@ class SelectedTextInput extends React.Component {
 
   handleInputKeyUp(event) {
     clearTimeout(this.timeout);
-
-    this.timeout = setTimeout(() => {
-      this.triggerSearch();
-    }, 1000);
+    this.timeout = setTimeout(this.triggerSearch.bind(this), 1000);
   }
 
   triggerSearch(event){
