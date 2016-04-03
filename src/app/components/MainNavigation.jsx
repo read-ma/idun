@@ -41,7 +41,7 @@ class SelectedTextInput extends React.Component {
   constructor(props){
     super(props);
     this.state = {text: props.text};
-    this.search = this.search.bind(this);
+    this.triggerSearch = this.triggerSearch.bind(this);
     this.timeout = null;
    }
 
@@ -55,22 +55,20 @@ class SelectedTextInput extends React.Component {
 
   handleInputKeyUp(event) {
     clearTimeout(this.timeout);
-    var eventkurwa = event;
-    debugger;
 
     this.timeout = setTimeout(() => {
-      this.handleInputChange(eventkurwa);
+      this.triggerSearch();
     }, 1000);
   }
 
-  search(event){
-    event.preventDefault();
+  triggerSearch(event){
+    if (event) event.preventDefault();
     this.props.search(this.state.text);
   }
 
   render() {
     return (
-      <form onSubmit={this.search} className="right col s4 main-navigation">
+      <form onSubmit={this.triggerSearch} className="right col s4 main-navigation">
         <div className="input-field black-text">
           <input id="search" type="search" required name="text" value={this.state.text} onKeyUp={this.handleInputKeyUp.bind(this)} onChange={this.handleInputChange.bind(this)} />
           <label htmlFor="search"><i className="material-icons black-text">search</i></label>
@@ -95,7 +93,7 @@ const mapStateToProps = state => {
 const mapActionsToProps = dispatch => {
   return {
     handleSearch (text) {
-      dispatch(textSelected(text));
+      if (text) dispatch(textSelected(text));
     }
   };
 };
