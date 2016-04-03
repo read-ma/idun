@@ -13,7 +13,6 @@ const MainNavigation = ({selectedText, handleSearch, displaySearchBar}) => {
     <div className="navbar-fixed">
       <nav className="white row">
         <div className="nav-wrapper container">
-          {/* FIXME 1: "Navigator" Placeholder #1 */}
           <ul className="left hide-on-med-and-down">
             <li><Link to='/articles'>Articles</Link></li>
             <li><Link to='/learn'>Learn</Link></li>
@@ -43,7 +42,8 @@ class SelectedTextInput extends React.Component {
     super(props);
     this.state = {text: props.text};
     this.search = this.search.bind(this);
-  }
+    this.timeout = null;
+   }
 
   componentWillReceiveProps({text}){
     this.setState({text});
@@ -51,6 +51,16 @@ class SelectedTextInput extends React.Component {
 
   handleInputChange(event){
     this.setState({[event.target.name]: event.target.value});
+  }
+
+  handleInputKeyUp(event) {
+    clearTimeout(this.timeout);
+    var eventkurwa = event;
+    debugger;
+
+    this.timeout = setTimeout(() => {
+      this.handleInputChange(eventkurwa);
+    }, 1000);
   }
 
   search(event){
@@ -62,7 +72,7 @@ class SelectedTextInput extends React.Component {
     return (
       <form onSubmit={this.search} className="right col s4 main-navigation">
         <div className="input-field black-text">
-          <input id="search" type="search" required name="text" value={this.state.text} onChange={this.handleInputChange.bind(this)} />
+          <input id="search" type="search" required name="text" value={this.state.text} onKeyUp={this.handleInputKeyUp.bind(this)} onChange={this.handleInputChange.bind(this)} />
           <label htmlFor="search"><i className="material-icons black-text">search</i></label>
           <TTSPlayer />
 
