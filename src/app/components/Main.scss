@@ -73,6 +73,10 @@ $d3k-bg: lightgreen;
       background-color: $selection-bg;
     }
 
+    .selected2 {
+      border-bottom: 3px solid $selection-bg;
+    }
+
     .word:hover {
       background-color: lighten($selection-bg, 10%);
     }
