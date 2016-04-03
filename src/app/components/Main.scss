@@ -45,48 +45,67 @@ nav ul a, nav .brand-logo {
   }
 }
 
+%highlight-padding {
+  padding: 1px 4px;
+  margin: 0 -4px;
+}
+
+$selection-bg: #f8bbd0;
+$d3k-bg: lightgreen;
+
+
 .article {
   .content {
     line-height: 185%;
+
     .word {
       cursor: pointer;
-      &:hover, &.selected, &.marked {
-        padding: 1px 4px;
-        margin: 0 -4px;
-      }
-      &:hover{
-        background-color: lighten(#f8bbd0, 10%) !important;
-      }
-      &.selected {
-        background-color: #f8bbd0 !important;
-      }
-      &.marked{
-        background-color: lightgreen;
-      }
-      &.user-selected {
-        border-bottom: solid 3px #ef5350;
+    }
+
+    // Highlighting
+    .word, .selected, .selection, .d3k {
+      @extend %highlight-padding;
+    }
+
+    // Selected word / phrase
+    // TODO: Unify .selected & .selection into one class
+    .selected, .selection {
+      background-color: $selection-bg;
+    }
+
+    .word:hover {
+      background-color: lighten($selection-bg, 10%);
+    }
+
+    .selection .word, .word.selected {
+      &:hover {
+        background-color: $selection-bg;
       }
     }
-  };
-  h1 {
-      font-size: 1.64rem;
-      line-height: 1.804rem;
-      margin: 0.82rem 0 0.656rem 0;
-  };
+
+    // 3k dictionary highlight
+    // TODO: Unify .marked & .d3k into one class
+    .marked, .d3k {
+      background-color: $d3k-bg;
+      &:hover {
+        background-color: darken($d3k-bg, 10%);
+      }
+    }
+
+    // Words added to user definition list
+    // TODO: Unify .user-selected & .user into one class
+    .user-selected, .user {
+      @extend %highlight-padding;
+      border-bottom: solid 3px #ef5350;
+    }
+
+  }
+
   mark {
-      background-color: inherit;
-      color: inherit;
-      &.selection {
-          background-color: #f8bbd0;
-      };
-      &.user {
-          border-bottom: solid 3px #ef5350;
-      };
-      &.d3k {
-          background-color: lightgreen;
-      };
-  };
-};
+    background-color: inherit;
+    color: inherit;
+  }
+}
 
 .error {
   color: red;
@@ -101,7 +120,6 @@ ul.ttsplayer {
   margin-top: 15px;
   li {
     display: inline;
-
   }
 }
 
