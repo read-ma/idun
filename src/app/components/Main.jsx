@@ -14,7 +14,7 @@ class Main extends React.Component {
       <div>
         <MainNavigaton displaySearchBar={this.displaySearchBar()} isAuthenticated={this.props.isAuthenticated} />
 
-        <div className="progress hidden">
+        <div className="progress hide">
           <div className="indeterminate"></div>
         </div>
 

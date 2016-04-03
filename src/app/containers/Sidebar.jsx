@@ -71,7 +71,7 @@ class UserCustomDefinition extends Component {
             <form onSubmit={this.saveUserDefinition}>
               <input className="col s11" type="text" onChange={this.handleInputChange} name="translation" value={this.state.translation} placeholder='My definition' required='required' />
               <i className="settings-trigger material-icons col s1 add-definition-button" onClick={this.saveUserDefinition}>add</i>
-              <input className='hidden' type="submit" />
+              <input className='hide' type="submit" />
             </form>
           </li>
           {definitions}
