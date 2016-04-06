@@ -13,6 +13,7 @@ class DefinitionBoxes extends Component {
                             wordLimit: box.wordLimit,
                             boxKey: box.key,
                             selectedText: this.props.selectedText,
+                            selectedTextContext: this.props.selectedTextContext,
                             dispatch: this.props.dispatch,
                             label: box.label,
                             items: this.props.data[box.key]
@@ -35,6 +36,7 @@ const FilterButton = ({active, name, value, onClick}) => {
 function mapStateToProps(state){
   return {
     selectedText: state.article.selectedText,
+    selectedTextContext: {articleId: state.article.id},
     boxes: state.definitions.config,
     data: state.definitions.data
   };

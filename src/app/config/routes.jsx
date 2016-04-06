@@ -21,7 +21,7 @@ export default (
     </Route>
 
     <Route path="/articles" component={requireAuthentication(Articles)}/>
-    <Route path="/article/:id" component={requireAuthentication(ArticlePage)} />
+    <Route path="/article/:id" component={requireAuthentication(ArticlePage)} displaySearchBar={true}/>
     <IndexRoute component={requireAuthentication(Articles)} />
   </Route>
 

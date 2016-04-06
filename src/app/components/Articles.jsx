@@ -144,9 +144,13 @@ class Articles extends Component {
   handleFilterChange(query) {
     this.setState(
       {
-        articles: this.props.articles.filter(article => article.title.match(query, 'gim'))
+        articles: this.props.articles.filter(article => article.title.match(new RegExp(query,'gim')))
       }
     );
+  }
+
+  restorePagePosition() {
+    window.scrollTo(0,0);
   }
 
   componentWillReceiveProps(nextProps){
@@ -157,6 +161,7 @@ class Articles extends Component {
 
   componentDidMount() {
     this.props.dispatch(loadArticles());
+    this.restorePagePosition();
   }
 
   render() {

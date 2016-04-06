@@ -60,6 +60,7 @@ class Settings extends Component {
       Object.assign({}, this.state, {settingVisible: false}),
       ()=> {this.props.dispatch(logout());}
     );
+    $('.modal').closeModal();
   }
 
   render() {

@@ -29,6 +29,7 @@ function cleanUpHighlighting(text) {
 //     words: <String>[],
 //     name: String
 // }
+
 function highlightText({text, wordlists}) {
   let result = text;
 
@@ -38,6 +39,5 @@ function highlightText({text, wordlists}) {
   });
   return result;
 }
-
 
 export { highlightText, getSelectedText }

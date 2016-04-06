@@ -8,7 +8,10 @@ class SimpleList extends Component {
 
   saveUserDefinition(selectedDefinition){
     this.props.dispatch(
-      saveUserDefinition(Object.assign({}, {word: this.props.selectedText}, selectedDefinition))
+      saveUserDefinition(Object.assign({},
+        {word: this.props.selectedText, article_id: this.props.selectedTextContext.articleId},
+        selectedDefinition
+      ))
     );
   }
 

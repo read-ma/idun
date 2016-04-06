@@ -1,4 +1,5 @@
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var webpack = require('webpack');
 
 module.exports = {
   entry: "./src/app/app.js",
@@ -6,7 +7,7 @@ module.exports = {
     filename: "public/bundle.js"
   },
   externals: {
-    'Config': JSON.stringify({ apiUrl: 'http://api.readma.com/api' })
+    'Config': JSON.stringify({ apiUrl: 'http://readma.logdock.com/api' })
   },
   module: {
     loaders: [
@@ -34,6 +35,11 @@ module.exports = {
   plugins: [
     new ExtractTextPlugin('public/style.css', {
       allChunks: true
+    }),
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify('development')
+      }
     })
   ]
 };

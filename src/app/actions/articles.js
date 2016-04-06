@@ -2,6 +2,16 @@ import store from '../store';
 import Config from 'Config';
 import api from '../api';
 
+function pageScrolled(pageId, position){
+  return {
+    type: 'PAGE_SCROLLED',
+    payload: {
+      position: position,
+      pageId: pageId
+    }
+  };
+};
+
 function articlesLoaded(items) {
   return {
     type: 'ARTICLES_LOADED',
@@ -47,7 +57,8 @@ function getArticles(params, handleSuccess){
   return api.get('/articles.json')
     .then((response) => {
       handleSuccess(response.data.articles);
-    });
+    })
+    .catch(err => console.log(err));
 }
 
 function getArticle(id, handleSuccess) {
@@ -63,4 +74,4 @@ function postArticle(source_url, handleSuccess, handleFail) {
     .catch(handleFail);
 }
 
-export { loadArticle, loadArticles, addArticle }
+export { loadArticle, loadArticles, addArticle, pageScrolled }

@@ -12,7 +12,7 @@ var config = {
   },
   externals: {
     'Config': JSON.stringify({
-      apiUrl: 'http://api.readma.com/api'
+      apiUrl: 'http://readma.logdock.com/api'
     })
   },
 

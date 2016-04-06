@@ -13,6 +13,17 @@
   }
 }
 
+pre {
+  padding: 10px 5px;
+  line-height: 100%;
+  border: solid 1px #eee;
+  background-color: #f5f5f5;
+}
+
+code {
+  font-size: 0.7em;
+}
+
 p {
   margin-bottom: 15px;
 }
@@ -36,19 +47,69 @@ nav ul a, nav .brand-logo {
   }
 }
 
+%highlight-padding {
+  padding: 1px 4px;
+  margin: 0 -4px;
+}
+
+$selection-bg: #f8bbd0;
+$d3k-bg: lightgreen;
+
+
 .article {
+  .content {
+    line-height: 185%;
+
+    .word {
+      cursor: pointer;
+    }
+
+    // Highlighting
+    .word, .selected, .selection, .d3k {
+      @extend %highlight-padding;
+    }
+
+    // Selected word / phrase
+    // TODO: Unify .selected & .selection into one class
+    .selected, .selection {
+      background-color: $selection-bg;
+    }
+
+    .selected2 {
+      border-bottom: 3px solid $selection-bg;
+    }
+
+    .word:hover {
+      background-color: lighten($selection-bg, 10%);
+    }
+
+    .selection .word, .word.selected {
+      &:hover {
+        background-color: $selection-bg;
+      }
+    }
+
+    // 3k dictionary highlight
+    // TODO: Unify .marked & .d3k into one class
+    .marked, .d3k {
+      background-color: $d3k-bg;
+      &:hover {
+        background-color: darken($d3k-bg, 10%);
+      }
+    }
+
+    // Words added to user definition list
+    // TODO: Unify .user-selected & .user into one class
+    .user-selected, .user {
+      @extend %highlight-padding;
+      border-bottom: solid 3px #ef5350;
+    }
+
+  }
+
   mark {
     background-color: inherit;
     color: inherit;
-    &.selection {
-      background-color: #f8bbd0;
-    }
-    &.user {
-      border-bottom: solid 3px #ef5350;
-    }
-    &.d3k {
-      background-color: lightgreen;
-    }
   }
 }
 
@@ -65,10 +126,9 @@ ul.ttsplayer {
   margin-top: 15px;
   li {
     display: inline;
-
   }
 }
 
 a {
-  cursor: pointer
+  cursor: pointer;
 }

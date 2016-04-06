@@ -4,25 +4,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { loadArticle, textSelected, loadUserDefinitions } from '../actions';
 import { Link } from 'react-router';
-import { highlightText, getSelectedText } from '../highlight';
 import Sidebar from '../containers/Sidebar';
-
-class ArticleContent extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {text: highlightText(props)};
-  }
-
-  componentWillReceiveProps(nextProps){
-    this.setState( { text: highlightText(nextProps) } );
-  }
-
-  render(){
-    return (
-      <div className="content flow-text" onMouseUp={this.props.onTextSelected} dangerouslySetInnerHTML={{__html: this.state.text}}></div>
-    );
-  }
-};
+import PositioningWidget from './PositioningWidget';
+import ArticleContent from './ArticleContent';
 
 const ArticleTitle = ({title, source_url}) => {
   return (
@@ -50,14 +34,6 @@ class ArticlePage extends Component {
     this.props.dispatch(loadUserDefinitions());
   }
 
-  onTextSelected(){
-    if (!getSelectedText().trim()) return;
-
-    this.props.dispatch(
-      textSelected(getSelectedText())
-    );
-  }
-
   getArticleContent(){
     return ['<h1>', this.props.title, '</h1>', this.props.content].join(' ');
   }
@@ -65,10 +41,11 @@ class ArticlePage extends Component {
   render() {
     return (
       <div>
+        <PositioningWidget pageId={this.props.params.id}/>
         <div className="row">
           <div className="col s12 m7 article-wrapper">
             <article className="article">
-              <ArticleContent text={this.getArticleContent()} onTextSelected={this.onTextSelected.bind(this)} wordlists={this.props.wordlists} />
+              <ArticleContent text={this.getArticleContent()} onTextSelected={this.props.onTextSelected} wordlists={this.props.wordlists} />
               <ArticleFooter source_url={this.props.source_url} />
             </article>
           </div>
@@ -81,9 +58,15 @@ class ArticlePage extends Component {
   }
 }
 
+const mapActionsToProps = (dispatch) => {
+  return {
+    onTextSelected: (text) => { dispatch(textSelected(text)); }
+  };
+};
+
 function mapStateToProps(state) {
-  return Object.assign({}, state.article, {wordlists: state.wordlists});
+  return Object.assign({}, state.article, {wordlists: state.wordlists, selectedText: state.selectedText});
 
 };
 
-export default connect(mapStateToProps)(ArticlePage);
+export default connect(mapStateToProps, mapActionsToProps)(ArticlePage);
