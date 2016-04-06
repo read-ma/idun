@@ -35,7 +35,7 @@ class ArticlePage extends Component {
   }
 
   getArticleContent(){
-    return ['<h1>', this.props.title, '</h1>', this.props.content].join(' ');
+    return this.props.normalized;
   }
 
   render() {

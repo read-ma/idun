@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { getSelectedText, highlightText } from '../highlight';
-import { walkTheDOM } from '../DOMUtils';
 import classnames from 'classnames';
 
 class Word extends Component{
@@ -10,7 +9,7 @@ class Word extends Component{
   }
   render() {
     return (
-      <span className={classnames('word', this.props.className, {selected2: this.state.selected})} onClick={this.selectWord.bind(this)}>
+      <span className={classnames('word', this.props.className)} onClick={this.selectWord.bind(this)}>
         {this.props.word}
       </span>);
   }
@@ -21,26 +20,39 @@ class Word extends Component{
   }
 }
 
-const WORDS_REGEX = /[\w|'|*|-|\’—]+/;
-const SEPARATOR_REGEX = /|(.?\,?\s)/;
-const STOP_REGEX = /|(\.)/;
-const SENTENCE_REGEX = new RegExp(WORDS_REGEX.source + SEPARATOR_REGEX.source + STOP_REGEX.source, 'g');
+const isSeparator = token => token.match(/^[\,\.\?\!\)\(\)\”\"\'\:\;\“]$/);
+const Separator = ( {children, separator} ) => <span>{children}</span>;
 
-const domParser = html => DOMParser ? (new DOMParser()).parseFromString(html, 'text/html') : $.parseXML(html);
-const isSeparator = token => token.match(/([\,\.]?\s)/) || token.length === 0;
+const detokenize = tokens => {
+  let output = [];
 
-const prepareArticle = (text, tokenize, wordlists) => {
-  let articleHtml = domParser(`<div id='tmpArticle'>${text}</div>`);
-  return walkTheDOM(articleHtml.getElementById("tmpArticle"), tokenize);
+  tokens.forEach(p => {
+    if (!p.props.separator)
+      output.push(' ');
+    output.push(p);
+  });
+
+  return output;
+}
+
+const ArticlePara = (props) => {
+  let paragraph = props.tokens.map((token,i) => {
+    if (isSeparator(token))
+      return (<Separator separator={true}>{token}</Separator>);
+    else {
+      return (<Word key={`word-${i}-${token}`} word={token} onClick={props.handleWordClick} />);
+    }
+  });
+
+  return (
+    <div className='paragraph'>{detokenize(paragraph)}</div>);
 };
 
 class ArticleContent extends Component {
   constructor(props) {
     super(props);
     this.getTextFromSelection = this.getTextFromSelection.bind(this);
-    this.tokenize = this.tokenize.bind(this);
     this.handleClick = this.handleClick.bind(this);
-    this.wrapToken = this.wrapToken.bind(this);
 
     this.currentTimeout = undefined;
     this.state = {selection: []};
@@ -58,30 +70,17 @@ class ArticleContent extends Component {
     }, 1000);
   }
 
-  tokenize(text){
-    return text.match(SENTENCE_REGEX).map(this.wrapToken);
-  };
-
-  wrapToken(token, i) {
-    if (isSeparator(token))
-      return (<span>{token}</span>);
-    else {
-      return (<Word key={`word-${i}-${token}`} word={token} onClick={this.handleClick} />);
-    }
-  }
-
   getTextFromSelection() {
     if (!getSelectedText().trim()) return;
     this.props.onTextSelected(getSelectedText());
   }
 
   componentWillReceiveProps(nextProps){
-    let text = highlightText(nextProps);
-    let article = prepareArticle(text, this.tokenize, nextProps.wordlists);
-    this.setState({ article: article })
+    this.setState({ article: nextProps.text.map(paragraph => <ArticlePara handleWordClick={this.handleClick} tokens={paragraph}/>)});
   }
 
   render() {
+    console.log('rendering article');
     return (
       <div className="content flow-text" onMouseUp={this.getTextFromSelection}>
         {this.state.article}
@@ -89,9 +88,8 @@ class ArticleContent extends Component {
     );
   }
 };
-
 ArticleContent.propTypes = {
-  text: React.PropTypes.string.isRequired
+  text: React.PropTypes.array.isRequired
 };
 
 export default ArticleContent;
