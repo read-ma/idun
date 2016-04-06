@@ -105,7 +105,6 @@ class UserDefinitions extends Component {
     );
   }
 
-<<<<<<< HEAD
   markItem(item, markValue) {
     const items = this.state.items;
     const itemIndex = items.indexOf(item);
