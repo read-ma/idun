@@ -7,6 +7,11 @@ class Word extends Component{
     super(props);
     this.state = {selected: false};
   }
+
+  componentWillReceiveProps(nextProps){
+    this.setState({});
+  }
+
   render() {
     return (
       <span className={classnames('word', this.props.className, {selected2: this.state.selected})} onClick={this.selectWord.bind(this)}>
