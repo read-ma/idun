@@ -9,7 +9,7 @@ class Word extends Component{
   }
   render() {
     return (
-      <span className={classnames('word', this.props.className)} onClick={this.selectWord.bind(this)}>
+      <span className={classnames('word', this.props.className, {selected2: this.state.selected})} onClick={this.selectWord.bind(this)}>
         {this.props.word}
       </span>);
   }
