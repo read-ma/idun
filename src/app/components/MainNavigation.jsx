@@ -68,10 +68,9 @@ class SelectedTextInput extends React.Component {
     return (
       <form onSubmit={this.triggerSearch} className="right col s4 main-navigation">
         <div className="input-field black-text">
-          <input id="search" type="search" required name="text" value={this.state.text} onKeyUp={this.handleInputKeyUp.bind(this)} onChange={this.handleInputChange.bind(this)} />
-          <label htmlFor="search"><i className="material-icons black-text">search</i></label>
+          <input id="search" className="search-input" type="search" required name="text" value={this.state.text} onKeyUp={this.handleInputKeyUp.bind(this)} onChange={this.handleInputChange.bind(this)} />
+          <label htmlFor="search"><i className="material-icons grey-text">search</i></label>
           <TTSPlayer />
-
         </div>
       </form>
     );
