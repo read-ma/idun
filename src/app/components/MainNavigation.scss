@@ -11,7 +11,9 @@
 
     .tts-player-icon {
       right: .5rem !important;
+      &:hover {
+        color: #000 !important;
+      }
     }
-
   }
 }
