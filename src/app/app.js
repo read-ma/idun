@@ -2,7 +2,7 @@ import "babel-polyfill";
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './containers/App.jsx';
-import ErrorNotifier from './ErrorNotifier.js'
+import ErrorNotifier from './ErrorNotifier.js';
 
 ErrorNotifier.setup();
 

@@ -57,12 +57,16 @@ $d3k-bg: lightgreen;
 
 
 .article {
+
+  .word {
+    cursor: pointer;
+  }
+
+  .appending .word {
+    cursor:crosshair;
+  }
   .content {
     line-height: 185%;
-
-    .word {
-      cursor: pointer;
-    }
 
     // Highlighting
     .word, .selected, .selection, .d3k {

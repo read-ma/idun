@@ -1,62 +1,66 @@
 import React, { Component } from 'react';
-import { getSelectedText, highlightText } from '../highlight';
 import classnames from 'classnames';
+import PositioningWidget from './PositioningWidget';
+import {connect} from 'react-redux';
+import { detokenize, isSeparator, Separator, Token} from './TextUtils';
+import Perf from 'react-addons-perf';
 
 class Word extends Component{
   constructor(props){
     super(props);
-    this.state = {selected: false};
-  }
-
-  componentWillReceiveProps(nextProps){
-    this.setState({});
+    this.state = {};
   }
 
   render() {
     return (
-      <span className={classnames('word', this.props.className, {selected2: this.state.selected})} onClick={this.selectWord.bind(this)}>
+      <span className={classnames('word', this.props.className, {selected2: this.state.on})} onClick={this.selectWord.bind(this)}>
         {this.props.word}
       </span>);
   }
 
   selectWord() {
-    this.setState({selected: true});
+    this.setState({on: true});
     this.props.onClick(this.props.word);
   }
 }
 
-const isSeparator = token => token.match(/^[\,\.\?\!\)\(\)\”\"\'\:\;\“]$/);
-const Separator = ( {children, separator} ) => <span>{children}</span>;
-
-const detokenize = tokens => {
-  let output = [];
-
-  tokens.forEach(p => {
-    if (!p.props.separator)
-      output.push(' ');
-    output.push(p);
-  });
-
-  return output;
-}
-
 const ArticlePara = (props) => {
-  let paragraph = props.tokens.map((token,i) => {
-    if (isSeparator(token))
-      return (<Separator separator={true}>{token}</Separator>);
-    else {
-      return (<Word key={`word-${i}-${token}`} word={token} onClick={props.handleWordClick} />);
-    }
+  let tokens = props.tokens;
+  props.wordlists
+       .forEach(list => tokens = markSelectedInDict(tokens, list));
+
+  let paragraph = tokens.map((token,i) => {
+    return (<Word
+              className={token.className()}
+              key={`word-${i}-${token.word}`}
+              word={token.word}
+              separator={isSeparator(token.word)}
+              onClick={props.handleWordClick} />);
   });
 
   return (
     <div className='paragraph'>{detokenize(paragraph)}</div>);
 };
 
+const contains = (list, tokens) => {
+  return list.indexOf(tokens.join(' '));
+};
+
+const highlightedTokens = (tokens, word) => {
+  return tokens.filter(t => t.word == word);
+};
+
+const markSelectedInDict = (tokens, wordlist) => {
+  wordlist.words.forEach(word => {
+    highlightedTokens(tokens, word).forEach(t => t.classNames.push(wordlist.name));
+  });
+
+  return tokens;
+};
+
 class ArticleContent extends Component {
   constructor(props) {
     super(props);
-    this.getTextFromSelection = this.getTextFromSelection.bind(this);
     this.handleClick = this.handleClick.bind(this);
 
     this.currentTimeout = undefined;
@@ -64,37 +68,59 @@ class ArticleContent extends Component {
   }
 
   handleClick(word) {
-    this.setState({selection: [...this.state.selection, word]});
+    this.setState({
+      selection: [...this.state.selection, word],
+      appending: true
+    });
 
     window.clearTimeout(this.currentTimeout);
     this.currentTimeout = window.setTimeout(() => {
       let selectedText = this.state.selection.join(' ');
 
-      this.setState({selection: []});
+      this.setState({selection: [], appending: false});
       this.props.onTextSelected(selectedText);
     }, 1000);
   }
 
-  getTextFromSelection() {
-    if (!getSelectedText().trim()) return;
-    this.props.onTextSelected(getSelectedText());
+  componentDidMount(){
+    //Perf.start();
+  }
+
+  componentWillUnmount(){
+    //Perf.printInclusive();
+    //Perf.printWasted();
+    //Perf.stop();
   }
 
   componentWillReceiveProps(nextProps){
-    this.setState({ article: nextProps.text.map(paragraph => <ArticlePara handleWordClick={this.handleClick} tokens={paragraph}/>)});
+    let paragraphs = nextProps.text.map(paragraph => {
+      let tokens = paragraph.map(p => new Token(p));
+
+      return <ArticlePara handleWordClick={this.handleClick} tokens={tokens} wordlists={nextProps.wordlists.filter(l => l.enabled)}/>;
+    });
+
+    this.setState({paragraphs: paragraphs});
   }
 
   render() {
-    console.log('rendering article');
     return (
-      <div className="content flow-text" onMouseUp={this.getTextFromSelection}>
-        {this.state.article}
+      <div className={classnames('content flow-text', {appending: this.state.appending})} onMouseUp={this.props.onTextSelected}>
+        {this.state.paragraphs}
       </div>
     );
   }
 };
+
 ArticleContent.propTypes = {
-  text: React.PropTypes.array.isRequired
+  text: React.PropTypes.array.isRequired,
+  onTextSelected: React.PropTypes.func.isRequired
 };
 
-export default ArticleContent;
+
+const mapStateToProps = (state) => {
+  return {
+    wordlists: state.wordlists
+  };
+};
+
+export default connect(mapStateToProps)(ArticleContent);
