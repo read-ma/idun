@@ -4,6 +4,7 @@ import PositioningWidget from './PositioningWidget';
 import {connect} from 'react-redux';
 import { detokenize, isSeparator, Separator, Token} from './TextUtils';
 import Perf from 'react-addons-perf';
+import _ from 'lodash';
 
 class Word extends Component{
   constructor(props){
@@ -13,21 +14,18 @@ class Word extends Component{
 
   render() {
     return (
-      <span className={classnames('word', this.props.className, {selected2: this.state.on})} onClick={this.selectWord.bind(this)}>
+      <span className={classnames('word', this.props.className)} onClick={this.selectWord.bind(this)}>
         {this.props.word}
       </span>);
   }
 
   selectWord() {
-    this.setState({on: true});
     this.props.onClick(this.props.word);
   }
 }
 
-const ArticlePara = (props) => {
-  let tokens = props.tokens;
-  props.wordlists
-       .forEach(list => tokens = markSelectedInDict(tokens, list));
+const ArticlePara = ({tokens, handleWordClick, wordlists}) => {
+  wordlists.forEach(list => tokens = markSelectedInDict(tokens, list));
 
   let paragraph = tokens.map((token,i) => {
     return (<Word
@@ -35,25 +33,47 @@ const ArticlePara = (props) => {
               key={`word-${i}-${token.word}`}
               word={token.word}
               separator={isSeparator(token.word)}
-              onClick={props.handleWordClick} />);
+              onClick={handleWordClick} />);
   });
 
   return (
     <div className='paragraph'>{detokenize(paragraph)}</div>);
 };
 
-const contains = (list, tokens) => {
-  return list.indexOf(tokens.join(' '));
-};
+const findAllOccurenceIndexes = (arr, item) => {
+  return arr.reduce((prev,current,currentIndex,array) => {
+    if (current.word.toLowerCase() == item.toLowerCase())
+      prev.push(currentIndex);
+    return prev;
+  }, []
+  );
+}
+const tokensContainingWord = (tokens, word) => {
+  let words = word.split(' ');
+  let result = [];
 
-const highlightedTokens = (tokens, word) => {
-  return tokens.filter(t => t.word == word);
-};
+  //user #reduce
+  findAllOccurenceIndexes(tokens, words[0]).forEach( idx => {
+    let matchCandidate = tokens.slice(idx, idx+words.length);
+
+    if (_.isEqual(words, matchCandidate.map(t => t.word)))
+      result = result.concat( matchCandidate );
+  });
+
+  return result;
+}
 
 const markSelectedInDict = (tokens, wordlist) => {
-  wordlist.words.forEach(word => {
-    highlightedTokens(tokens, word).forEach(t => t.classNames.push(wordlist.name));
-  });
+  if (wordlist.name == 'd3k')
+    tokens.forEach(token => {
+      if (wordlist.words.indexOf(token.word.toLowerCase()) > -1)
+        token.classNames.push(wordlist.name);
+    });
+  else
+    wordlist.words.forEach(word => {
+      tokensContainingWord(tokens,word)
+            .forEach(token => token.classNames.push(wordlist.name));
+    });
 
   return tokens;
 };
@@ -93,10 +113,11 @@ class ArticleContent extends Component {
   }
 
   componentWillReceiveProps(nextProps){
+    let wordlists = nextProps.wordlists.filter(l => l.enabled);
     let paragraphs = nextProps.text.map(paragraph => {
       let tokens = paragraph.map(p => new Token(p));
 
-      return <ArticlePara handleWordClick={this.handleClick} tokens={tokens} wordlists={nextProps.wordlists.filter(l => l.enabled)}/>;
+      return <ArticlePara handleWordClick={this.handleClick} tokens={tokens} wordlists={wordlists}/>;
     });
 
     this.setState({paragraphs: paragraphs});
