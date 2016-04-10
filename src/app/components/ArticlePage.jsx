@@ -40,7 +40,7 @@ class ArticlePage extends Component {
           <div className="col s12 m7 article-wrapper">
             <article className="article">
               <ArticleContent text={getArticleContent(this.props.article)} onTextSelected={this.props.onTextSelected} wordlists={this.props.wordlists} articleId={this.props.params.id}/>
-              <ArticleFooter source_url={this.props.source_url} />
+              <ArticleFooter source_url={this.props.article.source_url} />
             </article>
           </div>
           <div className="hide-on-small-only sidebar-wrapper">
