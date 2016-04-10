@@ -113,9 +113,12 @@ class ArticleContent extends Component {
   }
 
   render() {
+    if (!this.state.paragraphs)
+      return false;
     return (
       <div className={classnames('content flow-text', {appending: this.state.appending})} onMouseUp={this.props.onTextSelected}>
-        {this.state.paragraphs}
+        <h1>{this.state.paragraphs[0]}</h1>
+        {this.state.paragraphs.slice(0)}
       </div>
     );
   }

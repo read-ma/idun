@@ -39,7 +39,7 @@ class ArticlePage extends Component {
         <div className="row">
           <div className="col s12 m7 article-wrapper">
             <article className="article">
-              <ArticleContent text={this.props.article.content || []} onTextSelected={this.props.onTextSelected} wordlists={this.props.wordlists} articleId={this.props.params.id}/>
+              <ArticleContent text={getArticleContent(this.props.article)} onTextSelected={this.props.onTextSelected} wordlists={this.props.wordlists} articleId={this.props.params.id}/>
               <ArticleFooter source_url={this.props.source_url} />
             </article>
           </div>
