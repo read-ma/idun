@@ -3,6 +3,7 @@ import classnames from 'classnames';
 import PositioningWidget from './PositioningWidget';
 import {connect} from 'react-redux';
 import { detokenize, isSeparator, Separator, Token} from './TextUtils';
+import { newWordSelected } from '../actions';
 import _ from 'lodash';
 
 class Word extends Component{
@@ -91,6 +92,7 @@ class ArticleContent extends Component {
       selection: [...this.state.selection, word],
       appending: true
     });
+    this.props.onWordSelected(word);
 
     window.clearTimeout(this.currentTimeout);
     this.currentTimeout = window.setTimeout(() => {
@@ -118,7 +120,7 @@ class ArticleContent extends Component {
     return (
       <div className={classnames('content flow-text', {appending: this.state.appending})} onMouseUp={this.props.onTextSelected}>
         <h1>{this.state.paragraphs[0]}</h1>
-        {this.state.paragraphs.slice(0)}
+        {this.state.paragraphs.slice(1)}
       </div>
     );
   }
@@ -135,5 +137,11 @@ const mapStateToProps = (state) => {
     wordlists: state.wordlists
   };
 };
-
-export default connect(mapStateToProps)(ArticleContent);
+const mapActionsToProps = (dispatch) => {
+  return {
+    onWordSelected(text){
+      dispatch(newWordSelected(text));
+    }
+  };
+};
+export default connect(mapStateToProps, mapActionsToProps)(ArticleContent);

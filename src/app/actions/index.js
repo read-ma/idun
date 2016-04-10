@@ -14,6 +14,13 @@ const processStarted = () => {
   };
 };
 
+const newWordSelected = (text) => {
+  return {
+    type: 'NEW_WORD_SELECTED',
+    text: text
+  };
+};
+
 function textSelected(text) {
   return {
     type: 'TEXT_SELECTED',
@@ -82,5 +89,6 @@ export { loadArticles, loadArticle,
          loadUserDefinitions, saveUserDefinition,
          findTextDefinitions,
          changeLanguage,
-         processFinished, processStarted
+         processFinished, processStarted,
+         newWordSelected
        }
