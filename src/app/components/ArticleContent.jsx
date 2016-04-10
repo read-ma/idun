@@ -3,7 +3,6 @@ import classnames from 'classnames';
 import PositioningWidget from './PositioningWidget';
 import {connect} from 'react-redux';
 import { detokenize, isSeparator, Separator, Token} from './TextUtils';
-import Perf from 'react-addons-perf';
 import _ from 'lodash';
 
 class Word extends Component{
@@ -100,16 +99,6 @@ class ArticleContent extends Component {
       this.setState({selection: [], appending: false});
       this.props.onTextSelected(selectedText);
     }, 1000);
-  }
-
-  componentDidMount(){
-    //Perf.start();
-  }
-
-  componentWillUnmount(){
-    //Perf.printInclusive();
-    //Perf.printWasted();
-    //Perf.stop();
   }
 
   componentWillReceiveProps(nextProps){
