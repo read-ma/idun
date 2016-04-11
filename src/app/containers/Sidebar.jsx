@@ -61,7 +61,7 @@ class UserCustomDefinition extends Component {
       <li className="card">
         <ul className="collection with-header">
           <li className="collection-header">
-            <h5>Add your definition</h5>
+            <h5>Add your definition for: <i>{this.props.selectedText}</i></h5>
           </li>
           <li className="collection-item row">
             <form onSubmit={this.saveUserDefinition}>
