@@ -9,11 +9,18 @@ class PositioningWidget extends Component {
     this.handleScroll = this.handleScroll.bind(this);
   }
   componentDidMount(){
+    console.log('widget mouted');
     window.addEventListener('scroll', this.handleScroll);
-    this.restorePagePosition();
+  }
+
+  componentWillReceiveProps(nextProps){
+    console.log('widget props', nextProps.article, this.props.article);
+    if (nextProps.article && nextProps.article != this.props.article)
+      this.restorePagePosition();
   }
 
   restorePagePosition() {
+    console.log('restoring page position');
     let y = this.props.positions[this.props.pageId] || 0;
     window.scrollTo(0,y);
   }
@@ -40,7 +47,8 @@ PositioningWidget.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    positions: state.settings.articlePositions
+    positions: state.settings.articlePositions,
+    article: state.article.id
   };
 };
 

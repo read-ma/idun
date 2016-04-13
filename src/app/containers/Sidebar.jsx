@@ -9,10 +9,6 @@ import classnames from 'classnames';
 import LanguageBar from '../components/LanguageSelection';
 import {saveUserDefinition} from '../actions';
 
-const ProgressBar = () => {
-  return (<div className="progress"> <div className="indeterminate"></div> </div>);
-}
-
 const Sidebar = React.createClass({
   getInitialState: function() {
     return {

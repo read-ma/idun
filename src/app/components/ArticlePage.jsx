@@ -5,16 +5,8 @@ import { connect } from 'react-redux';
 import { loadArticle, textSelected, loadUserDefinitions } from '../actions';
 import { Link } from 'react-router';
 import Sidebar from '../containers/Sidebar';
-import PositioningWidget from './PositioningWidget';
 import ArticleContent from './ArticleContent';
-
-const ArticleTitle = ({title, source_url}) => {
-  return (
-    <header>
-      <h1>{title}</h1>
-    </header>
-  );
-};
+import { getSelectedText } from '../highlight';
 
 const ArticleFooter = ({source_url}) => {
   return (
@@ -25,7 +17,14 @@ const ArticleFooter = ({source_url}) => {
       </blockquote>
     </footer>
   );
-}
+};
+
+const getArticleContent = ({title, content}) => {
+  console.log('getting content');
+  if (!title || !content) return [];
+
+  return title.concat(content);
+};
 
 class ArticlePage extends Component {
 
@@ -34,18 +33,13 @@ class ArticlePage extends Component {
     this.props.dispatch(loadUserDefinitions());
   }
 
-  getArticleContent(){
-    return ['<h1>', this.props.title, '</h1>', this.props.content].join(' ');
-  }
-
   render() {
     return (
       <div>
-        <PositioningWidget pageId={this.props.params.id}/>
         <div className="row">
           <div className="col s12 m7 article-wrapper">
             <article className="article">
-              <ArticleContent text={this.getArticleContent()} onTextSelected={this.props.onTextSelected} wordlists={this.props.wordlists} />
+              <ArticleContent text={getArticleContent(this.props.article)} onTextSelected={this.props.onTextSelected} wordlists={this.props.wordlists} articleId={this.props.params.id}/>
               <ArticleFooter source_url={this.props.source_url} />
             </article>
           </div>
@@ -60,13 +54,22 @@ class ArticlePage extends Component {
 
 const mapActionsToProps = (dispatch) => {
   return {
-    onTextSelected: (text) => { dispatch(textSelected(text)); }
+    onTextSelected: (text) => {
+      if (text.type == 'mouseup')
+        text = getSelectedText().trim();
+
+      if (!text)
+        return;
+
+      dispatch(textSelected(text));
+    }
   };
 };
 
 function mapStateToProps(state) {
-  return Object.assign({}, state.article, {wordlists: state.wordlists, selectedText: state.selectedText});
-
+  return {
+    article: state.article
+  };
 };
 
 export default connect(mapStateToProps, mapActionsToProps)(ArticlePage);

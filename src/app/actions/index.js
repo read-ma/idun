@@ -2,6 +2,18 @@ import { loadArticles, loadArticle } from './articles';
 import { findTextDefinitions } from './definitions';
 import api from '../api';
 
+const processFinished = () => {
+  return {
+    type: 'PROCESS_FINISHED'
+  };
+};
+
+const processStarted = () => {
+  return {
+    type: 'PROCESS_STARTED'
+  };
+};
+
 function textSelected(text) {
   return {
     type: 'TEXT_SELECTED',
@@ -69,5 +81,6 @@ export { loadArticles, loadArticle,
          toggleHighlighting,
          loadUserDefinitions, saveUserDefinition,
          findTextDefinitions,
-         changeLanguage
+         changeLanguage,
+         processFinished, processStarted
        }

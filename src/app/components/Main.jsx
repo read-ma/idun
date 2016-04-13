@@ -2,6 +2,7 @@ require('./Main.scss');
 import React from 'react';
 import { connect } from 'react-redux';
 import MainNavigaton from './MainNavigation';
+import ProgressBar from './ProgressBar';
 
 class Main extends React.Component {
   //TODO redesign views, remove searchbar from the layout
@@ -14,9 +15,7 @@ class Main extends React.Component {
       <div>
         <MainNavigaton displaySearchBar={this.displaySearchBar()} isAuthenticated={this.props.isAuthenticated} />
 
-        <div className="progress hide">
-          <div className="indeterminate"></div>
-        </div>
+        <ProgressBar />
 
         <main className="container">
           <div className="section">

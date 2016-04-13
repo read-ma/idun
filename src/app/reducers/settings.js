@@ -9,7 +9,8 @@ const initialState = {
     { code: 'nb-NO', key: 'no', name: 'Norsk' }
   ],
   language: { from: 'en-GB', to: 'pl-PL' },
-  articlePositions: {}
+  articlePositions: {},
+  processesCounter: 0
 };
 
 function language(state = initialState.language, action){
@@ -37,6 +38,12 @@ function articlePositions(state = positions, action){
 
 export default function settings(state = initialState, action) {
   switch (action.type){
+
+  case 'PROCESS_STARTED':
+    return Object.assign({}, state, {processesCounter: state.processesCounter + 1});
+
+  case 'PROCESS_FINISHED':
+    return Object.assign({}, state, {processesCounter: state.processesCounter - 1});
 
   case 'CHANGE_LANGUAGE':
     return Object.assign({}, state, {language: language(state.language, action)});
