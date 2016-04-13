@@ -11,6 +11,15 @@ export default function wordlists(state = initialState, action) {
 
   switch (action.type) {
 
+  case 'ARTICLE_LOADED':
+    return state.map ((list) => {
+      if (list.name === 'd3k') {
+        return Object.assign({}, list, {words: action.article.d3k});
+      }
+      else
+        return list;
+    });
+
   case 'NEW_WORD_SELECTED':
     return state.map ((list) => {
       if (list.name === 'quick-selection') {
@@ -20,7 +29,6 @@ export default function wordlists(state = initialState, action) {
       else
         return list;
     });
-
 
   case 'USER_DEFINITIONS_LOADED':
     return state.map ((list) => {

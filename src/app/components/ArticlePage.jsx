@@ -20,7 +20,6 @@ const ArticleFooter = ({source_url}) => {
 };
 
 const getArticleContent = ({title, content}) => {
-  console.log('getting content');
   if (!title || !content) return [];
 
   return title.concat(content);
