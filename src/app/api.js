@@ -17,6 +17,7 @@ instance.interceptors.response.use(function (config) {
   store.dispatch(processFinished());
   return config;
 }, function (error) {
+  store.dispatch(processFinished());
   return Promise.reject(error);
 });
 
