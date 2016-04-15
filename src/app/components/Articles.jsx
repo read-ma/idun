@@ -24,13 +24,13 @@ function ArticleLink({id, title, source_url,tags, content_type, created_at, priv
     let cssClass;
     if (metric < 85) {
       description = 'Advanced';
-      cssClass = 'red-text text-lighten-3';
+      cssClass = 'purple-text text-lighten-2';
     } else if (metric < 95) {
       description = 'Upper-intermediate';
-      cssClass = 'orange-text text-lighten-3';
+      cssClass = 'orange-text text-lighten-2';
     } else {
       description = 'Intermediate';
-      cssClass = 'green-text text-lighten-3';
+      cssClass = 'green-text text-lighten-2';
     }
     return (<strong className={cssClass}>{description}</strong>);
   };
