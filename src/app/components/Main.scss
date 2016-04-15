@@ -79,8 +79,8 @@ $d3k-bg: lightgreen;
       background-color: $selection-bg;
     }
 
-    .selected2 {
-      border-bottom: 3px solid blue;
+    .quick-selection {
+      border-bottom: 3px solid $selection-bg;
     }
 
     .word:hover {

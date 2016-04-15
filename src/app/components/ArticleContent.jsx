@@ -3,6 +3,7 @@ import classnames from 'classnames';
 import PositioningWidget from './PositioningWidget';
 import {connect} from 'react-redux';
 import { detokenize, isSeparator, Separator, Token} from './TextUtils';
+import { newWordSelected } from '../actions';
 import _ from 'lodash';
 
 class Word extends Component{
@@ -63,11 +64,12 @@ const tokensContainingWord = (tokens, word) => {
 }
 
 const markSelectedInDict = (tokens, wordlist) => {
-  if (wordlist.name == 'd3k')
+  if (wordlist.name == 'd3k' || wordlist.name == 'user'){
     tokens.forEach(token => {
       if (wordlist.words.indexOf(token.word.toLowerCase()) > -1)
         token.classNames.push(wordlist.name);
     });
+  }
   else
     wordlist.words.forEach(word => {
       tokensContainingWord(tokens,word)
@@ -91,6 +93,7 @@ class ArticleContent extends Component {
       selection: [...this.state.selection, word],
       appending: true
     });
+    this.props.onWordSelected(word);
 
     window.clearTimeout(this.currentTimeout);
     this.currentTimeout = window.setTimeout(() => {
@@ -101,24 +104,21 @@ class ArticleContent extends Component {
     }, 1000);
   }
 
-  componentWillReceiveProps(nextProps){
-    let wordlists = nextProps.wordlists.filter(l => l.enabled);
-    let paragraphs = nextProps.text.map(paragraph => {
+  render() {
+    let wordlists = this.props.wordlists.filter(l => l.enabled);
+    let paragraphs = this.props.text.map(paragraph => {
       let tokens = paragraph.map(p => new Token(p));
 
       return <ArticlePara handleWordClick={this.handleClick} tokens={tokens} wordlists={wordlists}/>;
     });
 
-    this.setState({paragraphs: paragraphs});
-  }
-
-  render() {
-    if (!this.state.paragraphs)
+    if (!paragraphs)
       return false;
+
     return (
       <div className={classnames('content flow-text', {appending: this.state.appending})} onMouseUp={this.props.onTextSelected}>
-        <h1>{this.state.paragraphs[0]}</h1>
-        {this.state.paragraphs.slice(0)}
+        <h1>{paragraphs[0]}</h1>
+        {paragraphs.slice(1)}
       </div>
     );
   }
@@ -135,5 +135,11 @@ const mapStateToProps = (state) => {
     wordlists: state.wordlists
   };
 };
-
-export default connect(mapStateToProps)(ArticleContent);
+const mapActionsToProps = (dispatch) => {
+  return {
+    onWordSelected(text){
+      dispatch(newWordSelected(text));
+    }
+  };
+};
+export default connect(mapStateToProps, mapActionsToProps)(ArticleContent);
