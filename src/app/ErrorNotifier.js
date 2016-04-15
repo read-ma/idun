@@ -12,8 +12,6 @@ class ErrorNotifier {
         host: 'http://errbit.logdock.com'
       });
      window.onerror = airbrake.onerror;
-    } else {
-      console.log('just do nothing' + env);
     }
   }
 }
