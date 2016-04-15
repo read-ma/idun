@@ -13,7 +13,7 @@ const MainNavigation = ({selectedText, handleSearch, displaySearchBar}) => {
     <div className="navbar-fixed">
       <nav className="white row">
         <div className="nav-wrapper container">
-          <Link to='/articles' className="brand-logo left hide-on-small-and-down">ReadMa</a>
+          <Link to='/articles' className="brand-logo left hide-on-small-and-down">ReadMa</Link>
 
           <ul className="left hide-on-med-and-down">
             <li><Link to='/articles'>Articles</Link></li>
