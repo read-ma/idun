@@ -2,7 +2,7 @@ require('./ArticlePage.scss');
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { loadArticle, textSelected, loadUserDefinitions } from '../actions';
+import { loadArticle, textSelected, loadUserDefinitions, confirmArticleRead } from '../actions';
 import { Link } from 'react-router';
 import Sidebar from '../containers/Sidebar';
 import ArticleContent from './ArticleContent';
@@ -28,8 +28,8 @@ const getArticleContent = ({title, content}) => {
 class ArticlePage extends Component {
 
   componentDidMount(){
-    this.props.dispatch(loadArticle(this.props.params.id));
-    this.props.dispatch(loadUserDefinitions());
+    this.props.loadArticle(this.props.params.id);
+    this.props.loadUserDefinitions();
   }
 
   render() {
@@ -41,6 +41,7 @@ class ArticlePage extends Component {
               <ArticleContent text={getArticleContent(this.props.article)} onTextSelected={this.props.onTextSelected} wordlists={this.props.wordlists} articleId={this.props.params.id}/>
               <ArticleFooter source_url={this.props.article.source_url} />
             </article>
+            <a className="btn btn-large" onClick={this.props.onConfirmArticleRead.bind(this)}>Yeah! I have read this article (I know all words)!</a>
           </div>
           <div className="hide-on-small-only sidebar-wrapper">
             <Sidebar />
@@ -53,6 +54,11 @@ class ArticlePage extends Component {
 
 const mapActionsToProps = (dispatch) => {
   return {
+    loadArticle: (id) => dispatch(loadArticle(id)),
+    loadUserDefinitions: () => dispatch(loadUserDefinitions()),
+    onConfirmArticleRead: function() {
+      dispatch(confirmArticleRead(this.props.params.id));
+    },
     onTextSelected: (text) => {
       if (text.type == 'mouseup')
         text = getSelectedText().trim();

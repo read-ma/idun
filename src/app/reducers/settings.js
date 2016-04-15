@@ -6,7 +6,8 @@ const initialState = {
     { code: 'en-GB', key: 'en', name: 'English' },
     { code: 'fr-FR', key: 'fr', name: 'French' },
     { code: 'pt-BR', key: 'pt', name: 'Portuguese' },
-    { code: 'nb-NO', key: 'no', name: 'Norsk' }
+    { code: 'nb-NO', key: 'no', name: 'Norsk' },
+    { code: 'de-DE', key: 'de', name: 'German' }
   ],
   language: { from: 'en-GB', to: 'pl-PL' },
   articlePositions: {},

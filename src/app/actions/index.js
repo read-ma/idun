@@ -1,4 +1,4 @@
-import { loadArticles, loadArticle } from './articles';
+import { loadArticles, loadArticle, confirmArticleRead } from './articles';
 import { findTextDefinitions } from './definitions';
 import api from '../api';
 
@@ -83,7 +83,7 @@ function changeLanguage(type, key){
   };
 }
 
-export { loadArticles, loadArticle,
+export { loadArticles, loadArticle, confirmArticleRead,
          textSelected,
          toggleHighlighting,
          loadUserDefinitions, saveUserDefinition,

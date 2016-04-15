@@ -74,4 +74,17 @@ function postArticle(source_url, handleSuccess, handleFail) {
     .catch(handleFail);
 }
 
-export { loadArticle, loadArticles, addArticle, pageScrolled }
+const confirmArticleRead = (id) => {
+  api.post(`/articles/${id}/events`, {activity_type: 'article_read'})
+    .then(response => articleRead(articleId))
+    .catch(error => console.log(error));
+};
+
+const articleRead = (articleId) => {
+  return {
+    type: 'ARTICLE_READ',
+    payload: {articleId}
+  };
+};
+
+export { loadArticle, loadArticles, addArticle, pageScrolled, confirmArticleRead }
