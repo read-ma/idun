@@ -37,7 +37,9 @@ class Settings extends Component {
     this.setState(Object.assign({}, this.state, {settingVisible: !this.state.settingVisible}) );
   }
 
-  toggleSettingsModal() {
+  toggleSettingsModal(event) {
+    event.preventDefault();
+
     let $modal = $('#settingsModal');
 
     if (!this.state.settingVisible) {
@@ -69,7 +71,7 @@ class Settings extends Component {
 
     return (
       <li>
-        <span onClick={this.toggleSettingsModal.bind(this)} className="settings-trigger grey-text">Settings</span>
+        <a href="#" onClick={this.toggleSettingsModal.bind(this)} className="settings-trigger grey-text">Settings</a>
 
         <div id="settingsModal" className="modal modal-fixed-footer">
           <div className='modal-content'>
