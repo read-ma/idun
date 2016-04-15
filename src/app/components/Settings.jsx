@@ -92,7 +92,7 @@ class Settings extends Component {
 
 function mapStateToProps(state){
   return {
-    wordlists: state.wordlists,
+    wordlists: state.wordlists.filter((wl) => wl.toggable),
     isAuthenticated: state.auth.isAuthenticated
   };
 }
