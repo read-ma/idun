@@ -79,7 +79,10 @@ $d3k-bg: lightgreen;
       background-color: $selection-bg;
     }
 
-    .quick-selection {
+
+    // Handle case when word is both selected and highlighted by d3k
+    .quick-selection,
+    .selection.d3k {
       border-bottom: 3px solid $selection-bg;
     }
 
