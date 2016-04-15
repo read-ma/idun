@@ -69,7 +69,7 @@ class Settings extends Component {
 
     return (
       <li>
-        <i onClick={this.toggleSettingsModal.bind(this)} className="material-icons settings-trigger grey-text">settings</i>
+        <span onClick={this.toggleSettingsModal.bind(this)} className="settings-trigger grey-text">Settings</span>
 
         <div id="settingsModal" className="modal modal-fixed-footer">
           <div className='modal-content'>
