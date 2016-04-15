@@ -13,6 +13,8 @@ const MainNavigation = ({selectedText, handleSearch, displaySearchBar}) => {
     <div className="navbar-fixed">
       <nav className="white row">
         <div className="nav-wrapper container">
+          <a href="/articles" className="brand-logo left hide-on-small-and-down">ReadMa</a>
+
           <ul className="left hide-on-med-and-down">
             <li><Link to='/articles'>Articles</Link></li>
             <li><Link to='/learn'>Learn</Link></li>
@@ -20,11 +22,6 @@ const MainNavigation = ({selectedText, handleSearch, displaySearchBar}) => {
 
           <ul className="right">
             <Settings />
-          </ul>
-
-          <ul className="side-nav" id="mobile-demo">
-            <li><Link to='/learn'>Learn</Link></li>
-            <li><Link to='/articles'>Articles</Link></li>
           </ul>
 
           <ShowIf condition={displaySearchBar}>
@@ -76,10 +73,6 @@ class SelectedTextInput extends React.Component {
     );
   }
 }
-
-$(document).ready(function(){
-  $(".button-collapse").sideNav({ closeOnClick: true });
-});
 
 const mapStateToProps = state => {
   return {
