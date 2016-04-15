@@ -1,6 +1,7 @@
 import { loadArticles, loadArticle, confirmArticleRead } from './articles';
 import { findTextDefinitions } from './definitions';
 import api from '../api';
+import { store } from 'react-redux';
 
 const processFinished = () => {
   return {
@@ -58,6 +59,7 @@ function userDefinitionSavingFailed(error){
 }
 
 function userDefinitionSaved(definition){
+  //wrap this in a compont and observe message in redux store
   Materialize.toast('Definition added', 4000);
   return {
     type: 'USER_DEFINITION_SAVED',
@@ -71,7 +73,9 @@ function loadUserDefinitions(definitions){
       .then((response) => {
         dispatch(userDefinitionsLoaded(response.data.user_definitions));
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        store.dispatch(processFinished());
+      });
   };
 }
 
