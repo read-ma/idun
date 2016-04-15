@@ -24,14 +24,6 @@ code {
   font-size: 0.7em;
 }
 
-p {
-  margin-bottom: 15px;
-}
-
-nav ul a, nav .brand-logo {
-  @extend .black-text;
-}
-
 .articles {
   .userdefinitionbox{
     color: white;
@@ -66,7 +58,6 @@ $d3k-bg: lightgreen;
     cursor: copy;
   }
   .content {
-    line-height: 185%;
 
     // Highlighting
     .word, .selected, .selection, .d3k {
