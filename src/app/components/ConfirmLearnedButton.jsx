@@ -6,13 +6,16 @@ const ConfirmLearnedButton = ({confirmLearned, articleId, articleLearned}) => {
   let onConfirmLearned = () => {
     confirmLearned(articleId);
   };
-  if (articleLearned)
+
+  if (articleLearned || typeof articleLearned === "undefined")
     return <span></span>;
 
-  if (typeof articleLearned === "undefined")
-    return <span></span>;
-
-  return <a className="btn btn-large" onClick={onConfirmLearned}>Yeah! I have aquired words from this article</a>;
+  return (
+    <a className="btn btn-large" onClick={onConfirmLearned}>
+      <i className="material-icons left">done</i>
+      Mark all words from this article as learned by me
+    </a>
+  );
 };
 
 const mapActionsToProps = (dispatch) => {
