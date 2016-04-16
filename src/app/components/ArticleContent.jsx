@@ -52,7 +52,7 @@ const tokensContainingWord = (tokens, word) => {
   let words = word.split(' ');
   let result = [];
 
-  //user #reduce
+  //use #reduce
   findAllOccurenceIndexes(tokens, words[0]).forEach( idx => {
     let matchCandidate = tokens.slice(idx, idx+words.length);
 
@@ -111,7 +111,6 @@ class ArticleContent extends Component {
 
       return <ArticlePara handleWordClick={this.handleClick} tokens={tokens} wordlists={wordlists}/>;
     });
-
     if (!paragraphs)
       return false;
 

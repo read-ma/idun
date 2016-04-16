@@ -74,17 +74,19 @@ function postArticle(source_url, handleSuccess, handleFail) {
     .catch(handleFail);
 }
 
-const confirmArticleRead = (id) => {
-  api.post(`/articles/${id}/events`, {activity_type: 'article_read'})
-    .then(response => articleRead(articleId))
-    .catch(error => console.log(error));
+const confirmArticleLearned = (id) => {
+  return (dispatch) => {
+    api.post(`/article_actions.json`, {article_action: {article_id: id, action: 'learned'}})
+      .then(response => dispatch(articleLearned(id)))
+      .catch(error => console.log(error));
+  };
 };
 
-const articleRead = (articleId) => {
+const articleLearned = (articleId) => {
   return {
-    type: 'ARTICLE_READ',
+    type: 'ARTICLE_LEARNED',
     payload: {articleId}
   };
 };
 
-export { loadArticle, loadArticles, addArticle, pageScrolled, confirmArticleRead }
+export { loadArticle, loadArticles, addArticle, pageScrolled, confirmArticleLearned }

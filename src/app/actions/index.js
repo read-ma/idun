@@ -1,4 +1,4 @@
-import { loadArticles, loadArticle, confirmArticleRead } from './articles';
+import { loadArticles, loadArticle, confirmArticleLearned } from './articles';
 import { findTextDefinitions } from './definitions';
 import api from '../api';
 import { store } from 'react-redux';
@@ -87,7 +87,7 @@ function changeLanguage(type, key){
   };
 }
 
-export { loadArticles, loadArticle, confirmArticleRead,
+export { loadArticles, loadArticle, confirmArticleLearned,
          textSelected,
          toggleHighlighting,
          loadUserDefinitions, saveUserDefinition,
