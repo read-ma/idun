@@ -5,6 +5,7 @@ import { loadArticles } from '../actions';
 import { addArticle } from '../actions/articles';
 import moment from 'moment';
 import classnames from 'classnames';
+import PositioningWidget from './PositioningWidget';
 
 function mapStateToProps(state) {
   return {
@@ -149,10 +150,6 @@ class Articles extends Component {
     );
   }
 
-  restorePagePosition() {
-    window.scrollTo(0,0);
-  }
-
   componentWillReceiveProps(nextProps){
     this.setState({
       articles: nextProps.articles
@@ -161,12 +158,12 @@ class Articles extends Component {
 
   componentDidMount() {
     this.props.dispatch(loadArticles());
-    this.restorePagePosition();
   }
 
   render() {
     return (
       <div className="articles">
+        <PositioningWidget pageId='article-list-page' />
         <div className="row">
           <div className="col s5 left-align">
             <ArticleFilter onChange={this.handleFilterChange} />

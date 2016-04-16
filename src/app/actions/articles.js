@@ -5,10 +5,7 @@ import api from '../api';
 function pageScrolled(pageId, position){
   return {
     type: 'PAGE_SCROLLED',
-    payload: {
-      position: position,
-      pageId: pageId
-    }
+    payload: {position,pageId}
   };
 };
 

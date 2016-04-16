@@ -8,6 +8,7 @@ import Sidebar from '../containers/Sidebar';
 import ArticleContent from './ArticleContent';
 import ConfirmLearnedButton from './ConfirmLearnedButton';
 import { getSelectedText } from '../highlight';
+import PositioningWidget from './PositioningWidget';
 
 const ArticleFooter = ({source_url}) => {
   return (
@@ -18,12 +19,6 @@ const ArticleFooter = ({source_url}) => {
       </blockquote>
     </footer>
   );
-};
-
-const getArticleContent = ({title, content}) => {
-  if (!title || !content) return [];
-
-  return title.concat(content);
 };
 
 class ArticlePage extends Component {
@@ -37,9 +32,10 @@ class ArticlePage extends Component {
     return (
       <div>
         <div className="row">
+          <PositioningWidget pageId={`article-${this.props.params.id}`} />
           <div className="col s12 m6 article-wrapper">
             <article className="article">
-              <ArticleContent text={getArticleContent(this.props.article)} onTextSelected={this.props.onTextSelected} wordlists={this.props.wordlists} articleId={this.props.params.id}/>
+              <ArticleContent onTextSelected={this.props.onTextSelected} />
               <ArticleFooter source_url={this.props.article.source_url} />
             </article>
             <ConfirmLearnedButton articleId={this.props.params.id} />
