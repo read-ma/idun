@@ -12,7 +12,7 @@ function mapStateToProps(state) {
   };
 }
 
-function ArticleLink({id, title, source_url,tags, content_type, created_at, privy, metrics}){
+function ArticleLink({id, title, source_url,tags, content_type, created_at, privy, metrics, learned}){
   function extractDomain(sourceUrl){
     let matches = sourceUrl.match(/^https?\:\/\/(?:www\.)?([^\/?#]+)(?:[\/?#]|$)/i);
 
@@ -39,9 +39,9 @@ function ArticleLink({id, title, source_url,tags, content_type, created_at, priv
     <li key={id} className='collection-item'>
       <i className='material-icons'>{ privy ? 'lock_outline' : ''}</i>
 
-      {/*<div className="secondary-content badge">
-        <i className="material-icons">grade</i>
-      </div>*/}
+      {<div className="secondary-content badge">
+        <i className='material-icons'>{ learned ? 'done' : ''}</i>
+      </div>}
 
       <span className='title flow-text'>
         <Link to={`/article/${id}`}>
