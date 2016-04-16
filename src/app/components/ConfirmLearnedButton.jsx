@@ -7,12 +7,12 @@ const ConfirmLearnedButton = ({confirmLearned, articleId, articleLearned}) => {
     confirmLearned(articleId);
   };
   if (articleLearned)
-    return false;
+    return <span></span>;
 
   if (typeof articleLearned === "undefined")
     return <span></span>;
 
-  return <a className="btn btn-large" onClick={onConfirmLearned}>Yeah! I have learned this article and learnt all words</a>;
+  return <a className="btn btn-large" onClick={onConfirmLearned}>Yeah! I have aquired words from this article</a>;
 };
 
 const mapActionsToProps = (dispatch) => {
