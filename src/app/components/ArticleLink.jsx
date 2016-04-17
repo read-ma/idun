@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-export default function ArticleLink({id, title, source_url,tags, content_type, created_at, privy, metrics, learned}){
+export default function ArticleLink({id, title, source_url, tags, content_type, created_at, privy, metrics, learned}){
   function extractDomain(sourceUrl){
     let matches = sourceUrl.match(/^https?\:\/\/(?:www\.)?([^\/?#]+)(?:[\/?#]|$)/i);
 

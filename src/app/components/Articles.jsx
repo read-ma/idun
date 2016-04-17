@@ -1,3 +1,4 @@
+require('./Articles.scss');
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { loadArticles, updateArticlesFilter } from '../actions/articles';
@@ -17,7 +18,7 @@ class ArticleList extends Component {
     });
 
     return (
-      <ul className="collection">
+      <ul className="collection articles-list">
         {articleLinks}
       </ul>
     );
@@ -29,14 +30,17 @@ const FilterCheckboxes = ({onChange, filter}) => {
     if (!_.isBoolean(value)) return false;
 
     return (
-      <li>
+      <li className="clearfix">
         <input id={key} key={`filter-flag-${key}`} type="checkbox" onChange={onChange} checked={value} name={key} className='filled-in'/>
-        <label htmlFor={key}> {key}</label>
+        <label htmlFor={key}>{key.toUpperCase()}</label>
       </li> );
   });
 
   return (
-    <ul> {checkboxes} </ul>
+    <div className="col s6">
+      <h4>Filter articles by:</h4>
+      <ul className="articles-list-filters">{checkboxes}</ul>
+    </div>
   );
 };
 
@@ -61,8 +65,8 @@ class ArticleFilter extends Component {
         <div className="input-field col s12">
           <input type="text" id="articleSearch" name="query" value={this.props.filter.query} onChange={this.onChange.bind(this)}/>
           <label htmlFor="articleSearch">Search for article</label>
-          <FilterCheckboxes filter={this.props.filter} onChange={this.onCheckboxChange.bind(this)}/>
         </div>
+        <FilterCheckboxes filter={this.props.filter} onChange={this.onCheckboxChange.bind(this)}/>
       </form>
     );
   }

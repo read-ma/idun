@@ -1,0 +1,22 @@
+.articles {
+  .userdefinitionbox {
+    color: #fff;
+    &:hover {
+      color: #000;
+    }
+  }
+
+  .articles-list-filters {
+    li label {
+      line-height: 20px;
+      padding-left: 30px;
+    }
+  }
+
+  .articles-list li {
+    border-bottom: 1px solid #e0e0e0;
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}
