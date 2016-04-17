@@ -113,14 +113,12 @@ class Articles extends Component {
 }
 
 const matchCriteria = (article, filter) => {
-  let match = true;
-
   if (filter.query) return !!article.title.match(new RegExp(filter.query,'gim'));
-  if (filter.learned) return match && article.learned;
-  if (filter.privy) return match && article.privy;
-  if (filter.open) return match && !article.privy;
+  if (filter.learned) return article.learned;
+  if (filter.privy) return article.privy;
+  if (filter.open) return !article.privy;
 
-  return match;
+  return true;
 };
 
 const filterArticles = (articles, filter)=>{
