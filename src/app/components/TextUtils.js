@@ -25,7 +25,7 @@ const tokensContainingWord = (tokens, word) => {
   findAllOccurenceIndexes(tokens, words[0]).forEach( idx => {
     let matchCandidate = tokens.slice(idx, idx+words.length);
 
-    if (_.isEqual(words, matchCandidate.map(t => t.word)))
+    if (_.isEqual(words, matchCandidate.map(t => t.word.toLowerCase())))
       result = result.concat( matchCandidate );
   });
 
@@ -34,11 +34,11 @@ const tokensContainingWord = (tokens, word) => {
 
 const findAllOccurenceIndexes = (arr, item) => {
   return arr.reduce((prev,current,currentIndex,array) => {
-    if (current.word.toLowerCase() == item.toLowerCase())
+    if (_.isEqual(current.word.toLowerCase(), item.toLowerCase()))
       prev.push(currentIndex);
     return prev;
-  }, [])
-;};
+  }, []);
+};
 
 class Token {
   constructor(word, ...classNames){
