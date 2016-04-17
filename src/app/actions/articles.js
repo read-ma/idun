@@ -93,4 +93,11 @@ const articleLearned = (articleId) => {
   };
 };
 
-export { loadArticle, loadArticles, addArticle, pageScrolled, confirmArticleLearned, updateArticlesFilter }
+const articlePageClosed = () => {
+  return {
+    type: 'ARTICLE_PAGE_CLOSED'
+  };
+};
+
+
+export { loadArticle, loadArticles, addArticle, pageScrolled, confirmArticleLearned, updateArticlesFilter, articlePageClosed }

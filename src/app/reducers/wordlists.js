@@ -48,6 +48,14 @@ export default function wordlists(state = initialState, action) {
         return list;
     });
 
+  case 'ARTICLE_PAGE_CLOSED':
+    return state.map ((list) => {
+      if (list.name === 'selection') {
+        return Object.assign({}, list, {words: []});
+      }
+      else return list;
+    });
+
   case 'TEXT_SELECTED':
     return state.map ((list) => {
       if (list.name === 'selection') {

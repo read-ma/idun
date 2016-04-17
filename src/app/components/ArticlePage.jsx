@@ -2,7 +2,7 @@ require('./ArticlePage.scss');
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { loadArticle, textSelected, loadUserDefinitions } from '../actions';
+import { loadArticle, textSelected, loadUserDefinitions, articlePageClosed } from '../actions';
 import { Link } from 'react-router';
 import Sidebar from '../containers/Sidebar';
 import ArticleContent from './ArticleContent';
@@ -26,6 +26,10 @@ class ArticlePage extends Component {
   componentDidMount(){
     this.props.loadArticle(this.props.params.id);
     this.props.loadUserDefinitions();
+  }
+
+  componentWillUnmount(){
+    this.props.articlePageClosed();
   }
 
   render() {
@@ -52,7 +56,7 @@ class ArticlePage extends Component {
 const mapActionsToProps = (dispatch) => {
   return {
     loadArticle: (id) => dispatch(loadArticle(id)),
-
+    articlePageClosed: () => dispatch(articlePageClosed()),
     loadUserDefinitions: () => dispatch(loadUserDefinitions()),
 
     onTextSelected: (text) => {
