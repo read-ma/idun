@@ -31,7 +31,15 @@ function main(state = initialState, action) {
   }
 }
 
-const articlesFilter = (state = {}, action) => {
+
+const articlesFilterInitial = {
+  learned: false,
+  privy: false,
+  open: false,
+  query: ""
+};
+
+const articlesFilter = (state = articlesFilterInitial, action) => {
   switch (action.type) {
   case 'UPDATE_ARTICLES_FILTER':
     return Object.assign({}, state, action.payload);

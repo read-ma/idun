@@ -7,6 +7,7 @@ import classnames from 'classnames';
 import PositioningWidget from './PositioningWidget';
 import ArticleAdd from './AddArticleWidget.jsx';
 import ArticleLink from './ArticleLink.jsx';
+import _ from 'lodash';
 
 class ArticleList extends Component {
 
@@ -23,14 +24,14 @@ class ArticleList extends Component {
   }
 };
 
-const FilterCheckboxes = ({onChange}) => {
-  let flags = ['learned', 'privy', 'open'];
+const FilterCheckboxes = ({onChange, filter}) => {
+  let checkboxes = _.map(filter, (value, key, coll) => {
+    if (!_.isBoolean(value)) return false;
 
-  let checkboxes = flags.map(flag => {
     return (
       <li>
-        <input id={flag} key={`filter-flag-${flag}`} type="checkbox" onChange={onChange} name={flag} className='filled-in'/>
-        <label htmlFor={flag}> {flag}</label>
+        <input id={key} key={`filter-flag-${key}`} type="checkbox" onChange={onChange} checked={value} name={key} className='filled-in'/>
+        <label htmlFor={key}> {key}</label>
       </li> );
   });
 
@@ -58,9 +59,9 @@ class ArticleFilter extends Component {
     return (
       <form className="row">
         <div className="input-field col s12">
-          <input type="text" id="articleSearch" name="query" onChange={this.onChange.bind(this)}/>
+          <input type="text" id="articleSearch" name="query" value={this.props.filter.query} onChange={this.onChange.bind(this)}/>
           <label htmlFor="articleSearch">Search for article</label>
-          <FilterCheckboxes onChange={this.onCheckboxChange.bind(this)}/>
+          <FilterCheckboxes filter={this.props.filter} onChange={this.onCheckboxChange.bind(this)}/>
         </div>
       </form>
     );
@@ -95,7 +96,7 @@ class Articles extends Component {
         <PositioningWidget pageId='article-list-page' />
         <div className="row">
           <div className="col s5 left-align">
-            <ArticleFilter onChange={this.handleFilterChange} />
+            <ArticleFilter onChange={this.handleFilterChange} filter={this.props.filter}/>
           </div>
           <div className="col s5 offset-s1 right right-align">
             <ArticleAdd dispatch={this.props.dispatch} />
