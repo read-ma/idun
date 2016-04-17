@@ -115,26 +115,16 @@ class Articles extends Component {
 const matchCriteria = (article, filter) => {
   let match = true;
 
-  if ( filter.query )
-    match = !!article.title.match(new RegExp(filter.query,'gim'));
-
-  if ( filter.learned )
-   match = match && article.learned;
-
-  if ( filter.privy )
-   match = match && article.privy;
-
-  if ( filter.open )
-   match = match && !article.privy;
-
-
+  if (filter.query) return !!article.title.match(new RegExp(filter.query,'gim'));
+  if (filter.learned) return match && article.learned;
+  if (filter.privy) return match && article.privy;
+  if (filter.open) return match && !article.privy;
 
   return match;
 };
 
 const filterArticles = (articles, filter)=>{
-  console.log(filter);
-  return articles.filter( article => matchCriteria(article, filter));
+  return articles.filter(article => matchCriteria(article, filter));
 }
 
 function mapStateToProps(state) {
