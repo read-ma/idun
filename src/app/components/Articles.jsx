@@ -56,8 +56,16 @@ class ArticleFilter extends Component {
   }
 
   onCheckboxChange(event){
-    this.props.onChange({ [ event.target.name ]: event.target.checked });
+    let opposite = {privy: 'open', open: 'privy', learned: 'unread', unread: 'learned'};
+    let change = {[ event.target.name ]: event.target.checked};
+
+    if (event.target.checked){
+      change[opposite[event.target.name]] = false;
+    }
+
+    this.props.onChange(change);
   }
+
 
   render() {
     return (
@@ -113,12 +121,27 @@ class Articles extends Component {
 }
 
 const matchCriteria = (article, filter) => {
-  if (filter.query) return !!article.title.match(new RegExp(filter.query,'gim'));
-  if (filter.learned) return article.learned;
-  if (filter.privy) return article.privy;
-  if (filter.open) return !article.privy;
+  let match = true;
 
-  return true;
+  if ( filter.query )
+    match = !!article.title.match(new RegExp(filter.query,'gim'));
+
+  if ( filter.learned )
+    match = match && article.learned;
+
+  if ( filter.privy )
+    match = match && article.privy;
+
+  if ( filter.open )
+    match = match && !article.privy;
+
+  if ( filter.open )
+    match = match && !article.privy;
+
+  if (filter.unread)
+    match = match && !article.learned;
+
+  return match;
 };
 
 const filterArticles = (articles, filter)=>{

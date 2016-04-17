@@ -31,11 +31,11 @@ function main(state = initialState, action) {
   }
 }
 
-
 const articlesFilterInitial = {
-  learned: false,
   privy: false,
   open: false,
+  unread: false,
+  learned: false,
   query: ""
 };
 
