@@ -1,63 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
-import { loadArticles } from '../actions';
+import { loadArticles, updateArticlesFilter } from '../actions/articles';
 import { addArticle } from '../actions/articles';
 import moment from 'moment';
 import classnames from 'classnames';
 import PositioningWidget from './PositioningWidget';
-
-function mapStateToProps(state) {
-  return {
-    articles: state.articles
-  };
-}
-
-function ArticleLink({id, title, source_url,tags, content_type, created_at, privy, metrics, learned}){
-  function extractDomain(sourceUrl){
-    let matches = sourceUrl.match(/^https?\:\/\/(?:www\.)?([^\/?#]+)(?:[\/?#]|$)/i);
-
-    return matches && matches[1];
-  };
-
-  function difficultyLevel(metric){
-    let description;
-    let cssClass;
-    if (metric < 85) {
-      description = 'Advanced';
-      cssClass = 'purple-text text-lighten-2';
-    } else if (metric < 95) {
-      description = 'Upper-intermediate';
-      cssClass = 'orange-text text-lighten-2';
-    } else {
-      description = 'Intermediate';
-      cssClass = 'green-text text-lighten-2';
-    }
-    return (<strong className={cssClass}>{description}</strong>);
-  };
-
-  return (
-    <li key={id} className='collection-item'>
-      <i className='material-icons'>{ privy ? 'lock_outline' : ''}</i>
-
-      {<div className="secondary-content badge">
-        <i className='material-icons'>{ learned ? 'done' : ''}</i>
-      </div>}
-
-      <span className='title flow-text'>
-        <Link to={`/article/${id}`}>
-         {title}
-        </Link>
-      </span>
-
-      <p>{difficultyLevel(metrics)}</p>
-
-      <p>
-        <small><strong>{tags}</strong></small>
-      </p>
-    </li>
-  );
-};
+import ArticleAdd from './AddArticleWidget.jsx';
+import ArticleLink from './ArticleLink.jsx';
 
 class ArticleList extends Component {
 
@@ -74,65 +23,49 @@ class ArticleList extends Component {
   }
 };
 
+const FilterCheckboxes = ({onChange}) => {
+  let flags = ['learned', 'privy', 'open'];
+
+  let checkboxes = flags.map(flag => {
+    return (
+      <li>
+        <input id={flag} key={`filter-flag-${flag}`} type="checkbox" onChange={onChange} name={flag} className='filled-in'/>
+        <label htmlFor={flag}> {flag}</label>
+      </li> );
+  });
+
+  return (
+    <ul> {checkboxes} </ul>
+  );
+};
+
+
 class ArticleFilter extends Component {
-  onChange(event) {
-    this.props.onChange(event.target.value);
+  constructor(props){
+    super(props);
+    this.state= {};
   }
+
+  onChange(event) {
+    this.props.onChange({ [ event.target.name ]: event.target.value });
+  }
+
+  onCheckboxChange(event){
+    this.props.onChange({ [ event.target.name ]: event.target.checked });
+  }
+
   render() {
     return (
       <form className="row">
         <div className="input-field col s12">
-          <input type="text" id="articleSearch" name="articleSearch" onChange={this.onChange.bind(this)}/>
+          <input type="text" id="articleSearch" name="query" onChange={this.onChange.bind(this)}/>
           <label htmlFor="articleSearch">Search for article</label>
+          <FilterCheckboxes onChange={this.onCheckboxChange.bind(this)}/>
         </div>
       </form>
     );
   }
 };
-
-class ArticleAdd extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {inputValue: ''};
-    this.addUrl = this.addUrl.bind(this);
-    this.onChange = this.onChange.bind(this);
-  }
-
-  addUrl(event) {
-    event.preventDefault();
-    let sourceUrl = this.state.inputValue;
-    this.urlAdded();
-    this.props.dispatch(addArticle({source_url: sourceUrl}));
-  }
-
-  urlAdded() {
-    this.setState({inputValue: ''});
-  }
-
-  onChange(e) {
-   this.setState({ inputValue: e.target.value });
-  }
-
-  render () {
-    return (
-      <div className="row">
-        <form onSubmit={this.addUrl}>
-          <div className="col s10">
-            <div className="input-field">
-              <input type="url" name="sourceUrl" className="validate" ref="urlInput" id="sourceUrl" required="required" onChange={this.onChange} value={this.state.inputValue} />
-              <label htmlFor="sourceUrl">Add article from url</label>
-            </div>
-          </div>
-          <div className="col s2">
-            <button type="submit" className="btn-floating btn-large green">
-              <i className="material-icons">add</i>
-            </button>
-          </div>
-        </form>
-      </div>
-    );
-  }
-}
 
 class Articles extends Component {
 
@@ -142,17 +75,13 @@ class Articles extends Component {
     this.handleFilterChange = this.handleFilterChange.bind(this);
   }
 
-  handleFilterChange(query) {
-    this.setState(
-      {
-        articles: this.props.articles.filter(article => article.title.match(new RegExp(query,'gim')))
-      }
-    );
+  handleFilterChange(change) {
+    this.props.dispatch(updateArticlesFilter(change));
   }
 
   componentWillReceiveProps(nextProps){
     this.setState({
-      articles: nextProps.articles
+      articles: filterArticles(nextProps.articles, nextProps.filter)
     });
   };
 
@@ -176,6 +105,38 @@ class Articles extends Component {
       </div>
     );
   }
+}
+
+const matchCriteria = (article, filter) => {
+  let match = true;
+
+  if ( filter.query )
+    match = !!article.title.match(new RegExp(filter.query,'gim'));
+
+  if ( filter.learned )
+   match = match && article.learned;
+
+  if ( filter.privy )
+   match = match && article.privy;
+
+  if ( filter.open )
+   match = match && !article.privy;
+
+
+
+  return match;
+};
+
+const filterArticles = (articles, filter)=>{
+  console.log(filter);
+  return articles.filter( article => matchCriteria(article, filter));
+}
+
+function mapStateToProps(state) {
+  return {
+    articles: state.articles,
+    filter: state.articlesFilter
+  };
 }
 
 export default connect(mapStateToProps)(Articles);

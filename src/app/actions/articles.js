@@ -2,6 +2,13 @@ import store from '../store';
 import Config from 'Config';
 import api from '../api';
 
+const updateArticlesFilter = (change) => {
+  return {
+    type: 'UPDATE_ARTICLES_FILTER',
+    payload: change
+  };
+};
+
 function pageScrolled(pageId, position){
   return {
     type: 'PAGE_SCROLLED',
@@ -86,4 +93,4 @@ const articleLearned = (articleId) => {
   };
 };
 
-export { loadArticle, loadArticles, addArticle, pageScrolled, confirmArticleLearned }
+export { loadArticle, loadArticles, addArticle, pageScrolled, confirmArticleLearned, updateArticlesFilter }

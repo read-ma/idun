@@ -31,4 +31,14 @@ function main(state = initialState, action) {
   }
 }
 
-export {article, articles, main, wordlists, definitions, auth, settings}
+const articlesFilter = (state = {}, action) => {
+  switch (action.type) {
+  case 'UPDATE_ARTICLES_FILTER':
+    return Object.assign({}, state, action.payload);
+  default:
+    return state;
+  }
+};
+
+
+export {article, articles, main, wordlists, definitions, auth, settings, articlesFilter}
