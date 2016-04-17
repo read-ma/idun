@@ -129,17 +129,14 @@ const matchCriteria = (article, filter) => {
   if ( filter.learned )
     match = match && article.learned;
 
+  if (filter.unread)
+    match = match && !article.learned;
+
   if ( filter.privy )
     match = match && article.privy;
 
   if ( filter.open )
     match = match && !article.privy;
-
-  if ( filter.open )
-    match = match && !article.privy;
-
-  if (filter.unread)
-    match = match && !article.learned;
 
   return match;
 };
