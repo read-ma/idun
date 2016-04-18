@@ -1,4 +1,5 @@
 import React from 'react';
+import { addArticle } from '../actions/articles';
 
 export default class ArticleAdd extends React.Component {
   constructor(props) {

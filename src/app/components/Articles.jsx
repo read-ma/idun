@@ -2,7 +2,6 @@ require('./Articles.scss');
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { loadArticles, updateArticlesFilter } from '../actions/articles';
-import { addArticle } from '../actions/articles';
 import moment from 'moment';
 import classnames from 'classnames';
 import PositioningWidget from './PositioningWidget';
