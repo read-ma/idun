@@ -5,7 +5,7 @@ import MainNavigaton from './MainNavigation';
 import classnames  from 'classnames';
 
 const ProgressBar = ({processing}) => {
-  return (<div className={classnames('progress', {hide: !processing})}><div className="indeterminate"></div> </div>);
+  return (<div className={classnames('progress progress-loader', {hide: !processing})}><div className="indeterminate"></div> </div>);
 }
 
 const mapStateToProps = (state) => {

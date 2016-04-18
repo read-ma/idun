@@ -84,8 +84,10 @@ class FlashcardSettings extends Component {
       <div>
         <h3>Settings</h3>
         <label>Start with:</label>
-        <a onClick={this.props.changeSettings.bind(null, {startWith: 'definition'})}>Definition</a>
-        <a onClick={this.props.changeSettings.bind(null, {startWith: 'word'})}>Word</a>
+        <ul>
+          <li><a onClick={this.props.changeSettings.bind(null, {startWith: 'definition'})}>Definition</a></li>
+          <li><a onClick={this.props.changeSettings.bind(null, {startWith: 'word'})}>Word</a></li>
+        </ul>
       </div>
     )
   }
@@ -97,6 +99,7 @@ class FlashcardsQuiz extends Component {
     this.state = {
       items: props.items,
       currentItem: props.items[0],
+      itemIndex: 0,
       settings: {startWith: 'definition'}
     };
     this.markItem = this.markItem.bind(this);
@@ -111,15 +114,16 @@ class FlashcardsQuiz extends Component {
   }
 
   markItem(item, markValue) {
+    item.mastered = markValue === 'easy';
     const items = this.state.items;
     const itemIndex = items.indexOf(item);
-    item.mastered = markValue == 'easy';
     const newItems = items.slice();
     newItems.splice(itemIndex, 1, item);
 
     this.setState({
       currentItem: this.fetchNextElement(this.state.items, this.state.currentItem),
-      items: newItems
+      items: newItems,
+      itemIndex: itemIndex + 1
     });
   }
 
@@ -139,16 +143,36 @@ class FlashcardsQuiz extends Component {
     this.setState({settings: settings})
   }
 
+  renderProgress() {
+    const itemNumber = this.state.itemIndex + 1;
+    const percent = Math.round(itemNumber / this.state.items.length * 100);
+    return (
+      <div className="row">
+        <div className="col s4 offset-s4 center-align">
+          <span>{itemNumber} of {this.state.items.length}</span>
+          <div className="progress">
+            <div className="determinate" style={{width: percent + '%'}}></div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   render() {
     let result;
     if (this.state.currentItem) {
       result = (
-        <div>
-          <p className="right-align">
-            Mastered {this.masteredWords()} of {this.state.items.length}
-          </p>
-          <Flashcard key={this.state.currentItem.word} item={this.state.currentItem} markItem={this.markItem} startWithObverse={this.state.settings.startWith === 'word'} />
-          <FlashcardSettings changeSettings={this.changeSettings} />
+        <div className="row">
+          <div className="col s8">
+            <p className="right-align">
+              Mastered {this.masteredWords()}
+            </p>
+            <Flashcard key={this.state.currentItem.word} item={this.state.currentItem} markItem={this.markItem} startWithObverse={this.state.settings.startWith === 'word'} />
+            {this.renderProgress()}
+          </div>
+          <div className="col s4 right-align">
+            <FlashcardSettings changeSettings={this.changeSettings} />
+          </div>
         </div>
       )
     } else {

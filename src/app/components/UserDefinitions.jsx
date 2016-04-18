@@ -78,17 +78,19 @@ class UserDefinitions extends Component {
     return (
       <div className="articles">
         <div className="row">
-          <div className="cards-container">
+          <div className="flashcards-container">
             <FlashcardsQuiz items={this.state.items} />
+          </div>
+        </div>
+        <div className="row">
+          <div className="col s8">
+            {this.renderArticles()}
           </div>
         </div>
         <form className="row">
           <div className="input-field col s4">
             <input type='text' onChange={this.handleFilterChange} name='wordSearch' name='wordSearch' />
             <label htmlFor="wordSearch">Quick search...</label>
-          </div>
-          <div className="col s8">
-            {this.renderArticles()}
           </div>
         </form>
         <div className="cards-container row">
