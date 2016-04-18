@@ -2,18 +2,10 @@ import React from 'react';
 import _ from 'lodash';
 
 const markSelectedInDict = (tokens, wordlist) => {
-  if (wordlist.name == 'd3k' || wordlist.name == 'user'){
-    tokens.forEach(token => {
-      if (wordlist.words.indexOf(token.word.toLowerCase()) > -1)
-        token.classNames.push(wordlist.name);
-    });
-  }
-  else
-    wordlist.words.forEach(word => {
-      tokensContainingWord(tokens,word)
-        .forEach(token => token.classNames.push(wordlist.name));
-    });
-
+  wordlist.words.forEach(word => {
+    tokensContainingWord(tokens,word)
+      .forEach(token => token.classNames.push(wordlist.name));
+  });
   return tokens;
 };
 
