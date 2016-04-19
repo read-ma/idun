@@ -1,14 +1,20 @@
 import React, { Component } from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import classnames from 'classnames';
 
 class Flashcard extends Component {
   constructor(props) {
     super(props);
-    this.state = { reverted: false, side: props.startWithObverse ? 'obverse' : 'reverse'};
+    this.state = { reverted: false, side: props.startWithObverse ? 'obverse' : 'reverse', flipped: false, startWithObverse: props.startWithObverse};
     this.markEasy = this.markEasy.bind(this);
     this.markHard = this.markHard.bind(this);
     this.revert = this.revert.bind(this);
   }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({startWithObverse: nextProps.startWithObverse});
+  }
+
 
   markEasy() {
     this.mark('easy');
@@ -23,17 +29,16 @@ class Flashcard extends Component {
   }
 
   revert() {
-    this.setState({ reverted: true, side: this.state.side === 'reverse' ? 'obverse' : 'reverse' });
+    this.setState({ reverted: true, side: this.state.side === 'reverse' ? 'obverse' : 'reverse', flipped: !this.state.flipped });
   }
 
   renderMarkButtons() {
     let buttons;
     if (this.state.reverted) {
       buttons = (
-        <div className="row">
-          <hr/>
-          <a className="btn green" onClick={this.markEasy}>Easy</a>
-          <a className="btn red" onClick={this.markHard}>Hard</a>
+        <div className="card-action center-align">
+          <a className="green-text" onClick={this.markEasy}>Easy</a>
+          <a className="red-text" onClick={this.markHard}>Hard</a>
         </div>
       );
     } else {
@@ -44,36 +49,57 @@ class Flashcard extends Component {
 
   obverse() {
     return (
-      <div className="card-obverse">
-        <h5 className="card-title blue-text">{this.props.item.word}</h5>
+      <div className="card blue-grey darken-1 obverse" onClick={this.revert}>
+        <div className="card-content white-text center-align">
+          <div className="card-obverse">
+            <span className="card-title">
+              {this.props.item.word}
+            </span>
+          </div>
+        </div>
       </div>
     )
   }
 
   reverse() {
     return (
-      <div className="card-reverse">
-        <div>
-          {this.props.item.translation}
-          {this.props.item.definition}
+      <div className="card blue-grey darken-1 reverse" onClick={this.revert}>
+        <div className="card-content white-text center-align">
+          <div className="card-reverse">
+            <span className="card-title">
+              {this.props.item.translation}
+            </span>
+            <p>{this.props.item.definition}</p>
+          </div>
         </div>
+        {this.renderMarkButtons()}
       </div>
     )
   }
 
   render() {
-    const side = this[this.state.side]();
+    let sides;
+    if (this.state.startWithObverse) {
+      sides = (
+        <div className={classnames({ flipped: this.state.flipped })}>
+          {this.obverse()}
+          {this.reverse()}
+        </div>
+      )
+    } else {
+      sides = (
+        <div className={classnames({ flipped: this.state.flipped })}>
+          {this.reverse()}
+          {this.obverse()}
+        </div>
+      )
+    }
     return (
-      <div>
-        <ReactCSSTransitionGroup transitionName="fadein" transitionAppear={false} transitionLeave={false} transitionEnterTimeout={500} transitionLeaveTimeout={300}>
-          <div className="row" key={this.props.item.word}>
-            <div className="card-item" key={this.props.item.id} onClick={this.revert}>
-              {side}
-              {this.renderMarkButtons()}
-            </div>
-          </div>
-        </ReactCSSTransitionGroup>
-      </div>
+      <ReactCSSTransitionGroup transitionName="fadein" transitionAppear={true} transitionLeave={false} transitionEnterTimeout={500} transitionLeaveTimeout={300}>
+        <div className="row card-wrap" key={this.props.item.word}>
+          {sides}
+        </div>
+      </ReactCSSTransitionGroup>
     );
   }
 }
@@ -163,14 +189,14 @@ class FlashcardsQuiz extends Component {
     if (this.state.currentItem) {
       result = (
         <div className="row">
-          <div className="col s8">
+          <div className="col s6">
             <p className="right-align">
               Mastered {this.masteredWords()}
             </p>
             <Flashcard key={this.state.currentItem.word} item={this.state.currentItem} markItem={this.markItem} startWithObverse={this.state.settings.startWith === 'word'} />
             {this.renderProgress()}
           </div>
-          <div className="col s4 right-align">
+          <div className="col s3 offset-s3 right-align">
             <FlashcardSettings changeSettings={this.changeSettings} />
           </div>
         </div>

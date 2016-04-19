@@ -37,53 +37,40 @@
   .card-description {
 
   }
-  .fadein-enter{
-    opacity: 0.01;
-    &.fadein-enter-active{
-      opacity: 1;
-      transition: opacity .5s ease-in;
-    }
-  }
-  .fadein-appear{
-    opacity: 0.01;
-    &.fadein-appear-active{
-      opacity: 1;
-      transition: opacity .5s ease-in;
-    }
-  }
 
-  .fadein-leave{
-    opacity: 0.1;
-    &.fadein-leave-active{
-      opacity: 0.01;
-      transition: opacity .5s ease-in;
-    }
-  }
 }
 
 .flashcards-container {
-  .card-item {
-    padding: 10px;
-    margin: 2% .5%;
-    @extend .z-depth-1;
-    text-align: center;
-
-  }
-
-  .card-content {
-
-  }
-
-  .card-title {
-    text-transform: capitalize;
-  }
-
-  .card-subtitle {
-    line-height: 145%;
-  }
-
-  .card-description {
-
+  perspective: 800px;
+  position: relative;
+  .card-wrap{
+    min-height: 400px;
+    .card{
+      position: absolute;
+      width: 400px;
+      height: 300px;
+      &.obverse{
+        transform: rotateY(0deg);
+      }
+      &.reverse{
+        transform: rotateY(-180deg);
+      }
+      backface-visibility: hidden;
+      min-height: 200px;
+      .card-content{
+        cursor: pointer;
+      }
+      .card-title {
+        text-transform: capitalize;
+      }
+      transition: transform 0.5s ease 0s;
+    }
+    .flipped{
+      .card{
+        &.obverse{ transform: rotateY(180deg);}
+        &.reverse{ transform: rotateY(0deg);}
+      }
+    }
   }
   .fadein-enter{
     opacity: 0.01;
