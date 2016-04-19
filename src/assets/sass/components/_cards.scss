@@ -49,12 +49,6 @@
       position: absolute;
       width: 400px;
       height: 300px;
-      &.obverse{
-        transform: rotateY(0deg);
-      }
-      &.reverse{
-        transform: rotateY(-180deg);
-      }
       backface-visibility: hidden;
       min-height: 200px;
       .card-content{
@@ -63,13 +57,7 @@
       .card-title {
         text-transform: capitalize;
       }
-      transition: transform 0.5s ease 0s;
-    }
-    .flipped{
-      .card{
-        &.obverse{ transform: rotateY(180deg);}
-        &.reverse{ transform: rotateY(0deg);}
-      }
+      transition: transform 0.5s ease-in-out;
     }
   }
   .fadein-enter{
@@ -92,6 +80,20 @@
     &.fadein-leave-active{
       opacity: 0.01;
       transition: opacity .5s ease-in;
+    }
+  }
+  .flip-enter{
+    transform: rotateY( -180deg );
+    transform-style: preserve-3d;
+    &.flip-enter-active{
+      transform: rotateY( 0deg );
+    }
+  }
+  .flip-leave{
+    transform: rotateY( 0deg );
+    transform-style: preserve-3d;
+    &.flip-leave-active{
+      transform: rotateY( 180deg );
     }
   }
 }
