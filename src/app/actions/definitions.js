@@ -23,7 +23,7 @@ function findWordData(text, type, options={}){
     Language.keysOfCurrent());
 
   return (dispatch) => {
-    api.get(`/translate/${type}.json`, {params: params})
+    api.post('/translate.json', params)
       .then( response => dispatch(contentLoaded(type, response.data)))
       .catch( error => {
         console.log(error);

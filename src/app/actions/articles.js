@@ -2,13 +2,17 @@ import store from '../store';
 import Config from 'Config';
 import api from '../api';
 
+const updateArticlesFilter = (change) => {
+  return {
+    type: 'UPDATE_ARTICLES_FILTER',
+    payload: change
+  };
+};
+
 function pageScrolled(pageId, position){
   return {
     type: 'PAGE_SCROLLED',
-    payload: {
-      position: position,
-      pageId: pageId
-    }
+    payload: {position,pageId}
   };
 };
 
@@ -74,4 +78,26 @@ function postArticle(source_url, handleSuccess, handleFail) {
     .catch(handleFail);
 }
 
-export { loadArticle, loadArticles, addArticle, pageScrolled }
+const confirmArticleLearned = (id) => {
+  return (dispatch) => {
+    api.post(`/article_actions.json`, {article_action: {article_id: id, action: 'learned'}})
+      .then(response => dispatch(articleLearned(id)))
+      .catch(error => console.log(error));
+  };
+};
+
+const articleLearned = (articleId) => {
+  return {
+    type: 'ARTICLE_LEARNED',
+    payload: {articleId}
+  };
+};
+
+const articlePageClosed = () => {
+  return {
+    type: 'ARTICLE_PAGE_CLOSED'
+  };
+};
+
+
+export { loadArticle, loadArticles, addArticle, pageScrolled, confirmArticleLearned, updateArticlesFilter, articlePageClosed }

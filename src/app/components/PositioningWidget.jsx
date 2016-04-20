@@ -6,49 +6,50 @@ import ls from '../localStore.js';
 class PositioningWidget extends Component {
   constructor(props){
     super(props);
+    this.state = {};
     this.handleScroll = this.handleScroll.bind(this);
   }
   componentDidMount(){
-    console.log('widget mouted');
     window.addEventListener('scroll', this.handleScroll);
+    window.setTimeout(this.restorePosition.bind(this), 800);
   }
 
-  componentWillReceiveProps(nextProps){
-    console.log('widget props', nextProps.article, this.props.article);
-    if (nextProps.article && nextProps.article != this.props.article)
-      this.restorePagePosition();
-  }
-
-  restorePagePosition() {
-    console.log('restoring page position');
-    let y = this.props.positions[this.props.pageId] || 0;
-    window.scrollTo(0,y);
+  restorePosition() {
+    let newPosition = this.props.positions[this.props.pageId] || 0;
+    window.scrollTo(0, newPosition);
   }
 
   componentWillUnmount() {
     window.removeEventListener('scroll', this.handleScroll);
+
+    this.props.pageScrolled(this.props.pageId, this.state.position);
     this.props.synchLocalStorage('PAGE_POSITIONS', this.props.positions);
   }
 
   handleScroll(event){
     let target = event.target || event.srcElement;
-    this.props.pageScrolled(this.props.pageId, target.body.scrollTop);
+    this.setState({position : target.body.scrollTop});
   }
 
   render(){
     return false;
+
+    return (
+      <span style={{position: 'fixed', left:0, top: 0, zIndex:1000, backgroundColor: '#eee'}}>
+        {JSON.stringify(this.props.positions)}
+        {JSON.stringify(this.state)}
+      </span>);
   }
 }
 
 PositioningWidget.propTypes = {
-    pageId: PropTypes.string,
+    pageId: PropTypes.string.isRequired,
     positions: PropTypes.object
 };
 
 const mapStateToProps = (state) => {
   return {
-    positions: state.settings.articlePositions,
-    article: state.article.id
+    positions: state.settings.articlePositions
   };
 };
 

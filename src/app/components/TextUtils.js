@@ -1,4 +1,36 @@
 import React from 'react';
+import _ from 'lodash';
+
+const markSelectedInDict = (tokens, wordlist) => {
+  wordlist.words.forEach(word => {
+    tokensContainingWord(tokens,word)
+      .forEach(token => token.classNames.push(wordlist.name));
+  });
+  return tokens;
+};
+
+const tokensContainingWord = (tokens, word) => {
+  let words = word.split(' ');
+  let result = [];
+
+  //use #reduce
+  findAllOccurenceIndexes(tokens, words[0]).forEach( idx => {
+    let matchCandidate = tokens.slice(idx, idx+words.length);
+
+    if (_.isEqual(words, matchCandidate.map(t => t.word.toLowerCase())))
+      result = result.concat( matchCandidate );
+  });
+
+  return result;
+}
+
+const findAllOccurenceIndexes = (arr, item) => {
+  return arr.reduce((prev,current,currentIndex,array) => {
+    if (_.isEqual(current.word.toLowerCase(), item.toLowerCase()))
+      prev.push(currentIndex);
+    return prev;
+  }, []);
+};
 
 class Token {
   constructor(word, ...classNames){
@@ -51,4 +83,4 @@ const detokenize = tokens => {
 const isSeparator = token => token.match(/^[\,\.\?\!\)\(\)\”\"\“\'\:\;\“\‘\’]$/);
 const Separator = ( {children, separator} ) => <span>{children}</span>;
 
-export { detokenize, isSeparator, Separator, Token }
+export { detokenize, isSeparator, Separator, Token, markSelectedInDict }

@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
-import PositioningWidget from './PositioningWidget';
 import {connect} from 'react-redux';
-import { detokenize, isSeparator, Separator, Token} from './TextUtils';
+import { detokenize, isSeparator, Separator, Token, markSelectedInDict} from './TextUtils';
 import { newWordSelected } from '../actions';
 import _ from 'lodash';
 
@@ -13,6 +12,9 @@ class Word extends Component{
   }
 
   render() {
+    if (this.props.separator)
+      return <span>{ this.props.word }</span>;
+
     return (
       <span className={classnames('word', this.props.className)} onClick={this.selectWord.bind(this)}>
         {this.props.word}
@@ -25,13 +27,16 @@ class Word extends Component{
 }
 
 const ArticlePara = ({tokens, handleWordClick, wordlists}) => {
+  tokens = tokens.map(p => new Token(p));
+
   wordlists.forEach(list => tokens = markSelectedInDict(tokens, list));
 
   let paragraph = tokens.map((token,i) => {
+
     return (<Word
               className={token.className()}
-              key={`word-${i}-${token.word}`}
               word={token.word}
+              key={`word-${i}-${token.word}`}
               separator={isSeparator(token.word)}
               onClick={handleWordClick} />);
   });
@@ -40,44 +45,9 @@ const ArticlePara = ({tokens, handleWordClick, wordlists}) => {
     <div className='paragraph'>{detokenize(paragraph)}</div>);
 };
 
-const findAllOccurenceIndexes = (arr, item) => {
-  return arr.reduce((prev,current,currentIndex,array) => {
-    if (current.word.toLowerCase() == item.toLowerCase())
-      prev.push(currentIndex);
-    return prev;
-  }, []
-  );
+const compareKeys = (key, propsA, propsB) => {
+  console.log(key, propsA[key], propsA[key], _.isEqual(propsA[key], propsB[key]));
 }
-const tokensContainingWord = (tokens, word) => {
-  let words = word.split(' ');
-  let result = [];
-
-  //user #reduce
-  findAllOccurenceIndexes(tokens, words[0]).forEach( idx => {
-    let matchCandidate = tokens.slice(idx, idx+words.length);
-
-    if (_.isEqual(words, matchCandidate.map(t => t.word)))
-      result = result.concat( matchCandidate );
-  });
-
-  return result;
-}
-
-const markSelectedInDict = (tokens, wordlist) => {
-  if (wordlist.name == 'd3k' || wordlist.name == 'user'){
-    tokens.forEach(token => {
-      if (wordlist.words.indexOf(token.word.toLowerCase()) > -1)
-        token.classNames.push(wordlist.name);
-    });
-  }
-  else
-    wordlist.words.forEach(word => {
-      tokensContainingWord(tokens,word)
-            .forEach(token => token.classNames.push(wordlist.name));
-    });
-
-  return tokens;
-};
 
 class ArticleContent extends Component {
   constructor(props) {
@@ -105,34 +75,35 @@ class ArticleContent extends Component {
   }
 
   render() {
-    let wordlists = this.props.wordlists.filter(l => l.enabled);
-    let paragraphs = this.props.text.map(paragraph => {
-      let tokens = paragraph.map(p => new Token(p));
-
-      return <ArticlePara handleWordClick={this.handleClick} tokens={tokens} wordlists={wordlists}/>;
+    let paragraphs = this.props.text.map(tokens => {
+      return <ArticlePara handleWordClick={this.handleClick} tokens={tokens} wordlists={this.props.wordlists}/>;
     });
 
-    if (!paragraphs)
+    let title = paragraphs[0];
+    let content = paragraphs.slice(1);
+
+    if (!content)
       return false;
 
     return (
       <div className={classnames('content flow-text', {appending: this.state.appending})} onMouseUp={this.props.onTextSelected}>
-        <h1>{paragraphs[0]}</h1>
-        {paragraphs.slice(1)}
+        <h1>{title}</h1>
+        {content}
       </div>
     );
   }
 };
 
 ArticleContent.propTypes = {
-  text: React.PropTypes.array.isRequired,
+  /* text: React.PropTypes.array.isRequired, */
   onTextSelected: React.PropTypes.func.isRequired
 };
 
 
 const mapStateToProps = (state) => {
   return {
-    wordlists: state.wordlists
+    wordlists: state.wordlists.filter(l => l.enabled),
+    text: state.article.title && [...state.article.title, ...state.article.content] || []
   };
 };
 const mapActionsToProps = (dispatch) => {

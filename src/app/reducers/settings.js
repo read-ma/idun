@@ -1,15 +1,18 @@
 import ls from '../localStore.js';
 
+const positions = JSON.parse(ls.get('PAGE_POSITIONS')) || {};
+
 const initialState = {
   languages: [
     { code: 'pl-PL', key: 'pl', name: 'Polish'},
     { code: 'en-GB', key: 'en', name: 'English' },
     { code: 'fr-FR', key: 'fr', name: 'French' },
     { code: 'pt-BR', key: 'pt', name: 'Portuguese' },
-    { code: 'nb-NO', key: 'no', name: 'Norsk' }
+    { code: 'nb-NO', key: 'no', name: 'Norsk' },
+    { code: 'de-DE', key: 'de', name: 'German' }
   ],
   language: { from: 'en-GB', to: 'pl-PL' },
-  articlePositions: {},
+  articlePositions: positions,
   processesCounter: 0
 };
 
@@ -23,8 +26,6 @@ function language(state = initialState.language, action){
     return state;
   }
 };
-
-const positions = JSON.parse(ls.get('PAGE_POSITIONS'));
 
 function articlePositions(state = positions, action){
   switch(action.type){

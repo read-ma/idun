@@ -7,7 +7,7 @@ import map from 'lodash/map';
 const DEFAULT_RETURN_TO = '/articles';
 
 
-const ReturnTo = (state) => {
+const returnTo = (state) => {
   try {
     return state.routing.locationBeforeTransitions.query.next || DEFAULT_RETURN_TO;
   }
@@ -56,7 +56,7 @@ const loginAttempt = (email, password) => {
     )
       .then( (response) => {
         dispatch(userLoggedIn(response.data));
-        dispatch(push(ReturnTo(store.getState())));
+        dispatch(push(returnTo(store.getState())));
       })
       .catch(function (response) {
         dispatch(userSigningInError(response));

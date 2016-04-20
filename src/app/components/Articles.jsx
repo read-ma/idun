@@ -1,62 +1,13 @@
+require('./Articles.scss');
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
-import { loadArticles } from '../actions';
-import { addArticle } from '../actions/articles';
+import { loadArticles, updateArticlesFilter } from '../actions/articles';
 import moment from 'moment';
 import classnames from 'classnames';
-
-function mapStateToProps(state) {
-  return {
-    articles: state.articles
-  };
-}
-
-function ArticleLink({id, title, source_url,tags, content_type, created_at, privy, metrics}){
-  function extractDomain(sourceUrl){
-    let matches = sourceUrl.match(/^https?\:\/\/(?:www\.)?([^\/?#]+)(?:[\/?#]|$)/i);
-
-    return matches && matches[1];
-  };
-
-  function difficultyLevel(metric){
-    let description;
-    let cssClass;
-    if (metric < 85) {
-      description = 'Advanced';
-      cssClass = 'purple-text text-lighten-2';
-    } else if (metric < 95) {
-      description = 'Upper-intermediate';
-      cssClass = 'orange-text text-lighten-2';
-    } else {
-      description = 'Intermediate';
-      cssClass = 'green-text text-lighten-2';
-    }
-    return (<strong className={cssClass}>{description}</strong>);
-  };
-
-  return (
-    <li key={id} className='collection-item'>
-      <i className='material-icons'>{ privy ? 'lock_outline' : ''}</i>
-
-      {/*<div className="secondary-content badge">
-        <i className="material-icons">grade</i>
-      </div>*/}
-
-      <span className='title flow-text'>
-        <Link to={`/article/${id}`}>
-         {title}
-        </Link>
-      </span>
-
-      <p>{difficultyLevel(metrics)}</p>
-
-      <p>
-        <small><strong>{tags}</strong></small>
-      </p>
-    </li>
-  );
-};
+import PositioningWidget from './PositioningWidget';
+import ArticleAdd from './AddArticleWidget.jsx';
+import ArticleLink from './ArticleLink.jsx';
+import _ from 'lodash';
 
 class ArticleList extends Component {
 
@@ -66,72 +17,67 @@ class ArticleList extends Component {
     });
 
     return (
-      <ul className="collection">
+      <ul className="collection articles-list">
         {articleLinks}
       </ul>
     );
   }
 };
 
+const FilterCheckboxes = ({onChange, filter}) => {
+  let checkboxes = _.map(filter, (value, key, coll) => {
+    if (!_.isBoolean(value)) return false;
+
+    return (
+      <li className="clearfix">
+        <input id={key} key={`filter-flag-${key}`} type="checkbox" onChange={onChange} checked={value} name={key} className='filled-in'/>
+        <label htmlFor={key}>{key.toUpperCase()}</label>
+      </li> );
+  });
+
+  return (
+    <div className="col s6">
+      <h4>Filter articles by:</h4>
+      <ul className="articles-list-filters">{checkboxes}</ul>
+    </div>
+  );
+};
+
+
 class ArticleFilter extends Component {
-  onChange(event) {
-    this.props.onChange(event.target.value);
+  constructor(props){
+    super(props);
+    this.state= {};
   }
+
+  onChange(event) {
+    this.props.onChange({ [ event.target.name ]: event.target.value });
+  }
+
+  onCheckboxChange(event){
+    let opposite = {privy: 'open', open: 'privy', learned: 'unread', unread: 'learned'};
+    let change = {[ event.target.name ]: event.target.checked};
+
+    if (event.target.checked){
+      change[opposite[event.target.name]] = false;
+    }
+
+    this.props.onChange(change);
+  }
+
+
   render() {
     return (
       <form className="row">
         <div className="input-field col s12">
-          <input type="text" id="articleSearch" name="articleSearch" onChange={this.onChange.bind(this)}/>
+          <input type="text" id="articleSearch" name="query" value={this.props.filter.query} onChange={this.onChange.bind(this)}/>
           <label htmlFor="articleSearch">Search for article</label>
         </div>
+        <FilterCheckboxes filter={this.props.filter} onChange={this.onCheckboxChange.bind(this)}/>
       </form>
     );
   }
 };
-
-class ArticleAdd extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {inputValue: ''};
-    this.addUrl = this.addUrl.bind(this);
-    this.onChange = this.onChange.bind(this);
-  }
-
-  addUrl(event) {
-    event.preventDefault();
-    let sourceUrl = this.state.inputValue;
-    this.urlAdded();
-    this.props.dispatch(addArticle({source_url: sourceUrl}));
-  }
-
-  urlAdded() {
-    this.setState({inputValue: ''});
-  }
-
-  onChange(e) {
-   this.setState({ inputValue: e.target.value });
-  }
-
-  render () {
-    return (
-      <div className="row">
-        <form onSubmit={this.addUrl}>
-          <div className="col s10">
-            <div className="input-field">
-              <input type="url" name="sourceUrl" className="validate" ref="urlInput" id="sourceUrl" required="required" onChange={this.onChange} value={this.state.inputValue} />
-              <label htmlFor="sourceUrl">Add article from url</label>
-            </div>
-          </div>
-          <div className="col s2">
-            <button type="submit" className="btn-floating btn-large green">
-              <i className="material-icons">add</i>
-            </button>
-          </div>
-        </form>
-      </div>
-    );
-  }
-}
 
 class Articles extends Component {
 
@@ -141,35 +87,27 @@ class Articles extends Component {
     this.handleFilterChange = this.handleFilterChange.bind(this);
   }
 
-  handleFilterChange(query) {
-    this.setState(
-      {
-        articles: this.props.articles.filter(article => article.title.match(new RegExp(query,'gim')))
-      }
-    );
-  }
-
-  restorePagePosition() {
-    window.scrollTo(0,0);
+  handleFilterChange(change) {
+    this.props.dispatch(updateArticlesFilter(change));
   }
 
   componentWillReceiveProps(nextProps){
     this.setState({
-      articles: nextProps.articles
+      articles: filterArticles(nextProps.articles, nextProps.filter)
     });
   };
 
   componentDidMount() {
     this.props.dispatch(loadArticles());
-    this.restorePagePosition();
   }
 
   render() {
     return (
       <div className="articles">
+        <PositioningWidget pageId='article-list-page' />
         <div className="row">
           <div className="col s5 left-align">
-            <ArticleFilter onChange={this.handleFilterChange} />
+            <ArticleFilter onChange={this.handleFilterChange} filter={this.props.filter}/>
           </div>
           <div className="col s5 offset-s1 right right-align">
             <ArticleAdd dispatch={this.props.dispatch} />
@@ -179,6 +117,38 @@ class Articles extends Component {
       </div>
     );
   }
+}
+
+const matchCriteria = (article, filter) => {
+  let match = true;
+
+  if ( filter.query )
+    match = !!article.title.match(new RegExp(filter.query,'gim'));
+
+  if ( filter.learned )
+    match = match && article.learned;
+
+  if (filter.unread)
+    match = match && !article.learned;
+
+  if ( filter.privy )
+    match = match && article.privy;
+
+  if ( filter.open )
+    match = match && !article.privy;
+
+  return match;
+};
+
+const filterArticles = (articles, filter)=>{
+  return articles.filter(article => matchCriteria(article, filter));
+}
+
+function mapStateToProps(state) {
+  return {
+    articles: state.articles,
+    filter: state.articlesFilter
+  };
 }
 
 export default connect(mapStateToProps)(Articles);

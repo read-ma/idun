@@ -37,7 +37,9 @@ class Settings extends Component {
     this.setState(Object.assign({}, this.state, {settingVisible: !this.state.settingVisible}) );
   }
 
-  toggleSettingsModal() {
+  toggleSettingsModal(event) {
+    event.preventDefault();
+
     let $modal = $('#settingsModal');
 
     if (!this.state.settingVisible) {
@@ -69,7 +71,7 @@ class Settings extends Component {
 
     return (
       <li>
-        <i onClick={this.toggleSettingsModal.bind(this)} className="material-icons settings-trigger grey-text">settings</i>
+        <a href="#" onClick={this.toggleSettingsModal.bind(this)} className="settings-trigger grey-text">Settings</a>
 
         <div id="settingsModal" className="modal modal-fixed-footer">
           <div className='modal-content'>
@@ -92,7 +94,7 @@ class Settings extends Component {
 
 function mapStateToProps(state){
   return {
-    wordlists: state.wordlists,
+    wordlists: state.wordlists.filter((wl) => wl.toggable),
     isAuthenticated: state.auth.isAuthenticated
   };
 }
