@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {Home,Main, Articles, ArticlePage, UserDefinitions} from '../components';
+import {Home,Main, Articles, ArticlePage, UserDefinitionsLearn, UserDefinitionsList} from '../components';
 import Login from '../components/Login';
 import Profile from '../components/Profile';
 import PasswordReminderView from '../components/PasswordReminderView';
@@ -16,8 +16,8 @@ export default (
     <Route path="reset_password" component={ChangePasswordView}/>
 
     <Route path="/learn" component={requireAuthentication(Profile)}>
-      <Route path="/definitions" component={UserDefinitions} />
-      <IndexRoute component={UserDefinitions} />
+      <Route path="definitions" component={UserDefinitionsList} />
+      <IndexRoute component={UserDefinitionsLearn} />
     </Route>
 
     <Route path="/articles" component={requireAuthentication(Articles)}/>

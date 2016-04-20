@@ -25,20 +25,18 @@ class UserDefinitionBox extends Component {
   }
 }
 
-class UserDefinitions extends Component {
+class UserDefinitionsList extends Component {
   constructor(props) {
     super(props);
     this.state = {
       items: props.items
     };
     this.handleFilterChange = this.handleFilterChange.bind(this);
-    this.startQuizForArticle = this.startQuizForArticle.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
     this.setState({
-      items: nextProps.items,
-      currentItem: nextProps.items[0]
+      items: nextProps.items
     });
   }
 
@@ -56,37 +54,11 @@ class UserDefinitions extends Component {
     );
   }
 
-  startQuizForArticle(articleId) {
-    this.setState({ items: this.props.items.filter(item => item.article_id === parseInt(articleId, 10)) });
-  }
-
-  renderArticles() {
-    let articles = {};
-    this.props.items.map(item => articles[item.article_id] = item.article_title);
-    return (
-      <ul>
-        {Object.keys(articles).map( id => {
-          return <li><a onClick={this.startQuizForArticle.bind(null, id)}>{articles[id]} - {id}</a></li>;
-        })}
-      </ul>
-    );
-  }
-
   render() {
     const items = this.state.items.map(item => <UserDefinitionBox item={item} />);
 
     return (
       <div className="articles">
-        <div className="row">
-          <div className="flashcards-container">
-            <FlashcardsQuiz items={this.state.items} />
-          </div>
-        </div>
-        <div className="row">
-          <div className="col s8">
-            {this.renderArticles()}
-          </div>
-        </div>
         <form className="row">
           <div className="input-field col s4">
             <input type='text' onChange={this.handleFilterChange} name='wordSearch' name='wordSearch' />
@@ -101,4 +73,4 @@ class UserDefinitions extends Component {
   }
 }
 
-export default connect(mapStateToProps)(UserDefinitions);
+export default connect(mapStateToProps)(UserDefinitionsList);

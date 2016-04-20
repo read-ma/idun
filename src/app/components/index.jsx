@@ -1,6 +1,7 @@
 import Home from './Home';
 import Profile from './Profile';
-import UserDefinitions from './UserDefinitions';
+import UserDefinitionsLearn from './UserDefinitionsLearn';
+import UserDefinitionsList from './UserDefinitionsList';
 import Articles from './Articles';
 import ArticlePage from './ArticlePage';
 import Main from './Main';
@@ -36,6 +37,6 @@ class ShowIf extends React.Component {
 }
 
 export {
-  Home, Profile, Articles, ArticlePage, Main, Wordlists, UserDefinitions,
+  Home, Profile, Articles, ArticlePage, Main, Wordlists, UserDefinitionsLearn, UserDefinitionsList,
   DefinitionBoxes, ShowIf
 };

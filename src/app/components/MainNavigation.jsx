@@ -18,6 +18,7 @@ const MainNavigation = ({selectedText, handleSearch, displaySearchBar}) => {
           <ul className="left hide-on-med-and-down">
             <li><Link to='/articles'>Articles</Link></li>
             <li><Link to='/learn'>Learn</Link></li>
+            <li><Link to='/learn/definitions'>Words</Link></li>
           </ul>
 
           <ul className="right">
