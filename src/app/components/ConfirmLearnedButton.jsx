@@ -13,7 +13,7 @@ const ConfirmLearnedButton = ({confirmLearned, articleId, articleLearned}) => {
   return (
     <a className="btn btn-large" onClick={onConfirmLearned}>
       <i className="material-icons left">done</i>
-      Mark all words from this article as learned by me
+      Mark all words from this article as learned
     </a>
   );
 };
