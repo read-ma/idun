@@ -11,7 +11,12 @@ const defaultConfig = [
 
 const initialState = {
   config: defaultConfig,
-  data: {}
+  data: {},
+  mobileDefinitions: [
+    { language: "pl", text: "poparty lub nacechowany wiedzą" },
+    { text: "More temporary faculty means less access to tenured faculty engaged in scholarly activity.", title: "Strike Ends At York But Not Without Concerns About Adjunct Faculty"},
+    { url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUA6TNTkkgHuQvBaHa-5yobDV1b4hVAFl03tmSXhpoZGCgNUnDg3_tpVc" },
+  ]
 };
 
 function config(state, action) {

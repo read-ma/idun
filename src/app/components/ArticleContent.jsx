@@ -32,7 +32,6 @@ const ArticlePara = ({tokens, handleWordClick, wordlists}) => {
   wordlists.forEach(list => tokens = markSelectedInDict(tokens, list));
 
   let paragraph = tokens.map((token,i) => {
-
     return (<Word
               className={token.className()}
               word={token.word}
@@ -76,7 +75,7 @@ class ArticleContent extends Component {
 
   render() {
     let paragraphs = this.props.text.map(tokens => {
-      return <ArticlePara handleWordClick={this.handleClick} tokens={tokens} wordlists={this.props.wordlists}/>;
+      return <ArticlePara handleWordClick={this.handleClick} tokens={tokens} wordlists={this.props.wordlists} key={_.uniqueId('articlePara')} />;
     });
 
     let title = paragraphs[0];
