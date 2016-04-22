@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-export default function ArticleLink({id, title, source_url, tags, content_type, created_at, privy, metrics, learned}){
+export default function ArticleLink({id, title, source_url, tags, content_type, created_at, privy, difficulty, learned}){
   function extractDomain(sourceUrl){
     let matches = sourceUrl.match(/^https?\:\/\/(?:www\.)?([^\/?#]+)(?:[\/?#]|$)/i);
 
@@ -22,25 +22,13 @@ export default function ArticleLink({id, title, source_url, tags, content_type, 
         </Link>
       </span>
 
-      <p>{difficultyLevel(metrics)}</p>
+      <p>{difficultyLevel(difficulty)}</p>
 
       <p><small><strong>{tags}</strong></small></p>
     </li>
   );
 };
 
-function difficultyLevel(metric){
-  let description;
-  let cssClass;
-  if (metric < 85) {
-    description = 'Advanced';
-    cssClass = 'purple-text text-lighten-2';
-  } else if (metric < 95) {
-    description = 'Upper-intermediate';
-    cssClass = 'orange-text text-lighten-2';
-  } else {
-    description = 'Intermediate';
-    cssClass = 'green-text text-lighten-2';
-  }
-  return (<strong className={cssClass}>{description}</strong>);
+function difficultyLevel(difficulty){
+  return (<strong className={difficulty}>{difficulty}</strong>);
 };

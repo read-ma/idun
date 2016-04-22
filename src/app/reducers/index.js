@@ -34,8 +34,13 @@ function main(state = initialState, action) {
 const articlesFilterInitial = {
   privy: false,
   open: false,
-  unread: false,
+  unlearned: false,
   learned: false,
+  visited: false,
+  unvisited: false,
+  advanced: false,
+  'upper-intermediate': false,
+  intermediate: false,
   query: ""
 };
 

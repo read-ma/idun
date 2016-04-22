@@ -8,6 +8,7 @@ import PositioningWidget from './PositioningWidget';
 import ArticleAdd from './AddArticleWidget.jsx';
 import ArticleLink from './ArticleLink.jsx';
 import _ from 'lodash';
+import l from '../I18n';
 
 class ArticleList extends Component {
 
@@ -31,7 +32,7 @@ const FilterCheckboxes = ({onChange, filter}) => {
     return (
       <li className="clearfix">
         <input id={key} key={`filter-flag-${key}`} type="checkbox" onChange={onChange} checked={value} name={key} className='filled-in'/>
-        <label htmlFor={key}>{key.toUpperCase()}</label>
+        <label htmlFor={key}>{l(key)}</label>
       </li> );
   });
 
@@ -55,10 +56,17 @@ class ArticleFilter extends Component {
   }
 
   onCheckboxChange(event){
-    let opposite = {privy: 'open', open: 'privy', learned: 'unread', unread: 'learned'};
+    let opposite = {
+      privy: 'open',
+      open: 'privy',
+      learned: 'unlearned',
+      unlearned: 'learned',
+      visited: 'unvisited',
+      unvisited: 'visited'
+    };
     let change = {[ event.target.name ]: event.target.checked};
 
-    if (event.target.checked){
+    if (event.target.checked && opposite[event.target.name]){
       change[opposite[event.target.name]] = false;
     }
 
@@ -137,7 +145,24 @@ const matchCriteria = (article, filter) => {
   if ( filter.open )
     match = match && !article.privy;
 
-  return match;
+  if ( filter.visited )
+    match = match && article.visited;
+
+  if ( filter.unvisited )
+    match = match && !article.visited;
+
+  let statusMatch = !(filter.advanced || filter['upper-intermediate'] || filter.intermediate);
+
+  if ( filter.advanced )
+    statusMatch = article.difficulty === 'advanced';
+
+  if (filter['upper-intermediate'])
+    statusMatch = statusMatch || article.difficulty == 'upper-intermediate';
+
+  if (filter.intermediate)
+    statusMatch = statusMatch || article.difficulty === 'intermediate';
+
+  return match && statusMatch;
 };
 
 const filterArticles = (articles, filter)=>{
