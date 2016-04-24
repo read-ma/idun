@@ -37,8 +37,8 @@ const articlesFilterInitial = {
     open: {default: false, name: 'open', group: 'access', opposite: 'privy'},
     unlearned: {default: false, name: 'unlearned', group: 'learn', opposite: 'learned'},
     learned: {default: false, name: 'learned', group: 'learn', opposite: 'unlearned'},
-    visited: {default: false, name: 'visited', group: 'visit', opposite: 'unvisited'},
     unvisited: {default: false, name: 'unvisited', group: 'visit', opposite: 'visited'},
+    visited: {default: false, name: 'visited', group: 'visit', opposite: 'unvisited'},
     advanced: {default: false, name: 'advanced', group: 'difficulty'},
     'upper-intermediate': {default: false, name: 'upper-intermediate', group: 'difficulty'},
     intermediate: {default: false, name: 'intermediate', group: 'difficulty'}
