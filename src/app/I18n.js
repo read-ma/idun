@@ -7,7 +7,7 @@ export default (label) => {
     learned: 'Learned',
     visited: 'Read',
     unvisited: 'Unread',
-    upper: 'Upper-intermediate',
+    'upper-intermediate': 'Upper-intermediate',
     intermediate: 'Intermediate',
     advanced: 'Advanced'
   }[label] || label;

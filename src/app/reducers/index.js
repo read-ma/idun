@@ -32,22 +32,35 @@ function main(state = initialState, action) {
 }
 
 const articlesFilterInitial = {
-  privy: false,
-  open: false,
-  unlearned: false,
-  learned: false,
-  visited: false,
-  unvisited: false,
-  advanced: false,
-  'upper-intermediate': false,
-  intermediate: false,
-  query: ""
+  fields: {
+    privy: {default: false, name: 'privy', group: 'access', opposite: 'open'},
+    open: {default: false, name: 'open', group: 'access', opposite: 'privy'},
+    unlearned: {default: false, name: 'unlearned', group: 'learn', opposite: 'learned'},
+    learned: {default: false, name: 'learned', group: 'learn', opposite: 'unlearned'},
+    visited: {default: false, name: 'visited', group: 'visit', opposite: 'unvisited'},
+    unvisited: {default: false, name: 'unvisited', group: 'visit', opposite: 'visited'},
+    advanced: {default: false, name: 'advanced', group: 'difficulty'},
+    'upper-intermediate': {default: false, name: 'upper-intermediate', group: 'difficulty'},
+    intermediate: {default: false, name: 'intermediate', group: 'difficulty'}
+  },
+  values: {
+    privy: false,
+    open: false,
+    unlearned: false,
+    learned: false,
+    visited: false,
+    unvisited: false,
+    advanced: false,
+    'upper-intermediate': false,
+    intermediate: false,
+    query: ""
+  }
 };
 
 const articlesFilter = (state = articlesFilterInitial, action) => {
   switch (action.type) {
   case 'UPDATE_ARTICLES_FILTER':
-    return Object.assign({}, state, action.payload);
+    return Object.assign({}, state, {values: Object.assign({}, state.values, action.payload) });
   default:
     return state;
   }
