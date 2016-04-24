@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router';
+import classnames from 'classnames';
 
-export default function ArticleLink({id, title, source_url, tags, content_type, created_at, privy, difficulty, learned}){
+export default function ArticleLink({id, title, source_url, tags, content_type, created_at, privy, difficulty, learned, visited}){
   function extractDomain(sourceUrl){
     let matches = sourceUrl.match(/^https?\:\/\/(?:www\.)?([^\/?#]+)(?:[\/?#]|$)/i);
 
@@ -17,7 +18,7 @@ export default function ArticleLink({id, title, source_url, tags, content_type, 
       </div>
 
       <span className='title flow-text'>
-        <Link to={`/article/${id}`}>
+        <Link to={`/article/${id}`} className={classnames({unvisited: !visited})}>
           {title}
         </Link>
       </span>
