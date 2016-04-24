@@ -9,7 +9,9 @@ import uniqueId from 'lodash/uniqueId';
 
 
 function DefinitionListItem({text, url}) {
-  let key = _.uniqueId('mobileSidebar')
+  if (!text && !url) return false;
+
+  let key = _.uniqueId('mobileSidebar');
   if (url)
     return (
       <li className="collection-item item-image center-align col s12 m6" key={key}>
@@ -29,14 +31,27 @@ class MobileSidebar extends Component {
 
   constructor(props){
     super(props);
+    this.state = {visible: false};
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      visible: !!nextProps.selectedText
+    });
+  }
+
+  hide(){
+    this.setState({visible: false});
   }
 
   render() {
-    if (!this.props.selectedText) return false
-    let listItems = this.props.translations.map((options) => new DefinitionListItem(options));
+    if (!this.state.visible) return false;
+
+    let listItems = this.props.translations.map((item) => new DefinitionListItem(item));
 
     return (
       <div className='mobile-sidebar'>
+        <a onClick={this.hide.bind(this)}>close</a>
         <ul className="collection with-header">
           <li className="collection-header center-align"><h4>{this.props.selectedText}</h4></li>
           {listItems}
@@ -46,10 +61,14 @@ class MobileSidebar extends Component {
   }
 }
 
-function mapStateToProps(state){
+const mobileDefinitionSelector = (state) => {
+  return _.reduce(state.definitions.data, (prev,current) => { return current[0] && [...prev, current[0]] || prev; }, []);
+};
+
+const mapStateToProps = (state) => {
   return {
     selectedText: state.article.selectedText,
-    translations: state.definitions.mobileDefinitions
+    translations: mobileDefinitionSelector(state)
   };
 }
 
