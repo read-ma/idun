@@ -64,6 +64,7 @@ class UserDefinitionsLearn extends Component {
         </div>
         <div className="row">
           <div className="col s8">
+            <h1>Words saved for articles</h1>
             {this.renderArticles()}
           </div>
         </div>
