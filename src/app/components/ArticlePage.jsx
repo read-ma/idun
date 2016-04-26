@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { loadArticle, textSelected, loadUserDefinitions, articlePageClosed } from '../actions';
 import { Link } from 'react-router';
 import Sidebar from '../containers/Sidebar';
+import MobileSidebar from '../containers/MobileSidebar';
 import ArticleContent from './ArticleContent';
 import ConfirmLearnedButton from './ConfirmLearnedButton';
 import { getSelectedText } from '../highlight';
@@ -15,7 +16,7 @@ const ArticleFooter = ({source_url}) => {
     <footer>
       <blockquote>
         <span>Source: </span>
-        <a href={source_url} target="blank" alt="article link">{source_url}</a>
+        <a href={source_url} target="_blank" alt="Go to source article">{source_url}</a>
       </blockquote>
     </footer>
   );
@@ -46,6 +47,9 @@ class ArticlePage extends Component {
           </div>
           <div className="hide-on-small-only sidebar-wrapper">
             <Sidebar />
+          </div>
+          <div className="hide-on-med-and-up mobile-sidebar-wrapper">
+            <MobileSidebar />
           </div>
         </div>
       </div>

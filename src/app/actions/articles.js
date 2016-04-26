@@ -82,7 +82,7 @@ const confirmArticleLearned = (id) => {
   return (dispatch) => {
     api.post(`/article_actions.json`, {article_action: {article_id: id, action: 'learned'}})
       .then(response => dispatch(articleLearned(id)))
-      .catch(error => console.log(error));
+      .catch(error => console.error(error));
   };
 };
 
