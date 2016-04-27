@@ -4,25 +4,10 @@ import { connect } from 'react-redux';
 import { loadUserDefinitions } from '../actions';
 import _ from 'lodash';
 import FlashcardsQuiz from './FlashcardsQuiz'
+import FlashcardsQuizResults from './FlashcardsQuizResults'
 
 function mapStateToProps(state) {
   return { items: state.main.userDefinitions };
-}
-
-class UserDefinitionBox extends Component {
-  render() {
-    return (
-      <div className="userdefinitionbox card-item" key={this.props.item.id}>
-        <div className='card-content'>
-          <h5 className='card-title blue-text'>{this.props.item.word}</h5>
-          <h6 className='card-subtitle' dangerouslySetInnerHTML={{__html: this.props.item.translation}}></h6>
-          <div className='card-description'>
-            {this.props.item.definition}
-          </div>
-        </div>
-      </div>
-    );
-  }
 }
 
 class UserDefinitionsLearn extends Component {
@@ -30,6 +15,8 @@ class UserDefinitionsLearn extends Component {
     super(props);
     this.state = {items: []};
     this.startQuizForArticle = this.startQuizForArticle.bind(this);
+    this.endQuiz = this.endQuiz.bind(this);
+    this.closeResults = this.closeResults.bind(this);
   }
 
   componentDidMount(){
@@ -42,34 +29,70 @@ class UserDefinitionsLearn extends Component {
     this.setState({ items: this.props.items.filter(item => item.article_id === parseInt(articleId, 10)) });
   }
 
-  renderArticles() {
-    let articles = {};
-    this.props.items.map(item => articles[item.article_id] = item.article_title);
-    return (
-      <ul>
-        {Object.keys(articles).map( id => {
-          return <li><a onClick={this.startQuizForArticle.bind(null, id)}>{articles[id]} - {id}</a></li>;
-        })}
-      </ul>
-    );
+  endQuiz() {
+    this.setState({
+      showResults: true
+    })
   }
 
-  render() {
+  closeResults() {
+    this.setState({
+      showResults: false,
+      items: []
+    })
+  }
+
+  shouldShowQuiz() {
+    return this.state.items.length > 0 && !this.state.showResults;
+  }
+
+  shouldShowResults() {
+    return this.state.showResults;
+  }
+
+  renderArticles() {
+    const articles = {};
+    this.props.items.map(item => articles[item.article_id] = item.article_title);
+    if (!this.shouldShowQuiz() && !this.shouldShowResults()) {
+      return (
+        <div className="col s8">
+          <h1>Words saved for articles</h1>
+          <ul>
+            {Object.keys(articles).map( id => {
+              return <li><a onClick={this.startQuizForArticle.bind(null, id)}>{articles[id]} - {id}</a></li>;
+            })}
+          </ul>
+        </div>
+      );
+    }
+  }
+
+  renderEmptyMessage() {
+    return (
+      <div className="col s8">
+        <h1>Here will be words to practice once you add them on article</h1>
+      </div>
+    )
+  }
+
+  renderLearnPart() {
     return (
       <div className="articles">
         <div className="row">
-          <div className="flashcards-container">
-            <FlashcardsQuiz items={this.state.items} />
+          <div className="flashcards-container col m6 offset-m3">
+            <FlashcardsQuiz items={this.state.items} endQuiz={this.endQuiz} show={this.shouldShowQuiz()} />
+            <FlashcardsQuizResults items={this.state.items} show={this.shouldShowResults()} closeResults={this.closeResults} />
           </div>
         </div>
         <div className="row">
-          <div className="col s8">
-            <h1>Words saved for articles</h1>
-            {this.renderArticles()}
-          </div>
+          {this.renderArticles()}
         </div>
       </div>
-    );
+    )
+  }
+
+  render() {
+    return this.props.items.length > 0 ? this.renderLearnPart() : this.renderEmptyMessage();
   }
 }
 

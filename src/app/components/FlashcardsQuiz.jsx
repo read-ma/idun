@@ -1,84 +1,20 @@
 import React, { Component } from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import classnames from 'classnames';
+import Flashcard from './Flashcard';
 
-class Flashcard extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { reverted: false, side: props.startWithObverse ? 'obverse' : 'reverse'};
-    this.markEasy = this.markEasy.bind(this);
-    this.markHard = this.markHard.bind(this);
-    this.revert = this.revert.bind(this);
-  }
-
-  markEasy() {
-    this.mark('easy');
-  }
-
-  markHard() {
-    this.mark('hard');
-  }
-
-  mark(level) {
-    this.props.markItem(this.props.item, level);
-  }
-
-  revert() {
-    this.setState({ reverted: true, side: this.state.side === 'reverse' ? 'obverse' : 'reverse' });
-  }
-
-  renderMarkButtons() {
-    let buttons;
-    if (this.state.reverted) {
-      buttons = (
-        <div className="card-action center-align">
-          <a className="green-text" onClick={this.markEasy}>Easy</a>
-          <a className="red-text" onClick={this.markHard}>Hard</a>
-        </div>
-      );
-    } else {
-      buttons = (<div className="row"></div>);
-    }
-    return buttons;
-  }
-
-  obverse() {
-    return (
-      <div className="card-obverse">
-        <span className="card-title">
-          {this.props.item.word}
-        </span>
-      </div>
-    )
-  }
-
-  reverse() {
-    return (
-      <div className="card-reverse">
-        <span className="card-title">
-          {this.props.item.translation}
-        </span>
-        <p>{this.props.item.definition}</p>
-      </div>
-    )
-  }
-
+class Progress extends Component {
   render() {
-    const side = this[this.state.side]();
+    const itemNumber = this.props.itemIndex + 1;
+    const percent = Math.round(itemNumber / this.props.itemsNumber * 100);
     return (
-      <div>
-        <ReactCSSTransitionGroup transitionName="fadein" transitionAppear={true} transitionLeave={false} transitionEnterTimeout={500} transitionLeaveTimeout={300}>
-          <div className="row card-wrap" key={this.props.item.word}>
-            <ReactCSSTransitionGroup transitionName="flip" transitionLeave={true} transitionAppear={false} transitionEnterTimeout={500} transitionLeaveTimeout={500}>
-              <div className={classnames("card blue-grey dark-1", this.state.side)} key={this.state.side} onClick={this.revert}>
-                <div className="card-content white-text center-align">
-                  {side}
-                </div>
-                {this.renderMarkButtons()}
-              </div>
-            </ReactCSSTransitionGroup>
+      <div className="row">
+        <div className="col s4 offset-s4 center-align">
+          <span>{itemNumber} of {this.props.itemsNumber}</span>
+          <div className="progress">
+            <div className="determinate" style={{ width: percent + '%' }}></div>
           </div>
-        </ReactCSSTransitionGroup>
+        </div>
       </div>
     );
   }
@@ -88,11 +24,10 @@ class FlashcardSettings extends Component {
   render() {
     return (
       <div>
-        <h3>Settings</h3>
         <label>Start with:</label>
-        <ul>
-          <li><a onClick={this.props.changeSettings.bind(null, {startWith: 'definition'})}>Definition</a></li>
-          <li><a onClick={this.props.changeSettings.bind(null, {startWith: 'word'})}>Word</a></li>
+        <ul className="flashcards-settings">
+          <li className={classnames({active: this.props.startWith === 'definition'})}><a onClick={this.props.changeSettings.bind(null, {startWith: 'definition'})}>Definition</a></li>
+          <li className={classnames({active: this.props.startWith === 'word'})}><a onClick={this.props.changeSettings.bind(null, {startWith: 'word'})}>Word</a></li>
         </ul>
       </div>
     )
@@ -115,22 +50,32 @@ class FlashcardsQuiz extends Component {
   componentWillReceiveProps(nextProps) {
     this.setState({
       items: nextProps.items,
-      currentItem: nextProps.items[0]
+      currentItem: nextProps.items[0],
+      itemIndex: 0
     });
   }
 
   markItem(item, markValue) {
-    item.mastered = markValue === 'easy';
     const items = this.state.items;
     const itemIndex = items.indexOf(item);
     const newItems = items.slice();
+
+    item.mastered = markValue === 'easy';
     newItems.splice(itemIndex, 1, item);
 
-    this.setState({
-      currentItem: this.fetchNextElement(this.state.items, this.state.currentItem),
-      items: newItems,
-      itemIndex: itemIndex + 1
-    });
+    if (this.quizOngoing()) {
+      this.setState({
+        currentItem: this.fetchNextElement(this.state.items, this.state.currentItem),
+        items: newItems,
+        itemIndex: itemIndex + 1
+      });
+    } else {
+      this.props.endQuiz();
+    }
+  }
+
+  quizOngoing() {
+    return (this.state.itemIndex + 1) < this.state.items.length;
   }
 
   fetchNextElement(list, element) {
@@ -141,43 +86,21 @@ class FlashcardsQuiz extends Component {
     return list[nextElementIndex]
   }
 
-  masteredWords() {
-    return this.state.items.filter(item => item.mastered).length;
-  }
-
   changeSettings(settings) {
-    this.setState({settings: settings})
-  }
-
-  renderProgress() {
-    const itemNumber = this.state.itemIndex + 1;
-    const percent = Math.round(itemNumber / this.state.items.length * 100);
-    return (
-      <div className="row">
-        <div className="col s4 offset-s4 center-align">
-          <span>{itemNumber} of {this.state.items.length}</span>
-          <div className="progress">
-            <div className="determinate" style={{width: percent + '%'}}></div>
-          </div>
-        </div>
-      </div>
-    );
+    this.setState({ settings: settings });
   }
 
   render() {
     let result;
-    if (this.state.currentItem) {
+    if (this.props.show) {
       result = (
         <div className="row">
           <div className="col s6">
-            <p className="right-align">
-              Mastered {this.masteredWords()}
-            </p>
             <Flashcard key={this.state.currentItem.word} item={this.state.currentItem} markItem={this.markItem} startWithObverse={this.state.settings.startWith === 'word'} />
-            {this.renderProgress()}
+            <Progress itemIndex={this.state.itemIndex} itemsNumber={this.state.items.length} />
           </div>
           <div className="col s3 offset-s3 right-align">
-            <FlashcardSettings changeSettings={this.changeSettings} />
+            <FlashcardSettings changeSettings={this.changeSettings} startWith={this.state.settings.startWith} />
           </div>
         </div>
       )
