@@ -27,21 +27,6 @@ class Flashcard extends Component {
     this.setState({ reverted: true, side: this.state.side === 'reverse' ? 'obverse' : 'reverse' });
   }
 
-  renderMarkButtons() {
-    let buttons;
-    if (this.state.reverted) {
-      buttons = (
-        <div className="card-action center-align">
-          <a className="green-text" onClick={this.markEasy}>Easy</a>
-          <a className="red-text" onClick={this.markHard}>Hard</a>
-        </div>
-      );
-    } else {
-      buttons = (<div className="row"></div>);
-    }
-    return buttons;
-  }
-
   obverse() {
     return (
       <div className="card-obverse">
@@ -63,14 +48,30 @@ class Flashcard extends Component {
     )
   }
 
+  renderMarkButtons() {
+    let buttons;
+    if (this.state.reverted) {
+      buttons = (
+        <div className="card-action center-align">
+          <a className="green-text" onClick={this.markEasy}>Easy</a>
+          <a className="red-text" onClick={this.markHard}>Hard</a>
+        </div>
+      );
+    } else {
+      buttons = (<div className="row"></div>);
+    }
+    return buttons;
+  }
+
   render() {
     const side = this[this.state.side]();
+    const cardClassnames = classnames("card blue-grey dark-1", this.state.side);
     return (
       <div>
-        <ReactCSSTransitionGroup transitionName="fadein" transitionAppear={true} transitionLeave={false} transitionEnterTimeout={500} transitionLeaveTimeout={300}>
+        <ReactCSSTransitionGroup transitionName="fadein" transitionAppear={true} transitionLeave={false} transitionEnterTimeout={500} transitionAppearTimeout={500}>
           <div className="row card-wrap" key={this.props.item.word}>
             <ReactCSSTransitionGroup transitionName="flip" transitionLeave={true} transitionAppear={false} transitionEnterTimeout={500} transitionLeaveTimeout={500}>
-              <div className={classnames("card blue-grey dark-1", this.state.side)} key={this.state.side} onClick={this.revert}>
+              <div className={cardClassnames} key={this.state.side} onClick={this.revert}>
                 <div className="card-content white-text center-align">
                   {side}
                 </div>
@@ -83,5 +84,11 @@ class Flashcard extends Component {
     );
   }
 }
+
+Flashcard.propTypes = {
+  item: React.PropTypes.object,
+  startWithObverse: React.PropTypes.bool,
+  markItem: React.PropTypes.func
+};
 
 export default Flashcard;

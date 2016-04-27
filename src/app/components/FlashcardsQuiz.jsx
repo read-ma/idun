@@ -1,37 +1,40 @@
 import React, { Component } from 'react';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import classnames from 'classnames';
 import Flashcard from './Flashcard';
 
-class Progress extends Component {
-  render() {
-    const itemNumber = this.props.itemIndex + 1;
-    const percent = Math.round(itemNumber / this.props.itemsNumber * 100);
-    return (
-      <div className="row">
-        <div className="col s4 offset-s4 center-align">
-          <span>{itemNumber} of {this.props.itemsNumber}</span>
-          <div className="progress">
-            <div className="determinate" style={{ width: percent + '%' }}></div>
-          </div>
+const Progress = (props) => {
+  const itemNumber = props.itemIndex + 1;
+  const percent = Math.round(itemNumber / props.itemsNumber * 100);
+  return (
+    <div className="row">
+      <div className="col s4 offset-s4 center-align">
+        <span>{itemNumber} of {props.itemsNumber}</span>
+        <div className="progress">
+          <div className="determinate" style={{ width: percent + '%' }}></div>
         </div>
       </div>
-    );
-  }
+    </div>
+  );
 }
 
-class FlashcardSettings extends Component {
-  render() {
-    return (
-      <div>
-        <label>Start with:</label>
-        <ul className="flashcards-settings">
-          <li className={classnames({active: this.props.startWith === 'definition'})}><a onClick={this.props.changeSettings.bind(null, {startWith: 'definition'})}>Definition</a></li>
-          <li className={classnames({active: this.props.startWith === 'word'})}><a onClick={this.props.changeSettings.bind(null, {startWith: 'word'})}>Word</a></li>
-        </ul>
-      </div>
-    )
-  }
+const FlashcardSettings = (props) => {
+  return (
+    <div>
+      <label>Start with:</label>
+      <ul className="flashcards-settings">
+        <li className={classnames({ active: props.startWith === 'definition' })}>
+          <a onClick={props.changeSettings.bind(null, {startWith: 'definition'})}>
+            Definition
+          </a>
+        </li>
+        <li className={classnames({ active: props.startWith === 'word' })}>
+          <a onClick={props.changeSettings.bind(null, {startWith: 'word'})}>
+            Word
+          </a>
+        </li>
+      </ul>
+    </div>
+  )
 }
 
 class FlashcardsQuiz extends Component {
@@ -41,7 +44,7 @@ class FlashcardsQuiz extends Component {
       items: props.items,
       currentItem: props.items[0],
       itemIndex: 0,
-      settings: {startWith: 'definition'}
+      settings: { startWith: 'definition' }
     };
     this.markItem = this.markItem.bind(this);
     this.changeSettings = this.changeSettings.bind(this);
@@ -110,5 +113,12 @@ class FlashcardsQuiz extends Component {
     return result;
   }
 }
+
+FlashcardsQuiz.propTypes = {
+  items: React.PropTypes.array,
+  show: React.PropTypes.bool,
+  endQuiz: React.PropTypes.func,
+}
+
 
 export default FlashcardsQuiz;

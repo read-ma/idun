@@ -59,7 +59,11 @@ class UserDefinitionsLearn extends Component {
           <h1>Words saved for articles</h1>
           <ul>
             {Object.keys(articles).map( id => {
-              return <li><a onClick={this.startQuizForArticle.bind(null, id)}>{articles[id]} - {id}</a></li>;
+              return (
+                <li key={id}>
+                  <a onClick={this.startQuizForArticle.bind(null, id)}>{articles[id]} - {id}</a>
+                </li>
+              );
             })}
           </ul>
         </div>
