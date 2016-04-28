@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { connect } from 'react-redux';
 import { loadUserDefinitions } from '../actions';
-import _ from 'lodash';
-import FlashcardsQuiz from './FlashcardsQuiz'
-import FlashcardsQuizResults from './FlashcardsQuizResults'
+import FlashcardsQuiz from './FlashcardsQuiz';
+import FlashcardsQuizResults from './FlashcardsQuizResults';
 
 function mapStateToProps(state) {
   return { items: state.main.userDefinitions };
@@ -13,13 +11,13 @@ function mapStateToProps(state) {
 class UserDefinitionsLearn extends Component {
   constructor(props) {
     super(props);
-    this.state = {items: []};
+    this.state = { items: [] };
     this.startQuizForArticle = this.startQuizForArticle.bind(this);
     this.endQuiz = this.endQuiz.bind(this);
     this.closeResults = this.closeResults.bind(this);
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.props.dispatch(
       loadUserDefinitions()
     );
@@ -31,15 +29,15 @@ class UserDefinitionsLearn extends Component {
 
   endQuiz() {
     this.setState({
-      showResults: true
-    })
+      showResults: true,
+    });
   }
 
   closeResults() {
     this.setState({
       showResults: false,
-      items: []
-    })
+      items: [],
+    });
   }
 
   shouldShowQuiz() {
@@ -55,10 +53,11 @@ class UserDefinitionsLearn extends Component {
     this.props.items.map(item => articles[item.article_id] = item.article_title);
     if (!this.shouldShowQuiz() && !this.shouldShowResults()) {
       return (
-        <div className="col s8">
-          <h1>Words saved for articles</h1>
+        <div className="col s12">
+          <h1>Learn words used in recently read articles</h1>
+          <p>Click on article title to enter quiz from an article.</p>
           <ul>
-            {Object.keys(articles).map( id => {
+            {Object.keys(articles).map(id => {
               return (
                 <li key={id}>
                   <a onClick={this.startQuizForArticle.bind(null, id)}>{articles[id]} - {id}</a>
@@ -76,12 +75,12 @@ class UserDefinitionsLearn extends Component {
       <div className="col s8">
         <h1>Here will be words to practice once you add them on article</h1>
       </div>
-    )
+    );
   }
 
   renderLearnPart() {
     return (
-      <div className="articles">
+      <div>
         <div className="row">
           <div className="flashcards-container col m6 offset-m3">
             <FlashcardsQuiz items={this.state.items} endQuiz={this.endQuiz} show={this.shouldShowQuiz()} />

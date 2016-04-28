@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
 import _ from 'lodash';
-import classnames from 'classnames';
-import { uniqueId } from 'lodash/uniqueId';
 import { ShowIf } from '../../components';
 
 const LanguageIcon = ({lang}) => {
@@ -76,7 +74,7 @@ class DefinitionList extends Component {
       </ul>
     );
   }
-};
+}
 
 const MoreLessButton = ({collapsed, onClick}) => {
     return (
@@ -84,6 +82,6 @@ const MoreLessButton = ({collapsed, onClick}) => {
         <i onClick={onClick} className="material-icons">{collapsed ? 'expand_less' : 'expand_more'}</i>
       </li>
     );
-}
+};
 
 export default DefinitionList;

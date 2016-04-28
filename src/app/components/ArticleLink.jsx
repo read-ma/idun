@@ -2,12 +2,16 @@ import React from 'react';
 import { Link } from 'react-router';
 import classnames from 'classnames';
 
+function difficultyLevel(difficulty) {
+  return (<strong className={difficulty}>{difficulty}</strong>);
+}
+
 export default function ArticleLink({id, title, source_url, tags, content_type, created_at, privy, difficulty, learned, visited}){
-  function extractDomain(sourceUrl){
+  function extractDomain(sourceUrl) {
     let matches = sourceUrl.match(/^https?\:\/\/(?:www\.)?([^\/?#]+)(?:[\/?#]|$)/i);
 
     return matches && matches[1];
-  };
+  }
 
   return (
     <li key={id} className='collection-item'>
@@ -28,8 +32,5 @@ export default function ArticleLink({id, title, source_url, tags, content_type, 
       <p><small><strong>{tags}</strong></small></p>
     </li>
   );
-};
+}
 
-function difficultyLevel(difficulty){
-  return (<strong className={difficulty}>{difficulty}</strong>);
-};

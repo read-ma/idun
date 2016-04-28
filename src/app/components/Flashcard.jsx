@@ -5,7 +5,7 @@ import classnames from 'classnames';
 class Flashcard extends Component {
   constructor(props) {
     super(props);
-    this.state = { reverted: false, side: props.startWithObverse ? 'obverse' : 'reverse'};
+    this.state = { reverted: false, side: props.startWithObverse ? 'obverse' : 'reverse' };
     this.markEasy = this.markEasy.bind(this);
     this.markHard = this.markHard.bind(this);
     this.revert = this.revert.bind(this);
@@ -34,7 +34,7 @@ class Flashcard extends Component {
           {this.props.item.word}
         </span>
       </div>
-    )
+    );
   }
 
   reverse() {
@@ -45,7 +45,7 @@ class Flashcard extends Component {
         </span>
         <p>{this.props.item.definition}</p>
       </div>
-    )
+    );
   }
 
   renderMarkButtons() {
@@ -58,14 +58,14 @@ class Flashcard extends Component {
         </div>
       );
     } else {
-      buttons = (<div className="row"></div>);
+      buttons = (<div></div>);
     }
     return buttons;
   }
 
   render() {
     const side = this[this.state.side]();
-    const cardClassnames = classnames("card blue-grey dark-1", this.state.side);
+    const cardClassnames = classnames('card blue-grey dark-1', this.state.side);
     return (
       <div>
         <ReactCSSTransitionGroup transitionName="fadein" transitionAppear={true} transitionLeave={false} transitionEnterTimeout={500} transitionAppearTimeout={500}>
@@ -88,7 +88,7 @@ class Flashcard extends Component {
 Flashcard.propTypes = {
   item: React.PropTypes.object,
   startWithObverse: React.PropTypes.bool,
-  markItem: React.PropTypes.func
+  markItem: React.PropTypes.func,
 };
 
 export default Flashcard;

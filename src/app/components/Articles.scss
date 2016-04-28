@@ -1,3 +1,5 @@
+@import "./src/assets/sass/materialize/components/color";
+
 .articles {
   .userdefinitionbox {
     color: #fff;
@@ -8,6 +10,7 @@
 
   .unvisited {
     font-weight: 400;
+    color: darken(#039be5, 10%);
   }
 
   .article-list-filters {
@@ -22,5 +25,20 @@
     &:last-child {
       border-bottom: none;
     }
+  }
+
+  .advanced {
+    @extend .purple-text;
+    @extend .text-lighten-2;
+  }
+
+  .upper-intermediate {
+    @extend .orange-text;
+    @extend .text-lighten-2;
+  }
+
+  .intermediate {
+    @extend .green-text;
+    @extend .text-lighten-2;
   }
 }

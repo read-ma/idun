@@ -8,7 +8,7 @@ import auth from './auth';
 
 const initialState = {
   profile: '',
-  userDefinitions: []
+  userDefinitions: [],
 };
 
 function main(state = initialState, action) {
@@ -53,8 +53,8 @@ const articlesFilterInitial = {
     advanced: false,
     'upper-intermediate': false,
     intermediate: false,
-    query: ""
-  }
+    query: "",
+  },
 };
 
 const articlesFilter = (state = articlesFilterInitial, action) => {
@@ -67,4 +67,4 @@ const articlesFilter = (state = articlesFilterInitial, action) => {
 };
 
 
-export {article, articles, main, wordlists, definitions, auth, settings, articlesFilter}
+export { article, articles, main, wordlists, definitions, auth, settings, articlesFilter };
