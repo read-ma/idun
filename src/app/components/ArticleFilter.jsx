@@ -7,14 +7,16 @@ import _ from 'lodash';
 const FilterCheckbox = (key, onChange, checked) => {
   return (
     <li className="clearfix">
-      <input id={key} key={`filter-flag-${key}`} type="checkbox" onChange={onChange} checked={checked} name={key} className='filled-in'/>
+      <input id={key} key={`filter-flag-${key}`} type="checkbox" onChange={onChange}
+        checked={checked} name={key} className="filled-in"
+      />
       <label htmlFor={key}>{l(key)}</label>
     </li>
   );
 };
 
-const CheckboxGroup = (name, fields ,onChange, filter) => {
-  let checkboxes = _.map(fields, ({name}) => new FilterCheckbox(name, onChange, filter[name]) );
+const CheckboxGroup = (name, fields, onChange, filter) => {
+  let checkboxes = _.map(fields, ({ name }) => new FilterCheckbox(name, onChange, filter[name]) );
 
   return (
     <div className="col s3">
@@ -23,31 +25,32 @@ const CheckboxGroup = (name, fields ,onChange, filter) => {
   );
 };
 
-const FilterCheckboxes = ({onChange, filter, fields}) => {
-  let fieldGroups = _.groupBy(fields, 'group');
+const FilterCheckboxes = ({ onChange, filter, fields }) => {
+  const fieldGroups = _.groupBy(fields, 'group');
   let checkboxGroups = _.map(fieldGroups, (group, name) => new CheckboxGroup(name, group, onChange, filter));
 
   return (
-    <div>
+    <div className="col s12">
+      <h2>Filter articles by:</h2>
       {checkboxGroups}
     </div>
   );
 };
 
 class ArticleFilter extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.state= {};
+    this.state = {};
   }
 
   onChange(event) {
-    this.props.onChange({ [ event.target.name ]: event.target.value });
+    this.props.onChange({ [event.target.name]: event.target.value });
   }
 
-  onCheckboxChange(event){
-    let change = {[ event.target.name ]: event.target.checked};
+  onCheckboxChange(event) {
+    const change = { [event.target.name]: event.target.checked };
+    const opposite = this.props.fields[event.target.name].opposite;
 
-    let opposite = this.props.fields[event.target.name].opposite;
     if (event.target.checked && opposite) {
       change[opposite] = false;
     }
@@ -57,13 +60,21 @@ class ArticleFilter extends Component {
 
   render() {
     return (
-      <form className="row">
-        <div className="input-field col s12">
-          <input type="text" id="articleSearch" name="query" value={this.props.filter.query} onChange={this.onChange.bind(this)}/>
-          <label htmlFor="articleSearch">Search for article</label>
+      <div>
+        <div className="col s6 left-align">
+          <form className="row">
+            <div className="input-field col s12">
+              <input type="text" id="articleSearch" name="query" value={this.props.filter.query} onChange={this.onChange.bind(this)} />
+              <label htmlFor="articleSearch">Search for article</label>
+            </div>
+          </form>
         </div>
-        <FilterCheckboxes fields={this.props.fields} filter={this.props.filter} onChange={this.onCheckboxChange.bind(this)}/>
-      </form>
+
+        <FilterCheckboxes
+          fields={this.props.fields}
+          filter={this.props.filter}
+          onChange={this.onCheckboxChange.bind(this)} />
+      </div>
     );
   }
 };
@@ -71,7 +82,7 @@ class ArticleFilter extends Component {
 function mapStateToProps(state) {
   return {
     fields: state.articlesFilter.fields,
-    filter: state.articlesFilter.values
+    filter: state.articlesFilter.values,
   };
 }
 

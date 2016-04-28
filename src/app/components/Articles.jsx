@@ -53,12 +53,10 @@ class Articles extends Component {
       <div className="articles">
         <PositioningWidget pageId='article-list-page' />
         <div className="row">
-          <div className="col m6 left-align">
-            <ArticleFilter onChange={this.handleFilterChange} />
-          </div>
           <div className="col s5 offset-s1 right right-align">
             <ArticleAdd dispatch={this.props.dispatch} />
           </div>
+          <ArticleFilter onChange={this.handleFilterChange} />
         </div>
         <ArticleList articles={this.state.articles} />
       </div>
