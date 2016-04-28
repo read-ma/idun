@@ -1,3 +1,4 @@
+require('./Flashcard.scss');
 import React, { Component } from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import classnames from 'classnames';
@@ -24,7 +25,7 @@ class Flashcard extends Component {
   }
 
   revert() {
-    this.setState({ reverted: true, side: this.state.side === 'reverse' ? 'obverse' : 'reverse' });
+    this.setState({ reverted: !this.state.reverted, side: this.state.side === 'reverse' ? 'obverse' : 'reverse' });
   }
 
   obverse() {
@@ -65,7 +66,10 @@ class Flashcard extends Component {
 
   render() {
     const side = this[this.state.side]();
-    const cardClassnames = classnames('card blue-grey dark-1', this.state.side);
+    const cardClassnames = classnames('card', {
+      'blue darken-4': this.state.side === 'obverse',
+      'amber darken-4': this.state.side === 'reverse'
+    });
     return (
       <div>
         <ReactCSSTransitionGroup transitionName="fadein" transitionAppear={true} transitionLeave={false} transitionEnterTimeout={500} transitionAppearTimeout={500}>
