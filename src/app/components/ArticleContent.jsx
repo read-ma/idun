@@ -31,22 +31,18 @@ const ArticlePara = ({tokens, handleWordClick, wordlists}) => {
 
   wordlists.forEach(list => tokens = markSelectedInDict(tokens, list));
 
-  let paragraph = tokens.map((token,i) => {
-    return (<Word
-              className={token.className()}
-              word={token.word}
-              key={`word-${i}-${token.word}`}
-              separator={isSeparator(token.word)}
-              onClick={handleWordClick} />);
+  const paragraph = tokens.map((token, i) => {
+    return (
+      <Word
+        className={token.className()} word={token.word}
+        key={`word-${i}-${token.word}`}
+        separator={isSeparator(token.word)}
+        onClick={handleWordClick} />);
   });
 
   return (
     <div className='paragraph'>{detokenize(paragraph)}</div>);
 };
-
-const compareKeys = (key, propsA, propsB) => {
-  console.log(key, propsA[key], propsA[key], _.isEqual(propsA[key], propsB[key]));
-}
 
 class ArticleContent extends Component {
   constructor(props) {
@@ -60,32 +56,31 @@ class ArticleContent extends Component {
   handleClick(word) {
     this.setState({
       selection: [...this.state.selection, word],
-      appending: true
+      appending: true,
     });
     this.props.onWordSelected(word);
 
     window.clearTimeout(this.currentTimeout);
     this.currentTimeout = window.setTimeout(() => {
-      let selectedText = this.state.selection.join(' ');
+      const selectedText = this.state.selection.join(' ');
 
-      this.setState({selection: [], appending: false});
+      this.setState({ selection: [], appending: false });
       this.props.onTextSelected(selectedText);
     }, 1000);
   }
 
   render() {
-    let paragraphs = this.props.text.map(tokens => {
+    const paragraphs = this.props.text.map(tokens => {
       return <ArticlePara handleWordClick={this.handleClick} tokens={tokens} wordlists={this.props.wordlists} key={_.uniqueId('articlePara')} />;
     });
 
     let title = paragraphs[0];
     let content = paragraphs.slice(1);
 
-    if (!content)
-      return false;
+    if (!content) return false;
 
     return (
-      <div className={classnames('content flow-text', {appending: this.state.appending})} onMouseUp={this.props.onTextSelected}>
+      <div className={classnames('content flow-text', { appending: this.state.appending })} onMouseUp={this.props.onTextSelected}>
         <h1>{title}</h1>
         {content}
       </div>
@@ -94,8 +89,10 @@ class ArticleContent extends Component {
 };
 
 ArticleContent.propTypes = {
-  /* text: React.PropTypes.array.isRequired, */
-  onTextSelected: React.PropTypes.func.isRequired
+  text: React.PropTypes.array.isRequired,
+  onTextSelected: React.PropTypes.func.isRequired,
+  onWordSelected: React.PropTypes.func.isRequired,
+  wordlists: React.PropTypes.array.isRequired,
 };
 
 
