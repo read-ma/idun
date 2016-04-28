@@ -3,6 +3,11 @@
 @import "./src/assets/sass/vendor_overrides";
 @import "./src/assets/sass/custom";
 
+body {
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke: 1px rgba(0,0,0,0.1)
+}
+
 #app > div > .container {
   position: relative;
 }
