@@ -1,3 +1,4 @@
+require('./FlashcardsQuiz.scss');
 import React, { Component } from 'react';
 import classnames from 'classnames';
 import Flashcard from './Flashcard';
@@ -15,7 +16,7 @@ const Progress = (props) => {
       </div>
     </div>
   );
-}
+};
 
 const FlashcardSettings = (props) => {
   return (
@@ -34,8 +35,8 @@ const FlashcardSettings = (props) => {
         </li>
       </ul>
     </div>
-  )
-}
+  );
+};
 
 class FlashcardsQuiz extends Component {
   constructor(props) {
