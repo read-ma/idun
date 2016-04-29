@@ -75,7 +75,7 @@ class ArticleContent extends Component {
 
   render() {
     let paragraphs = this.props.text.map(tokens => {
-      return <ArticlePara handleWordClick={this.handleClick} tokens={tokens} wordlists={this.props.wordlists} key={_.uniqueId('articlePara')} />;
+      return <ArticlePara handleWordClick={this.handleClick} tokens={tokens} wordlists={this.props.wordlists} />;
     });
 
     let title = paragraphs[0];
