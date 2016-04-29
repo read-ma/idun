@@ -12,6 +12,13 @@ class Flashcard extends Component {
     this.revert = this.revert.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      reverted: false,
+      side: nextProps.startWithObverse ? 'obverse' : 'reverse'
+    });
+  }
+
   markEasy() {
     this.mark('easy');
   }
