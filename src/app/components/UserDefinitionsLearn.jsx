@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+  import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { loadUserDefinitions } from '../actions';
 import FlashcardsQuiz from './FlashcardsQuiz';
 import FlashcardsQuizResults from './FlashcardsQuizResults';
+import _ from 'lodash';
 
 function mapStateToProps(state) {
   return { items: state.main.userDefinitions };
@@ -51,6 +52,7 @@ class UserDefinitionsLearn extends Component {
   renderArticles() {
     const articles = {};
     this.props.items.map(item => articles[item.article_id] = item.article_title);
+    const articlesCount = _.countBy(this.props.items, 'article_id');
     if (!this.shouldShowQuiz() && !this.shouldShowResults()) {
       return (
         <div className="col s12">
@@ -60,7 +62,9 @@ class UserDefinitionsLearn extends Component {
             {Object.keys(articles).map(id => {
               return (
                 <li key={id}>
-                  <a onClick={this.startQuizForArticle.bind(null, id)}>{articles[id]} - {id}</a>
+                  <a onClick={this.startQuizForArticle.bind(null, id)}>
+                    {articles[id]} ({articlesCount[id]})
+                  </a>
                 </li>
               );
             })}
