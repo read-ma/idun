@@ -10,4 +10,15 @@
   box-shadow: 0 0 10px 2px rgba(3, 3, 3, 0.35);
   padding: 10px;
   box-sizing: border-box;
+
+  .close-sidebar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .collection {
+    clear: both;
+  }
 }

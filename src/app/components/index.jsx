@@ -6,9 +6,7 @@ import Articles from './Articles';
 import ArticlePage from './ArticlePage';
 import Main from './Main';
 import DefinitionBoxes from './DefinitionBoxes';
-
 import React, { Component } from 'react';
-
 import classnames from 'classnames';
 
 const Wordlists = ({header, wordlists, handleSelected}) => {
