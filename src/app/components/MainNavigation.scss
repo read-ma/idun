@@ -4,10 +4,12 @@
 }
 
 .main-navigation {
+  height: 100%;
   margin-right: 25px;
   .input-field {
     border-left: 1px solid #ccc;
     border-right: 1px solid #ccc;
+    height: 100%;
 
     input[type=search] {
       box-sizing: border-box;
