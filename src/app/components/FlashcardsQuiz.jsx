@@ -7,12 +7,10 @@ const Progress = (props) => {
   const itemNumber = props.itemIndex + 1;
   const percent = Math.round(itemNumber / props.itemsNumber * 100);
   return (
-    <div className="row">
-      <div className="col s4 offset-s4 center-align">
-        <span>{itemNumber} of {props.itemsNumber}</span>
-        <div className="progress">
-          <div className="determinate" style={{ width: percent + '%' }}></div>
-        </div>
+    <div className="col s4 center-align">
+      <span>{itemNumber} of {props.itemsNumber}</span>
+      <div className="progress">
+        <div className="determinate" style={{ width: percent + '%' }}></div>
       </div>
     </div>
   );
@@ -49,6 +47,8 @@ class FlashcardsQuiz extends Component {
     };
     this.markItem = this.markItem.bind(this);
     this.changeSettings = this.changeSettings.bind(this);
+    this.goToNext = this.goToNext.bind(this);
+    this.goToPrev = this.goToPrev.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -67,7 +67,7 @@ class FlashcardsQuiz extends Component {
     item.mastered = markValue === 'easy';
     newItems.splice(itemIndex, 1, item);
 
-    if (this.quizOngoing()) {
+    if (this.isQuizOngoing()) {
       this.setState({
         currentItem: this.fetchNextElement(this.state.items, this.state.currentItem),
         items: newItems,
@@ -78,7 +78,7 @@ class FlashcardsQuiz extends Component {
     }
   }
 
-  quizOngoing() {
+  isQuizOngoing() {
     return (this.state.itemIndex + 1) < this.state.items.length;
   }
 
@@ -88,6 +88,38 @@ class FlashcardsQuiz extends Component {
       nextElementIndex = 0
     }
     return list[nextElementIndex]
+  }
+
+  fetchPrevElement(list, element) {
+    const nextElementIndex = list.indexOf(element) - 1;
+    return list[nextElementIndex];
+  }
+
+  goToNext() {
+    if (this.isQuizOngoing()) {
+      this.setState({
+        currentItem: this.fetchNextElement(this.state.items, this.state.currentItem),
+        itemIndex: this.state.itemIndex + 1
+      });
+    } else {
+      this.props.endQuiz();
+    }
+  }
+
+  canGoNext() {
+    // this allows to go one item futher so we can end a quiz
+    return this.state.itemIndex < this.state.items.length;
+  }
+
+  goToPrev() {
+    this.setState({
+      currentItem: this.fetchPrevElement(this.state.items, this.state.currentItem),
+      itemIndex: this.state.itemIndex - 1
+    });
+  }
+
+  canGoPrev() {
+    return this.state.itemIndex > 0;
   }
 
   changeSettings(settings) {
@@ -101,7 +133,19 @@ class FlashcardsQuiz extends Component {
         <div className="row">
           <div className="col s6">
             <Flashcard key={this.state.currentItem.word} item={this.state.currentItem} markItem={this.markItem} startWithObverse={this.state.settings.startWith === 'word'} />
-            <Progress itemIndex={this.state.itemIndex} itemsNumber={this.state.items.length} />
+            <div className="row">
+              <div className="col s2 offset-s1">
+                <a onClick={this.goToPrev} className={classnames({disabled: !this.canGoPrev()})}>
+                  <i className="material-icons">fast_rewind</i>
+                </a>
+              </div>
+              <Progress itemIndex={this.state.itemIndex} itemsNumber={this.state.items.length} />
+              <div className="col s2">
+                <a onClick={this.goToNext} className={classnames({disabled: !this.canGoNext()})}>
+                  <i className="material-icons">fast_forward</i>
+                </a>
+              </div>
+            </div>
           </div>
           <div className="col s3 offset-s3 right-align">
             <FlashcardSettings changeSettings={this.changeSettings} startWith={this.state.settings.startWith} />
