@@ -86,3 +86,9 @@ $d3k-bg: lightgreen;
     word-wrap: break-word;
   }
 }
+
+@media only screen and (max-width: 600px) {
+  .article-wrapper {
+    padding-bottom: 50% !important; // Unhide bottom of the article from mobile sidebar
+  }
+}
