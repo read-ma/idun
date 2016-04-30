@@ -1,24 +1,23 @@
-require('./MainNavigation.scss')
+require('./MainNavigation.scss');
 import { Link } from 'react-router';
-import React, { Component } from 'react';
-import classnames from 'classnames';
+import React from 'react';
 import { connect } from 'react-redux';
 import Settings from './Settings';
 import { textSelected } from '../actions';
 import TTSPlayer from '../components/TTSPlayer';
-import {ShowIf} from '../components';
+import { ShowIf } from '../components';
 
-const MainNavigation = ({selectedText, handleSearch, displaySearchBar}) => {
+const MainNavigation = ({ selectedText, handleSearch, displaySearchBar }) => {
   return (
     <div className="navbar-fixed">
       <nav className="white row">
         <div className="nav-wrapper container">
-          <Link to='/articles' className="brand-logo left hide-on-small-and-down">ReadMa</Link>
+          <Link to="/articles" className="brand-logo left hide-on-small-and-down">ReadMa</Link>
 
           <ul className="left hide-on-med-and-down">
-            <li><Link to='/articles'>Articles</Link></li>
-            <li><Link to='/learn'>Learn</Link></li>
-            <li><Link to='/learn/definitions'>Words</Link></li>
+            <li><Link to="/articles">Articles</Link></li>
+            <li><Link to="/learn">Learn</Link></li>
+            <li><Link to="/learn/definitions">Words</Link></li>
           </ul>
 
           <ul className="right">
@@ -35,28 +34,37 @@ const MainNavigation = ({selectedText, handleSearch, displaySearchBar}) => {
   );
 };
 
+MainNavigation.propTypes = {
+  selectedText: React.PropTypes.string.isRequired,
+  handleSearch: React.PropTypes.func.isRequired,
+  displaySearchBar: React.PropTypes.bool.isRequired,
+};
+
+
 class SelectedTextInput extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.state = {text: props.text};
+    this.state = { text: props.text };
     this.triggerSearch = this.triggerSearch.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleInputKeyUp = this.handleInputKeyUp.bind(this);
     this.timeout = null;
-   }
-
-  componentWillReceiveProps({text}){
-    this.setState({text});
   }
 
-  handleInputChange(event){
-    this.setState({[event.target.name]: event.target.value});
+  componentWillReceiveProps({ text }) {
+    this.setState({ text });
   }
 
-  handleInputKeyUp(event) {
+  handleInputChange(event) {
+    this.setState({ [event.target.name]: event.target.value });
+  }
+
+  handleInputKeyUp() {
     clearTimeout(this.timeout);
     this.timeout = setTimeout(this.triggerSearch, 1000);
   }
 
-  triggerSearch(event){
+  triggerSearch(event) {
     if (event) event.preventDefault();
 
     this.props.search(this.state.text);
@@ -66,7 +74,11 @@ class SelectedTextInput extends React.Component {
     return (
       <form onSubmit={this.triggerSearch} className="right col s8 m4 main-navigation">
         <div className="input-field black-text">
-          <input id="search" className="search-input" type="search" required name="text" value={this.state.text} onKeyUp={this.handleInputKeyUp.bind(this)} onChange={this.handleInputChange.bind(this)} />
+          <input id="search" className="search-input" type="search" required name="text"
+            value={this.state.text}
+            onKeyUp={this.handleInputKeyUp}
+            onChange={this.handleInputChange}
+          />
           <label htmlFor="search"><i className="material-icons grey-text">search</i></label>
           <TTSPlayer />
         </div>
@@ -75,17 +87,22 @@ class SelectedTextInput extends React.Component {
   }
 }
 
+SelectedTextInput.propTypes = {
+  text: React.PropTypes.string.isRequired,
+  search: React.PropTypes.func.isRequired,
+};
+
 const mapStateToProps = state => {
   return {
-    selectedText: state.article.selectedText
+    selectedText: state.article.selectedText,
   };
 };
 
 const mapActionsToProps = dispatch => {
   return {
-    handleSearch (text) {
+    handleSearch(text) {
       if (text) dispatch(textSelected(text));
-    }
+    },
   };
 };
 
