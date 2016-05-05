@@ -74,8 +74,8 @@ class Flashcard extends Component {
   render() {
     const side = this[this.state.side]();
     const cardClassnames = classnames('card', {
-      'blue darken-4': this.state.side === 'obverse',
-      'amber darken-4': this.state.side === 'reverse'
+      'card-obverse': this.state.side === 'obverse',
+      'card-reverse': this.state.side === 'reverse'
     });
     return (
       <div>
@@ -83,10 +83,14 @@ class Flashcard extends Component {
           <div className="row card-wrap" key={this.props.item.word}>
             <ReactCSSTransitionGroup transitionName="flip" transitionLeave={true} transitionAppear={false} transitionEnterTimeout={500} transitionLeaveTimeout={500}>
               <div className={cardClassnames} key={this.state.side} onClick={this.revert}>
-                <div className="card-content white-text center-align">
+                <div className="card-content center-align">
                   {side}
                 </div>
                 {this.renderMarkButtons()}
+                <span className="help-text">
+                  Click to turn card
+                  <i className="material-icons">loop</i>
+                </span>
               </div>
             </ReactCSSTransitionGroup>
           </div>

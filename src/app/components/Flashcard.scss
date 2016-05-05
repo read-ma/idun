@@ -19,6 +19,13 @@
       .card-action{
         font-weight: bold;
       }
+      .help-text{
+        position: absolute;
+        right: 1em;
+        bottom: 1em;
+        color: gray;
+        line-height: 25px;
+      }
     }
   }
 }
