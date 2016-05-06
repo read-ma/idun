@@ -19,6 +19,7 @@ export default class ArticleAdd extends React.Component {
 
   urlAdded() {
     this.setState({inputValue: ''});
+    this.toggleModal();
   }
 
   onChange(e) {
@@ -43,7 +44,7 @@ export default class ArticleAdd extends React.Component {
   }
 
   toggleModal(event) {
-    event.preventDefault();
+    if (event) event.preventDefault();
 
     let $modal = $('#addArticleModal');
 
@@ -67,12 +68,12 @@ export default class ArticleAdd extends React.Component {
           <form onSubmit={this.addUrl}>
             <div className="modal-content">
               <h4 className="left-align">Add article</h4>
-                <div className="input-field col s12">
+                <div className="input-field col s12 hide">
                   <textarea id="article-source-text" className="materialize-textarea"></textarea>
                   <label htmlFor="article-source-text">Paste your text</label>
                 </div>
 
-                <div className="center-align row">
+                <div className="center-align row hide">
                   Or
                 </div>
 
@@ -80,16 +81,15 @@ export default class ArticleAdd extends React.Component {
                   <input type="url" name="sourceUrl" className="validate" ref="urlInput" id="sourceUrl" required="required" onChange={this.onChange} value={this.state.inputValue} />
                   <label htmlFor="sourceUrl">Enter URL for article to import</label>
                 </div>
-
             </div>
             <div className="modal-footer">
-              <a href="#!" className=" modal-action modal-close waves-effect waves-green btn-flat">Add article</a>
+              <button type="submit" className="waves-effect waves-green btn-flat">Add article</button>
             </div>
           </form>
         </div>
 
         <div className="col s2 offset-s10">
-          <button type="submit" className="btn-floating btn-large green" onClick={this.toggleModal}>
+          <button className="btn-floating btn-large green" onClick={this.toggleModal}>
             <i className="material-icons">add</i>
           </button>
         </div>
