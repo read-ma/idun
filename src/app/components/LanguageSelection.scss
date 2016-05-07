@@ -1,5 +1,3 @@
-@import "./src/assets/sass/materialize/components/color";
-
 .language-select {
   .collection-item {
     padding-left: 0;
@@ -12,8 +10,7 @@
     .language-direction {
       flex-basis: 20%;
       text-align: center;
-      @extend .grey;
-      @extend .lighten-2;
+      color: #eee;
     }
   }
 }
