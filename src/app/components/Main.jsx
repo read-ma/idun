@@ -5,8 +5,6 @@ import MainNavigaton from './MainNavigation';
 import ProgressBar from './ProgressBar';
 
 class Main extends React.Component {
-  //TODO redesign views, remove searchbar from the layout
-  //it's a dirty hack
   displaySearchBar() {
     return this.props.routes && this.props.routes[this.props.routes.length-1].displaySearchBar;
   }
@@ -25,7 +23,7 @@ class Main extends React.Component {
       </div>
     );
   }
-};
+}
 
 function mapStateToProps(state){
   return {
