@@ -8,7 +8,7 @@ module.exports = {
     filename: "public/bundle.js"
   },
   externals: {
-    'Config': JSON.stringify({ apiUrl: 'http://api.readma.com' })
+    'Config': JSON.stringify({ apiUrl: 'http://api.readma.com/api' })
   },
   module: {
     loaders: [

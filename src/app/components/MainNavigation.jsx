@@ -7,6 +7,11 @@ import { textSelected } from '../actions';
 import TTSPlayer from '../components/TTSPlayer';
 import { ShowIf } from '../components';
 
+import LeftNav from 'material-ui/lib/left-nav';
+import AppBar from 'material-ui/lib/app-bar';
+
+
+
 const MainNavigation = ({ selectedText, handleSearch, displaySearchBar }) => {
   return (
     <div className="navbar-fixed">
@@ -32,6 +37,10 @@ const MainNavigation = ({ selectedText, handleSearch, displaySearchBar }) => {
       </nav>
     </div>
   );
+
+  // return (<LeftNav width="16.6%" className="col-xs-2" open={true} style={{padding: 0}}>
+  //     <AppBar />
+  //   </LeftNav>);
 };
 
 MainNavigation.propTypes = {

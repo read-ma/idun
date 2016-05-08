@@ -2,7 +2,7 @@ require('./MobileSidebar.scss');
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
-import map from 'lodash/isArray';
+import reduce from 'lodash/reduce';
 import uniqueId from 'lodash/uniqueId';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { ShowIf } from '../components';

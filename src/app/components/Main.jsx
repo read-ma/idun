@@ -3,6 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import MainNavigaton from './MainNavigation';
 import ProgressBar from './ProgressBar';
+import AppBar from 'material-ui/lib/app-bar';
 
 class Main extends React.Component {
   displaySearchBar() {
@@ -10,16 +11,10 @@ class Main extends React.Component {
   }
   render() {
     return (
-      <div>
+      <div className="row center-xs">
+        <AppBar />
         <MainNavigaton displaySearchBar={this.displaySearchBar()} isAuthenticated={this.props.isAuthenticated} />
-
-        <ProgressBar />
-
-        <main className="container">
-          <div className="section">
-            {this.props.children}
-          </div>
-        </main>
+        {this.props.children}
       </div>
     );
   }
