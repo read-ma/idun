@@ -9,38 +9,51 @@ import { ShowIf } from '../components';
 
 import LeftNav from 'material-ui/lib/left-nav';
 import AppBar from 'material-ui/lib/app-bar';
-
+import List from 'material-ui/lib/lists/list';
+import ListItem from 'material-ui/lib/lists/list-item';
+import Divider from 'material-ui/lib/divider';
 
 
 const MainNavigation = ({ selectedText, handleSearch, displaySearchBar }) => {
+  // return (
+  //   <div className="navbar-fixed">
+  //     <nav className="white row">
+  //       <div className="nav-wrapper container">
+  //         <Link to="/articles" className="brand-logo left hide-on-small-and-down">ReadMa</Link>
+
+
+  //         <ul className="right">
+  //           <Settings />
+  //         </ul>
+
+  //         <ShowIf condition={displaySearchBar}>
+  //           <SelectedTextInput text={selectedText} search={handleSearch} />
+  //         </ShowIf>
+
+  //       </div>
+  //     </nav>
+  //   </div>
+  // );
+
+
+  // Todo; Add mobiletearsheet
+  // Todo; add logo
   return (
-    <div className="navbar-fixed">
-      <nav className="white row">
-        <div className="nav-wrapper container">
-          <Link to="/articles" className="brand-logo left hide-on-small-and-down">ReadMa</Link>
-
-          <ul className="left hide-on-med-and-down">
-            <li><Link to="/articles">Articles</Link></li>
-            <li><Link to="/learn">Learn</Link></li>
-            <li><Link to="/learn/definitions">Words</Link></li>
-          </ul>
-
-          <ul className="right">
-            <Settings />
-          </ul>
-
-          <ShowIf condition={displaySearchBar}>
-            <SelectedTextInput text={selectedText} search={handleSearch} />
-          </ShowIf>
-
-        </div>
-      </nav>
+    <div>
+      <AppBar />
+      <LeftNav width="16.6%" className="col-xs-2" open={true} style={{padding: 0}}>
+        <List>
+          <ListItem primaryText="Articles" href="#/articles" />
+          <ListItem primaryText="Learn" href="#/learn" />
+          <ListItem primaryText="Words" href="#/learn/definitions"/>
+        </List>
+        <Divider />
+        <List>
+          <ListItem primaryText="Follow up" />
+        </List>
+      </LeftNav>
     </div>
   );
-
-  // return (<LeftNav width="16.6%" className="col-xs-2" open={true} style={{padding: 0}}>
-  //     <AppBar />
-  //   </LeftNav>);
 };
 
 MainNavigation.propTypes = {
