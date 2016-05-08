@@ -19,6 +19,13 @@ const styles = {
     marginBottom: 12,
     fontWeight: 500,
   },
+  loginButton: {
+    marginRight: 10,
+  },
+  createAccountLink: {
+    marginBottom: 10,
+    marginTop: 10,
+  },
 };
 
 
@@ -125,11 +132,12 @@ class Login extends React.Component {
           />
           <br />
 
-          <RaisedButton label="Login" primary={true} type="submit" />
+          <RaisedButton label="Login" primary={true} type="submit" style={styles.loginButton} />
 
-          <Link to='forgot_password' className="right">I forgot my password</Link>
+          <Link to='forgot_password'>I forgot my password</Link>
 
-          <Link to='create_account' className="right">Create account</Link>
+          <Divider />
+          <Link to='create_account' style={styles.createAccountLink}>Create account</Link>
 
         </form>
       </Paper>
