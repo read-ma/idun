@@ -2,6 +2,7 @@ import React from 'react';
 
 import {Home,Main, Articles, ArticlePage, UserDefinitionsLearn, UserDefinitionsList} from '../components';
 import Login from '../components/Login';
+import SignUpForm from '../components/SignUpForm';
 import Profile from '../components/Profile';
 import PasswordReminderView from '../components/PasswordReminderView';
 import ChangePasswordView from '../components/ChangePasswordView';
@@ -12,6 +13,7 @@ import { requireAuthentication } from '../utils';
 export default (
   <Route path="/" component={Main}>
     <Route path="/login" component={Login}/>
+    <Route path="/sign_up" component={SignUpForm}/>
     <Route path="forgot_password" component={PasswordReminderView}/>
     <Route path="reset_password" component={ChangePasswordView}/>
 
