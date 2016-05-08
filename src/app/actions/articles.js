@@ -23,11 +23,11 @@ function articlesLoaded(items) {
   };
 }
 
-function addArticle({source_url}) {
+function addArticle(article) {
   return (dispatch) => {
     postArticle(
-      source_url,
-      (article) => { Materialize.toast('Article will be added to list after a short while', 6000); },
+      Object.assign({}, article, { content_type: 'article' }),
+      (_) => { Materialize.toast('Article will be added to list after a short while', 6000); },
       (error) => {
         Materialize.toast('There was a problem with adding your article', 6000);
         throw new Error('READMA: article not added' + error.message);
@@ -72,9 +72,9 @@ function getArticle(id, handleSuccess) {
     });
 }
 
-function postArticle(source_url, handleSuccess, handleFail) {
-  return api.post('/articles.json', {article: {content_type: 'article', source_url: source_url}})
-    .then( (response) => {handleSuccess(response.data);})
+function postArticle(article, handleSuccess, handleFail) {
+  return api.post('/articles.json', { article })
+    .then((response) => {handleSuccess(response.data); })
     .catch(handleFail);
 }
 
