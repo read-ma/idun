@@ -3,26 +3,24 @@ import { connect } from 'react-redux';
 import { map } from 'lodash';
 import l from '../I18n';
 import _ from 'lodash';
+import { updateArticlesFilter } from '../actions/articles';
+import Checkbox from 'material-ui/lib/checkbox';
+import ListItem from 'material-ui/lib/lists/list-item';
+import List from 'material-ui/lib/lists/list';
+import Divider from 'material-ui/lib/divider';
 
 const FilterCheckbox = (key, onChange, checked) => {
+  const checkbox = <Checkbox onCheck={onChange} checked={checked} name={key} />;
+
   return (
-    <li className="clearfix">
-      <input id={key} key={`filter-flag-${key}`} type="checkbox" onChange={onChange}
-        checked={checked} name={key} className="filled-in"
-      />
-      <label htmlFor={key}>{l(key)}</label>
-    </li>
+    <ListItem leftCheckbox={checkbox} primaryText={l(key)} />
   );
 };
 
 const CheckboxGroup = (name, fields, onChange, filter) => {
-  let checkboxes = _.map(fields, ({ name }) => new FilterCheckbox(name, onChange, filter[name]) );
+  const checkboxes = _.map(fields, ({ name }) => new FilterCheckbox(name, onChange, filter[name]) );
 
-  return (
-    <div className="col s3">
-      <ul className="article-list-filters">{checkboxes}</ul>
-    </div>
-  );
+  return (<div> {checkboxes} <Divider /> </div>);
 };
 
 const FilterCheckboxes = ({ onChange, filter, fields }) => {
@@ -30,10 +28,9 @@ const FilterCheckboxes = ({ onChange, filter, fields }) => {
   let checkboxGroups = _.map(fieldGroups, (group, name) => new CheckboxGroup(name, group, onChange, filter));
 
   return (
-    <div className="col s12">
-      <h2>Filter articles by:</h2>
+    <List subheader="Filter articles">
       {checkboxGroups}
-    </div>
+    </List>
   );
 };
 
@@ -55,8 +52,9 @@ class ArticleFilter extends Component {
       change[opposite] = false;
     }
 
-    this.props.onChange(change);
+    this.props.dispatch(updateArticlesFilter(change));
   }
+
 
   render() {
     return (

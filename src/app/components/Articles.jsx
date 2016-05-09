@@ -1,11 +1,10 @@
 require('./Articles.scss');
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { loadArticles, updateArticlesFilter } from '../actions/articles';
+import { loadArticles } from '../actions/articles';
 import PositioningWidget from './PositioningWidget';
 import ArticleAdd from './AddArticleWidget.jsx';
 import ArticleLink from './ArticleLink.jsx';
-import ArticleFilter from './ArticleFilter';
 import filterArticles from '../articleCriteriaMatcher';
 
 class ArticleList extends Component {
@@ -28,11 +27,6 @@ class Articles extends Component {
   constructor(props) {
     super(props);
     this.state = Object.assign({}, this.props);
-    this.handleFilterChange = this.handleFilterChange.bind(this);
-  }
-
-  handleFilterChange(change) {
-    this.props.dispatch(updateArticlesFilter(change));
   }
 
   componentWillReceiveProps(nextProps){
@@ -49,12 +43,6 @@ class Articles extends Component {
     return (
       <div className="articles">
         <PositioningWidget pageId='article-list-page' />
-        <div className="row">
-          <div className="col s5 offset-s1 right right-align">
-            <ArticleAdd dispatch={this.props.dispatch} />
-          </div>
-          <ArticleFilter onChange={this.handleFilterChange} />
-        </div>
         <ArticleList articles={this.state.articles} />
       </div>
     );

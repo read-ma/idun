@@ -21,7 +21,7 @@ import ActionHome from 'material-ui/lib/svg-icons/action/home';
 import ActionInfo from 'material-ui/lib/svg-icons/action/info';
 import SpeakerNotes from 'material-ui/lib/svg-icons/action/speaker-notes';
 
-const MainNavigation = ({ selectedText, handleSearch, displaySearchBar }) => {
+const MainNavigation = ({ selectedText, handleSearch, displaySearchBar, children }) => {
   return (
     <LeftNav className="col-xs-2" open={true} style={{ padding: 0 }}>
       <AppBar title="ReadMa" iconElementLeft={<IconButton><NavigationClose /></IconButton>} />
@@ -31,7 +31,9 @@ const MainNavigation = ({ selectedText, handleSearch, displaySearchBar }) => {
         <ListItem primaryText="Words" href="#/learn/definitions" leftIcon={<SpeakerNotes />} />
       </List>
       <Divider />
+      {children}
     </LeftNav>
+
   );
 };
 

@@ -10,6 +10,8 @@ import ChangePasswordView from '../components/ChangePasswordView';
 import { Route, IndexRoute } from 'react-router';
 import { requireAuthentication } from '../utils';
 
+import ArticleFilter from '../components/ArticleFilter';
+
 export default (
   <Route path="/" component={Main}>
     <Route path="/login" component={Login}/>
@@ -22,7 +24,7 @@ export default (
       <IndexRoute component={UserDefinitionsLearn} />
     </Route>
 
-    <Route path="/articles" component={requireAuthentication(Articles)}/>
+    <Route path="/articles" components={{children: requireAuthentication(Articles), navChildren: ArticleFilter }} />
     <Route path="/article/:id" component={requireAuthentication(ArticlePage)} displaySearchBar={true}/>
     <IndexRoute component={requireAuthentication(Articles)} />
   </Route>
