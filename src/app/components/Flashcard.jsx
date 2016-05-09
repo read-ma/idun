@@ -97,7 +97,7 @@ class Flashcard extends Component {
                     {side}
                   </div>
                   {this.renderMarkButtons()}
-                  <span className="help-text">
+                  <span className="help-text ">
                     Click to turn card
                     <i className="material-icons">loop</i>
                   </span>
