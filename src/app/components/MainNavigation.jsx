@@ -18,8 +18,8 @@ import IconButton from 'material-ui/lib/icon-button';
 import NavigationClose from 'material-ui/lib/svg-icons/navigation/close';
 import ActionReorder from 'material-ui/lib/svg-icons/action/reorder';
 import ActionHome from 'material-ui/lib/svg-icons/action/home';
-import ActionInfo from 'material-ui/lib/svg-icons/action/info';
-import SpeakerNotes from 'material-ui/lib/svg-icons/action/speaker-notes';
+import SocialSchool from 'material-ui/lib/svg-icons/social/school';
+import NavigationApps from 'material-ui/lib/svg-icons/navigation/apps';
 
 const MainNavigation = ({ selectedText, handleSearch, displaySearchBar, children }) => {
   return (
@@ -27,8 +27,8 @@ const MainNavigation = ({ selectedText, handleSearch, displaySearchBar, children
       <AppBar title="ReadMa" iconElementLeft={<IconButton><NavigationClose /></IconButton>} />
       <List>
         <ListItem primaryText="Articles" href="#/articles" leftIcon={<ActionReorder />} />
-        <ListItem primaryText="Learn" href="#/learn" leftIcon={<ActionInfo />} />
-        <ListItem primaryText="Words" href="#/learn/definitions" leftIcon={<SpeakerNotes />} />
+        <ListItem primaryText="Learn" href="#/learn" leftIcon={<SocialSchool />} />
+        <ListItem primaryText="Words" href="#/learn/definitions" leftIcon={<NavigationApps />} />
       </List>
       <Divider />
       {children}
