@@ -14,7 +14,7 @@ class Main extends React.Component {
       <div className="row">
         <AppBar />
         <MainNavigaton displaySearchBar={this.displaySearchBar()} isAuthenticated={this.props.isAuthenticated} />
-        <div className="col-xs-offset-2">
+        <div className="col-xs-offset-2 col-xs-10">
           {this.props.children}
         </div>
       </div>

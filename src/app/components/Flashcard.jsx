@@ -6,7 +6,7 @@ import Paper from 'material-ui/lib/paper';
 
 const style = {
   height: 200,
-  width: 300,
+  width: '100%',
   margin: 20,
   textAlign: 'center',
   display: 'inline-block',
@@ -82,7 +82,7 @@ class Flashcard extends Component {
 
   render() {
     const side = this[this.state.side]();
-    const cardClassnames = classnames('card', {
+    const cardClassnames = classnames('card col-xs-8', {
       'card-obverse': this.state.side === 'obverse',
       'card-reverse': this.state.side === 'reverse'
     });
