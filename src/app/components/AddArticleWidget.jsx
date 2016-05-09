@@ -1,6 +1,9 @@
 import React from 'react';
 import { addArticle } from '../actions/articles';
 import isEmpty from 'lodash/isEmpty';
+import FloatingActionButton from 'material-ui/lib/floating-action-button';
+import ContentAdd from 'material-ui/lib/svg-icons/content/add';
+
 
 export default class ArticleAdd extends React.Component {
   constructor(props) {
@@ -98,9 +101,9 @@ export default class ArticleAdd extends React.Component {
         </div>
 
         <div className="col s2 offset-s10">
-          <button className="btn-floating btn-large green" onClick={this.toggleModal}>
-            <i className="material-icons">add</i>
-          </button>
+          <FloatingActionButton onMouseDown={this.toggleModal}>
+            <ContentAdd />
+          </FloatingActionButton>
         </div>
       </div>
     );
