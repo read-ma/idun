@@ -17,11 +17,18 @@ import Divider from 'material-ui/lib/divider';
 import IconButton from 'material-ui/lib/icon-button';
 import NavigationClose from 'material-ui/lib/svg-icons/navigation/close';
 import ActionReorder from 'material-ui/lib/svg-icons/action/reorder';
-import ActionHome from 'material-ui/lib/svg-icons/action/home';
 import SocialSchool from 'material-ui/lib/svg-icons/social/school';
 import NavigationApps from 'material-ui/lib/svg-icons/navigation/apps';
+import ActionSettings from 'material-ui/lib/svg-icons/action/settings';
+import ActionPowerSettingsNew from 'material-ui/lib/svg-icons/action/power-settings-new';
+
+// Czemu to kurwa nie extenduje componentu tylko jakies gowniane funkcje...
+// nawet propsow sie nie da uzyc kurwa
+// jeszcze dwa komponenty w jednym pliku zeby bylo radosniej zajebana mac
 
 const MainNavigation = ({ selectedText, handleSearch, displaySearchBar, children }) => {
+  const logout = () => { return this.props.dispatch(logout()).bind(this); }
+
   return (
     <LeftNav className="col-xs-2" open={true} style={{ padding: 0 }}>
       <AppBar title="ReadMa" iconElementLeft={<IconButton><NavigationClose /></IconButton>} />
@@ -29,6 +36,11 @@ const MainNavigation = ({ selectedText, handleSearch, displaySearchBar, children
         <ListItem primaryText="Articles" href="#/articles" leftIcon={<ActionReorder />} />
         <ListItem primaryText="Learn" href="#/learn" leftIcon={<SocialSchool />} />
         <ListItem primaryText="Words" href="#/learn/definitions" leftIcon={<NavigationApps />} />
+      </List>
+      <Divider />
+      <List>
+        <ListItem primaryText="Settings" leftIcon={<ActionSettings />} />
+        <ListItem primaryText="Sign out" leftIcon={<ActionPowerSettingsNew />} onClick={logout.bind(this)} />
       </List>
       <Divider />
       {children}
@@ -40,7 +52,7 @@ const MainNavigation = ({ selectedText, handleSearch, displaySearchBar, children
 MainNavigation.propTypes = {
   selectedText: React.PropTypes.string.isRequired,
   handleSearch: React.PropTypes.func.isRequired,
-  displaySearchBar: React.PropTypes.bool.isRequired,
+  // displaySearchBar: React.PropTypes.bool.isRequired,
 };
 
 

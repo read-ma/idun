@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import MainNavigaton from './MainNavigation';
 import ProgressBar from './ProgressBar';
 import AppBar from 'material-ui/lib/app-bar';
+import { logout } from '../actions/auth';
+
 
 import IconButton from 'material-ui/lib/icon-button';
 import IconMenu from 'material-ui/lib/menus/icon-menu';
@@ -12,7 +14,6 @@ import MenuItem from 'material-ui/lib/menus/menu-item';
 
 
 const ContextAppMenu = () => {
-
   return (
     <IconMenu
       iconButtonElement={<IconButton><MoreVertIcon /></IconButton>}
@@ -20,8 +21,6 @@ const ContextAppMenu = () => {
       anchorOrigin={{horizontal: 'right', vertical: 'top'}}
     >
       <MenuItem primaryText="Refresh" />
-      <MenuItem primaryText="Help" />
-      <MenuItem primaryText="Sign out" />
     </IconMenu>
   );
 }
