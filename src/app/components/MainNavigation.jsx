@@ -13,45 +13,25 @@ import List from 'material-ui/lib/lists/list';
 import ListItem from 'material-ui/lib/lists/list-item';
 import Divider from 'material-ui/lib/divider';
 
+// Icons
+import IconButton from 'material-ui/lib/icon-button';
+import NavigationClose from 'material-ui/lib/svg-icons/navigation/close';
+import ActionReorder from 'material-ui/lib/svg-icons/action/reorder';
+import ActionHome from 'material-ui/lib/svg-icons/action/home';
+import ActionInfo from 'material-ui/lib/svg-icons/action/info';
+import SpeakerNotes from 'material-ui/lib/svg-icons/action/speaker-notes';
 
 const MainNavigation = ({ selectedText, handleSearch, displaySearchBar }) => {
-  // return (
-  //   <div className="navbar-fixed">
-  //     <nav className="white row">
-  //       <div className="nav-wrapper container">
-  //         <Link to="/articles" className="brand-logo left hide-on-small-and-down">ReadMa</Link>
-
-
-  //         <ul className="right">
-  //           <Settings />
-  //         </ul>
-
-  //         <ShowIf condition={displaySearchBar}>
-  //           <SelectedTextInput text={selectedText} search={handleSearch} />
-  //         </ShowIf>
-
-  //       </div>
-  //     </nav>
-  //   </div>
-  // );
-
-
-  // Todo; Add mobiletearsheet
-  // Todo; add logo
   return (
-    <div>
-      <LeftNav className="col-xs-2" open={true} style={{padding: 0}}>
-        <List>
-          <ListItem primaryText="Articles" href="#/articles" />
-          <ListItem primaryText="Learn" href="#/learn" />
-          <ListItem primaryText="Words" href="#/learn/definitions"/>
-        </List>
-        <Divider />
-        <List>
-          <ListItem primaryText="Follow up" />
-        </List>
-      </LeftNav>
-    </div>
+    <LeftNav className="col-xs-2" open={true} style={{ padding: 0 }}>
+      <AppBar title="ReadMa" iconElementLeft={<IconButton><NavigationClose /></IconButton>} />
+      <List>
+        <ListItem primaryText="Articles" href="#/articles" leftIcon={<ActionReorder />} />
+        <ListItem primaryText="Learn" href="#/learn" leftIcon={<ActionInfo />} />
+        <ListItem primaryText="Words" href="#/learn/definitions" leftIcon={<SpeakerNotes />} />
+      </List>
+      <Divider />
+    </LeftNav>
   );
 };
 
