@@ -40,8 +40,7 @@ const MainNavigation = ({ selectedText, handleSearch, displaySearchBar }) => {
   // Todo; add logo
   return (
     <div>
-      <AppBar />
-      <LeftNav width="16.6%" className="col-xs-2" open={true} style={{padding: 0}}>
+      <LeftNav className="col-xs-2" open={true} style={{padding: 0}}>
         <List>
           <ListItem primaryText="Articles" href="#/articles" />
           <ListItem primaryText="Learn" href="#/learn" />
