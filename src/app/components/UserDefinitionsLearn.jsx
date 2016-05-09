@@ -4,6 +4,10 @@ import { loadUserDefinitions } from '../actions';
 import FlashcardsQuiz from './FlashcardsQuiz';
 import FlashcardsQuizResults from './FlashcardsQuizResults';
 import _ from 'lodash';
+import List from 'material-ui/lib/lists/list';
+import ListItem from 'material-ui/lib/lists/list-item';
+import Badge from 'material-ui/lib/badge';
+
 
 function mapStateToProps(state) {
   return { items: state.main.userDefinitions };
@@ -55,20 +59,19 @@ class UserDefinitionsLearn extends Component {
     const articlesCount = _.countBy(this.props.items, 'article_id');
     if (!this.shouldShowQuiz() && !this.shouldShowResults()) {
       return (
-        <div className="col s12">
+        <div>
           <h1>Learn words used in recently read articles</h1>
           <p>Click on article title to enter quiz from an article.</p>
-          <ul>
+          <List>
             {Object.keys(articles).map(id => {
               return (
-                <li key={id}>
-                  <a onClick={this.startQuizForArticle.bind(null, id)}>
-                    {articles[id]} ({articlesCount[id]})
-                  </a>
-                </li>
+                <ListItem key={id} onClick={this.startQuizForArticle.bind(null, id)}>
+                  {articles[id]}
+                  <Badge badgeContent={articlesCount[id]} primary={true} />
+                </ListItem>
               );
             })}
-          </ul>
+          </List>
         </div>
       );
     }
@@ -84,14 +87,12 @@ class UserDefinitionsLearn extends Component {
 
   renderLearnPart() {
     return (
-      <div>
-        <div className="row">
-          <div className="flashcards-container col m6 offset-m3">
-            <FlashcardsQuiz items={this.state.items} endQuiz={this.endQuiz} show={this.shouldShowQuiz()} />
-            <FlashcardsQuizResults items={this.state.items} show={this.shouldShowResults()} closeResults={this.closeResults} />
-          </div>
+      <div className="col-xs-12">
+        <div className="flashcards-container">
+          <FlashcardsQuiz items={this.state.items} endQuiz={this.endQuiz} show={this.shouldShowQuiz()} />
+          <FlashcardsQuizResults items={this.state.items} show={this.shouldShowResults()} closeResults={this.closeResults} />
         </div>
-        <div className="row">
+        <div>
           {this.renderArticles()}
         </div>
       </div>

@@ -131,7 +131,7 @@ class FlashcardsQuiz extends Component {
     if (this.props.show) {
       result = (
         <div className="row">
-          <div className="col s6">
+          <div className="col-sm-6">
             <Flashcard key={this.state.currentItem.word} item={this.state.currentItem} markItem={this.markItem} startWithObverse={this.state.settings.startWith === 'word'} />
             <div className="row">
               <div className="col s2 offset-s1">
@@ -147,7 +147,7 @@ class FlashcardsQuiz extends Component {
               </div>
             </div>
           </div>
-          <div className="col s3 offset-s3 right-align">
+          <div className="col-sm-3 col-sm-offset-3 end-sm">
             <FlashcardSettings changeSettings={this.changeSettings} startWith={this.state.settings.startWith} />
           </div>
         </div>

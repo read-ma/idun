@@ -11,10 +11,12 @@ class Main extends React.Component {
   }
   render() {
     return (
-      <div className="row center-xs">
+      <div className="row">
         <AppBar />
         <MainNavigaton displaySearchBar={this.displaySearchBar()} isAuthenticated={this.props.isAuthenticated} />
-        {this.props.children}
+        <div className="col-xs-offset-2">
+          {this.props.children}
+        </div>
       </div>
     );
   }

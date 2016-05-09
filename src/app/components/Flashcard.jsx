@@ -2,6 +2,15 @@ require('./Flashcard.scss');
 import React, { Component } from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import classnames from 'classnames';
+import Paper from 'material-ui/lib/paper';
+
+const style = {
+  height: 200,
+  width: 300,
+  margin: 20,
+  textAlign: 'center',
+  display: 'inline-block',
+};
 
 class Flashcard extends Component {
   constructor(props) {
@@ -83,14 +92,16 @@ class Flashcard extends Component {
           <div className="row card-wrap" key={this.props.item.word}>
             <ReactCSSTransitionGroup transitionName="flip" transitionLeave={true} transitionAppear={false} transitionEnterTimeout={500} transitionLeaveTimeout={500}>
               <div className={cardClassnames} key={this.state.side} onClick={this.revert}>
-                <div className="card-content center-align">
-                  {side}
-                </div>
-                {this.renderMarkButtons()}
-                <span className="help-text">
-                  Click to turn card
-                  <i className="material-icons">loop</i>
-                </span>
+                <Paper style={style} zDepth={2}>
+                  <div className="card-content center-align">
+                    {side}
+                  </div>
+                  {this.renderMarkButtons()}
+                  <span className="help-text">
+                    Click to turn card
+                    <i className="material-icons">loop</i>
+                  </span>
+                </Paper>
               </div>
             </ReactCSSTransitionGroup>
           </div>
