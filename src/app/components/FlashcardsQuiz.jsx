@@ -1,40 +1,8 @@
 require('./FlashcardsQuiz.scss');
 import React, { Component } from 'react';
-import classnames from 'classnames';
 import Flashcard from './Flashcard';
-
-const Progress = (props) => {
-  const itemNumber = props.itemIndex + 1;
-  const percent = Math.round(itemNumber / props.itemsNumber * 100);
-  return (
-    <div className="col-xs-4 center-xs">
-      <span>{itemNumber} of {props.itemsNumber}</span>
-      <div className="progress">
-        <div className="determinate" style={{ width: percent + '%' }}></div>
-      </div>
-    </div>
-  );
-};
-
-const FlashcardSettings = (props) => {
-  return (
-    <div>
-      <label>Start with:</label>
-      <ul className="flashcards-settings">
-        <li className={classnames({ active: props.startWith === 'definition' })}>
-          <a onClick={props.changeSettings.bind(null, {startWith: 'definition'})}>
-            Definition
-          </a>
-        </li>
-        <li className={classnames({ active: props.startWith === 'word' })}>
-          <a onClick={props.changeSettings.bind(null, {startWith: 'word'})}>
-            Word
-          </a>
-        </li>
-      </ul>
-    </div>
-  );
-};
+import FlashcardSettings from './FlashcardSettings';
+import FlashcardProgress from './FlashcardProgress';
 
 class FlashcardsQuiz extends Component {
   constructor(props) {
@@ -133,19 +101,11 @@ class FlashcardsQuiz extends Component {
         <div className="row">
           <div className="col-sm-6 col-sm-offset-2">
             <Flashcard key={this.state.currentItem.word} item={this.state.currentItem} markItem={this.markItem} startWithObverse={this.state.settings.startWith === 'word'} />
-            <div className="row">
-              <div className="col-xs-2 col-xs-offset-1">
-                <a onClick={this.goToPrev} className={classnames({disabled: !this.canGoPrev()})}>
-                  <i className="material-icons">fast_rewind</i>
-                </a>
-              </div>
-              <Progress itemIndex={this.state.itemIndex} itemsNumber={this.state.items.length} />
-              <div className="col-xs-2">
-                <a onClick={this.goToNext} className={classnames({disabled: !this.canGoNext()})}>
-                  <i className="material-icons">fast_forward</i>
-                </a>
-              </div>
-            </div>
+            <FlashcardProgress
+              canGoPrev={this.canGoPrev()} canGoNext={this.canGoNext()}
+              goToPrev={this.goToPrev} goToNext={this.goToNext}
+              itemsNumber={this.state.items.length} itemIndex={this.state.itemIndex}
+            />
           </div>
           <div className="col-sm-3 col-sm-offset-1">
             <FlashcardSettings changeSettings={this.changeSettings} startWith={this.state.settings.startWith} />

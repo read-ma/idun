@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import classnames from 'classnames';
 import Paper from 'material-ui/lib/paper';
+import FlatButton from 'material-ui/lib/flat-button';
 
 const style = {
   height: 200,
@@ -70,8 +71,8 @@ class Flashcard extends Component {
     if (this.state.reverted) {
       buttons = (
         <div className="card-action center-align">
-          <a className="green-text" onClick={this.markEasy}>Easy</a>
-          <a className="red-text" onClick={this.markHard}>Hard</a>
+          <FlatButton label="Easy" secondary={true} onClick={this.markEasy} />
+          <FlatButton label="Hard" primary={true} onClick={this.markHard} />
         </div>
       );
     } else {
@@ -97,7 +98,7 @@ class Flashcard extends Component {
                     {side}
                   </div>
                   {this.renderMarkButtons()}
-                  <span className="help-text">
+                  <span className="help-text ">
                     Click to turn card
                     <i className="material-icons">loop</i>
                   </span>
