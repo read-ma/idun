@@ -5,69 +5,68 @@ import { store } from 'react-redux';
 
 const processFinished = () => {
   return {
-    type: 'PROCESS_FINISHED'
+    type: 'PROCESS_FINISHED',
   };
 };
 
 const processStarted = () => {
   return {
-    type: 'PROCESS_STARTED'
+    type: 'PROCESS_STARTED',
   };
 };
 
 const newWordSelected = (text) => {
   return {
     type: 'NEW_WORD_SELECTED',
-    text: text
+    text,
   };
 };
 
 function textSelected(text) {
   return {
     type: 'TEXT_SELECTED',
-    text: text.trim()
+    text: text.trim(),
   };
-};
+}
 
 function toggleHighlighting(wordlist) {
   return {
     type: 'TOGGLE_HIGHLIGHTING',
-    wordlist: wordlist
+    wordlist,
   };
 }
 
 function userDefinitionsLoaded(definitions) {
   return {
     type: 'USER_DEFINITIONS_LOADED',
-    userDefinitions: definitions
+    userDefinitions: definitions,
   };
 }
 
-function saveUserDefinition(definition){
+function userDefinitionSavingFailed(error) {
+  return {
+    type: 'USER_DEFINITION_SAVING_FAILED',
+    payload: error,
+  };
+}
+
+function userDefinitionSaved(definition) {
+  // 'Definition added'
+  return {
+    type: 'USER_DEFINITION_SAVED',
+    definition,
+  };
+}
+
+function saveUserDefinition(definition) {
   return dispatch => {
-    api.post('/user_definitions.json', {user_definition: definition})
+    api.post('/user_definitions.json', { user_definition: definition })
       .then(response => dispatch(userDefinitionSaved(response.data.user_definition)))
       .catch(error => dispatch(userDefinitionSavingFailed(error)));
   };
 }
 
-function userDefinitionSavingFailed(error){
-  return {
-    type: 'USER_DEFINITION_SAVING_FAILED',
-    payload: error
-  };
-}
-
-function userDefinitionSaved(definition){
-  //wrap this in a compont and observe message in redux store
-  Materialize.toast('Definition added', 4000);
-  return {
-    type: 'USER_DEFINITION_SAVED',
-    definition: definition
-  };
-}
-
-function loadUserDefinitions(definitions){
+function loadUserDefinitions() {
   return (dispatch) => {
     api.get('/user_definitions.json')
       .then((response) => {
@@ -79,11 +78,11 @@ function loadUserDefinitions(definitions){
   };
 }
 
-function changeLanguage(type, key){
+function changeLanguage(type, key) {
   return {
     type: 'CHANGE_LANGUAGE',
     langType: type,
-    key: key
+    key,
   };
 }
 
@@ -94,5 +93,5 @@ export { loadArticles, loadArticle, confirmArticleLearned, articlePageClosed,
          findTextDefinitions,
          changeLanguage,
          processFinished, processStarted,
-         newWordSelected
-       }
+         newWordSelected,
+       };

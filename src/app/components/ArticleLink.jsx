@@ -5,26 +5,29 @@ import classnames from 'classnames';
 import l from '../I18n';
 import ListItem from 'material-ui/lib/lists/list-item';
 
+import NavigationCheck from 'material-ui/lib/svg-icons/navigation/check';
+import ActionLock from 'material-ui/lib/svg-icons/action/lock-outline';
+
+
 function difficultyLevel(difficulty) {
   return (<strong className={difficulty}>{l(difficulty)}</strong>);
 }
 
 export default function ArticleLink({ id, title, tags, privy, difficulty, learned, visited }) {
   return (
-    <ListItem key={id}>
-      <div className="secondary-content badge">
-        <i className="material-icons">{learned ? 'done' : ''}</i>
-      </div>
-
-      <span className="title flow-text">
-        <Link to={`/article/${id}`} className={classnames({ unvisited: !visited })}>
-          <i className="material-icons icon-private">{privy ? 'lock_outline' : ''}</i>{title}
-        </Link>
-      </span>
-
-      <p>{difficultyLevel(difficulty)}</p>
-
-      <p><small><strong>{tags}</strong></small></p>
+    <ListItem
+      key={id}
+      primaryText={title}
+      secondaryText={
+        <div>
+          {difficultyLevel(difficulty)}
+          <p>{tags}</p>
+        </div>
+      }
+      rightIcon={learned ? <NavigationCheck /> : <i/>}
+      leftIcon={privy ? <ActionLock /> : <i/>}
+      href={`#/article/${id}`}
+    >
     </ListItem>
   );
 }
