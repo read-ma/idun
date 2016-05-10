@@ -6,6 +6,7 @@ import ProgressBar from './ProgressBar';
 import AppBar from 'material-ui/lib/app-bar';
 import { logout } from '../actions/auth';
 
+import SelectedTextInput from './SelectedTextInput';
 
 import IconButton from 'material-ui/lib/icon-button';
 import IconMenu from 'material-ui/lib/menus/icon-menu';
@@ -32,7 +33,7 @@ class Main extends React.Component {
   render() {
     return (
       <div className="row">
-        <AppBar iconElementRight={<ContextAppMenu />} />
+        <AppBar iconElementRight={<ContextAppMenu />} title={<SelectedTextInput />} />
         <MainNavigaton displaySearchBar={this.displaySearchBar()} isAuthenticated={this.props.isAuthenticated}>
           {this.props.navChildren}
         </MainNavigaton>
