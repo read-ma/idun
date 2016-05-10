@@ -3,6 +3,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import classnames from 'classnames';
 import l from '../I18n';
+import ListItem from 'material-ui/lib/lists/list-item';
 
 function difficultyLevel(difficulty) {
   return (<strong className={difficulty}>{l(difficulty)}</strong>);
@@ -10,9 +11,7 @@ function difficultyLevel(difficulty) {
 
 export default function ArticleLink({ id, title, tags, privy, difficulty, learned, visited }) {
   return (
-    <li key={id} className="collection-item">
-
-
+    <ListItem key={id}>
       <div className="secondary-content badge">
         <i className="material-icons">{learned ? 'done' : ''}</i>
       </div>
@@ -26,7 +25,7 @@ export default function ArticleLink({ id, title, tags, privy, difficulty, learne
       <p>{difficultyLevel(difficulty)}</p>
 
       <p><small><strong>{tags}</strong></small></p>
-    </li>
+    </ListItem>
   );
 }
 

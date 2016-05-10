@@ -6,20 +6,18 @@ import PositioningWidget from './PositioningWidget';
 import ArticleAdd from './AddArticleWidget.jsx';
 import ArticleLink from './ArticleLink.jsx';
 import filterArticles from '../articleCriteriaMatcher';
+import List from 'material-ui/lib/lists/list';
 
-class ArticleList extends Component {
+const ArticleList = (props) => {
+  const articleLinks = props.articles.map((article) => {
+    return ArticleLink(article);
+  });
 
-  render() {
-    var articleLinks = this.props.articles.map((article) => {
-      return ArticleLink(article);
-    });
-
-    return (
-      <ul className="collection articles-list">
-        {articleLinks}
-      </ul>
-    );
-  }
+  return (
+    <List>
+      {articleLinks}
+    </List>
+  );
 };
 
 class Articles extends Component {
