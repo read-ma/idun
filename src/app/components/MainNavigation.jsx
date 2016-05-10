@@ -4,6 +4,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Settings from './Settings';
 import { textSelected } from '../actions';
+import { logout } from '../actions/auth';
 import TTSPlayer from '../components/TTSPlayer';
 import { ShowIf } from '../components';
 
@@ -26,9 +27,7 @@ import ActionPowerSettingsNew from 'material-ui/lib/svg-icons/action/power-setti
 // nawet propsow sie nie da uzyc kurwa
 // jeszcze dwa komponenty w jednym pliku zeby bylo radosniej zajebana mac
 
-const MainNavigation = ({ selectedText, handleSearch, displaySearchBar, children }) => {
-  const logout = () => { return this.props.dispatch(logout()).bind(this); }
-
+const MainNavigation = ({ logout, selectedText, handleSearch, displaySearchBar, children }) => {
   return (
     <LeftNav className="col-xs-2" open={true} style={{ padding: 0 }}>
       <AppBar title="ReadMa" iconElementLeft={<IconButton><NavigationClose /></IconButton>} />
@@ -40,7 +39,7 @@ const MainNavigation = ({ selectedText, handleSearch, displaySearchBar, children
       <Divider />
       <List>
         <ListItem primaryText="Settings" leftIcon={<ActionSettings />} />
-        <ListItem primaryText="Sign out" leftIcon={<ActionPowerSettingsNew />} onClick={logout.bind(this)} />
+        <ListItem primaryText="Sign out" leftIcon={<ActionPowerSettingsNew />} onClick={logout} />
       </List>
       <Divider />
       {children}
@@ -118,6 +117,7 @@ const mapActionsToProps = dispatch => {
     handleSearch(text) {
       if (text) dispatch(textSelected(text));
     },
+    logout() { dispatch(logout()); }
   };
 };
 
