@@ -88,7 +88,7 @@ class UserDefinitionsLearn extends Component {
 
   renderEmptyMessage() {
     return (
-      <div className="col s8">
+      <div className="col-xs-12">
         <h1>Here will be words to practice once you add them on article</h1>
       </div>
     );

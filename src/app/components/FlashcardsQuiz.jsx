@@ -15,8 +15,6 @@ class FlashcardsQuiz extends Component {
     };
     this.markItem = this.markItem.bind(this);
     this.changeSettings = this.changeSettings.bind(this);
-    this.goToNext = this.goToNext.bind(this);
-    this.goToPrev = this.goToPrev.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -74,22 +72,6 @@ class FlashcardsQuiz extends Component {
     }
   }
 
-  canGoNext() {
-    // this allows to go one item futher so we can end a quiz
-    return this.state.itemIndex < this.state.items.length;
-  }
-
-  goToPrev() {
-    this.setState({
-      currentItem: this.fetchPrevElement(this.state.items, this.state.currentItem),
-      itemIndex: this.state.itemIndex - 1
-    });
-  }
-
-  canGoPrev() {
-    return this.state.itemIndex > 0;
-  }
-
   changeSettings(settings) {
     this.setState({ settings: settings });
   }
@@ -101,11 +83,7 @@ class FlashcardsQuiz extends Component {
         <div className="row">
           <div className="col-sm-6 col-sm-offset-2">
             <Flashcard key={this.state.currentItem.word} item={this.state.currentItem} markItem={this.markItem} startWithObverse={this.state.settings.startWith === 'word'} />
-            <FlashcardProgress
-              canGoPrev={this.canGoPrev()} canGoNext={this.canGoNext()}
-              goToPrev={this.goToPrev} goToNext={this.goToNext}
-              itemsNumber={this.state.items.length} itemIndex={this.state.itemIndex}
-            />
+            <FlashcardProgress itemsNumber={this.state.items.length} itemIndex={this.state.itemIndex} />
           </div>
           <div className="col-sm-3 col-sm-offset-1">
             <FlashcardSettings changeSettings={this.changeSettings} startWith={this.state.settings.startWith} />

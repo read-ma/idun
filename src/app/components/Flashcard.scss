@@ -1,15 +1,16 @@
 .flashcards-container {
-  perspective: 800px;
   position: relative;
   .card-wrap{
     min-height: 350px;
+    position: relative;
     .card{
       position: absolute;
-      width: 400px;
-      height: 300px;
       backface-visibility: hidden;
       min-height: 200px;
       transition: transform 0.5s ease-in-out;
+      top: 0;
+      left: 0;
+      right: 0;
       .card-content{
         cursor: pointer;
       }

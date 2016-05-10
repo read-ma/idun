@@ -7,7 +7,7 @@ const FlashcardsQuizResults = (props) => {
   if (props.show) {
     result = (
       <div className="row">
-        <div className="col-sm-6 col-sm-offset-3 center-xs">
+        <div className="col-sm-6 col-sm-offset-2 center-xs">
           <h2>Results</h2>
           <h1>
             Mastered {masteredWords} of ouf {props.items.length}
