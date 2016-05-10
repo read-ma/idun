@@ -1,29 +1,20 @@
 import React, { Component } from 'react';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { connect } from 'react-redux';
 import { loadUserDefinitions } from '../actions';
-import _ from 'lodash';
-import FlashcardsQuiz from './FlashcardsQuiz'
+import TextField from 'material-ui/lib/text-field';
+import UserDefinitionBox from './UserDefinitionBox';
+
 
 function mapStateToProps(state) {
   return { items: state.main.userDefinitions };
 }
-
-class UserDefinitionBox extends Component {
-  render() {
-    return (
-      <div className="userdefinitionbox card-item" key={this.props.item.id}>
-        <div className='card-content'>
-          <h5 className='card-title blue-text'>{this.props.item.word}</h5>
-          <h6 className='card-subtitle' dangerouslySetInnerHTML={{__html: this.props.item.translation}}></h6>
-          <div className='card-description'>
-            {this.props.item.definition}
-          </div>
-        </div>
-      </div>
-    );
-  }
-}
+const styles = {
+  gridList: {
+    height: 200,
+    overflowY: 'auto',
+    marginBottom: 24,
+  },
+};
 
 class UserDefinitionsList extends Component {
   constructor(props) {
@@ -58,15 +49,16 @@ class UserDefinitionsList extends Component {
     const items = this.state.items.map(item => <UserDefinitionBox item={item} />);
 
     return (
-      <div className="articles">
-        <form className="row">
-          <div className="input-field col s4">
-            <input type='text' onChange={this.handleFilterChange} name='wordSearch' name='wordSearch' />
-            <label htmlFor="wordSearch">Quick search...</label>
+      <div>
+        <div className="row">
+          <div className="col-xs-4 col-xs-offset-1">
+            <TextField hintText="Quick Search..." onChange={this.handleFilterChange} />
           </div>
-        </form>
-        <div className="cards-container row">
-          {items}
+        </div>
+        <div className="row">
+          <div className="col-xs-12">
+            {items}
+          </div>
         </div>
       </div>
     );
