@@ -1,4 +1,4 @@
-  import React, { Component } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { loadUserDefinitions } from '../actions';
 import FlashcardsQuiz from './FlashcardsQuiz';
@@ -6,8 +6,9 @@ import FlashcardsQuizResults from './FlashcardsQuizResults';
 import _ from 'lodash';
 import List from 'material-ui/lib/lists/list';
 import ListItem from 'material-ui/lib/lists/list-item';
-import Badge from 'material-ui/lib/badge';
-
+import Avatar from 'material-ui/lib/avatar';
+import Colors from 'material-ui/lib/styles/colors';
+import NavigationChevronRight from 'material-ui/lib/svg-icons/navigation/chevron-right';
 
 function mapStateToProps(state) {
   return { items: state.main.userDefinitions };
@@ -65,9 +66,17 @@ class UserDefinitionsLearn extends Component {
           <List>
             {Object.keys(articles).map(id => {
               return (
-                <ListItem key={id} onClick={this.startQuizForArticle.bind(null, id)}>
+                <ListItem key={id} onClick={this.startQuizForArticle.bind(null, id)}
+                  leftAvatar={
+                    <Avatar
+                      color={Colors.pinkA200} backgroundColor={Colors.transparent}
+                      style={{left: 8}}>
+                      {articlesCount[id]}
+                    </Avatar>
+                  }
+                  rightIcon={<NavigationChevronRight />}
+                >
                   {articles[id]}
-                  <Badge badgeContent={articlesCount[id]} primary={true} />
                 </ListItem>
               );
             })}

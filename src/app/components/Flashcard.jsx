@@ -76,7 +76,13 @@ class Flashcard extends Component {
         </div>
       );
     } else {
-      buttons = (<div></div>);
+      buttons = (
+        <div>
+          <span className="help-text ">
+            Show answer
+          </span>
+        </div>
+      );
     }
     return buttons;
   }
@@ -98,10 +104,7 @@ class Flashcard extends Component {
                     {side}
                   </div>
                   {this.renderMarkButtons()}
-                  <span className="help-text ">
-                    Click to turn card
-                    <i className="material-icons">loop</i>
-                  </span>
+
                 </Paper>
               </div>
             </ReactCSSTransitionGroup>
