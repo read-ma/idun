@@ -3,6 +3,7 @@ import React from 'react';
 import { Home, Main, Articles, ArticlePage, UserDefinitionsLearn, UserDefinitionsList } from '../components';
 import Login from '../components/Login';
 import SignUpForm from '../components/SignUpForm';
+import Settings from '../components/Settings';
 import Profile from '../components/Profile';
 import PasswordReminderView from '../components/PasswordReminderView';
 import ChangePasswordView from '../components/ChangePasswordView';
@@ -27,7 +28,7 @@ export default (
 
     <Route path="/articles" components={{ children: requireAuthentication(Articles), navChildren: ArticleFilter }} />
     <Route path="/new-article" component={AddArticle} />
-    <Route path="/article/:id" component={requireAuthentication(ArticlePage)} displaySearchBar={true} />
+    <Route path="/article/:id" components={{ children: requireAuthentication(ArticlePage), navChildren: Settings} } />
     <IndexRedirect to="/articles" />
   </Route>
 

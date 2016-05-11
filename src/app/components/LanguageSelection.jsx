@@ -3,39 +3,46 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import { changeLanguage } from '../actions';
 
+import ListItem from 'material-ui/lib/lists/list-item';
+import List from 'material-ui/lib/lists/list';
+import SelectField from 'material-ui/lib/select-field';
+import MenuItem from 'material-ui/lib/menus/menu-item';
+
 class LanguageBar extends Component {
   constructor(props){
     super(props);
     this.state = props.language;
     this.languageChange = this.languageChange.bind(this);
+    this.languageFromChange = this.languageFromChange.bind(this);
+    this.languageToChange = this.languageToChange.bind(this);
   };
 
-  languageChange(event) {
-    this.setState(Object.assign({}, this.state, {[event.target.name] : event.target.value}));
+  languageChange(key, value) {
+    this.setState(Object.assign({}, this.state, { [key] : value }));
+    this.props.changeLanguage(key, value);
+  };
 
-    this.props.dispatch( changeLanguage(event.target.name, event.target.value) );
-  }
+  languageFromChange(event, index, value){
+    this.languageChange('from', value);
+  };
+
+  languageToChange(event, index, value){
+    this.languageChange('to', value);
+  };
 
   render() {
-    let languages = this.props.languages.map(lang => (<option key={lang.code} value={lang.code}>{lang.name}</option>));
+    let languages = this.props.languages.map(lang => (<MenuItem value={lang.code} primaryText={lang.name} />));
 
     return (
-      <ul className="collection with-header language-select">
-        <li className='collection-header'><h5>Select languages</h5></li>
-        <li className="collection-item">
-          <div className="language-item source-language">
-            <label>Source language</label>
-            <select onChange={this.languageChange} name='from' className="browser-default icons" value={this.state.from}>{languages}</select>
-          </div>
-          <div className="language-direction">
-            <i className="material-icons grey-text lighten-2">trending_flat</i>
-          </div>
-          <div className="language-item target-language">
-            <label>Target language</label>
-            <select onChange={this.languageChange} name='to' className="browser-default icons" value={this.state.to}>{languages}</select>
-          </div>
-        </li>
-      </ul>
+      <List subheader="Select languages">
+        <ListItem secondaryText="Source language">
+          <SelectField onChange={this.languageFromChange} name="from" value={this.state.from}>{languages}</SelectField>
+        </ListItem>
+        <ListItem
+          secondaryText="Target language">
+          <SelectField onChange={this.languageToChange} name="to" value={this.state.to}>{languages}</SelectField>
+        </ListItem>
+      </List>
     );
   }
 }
@@ -47,5 +54,13 @@ function mapStateToProps(state){
   };
 }
 
+const mapActionsToProps = (dispatch) => {
+  return {
+    changeLanguage(key, value) {
+      dispatch(changeLanguage(key, value));
+    }
+  }
+}
 
-export default connect(mapStateToProps)(LanguageBar);
+
+export default connect(mapStateToProps, mapActionsToProps)(LanguageBar);
