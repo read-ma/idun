@@ -11,6 +11,7 @@ import { Route, IndexRoute, IndexRedirect } from 'react-router';
 import { requireAuthentication } from '../utils';
 
 import ArticleFilter from '../components/ArticleFilter';
+import AddArticle from '../components/AddArticleWidget';
 
 export default (
   <Route path="/" component={Main}>
@@ -25,6 +26,7 @@ export default (
     </Route>
 
     <Route path="/articles" components={{ children: requireAuthentication(Articles), navChildren: ArticleFilter }} />
+    <Route path="/new-article" component={AddArticle} />
     <Route path="/article/:id" component={requireAuthentication(ArticlePage)} displaySearchBar={true} />
     <IndexRedirect to="/articles" />
   </Route>

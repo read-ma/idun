@@ -3,15 +3,14 @@ import { addArticle } from '../actions/articles';
 import isEmpty from 'lodash/isEmpty';
 import FloatingActionButton from 'material-ui/lib/floating-action-button';
 import ContentAdd from 'material-ui/lib/svg-icons/content/add';
+import { connect } from 'react-redux';
 
-
-export default class ArticleAdd extends React.Component {
+class ArticleAdd extends React.Component {
   constructor(props) {
     super(props);
     this.state = { article: {} };
-    this.addUrl = this.addUrl.bind(this);
+    this.addArticle = this.addArticle.bind(this);
     this.onChange = this.onChange.bind(this);
-    this.toggleModal = this.toggleModal.bind(this);
   }
 
   onChange(e) {
@@ -24,57 +23,16 @@ export default class ArticleAdd extends React.Component {
           this.state.article, { [e.target.name]: e.target.value }) }));
   }
 
-  getModalSettings() {
-    return {
-      dismissible: true,
-      opacity: 0,
-      in_duration: 100,
-      out_duration: 100,
-      ready: this.removeModalBackground,
-    };
-  }
-
-  /* Workaround
-    Dirty hack to prevent BG overlapping modal
-  */
-  removeModalBackground() {
-    $('.lean-overlay').remove();
-  }
-
-  urlAdded() {
-    this.setState({ article: {} });
-    this.toggleModal();
-  }
-
-  addUrl(event) {
+  addArticle(event) {
     event.preventDefault();
-    this.urlAdded();
-    this.props.dispatch(addArticle(this.state.article));
-  }
-
-  toggleModal(event) {
-    if (event) event.preventDefault();
-
-    const $modal = $('#addArticleModal');
-
-    if (!this.state.settingVisible) {
-      $modal.openModal(this.getModalSettings());
-    } else {
-      $modal.closeModal(this.getModalSettings());
-    }
-
-    this.toggleVisibilityState();
-  }
-
-  toggleVisibilityState() {
-    this.setState(Object.assign({}, this.state, { settingVisible: !this.state.settingVisible }));
+    this.props.addArticle(this.state.article);
   }
 
   render() {
     return (
-      <div className="row">
-        <div id="addArticleModal" className="modal">
-          <form onSubmit={this.addUrl}>
+      <div className="row" style={{ paddingLeft: '100px' }}>
+        <div id="addArticleModal">
+          <form onSubmit={this.addArticle}>
             <div className="modal-content">
               <h4 className="left-align">Add article</h4>
 
@@ -110,5 +68,18 @@ export default class ArticleAdd extends React.Component {
   }
 }
 ArticleAdd.propTypes = {
-  dispatch: React.PropTypes.func.isRequired,
+  addArticle: React.PropTypes.func.isRequired,
 }
+
+
+const mapActionsToProps = (dispatch) => {
+  return {
+    addArticle(article){
+      dispatch(addArticle(article));
+    }
+  };
+};
+
+function mapStateToProps(state){ return {}; };
+
+export default connect(mapStateToProps, mapActionsToProps)(ArticleAdd);

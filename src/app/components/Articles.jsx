@@ -3,18 +3,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { loadArticles } from '../actions/articles';
 import PositioningWidget from './PositioningWidget';
-import ArticleAdd from './AddArticleWidget';
 import ArticleLink from './ArticleLink';
 import filterArticles from '../articleCriteriaMatcher';
 
 import List from 'material-ui/lib/lists/list';
 import Paper from 'material-ui/lib/paper';
 
-
-
 const ArticleList = (props) => {
   const articleLinks = props.articles.map((article) => {
-    return ArticleLink(article);
+    return new ArticleLink(article);
   });
 
   return (
