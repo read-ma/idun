@@ -17,8 +17,6 @@ class UserDefinitionsLearn extends Component {
     super(props);
     this.state = { items: [] };
     this.startQuizForArticle = this.startQuizForArticle.bind(this);
-    this.endQuiz = this.endQuiz.bind(this);
-    this.closeResults = this.closeResults.bind(this);
   }
 
   componentDidMount() {
@@ -28,7 +26,6 @@ class UserDefinitionsLearn extends Component {
   }
 
   startQuizForArticle(articleId) {
-    this.setState({ items: this.props.items.filter(item => item.article_id === parseInt(articleId, 10)) });
   }
 
   renderArticles() {
@@ -46,7 +43,8 @@ class UserDefinitionsLearn extends Component {
                 leftAvatar={
                   <Avatar
                     color={Colors.pinkA200} backgroundColor={Colors.transparent}
-                    style={{left: 8}}>
+                    style={{ left: 8 }}
+                  >
                     {articlesCount[id]}
                   </Avatar>
                 }
@@ -77,5 +75,10 @@ class UserDefinitionsLearn extends Component {
     return this.props.items.length > 0 ? this.renderArticles() : this.renderEmptyMessage();
   }
 }
+
+UserDefinitionsLearn.propTypes = {
+  items: React.PropTypes.array,
+};
+
 
 export default connect(mapStateToProps)(UserDefinitionsLearn);

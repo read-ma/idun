@@ -26,7 +26,7 @@ const MainNavigation = ({ logout, children }) => {
       <List>
         <ListItem primaryText="Articles" href="#/articles" leftIcon={<ActionReorder />} />
         <ListItem primaryText="Learn" href="#/learn" leftIcon={<SocialSchool />} />
-        <ListItem primaryText="Words" href="#/learn/definitions" leftIcon={<NavigationApps />} />
+        <ListItem primaryText="Words" href="#/definitions" leftIcon={<NavigationApps />} />
       </List>
       <Divider />
       {children}

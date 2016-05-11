@@ -1,20 +1,32 @@
 require('./FlashcardsQuiz.scss');
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { loadDeckForArticle } from '../actions';
 import Flashcard from './Flashcard';
 import FlashcardSettings from './FlashcardSettings';
 import FlashcardProgress from './FlashcardProgress';
+
+function mapStateToProps(state) {
+  return { items: state.deck.items };
+}
 
 class FlashcardsQuiz extends Component {
   constructor(props) {
     super(props);
     this.state = {
       items: props.items,
-      currentItem: props.items[0],
+      currentItem: (props.items || [])[0],
       itemIndex: 0,
       settings: { startWith: 'definition' },
     };
     this.markItem = this.markItem.bind(this);
     this.changeSettings = this.changeSettings.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.dispatch(
+      loadDeckForArticle(this.props.params.id)
+    );
   }
 
   componentWillReceiveProps(nextProps) {
@@ -77,6 +89,7 @@ class FlashcardsQuiz extends Component {
   }
 
   render() {
+    if (!this.state.currentItem) return false;
     return (
       <div className="row flashcards-container">
         <div className="col-sm-6 col-sm-offset-2">
@@ -97,4 +110,4 @@ FlashcardsQuiz.propTypes = {
   endQuiz: React.PropTypes.func,
 };
 
-export default FlashcardsQuiz;
+export default connect(mapStateToProps)(FlashcardsQuiz);

@@ -43,6 +43,13 @@ function userDefinitionsLoaded(definitions) {
   };
 }
 
+function deckLoaded(deck) {
+  return {
+    type: 'DECK_LOADED',
+    deck,
+  };
+}
+
 function userDefinitionSavingFailed(error) {
   return {
     type: 'USER_DEFINITION_SAVING_FAILED',
@@ -78,6 +85,18 @@ function loadUserDefinitions() {
   };
 }
 
+function loadDeckForArticle(articleId) {
+  return (dispatch) => {
+    api.get(`/decks.json?article_id=${articleId}`)
+      .then((response) => {
+        dispatch(deckLoaded({ items: response.data.deck }));
+      })
+      .catch((error) => {
+        store.dispatch(processFinished());
+      });
+  };
+}
+
 function changeLanguage(type, key) {
   return {
     type: 'CHANGE_LANGUAGE',
@@ -90,6 +109,7 @@ export { loadArticles, loadArticle, confirmArticleLearned, articlePageClosed,
          textSelected,
          toggleHighlighting,
          loadUserDefinitions, saveUserDefinition,
+         loadDeckForArticle,
          findTextDefinitions,
          changeLanguage,
          processFinished, processStarted,
