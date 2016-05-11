@@ -6,9 +6,11 @@ import SignUpForm from '../components/SignUpForm';
 import Settings from '../components/Settings';
 import Profile from '../components/Profile';
 import PasswordReminderView from '../components/PasswordReminderView';
+import FlashcardsQuiz from '../components/FlashcardsQuiz';
 import ChangePasswordView from '../components/ChangePasswordView';
 
-import { Route, IndexRoute, IndexRedirect } from 'react-router';
+
+import { Route, IndexRedirect } from 'react-router';
 import { requireAuthentication } from '../utils';
 
 import ArticleFilter from '../components/ArticleFilter';
@@ -21,10 +23,9 @@ export default (
     <Route path="forgot_password" component={PasswordReminderView} />
     <Route path="reset_password" component={ChangePasswordView} />
 
-    <Route path="/learn" component={requireAuthentication(Profile)}>
-      <Route path="definitions" component={UserDefinitionsList} />
-      <IndexRoute component={UserDefinitionsLearn} />
-    </Route>
+    <Route path="/learn" component={requireAuthentication(UserDefinitionsLearn)} />
+    <Route path="/learn/:id" component={requireAuthentication(FlashcardsQuiz)} />
+    <Route path="/definitions" component={UserDefinitionsList} />
 
     <Route path="/articles" components={{ children: requireAuthentication(Articles), navChildren: ArticleFilter }} />
     <Route path="/new-article" component={AddArticle} />

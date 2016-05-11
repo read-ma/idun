@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { loadUserDefinitions } from '../actions';
-import FlashcardsQuiz from './FlashcardsQuiz';
-import FlashcardsQuizResults from './FlashcardsQuizResults';
 import _ from 'lodash';
 import List from 'material-ui/lib/lists/list';
 import ListItem from 'material-ui/lib/lists/list-item';
@@ -33,83 +31,50 @@ class UserDefinitionsLearn extends Component {
     this.setState({ items: this.props.items.filter(item => item.article_id === parseInt(articleId, 10)) });
   }
 
-  endQuiz() {
-    this.setState({
-      showResults: true,
-    });
-  }
-
-  closeResults() {
-    this.setState({
-      showResults: false,
-      items: [],
-    });
-  }
-
-  shouldShowQuiz() {
-    return this.state.items.length > 0 && !this.state.showResults;
-  }
-
-  shouldShowResults() {
-    return this.state.showResults;
-  }
-
   renderArticles() {
     const articles = {};
     this.props.items.map(item => articles[item.article_id] = item.article_title);
     const articlesCount = _.countBy(this.props.items, 'article_id');
-    if (!this.shouldShowQuiz() && !this.shouldShowResults()) {
-      return (
-        <div>
-          <h1>Learn words used in recently read articles</h1>
-          <p>Click on article title to enter quiz from an article.</p>
-          <List>
-            {Object.keys(articles).map(id => {
-              return (
-                <ListItem key={id} onClick={this.startQuizForArticle.bind(null, id)}
-                  leftAvatar={
-                    <Avatar
-                      color={Colors.pinkA200} backgroundColor={Colors.transparent}
-                      style={{left: 8}}>
-                      {articlesCount[id]}
-                    </Avatar>
-                  }
-                  rightIcon={<NavigationChevronRight />}
-                >
-                  {articles[id]}
-                </ListItem>
-              );
-            })}
-          </List>
-        </div>
-      );
-    }
+    return (
+      <div>
+        <h1>Learn words used in recently read articles</h1>
+        <p>Click on article title to enter quiz from an article.</p>
+        <List>
+          {Object.keys(articles).map(id => {
+            return (
+              <ListItem key={id} onClick={this.startQuizForArticle.bind(null, id)}
+                leftAvatar={
+                  <Avatar
+                    color={Colors.pinkA200} backgroundColor={Colors.transparent}
+                    style={{left: 8}}>
+                    {articlesCount[id]}
+                  </Avatar>
+                }
+                rightIcon={<NavigationChevronRight />}
+                href={`#/learn/${id}`}
+              >
+                {articles[id]}
+              </ListItem>
+            );
+          })}
+        </List>
+      </div>
+    );
   }
 
   renderEmptyMessage() {
     return (
       <div className="col-xs-12">
-        <h1>Here will be words to practice once you add them on article</h1>
+        <h1>Please add words to learn from article</h1>
       </div>
     );
   }
 
-  renderLearnPart() {
-    return (
-      <div className="col-xs-12">
-        <div className="flashcards-container">
-          <FlashcardsQuiz items={this.state.items} endQuiz={this.endQuiz} show={this.shouldShowQuiz()} />
-          <FlashcardsQuizResults items={this.state.items} show={this.shouldShowResults()} closeResults={this.closeResults} />
-        </div>
-        <div>
-          {this.renderArticles()}
-        </div>
-      </div>
-    )
-  }
+  // <FlashcardsQuiz items={this.state.items} endQuiz={this.endQuiz} show={this.shouldShowQuiZ()} />
+  // <FlashcardsQuizResults items={this.state.items} show={this.shouldShowResults()} closeResults={this.closeResults} />
 
   render() {
-    return this.props.items.length > 0 ? this.renderLearnPart() : this.renderEmptyMessage();
+    return this.props.items.length > 0 ? this.renderArticles() : this.renderEmptyMessage();
   }
 }
 
