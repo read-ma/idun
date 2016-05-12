@@ -30,7 +30,7 @@ function postArticle(article, handleSuccess, handleFail) {
 function addArticle(article) {
   return () => {
     postArticle(
-      Object.assign({}, article, { content_type: 'article' }),
+      Object.assign({}, article, { content_type: 'article', state: 'published' }),
       (_) => { /*
         TODO: Add snackbar. http://www.material-ui.com/v0.14.4/#/components/snackbar
         'Article will be added to list after a short while'

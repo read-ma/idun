@@ -5,9 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "sh script/test.sh",
-    "deploy": "NODE_ENV=production node node_modules/webpack/bin/webpack.js -p --config webpack.production.config.js",
+    "deploy:production": "NODE_ENV=production node node_modules/webpack/bin/webpack.js -p --config webpack.production.config.js",
+    "deploy:staging": "NODE_ENV=production node node_modules/webpack/bin/webpack.js -p --config webpack.production.config.js",
     "dev": "webpack-dev-server --host 0.0.0.0 --progress --colors --hot --inline --content-base public",
-    "postdeploy": "sh script/deploy.sh",
+    "postdeploy:production": "sh script/deploy.sh",
+    "postdeploy:staging": "sh script/deploy-staging.sh",
     "maintenance": "sh script/maintenance.sh"
   },
   "author": "",
