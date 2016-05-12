@@ -3,6 +3,7 @@ var node_modules_dir = path.resolve(__dirname, 'node_modules');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var CompressionPlugin = require("compression-webpack-plugin");
 var webpack = require('webpack');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 var config = {
   entry: path.resolve(__dirname, './src/app/app.js'),
@@ -39,6 +40,12 @@ var config = {
     extensions: ['', '.js', '.jsx']
   },
   plugins: [
+    new HtmlWebpackPlugin({
+      title: 'ReadMa - Your learning assistant',
+      template : './public/index.production.html',
+      hash: true,
+      cache: true,
+    }),
     new ExtractTextPlugin('style.css', {
       allChunks: true
     }),
