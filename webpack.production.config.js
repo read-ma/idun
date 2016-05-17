@@ -44,7 +44,6 @@ var config = {
       title: 'ReadMa - Your learning assistant',
       template : './public/index.production.html',
       hash: true,
-      cache: true,
     }),
     new ExtractTextPlugin('style.css', {
       allChunks: true

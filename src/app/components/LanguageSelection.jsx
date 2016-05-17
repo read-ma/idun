@@ -7,6 +7,7 @@ import ListItem from 'material-ui/lib/lists/list-item';
 import List from 'material-ui/lib/lists/list';
 import SelectField from 'material-ui/lib/select-field';
 import MenuItem from 'material-ui/lib/menus/menu-item';
+import Divider from 'material-ui/lib/divider';
 
 class LanguageBar extends Component {
   constructor(props){
@@ -42,6 +43,7 @@ class LanguageBar extends Component {
           secondaryText="Target language">
           <SelectField onChange={this.languageToChange} name="to" value={this.state.to}>{languages}</SelectField>
         </ListItem>
+        <Divider />
       </List>
     );
   }

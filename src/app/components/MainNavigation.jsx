@@ -29,12 +29,11 @@ const MainNavigation = ({ logout, children }) => {
         <ListItem primaryText="Words" href="#/learn/definitions" leftIcon={<NavigationApps />} />
       </List>
       <Divider />
+      {children}
       <List>
-        <ListItem primaryText="Settings" leftIcon={<ActionSettings />} />
+        {/* <ListItem primaryText="Settings" leftIcon={<ActionSettings />} /> */}
         <ListItem primaryText="Sign out" leftIcon={<ActionPowerSettingsNew />} onClick={logout} />
       </List>
-      <Divider />
-      {children}
     </LeftNav>
   );
 };

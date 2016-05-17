@@ -9,8 +9,8 @@ import filterArticles from '../articleCriteriaMatcher';
 import List from 'material-ui/lib/lists/list';
 import Paper from 'material-ui/lib/paper';
 
-const ArticleList = (props) => {
-  const articleLinks = props.articles.map((article) => {
+const ArticleList = ({ articles }) => {
+  const articleLinks = articles.map((article) => {
     return new ArticleLink(article);
   });
 
@@ -19,6 +19,10 @@ const ArticleList = (props) => {
   );
 };
 
+ArticleList.propTypes = {
+  articles: React.PropTypes.array.isRequired,
+}
+
 class Articles extends Component {
 
   constructor(props) {
@@ -26,14 +30,14 @@ class Articles extends Component {
     this.state = Object.assign({}, this.props);
   }
 
+  componentDidMount() {
+    this.props.loadArticles();
+  }
+
   componentWillReceiveProps(nextProps) {
     this.setState({
       articles: filterArticles(nextProps.articles, nextProps.filter),
     });
-  }
-
-  componentDidMount() {
-    this.props.dispatch(loadArticles());
   }
 
   render() {
@@ -53,4 +57,18 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(Articles);
+Articles.propTypes = {
+  loadArticles: React.PropTypes.func.isRequired,
+  filter: React.PropTypes.object.isRequired,
+  articles: React.PropTypes.array.isRequired,
+}
+
+const mapActionsToProps = (dispatch) => {
+  return {
+    loadArticles(){
+      dispatch(loadArticles());
+    }
+  };
+};
+
+export default connect(mapStateToProps, mapActionsToProps)(Articles);

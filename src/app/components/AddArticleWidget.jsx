@@ -67,10 +67,10 @@ class ArticleAdd extends React.Component {
     );
   }
 }
+
 ArticleAdd.propTypes = {
   addArticle: React.PropTypes.func.isRequired,
 }
-
 
 const mapActionsToProps = (dispatch) => {
   return {

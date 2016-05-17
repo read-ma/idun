@@ -38,21 +38,20 @@ class ArticleFilter extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+    this.onCheckboxChange = this.onCheckboxChange.bind(this);
   }
 
-  onChange(event) {
-    this.props.onChange({ [event.target.name]: event.target.value });
-  }
-
-  onCheckboxChange(event) {
-    const change = { [event.target.name]: event.target.checked };
+  // it's something wrong with the checkbox onCheck event
+  // https://github.com/callemall/material-ui/issues/2983
+  onCheckboxChange(event, prevChecked) {
+    const change = { [event.target.name]: !prevChecked };
     const opposite = this.props.fields[event.target.name].opposite;
 
-    if (event.target.checked && opposite) {
+    if (!prevChecked && opposite) {
       change[opposite] = false;
     }
 
-    this.props.dispatch(updateArticlesFilter(change));
+    this.props.updateArticlesFilter(change);
   }
 
 
@@ -62,7 +61,7 @@ class ArticleFilter extends Component {
         <div className="col s6 left-align">
           <form className="row">
             <div className="input-field col s12">
-              <input type="text" id="articleSearch" name="query" value={this.props.filter.query} onChange={this.onChange.bind(this)} />
+              <input type="text" id="articleSearch" name="query" value={this.props.filter.query} />
               <label htmlFor="articleSearch">Search for article</label>
             </div>
           </form>
@@ -71,7 +70,7 @@ class ArticleFilter extends Component {
         <FilterCheckboxes
           fields={this.props.fields}
           filter={this.props.filter}
-          onChange={this.onCheckboxChange.bind(this)} />
+          onChange={this.onCheckboxChange} />
       </div>
     );
   }
@@ -84,4 +83,15 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(ArticleFilter);
+const mapActionsToProps = (dispatch) => {
+  return {
+    updateArticlesFilter(change){
+      console.log(change);
+      dispatch(updateArticlesFilter(change));
+    }
+  };
+};
+
+
+
+export default connect(mapStateToProps, mapActionsToProps)(ArticleFilter);
