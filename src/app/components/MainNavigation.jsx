@@ -2,7 +2,7 @@ require('./MainNavigation.scss');
 import React from 'react';
 import { connect } from 'react-redux';
 import Settings from './Settings';
-import { logoutAction } from '../actions/auth';
+import { logout } from '../actions/auth';
 
 import LeftNav from 'material-ui/lib/left-nav';
 import AppBar from 'material-ui/lib/app-bar';
@@ -46,8 +46,8 @@ MainNavigation.propTypes = {
 
 const mapActionsToProps = dispatch => {
   return {
-    logout() { dispatch(logoutAction()); }
+    logout() { dispatch(logout()); }
   };
 };
-
-export default connect(mapActionsToProps)(MainNavigation);
+const mapStateToProps = state => { return {} };
+export default connect(mapStateToProps, mapActionsToProps)(MainNavigation);

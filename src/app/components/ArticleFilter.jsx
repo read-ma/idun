@@ -41,13 +41,11 @@ class ArticleFilter extends Component {
     this.onCheckboxChange = this.onCheckboxChange.bind(this);
   }
 
-  // it's something wrong with the checkbox onCheck event
-  // https://github.com/callemall/material-ui/issues/2983
   onCheckboxChange(event, prevChecked) {
-    const change = { [event.target.name]: !prevChecked };
+    const change = { [event.target.name]: event.target.checked };
     const opposite = this.props.fields[event.target.name].opposite;
 
-    if (!prevChecked && opposite) {
+    if (event.target.checked && opposite) {
       change[opposite] = false;
     }
 
@@ -86,7 +84,6 @@ function mapStateToProps(state) {
 const mapActionsToProps = (dispatch) => {
   return {
     updateArticlesFilter(change){
-      console.log(change);
       dispatch(updateArticlesFilter(change));
     }
   };
