@@ -20,9 +20,7 @@ class DefinitionBoxes extends Component {
                           }));
 
     return (
-      <div id="definitionboxes">
-        {boxes}
-      </div>
+      <div>{boxes}</div>
     );
   }
 };

@@ -3,6 +3,8 @@ import { findWordData } from '../../actions/definitions';
 import { saveUserDefinition } from '../../actions';
 import DefinitionList from './list';
 import _ from 'lodash';
+import Divider from 'material-ui/lib/divider';
+
 
 class SimpleList extends Component {
 
@@ -18,7 +20,8 @@ class SimpleList extends Component {
   render() {
     if (!_.isEmpty(this.props.items))
       return (
-        <div className="card">
+        <div>
+          <Divider />
           <DefinitionList items={this.props.items} label={this.props.label} handleClick={this.saveUserDefinition.bind(this)}/>
         </div>
       );

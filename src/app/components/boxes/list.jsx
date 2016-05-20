@@ -2,6 +2,15 @@ import React, {Component} from 'react';
 import _ from 'lodash';
 import { ShowIf } from '../../components';
 
+import List from 'material-ui/lib/lists/list';
+import ListItem from 'material-ui/lib/lists/list-item';
+import IconButton from 'material-ui/lib/icon-button';
+import ContentAdd from 'material-ui/lib/svg-icons/content/add';
+import KeyboardArrowUp from 'material-ui/lib/svg-icons/hardware/keyboard-arrow-up';
+import KeyboardArrowDown from 'material-ui/lib/svg-icons/hardware/keyboard-arrow-down';
+
+
+
 const LanguageIcon = ({lang}) => {
   let language = lang === 'en' ? 'gb' : lang;
 
@@ -22,20 +31,22 @@ function DefinitionListItem({text, language, url, partOfSpeech, handleClick, key
     handleClick({translation: text});
   }
 
+  let AddContent = (<IconButton onClick={add}><ContentAdd /></IconButton>);
+
   if (url)
     return (
-      <li className="collection-item item-image center-align col s12 m6" key={key}>
-        <img data-caption={text} src={url} alt={text} />
-      </li>
+      <ListItem>
+        <img data-caption={text} src={url} alt={text} key={key}/>
+      </ListItem>
     );
   else
     return (
-      <li className="collection-item" key={key}>
-        <a className="secondary-content badge"><i className="material-icons" onClick={add}>add</i></a>
-        <LanguageIcon lang={language} />
-        {renderPartOfSpeech(partOfSpeech)}
-        <div dangerouslySetInnerHTML={{__html: text}}></div>
-      </li>
+      <ListItem key={key}
+                rightIconButton={AddContent}
+                leftAvatar={<LanguageIcon lang={language} />}
+                primaryText={text}
+                secondaryText={renderPartOfSpeech(partOfSpeech)}
+                disabled={true} />
     );
 }
 
@@ -63,25 +74,22 @@ class DefinitionList extends Component {
     );
 
     return (
-      <ul className="collection with-header">
-        <li className="collection-header">
-          <h5>{this.props.label}</h5>
-        </li>
+      <List subheader={this.props.label}>
         {items}
+
         <ShowIf condition={this.props.items.length > LOW_LIMIT}>
           <MoreLessButton onClick={this.toggle} collapsed={this.state.collapsed} />
         </ShowIf>
-      </ul>
+      </List>
     );
   }
 }
 
 const MoreLessButton = ({collapsed, onClick}) => {
-    return (
-      <li className="center expand-collapse-trigger">
-        <i onClick={onClick} className="material-icons">{collapsed ? 'expand_less' : 'expand_more'}</i>
-      </li>
-    );
+  let icon = collapsed ? <KeyboardArrowUp /> : <KeyboardArrowDown />;
+  return (
+    <ListItem rightIcon={icon} onClick={onClick} />
+  );
 };
 
 export default DefinitionList;

@@ -1,6 +1,3 @@
-require('./Sidebar.scss');
-
-import request from 'superagent';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { textSelected } from '../actions';
@@ -8,6 +5,8 @@ import { Wordlists, DefinitionBoxes } from '../components';
 import classnames from 'classnames';
 import LanguageBar from '../components/LanguageSelection';
 import {saveUserDefinition} from '../actions';
+
+import LeftNav from 'material-ui/lib/left-nav';
 
 const Sidebar = React.createClass({
   getInitialState: function() {
@@ -18,12 +17,11 @@ const Sidebar = React.createClass({
 
   render: function() {
     return (
-      <div className='sidebar'>
-        <ul>
-          <UserCustomDefinition userDefinitions={this.props.userDefinitions} selectedText={this.props.selectedText} saveUserDefinition={this.props.saveUserDefinition}/>
-          <li><DefinitionBoxes /></li>
-        </ul>
-      </div>
+      <LeftNav width="25%" openRight={true} open={this.state.open}>
+        <h1>Right Nav</h1>
+        <UserCustomDefinition userDefinitions={this.props.userDefinitions} selectedText={this.props.selectedText} saveUserDefinition={this.props.saveUserDefinition}/>
+        <DefinitionBoxes />
+      </LeftNav>
     );
   }
 });
@@ -56,7 +54,10 @@ class UserCustomDefinition extends Component {
   render() {
     if (!this.props.selectedText) return false;
 
-    let definitions = this.state.userDefinitions.map(def => <li key={def.translation} className="collection-item" dangerouslySetInnerHTML={{__html: def.translation}} />);
+    let definitions = this.state.userDefinitions.map(def =>
+      <li key={def.translation} className="collection-item" dangerouslySetInnerHTML={{__html: def.translation}} />
+    );
+
     return (
       <li className="card">
         <ul className="collection with-header">
