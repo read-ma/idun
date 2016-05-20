@@ -23,10 +23,6 @@ const LanguageIcon = ({lang}) => {
 };
 
 function DefinitionListItem({text, language, url, partOfSpeech, handleClick, key}) {
-  function renderPartOfSpeech(partOfSpeech) {
-    return partOfSpeech ? <small>{partOfSpeech}</small> : false;
-  }
-
   function add(){
     handleClick({translation: text});
   }
@@ -43,10 +39,12 @@ function DefinitionListItem({text, language, url, partOfSpeech, handleClick, key
     return (
       <ListItem key={key}
                 rightIconButton={AddContent}
-                leftAvatar={<LanguageIcon lang={language} />}
-                primaryText={text}
-                secondaryText={renderPartOfSpeech(partOfSpeech)}
-                disabled={true} />
+                secondaryText={partOfSpeech}
+                disabled={true}>
+
+        <LanguageIcon lang={language} />
+        {text}
+      </ListItem>
     );
 }
 

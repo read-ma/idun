@@ -7,6 +7,12 @@ import LanguageBar from '../components/LanguageSelection';
 import {saveUserDefinition} from '../actions';
 
 import LeftNav from 'material-ui/lib/left-nav';
+import List from 'material-ui/lib/lists/list';
+import ListItem from 'material-ui/lib/lists/list-item';
+import TextField from 'material-ui/lib/text-field';
+import IconButton from 'material-ui/lib/icon-button';
+import ContentAdd from 'material-ui/lib/svg-icons/content/add';
+
 
 const Sidebar = React.createClass({
   getInitialState: function() {
@@ -18,7 +24,6 @@ const Sidebar = React.createClass({
   render: function() {
     return (
       <LeftNav width="25%" openRight={true} open={this.state.open}>
-        <h1>Right Nav</h1>
         <UserCustomDefinition userDefinitions={this.props.userDefinitions} selectedText={this.props.selectedText} saveUserDefinition={this.props.saveUserDefinition}/>
         <DefinitionBoxes />
       </LeftNav>
@@ -54,26 +59,23 @@ class UserCustomDefinition extends Component {
   render() {
     if (!this.props.selectedText) return false;
 
-    let definitions = this.state.userDefinitions.map(def =>
-      <li key={def.translation} className="collection-item" dangerouslySetInnerHTML={{__html: def.translation}} />
-    );
+    let definitions = this.state.userDefinitions.map(def => <ListItem key={def.translation}>{def.translation}</ListItem>);
+    let subheader = `Add your definition for: ${this.props.selectedText}`
+    let AddContent = (<IconButton onClick={this.saveUserDefinition}><ContentAdd /></IconButton>);
 
     return (
-      <li className="card">
-        <ul className="collection with-header">
-          <li className="collection-header">
-            <h5>Add your definition for: <i>{this.props.selectedText}</i></h5>
-          </li>
-          <li className="collection-item row">
-            <form onSubmit={this.saveUserDefinition}>
-              <input className="col s11" type="text" onChange={this.handleInputChange} name="translation" value={this.state.translation} placeholder='My definition' required='required' />
-              <i className="settings-trigger material-icons col s1 add-definition-button" onClick={this.saveUserDefinition}>add</i>
-              <input className='hide' type="submit" />
-            </form>
-          </li>
-          {definitions}
-        </ul>
-      </li>
+      <List subheader={subheader}>
+        <ListItem rightIconButton={AddContent}>
+          <TextField hintText="My definition"
+                    onEnterKeyDown={this.saveUserDefinition}
+                    onChange={this.handleInputChange}
+                    value={this.state.translation}
+                    name="translation"
+          />
+        </ListItem>
+
+        {definitions}
+      </List>
     );
   }
 }

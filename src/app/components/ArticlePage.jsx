@@ -38,7 +38,7 @@ class ArticlePage extends Component {
       <div>
         <div className="row">
           <PositioningWidget pageId={`article-${this.props.params.id}`} />
-          <div className="col s12 m6 article-wrapper">
+          <div className="col-sm-8 article-wrapper">
             <article className="article">
               <ArticleContent onTextSelected={this.props.onTextSelected} />
               <ArticleFooter source_url={this.props.article.source_url} />
