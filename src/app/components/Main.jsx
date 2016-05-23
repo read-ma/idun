@@ -26,6 +26,9 @@ class Main extends React.Component {
         <MainNavigaton displaySearchBar={this.displaySearchBar()} isAuthenticated={this.props.isAuthenticated}>
           {this.props.navChildren}
         </MainNavigaton>
+        <div className="col-xs-offset-2 col-xs-10">
+          {this.props.children}
+        </div>
 
       </div>
     );

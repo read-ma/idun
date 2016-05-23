@@ -22,7 +22,7 @@ import ActionPowerSettingsNew from 'material-ui/lib/svg-icons/action/power-setti
 
 const MainNavigation = ({ logout, children, open, closeNav }) => {
   return (
-    <LeftNav className="col-xs-2" docked={false} open={open} style={{ padding: 0 }}>
+    <LeftNav width={200} docked={true} open={open} style={{ padding: 0 }}>
       <AppBar title="ReadMa" iconElementLeft={<IconButton onClick={closeNav}><NavigationClose /></IconButton>} />
       <List>
         <ListItem primaryText="Articles" href="#/articles" leftIcon={<ActionReorder />} />
