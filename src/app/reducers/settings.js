@@ -13,7 +13,8 @@ const initialState = {
   ],
   language: { from: 'en-GB', to: 'pl-PL' },
   articlePositions: positions,
-  processesCounter: 0
+  processesCounter: 0,
+  leftNavOpen: false
 };
 
 function language(state = initialState.language, action){
@@ -38,6 +39,7 @@ function articlePositions(state = positions, action){
 };
 
 export default function settings(state = initialState, action) {
+  // console.log(action)
   switch (action.type){
 
   case 'PROCESS_STARTED':
@@ -45,6 +47,12 @@ export default function settings(state = initialState, action) {
 
   case 'PROCESS_FINISHED':
     return Object.assign({}, state, {processesCounter: state.processesCounter - 1});
+
+  case 'LEFT_NAV_CLOSED':
+    return Object.assign({}, state, {leftNavOpen: false});
+
+  case 'LEFT_NAV_OPENED':
+    return Object.assign({}, state, {leftNavOpen: true});
 
   case 'CHANGE_LANGUAGE':
     return Object.assign({}, state, {language: language(state.language, action)});

@@ -22,6 +22,18 @@ const newWordSelected = (text) => {
   };
 };
 
+const closeLeftNav = () => {
+  return {
+    type: 'LEFT_NAV_CLOSED',
+  };
+};
+
+const openLeftNav = () => {
+  return {
+    type: 'LEFT_NAV_OPENED',
+  };
+};
+
 function textSelected(text) {
   return {
     type: 'TEXT_SELECTED',
@@ -114,4 +126,5 @@ export { loadArticles, loadArticle, confirmArticleLearned, articlePageClosed,
          changeLanguage,
          processFinished, processStarted,
          newWordSelected,
+         closeLeftNav, openLeftNav,
        };

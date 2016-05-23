@@ -5,6 +5,7 @@ import MainNavigaton from './MainNavigation';
 import ProgressBar from './ProgressBar';
 import AppBar from 'material-ui/lib/app-bar';
 import { logout } from '../actions/auth';
+import { openLeftNav } from '../actions';
 
 import SelectedTextInput from './SelectedTextInput';
 
@@ -14,18 +15,6 @@ import MoreVertIcon from 'material-ui/lib/svg-icons/navigation/more-vert';
 import MenuItem from 'material-ui/lib/menus/menu-item';
 
 
-const ContextAppMenu = () => {
-  return (
-    <IconMenu
-      iconButtonElement={<IconButton><MoreVertIcon /></IconButton>}
-      targetOrigin={{horizontal: 'right', vertical: 'top'}}
-      anchorOrigin={{horizontal: 'right', vertical: 'top'}}
-    >
-      <MenuItem primaryText="Refresh" />
-    </IconMenu>
-  );
-}
-
 class Main extends React.Component {
   displaySearchBar() {
     return this.props.routes && this.props.routes[this.props.routes.length-1].displaySearchBar;
@@ -33,13 +22,11 @@ class Main extends React.Component {
   render() {
     return (
       <div className="row">
-        <AppBar iconElementRight={<ContextAppMenu />} title={<SelectedTextInput />} />
+        <AppBar onLeftIconButtonTouchTap={this.props.openNav} title={<SelectedTextInput />} />
         <MainNavigaton displaySearchBar={this.displaySearchBar()} isAuthenticated={this.props.isAuthenticated}>
           {this.props.navChildren}
         </MainNavigaton>
-        <div className="col-xs-offset-2 col-xs-10">
-          {this.props.children}
-        </div>
+
       </div>
     );
   }
@@ -51,4 +38,10 @@ function mapStateToProps(state){
   };
 }
 
-export default connect(mapStateToProps)(Main);
+const mapActionsToProps = dispatch => {
+  return {
+    openNav() { dispatch(openLeftNav()); }
+  };
+};
+
+export default connect(mapStateToProps, mapActionsToProps)(Main);

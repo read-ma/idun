@@ -3,6 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Settings from './Settings';
 import { logout } from '../actions/auth';
+import { closeLeftNav } from '../actions';
 
 import LeftNav from 'material-ui/lib/left-nav';
 import AppBar from 'material-ui/lib/app-bar';
@@ -19,10 +20,10 @@ import NavigationApps from 'material-ui/lib/svg-icons/navigation/apps';
 import ActionSettings from 'material-ui/lib/svg-icons/action/settings';
 import ActionPowerSettingsNew from 'material-ui/lib/svg-icons/action/power-settings-new';
 
-const MainNavigation = ({ logout, children }) => {
+const MainNavigation = ({ logout, children, open, closeNav }) => {
   return (
-    <LeftNav className="col-xs-2" style={{ padding: 0 }}>
-      <AppBar title="ReadMa" iconElementLeft={<IconButton><NavigationClose /></IconButton>} />
+    <LeftNav className="col-xs-2" docked={false} open={open} style={{ padding: 0 }}>
+      <AppBar title="ReadMa" iconElementLeft={<IconButton onClick={closeNav}><NavigationClose /></IconButton>} />
       <List>
         <ListItem primaryText="Articles" href="#/articles" leftIcon={<ActionReorder />} />
         <ListItem primaryText="Learn" href="#/learn" leftIcon={<SocialSchool />} />
@@ -31,7 +32,6 @@ const MainNavigation = ({ logout, children }) => {
       <Divider />
       {children}
       <List>
-        {/* <ListItem primaryText="Settings" leftIcon={<ActionSettings />} /> */}
         <ListItem primaryText="Sign out" leftIcon={<ActionPowerSettingsNew />} onClick={logout} />
       </List>
     </LeftNav>
@@ -46,8 +46,13 @@ MainNavigation.propTypes = {
 
 const mapActionsToProps = dispatch => {
   return {
-    logout() { dispatch(logout()); }
+    logout() { dispatch(logout()); },
+    closeNav() { dispatch(closeLeftNav()); }
   };
 };
-const mapStateToProps = state => { return {} };
+
+const mapStateToProps = state => { return {
+  open: state.settings.leftNavOpen
+}};
+
 export default connect(mapStateToProps, mapActionsToProps)(MainNavigation);
