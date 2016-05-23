@@ -23,7 +23,7 @@ const Sidebar = React.createClass({
 
   render: function() {
     return (
-      <LeftNav width="25%" openRight={true} open={this.state.open}>
+      <LeftNav width={200} openRight={true} open={this.state.open}>
         <UserCustomDefinition userDefinitions={this.props.userDefinitions} selectedText={this.props.selectedText} saveUserDefinition={this.props.saveUserDefinition}/>
         <DefinitionBoxes />
       </LeftNav>

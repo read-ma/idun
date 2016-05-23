@@ -22,7 +22,12 @@ class Main extends React.Component {
   render() {
     return (
       <div className="row">
-        <AppBar onLeftIconButtonTouchTap={this.props.openNav} title={<SelectedTextInput />} />
+        <AppBar onLeftIconButtonTouchTap={this.props.openNav} title={this.props.topNavChildren}
+        titleStyle={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center'
+        }}/>
         <MainNavigaton displaySearchBar={this.displaySearchBar()} isAuthenticated={this.props.isAuthenticated}>
           {this.props.navChildren}
         </MainNavigaton>

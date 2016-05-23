@@ -41,7 +41,7 @@ class ArticleFilter extends Component {
     this.onCheckboxChange = this.onCheckboxChange.bind(this);
   }
 
-  onCheckboxChange(event, prevChecked) {
+  onCheckboxChange(event) {
     const change = { [event.target.name]: event.target.checked };
     const opposite = this.props.fields[event.target.name].opposite;
 
@@ -56,15 +56,6 @@ class ArticleFilter extends Component {
   render() {
     return (
       <div>
-        <div className="col s6 left-align">
-          <form className="row">
-            <div className="input-field col s12">
-              <input type="text" id="articleSearch" name="query" value={this.props.filter.query} />
-              <label htmlFor="articleSearch">Search for article</label>
-            </div>
-          </form>
-        </div>
-
         <FilterCheckboxes
           fields={this.props.fields}
           filter={this.props.filter}
