@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { loadArticle, textSelected, loadUserDefinitions, articlePageClosed } from '../actions';
 import { Link } from 'react-router';
 import Sidebar from '../containers/Sidebar';
-import MobileSidebar from '../containers/MobileSidebar';
 import ArticleContent from './ArticleContent';
 import ConfirmLearnedButton from './ConfirmLearnedButton';
 import { getSelectedText } from '../highlight';

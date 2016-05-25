@@ -42,6 +42,26 @@ function articlePositions(state = positions, action){
   }
 };
 
+function navBarVisibility(state = initialState.navOpen, action){
+  switch(action.type){
+  case 'ARTICLE_LOADED':
+    return initialState.navOpen;
+
+  case 'NAV_CLOSED':
+    return Object.assign({}, state.navOpen, {[action.side] : false});
+
+  case 'TEXT_SELECTED':
+    return Object.assign({}, state.navOpen, {right : !!action.text});
+
+  case
+    'NAV_OPENED':
+    return Object.assign({}, state.navOpen, {[action.side] : true});
+
+  default:
+    return state;
+  }
+}
+
 export default function settings(state = initialState, action) {
   // console.log(action)
   switch (action.type){
@@ -52,18 +72,14 @@ export default function settings(state = initialState, action) {
   case 'PROCESS_FINISHED':
     return Object.assign({}, state, {processesCounter: state.processesCounter - 1});
 
-  case 'NAV_CLOSED':
-    return Object.assign({}, state, { navOpen: Object.assign({}, state.navOpen, {[action.side] : false})});
-
-  case 'TEXT_SELECTED':
-    return Object.assign({}, state, { navOpen: Object.assign({}, state.navOpen, {right : true})});
-
-  case
-  'NAV_OPENED':
-    return Object.assign({}, state, { navOpen: Object.assign({}, state.navOpen, {[action.side] : true})});
-
   case 'CHANGE_LANGUAGE':
     return Object.assign({}, state, {language: language(state.language, action)});
+
+  case 'ARTICLE_LOADED':
+  case 'NAV_CLOSED':
+  case 'TEXT_SELECTED':
+  case 'NAV_OPENED':
+    return Object.assign({}, state, {navOpen: navBarVisibility(state.navOpen, action)});
 
   case 'PAGE_SCROLLED':
     return Object.assign(

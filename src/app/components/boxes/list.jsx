@@ -67,8 +67,8 @@ class DefinitionList extends Component {
   }
 
   render() {
-    let items = this.props.items.slice(0, this.state.itemsToShowNumber).map( (item) =>
-      DefinitionListItem(Object.assign({}, item, {key: _.uniqueId('definitionlist')}, {handleClick: this.props.handleClick}))
+    let items = this.props.items.slice(0, this.state.itemsToShowNumber).map( (item, index) =>
+      DefinitionListItem(Object.assign({}, item, {handleClick: this.props.handleClick}))
     );
 
     return (

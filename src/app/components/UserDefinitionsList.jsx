@@ -46,7 +46,7 @@ class UserDefinitionsList extends Component {
   }
 
   render() {
-    const items = this.state.items.map(item => <UserDefinitionBox item={item} />);
+    const items = this.state.items.map(item => <UserDefinitionBox key={item} item={item} />);
 
     return (
       <div>

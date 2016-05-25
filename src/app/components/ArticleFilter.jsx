@@ -13,14 +13,14 @@ const FilterCheckbox = (key, onChange, checked) => {
   const checkbox = <Checkbox onCheck={onChange} checked={checked} name={key} />;
 
   return (
-    <ListItem leftCheckbox={checkbox} primaryText={l(key)} />
+    <ListItem key={`filter-field-${key}`} leftCheckbox={checkbox} primaryText={l(key)} />
   );
 };
 
 const CheckboxGroup = (name, fields, onChange, filter) => {
   const checkboxes = _.map(fields, ({ name }) => new FilterCheckbox(name, onChange, filter[name]) );
 
-  return (<div> {checkboxes} <Divider /> </div>);
+  return (<div key={`checkbox-group-${name}`}> {checkboxes} <Divider /> </div>);
 };
 
 const FilterCheckboxes = ({ onChange, filter, fields }) => {

@@ -10,7 +10,7 @@ const Wordlists = ({header, wordlists, handleSelected}) => {
   const buttons = lists.map((list) => {
     const checkbox = <Checkbox name={list.name} onCheck={handleSelected} checked={list.enabled}  />;
     return (
-      <ListItem leftCheckbox={checkbox} primaryText={list.label} />
+      <ListItem key={`wordlist-${list.name}`}leftCheckbox={checkbox} primaryText={list.label} />
     );
   });
   return (
