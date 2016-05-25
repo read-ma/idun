@@ -26,7 +26,7 @@ const Sidebar = React.createClass({
 
   render: function() {
     let sidebarStyles = {
-      width: 256
+      width: 500
     }
 
     if (isMobile()) {
@@ -37,7 +37,7 @@ const Sidebar = React.createClass({
     }
 
     return (
-      <LeftNav style={sidebarStyles} openRight={true} open={this.props.open}>
+      <LeftNav width="350" style={sidebarStyles} openRight={true} open={this.props.open}>
         <AppBar title={false} iconElementLeft={<IconButton onClick={this.props.closeNav}><NavigationClose /></IconButton>} />
 
         <UserCustomDefinition userDefinitions={this.props.userDefinitions} selectedText={this.props.selectedText} saveUserDefinition={this.props.saveUserDefinition}/>
