@@ -45,11 +45,8 @@ class ArticlePage extends Component {
             </article>
             <ConfirmLearnedButton articleId={this.props.params.id} />
           </div>
-          <div className="hide-on-small-only sidebar-wrapper">
+          <div className="sidebar-wrapper">
             <Sidebar />
-          </div>
-          <div className="hide-on-med-and-up mobile-sidebar-wrapper">
-            <MobileSidebar />
           </div>
         </div>
       </div>

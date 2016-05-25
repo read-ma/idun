@@ -22,15 +22,17 @@ const newWordSelected = (text) => {
   };
 };
 
-const closeLeftNav = () => {
+const closeNav = (side) => {
   return {
-    type: 'LEFT_NAV_CLOSED',
+    type: 'NAV_CLOSED',
+    side
   };
 };
 
-const openLeftNav = () => {
+const openNav = (side) => {
   return {
-    type: 'LEFT_NAV_OPENED',
+    type: 'NAV_OPENED',
+    side
   };
 };
 
@@ -126,5 +128,5 @@ export { loadArticles, loadArticle, confirmArticleLearned, articlePageClosed,
          changeLanguage,
          processFinished, processStarted,
          newWordSelected,
-         closeLeftNav, openLeftNav,
+         closeNav, openNav,
        };

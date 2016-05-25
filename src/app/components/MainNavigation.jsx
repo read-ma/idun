@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Settings from './Settings';
 import { logout } from '../actions/auth';
-import { closeLeftNav } from '../actions';
+import { closeNav } from '../actions';
 
 import LeftNav from 'material-ui/lib/left-nav';
 import AppBar from 'material-ui/lib/app-bar';
@@ -47,12 +47,12 @@ MainNavigation.propTypes = {
 const mapActionsToProps = dispatch => {
   return {
     logout() { dispatch(logout()); },
-    closeNav() { dispatch(closeLeftNav()); }
+    closeNav() { dispatch(closeNav('left')); }
   };
 };
 
 const mapStateToProps = state => { return {
-  open: state.settings.leftNavOpen
+  open: state.settings.navOpen.left
 }};
 
 export default connect(mapStateToProps, mapActionsToProps)(MainNavigation);

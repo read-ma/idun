@@ -14,7 +14,11 @@ const initialState = {
   language: { from: 'en-GB', to: 'pl-PL' },
   articlePositions: positions,
   processesCounter: 0,
-  leftNavOpen: false
+  navOpen: {
+    left: false,
+    right: false
+  }
+
 };
 
 function language(state = initialState.language, action){
@@ -48,11 +52,15 @@ export default function settings(state = initialState, action) {
   case 'PROCESS_FINISHED':
     return Object.assign({}, state, {processesCounter: state.processesCounter - 1});
 
-  case 'LEFT_NAV_CLOSED':
-    return Object.assign({}, state, {leftNavOpen: false});
+  case 'NAV_CLOSED':
+    return Object.assign({}, state, { navOpen: Object.assign({}, state.navOpen, {[action.side] : false})});
 
-  case 'LEFT_NAV_OPENED':
-    return Object.assign({}, state, {leftNavOpen: true});
+  case 'TEXT_SELECTED':
+    return Object.assign({}, state, { navOpen: Object.assign({}, state.navOpen, {right : true})});
+
+  case
+  'NAV_OPENED':
+    return Object.assign({}, state, { navOpen: Object.assign({}, state.navOpen, {[action.side] : true})});
 
   case 'CHANGE_LANGUAGE':
     return Object.assign({}, state, {language: language(state.language, action)});

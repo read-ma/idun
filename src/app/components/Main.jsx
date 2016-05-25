@@ -5,9 +5,10 @@ import MainNavigaton from './MainNavigation';
 import ProgressBar from './ProgressBar';
 import AppBar from 'material-ui/lib/app-bar';
 import { logout } from '../actions/auth';
-import { openLeftNav } from '../actions';
+import { openNav } from '../actions';
 
 import SelectedTextInput from './SelectedTextInput';
+import {screenSize} from '../Responsive';
 
 import IconButton from 'material-ui/lib/icon-button';
 import IconMenu from 'material-ui/lib/menus/icon-menu';
@@ -20,8 +21,9 @@ class Main extends React.Component {
     return this.props.routes && this.props.routes[this.props.routes.length-1].displaySearchBar;
   }
   render() {
+
     return (
-      <div className="row">
+      <div className={`row ${screenSize()}`}>
         <AppBar onLeftIconButtonTouchTap={this.props.openNav} title={this.props.topNavChildren}
         titleStyle={{
           display: 'flex',
@@ -48,7 +50,7 @@ function mapStateToProps(state){
 
 const mapActionsToProps = dispatch => {
   return {
-    openNav() { dispatch(openLeftNav()); }
+    openNav() { dispatch(openNav('left')); }
   };
 };
 
