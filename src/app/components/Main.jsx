@@ -17,7 +17,8 @@ import MenuItem from 'material-ui/lib/menus/menu-item';
 
 const styles = {
   appbar: {
-    position: 'fixed'
+    position: 'fixed',
+    width: '100%'
   },
   articleslist: {
     paddingTop: 64

@@ -28,7 +28,9 @@ class ArticleSearchInput extends Component {
         hintStyle={{ paddingLeft: 20 }}
         inputStyle={{ paddingLeft: 20, color: "#555" }}
         style={{
-          width: '63%',
+          width: '83.333%',
+          marginRight: 'auto',
+          marginLeft: 14,
           backgroundColor: '#fff',
           fontSize: 20
         }}
