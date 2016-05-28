@@ -1,4 +1,3 @@
-require('./Articles.scss');
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { loadArticles } from '../actions/articles';
@@ -6,9 +5,7 @@ import PositioningWidget from './PositioningWidget';
 import ArticleLink from './ArticleLink';
 import ArticlesToolbar from './ArticlesToolbar';
 import filterArticles from '../articleCriteriaMatcher';
-
 import List from 'material-ui/lib/lists/list';
-import Paper from 'material-ui/lib/paper';
 
 const ArticleList = ({ articles }) => {
   const articleLinks = articles.map((article) => {
@@ -22,7 +19,7 @@ const ArticleList = ({ articles }) => {
 
 ArticleList.propTypes = {
   articles: React.PropTypes.array.isRequired,
-}
+};
 
 class Articles extends Component {
 
@@ -63,11 +60,11 @@ Articles.propTypes = {
   loadArticles: React.PropTypes.func.isRequired,
   filter: React.PropTypes.object.isRequired,
   articles: React.PropTypes.array.isRequired,
-}
+};
 
 const mapActionsToProps = (dispatch) => {
   return {
-    loadArticles(){
+    loadArticles() {
       dispatch(loadArticles());
     }
   };
