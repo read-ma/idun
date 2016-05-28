@@ -35,7 +35,6 @@ class ArticleSearchInput extends Component {
     />
     )
   }
-
 }
 
 
