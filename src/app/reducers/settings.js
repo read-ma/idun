@@ -50,6 +50,9 @@ function navBarVisibility(state = initialState.navOpen, action){
   case 'NAV_CLOSED':
     return Object.assign({}, state.navOpen, {[action.side] : false});
 
+  case '@@router/LOCATION_CHANGE':
+    return Object.assign({}, state.navOpen, {left : false});
+
   case 'TEXT_SELECTED':
     return Object.assign({}, state.navOpen, {right : !!action.text});
 
@@ -79,6 +82,7 @@ export default function settings(state = initialState, action) {
   case 'NAV_CLOSED':
   case 'TEXT_SELECTED':
   case 'NAV_OPENED':
+  case '@@router/LOCATION_CHANGE':
     return Object.assign({}, state, {navOpen: navBarVisibility(state.navOpen, action)});
 
   case 'PAGE_SCROLLED':
