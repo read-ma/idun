@@ -22,7 +22,7 @@ class ArticleSearchInput extends Component {
         id="articleSearch"
         name="query"
         onChange={this.onFilterChange}
-        value={this.props.filter.query}
+        value={this.props.filter}
         hintText="Search for article"
         underlineShow={false}
         hintStyle={{ paddingLeft: 20 }}
@@ -39,11 +39,9 @@ class ArticleSearchInput extends Component {
   }
 }
 
-
-
 function mapStateToProps(state) {
   return {
-    filter: state.articlesFilter.values,
+    filter: state.articlesFilter.values.query,
   };
 }
 
@@ -54,7 +52,5 @@ const mapActionsToProps = (dispatch) => {
     }
   };
 };
-
-
 
 export default connect(mapStateToProps, mapActionsToProps)(ArticleSearchInput);
