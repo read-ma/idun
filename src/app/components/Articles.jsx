@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { loadArticles } from '../actions/articles';
 import PositioningWidget from './PositioningWidget';
 import ArticleLink from './ArticleLink';
+import ArticlesToolbar from './ArticlesToolbar';
 import filterArticles from '../articleCriteriaMatcher';
 
 import List from 'material-ui/lib/lists/list';
@@ -44,6 +45,7 @@ class Articles extends Component {
     return (
       <div>
         <PositioningWidget pageId="article-list-page" />
+        <ArticlesToolbar />
         <ArticleList articles={this.state.articles} />
       </div>
     );
