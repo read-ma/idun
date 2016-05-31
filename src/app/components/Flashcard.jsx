@@ -59,6 +59,7 @@ class Flashcard extends Component {
       <div className="card-reverse">
         {this.props.item.translation}
         <p>{this.props.item.definition}</p>
+        <p>{this.props.item.example}</p>
       </div>
     );
   }

@@ -1,6 +1,7 @@
 import * as types from '../constants/ActionTypes';
 import article from './article';
 import deck from './deck';
+import decks from './decks';
 import articles from './articles';
 import wordlists from './wordlists';
 import definitions from './definitions';
@@ -68,4 +69,4 @@ const articlesFilter = (state = articlesFilterInitial, action) => {
 };
 
 
-export { article, articles, deck, main, wordlists, definitions, auth, settings, articlesFilter };
+export { article, articles, deck, decks, main, wordlists, definitions, auth, settings, articlesFilter };

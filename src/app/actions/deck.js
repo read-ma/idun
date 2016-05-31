@@ -29,11 +29,11 @@ function closeResults() {
   }
 }
 
-function loadDeckForArticle(articleId) {
+function loadDeckForArticle(deckId) {
   return (dispatch) => {
-    api.get(`/decks.json?article_id=${articleId}`)
+    api.get(`/decks/${deckId}.json`)
       .then((response) => {
-        dispatch(deckLoaded({ items: response.data.deck }));
+        dispatch(deckLoaded(response.data.deck));
       })
       .catch((error) => {
         store.dispatch(processFinished());
@@ -41,4 +41,24 @@ function loadDeckForArticle(articleId) {
   };
 }
 
-export { endQuiz, loadDeckForArticle }
+function decksLoaded(decks) {
+  return {
+    type: 'DECKS_LOADED',
+    decks: decks,
+  };
+}
+
+
+function loadDecks() {
+  return (dispatch) => {
+    api.get('/decks.json')
+      .then((response) => {
+        dispatch(decksLoaded(response.data.decks));
+      })
+      .catch((error) => {
+        store.dispatch(processFinished());
+      });
+  };
+}
+
+export { endQuiz, loadDeckForArticle, loadDecks }

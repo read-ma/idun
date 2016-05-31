@@ -7,7 +7,7 @@ import FlashcardSettings from './FlashcardSettings';
 import FlashcardProgress from './FlashcardProgress';
 
 function mapStateToProps(state) {
-  return { items: state.deck.items };
+  return { items: state.deck.cards };
 }
 
 class FlashcardsQuiz extends Component {

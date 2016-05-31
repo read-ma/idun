@@ -1,6 +1,6 @@
 import { loadArticles, loadArticle, confirmArticleLearned, articlePageClosed } from './articles';
 import { findTextDefinitions } from './definitions';
-import { loadDeckForArticle, endQuiz} from './deck';
+import { loadDecks, loadDeckForArticle, endQuiz} from './deck';
 import api from '../api';
 import { store } from 'react-redux';
 
@@ -105,7 +105,7 @@ export { loadArticles, loadArticle, confirmArticleLearned, articlePageClosed,
          textSelected,
          toggleHighlighting,
          loadUserDefinitions, saveUserDefinition,
-         loadDeckForArticle,
+         loadDeckForArticle, loadDecks,
          endQuiz,
          findTextDefinitions,
          changeLanguage,
