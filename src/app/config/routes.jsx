@@ -7,6 +7,7 @@ import Settings from '../components/Settings';
 import Profile from '../components/Profile';
 import PasswordReminderView from '../components/PasswordReminderView';
 import FlashcardsQuiz from '../components/FlashcardsQuiz';
+import FlashcardsQuizResults from '../components/FlashcardsQuizResults';
 import ChangePasswordView from '../components/ChangePasswordView';
 import ArticleSearchInput from '../components/ArticleSearchInput';
 
@@ -27,6 +28,7 @@ export default (
 
     <Route path="/learn" component={requireAuthentication(UserDefinitionsLearn)} />
     <Route path="/learn/:id" component={requireAuthentication(FlashcardsQuiz)} />
+    <Route path="/results" component={requireAuthentication(FlashcardsQuizResults)} />
     <Route path="/definitions" component={UserDefinitionsList} />
 
     <Route path="/articles" components={{ children: requireAuthentication(Articles), navChildren: ArticleFilter, topNavChildren: ArticleSearchInput }} />

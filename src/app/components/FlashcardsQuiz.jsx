@@ -1,7 +1,7 @@
 require('./FlashcardsQuiz.scss');
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { loadDeckForArticle } from '../actions';
+import { loadDeckForArticle, endQuiz } from '../actions';
 import Flashcard from './Flashcard';
 import FlashcardSettings from './FlashcardSettings';
 import FlashcardProgress from './FlashcardProgress';
@@ -52,7 +52,7 @@ class FlashcardsQuiz extends Component {
         itemIndex: itemIndex + 1,
       });
     } else {
-      this.props.endQuiz();
+      this.props.dispatch(endQuiz({items: this.state.items}));
     }
   }
 
@@ -71,17 +71,6 @@ class FlashcardsQuiz extends Component {
   fetchPrevElement(list, element) {
     const nextElementIndex = list.indexOf(element) - 1;
     return list[nextElementIndex];
-  }
-
-  goToNext() {
-    if (this.isQuizOngoing()) {
-      this.setState({
-        currentItem: this.fetchNextElement(this.state.items, this.state.currentItem),
-        itemIndex: this.state.itemIndex + 1,
-      });
-    } else {
-      this.props.endQuiz();
-    }
   }
 
   changeSettings(settings) {

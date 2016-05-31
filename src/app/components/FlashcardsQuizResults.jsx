@@ -1,25 +1,21 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import FlatButton from 'material-ui/lib/flat-button';
+import { loadDeckForArticle, endQuiz } from '../actions';
 
-const FlashcardsQuizResults = (props) => {
-  let result;
-  const masteredWords = props.items.filter(item => item.mastered).length;
-  if (props.show) {
-    result = (
-      <div className="row">
-        <div className="col-sm-6 col-sm-offset-2 center-xs">
-          <h2>Results</h2>
-          <h1>
-            Mastered {masteredWords} of ouf {props.items.length}
-          </h1>
-          <FlatButton label="Continue" primary={true} onClick={props.closeResults} />
-        </div>
-      </div>
-    )
-  } else {
-    result = (<div className="row"></div>);
-  }
-  return result;
+function mapStateToProps(state) {
+  return { items: state.deck.items };
 }
 
-export default FlashcardsQuizResults;
+const FlashcardsQuizResults = (props) => {
+  return (
+    <div className="row">
+      <div className="col-sm-6 col-sm-offset-2 center-xs">
+        <h2>Finished</h2>
+        <FlatButton label="Continue" primary={true} href={"#/learn"} linkButton={true} />
+      </div>
+    </div>
+  );
+}
+
+export default connect(mapStateToProps)(FlashcardsQuizResults);
