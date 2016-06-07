@@ -3,19 +3,18 @@ require('./ArticlePage.scss');
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { loadArticle, textSelected, loadUserDefinitions, articlePageClosed } from '../actions';
-import { Link } from 'react-router';
 import Sidebar from '../containers/Sidebar';
 import ArticleContent from './ArticleContent';
 import ConfirmLearnedButton from './ConfirmLearnedButton';
 import { getSelectedText } from '../highlight';
 import PositioningWidget from './PositioningWidget';
 
-const ArticleFooter = ({source_url}) => {
+const ArticleFooter = ({ sourceUrl }) => {
   return (
     <footer>
       <blockquote>
         <span>Source: </span>
-        <a href={source_url} target="_blank" alt="Go to source article">{source_url}</a>
+        <a href={sourceUrl} target="_blank" alt="Go to source article">{sourceUrl}</a>
       </blockquote>
     </footer>
   );
@@ -23,12 +22,12 @@ const ArticleFooter = ({source_url}) => {
 
 class ArticlePage extends Component {
 
-  componentDidMount(){
+  componentDidMount() {
     this.props.loadArticle(this.props.params.id);
     this.props.loadUserDefinitions();
   }
 
-  componentWillUnmount(){
+  componentWillUnmount() {
     this.props.articlePageClosed();
   }
 
@@ -40,7 +39,7 @@ class ArticlePage extends Component {
           <div className="col-sm-8 article-wrapper">
             <article className="article">
               <ArticleContent onTextSelected={this.props.onTextSelected} />
-              <ArticleFooter source_url={this.props.article.source_url} />
+              <ArticleFooter sourceUrl={this.props.article.source_url} />
             </article>
             <ConfirmLearnedButton articleId={this.props.params.id} />
           </div>
@@ -60,13 +59,17 @@ const mapActionsToProps = (dispatch) => {
     loadUserDefinitions: () => dispatch(loadUserDefinitions()),
 
     onTextSelected: (text) => {
-      if (text.type == 'mouseup')
-        text = getSelectedText().trim();
+      let selectedText = text;
 
-      if (!text)
+      if (text.type === 'mouseup') {
+        selectedText = getSelectedText().trim();
+      }
+
+      if (!selectedText) {
         return;
+      }
 
-      dispatch(textSelected(text));
+      dispatch(textSelected(selectedText));
     }
   };
 };
@@ -75,6 +78,6 @@ function mapStateToProps(state) {
   return {
     article: state.article
   };
-};
+}
 
 export default connect(mapStateToProps, mapActionsToProps)(ArticlePage);

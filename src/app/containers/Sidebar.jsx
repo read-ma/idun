@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { DefinitionBoxes } from '../components';
 import UserCustomDefinition from '../components/UserCustomDefinition';
-import {saveUserDefinition, closeNav} from '../actions';
-import {isMobile} from '../Responsive';
+import { saveUserDefinition, closeNav } from '../actions';
+import { isMobile } from '../Responsive';
 
 import LeftNav from 'material-ui/lib/left-nav';
 import IconButton from 'material-ui/lib/icon-button';
@@ -12,14 +12,17 @@ import AppBar from 'material-ui/lib/app-bar';
 
 class Sidebar extends Component {
   render() {
-    let sidebarStyles = {width: 500};
+    let sidebarStyles = { width: 500 };
+    let docked = true;
 
     if (isMobile()) {
-      sidebarStyles = {width: 100, marginTop: 200};
-    };
+      sidebarStyles = { width: '100%', marginTop: 200 };
+      docked = false;
+    }
+
 
     return (
-      <LeftNav width="350" style={sidebarStyles} openRight={true} open={this.props.open}>
+      <LeftNav width="350" style={sidebarStyles} docked={docked} openRight={true} open={this.props.open}>
         <AppBar title={false} iconElementLeft={<IconButton onClick={this.props.closeNav}><NavigationClose /></IconButton>} />
 
         <UserCustomDefinition />
@@ -27,9 +30,9 @@ class Sidebar extends Component {
       </LeftNav>
     );
   }
-};
+}
 
-function mapStateToProps(state){
+function mapStateToProps(state) {
   return {
     wordlists: state.wordlists,
     open: state.settings.navOpen.right
@@ -38,8 +41,10 @@ function mapStateToProps(state){
 
 const mapActionsToProps = (dispatch) => {
   return {
-    closeNav() { dispatch(closeNav('right')); }
+    closeNav() {
+      dispatch(closeNav('right'));
+    }
   };
-}
+};
 
 export default connect(mapStateToProps, mapActionsToProps)(Sidebar);
