@@ -7,13 +7,13 @@ import { toggleHighlighting } from '../actions';
 import Divider from 'material-ui/lib/divider';
 
 class Settings extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {};
     this.handleWordListSelected = this.handleWordListSelected.bind(this);
-  };
+  }
 
-  handleWordListSelected(event){
+  handleWordListSelected(event) {
     this.props.dispatch(
       toggleHighlighting(event.target.name)
     );
@@ -30,7 +30,7 @@ class Settings extends Component {
   }
 }
 
-function mapStateToProps(state){
+function mapStateToProps(state) {
   return {
     wordlists: state.wordlists.filter((wl) => wl.toggable),
   };

@@ -8,13 +8,6 @@ import UserDefinitionBox from './UserDefinitionBox';
 function mapStateToProps(state) {
   return { items: state.main.userDefinitions };
 }
-const styles = {
-  gridList: {
-    height: 200,
-    overflowY: 'auto',
-    marginBottom: 24,
-  },
-};
 
 class UserDefinitionsList extends Component {
   constructor(props) {
@@ -39,7 +32,7 @@ class UserDefinitionsList extends Component {
     });
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.props.dispatch(
       loadUserDefinitions()
     );

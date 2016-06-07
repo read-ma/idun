@@ -16,6 +16,6 @@ const FlashcardsQuizResults = (props) => {
       </div>
     </div>
   );
-}
+};
 
 export default connect(mapStateToProps)(FlashcardsQuizResults);

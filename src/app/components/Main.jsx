@@ -1,19 +1,11 @@
 require('./Main.scss');
 import React from 'react';
 import { connect } from 'react-redux';
-import MainNavigaton from './MainNavigation';
-import ProgressBar from './ProgressBar';
-import AppBar from 'material-ui/lib/app-bar';
-import { logout } from '../actions/auth';
 import { openNav } from '../actions';
+import { screenSize } from '../Responsive';
+import MainNavigaton from './MainNavigation';
+import AppBar from 'material-ui/lib/app-bar';
 
-import SelectedTextInput from './SelectedTextInput';
-import {screenSize} from '../Responsive';
-
-import IconButton from 'material-ui/lib/icon-button';
-import IconMenu from 'material-ui/lib/menus/icon-menu';
-import MoreVertIcon from 'material-ui/lib/svg-icons/navigation/more-vert';
-import MenuItem from 'material-ui/lib/menus/menu-item';
 
 const styles = {
   appbar: {
@@ -23,7 +15,7 @@ const styles = {
   articleslist: {
     paddingTop: 120
   }
-}
+};
 
 class Main extends React.Component {
   displaySearchBar() {
@@ -31,7 +23,6 @@ class Main extends React.Component {
   }
 
   render() {
-
     return (
       <div className={`row ${screenSize()}`}>
         <AppBar
@@ -56,7 +47,7 @@ class Main extends React.Component {
   }
 }
 
-function mapStateToProps(state){
+function mapStateToProps(state) {
   return {
     isAuthenticated: state.auth.isAuthenticated
   };

@@ -1,5 +1,4 @@
-import React, {Component} from 'react';
-import _ from 'lodash';
+import React, { Component } from 'react';
 import { ShowIf } from '../../components';
 
 import List from 'material-ui/lib/lists/list';
@@ -10,8 +9,7 @@ import KeyboardArrowUp from 'material-ui/lib/svg-icons/hardware/keyboard-arrow-u
 import KeyboardArrowDown from 'material-ui/lib/svg-icons/hardware/keyboard-arrow-down';
 
 
-
-const LanguageIcon = ({lang}) => {
+const LanguageIcon = ({ lang }) => {
   let language = lang === 'en' ? 'gb' : lang;
 
   if (language)
@@ -22,12 +20,12 @@ const LanguageIcon = ({lang}) => {
     return <span></span>;
 };
 
-function DefinitionListItem({text, language, url, partOfSpeech, handleClick, key}) {
-  function add(){
-    handleClick({translation: text});
+function DefinitionListItem({ text, language, url, partOfSpeech, handleClick, key }) {
+  function add() {
+    handleClick({ translation: text });
   }
 
-  let AddContent = (<IconButton onClick={add}><ContentAdd /></IconButton>);
+  let AddContent = <IconButton onClick={add}><ContentAdd /></IconButton>;
 
   if (url)
     return (
@@ -55,20 +53,20 @@ class DefinitionList extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {collapsed: false, itemsToShowNumber: LOW_LIMIT};
+    this.state = { collapsed: false, itemsToShowNumber: LOW_LIMIT };
     this.toggle = this.toggle.bind(this);
   }
 
   toggle() {
     this.setState({
       collapsed: !this.state.collapsed,
-      itemsToShowNumber: (!this.state.collapsed ? TOP_LIMIT : LOW_LIMIT)
+      itemsToShowNumber: !this.state.collapsed ? TOP_LIMIT : LOW_LIMIT
     });
   }
 
   render() {
-    let items = this.props.items.slice(0, this.state.itemsToShowNumber).map( (item, index) =>
-      DefinitionListItem(Object.assign({}, item, {handleClick: this.props.handleClick}))
+    let items = this.props.items.slice(0, this.state.itemsToShowNumber).map((item, index) =>
+      DefinitionListItem(Object.assign({}, item, { handleClick: this.props.handleClick }))
     );
 
     return (
@@ -83,7 +81,7 @@ class DefinitionList extends Component {
   }
 }
 
-const MoreLessButton = ({collapsed, onClick}) => {
+const MoreLessButton = ({ collapsed, onClick }) => {
   let icon = collapsed ? <KeyboardArrowUp /> : <KeyboardArrowDown />;
   return (
     <ListItem rightIcon={icon} onClick={onClick} />

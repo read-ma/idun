@@ -3,7 +3,7 @@ import React from 'react';
 const Home = () => {
   return (
     <h2>
-      MyBabel
+      ReadMa
     </h2>
   );
 };

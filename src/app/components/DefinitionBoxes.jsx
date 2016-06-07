@@ -5,10 +5,10 @@ import sidebarBoxRegistry from './boxes';
 import classnames from 'classnames';
 
 class DefinitionBoxes extends Component {
-  render(){
+  render() {
     let boxes = this.props.boxes
-                    .map( box =>
-                          React.createElement(sidebarBoxRegistry.get(box.component),{
+                    .map(box =>
+                          React.createElement(sidebarBoxRegistry.get(box.component), {
                             key: box.key,
                             wordLimit: box.wordLimit,
                             boxKey: box.key,
@@ -23,18 +23,18 @@ class DefinitionBoxes extends Component {
       <div>{boxes}</div>
     );
   }
-};
+}
 
-const FilterButton = ({active, name, value, onClick}) => {
+const FilterButton = ({ active, name, value, onClick }) => {
   return (
-    <button className={classnames({active: active})} name={name} value={value} onClick={onClick}>{value}</button>
+    <button className={classnames({ active: active })} name={name} value={value} onClick={onClick}>{value}</button>
   );
 };
 
-function mapStateToProps(state){
+function mapStateToProps(state) {
   return {
     selectedText: state.article.selectedText,
-    selectedTextContext: {articleId: state.article.id},
+    selectedTextContext: { articleId: state.article.id },
     boxes: state.definitions.config,
     data: state.definitions.data
   };

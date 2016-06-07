@@ -18,7 +18,7 @@ const styles = {
   icon: {
     fill: '#000'
   }
-}
+};
 
 class ArticlesToolbar extends Component {
   render() {
@@ -53,10 +53,8 @@ class ArticlesToolbar extends Component {
   }
 }
 
-
-
 function mapStateToProps(state) {
-  return {}
+  return {};
 }
 
 const mapActionsToProps = (dispatch) => {
@@ -66,4 +64,4 @@ const mapActionsToProps = (dispatch) => {
 
 // export default connect(mapStateToProps, mapActionsToProps)(Articles);
 
-export default ArticlesToolbar
+export default ArticlesToolbar;

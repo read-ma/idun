@@ -3,10 +3,9 @@ import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
 import { textSelected, saveUserDefinition} from '../actions';
-import { DefinitionBoxes } from '../components';
 
 class UserCustomDefinitionForm extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       word: props.selectedText,
@@ -27,29 +26,29 @@ class UserCustomDefinitionForm extends Component {
     );
   }
 
-  componentDidUpdate(){
+  componentDidUpdate() {
   }
 
-  search(event){
+  search(event) {
     event.preventDefault();
 
     if (!event.keyCode || event.keyCode === 13)
-      this.props.dispatch( textSelected(this.state.word) );
+      this.props.dispatch(textSelected(this.state.word));
   }
 
   handleFormInputChanged(event) {
     this.setState(
-      Object.assign({}, this.state, {[event.target.name] : event.target.value})
+      Object.assign({}, this.state, { [event.target.name]: event.target.value})
     );
   }
 
-  toggleForm(){
+  toggleForm() {
     this.setState(
-      Object.assign({}, this.state, {collapsed: !this.state.collapsed})
+      Object.assign({}, this.state, { collapsed: !this.state.collapsed })
     );
   }
 
-  saveUserDefinition(event){
+  saveUserDefinition(event) {
     event.preventDefault();
     this.props.dispatch(saveUserDefinition(this.state));
   }
@@ -57,13 +56,10 @@ class UserCustomDefinitionForm extends Component {
   render() {
     return (
       <div className="card">
-        <div className='row'>
+        <div className="row">
           <div className="col s12">
             <div className="input-field col s9">
-              {/* FIXME 1: Move to "Navigator" placeholder #1 */}
-              <input className="selectedText" ref="selectedText" type='text' placeholder='Search and translate word' name='word' onKeyUp={this.search} onChange={this.handleFormInputChanged} value={this.state.word} />
-
-              <TTSPlayer />
+              <input className="selectedText" ref="selectedText" type="text" placeholder="Search and translate word" name="word" onKeyUp={this.search} onChange={this.handleFormInputChanged} value={this.state.word} />
             </div>
             <div className="input-field col s3">
               <button className="btn-flat btn-small white" onClick={this.search}><i className="material-icons">search</i></button>
@@ -73,19 +69,19 @@ class UserCustomDefinitionForm extends Component {
         </div>
 
         <div className="card-content">
-          <div className='row' className={classnames({hidden: this.state.collapsed})}>
-            <div className='input-field col s12'>
-              <input type='text' name='translation' placeholder='translation' onChange={this.handleFormInputChanged} value={this.state.translation} />
+          <div className="row" className={classnames({ hidden: this.state.collapsed })}>
+            <div className="input-field col s12">
+              <input type="text" name="translation" placeholder="translation" onChange={this.handleFormInputChanged} value={this.state.translation} />
             </div>
-            <div className='input-field col s12'>
-              <input type='text' name='definition' placeholder='definition' onChange={this.handleFormInputChanged} value={this.state.definition} />
+            <div className="input-field col s12">
+              <input type="text" name="definition" placeholder="definition" onChange={this.handleFormInputChanged} value={this.state.definition} />
             </div>
-            <div className='input-field col s12'>
-              <input type='text' name='tags' placeholder='tags' onChange={this.handleFormInputChanged} value={this.state.tags} />
+            <div className="input-field col s12">
+              <input type="text" name="tags" placeholder="tags" onChange={this.handleFormInputChanged} value={this.state.tags} />
             </div>
           </div>
         </div>
-        <div className={classnames('card-action', {hidden: this.state.collapsed})}>
+        <div className={classnames('card-action', { hidden: this.state.collapsed })}>
           <a onClick={this.saveUserDefinition}>Save</a>
         </div>
       </div>

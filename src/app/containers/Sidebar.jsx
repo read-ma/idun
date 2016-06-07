@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { DefinitionBoxes } from '../components';
 import UserCustomDefinition from '../components/UserCustomDefinition';
-import { saveUserDefinition, closeNav } from '../actions';
+import { closeNav } from '../actions';
 import { isMobile } from '../Responsive';
 
 import LeftNav from 'material-ui/lib/left-nav';

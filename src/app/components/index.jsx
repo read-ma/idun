@@ -10,7 +10,7 @@ import DefinitionBoxes from './DefinitionBoxes';
 import React from 'react';
 
 class ShowIf extends React.Component {
-  render(){
+  render() {
     return this.props.condition ? this.props.children : false;
   }
 }

@@ -2,12 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { confirmArticleLearned } from '../actions';
 
-const ConfirmLearnedButton = ({confirmLearned, articleId, articleLearned}) => {
+const ConfirmLearnedButton = ({ confirmLearned, articleId, articleLearned }) => {
   let onConfirmLearned = () => {
     confirmLearned(articleId);
   };
 
-  if (articleLearned || typeof articleLearned === "undefined")
+  if (articleLearned || typeof articleLearned === 'undefined')
     return <span></span>;
 
   return (
@@ -32,4 +32,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps,mapActionsToProps)(ConfirmLearnedButton);
+export default connect(mapStateToProps, mapActionsToProps)(ConfirmLearnedButton);

@@ -1,15 +1,15 @@
-import React, {Component,PropTypes} from 'react';
-import {connect} from 'react-redux';
-import {pageScrolled} from '../actions/articles';
+import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { pageScrolled } from '../actions/articles';
 import ls from '../localStore.js';
 
 class PositioningWidget extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {};
     this.handleScroll = this.handleScroll.bind(this);
   }
-  componentDidMount(){
+  componentDidMount() {
     window.addEventListener('scroll', this.handleScroll);
     window.setTimeout(this.restorePosition.bind(this), 800);
   }
@@ -26,16 +26,16 @@ class PositioningWidget extends Component {
     this.props.synchLocalStorage('PAGE_POSITIONS', this.props.positions);
   }
 
-  handleScroll(event){
+  handleScroll(event) {
     let target = event.target || event.srcElement;
-    this.setState({position : target.body.scrollTop});
+    this.setState({ position : target.body.scrollTop });
   }
 
-  render(){
+  render() {
     return false;
 
     return (
-      <span style={{position: 'fixed', left:0, top: 0, zIndex:1000, backgroundColor: '#eee'}}>
+      <span style={{ position: 'fixed', left: 0, top: 0, zIndex: 1000, backgroundColor: '#eee' }}>
         {JSON.stringify(this.props.positions)}
         {JSON.stringify(this.state)}
       </span>);
@@ -43,8 +43,8 @@ class PositioningWidget extends Component {
 }
 
 PositioningWidget.propTypes = {
-    pageId: PropTypes.string.isRequired,
-    positions: PropTypes.object
+  pageId: PropTypes.string.isRequired,
+  positions: PropTypes.object
 };
 
 const mapStateToProps = (state) => {
@@ -58,7 +58,7 @@ const mapActionsToProps = (dispatch) => {
     pageScrolled(id, position) {
       dispatch(pageScrolled(id, position));
     },
-    synchLocalStorage(key, value){
+    synchLocalStorage(key, value) {
      ls.set(key, JSON.stringify(value));
     }
   };

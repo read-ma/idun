@@ -1,7 +1,5 @@
 require('./ArticleLink.scss');
 import React from 'react';
-import { Link } from 'react-router';
-import classnames from 'classnames';
 import l from '../I18n';
 import ListItem from 'material-ui/lib/lists/list-item';
 
@@ -10,7 +8,7 @@ import ActionLock from 'material-ui/lib/svg-icons/action/lock-outline';
 
 
 function difficultyLevel(difficulty) {
-  return (<strong className={difficulty}>{l(difficulty)}</strong>);
+  return <strong className={difficulty}>{l(difficulty)}</strong>;
 }
 
 export default function ArticleLink({ id, title, tags, privy, difficulty, learned, visited }) {

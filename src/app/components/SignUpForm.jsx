@@ -1,18 +1,17 @@
 import React from 'react';
-import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { signupAttempt } from '../actions/auth';
 
 class SignUpForm extends React.Component {
 
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {};
   }
 
   handleFormInputChanged(event) {
     this.setState(
-      Object.assign({}, this.state, {[event.target.name] : event.target.value})
+      Object.assign({}, this.state, { [event.target.name]: event.target.value })
     );
   }
 
@@ -21,7 +20,7 @@ class SignUpForm extends React.Component {
     this.props.dispatch(signupAttempt(this.state.email));
   }
 
-  render(){
+  render() {
     return (
       <div className="signupform">
         <h2>Sign up</h2>
@@ -33,13 +32,13 @@ class SignUpForm extends React.Component {
         <form onSubmit={this.handleSignUp.bind(this)}>
           <div className="input-field">
             <input
-              name='email'
-              id='signUpEmail'
-              type='email'
-              required='true'
+              name="email"
+              id="signUpEmail"
+              type="email"
+              required="true"
               onChange={this.handleFormInputChanged.bind(this)}
               className="validate" />
-            <label htmlFor='signUpEmail'>Your email</label>
+            <label htmlFor="signUpEmail">Your email</label>
           </div>
           <h5 className="green-text">{this.props.signupMessage}</h5>
           <input className="btn" type="submit" value="Sign up" />
@@ -47,7 +46,7 @@ class SignUpForm extends React.Component {
         </form>
       </div>
     );
-  };
+  }
 }
 
 const mapStateToProps = (state) => {

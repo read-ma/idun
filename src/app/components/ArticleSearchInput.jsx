@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import _ from 'lodash';
 import { updateArticlesFilter } from '../actions/articles';
 
 import TextField from 'material-ui/lib/text-field';
@@ -34,8 +33,7 @@ class ArticleSearchInput extends Component {
           backgroundColor: '#fff',
           fontSize: 20
         }}
-    />
-    )
+    />);
   }
 }
 
@@ -47,7 +45,7 @@ function mapStateToProps(state) {
 
 const mapActionsToProps = (dispatch) => {
   return {
-    updateArticlesFilter(change){
+    updateArticlesFilter(change) {
       dispatch(updateArticlesFilter(change));
     }
   };

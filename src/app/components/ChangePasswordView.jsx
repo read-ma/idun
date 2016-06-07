@@ -4,7 +4,7 @@ import { updatePassword, resetPassword } from '../actions/auth';
 import NotificationBox from './NotificationBox';
 
 class ChangePasswordView extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       reset_password_token: props.location.query.t
@@ -12,21 +12,21 @@ class ChangePasswordView extends React.Component {
     this.handleInputChange = this.handleInputChange.bind(this);
   }
 
-  handleInputChange(event){
-    this.setState({[event.target.name] : event.target.value});
+  handleInputChange(event) {
+    this.setState({ [event.target.name]: event.target.value });
   }
 
-  componentDidMount(){
+  componentDidMount() {
     if (!this.state.reset_password_token)
       this.props.dispatch(push('/Login'));
   }
 
-  updatePassword(event){
+  updatePassword(event) {
     event.preventDefault();
     this.props.dispatch(updatePassword(this.state));
   }
 
-  render(){
+  render() {
     return (
       <div>
         <h4>Change your password</h4>

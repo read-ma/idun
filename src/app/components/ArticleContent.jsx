@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
-import {connect} from 'react-redux';
-import { detokenize, isSeparator, Separator, Token, markSelectedInDict} from './TextUtils';
+import { connect } from 'react-redux';
+import { detokenize, isSeparator, Token, markSelectedInDict } from './TextUtils';
 import { newWordSelected } from '../actions';
-import _ from 'lodash';
 
-class Word extends Component{
-  constructor(props){
+class Word extends Component {
+  constructor(props) {
     super(props);
     this.state = {};
   }
@@ -26,7 +25,7 @@ class Word extends Component{
   }
 }
 
-const ArticlePara = ({tokens, handleWordClick, wordlists}) => {
+const ArticlePara = ({ tokens, handleWordClick, wordlists }) => {
   tokens = tokens.map(p => new Token(p));
 
   wordlists.forEach(list => tokens = markSelectedInDict(tokens, list));
@@ -50,7 +49,7 @@ class ArticleContent extends Component {
     this.handleClick = this.handleClick.bind(this);
 
     this.currentTimeout = undefined;
-    this.state = {selection: []};
+    this.state = { selection: [] };
   }
 
   handleClick(word) {
@@ -86,7 +85,7 @@ class ArticleContent extends Component {
       </div>
     );
   }
-};
+}
 
 ArticleContent.propTypes = {
   text: React.PropTypes.array.isRequired,
@@ -104,7 +103,7 @@ const mapStateToProps = (state) => {
 };
 const mapActionsToProps = (dispatch) => {
   return {
-    onWordSelected(text){
+    onWordSelected(text) {
       dispatch(newWordSelected(text));
     }
   };

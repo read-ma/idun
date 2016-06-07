@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
-import { loginAttempt, signupAttempt } from '../actions/auth';
+import { loginAttempt } from '../actions/auth';
 
 import TextField from 'material-ui/lib/text-field';
 import RaisedButton from 'material-ui/lib/raised-button';
@@ -37,7 +37,7 @@ class Login extends React.Component {
 
   handleFormInputChanged(event) {
     this.setState(
-      Object.assign({}, this.state, { [event.target.name] : event.target.value })
+      Object.assign({}, this.state, { [event.target.name]: event.target.value })
     );
   }
 
@@ -49,7 +49,7 @@ class Login extends React.Component {
   }
 
   render() {
-    return(
+    return (
       <Paper zDepth={2} className="col-xs-10">
         <h2 style={styles.headline}>If you already have an account, please log in</h2>
         <span className="error">
@@ -71,26 +71,26 @@ class Login extends React.Component {
 
           <TextField
             floatingLabelText="Enter your password"
-            type='password'
-            id='password'
-            name='password'
-            require='true'
+            type="password"
+            id="password"
+            name="password"
+            require="true"
             onChange={this.handleFormInputChanged}
           />
           <br />
 
           <RaisedButton label="Login" primary={true} type="submit" style={styles.loginButton} />
 
-          <Link to='forgot_password'>I forgot my password</Link>
+          <Link to="forgot_password">I forgot my password</Link>
 
           <Divider />
-          <Link to='sign_up' style={styles.createAccountLink}>Create account</Link>
+          <Link to="sign_up" style={styles.createAccountLink}>Create account</Link>
 
         </form>
       </Paper>
     );
   }
-};
+}
 
 let mapStateToProps = (state) => {
   return {

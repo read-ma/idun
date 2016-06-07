@@ -18,9 +18,9 @@ const FilterCheckbox = (key, onChange, checked) => {
 };
 
 const CheckboxGroup = (name, fields, onChange, filter) => {
-  const checkboxes = _.map(fields, ({ name }) => new FilterCheckbox(name, onChange, filter[name]) );
+  const checkboxes = _.map(fields, ({ name }) => new FilterCheckbox(name, onChange, filter[name]));
 
-  return (<div key={`checkbox-group-${name}`}> {checkboxes} <Divider /> </div>);
+  return <div key={`checkbox-group-${name}`}> {checkboxes} <Divider /> </div>;
 };
 
 const FilterCheckboxes = ({ onChange, filter, fields }) => {
@@ -63,7 +63,7 @@ class ArticleFilter extends Component {
       </div>
     );
   }
-};
+}
 
 function mapStateToProps(state) {
   return {
@@ -74,12 +74,11 @@ function mapStateToProps(state) {
 
 const mapActionsToProps = (dispatch) => {
   return {
-    updateArticlesFilter(change){
+    updateArticlesFilter(change) {
       dispatch(updateArticlesFilter(change));
     }
   };
 };
-
 
 
 export default connect(mapStateToProps, mapActionsToProps)(ArticleFilter);

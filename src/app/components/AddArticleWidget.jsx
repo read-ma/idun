@@ -1,6 +1,5 @@
 import React from 'react';
 import { addArticle } from '../actions/articles';
-import isEmpty from 'lodash/isEmpty';
 import FloatingActionButton from 'material-ui/lib/floating-action-button';
 import ContentAdd from 'material-ui/lib/svg-icons/content/add';
 import { connect } from 'react-redux';
@@ -42,12 +41,12 @@ class ArticleAdd extends React.Component {
               </div>
 
               <div className="input-field hide">
-                <input name='title' type='text' id="article-source-title" className="materialize-textarea" onChange={this.onChange}></input>
+                <input name="title" type="text" id="article-source-title" className="materialize-textarea" onChange={this.onChange}></input>
                 <label htmlFor="article-source-title">Title</label>
               </div>
 
               <div className="input-field hide">
-                <textarea name='content' id="article-source-text" className="materialize-textarea" onChange={this.onChange}></textarea>
+                <textarea name="content" id="article-source-text" className="materialize-textarea" onChange={this.onChange}></textarea>
                 <label htmlFor="article-source-text">Article body</label>
               </div>
 
@@ -70,16 +69,18 @@ class ArticleAdd extends React.Component {
 
 ArticleAdd.propTypes = {
   addArticle: React.PropTypes.func.isRequired,
-}
+};
 
 const mapActionsToProps = (dispatch) => {
   return {
-    addArticle(article){
+    addArticle(article) {
       dispatch(addArticle(article));
     }
   };
 };
 
-function mapStateToProps(state){ return {}; };
+function mapStateToProps(state) {
+  return {};
+}
 
 export default connect(mapStateToProps, mapActionsToProps)(ArticleAdd);

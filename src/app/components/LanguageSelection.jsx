@@ -1,6 +1,6 @@
 require('./LanguageSelection.scss');
 import React, { Component } from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import { changeLanguage } from '../actions';
 
 import ListItem from 'material-ui/lib/lists/list-item';
@@ -10,29 +10,29 @@ import MenuItem from 'material-ui/lib/menus/menu-item';
 import Divider from 'material-ui/lib/divider';
 
 class LanguageBar extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = props.language;
     this.languageChange = this.languageChange.bind(this);
     this.languageFromChange = this.languageFromChange.bind(this);
     this.languageToChange = this.languageToChange.bind(this);
-  };
+  }
 
   languageChange(key, value) {
-    this.setState(Object.assign({}, this.state, { [key] : value }));
+    this.setState(Object.assign({}, this.state, { [key]: value }));
     this.props.changeLanguage(key, value);
-  };
+  }
 
-  languageFromChange(event, index, value){
+  languageFromChange(event, index, value) {
     this.languageChange('from', value);
-  };
+  }
 
-  languageToChange(event, index, value){
+  languageToChange(event, index, value) {
     this.languageChange('to', value);
-  };
+  }
 
   render() {
-    let languages = this.props.languages.map(lang => (<MenuItem value={lang.code} primaryText={lang.name} />));
+    let languages = this.props.languages.map(lang => <MenuItem value={lang.code} primaryText={lang.name} />);
 
     return (
       <List subheader="Select languages">
@@ -49,7 +49,7 @@ class LanguageBar extends Component {
   }
 }
 
-function mapStateToProps(state){
+function mapStateToProps(state) {
   return {
     languages: state.settings.languages,
     language: state.settings.language,
@@ -61,8 +61,8 @@ const mapActionsToProps = (dispatch) => {
     changeLanguage(key, value) {
       dispatch(changeLanguage(key, value));
     }
-  }
-}
+  };
+};
 
 
 export default connect(mapStateToProps, mapActionsToProps)(LanguageBar);

@@ -1,9 +1,12 @@
 import React from 'react';
 import _ from 'lodash';
 
+const isSeparator = token => token.match(/^[\,\.\?\!\)\(\)\”\"\“\'\:\;\“\‘\’]$/);
+const Separator = ({ children, separator }) => <span>{children}</span>;
+
 const markSelectedInDict = (tokens, wordlist) => {
   wordlist.words.forEach(word => {
-    tokensContainingWord(tokens,word)
+    tokensContainingWord(tokens, word)
       .forEach(token => token.classNames.push(wordlist.name));
   });
   return tokens;
@@ -13,19 +16,19 @@ const tokensContainingWord = (tokens, word) => {
   let words = word.split(' ');
   let result = [];
 
-  //use #reduce
-  findAllOccurenceIndexes(tokens, words[0]).forEach( idx => {
+  // use #reduce
+  findAllOccurenceIndexes(tokens, words[0]).forEach(idx => {
     let matchCandidate = tokens.slice(idx, idx+words.length);
 
     if (_.isEqual(words, matchCandidate.map(t => t.word.toLowerCase())))
-      result = result.concat( matchCandidate );
+      result = result.concat(matchCandidate);
   });
 
   return result;
-}
+};
 
 const findAllOccurenceIndexes = (arr, item) => {
-  return arr.reduce((prev,current,currentIndex,array) => {
+  return arr.reduce((prev, current, currentIndex, array) => {
     if (_.isEqual(current.word.toLowerCase(), item.toLowerCase()))
       prev.push(currentIndex);
     return prev;
@@ -33,10 +36,10 @@ const findAllOccurenceIndexes = (arr, item) => {
 };
 
 class Token {
-  constructor(word, ...classNames){
+  constructor(word, ...classNames) {
     this.word = word;
     this.classNames = classNames;
-    this.separator  = isSeparator(this.word);
+    this.separator = isSeparator(this.word);
   }
 
   className() {
@@ -55,16 +58,16 @@ const detokenize = tokens => {
   let openningQuoteMark = false;
 
   tokens.forEach(p => {
-    let previous    = output[output.length - 1];
+    let previous = output[output.length - 1];
 
     let quote = p.props.separator && isQuoteMark(p.props.word);
 
     if (quote) openningQuoteMark = !openningQuoteMark;
 
     let spaceBefore = p.props.separator && p.props.word.match(/^[\(\“\“]$/);
-    let noSpace     = previous && previous.props.separator && (previous.props.word.match(/^[\(\[]$/) || ( isQuoteMark(previous.props.word) && openningQuoteMark ));
+    let noSpace = previous && previous.props.separator && (previous.props.word.match(/^[\(\[]$/) || (isQuoteMark(previous.props.word) && openningQuoteMark));
 
-    if (spaceBefore && !noSpace){
+    if (spaceBefore && !noSpace) {
       output.push(' ');
     }
 
@@ -80,7 +83,4 @@ const detokenize = tokens => {
   return output;
 };
 
-const isSeparator = token => token.match(/^[\,\.\?\!\)\(\)\”\"\“\'\:\;\“\‘\’]$/);
-const Separator = ( {children, separator} ) => <span>{children}</span>;
-
-export { detokenize, isSeparator, Separator, Token, markSelectedInDict }
+export { detokenize, isSeparator, Separator, Token, markSelectedInDict };

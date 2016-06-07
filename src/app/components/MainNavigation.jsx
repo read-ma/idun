@@ -51,8 +51,10 @@ const mapActionsToProps = dispatch => {
   };
 };
 
-const mapStateToProps = state => { return {
-  open: state.settings.navOpen.left
-}};
+const mapStateToProps = state => {
+  return {
+    open: state.settings.navOpen.left
+  }
+};
 
 export default connect(mapStateToProps, mapActionsToProps)(MainNavigation);

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { findWordData } from '../../actions/definitions';
 import { saveUserDefinition } from '../../actions';
 import DefinitionList from './list';
@@ -8,10 +8,10 @@ import Divider from 'material-ui/lib/divider';
 
 class SimpleList extends Component {
 
-  saveUserDefinition(selectedDefinition){
+  saveUserDefinition(selectedDefinition) {
     this.props.dispatch(
       saveUserDefinition(Object.assign({},
-        {word: this.props.selectedText, article_id: this.props.selectedTextContext.articleId},
+        { word: this.props.selectedText, article_id: this.props.selectedTextContext.articleId },
         selectedDefinition
       ))
     );
@@ -27,41 +27,41 @@ class SimpleList extends Component {
       );
     else return false;
   }
-};
+}
 
 
 class RemoteList extends SimpleList {
 
-  loadDefinition(props){
+  loadDefinition(props) {
     props.dispatch(findWordData(props.selectedText, props.boxKey));
   }
 
-  checkWordLimit(text, limit){
+  checkWordLimit(text, limit) {
     let wordsNumber = text.split(' ').length;
 
     return text.length > 1 && wordsNumber <= limit[1] && wordsNumber >= limit[0];
   }
 
-  componentWillReceiveProps(nextProps){
+  componentWillReceiveProps(nextProps) {
     if (!!nextProps.selectedText
-     && this.props.selectedText != nextProps.selectedText
+     && this.props.selectedText !== nextProps.selectedText
      && this.checkWordLimit(nextProps.selectedText, this.props.wordLimit)
     )
       this.loadDefinition(nextProps);
-  };
-};
+  }
+}
 
 
 class SidebarBoxRegistry {
 
-  constructor(){
+  constructor() {
     this.registry = {
       SimpleList: SimpleList,
       RemoteList: RemoteList
     };
-  };
+  }
 
-  get(key){
+  get(key) {
     return this.registry[key];
   }
 }

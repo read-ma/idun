@@ -18,7 +18,7 @@ class FlashcardSettings extends Component {
   }
 
   change(_e, value) {
-    this.props.changeSettings({startWith: value});
+    this.props.changeSettings({ startWith: value });
   }
 
   render() {
