@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { DefinitionBoxes } from '../components';
 import UserCustomDefinition from '../components/UserCustomDefinition';
-import { saveUserDefinition, closeNav } from '../actions';
+import { closeNav } from '../actions';
 import { isMobile } from '../Responsive';
 
 import LeftNav from 'material-ui/lib/left-nav';
@@ -20,7 +20,6 @@ class Sidebar extends Component {
       docked = false;
     }
 
-
     return (
       <LeftNav width="350" style={sidebarStyles} docked={docked} openRight={true} open={this.props.open}>
         <AppBar title={false} iconElementLeft={<IconButton onClick={this.props.closeNav}><NavigationClose /></IconButton>} />
@@ -31,6 +30,11 @@ class Sidebar extends Component {
     );
   }
 }
+
+Sidebar.propTypes = {
+  open: React.PropTypes.bool.isRequred,
+  closeNav: React.PropTypes.func.isRequred
+};
 
 function mapStateToProps(state) {
   return {
