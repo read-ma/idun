@@ -7,11 +7,14 @@ $selection-bg: #f8bbd0;
 $d3k-bg: lightgreen;
 
 .article-wrapper {
+  width: 100%;
+  max-width: 65em;
+
   .article {
     font-size: 1.6em;
     padding-left: 1em;
     .content {
-      line-height: 150%;
+      line-height: 155%;
     }
 
     .word {

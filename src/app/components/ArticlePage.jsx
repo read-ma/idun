@@ -36,7 +36,7 @@ class ArticlePage extends Component {
       <div>
         <div className="row">
           <PositioningWidget pageId={`article-${this.props.params.id}`} />
-          <div className="col-sm-8 article-wrapper">
+          <div className="article-wrapper">
             <article className="article">
               <ArticleContent onTextSelected={this.props.onTextSelected} />
               <ArticleFooter sourceUrl={this.props.article.source_url} />
@@ -51,6 +51,7 @@ class ArticlePage extends Component {
     );
   }
 }
+
 
 const mapActionsToProps = (dispatch) => {
   return {
