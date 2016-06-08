@@ -20,13 +20,13 @@ function endQuiz(deck) {
   return (dispatch) => {
     dispatch(deckFinished(deck));
     dispatch(push(`/results`));
-  }
+  };
 }
 
 function closeResults() {
   return (dispatch) => {
     dispatch(push("/learn"));
-  }
+  };
 }
 
 function loadDeckForArticle(deckId) {

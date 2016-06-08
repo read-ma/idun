@@ -6,14 +6,15 @@ const initialState = {
 const INTERVALS_FOR_GROUP = {
   0: 1,
   1: 10,
-  2: 24 * 60
+  2: 24 * 60,
+  3: 24 * 60
 }
 
 const moveToNewBucket = (item, { value }) => {
   const newGroup = item.group + value;
-  return { 
+  return {
     group: newGroup,
-    repeatedAt: moment().add(INTERVALS_FOR_GROUP[newGroup], 'minute').toDate()
+    repeated_at: moment().add(INTERVALS_FOR_GROUP[newGroup], 'minute').toDate()
   };
 };
 
