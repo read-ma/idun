@@ -1,12 +1,12 @@
 require('./FlashcardsQuiz.scss');
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { loadDeckForArticle, endQuiz, markItem } from '../actions/deck';
+import { loadDeckForArticle, markItem } from '../actions/deck';
 import Flashcard from './Flashcard';
 import FlashcardSettings from './FlashcardSettings';
 import FlashcardProgress from './FlashcardProgress';
 
-const DummyRow = ({word, group, repeated_at}) => {
+const DummyRow = ({ word, group, repeated_at }) => {
   return (
     <tr>
       <td>{word}</td>
@@ -14,6 +14,12 @@ const DummyRow = ({word, group, repeated_at}) => {
       <td>{ repeated_at && repeated_at.toString()}</td>
     </tr>
   );
+};
+
+DummyRow.propTypes = {
+  word: React.PropTypes.string.isRequired,
+  group: React.PropTypes.string.isRequired,
+  repeated_at: React.PropTypes.string.isRequired,
 };
 
 class FlashcardsQuiz extends Component {
@@ -36,11 +42,17 @@ class FlashcardsQuiz extends Component {
   }
 
   render() {
-    if (!this.props.currentItem) return false;
+    if (!this.props.currentItem) {
+      return false;
+    }
     return (
       <div className="row flashcards-container">
         <div className="col-sm-6 col-sm-offset-2">
-          <Flashcard key={this.props.currentItem.id} item={this.props.currentItem} markItem={this.props.markItem} startWithObverse={this.state.settings.startWith === 'word'} />
+          <Flashcard
+          key={this.props.currentItem.id}
+          item={this.props.currentItem}
+          markItem={this.props.markItem}
+          startWithObverse={this.state.settings.startWith === 'word'} />
           <FlashcardProgress itemsNumber={this.props.items.length} itemIndex={1} />
           <div className="row">
             <table><tbody>
@@ -62,6 +74,9 @@ FlashcardsQuiz.propTypes = {
   items: React.PropTypes.array.isRequired,
   show: React.PropTypes.bool,
   endQuiz: React.PropTypes.func,
+  currentItem: React.PropTypes.object,
+  params: React.PropTypes.object,
+  markItem: React.PropTypes.func
 };
 
 function getItems(state) {
@@ -72,9 +87,9 @@ function getItems(state) {
   return state.deck
               .cards
               .filter(card => card.group < 4)
-              .map(card => card.repeated_at ? card : Object.assign({}, card, {repeated_at: new Date()}))
+              .map(card => card.repeated_at ? card : Object.assign({}, card, { repeated_at: new Date() }))
               .sort((card_a, card_b) => new Date(card_a.repeated_at) - new Date(card_b.repeated_at));
-};
+}
 
 function mapStateToProps(state) {
   let items = getItems(state);

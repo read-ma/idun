@@ -2,14 +2,15 @@ import React from 'react';
 import _ from 'lodash';
 
 const isSeparator = token => token.match(/^[\,\.\?\!\)\(\)\”\"\“\'\:\;\“\‘\’]$/);
-const Separator = ({ children, separator }) => <span>{children}</span>;
+const Separator = ({ children }) => <span>{children}</span>;
 
-const markSelectedInDict = (tokens, wordlist) => {
-  wordlist.words.forEach(word => {
-    tokensContainingWord(tokens, word)
-      .forEach(token => token.classNames.push(wordlist.name));
-  });
-  return tokens;
+const findAllOccurenceIndexes = (arr, item) => {
+  return arr.reduce((prev, current, currentIndex) => {
+    if (_.isEqual(current.word.toLowerCase(), item.toLowerCase())) {
+      prev.push(currentIndex);
+    }
+    return prev;
+  }, []);
 };
 
 const tokensContainingWord = (tokens, word) => {
@@ -20,19 +21,20 @@ const tokensContainingWord = (tokens, word) => {
   findAllOccurenceIndexes(tokens, words[0]).forEach(idx => {
     let matchCandidate = tokens.slice(idx, idx+words.length);
 
-    if (_.isEqual(words, matchCandidate.map(t => t.word.toLowerCase())))
+    if (_.isEqual(words, matchCandidate.map(t => t.word.toLowerCase()))) {
       result = result.concat(matchCandidate);
+    }
   });
 
   return result;
 };
 
-const findAllOccurenceIndexes = (arr, item) => {
-  return arr.reduce((prev, current, currentIndex, array) => {
-    if (_.isEqual(current.word.toLowerCase(), item.toLowerCase()))
-      prev.push(currentIndex);
-    return prev;
-  }, []);
+const markSelectedInDict = (tokens, wordlist) => {
+  wordlist.words.forEach(word => {
+    tokensContainingWord(tokens, word)
+      .forEach(token => token.classNames.push(wordlist.name));
+  });
+  return tokens;
 };
 
 class Token {
@@ -62,7 +64,9 @@ const detokenize = tokens => {
 
     let quote = p.props.separator && isQuoteMark(p.props.word);
 
-    if (quote) openningQuoteMark = !openningQuoteMark;
+    if (quote) {
+      openningQuoteMark = !openningQuoteMark;
+    }
 
     let spaceBefore = p.props.separator && p.props.word.match(/^[\(\“\“]$/);
     let noSpace = previous && previous.props.separator && (previous.props.word.match(/^[\(\[]$/) || (isQuoteMark(previous.props.word) && openningQuoteMark));
@@ -71,11 +75,13 @@ const detokenize = tokens => {
       output.push(' ');
     }
 
-    if (quote && openningQuoteMark && (previous && !previous.props.word.match(/^[\(]$/)))
+    if (quote && openningQuoteMark && (previous && !previous.props.word.match(/^[\(]$/))) {
       output.push(' ');
+    }
 
-    if (!p.props.separator && output.length != 0 && !noSpace)
+    if (!p.props.separator && output.length !== 0 && !noSpace) {
       output.push(' ');
+    }
 
     output.push(p);
   });

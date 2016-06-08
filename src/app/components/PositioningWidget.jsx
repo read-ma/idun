@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { pageScrolled } from '../actions/articles';
 import ls from '../localStore.js';
@@ -28,23 +28,23 @@ class PositioningWidget extends Component {
 
   handleScroll(event) {
     let target = event.target || event.srcElement;
-    this.setState({ position : target.body.scrollTop });
+    this.setState({ position: target.body.scrollTop });
   }
 
   render() {
     return false;
 
-    return (
-      <span style={{ position: 'fixed', left: 0, top: 0, zIndex: 1000, backgroundColor: '#eee' }}>
-        {JSON.stringify(this.props.positions)}
-        {JSON.stringify(this.state)}
-      </span>);
+    // return (
+    //   <span style={{ position: 'fixed', left: 0, top: 0, zIndex: 1000, backgroundColor: '#eee' }}>
+    //     {JSON.stringify(this.props.positions)}
+    //     {JSON.stringify(this.state)}
+    //   </span>);
   }
 }
 
 PositioningWidget.propTypes = {
-  pageId: PropTypes.string.isRequired,
-  positions: PropTypes.object
+  pageId: React.PropTypes.string.isRequired,
+  positions: React.PropTypes.object
 };
 
 const mapStateToProps = (state) => {
@@ -59,7 +59,7 @@ const mapActionsToProps = (dispatch) => {
       dispatch(pageScrolled(id, position));
     },
     synchLocalStorage(key, value) {
-     ls.set(key, JSON.stringify(value));
+      ls.set(key, JSON.stringify(value));
     }
   };
 };

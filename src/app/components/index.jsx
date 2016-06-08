@@ -15,6 +15,10 @@ class ShowIf extends React.Component {
   }
 }
 
+ShowIf.propTypes = {
+  condition: React.PropTypes.bool.isRequired,
+};
+
 export {
   Home, Profile, Articles, ArticlePage, Main, Wordlists, UserDefinitionsLearn, UserDefinitionsList,
   DefinitionBoxes, ShowIf

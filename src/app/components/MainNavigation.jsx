@@ -1,7 +1,6 @@
 require('./MainNavigation.scss');
 import React from 'react';
 import { connect } from 'react-redux';
-import Settings from './Settings';
 import { logout } from '../actions/auth';
 import { closeNav } from '../actions';
 
@@ -17,7 +16,6 @@ import NavigationClose from 'material-ui/lib/svg-icons/navigation/close';
 import ActionReorder from 'material-ui/lib/svg-icons/action/reorder';
 import SocialSchool from 'material-ui/lib/svg-icons/social/school';
 import NavigationApps from 'material-ui/lib/svg-icons/navigation/apps';
-import ActionSettings from 'material-ui/lib/svg-icons/action/settings';
 import ActionPowerSettingsNew from 'material-ui/lib/svg-icons/action/power-settings-new';
 
 const MainNavigation = ({ logout, children, open, closeNav }) => {
@@ -41,20 +39,23 @@ const MainNavigation = ({ logout, children, open, closeNav }) => {
 MainNavigation.propTypes = {
   logout: React.PropTypes.func.isRequired,
   children: React.PropTypes.object,
-  // displaySearchBar: React.PropTypes.bool.isRequired,
 };
 
 const mapActionsToProps = dispatch => {
   return {
-    logout() { dispatch(logout()); },
-    closeNav() { dispatch(closeNav('left')); }
+    logout() {
+      dispatch(logout());
+    },
+    closeNav() {
+      dispatch(closeNav('left'));
+    }
   };
 };
 
 const mapStateToProps = state => {
   return {
     open: state.settings.navOpen.left
-  }
+  };
 };
 
 export default connect(mapStateToProps, mapActionsToProps)(MainNavigation);

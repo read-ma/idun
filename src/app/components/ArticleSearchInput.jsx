@@ -25,7 +25,7 @@ class ArticleSearchInput extends Component {
         hintText="Search for article"
         underlineShow={false}
         hintStyle={{ paddingLeft: 20 }}
-        inputStyle={{ paddingLeft: 20, color: "#555" }}
+        inputStyle={{ paddingLeft: 20, color: '#555' }}
         style={{
           width: '83.333%',
           marginRight: 'auto',
@@ -36,6 +36,11 @@ class ArticleSearchInput extends Component {
     />);
   }
 }
+
+ArticleSearchInput.propTypes = {
+  updateArticlesFilter: React.PropTypes.function,
+  filter: React.PropTypes.string,
+};
 
 function mapStateToProps(state) {
   return {

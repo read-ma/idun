@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import IconButton from 'material-ui/lib/icon-button';
+import React from 'react';
 import LinearProgress from 'material-ui/lib/linear-progress';
 
 const FlashcardProgress = (props) => {
@@ -13,6 +12,11 @@ const FlashcardProgress = (props) => {
       </div>
     </div>
   );
+};
+
+FlashcardProgress.propTypes = {
+  itemIndex: React.PropTypes.number.isRequired,
+  itemsNumber: React.PropTypes.number.isRequired,
 };
 
 export default FlashcardProgress;

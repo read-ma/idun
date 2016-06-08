@@ -42,7 +42,9 @@ class Flashcard extends Component {
   }
 
   revert() {
-    if (this.state.reverted) { return; }
+    if (this.state.reverted) {
+      return;
+    }
     this.setState({ reverted: !this.state.reverted, side: this.state.side === 'reverse' ? 'obverse' : 'reverse' });
   }
 
@@ -87,12 +89,24 @@ class Flashcard extends Component {
     });
     return (
       <div>
-        <ReactCSSTransitionGroup transitionName="fadein" transitionAppear={true} transitionLeave={false} transitionEnterTimeout={500} transitionAppearTimeout={500} style={{width: '100%'}}>
+        <ReactCSSTransitionGroup
+        transitionName="fadein"
+        transitionAppear={true}
+        transitionLeave={false}
+        transitionEnterTimeout={500}
+        transitionAppearTimeout={500}
+        style={{ width: '100%' }}>
           <div className="row card-wrap" key={this.props.item.word}>
-            <ReactCSSTransitionGroup transitionName="flip" transitionLeave={true} transitionAppear={false} transitionEnterTimeout={500} transitionLeaveTimeout={500} style={{width: '100%'}}>
+            <ReactCSSTransitionGroup
+            transitionName="flip"
+            transitionLeave={true}
+            transitionAppear={false}
+            transitionEnterTimeout={500}
+            transitionLeaveTimeout={500}
+            style={{ width: '100%' }}>
               <div className={cardClassnames} key={this.state.side} onClick={this.revert}>
                 <Paper style={style} zDepth={2}>
-                  <div className="row middle-xs between-xs" style={{height: '100%'}}>
+                  <div className="row middle-xs between-xs" style={{ height: '100%' }}>
                     <div className="col-xs-12">
                       {side}
                     </div>

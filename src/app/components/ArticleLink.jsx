@@ -11,7 +11,7 @@ function difficultyLevel(difficulty) {
   return <strong className={difficulty}>{l(difficulty)}</strong>;
 }
 
-export default function ArticleLink({ id, title, tags, privy, difficulty, learned, visited }) {
+export default function ArticleLink({ id, title, tags, privy, difficulty, learned }) {
   return (
     <ListItem
       key={id}
@@ -25,8 +25,7 @@ export default function ArticleLink({ id, title, tags, privy, difficulty, learne
       rightIcon={learned ? <NavigationCheck /> : <i/>}
       leftIcon={privy ? <ActionLock /> : <i/>}
       href={`#/article/${id}`}
-    >
-    </ListItem>
+    />
   );
 }
 

@@ -11,8 +11,9 @@ class Word extends Component {
   }
 
   render() {
-    if (this.props.separator)
+    if (this.props.separator) {
       return <span>{ this.props.word }</span>;
+    }
 
     return (
       <span className={classnames('word', this.props.className)} onClick={this.selectWord.bind(this)}>
@@ -25,30 +26,43 @@ class Word extends Component {
   }
 }
 
+
+Word.propTypes = {
+  separator: React.PropTypes.array,
+  word: React.PropTypes.string.isRequired,
+  className: React.PropTypes.string.isRequired,
+  onClick: React.PropTypes.func.isRequired,
+};
+
+
 const ArticlePara = ({ tokens, handleWordClick, wordlists }) => {
   tokens = tokens.map(p => new Token(p));
-
   wordlists.forEach(list => tokens = markSelectedInDict(tokens, list));
 
   const paragraph = tokens.map((token, i) => {
     return (
       <Word
-        className={token.className()} word={token.word}
+        className={token.className()}
+        word={token.word}
         key={`word-${i}-${token.word}`}
         separator={isSeparator(token.word)}
-        onClick={handleWordClick} />);
+        onClick={handleWordClick} />
+    );
   });
 
-  return (
-    <div className='paragraph'>{detokenize(paragraph)}</div>);
+  return <div className="paragraph">{detokenize(paragraph)}</div>;
+};
+
+ArticlePara.propTypes = {
+  tokens: React.PropTypes.array.isRequired,
+  handleWordClick: React.PropTypes.func.isRequired,
+  wordlists: React.PropTypes.array.isRequired,
 };
 
 class ArticleContent extends Component {
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
-
-    this.currentTimeout = undefined;
     this.state = { selection: [] };
   }
 
@@ -76,7 +90,9 @@ class ArticleContent extends Component {
     let title = paragraphs[0];
     let content = paragraphs.slice(1);
 
-    if (!content) return false;
+    if (!content) {
+      return false;
+    }
 
     return (
       <div className={classnames('content flow-text', { appending: this.state.appending })} onMouseUp={this.props.onTextSelected}>

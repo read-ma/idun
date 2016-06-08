@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import store from '../store';
 import sidebarBoxRegistry from './boxes';
-import classnames from 'classnames';
 
 class DefinitionBoxes extends Component {
   render() {
-    let boxes = this.props.boxes
-                    .map(box =>
+    let boxes = this.props.boxes.map(box =>
                           React.createElement(sidebarBoxRegistry.get(box.component), {
                             key: box.key,
                             wordLimit: box.wordLimit,
@@ -25,10 +22,12 @@ class DefinitionBoxes extends Component {
   }
 }
 
-const FilterButton = ({ active, name, value, onClick }) => {
-  return (
-    <button className={classnames({ active: active })} name={name} value={value} onClick={onClick}>{value}</button>
-  );
+DefinitionBoxes.propTypes = {
+  selectedText: React.PropTypes.string.isRequired,
+  selectedTextContext: React.PropTypes.object.isRequired,
+  dispatch: React.PropTypes.func,
+  data: React.PropTypes.array.isRequired,
+  boxes: React.PropTypes.array.isRequired,
 };
 
 function mapStateToProps(state) {

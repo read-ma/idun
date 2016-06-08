@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { map } from 'lodash';
+import { map } from 'lodash/map';
 import l from '../I18n';
 import _ from 'lodash';
 import { updateArticlesFilter } from '../actions/articles';
@@ -34,6 +34,12 @@ const FilterCheckboxes = ({ onChange, filter, fields }) => {
   );
 };
 
+FilterCheckboxes.propTypes = {
+  onChange: React.PropTypes.func.isRequired,
+  filter: React.PropTypes.object.isRequired,
+  fields: React.PropTypes.object.isRequired,
+};
+
 class ArticleFilter extends Component {
   constructor(props) {
     super(props);
@@ -52,7 +58,6 @@ class ArticleFilter extends Component {
     this.props.updateArticlesFilter(change);
   }
 
-
   render() {
     return (
       <div>
@@ -64,6 +69,12 @@ class ArticleFilter extends Component {
     );
   }
 }
+
+ArticleFilter.propTypes = {
+  filter: React.PropTypes.object.isRequired,
+  fields: React.PropTypes.object.isRequired,
+  updateArticlesFilter: React.PropTypes.func.isRequired,
+};
 
 function mapStateToProps(state) {
   return {
@@ -79,6 +90,5 @@ const mapActionsToProps = (dispatch) => {
     }
   };
 };
-
 
 export default connect(mapStateToProps, mapActionsToProps)(ArticleFilter);

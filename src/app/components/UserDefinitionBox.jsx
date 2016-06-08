@@ -23,4 +23,8 @@ class UserDefinitionBox extends Component {
   }
 }
 
+UserDefinitionBox.propTypes = {
+  item: React.PropTypes.object.isRequired
+};
+
 export default UserDefinitionBox;

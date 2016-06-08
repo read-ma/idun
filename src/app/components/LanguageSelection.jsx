@@ -49,6 +49,12 @@ class LanguageBar extends Component {
   }
 }
 
+LanguageBar.propTypes = {
+  language: React.PropTypes.object,
+  changeLanguage: React.PropTypes.func,
+  languages: React.PropTypes.array.isRequired,
+};
+
 function mapStateToProps(state) {
   return {
     languages: state.settings.languages,
@@ -63,6 +69,5 @@ const mapActionsToProps = (dispatch) => {
     }
   };
 };
-
 
 export default connect(mapStateToProps, mapActionsToProps)(LanguageBar);

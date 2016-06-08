@@ -12,9 +12,7 @@ const ArticleList = ({ articles }) => {
     return new ArticleLink(article);
   });
 
-  return (
-    <List>{articleLinks}</List>
-  );
+  return <List>{articleLinks}</List>;
 };
 
 ArticleList.propTypes = {

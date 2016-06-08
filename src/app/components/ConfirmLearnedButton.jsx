@@ -7,8 +7,9 @@ const ConfirmLearnedButton = ({ confirmLearned, articleId, articleLearned }) => 
     confirmLearned(articleId);
   };
 
-  if (articleLearned || typeof articleLearned === 'undefined')
+  if (articleLearned || typeof articleLearned === 'undefined') {
     return <span></span>;
+  }
 
   return (
     <a className="btn btn-large" onClick={onConfirmLearned}>
@@ -16,6 +17,12 @@ const ConfirmLearnedButton = ({ confirmLearned, articleId, articleLearned }) => 
       Mark all words from this article as learned
     </a>
   );
+};
+
+ConfirmLearnedButton.propTypes = {
+  confirmLearned: React.PropTypes.function,
+  articleId: React.PropTypes.number.isRequired,
+  articleLearned: React.PropTypes.bool.isRequired,
 };
 
 const mapActionsToProps = (dispatch) => {

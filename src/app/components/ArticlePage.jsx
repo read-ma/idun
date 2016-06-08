@@ -20,8 +20,11 @@ const ArticleFooter = ({ sourceUrl }) => {
   );
 };
 
-class ArticlePage extends Component {
+ArticleFooter.propTypes = {
+  sourceUrl: React.PropTypes.string.isRequired,
+};
 
+class ArticlePage extends Component {
   componentDidMount() {
     this.props.loadArticle(this.props.params.id);
     this.props.loadUserDefinitions();
@@ -52,6 +55,14 @@ class ArticlePage extends Component {
   }
 }
 
+ArticlePage.propTypes = {
+  onTextSelected: React.PropTypes.function,
+  article: React.PropTypes.object.isRequired,
+  params: React.PropTypes.object.isRequired,
+  loadArticle: React.PropTypes.function,
+  loadUserDefinitions: React.PropTypes.function,
+  articlePageClosed: React.PropTypes.function,
+};
 
 const mapActionsToProps = (dispatch) => {
   return {

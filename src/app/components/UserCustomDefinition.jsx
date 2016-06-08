@@ -32,8 +32,9 @@ class UserCustomDefinition extends Component {
   }
 
   render() {
-    if (!this.props.selectedText) return false;
-
+    if (!this.props.selectedText) {
+      return false;
+    }
     let definitions = this.state.userDefinitions.map(def => <ListItem key={def.translation}>{def.translation}</ListItem>);
     let subheader = `Add your definition for: ${this.props.selectedText}`;
     let AddContent = <IconButton onClick={this.saveUserDefinition}><ContentAdd /></IconButton>;
@@ -65,7 +66,9 @@ function mapStateToProps(state) {
 const mapActionsToProps = (dispatch) => {
   return {
     saveUserDefinition(word, definition) {
-      if (!definition.translation) return;
+      if (!definition.translation) {
+        return;
+      }
       dispatch(
         saveUserDefinition(Object.assign({}, { word: word }, definition))
       );

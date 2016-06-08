@@ -23,7 +23,7 @@ class UserDefinitionsLearn extends Component {
     );
   }
 
-  startQuizForArticle(articleId) {
+  startQuizForArticle(/* articleId */) {
   }
 
   renderArticles() {

@@ -27,7 +27,9 @@ class SelectedTextInput extends React.Component {
   }
 
   triggerSearch(event) {
-    if (event) event.preventDefault();
+    if (event) {
+      event.preventDefault();
+    }
 
     this.props.search(this.state.text);
   }
@@ -63,7 +65,9 @@ const mapStateToProps = state => {
 const mapActionsToProps = (dispatch) => {
   return {
     search(text) {
-      if (text) dispatch(textSelected(text));
+      if (text) {
+        dispatch(textSelected(text));
+      }
     },
   };
 };
