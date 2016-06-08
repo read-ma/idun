@@ -30,15 +30,15 @@ class Flashcard extends Component {
   }
 
   markEasy() {
-    this.mark('easy');
+    this.mark(1);
   }
 
   markHard() {
-    this.mark('hard');
+    this.mark(-1);
   }
 
   mark(level) {
-    this.props.markItem(this.props.item, level);
+    this.props.markItem(this.props.item.id, level);
   }
 
   revert() {

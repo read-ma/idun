@@ -61,4 +61,11 @@ function loadDecks() {
   };
 }
 
-export { endQuiz, loadDeckForArticle, loadDecks }
+function markItem(id, value) {
+  return {
+    type: "MARK_ITEM",
+    id, value
+  }
+}
+
+export { endQuiz, loadDeckForArticle, loadDecks, markItem }

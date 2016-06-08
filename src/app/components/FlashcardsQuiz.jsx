@@ -1,25 +1,27 @@
 require('./FlashcardsQuiz.scss');
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { loadDeckForArticle, endQuiz } from '../actions';
+import { loadDeckForArticle, endQuiz, markItem } from '../actions/deck';
 import Flashcard from './Flashcard';
 import FlashcardSettings from './FlashcardSettings';
 import FlashcardProgress from './FlashcardProgress';
 
-function mapStateToProps(state) {
-  return { items: state.deck.cards };
+const DummyRow = ({word, group, repeatedAt}) => {
+  return (
+    <tr>
+      <td>{word}</td>
+      <td>{group}</td>
+      <td>{ repeatedAt && repeatedAt.toString()}</td>
+    </tr>
+  );
 }
 
 class FlashcardsQuiz extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      items: props.items,
-      currentItem: (props.items || [])[0],
-      itemIndex: 0,
-      settings: { startWith: 'definition' },
+      settings: { startWith: 'definition' }
     };
-    this.markItem = this.markItem.bind(this);
     this.changeSettings = this.changeSettings.bind(this);
   }
 
@@ -29,61 +31,24 @@ class FlashcardsQuiz extends Component {
     );
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      items: nextProps.items,
-      currentItem: nextProps.items[0],
-      itemIndex: 0,
-    });
-  }
-
-  markItem(item, markValue) {
-    const items = this.state.items;
-    const itemIndex = items.indexOf(item);
-    const newItems = items.slice();
-
-    item.mastered = markValue === 'easy';
-    newItems.splice(itemIndex, 1, item);
-
-    if (this.isQuizOngoing()) {
-      this.setState({
-        currentItem: this.fetchNextElement(this.state.items, this.state.currentItem),
-        items: newItems,
-        itemIndex: itemIndex + 1,
-      });
-    } else {
-      this.props.dispatch(endQuiz({items: this.state.items}));
-    }
-  }
-
-  isQuizOngoing() {
-    return (this.state.itemIndex + 1) < this.state.items.length;
-  }
-
-  fetchNextElement(list, element) {
-    let nextElementIndex = list.indexOf(element) + 1;
-    if (nextElementIndex >= list.length) {
-      nextElementIndex = 0;
-    }
-    return list[nextElementIndex];
-  }
-
-  fetchPrevElement(list, element) {
-    const nextElementIndex = list.indexOf(element) - 1;
-    return list[nextElementIndex];
-  }
-
   changeSettings(settings) {
     this.setState({ settings });
   }
 
   render() {
-    if (!this.state.currentItem) return false;
+    if (!this.props.currentItem) return false;
     return (
       <div className="row flashcards-container">
         <div className="col-sm-6 col-sm-offset-2">
-          <Flashcard key={this.state.currentItem.word} item={this.state.currentItem} markItem={this.markItem} startWithObverse={this.state.settings.startWith === 'word'} />
-          <FlashcardProgress itemsNumber={this.state.items.length} itemIndex={this.state.itemIndex} />
+          <Flashcard key={this.props.currentItem.id} item={this.props.currentItem} markItem={this.props.markItem} startWithObverse={this.state.settings.startWith === 'word'} />
+          <FlashcardProgress itemsNumber={this.props.items.length} itemIndex={1} />
+          <div className="row">
+            <table>
+              {
+                this.props.items.map(item => DummyRow(item))
+              }
+            </table>
+          </div>
         </div>
         <div className="col-sm-3 col-sm-offset-1">
           <FlashcardSettings changeSettings={this.changeSettings} startWith={this.state.settings.startWith} />
@@ -94,9 +59,33 @@ class FlashcardsQuiz extends Component {
 }
 
 FlashcardsQuiz.propTypes = {
-  items: React.PropTypes.array,
+  items: React.PropTypes.array.isRequired,
   show: React.PropTypes.bool,
   endQuiz: React.PropTypes.func,
 };
 
-export default connect(mapStateToProps)(FlashcardsQuiz);
+function getItems(state) {
+  if (!state.deck.cards) return [];
+  
+  return state.deck.cards.filter(card => card.group < 4);
+}
+
+function mapStateToProps(state) {
+  let items = getItems(state);
+  return {
+    items: items,
+    currentItem: items[0],
+  };
+}
+
+const mapActionsToProps = (dispatch) => {
+  return {
+    markItem(id, value) {
+      dispatch(markItem(id, value));
+    }
+  };
+};
+
+
+
+export default connect(mapStateToProps, mapActionsToProps)(FlashcardsQuiz);
