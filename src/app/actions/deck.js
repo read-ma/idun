@@ -1,4 +1,4 @@
-import {push} from 'react-router-redux';
+import { push } from 'react-router-redux';
 import api from '../api';
 import { store } from 'react-redux';
 
@@ -19,7 +19,8 @@ function deckFinished(deck) {
 function endQuiz(deck) {
   return (dispatch) => {
     dispatch(deckFinished(deck));
-    dispatch(push(`/results`));
+    dispatch(
+      push('/results'));
   };
 }
 

@@ -24,6 +24,8 @@ ArticleFooter.propTypes = {
   sourceUrl: React.PropTypes.string.isRequired,
 };
 
+const LoadingArticle = () => <span>...</span>;
+
 class ArticlePage extends Component {
   componentDidMount() {
     this.props.loadArticle(this.props.params.id);
@@ -35,6 +37,9 @@ class ArticlePage extends Component {
   }
 
   render() {
+    if (!this.props.article.id) {
+      return <LoadingArticle />;
+    }
     return (
       <div>
         <div className="row">
@@ -56,12 +61,12 @@ class ArticlePage extends Component {
 }
 
 ArticlePage.propTypes = {
-  onTextSelected: React.PropTypes.function,
+  onTextSelected: React.PropTypes.func,
   article: React.PropTypes.object.isRequired,
   params: React.PropTypes.object.isRequired,
-  loadArticle: React.PropTypes.function,
-  loadUserDefinitions: React.PropTypes.function,
-  articlePageClosed: React.PropTypes.function,
+  loadArticle: React.PropTypes.func,
+  loadUserDefinitions: React.PropTypes.func,
+  articlePageClosed: React.PropTypes.func,
 };
 
 const mapActionsToProps = (dispatch) => {

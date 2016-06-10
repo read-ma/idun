@@ -1,15 +1,15 @@
 import React from 'react';
 
-import { Home, Main, Articles, ArticlePage, UserDefinitionsLearn, UserDefinitionsList } from '../components';
+import { Main, Articles, ArticlePage, UserDefinitionsLearn, UserDefinitionsList } from '../components';
 import Login from '../components/Login';
 import SignUpForm from '../components/SignUpForm';
 import Settings from '../components/Settings';
-import Profile from '../components/Profile';
 import PasswordReminderView from '../components/PasswordReminderView';
 import FlashcardsQuiz from '../components/FlashcardsQuiz';
 import FlashcardsQuizResults from '../components/FlashcardsQuizResults';
 import ChangePasswordView from '../components/ChangePasswordView';
 import ArticleSearchInput from '../components/ArticleSearchInput';
+import WordSearchInput from '../components/WordSearchInput';
 
 
 import { Route, IndexRedirect } from 'react-router';
@@ -30,10 +30,16 @@ export default (
     <Route path="/learn/:id" component={requireAuthentication(FlashcardsQuiz)} />
     <Route path="/results" component={requireAuthentication(FlashcardsQuizResults)} />
     <Route path="/definitions" component={UserDefinitionsList} />
-
-    <Route path="/articles" components={{ children: requireAuthentication(Articles), navChildren: ArticleFilter, topNavChildren: ArticleSearchInput }} />
+    <Route path="/articles"
+      components={{ children: requireAuthentication(Articles),
+                    navChildren: ArticleFilter,
+                    topNavChildren: ArticleSearchInput }} />
     <Route path="/new-article" component={AddArticle} />
-    <Route path="/article/:id" components={{ children: requireAuthentication(ArticlePage), navChildren: Settings} } />
+    <Route path="/article/:id"
+      components={{ children: requireAuthentication(ArticlePage),
+                    navChildren: Settings,
+                    topNavChildren: WordSearchInput } } />
+
     <IndexRedirect to="/articles" />
   </Route>
 

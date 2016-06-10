@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { updatePassword } from '../actions/auth';
 import NotificationBox from './NotificationBox';
+import { push } from 'react-router-redux';
 
 class ChangePasswordView extends React.Component {
   constructor(props) {
@@ -18,7 +19,8 @@ class ChangePasswordView extends React.Component {
 
   componentDidMount() {
     if (!this.state.resetPasswordToken) {
-      this.props.dispatch(push('/Login'));
+      this.props.dispatch(
+        push('/Login'));
     }
   }
 
@@ -49,7 +51,7 @@ class ChangePasswordView extends React.Component {
 
 ChangePasswordView.propTypes = {
   location: React.PropTypes.object,
-  dispatch: React.PropTypes.function,
+  dispatch: React.PropTypes.func,
   error: React.PropTypes.array.isRequired,
 };
 

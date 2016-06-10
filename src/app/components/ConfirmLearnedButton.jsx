@@ -20,8 +20,8 @@ const ConfirmLearnedButton = ({ confirmLearned, articleId, articleLearned }) => 
 };
 
 ConfirmLearnedButton.propTypes = {
-  confirmLearned: React.PropTypes.function,
-  articleId: React.PropTypes.number.isRequired,
+  confirmLearned: React.PropTypes.func,
+  articleId: React.PropTypes.string.isRequired,
   articleLearned: React.PropTypes.bool.isRequired,
 };
 
@@ -35,7 +35,7 @@ const mapActionsToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
   return {
-    articleLearned: state.article.learned
+    articleLearned: !!state.article.learned
   };
 };
 
