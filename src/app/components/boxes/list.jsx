@@ -12,12 +12,11 @@ import KeyboardArrowDown from 'material-ui/lib/svg-icons/hardware/keyboard-arrow
 const LanguageIcon = ({ lang }) => {
   let language = lang === 'en' ? 'gb' : lang;
 
-  if (language)
-    return (
-      <span className={`left flag-icon flag-icon-${language}`}></span>
-    );
-  else
+  if (language) {
+    return <span className={`left flag-icon flag-icon-${language}`}></span>;
+  } else {
     return <span></span>;
+  }
 };
 
 function DefinitionListItem({ text, language, url, partOfSpeech, handleClick, key }) {
@@ -27,13 +26,13 @@ function DefinitionListItem({ text, language, url, partOfSpeech, handleClick, ke
 
   let AddContent = <IconButton onClick={add}><ContentAdd /></IconButton>;
 
-  if (url)
+  if (url) {
     return (
       <ListItem>
         <img data-caption={text} src={url} alt={text} key={key}/>
       </ListItem>
     );
-  else
+  } else {
     return (
       <ListItem key={key}
                 rightIconButton={AddContent}
@@ -41,9 +40,10 @@ function DefinitionListItem({ text, language, url, partOfSpeech, handleClick, ke
                 disabled={true}>
 
         <LanguageIcon lang={language} />
-        {text}
+        <span dangerouslySetInnerHTML={{ __html: text }} />
       </ListItem>
     );
+  }
 }
 
 const LOW_LIMIT = 2;
@@ -65,7 +65,7 @@ class DefinitionList extends Component {
   }
 
   render() {
-    let items = this.props.items.slice(0, this.state.itemsToShowNumber).map((item, index) =>
+    let items = this.props.items.slice(0, this.state.itemsToShowNumber).map((item) =>
       DefinitionListItem(Object.assign({}, item, { handleClick: this.props.handleClick }))
     );
 

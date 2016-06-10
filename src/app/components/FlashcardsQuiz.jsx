@@ -52,7 +52,7 @@ class FlashcardsQuiz extends Component {
           key={this.props.currentItem.id}
           item={this.props.currentItem}
           markItem={this.props.markItem}
-          startWithObverse={this.state.settings.startWith === 'word'} />
+          startWithObverse={true} />
           <FlashcardProgress itemsNumber={this.props.items.length} itemIndex={1} />
           <div className="row">
             <table><tbody>

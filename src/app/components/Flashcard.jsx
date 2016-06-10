@@ -51,7 +51,7 @@ class Flashcard extends Component {
   obverse() {
     return (
       <div className="card-obverse">
-        {this.props.item.word}
+        <small dangerouslySetInnerHTML={{ __html: this.props.item.word }} />
       </div>
     );
   }
@@ -59,9 +59,9 @@ class Flashcard extends Component {
   reverse() {
     return (
       <div className="card-reverse">
-        {this.props.item.translation}
-        <p>{this.props.item.definition}</p>
-        <p>{this.props.item.example}</p>
+        <div dangerouslySetInnerHTML={{ __html: this.props.item.translation }} />
+        <hr />
+        <small dangerouslySetInnerHTML={{ __html: this.props.item.example }} />
       </div>
     );
   }
