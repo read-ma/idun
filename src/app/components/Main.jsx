@@ -10,11 +10,15 @@ import AppBar from 'material-ui/lib/app-bar';
 const styles = {
   appbar: {
     position: 'fixed',
-    width: '100%'
+    width: '100%',
+    top: 0,
+    title: {
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center'
+    }
   },
-  articleslist: {
-    paddingTop: 130
-  }
+  articleslist: {}
 };
 
 class Main extends React.Component {
@@ -29,11 +33,7 @@ class Main extends React.Component {
           onLeftIconButtonTouchTap={this.props.openNav}
           style={styles.appbar}
           title={this.props.topNavChildren}
-          titleStyle={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center'
-          }}
+          titleStyle={styles.appbar.title}
         />
         <MainNavigaton displaySearchBar={this.displaySearchBar()} isAuthenticated={this.props.isAuthenticated}>
           {this.props.navChildren}

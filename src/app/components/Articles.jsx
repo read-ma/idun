@@ -12,7 +12,7 @@ const ArticleList = ({ articles }) => {
     return new ArticleLink(article);
   });
 
-  return <List>{articleLinks}</List>;
+  return <List style={{ marginTop: '120px' }}>{articleLinks}</List>;
 };
 
 ArticleList.propTypes = {

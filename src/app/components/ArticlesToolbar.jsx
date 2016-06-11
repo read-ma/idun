@@ -17,6 +17,7 @@ const styles = {
     top: 64,
     left: 0,
     right: 0,
+    zIndex: 2,
     padding: '0',
     backgroundColor: '#fff',
     borderBottom: '1px solid #eee'
