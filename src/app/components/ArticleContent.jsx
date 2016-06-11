@@ -117,6 +117,7 @@ const mapStateToProps = (state) => {
     text: state.article.title && [...state.article.title, ...state.article.content] || []
   };
 };
+
 const mapActionsToProps = (dispatch) => {
   return {
     onWordSelected(text) {

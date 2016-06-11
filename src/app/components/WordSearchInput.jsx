@@ -19,4 +19,8 @@ const mapActionsToProps = (dispatch) => {
   };
 };
 
+WordSearchInput.defaultProps = {
+  hintText: "Search for translations and images"
+};
+
 export default connect(mapStateToProps, mapActionsToProps)(WordSearchInput);

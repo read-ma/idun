@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Main, Articles, ArticlePage, UserDefinitionsLearn, UserDefinitionsList } from '../components';
+import { Home, Main, Articles, ArticlePage, UserDefinitionsLearn, UserDefinitionsList } from '../components';
 import Login from '../components/Login';
 import SignUpForm from '../components/SignUpForm';
 import Settings from '../components/Settings';
@@ -22,6 +22,11 @@ import AddArticle from '../components/AddArticleWidget';
 export default (
   <Route path="/" component={Main}>
     <Route path="/login" component={Login} />
+    <Route
+      path="/home" components={{ children: Home,
+                                 navChildren: Settings,
+                                 topNavChildren: WordSearchInput }} />
+
     <Route path="/sign_up" component={SignUpForm} />
     <Route path="forgot_password" component={PasswordReminderView} />
     <Route path="reset_password" component={ChangePasswordView} />
@@ -34,13 +39,14 @@ export default (
       components={{ children: requireAuthentication(Articles),
                     navChildren: ArticleFilter,
                     topNavChildren: ArticleSearchInput }} />
+
     <Route path="/new-article" component={AddArticle} />
     <Route path="/article/:id"
       components={{ children: requireAuthentication(ArticlePage),
                     navChildren: Settings,
                     topNavChildren: WordSearchInput } } />
 
-    <IndexRedirect to="/articles" />
+    <IndexRedirect to="/home" />
   </Route>
 
 );
