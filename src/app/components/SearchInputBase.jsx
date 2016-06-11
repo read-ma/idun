@@ -29,7 +29,7 @@ class SearchInputBase extends Component {
         name="query"
        onChange={this.onFilterChange}
         value={this.state.query}
-        hintText="Search for article"
+        hintText={this.props.hintText}
         underlineShow={false}
         hintStyle={{ paddingLeft: 20 }}
         inputStyle={{ paddingLeft: 20, color: '#555' }}
@@ -47,6 +47,7 @@ class SearchInputBase extends Component {
 SearchInputBase.propTypes = {
   onFilterChange: React.PropTypes.func,
   query: React.PropTypes.string,
+  hintText: React.PropTypes.string,
 };
 
 export default SearchInputBase;

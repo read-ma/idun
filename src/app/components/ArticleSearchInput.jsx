@@ -19,4 +19,8 @@ const mapActionsToProps = (dispatch) => {
   };
 };
 
+ArticleSearchInput.defaultProps = {
+  hintText: 'Search for articles'
+};
+
 export default connect(mapStateToProps, mapActionsToProps)(ArticleSearchInput);
