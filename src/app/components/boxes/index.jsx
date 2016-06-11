@@ -7,7 +7,6 @@ import Divider from 'material-ui/lib/divider';
 
 
 class SimpleList extends Component {
-
   saveUserDefinition(selectedDefinition) {
     this.props.dispatch(
       saveUserDefinition(Object.assign({},
@@ -18,20 +17,32 @@ class SimpleList extends Component {
   }
 
   render() {
-    if (!_.isEmpty(this.props.items))
+    if (!_.isEmpty(this.props.items)) {
       return (
         <div>
           <Divider />
-          <DefinitionList key={this.props.label} items={this.props.items} label={this.props.label} handleClick={this.saveUserDefinition.bind(this)} />
+          <DefinitionList
+            key={this.props.label}
+            items={this.props.items}
+            label={this.props.label}
+            handleClick={this.saveUserDefinition.bind(this)}
+          />
         </div>
       );
-    else return false;
+    } else {
+      return false;
+    }
   }
 }
 
+SimpleList.propTypes = {
+  label: React.PropTypes.string,
+  items: React.PropTypes.array,
+  selectedText: React.PropTypes.string,
+  selectedTextContext: React.PropTypes.string, // Check when connected to the network
+};
 
 class RemoteList extends SimpleList {
-
   loadDefinition(props) {
     props.dispatch(findWordData(props.selectedText, props.boxKey));
   }
@@ -46,14 +57,14 @@ class RemoteList extends SimpleList {
     if (!!nextProps.selectedText
      && this.props.selectedText !== nextProps.selectedText
      && this.checkWordLimit(nextProps.selectedText, this.props.wordLimit)
-    )
+    ) {
       this.loadDefinition(nextProps);
+    }
   }
 }
 
 
 class SidebarBoxRegistry {
-
   constructor() {
     this.registry = {
       SimpleList: SimpleList,

@@ -20,7 +20,6 @@ ArticleList.propTypes = {
 };
 
 class Articles extends Component {
-
   constructor(props) {
     super(props);
     this.state = Object.assign({}, this.props);
@@ -39,8 +38,8 @@ class Articles extends Component {
   render() {
     return (
       <div>
-        <PositioningWidget pageId="article-list-page" />
         <ArticlesToolbar />
+        <PositioningWidget pageId="article-list-page" />
         <ArticleList articles={this.state.articles} />
       </div>
     );

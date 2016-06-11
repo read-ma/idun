@@ -49,6 +49,11 @@ class SignUpForm extends React.Component {
   }
 }
 
+SignUpForm.propTypes = {
+  signupMessage: React.PropTypes.string,
+  dispatch: React.PropTypes.func,
+};
+
 const mapStateToProps = (state) => {
   return {
     signupMessage: state.auth.signupMessage,

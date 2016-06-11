@@ -36,7 +36,15 @@ class ArticleAdd extends React.Component {
               <h4 className="left-align">Add article</h4>
 
               <div className="input-field">
-                <input type="url" name="sourceUrl" className="validate" ref="urlInput" id="sourceUrl" onChange={this.onChange} value={this.state.inputValue} />
+                <input
+                  type="url"
+                  name="sourceUrl"
+                  className="validate"
+                  ref="urlInput"
+                  id="sourceUrl"
+                  onChange={this.onChange}
+                  value={this.state.inputValue}
+                />
                 <label htmlFor="sourceUrl">Enter URL for article to import</label>
               </div>
 
@@ -79,7 +87,7 @@ const mapActionsToProps = (dispatch) => {
   };
 };
 
-function mapStateToProps(state) {
+function mapStateToProps() {
   return {};
 }
 

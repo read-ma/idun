@@ -17,6 +17,7 @@ class ShowIf extends React.Component {
 
 ShowIf.propTypes = {
   condition: React.PropTypes.bool.isRequired,
+  children: React.PropTypes.array,
 };
 
 export {

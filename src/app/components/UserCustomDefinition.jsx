@@ -55,6 +55,11 @@ class UserCustomDefinition extends Component {
   }
 }
 
+UserCustomDefinition.propTypes = {
+  saveUserDefinition: React.PropTypes.func,
+  selectedText: React.PropTypes.string,
+};
+
 function mapStateToProps(state) {
   return {
     selectedText: state.article.selectedText,

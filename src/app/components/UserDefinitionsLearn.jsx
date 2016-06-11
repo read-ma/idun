@@ -23,8 +23,7 @@ class UserDefinitionsLearn extends Component {
     );
   }
 
-  startQuizForArticle(/* articleId */) {
-  }
+  startQuizForArticle() {}
 
   renderArticles() {
     return (
@@ -70,6 +69,7 @@ class UserDefinitionsLearn extends Component {
 
 UserDefinitionsLearn.propTypes = {
   decks: React.PropTypes.array,
+  dispatch: React.PropTypes.func
 };
 
 

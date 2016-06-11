@@ -47,6 +47,15 @@ class Main extends React.Component {
   }
 }
 
+Main.propTypes = {
+  openNav: React.PropTypes.func,
+  topNavChildren: React.PropTypes.object,
+  isAuthenticated: React.PropTypes.bool,
+  navChildren: React.PropTypes.object,
+  children: React.PropTypes.object,
+  routes: React.PropTypes.array,
+};
+
 function mapStateToProps(state) {
   return {
     isAuthenticated: state.auth.isAuthenticated
@@ -55,7 +64,9 @@ function mapStateToProps(state) {
 
 const mapActionsToProps = dispatch => {
   return {
-    openNav() { dispatch(openNav('left')); }
+    openNav() {
+      dispatch(openNav('left'));
+    }
   };
 };
 

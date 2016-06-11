@@ -11,12 +11,19 @@ import KeyboardArrowDown from 'material-ui/lib/svg-icons/hardware/keyboard-arrow
 
 const LanguageIcon = ({ lang }) => {
   let language = lang === 'en' ? 'gb' : lang;
+  let languageIcon = <span></span>;
 
   if (language) {
-    return <span style={{ float: 'left', marginRight: 5, border: '1px solid #ccc' }} className={`flag-icon flag-icon-${language}`}></span>;
-  } else {
-    return <span></span>;
+    languageIcon = (<span style={{ float: 'left', marginRight: 5, border: '1px solid #ccc' }}
+      className={`flag-icon flag-icon-${language}`}></span>
+    );
   }
+
+  return languageIcon;
+};
+
+LanguageIcon.propTypes = {
+  lang: React.PropTypes.string
 };
 
 function DefinitionListItem({ text, language, url, partOfSpeech, handleClick, key }) {
@@ -25,15 +32,16 @@ function DefinitionListItem({ text, language, url, partOfSpeech, handleClick, ke
   }
 
   let AddContent = <IconButton onClick={add}><ContentAdd /></IconButton>;
+  let listItem = '';
 
   if (url) {
-    return (
-      <ListItem style={{float: 'left'}} disabled={true}>
+    listItem = (
+      <ListItem style={{ float: 'left' }} disabled={true}>
         <img data-caption={text} src={url} alt={text} key={key}/>
       </ListItem>
     );
   } else {
-    return (
+    listItem = (
       <ListItem key={key}
                 rightIconButton={AddContent}
                 secondaryText={partOfSpeech}
@@ -43,7 +51,17 @@ function DefinitionListItem({ text, language, url, partOfSpeech, handleClick, ke
       </ListItem>
     );
   }
+  return listItem;
 }
+
+DefinitionListItem.propTypes = {
+  text: React.PropTypes.string,
+  language: React.PropTypes.string,
+  url: React.PropTypes.string,
+  partOfSpeech: React.PropTypes.string,
+  handleClick: React.PropTypes.func,
+  key: React.PropTypes.string,
+};
 
 const LOW_LIMIT = 2;
 const TOP_LIMIT = 8;
@@ -80,11 +98,24 @@ class DefinitionList extends Component {
   }
 }
 
+DefinitionList.propTypes = {
+  items: React.PropTypes.array,
+  itemsToShowNumber: React.PropTypes.number,
+  handleClick: React.PropTypes.func,
+  label: React.PropTypes.string,
+};
+
 const MoreLessButton = ({ collapsed, onClick }) => {
   let icon = collapsed ? <KeyboardArrowUp /> : <KeyboardArrowDown />;
+
   return (
     <ListItem onClick={onClick} style={{ textAlign: 'center' }}>{icon}</ListItem>
   );
+};
+
+MoreLessButton.propTypes = {
+  collapsed: React.PropTypes.bool,
+  onClick: React.PropTypes.func,
 };
 
 export default DefinitionList;

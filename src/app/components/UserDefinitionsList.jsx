@@ -58,4 +58,9 @@ class UserDefinitionsList extends Component {
   }
 }
 
+UserDefinitionsList.propTypes = {
+  items: React.PropTypes.array,
+  dispatch: React.PropTypes.func,
+};
+
 export default connect(mapStateToProps)(UserDefinitionsList);

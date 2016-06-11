@@ -23,7 +23,9 @@ function articlesLoaded(items) {
 
 function postArticle(article, handleSuccess, handleFail) {
   return api.post('/articles.json', { article })
-    .then((response) => {handleSuccess(response.data); })
+    .then((response) => {
+      handleSuccess(response.data);
+    })
     .catch(handleFail);
 }
 
@@ -31,7 +33,8 @@ function addArticle(article) {
   return () => {
     postArticle(
       Object.assign({}, article, { content_type: 'article', state: 'published' }),
-      (_) => { /*
+      () => {
+      /*
         TODO: Add snackbar. http://www.material-ui.com/v0.14.4/#/components/snackbar
         'Article will be added to list after a short while'
       */
@@ -77,7 +80,9 @@ function getArticle(id, handleSuccess) {
 
 function loadArticle(articleId) {
   return (dispatch) => {
-    getArticle(articleId, (article) => { dispatch(articleLoaded(article)); });
+    getArticle(articleId, (article) => {
+      dispatch(articleLoaded(article));
+    });
   };
 }
 
@@ -90,9 +95,11 @@ const articleLearned = (articleId) => {
 
 const confirmArticleLearned = (id) => {
   return (dispatch) => {
-    api.post('/article_actions.json', { article_action: { article_id: id, action: 'learned' } })
-      .then(response => dispatch(articleLearned(id)))
-      .catch(error => console.error(error));
+    api.post('/article_actions.json', {
+      article_action: { article_id: id, action: 'learned' }
+    })
+    .then(() => dispatch(articleLearned(id)))
+    .catch(error => console.error(error));
   };
 };
 

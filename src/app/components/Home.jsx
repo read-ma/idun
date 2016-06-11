@@ -22,5 +22,8 @@ class Home extends React.Component {
   }
 }
 
+Home.propTypes = {
+  onTextSelected: React.PropTypes.func,
+};
 
 export default Home;

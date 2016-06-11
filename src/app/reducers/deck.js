@@ -8,7 +8,7 @@ const INTERVALS_FOR_GROUP = {
   1: 10,
   2: 24 * 60,
   3: 24 * 60
-}
+};
 
 const moveToNewBucket = (item, { value }) => {
   const newGroup = item.group + value;
@@ -19,7 +19,7 @@ const moveToNewBucket = (item, { value }) => {
 };
 
 export default function deck(state = initialState, action) {
-  console.log(state, action);
+  // console.log(state, action);
   switch (action.type) {
   case 'DECK_LOADED':
     return Object.assign({}, state, action.deck);

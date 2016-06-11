@@ -11,7 +11,7 @@ const DummyRow = ({ word, group, repeated_at }) => {
     <tr>
       <td>{word}</td>
       <td>{group}</td>
-      <td>{ repeated_at && repeated_at.toString()}</td>
+      <td>{ repeated_at && repeated_at.toString() }</td>
     </tr>
   );
 };
@@ -76,7 +76,8 @@ FlashcardsQuiz.propTypes = {
   endQuiz: React.PropTypes.func,
   currentItem: React.PropTypes.object,
   params: React.PropTypes.object,
-  markItem: React.PropTypes.func
+  markItem: React.PropTypes.func,
+  dispatch: React.PropTypes.func
 };
 
 function getItems(state) {

@@ -5,10 +5,6 @@ const NotificationBox = (messages, type='notice') => {
     return false;
   }
 
-  // if (!Array.isArray(messages)) {
-  //   messages = Array(messages);
-  // }
-
   let msgs = messages.map(m => <li key={m}>{m}</li>);
 
   return <ul className={type}>{msgs}</ul>;

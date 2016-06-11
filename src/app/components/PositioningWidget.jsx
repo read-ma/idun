@@ -33,18 +33,14 @@ class PositioningWidget extends Component {
 
   render() {
     return false;
-
-    // return (
-    //   <span style={{ position: 'fixed', left: 0, top: 0, zIndex: 1000, backgroundColor: '#eee' }}>
-    //     {JSON.stringify(this.props.positions)}
-    //     {JSON.stringify(this.state)}
-    //   </span>);
   }
 }
 
 PositioningWidget.propTypes = {
   pageId: React.PropTypes.string.isRequired,
-  positions: React.PropTypes.object
+  positions: React.PropTypes.object,
+  pageScrolled: React.PropTypes.func,
+  synchLocalStorage: React.PropTypes.func,
 };
 
 const mapStateToProps = (state) => {

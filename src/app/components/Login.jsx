@@ -52,9 +52,7 @@ class Login extends React.Component {
     return (
       <Paper zDepth={2} className="col-xs-10">
         <h2 style={styles.headline}>If you already have an account, please log in</h2>
-        <span className="error">
-         {this.props.error}
-        </span>
+        <span className="error">{this.props.error}</span>
 
         <form onSubmit={this.login.bind(this)}>
 
@@ -85,12 +83,16 @@ class Login extends React.Component {
 
           <Divider />
           <Link to="sign_up" style={styles.createAccountLink}>Create account</Link>
-
         </form>
       </Paper>
     );
   }
 }
+
+Login.propTypes = {
+  dispatch: React.PropTypes.func,
+  error: React.PropTypes.string,
+};
 
 let mapStateToProps = (state) => {
   return {

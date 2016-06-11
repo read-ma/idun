@@ -30,6 +30,11 @@ class Settings extends Component {
   }
 }
 
+Settings.propTypes = {
+  dispatch: React.PropTypes.func,
+  wordlists: React.PropTypes.array
+};
+
 function mapStateToProps(state) {
   return {
     wordlists: state.wordlists.filter((wl) => wl.toggable),

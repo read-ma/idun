@@ -39,16 +39,31 @@ class PasswordReminder extends React.Component {
   }
 }
 
+PasswordReminder.propTypes = {
+  email: React.PropTypes.string,
+  error: React.PropTypes.string,
+  message: React.PropTypes.string,
+  resetPassword: React.PropTypes.string,
+  onSubmit: React.PropTypes.func,
+};
+
 class PasswordReminderViewBase extends React.Component {
   resetPassword(email) {
     this.props.dispatch(
-      resetPassword(email));
+      resetPassword(email)
+    );
   }
 
   render() {
-    return <PasswordReminder error={this.props.error} message={ this.props.message } onSubmit={this.resetPassword.bind(this)}/>;
+    return <PasswordReminder error={this.props.error} message={this.props.message} onSubmit={this.resetPassword.bind(this)} />;
   }
 }
+
+PasswordReminderViewBase.propTypes = {
+  dispatch: React.PropTypes.func,
+  error: React.PropTypes.string,
+  message: React.PropTypes.string,
+};
 
 const mapStateToProps = (state) => {
   return {

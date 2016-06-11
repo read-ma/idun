@@ -39,8 +39,7 @@ class LanguageBar extends Component {
         <ListItem secondaryText="Source language">
           <SelectField onChange={this.languageFromChange} name="from" value={this.state.from}>{languages}</SelectField>
         </ListItem>
-        <ListItem
-          secondaryText="Target language">
+        <ListItem secondaryText="Target language">
           <SelectField onChange={this.languageToChange} name="to" value={this.state.to}>{languages}</SelectField>
         </ListItem>
         <Divider />
