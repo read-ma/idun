@@ -23,7 +23,7 @@ class Sidebar extends Component {
 
     return (
       <LeftNav width="350" style={sidebarStyles} docked={docked} openRight={true} open={this.props.open}>
-        <AppBar title={<em>{title}</em>}  iconElementLeft={<IconButton onClick={this.props.closeNav}><NavigationClose /></IconButton>} />
+        <AppBar title={<em>{title}</em>} iconElementLeft={<IconButton onClick={this.props.closeNav}><NavigationClose /></IconButton>} />
 
         <UserCustomDefinition />
         <DefinitionBoxes />

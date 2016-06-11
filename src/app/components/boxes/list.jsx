@@ -13,7 +13,7 @@ const LanguageIcon = ({ lang }) => {
   let language = lang === 'en' ? 'gb' : lang;
 
   if (language) {
-    return <span className={`left flag-icon flag-icon-${language}`}></span>;
+    return <span style={{ float: 'left', marginRight: 5, border: '1px solid #ccc' }} className={`flag-icon flag-icon-${language}`}></span>;
   } else {
     return <span></span>;
   }
@@ -28,7 +28,7 @@ function DefinitionListItem({ text, language, url, partOfSpeech, handleClick, ke
 
   if (url) {
     return (
-      <ListItem>
+      <ListItem style={{float: 'left'}} disabled={true}>
         <img data-caption={text} src={url} alt={text} key={key}/>
       </ListItem>
     );
@@ -38,9 +38,8 @@ function DefinitionListItem({ text, language, url, partOfSpeech, handleClick, ke
                 rightIconButton={AddContent}
                 secondaryText={partOfSpeech}
                 disabled={true}>
-
         <LanguageIcon lang={language} />
-        <span dangerouslySetInnerHTML={{ __html: text }} />
+        <span style={{ lineHeight: '20px' }} dangerouslySetInnerHTML={{ __html: text }} />
       </ListItem>
     );
   }
@@ -72,7 +71,7 @@ class DefinitionList extends Component {
     return (
       <List subheader={this.props.label}>
         {items}
-
+        <br style={{ clear: 'both' }} />
         <ShowIf condition={this.props.items.length > LOW_LIMIT}>
           <MoreLessButton onClick={this.toggle} collapsed={this.state.collapsed} />
         </ShowIf>
@@ -84,7 +83,7 @@ class DefinitionList extends Component {
 const MoreLessButton = ({ collapsed, onClick }) => {
   let icon = collapsed ? <KeyboardArrowUp /> : <KeyboardArrowDown />;
   return (
-    <ListItem rightIcon={icon} onClick={onClick} />
+    <ListItem onClick={onClick} style={{ textAlign: 'center' }}>{icon}</ListItem>
   );
 };
 

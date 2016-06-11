@@ -22,7 +22,7 @@ class SimpleList extends Component {
       return (
         <div>
           <Divider />
-          <DefinitionList key={this.props.label} items={this.props.items} label={this.props.label} handleClick={this.saveUserDefinition.bind(this)}/>
+          <DefinitionList key={this.props.label} items={this.props.items} label={this.props.label} handleClick={this.saveUserDefinition.bind(this)} />
         </div>
       );
     else return false;
