@@ -3,7 +3,6 @@ import React from 'react';
 import { Home, Main, Articles, ArticlePage, UserDefinitionsLearn, UserDefinitionsList } from '../components';
 import Login from '../components/Login';
 import SignUpForm from '../components/SignUpForm';
-import Settings from '../components/Settings';
 import PasswordReminderView from '../components/PasswordReminderView';
 import FlashcardsQuiz from '../components/FlashcardsQuiz';
 import FlashcardsQuizResults from '../components/FlashcardsQuizResults';
@@ -22,7 +21,6 @@ export default (
     <Route path="/login" component={Login} />
     <Route
       path="/home" components={{ children: Home,
-                                 navChildren: Settings,
                                  topNavChildren: WordSearchInput }} />
 
     <Route path="/sign_up" component={SignUpForm} />
@@ -40,7 +38,6 @@ export default (
     <Route path="/new-article" component={AddArticle} />
     <Route path="/article/:id"
       components={{ children: requireAuthentication(ArticlePage),
-                    navChildren: Settings,
                     topNavChildren: WordSearchInput } } />
 
     <IndexRedirect to="/home" />

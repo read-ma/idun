@@ -8,7 +8,6 @@ import ContentAdd from 'material-ui/lib/svg-icons/content/add';
 import KeyboardArrowUp from 'material-ui/lib/svg-icons/hardware/keyboard-arrow-up';
 import KeyboardArrowDown from 'material-ui/lib/svg-icons/hardware/keyboard-arrow-down';
 
-
 const LanguageIcon = ({ lang }) => {
   let language = lang === 'en' ? 'gb' : lang;
   let languageIcon = <span></span>;

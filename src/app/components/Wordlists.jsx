@@ -1,17 +1,21 @@
 import React from 'react';
 import Checkbox from 'material-ui/lib/checkbox';
-import ListItem from 'material-ui/lib/lists/list-item';
-import List from 'material-ui/lib/lists/list';
+import ToolbarGroup from 'material-ui/lib/toolbar/toolbar-group';
 
 const Wordlists = ({ wordlists, handleSelected }) => {
   const lists = wordlists.filter(list => list.name !== 'selection');
 
   const buttons = lists.map((list) => {
-    const checkbox = <Checkbox name={list.name} onCheck={handleSelected} checked={list.enabled} />;
-    return <ListItem key={`wordlist-${list.name}`}leftCheckbox={checkbox} primaryText={list.label} />;
+    return (
+      <Checkbox
+      style={{ float: 'left' }}
+      key={`wordlist-${list.name}`}
+      name={list.name}
+      onCheck={handleSelected}
+      checked={list.enabled} label={list.label} />
+    );
   });
-
-  return <List subheader="Highlighting">{buttons}</List>;
+  return <ToolbarGroup>{ buttons }</ToolbarGroup>;
 };
 
 Wordlists.propTypes = {
