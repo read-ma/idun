@@ -26,7 +26,7 @@ DefinitionBoxes.propTypes = {
   selectedText: React.PropTypes.string.isRequired,
   selectedTextContext: React.PropTypes.object.isRequired,
   dispatch: React.PropTypes.func,
-  data: React.PropTypes.array.isRequired,
+  data: React.PropTypes.object.isRequired,
   boxes: React.PropTypes.array.isRequired,
 };
 

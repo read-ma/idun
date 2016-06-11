@@ -1,5 +1,5 @@
 function screenSize() {
-  let width = window.innerWidth;
+  let width = screenWidth();
 
   if (width > 1100) { return 'large' }
   if (width > 768) { return 'medium' }
@@ -8,12 +8,15 @@ function screenSize() {
 }
 
 function isDesktop() {
-  return screenSize() === 'large' || screenSize() === 'medium'
+  return screenSize() === 'large' || screenSize() === 'medium';
 }
 
 function isMobile() {
-  return screenSize() === 'small' || screenSize() === 'extra-small'
+  return screenSize() === 'small' || screenSize() === 'extra-small';
 }
 
+function screenWidth() {
+  return window.innerWidth;
+}
 
-export { isDesktop, isMobile, screenSize }
+export { isDesktop, isMobile, screenSize, screenWidth };

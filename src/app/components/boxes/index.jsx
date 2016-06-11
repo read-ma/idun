@@ -39,7 +39,8 @@ SimpleList.propTypes = {
   label: React.PropTypes.string,
   items: React.PropTypes.array,
   selectedText: React.PropTypes.string,
-  selectedTextContext: React.PropTypes.string, // Check when connected to the network
+  selectedTextContext: React.PropTypes.object,
+  dispatch: React.PropTypes.func,
 };
 
 class RemoteList extends SimpleList {

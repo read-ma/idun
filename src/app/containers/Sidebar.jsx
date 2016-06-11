@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { DefinitionBoxes } from '../components';
 import UserCustomDefinition from '../components/UserCustomDefinition';
 import { closeNav } from '../actions';
-import { isMobile } from '../Responsive';
+import { isMobile, screenWidth } from '../Responsive';
 
 import LeftNav from 'material-ui/lib/left-nav';
 import IconButton from 'material-ui/lib/icon-button';
@@ -17,12 +17,12 @@ class Sidebar extends Component {
     let title = `» ${this.props.selectedText} «`;
 
     if (isMobile()) {
-      sidebarStyles = { width: '100%', marginTop: 200 };
+      sidebarStyles = { width: screenWidth(), marginTop: 175, height: 'calc(100% - 175px)' };
       docked = false;
     }
 
     return (
-      <LeftNav width="350" style={sidebarStyles} docked={docked} openRight={true} open={this.props.open}>
+      <LeftNav width={sidebarStyles.width} style={sidebarStyles} docked={docked} openRight={true} open={this.props.open}>
         <AppBar title={<em>{title}</em>} iconElementLeft={<IconButton onClick={this.props.closeNav}><NavigationClose /></IconButton>} />
 
         <UserCustomDefinition />

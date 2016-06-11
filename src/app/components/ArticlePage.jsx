@@ -5,9 +5,11 @@ import { connect } from 'react-redux';
 import { loadArticle, textSelected, loadUserDefinitions, articlePageClosed } from '../actions';
 import Sidebar from '../containers/Sidebar';
 import ArticleContent from './ArticleContent';
+import ArticleToolbar from './ArticleToolbar';
 import ConfirmLearnedButton from './ConfirmLearnedButton';
 import { getSelectedText } from '../highlight';
 import PositioningWidget from './PositioningWidget';
+import { isMobile } from '../Responsive';
 
 const ArticleFooter = ({ sourceUrl }) => {
   return (
@@ -24,7 +26,7 @@ ArticleFooter.propTypes = {
   sourceUrl: React.PropTypes.string.isRequired,
 };
 
-const LoadingArticle = () => <span>...</span>;
+const LoadingArticle = () => <span>Loading...</span>;
 
 class ArticlePage extends Component {
   componentDidMount() {
@@ -40,10 +42,13 @@ class ArticlePage extends Component {
     if (!this.props.article.id) {
       return <LoadingArticle />;
     }
+
+    const Toolbar = !isMobile() ? <ArticleToolbar /> : null;
+
     return (
       <div>
-        <div className="row">
           <PositioningWidget pageId={`article-${this.props.params.id}`} />
+          {Toolbar}
           <div className="article-wrapper">
             <article className="article">
               <ArticleContent onTextSelected={this.props.onTextSelected} />
@@ -54,7 +59,6 @@ class ArticlePage extends Component {
           <div className="sidebar-wrapper">
             <Sidebar />
           </div>
-        </div>
       </div>
     );
   }

@@ -1,4 +1,4 @@
-require('./ArticlesToolbar.scss');
+require('./shared/Toolbar.scss');
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
@@ -56,7 +56,7 @@ class ArticlesToolbar extends Component {
   }
   render() {
     return (
-      <Toolbar style={styles.toolbar} className="articles-toolbar">
+      <Toolbar style={styles.toolbar} className="toolbar">
         <ToolbarGroup>
           <FilterDropDownMenu updateFilter={this.props.updateFilter} name='visibility' selected={this.props.filter.visibility} />
           <FilterDropDownMenu updateFilter={this.props.updateFilter} name='visiting' selected={this.props.filter.visiting} />
@@ -72,7 +72,7 @@ function mapStateToProps(state) {
   return {
     filter: state.articlesFilter
   };
-};
+}
 
 const mapActionsToProps = (dispatch) => {
   return {
