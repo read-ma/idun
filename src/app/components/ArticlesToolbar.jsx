@@ -1,5 +1,5 @@
+require('./ArticlesToolbar.scss');
 import React, { Component } from 'react';
-// import { connect } from 'react-redux';
 
 import Toolbar from 'material-ui/lib/toolbar/toolbar';
 import ToolbarGroup from 'material-ui/lib/toolbar/toolbar-group';
@@ -9,9 +9,12 @@ import DropDownMenu from 'material-ui/lib/DropDownMenu';
 const styles = {
   toolbar: {
     position: 'fixed',
-    top: 70,
-    left: 71,
-    width: 'calc(83.333% - 71px)'
+    top: 64,
+    left: 0,
+    right: 0,
+    padding: '0',
+    backgroundColor: '#fff',
+    borderBottom: '1px solid #eee'
   },
   icon: {
     fill: '#000'
@@ -21,7 +24,7 @@ const styles = {
 class ArticlesToolbar extends Component {
   render() {
     return (
-      <Toolbar style={styles.toolbar}>
+      <Toolbar style={styles.toolbar} className="articles-toolbar">
         <ToolbarGroup>
           <DropDownMenu value={1} iconStyle={styles.icon}>
             <MenuItem value={1} primaryText="Visibility" disabled={true} />

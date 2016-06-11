@@ -13,7 +13,7 @@ const styles = {
     width: '100%'
   },
   articleslist: {
-    paddingTop: 120
+    paddingTop: 130
   }
 };
 
@@ -24,7 +24,7 @@ class Main extends React.Component {
 
   render() {
     return (
-      <div className={`row ${screenSize()}`}>
+      <div className={`${screenSize()}`}>
         <AppBar
           onLeftIconButtonTouchTap={this.props.openNav}
           style={styles.appbar}
@@ -41,7 +41,6 @@ class Main extends React.Component {
         <div className="col-xs-12 col-sm-10 col-md-8" style={styles.articleslist}>
           {this.props.children}
         </div>
-
       </div>
     );
   }
