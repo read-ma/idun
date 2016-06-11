@@ -15,9 +15,7 @@ import WordSearchInput from '../components/WordSearchInput';
 import { Route, IndexRedirect } from 'react-router';
 import { requireAuthentication } from '../utils';
 
-import ArticleFilter from '../components/ArticleFilter';
 import AddArticle from '../components/AddArticleWidget';
-
 
 export default (
   <Route path="/" component={Main}>
@@ -37,7 +35,6 @@ export default (
     <Route path="/definitions" component={UserDefinitionsList} />
     <Route path="/articles"
       components={{ children: requireAuthentication(Articles),
-                    navChildren: ArticleFilter,
                     topNavChildren: ArticleSearchInput }} />
 
     <Route path="/new-article" component={AddArticle} />

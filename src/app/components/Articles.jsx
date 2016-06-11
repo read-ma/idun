@@ -49,7 +49,7 @@ class Articles extends Component {
 function mapStateToProps(state) {
   return {
     articles: state.articles,
-    filter: state.articlesFilter.values,
+    filter: state.articlesFilter
   };
 }
 

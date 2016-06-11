@@ -7,7 +7,7 @@ class ArticleSearchInput extends SearchInputBase {}
 
 function mapStateToProps(state) {
   return {
-    query: state.articlesFilter.values.query,
+    query: state.articlesFilter.query,
   };
 }
 

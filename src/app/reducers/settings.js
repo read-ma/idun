@@ -66,7 +66,6 @@ function navBarVisibility(state = initialState.navOpen, action){
 }
 
 export default function settings(state = initialState, action) {
-  // console.log(action)
   switch (action.type){
 
   case 'PROCESS_STARTED':

@@ -1,4 +1,3 @@
-import * as types from '../constants/ActionTypes';
 import article from './article';
 import deck from './deck';
 import decks from './decks';
@@ -19,7 +18,7 @@ function main(state = initialState, action) {
     return Object.assign(
       {},
       state,
-      { userDefinitions: Array.from(action.userDefinitions)}
+      { userDefinitions: Array.from(action.userDefinitions) }
     );
 
   case 'USER_DEFINITION_SAVED':
@@ -33,36 +32,23 @@ function main(state = initialState, action) {
   }
 }
 
+// privy, open
+// unlearned, learned
+// visited, unvisited
+// advanced, upper-intermediate, intermediate
+
 const articlesFilterInitial = {
-  fields: {
-    privy: {default: false, name: 'privy', group: 'access', opposite: 'open'},
-    open: {default: false, name: 'open', group: 'access', opposite: 'privy'},
-    unlearned: {default: false, name: 'unlearned', group: 'learn', opposite: 'learned'},
-    learned: {default: false, name: 'learned', group: 'learn', opposite: 'unlearned'},
-    unvisited: {default: false, name: 'unvisited', group: 'visit', opposite: 'visited'},
-    visited: {default: false, name: 'visited', group: 'visit', opposite: 'unvisited'},
-    advanced: {default: false, name: 'advanced', group: 'difficulty'},
-    'upper-intermediate': {default: false, name: 'upper-intermediate', group: 'difficulty'},
-    intermediate: {default: false, name: 'intermediate', group: 'difficulty'}
-  },
-  values: {
-    privy: false,
-    open: false,
-    unlearned: false,
-    learned: false,
-    visited: false,
-    unvisited: false,
-    advanced: false,
-    'upper-intermediate': false,
-    intermediate: false,
-    query: "",
-  },
+  visibility: 'all',
+  learning: 'all',
+  visiting: 'all',
+  difficulty: 'all',
+  query: '',
 };
 
 const articlesFilter = (state = articlesFilterInitial, action) => {
   switch (action.type) {
   case 'UPDATE_ARTICLES_FILTER':
-    return Object.assign({}, state, {values: Object.assign({}, state.values, action.payload) });
+    return Object.assign({}, state, action.payload);
   default:
     return state;
   }

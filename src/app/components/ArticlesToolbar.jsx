@@ -1,10 +1,15 @@
 require('./ArticlesToolbar.scss');
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import Toolbar from 'material-ui/lib/toolbar/toolbar';
 import ToolbarGroup from 'material-ui/lib/toolbar/toolbar-group';
 import MenuItem from 'material-ui/lib/menus/menu-item';
 import DropDownMenu from 'material-ui/lib/DropDownMenu';
+
+import { updateArticlesFilter } from '../actions/articles';
+import _ from 'lodash';
+import { forOwn } from 'lodash/forOwn';
 
 const styles = {
   toolbar: {
@@ -21,50 +26,59 @@ const styles = {
   }
 };
 
+const MenuItemFields = {
+  visibility: { all: 'All articles', privy: 'My articles', open: 'Public articles' },
+  visiting: { all: 'Visits - all', visited: 'Visited', unvisited: 'To visit' },
+  learning: { all: 'Learning - all', learned: 'Learned', unlearned: 'To learn' },
+  difficulty: { all: 'All levels', advanced: 'Advanced', 'upper-intermediate': 'Upper intermediate', intermediate: 'Intermediate' },
+};
+
+const FilterDropDownMenu = ({ updateFilter, name, selected }) => {
+  const onChange = (event, key, payload) => {
+    updateFilter({ [name]: payload});
+  };
+  const items = [];
+  _.forOwn(MenuItemFields[name],
+           (value, key) => items.push(<MenuItem value={key} primaryText={value} />)
+  );
+
+  return (
+    <DropDownMenu value={selected} iconStyle={styles.icon} onChange={onChange}>
+      {items}
+    </DropDownMenu>
+  );
+};
+
 class ArticlesToolbar extends Component {
+  onChange(event, key, payload) {
+    this.props.updateFilter({ [payload]: payload });
+  }
   render() {
     return (
       <Toolbar style={styles.toolbar} className="articles-toolbar">
         <ToolbarGroup>
-          <DropDownMenu value={1} iconStyle={styles.icon}>
-            <MenuItem value={1} primaryText="Visibility" disabled={true} />
-            <MenuItem value={2} primaryText="My articles" />
-            <MenuItem value={3} primaryText="Public articles" />
-          </DropDownMenu>
-
-          <DropDownMenu value={1} iconStyle={styles.icon}>
-            <MenuItem value={1} primaryText="Learning" disabled={true} />
-            <MenuItem value={2} primaryText="Articles to learn" />
-            <MenuItem value={3} primaryText="Learned articles" />
-          </DropDownMenu>
-
-          <DropDownMenu value={1} iconStyle={styles.icon}>
-            <MenuItem value={1} primaryText="Visits" disabled={true} />
-            <MenuItem value={2} primaryText="Unread articles" />
-            <MenuItem value={3} primaryText="Read articles" />
-          </DropDownMenu>
-
-          <DropDownMenu value={1} iconStyle={styles.icon}>
-            <MenuItem value={1} primaryText="Level" disabled={true} />
-            <MenuItem value={2} primaryText="Intermediate" />
-            <MenuItem value={3} primaryText="Upper-intermediate" />
-            <MenuItem value={4} primaryText="Advanced" />
-          </DropDownMenu>
+          <FilterDropDownMenu updateFilter={this.props.updateFilter} name='visibility' selected={this.props.filter.visibility} />
+          <FilterDropDownMenu updateFilter={this.props.updateFilter} name='visiting' selected={this.props.filter.visiting} />
+          <FilterDropDownMenu updateFilter={this.props.updateFilter} name='learning' selected={this.props.filter.learning} />
+          <FilterDropDownMenu updateFilter={this.props.updateFilter} name='difficulty' selected={this.props.filter.difficulty} />
         </ToolbarGroup>
       </Toolbar>
     );
   }
 }
 
-// function mapStateToProps(state) {
-//   return {};
-// }
-//
-// const mapActionsToProps = (dispatch) => {
-//   return {
-//   };
-// };
+function mapStateToProps(state) {
+  return {
+    filter: state.articlesFilter
+  };
+};
 
-// export default connect(mapStateToProps, mapActionsToProps)(Articles);
+const mapActionsToProps = (dispatch) => {
+  return {
+    updateFilter(payload) {
+      dispatch(updateArticlesFilter(payload));
+    }
+  };
+};
 
-export default ArticlesToolbar;
+export default connect(mapStateToProps, mapActionsToProps)(ArticlesToolbar);

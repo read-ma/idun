@@ -4,36 +4,27 @@ const matchCriteria = (article, filter) => {
   if ( filter.query )
     match = !!article.title.match(new RegExp(filter.query,'gim'));
 
-  if ( filter.learned )
+  if ( filter.learning === 'learned' )
     match = match && article.learned;
 
-  if (filter.unread)
+  if ( filter.learning === 'unlearned' )
     match = match && !article.learned;
 
-  if ( filter.privy )
+  if ( filter.visibility === 'privy' )
     match = match && article.privy;
 
-  if ( filter.open )
+  if ( filter.visibility === 'open' )
     match = match && !article.privy;
 
-  if ( filter.visited )
+  if ( filter.visiting === 'visited' )
     match = match && article.visited;
 
-  if ( filter.unvisited )
+  if ( filter.visiting === 'unvisited' )
     match = match && !article.visited;
 
-  let statusMatch = !(filter.advanced || filter['upper-intermediate'] || filter.intermediate);
+  let difficultyMatch = filter.difficulty === 'all' || article.difficulty === filter.difficulty;
 
-  if ( filter.advanced )
-    statusMatch = article.difficulty === 'advanced';
-
-  if (filter['upper-intermediate'])
-    statusMatch = statusMatch || article.difficulty == 'upper-intermediate';
-
-  if (filter.intermediate)
-    statusMatch = statusMatch || article.difficulty === 'intermediate';
-
-  return match && statusMatch;
+  return match && difficultyMatch;
 };
 
 

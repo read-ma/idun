@@ -5,13 +5,14 @@ import { loadDeckForArticle, markItem } from '../actions/deck';
 import Flashcard from './Flashcard';
 import FlashcardSettings from './FlashcardSettings';
 import FlashcardProgress from './FlashcardProgress';
+import moment from 'moment';
 
-const DummyRow = ({ word, group, repeated_at }) => {
+const DummyRow = ({ word, group, repeatedAt }) => {
   return (
     <tr>
       <td>{word}</td>
       <td>{group}</td>
-      <td>{ repeated_at && repeated_at.toString() }</td>
+      <td>{ moment(repeatedAt).fromNow() }</td>
     </tr>
   );
 };
@@ -19,7 +20,7 @@ const DummyRow = ({ word, group, repeated_at }) => {
 DummyRow.propTypes = {
   word: React.PropTypes.string.isRequired,
   group: React.PropTypes.string.isRequired,
-  repeated_at: React.PropTypes.string.isRequired,
+  repeatedAt: React.PropTypes.string.isRequired,
 };
 
 class FlashcardsQuiz extends Component {
@@ -47,7 +48,7 @@ class FlashcardsQuiz extends Component {
     }
     return (
       <div className="row flashcards-container">
-        <div className="col-sm-6 col-sm-offset-2">
+        <div className="col-sm-9 col-sm-offset-2">
           <Flashcard
           key={this.props.currentItem.id}
           item={this.props.currentItem}
@@ -61,9 +62,6 @@ class FlashcardsQuiz extends Component {
               }
             </tbody></table>
           </div>
-        </div>
-        <div className="col-sm-3 col-sm-offset-1">
-          <FlashcardSettings changeSettings={this.changeSettings} startWith={this.state.settings.startWith} />
         </div>
       </div>
     );
@@ -88,8 +86,8 @@ function getItems(state) {
   return state.deck
               .cards
               .filter(card => card.group < 4)
-              .map(card => card.repeated_at ? card : Object.assign({}, card, { repeated_at: new Date() }))
-              .sort((card_a, card_b) => new Date(card_a.repeated_at) - new Date(card_b.repeated_at));
+              .map(card => card.repeatedAt ? card : Object.assign({}, card, { repeatedAt: new Date() }))
+              .sort((card_a, card_b) => new Date(card_a.repeatedAt) - new Date(card_b.repeatedAt));
 }
 
 function mapStateToProps(state) {

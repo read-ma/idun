@@ -14,12 +14,11 @@ const moveToNewBucket = (item, { value }) => {
   const newGroup = item.group + value;
   return {
     group: newGroup,
-    repeated_at: moment().add(INTERVALS_FOR_GROUP[newGroup], 'minute').toDate()
+    repeatedAt: moment().add(INTERVALS_FOR_GROUP[newGroup], 'minute').toDate()
   };
 };
 
 export default function deck(state = initialState, action) {
-  // console.log(state, action);
   switch (action.type) {
   case 'DECK_LOADED':
     return Object.assign({}, state, action.deck);
