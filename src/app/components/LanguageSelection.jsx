@@ -1,13 +1,34 @@
-require('./LanguageSelection.scss');
+require('./shared/Toolbar.scss');
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { changeLanguage } from '../actions';
-
-import ListItem from 'material-ui/lib/lists/list-item';
-import List from 'material-ui/lib/lists/list';
-import SelectField from 'material-ui/lib/select-field';
+import Toolbar from 'material-ui/lib/toolbar/toolbar';
+import ToolbarGroup from 'material-ui/lib/toolbar/toolbar-group';
+import ToolbarTitle from 'material-ui/lib/toolbar/toolbar-title';
 import MenuItem from 'material-ui/lib/menus/menu-item';
-import Divider from 'material-ui/lib/divider';
+import DropDownMenu from 'material-ui/lib/DropDownMenu';
+
+import NavigationArrowForward from 'material-ui/lib/svg-icons/navigation/arrow-forward';
+
+const styles = {
+  toolbar: {
+    position: 'fixed',
+    top: 64,
+    left: 0,
+    right: 0,
+    zIndex: 2,
+    padding: '0',
+    backgroundColor: '#fff',
+    borderBottom: '1px solid #eee',
+    title: {
+      fontSize: '16px',
+      margin: '0 20px'
+    }
+  },
+  icon: {
+    fill: '#000'
+  }
+};
 
 class LanguageBar extends Component {
   constructor(props) {
@@ -35,15 +56,22 @@ class LanguageBar extends Component {
     let languages = this.props.languages.map(lang => <MenuItem value={lang.code} primaryText={lang.name} />);
 
     return (
-      <List subheader="Select languages">
-        <ListItem secondaryText="Source language">
-          <SelectField onChange={this.languageFromChange} name="from" value={this.state.from}>{languages}</SelectField>
-        </ListItem>
-        <ListItem secondaryText="Target language">
-          <SelectField onChange={this.languageToChange} name="to" value={this.state.to}>{languages}</SelectField>
-        </ListItem>
-        <Divider />
-      </List>
+      <Toolbar style={styles.toolbar} className="toolbar">
+        <ToolbarGroup float={"left"}>
+          <ToolbarTitle text="Source language" style={styles.toolbar.title} />
+          <DropDownMenu value={this.state.from} iconStyle={styles.icon} onChange={this.languageFromChange}>
+            {languages}
+          </DropDownMenu>
+        </ToolbarGroup>
+
+
+        <ToolbarGroup float={"right"}>
+          <DropDownMenu value={this.state.to} iconStyle={styles.icon} onChange={this.languageToChange}>
+            {languages}
+          </DropDownMenu>
+          <ToolbarTitle text="Target language" style={styles.toolbar.title} />
+        </ToolbarGroup>
+      </Toolbar>
     );
   }
 }

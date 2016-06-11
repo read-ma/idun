@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { loadArticle, textSelected, loadUserDefinitions, articlePageClosed } from '../actions';
 import Sidebar from '../containers/Sidebar';
 import ArticleContent from './ArticleContent';
-import ArticleToolbar from './ArticleToolbar';
+import LanguageSelection from './LanguageSelection';
 import ConfirmLearnedButton from './ConfirmLearnedButton';
 import { getSelectedText } from '../highlight';
 import PositioningWidget from './PositioningWidget';
@@ -43,12 +43,12 @@ class ArticlePage extends Component {
       return <LoadingArticle />;
     }
 
-    const Toolbar = !isMobile() ? <ArticleToolbar /> : null;
+    const LanguageSelectionToolbar = !isMobile() ? <LanguageSelection /> : null;
 
     return (
       <div>
           <PositioningWidget pageId={`article-${this.props.params.id}`} />
-          {Toolbar}
+          {LanguageSelectionToolbar}
           <div className="article-wrapper">
             <article className="article">
               <ArticleContent onTextSelected={this.props.onTextSelected} />

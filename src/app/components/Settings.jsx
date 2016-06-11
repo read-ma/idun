@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import { Wordlists } from '../components';
-import LanguageBar from '../components/LanguageSelection';
 import { connect } from 'react-redux';
 import { toggleHighlighting } from '../actions';
-
-import Divider from 'material-ui/lib/divider';
 
 class Settings extends Component {
   constructor(props) {
@@ -21,11 +18,7 @@ class Settings extends Component {
 
   render() {
     return (
-      <span>
-        <Wordlists handleSelected={this.handleWordListSelected} wordlists={this.props.wordlists} />
-        <Divider />
-        <LanguageBar />
-      </span>
+      <Wordlists handleSelected={this.handleWordListSelected} wordlists={this.props.wordlists} />
     );
   }
 }
