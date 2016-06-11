@@ -39,20 +39,13 @@ class UserDefinitionsList extends Component {
   }
 
   render() {
-    const items = this.state.items.map(item => <UserDefinitionBox key={item} item={item} />);
+    const items = this.state.items.map(item => <UserDefinitionBox key={item.id} item={item} />);
 
     return (
       <div>
-        <div className="row">
-          <div className="col-xs-4 col-xs-offset-1">
-            <TextField hintText="Quick Search..." onChange={this.handleFilterChange} />
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-xs-12">
-            {items}
-          </div>
-        </div>
+        <TextField hintText="Quick Search..." onChange={this.handleFilterChange} />
+        <br />
+        {items}
       </div>
     );
   }

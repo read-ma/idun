@@ -18,7 +18,9 @@ const styles = {
       alignItems: 'center'
     }
   },
-  articleslist: {}
+  mainContent: {
+    paddingTop: '120px'
+  }
 };
 
 class Main extends React.Component {
@@ -38,7 +40,7 @@ class Main extends React.Component {
         <MainNavigaton displaySearchBar={this.displaySearchBar()} isAuthenticated={this.props.isAuthenticated}>
           {this.props.navChildren}
         </MainNavigaton>
-        <div className="col-xs-12 col-sm-10 col-md-8" style={styles.articleslist}>
+        <div className="col-xs-12 col-sm-10 col-md-8" style={styles.mainContent}>
           {this.props.children}
         </div>
       </div>
