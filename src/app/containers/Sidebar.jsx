@@ -14,6 +14,7 @@ class Sidebar extends Component {
   render() {
     let sidebarStyles = { width: 500 };
     let docked = true;
+    let title = `» ${this.props.selectedText} «`;
 
     if (isMobile()) {
       sidebarStyles = { width: '100%', marginTop: 200 };
@@ -22,7 +23,7 @@ class Sidebar extends Component {
 
     return (
       <LeftNav width="350" style={sidebarStyles} docked={docked} openRight={true} open={this.props.open}>
-        <AppBar title={false} iconElementLeft={<IconButton onClick={this.props.closeNav}><NavigationClose /></IconButton>} />
+        <AppBar title={<em>{title}</em>}  iconElementLeft={<IconButton onClick={this.props.closeNav}><NavigationClose /></IconButton>} />
 
         <UserCustomDefinition />
         <DefinitionBoxes />
@@ -32,14 +33,17 @@ class Sidebar extends Component {
 }
 
 Sidebar.propTypes = {
-  open: React.PropTypes.bool.isRequred,
-  closeNav: React.PropTypes.func.isRequred
+  open: React.PropTypes.bool.isRequired,
+  closeNav: React.PropTypes.func.isRequired,
+  selectedText: React.PropTypes.string.isRequired
 };
 
 function mapStateToProps(state) {
   return {
     wordlists: state.wordlists,
-    open: state.settings.navOpen.right
+    open: state.settings.navOpen.right,
+    selectedText: state.article.selectedText,
+
   };
 }
 

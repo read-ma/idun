@@ -36,11 +36,10 @@ class UserCustomDefinition extends Component {
       return false;
     }
     let definitions = this.state.userDefinitions.map(def => <ListItem key={def.translation}>{def.translation}</ListItem>);
-    let subheader = `Add your definition for: ${this.props.selectedText}`;
     let AddContent = <IconButton onClick={this.saveUserDefinition}><ContentAdd /></IconButton>;
 
     return (
-      <List subheader={subheader}>
+      <List>
         <ListItem rightIconButton={AddContent}>
           <TextField hintText="My definition"
             onEnterKeyDown={this.saveUserDefinition}
