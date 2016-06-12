@@ -28,7 +28,7 @@ const styles = {
 
 const MenuItemFields = {
   visibility: { all: 'All articles', privy: 'My articles', open: 'Public articles' },
-  visiting: { all: 'Visits - all', visited: 'Visited', unvisited: 'To visit' },
+  visiting: { all: 'Visits - all', visited: 'Read', unvisited: 'To read' },
   learning: { all: 'Learning - all', learned: 'Learned', unlearned: 'To learn' },
   difficulty: { all: 'All levels', advanced: 'Advanced', 'upper-intermediate': 'Upper intermediate', intermediate: 'Intermediate' },
 };

@@ -9,12 +9,12 @@ import LeftNav from 'material-ui/lib/left-nav';
 import IconButton from 'material-ui/lib/icon-button';
 import NavigationClose from 'material-ui/lib/svg-icons/navigation/close';
 import AppBar from 'material-ui/lib/app-bar';
+import WordSearchInput from '../components/WordSearchInput';
 
 class Sidebar extends Component {
   render() {
     let sidebarStyles = { width: 500 };
     let docked = true;
-    let title = `» ${this.props.selectedText} «`;
 
     if (isMobile()) {
       sidebarStyles = { width: screenWidth(), marginTop: 175, height: 'calc(100% - 175px)' };
@@ -23,7 +23,7 @@ class Sidebar extends Component {
 
     return (
       <LeftNav width={sidebarStyles.width} style={sidebarStyles} docked={docked} openRight={true} open={this.props.open}>
-        <AppBar title={<em>{title}</em>} iconElementLeft={<IconButton onClick={this.props.closeNav}><NavigationClose /></IconButton>} />
+        <AppBar title={<WordSearchInput />} iconElementLeft={<IconButton onClick={this.props.closeNav}><NavigationClose /></IconButton>} />
 
         <UserCustomDefinition />
         <DefinitionBoxes />

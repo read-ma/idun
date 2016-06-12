@@ -8,8 +8,6 @@ import FlashcardsQuiz from '../components/FlashcardsQuiz';
 import FlashcardsQuizResults from '../components/FlashcardsQuizResults';
 import ChangePasswordView from '../components/ChangePasswordView';
 import ArticleSearchInput from '../components/ArticleSearchInput';
-import WordSearchInput from '../components/WordSearchInput';
-
 
 import { Route, IndexRedirect } from 'react-router';
 import { requireAuthentication } from '../utils';
@@ -19,9 +17,7 @@ import AddArticle from '../components/AddArticleWidget';
 export default (
   <Route path="/" component={Main}>
     <Route path="/login" component={Login} />
-    <Route
-      path="/home" components={{ children: Home,
-                                 topNavChildren: WordSearchInput }} />
+    <Route path="/home" components={{ children: Home }} />
 
     <Route path="/sign_up" component={SignUpForm} />
     <Route path="forgot_password" component={PasswordReminderView} />
@@ -36,9 +32,7 @@ export default (
                     topNavChildren: ArticleSearchInput }} />
 
     <Route path="/new-article" component={AddArticle} />
-    <Route path="/article/:id"
-      components={{ children: requireAuthentication(ArticlePage),
-                    topNavChildren: WordSearchInput } } />
+    <Route path="/article/:id" components={{ children: requireAuthentication(ArticlePage)} } />
 
     <IndexRedirect to="/home" />
   </Route>
