@@ -1,4 +1,4 @@
-require('./shared/Toolbar.scss');
+require('./styles/Toolbar.scss');
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 

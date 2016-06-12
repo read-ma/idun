@@ -1,4 +1,4 @@
-require('./Flashcard.scss');
+require('./styles/Flashcard.scss');
 import React, { Component } from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import classnames from 'classnames';

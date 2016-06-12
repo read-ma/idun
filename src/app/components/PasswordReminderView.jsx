@@ -1,4 +1,4 @@
-require('./PasswordReminderView.scss');
+require('./styles/PasswordReminderView.scss');
 import React from 'react';
 import { connect } from 'react-redux';
 import { resetPassword } from '../actions/auth';

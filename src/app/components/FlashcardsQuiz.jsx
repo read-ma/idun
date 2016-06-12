@@ -1,4 +1,4 @@
-require('./FlashcardsQuiz.scss');
+require('./styles/FlashcardsQuiz.scss');
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { loadDeckForArticle, markItem } from '../actions/deck';

@@ -1,4 +1,4 @@
-require('./ArticleLink.scss');
+require('./styles/ArticleLink.scss');
 import React from 'react';
 import l from '../I18n';
 import ListItem from 'material-ui/lib/lists/list-item';

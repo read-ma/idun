@@ -1,4 +1,4 @@
-require('./Articles.scss');
+require('./styles/Articles.scss');
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { loadArticles } from '../actions/articles';
