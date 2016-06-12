@@ -2,6 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { confirmArticleLearned } from '../actions';
 
+import RaisedButton from 'material-ui/lib/raised-button';
+import NavigationCheck from 'material-ui/lib/svg-icons/navigation/check';
+
 const ConfirmLearnedButton = ({ confirmLearned, articleId, articleLearned }) => {
   let onConfirmLearned = () => {
     confirmLearned(articleId);
@@ -12,10 +15,12 @@ const ConfirmLearnedButton = ({ confirmLearned, articleId, articleLearned }) => 
   }
 
   return (
-    <a className="btn btn-large" onClick={onConfirmLearned}>
-      <i className="material-icons left">done</i>
-      Mark all words from this article as learned
-    </a>
+    <RaisedButton
+      label="Mark all words from this article as learned"
+      primary={true}
+      fullWidth={true}
+      icon={<NavigationCheck />}
+      onClick={onConfirmLearned} />
   );
 };
 

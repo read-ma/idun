@@ -9,7 +9,6 @@ import DropDownMenu from 'material-ui/lib/DropDownMenu';
 
 import { updateArticlesFilter } from '../actions/articles';
 import _ from 'lodash';
-import { forOwn } from 'lodash/forOwn';
 
 const styles = {
   toolbar: {
@@ -36,7 +35,7 @@ const MenuItemFields = {
 
 const FilterDropDownMenu = ({ updateFilter, name, selected }) => {
   const onChange = (event, key, payload) => {
-    updateFilter({ [name]: payload});
+    updateFilter({ [name]: payload });
   };
   const items = [];
   _.forOwn(MenuItemFields[name],
