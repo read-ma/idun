@@ -8,8 +8,6 @@ import ToolbarTitle from 'material-ui/lib/toolbar/toolbar-title';
 import MenuItem from 'material-ui/lib/menus/menu-item';
 import DropDownMenu from 'material-ui/lib/DropDownMenu';
 
-import NavigationArrowForward from 'material-ui/lib/svg-icons/navigation/arrow-forward';
-
 const styles = {
   toolbar: {
     position: 'fixed',
@@ -53,7 +51,21 @@ class LanguageBar extends Component {
   }
 
   render() {
-    let languages = this.props.languages.map(lang => <MenuItem value={lang.code} primaryText={lang.name} />);
+    let languageFlag = (langKey) => {
+      let flagCode = langKey === 'en' ? 'gb' : langKey;
+      const iconStyles = {
+        border: '1px solid #ccc',
+        padding: 0,
+        width: 19,
+        height: 16,
+        top: 6
+      };
+      return (
+        <span style={iconStyles} className={`flag-icon flag-icon-${flagCode}`}></span>);
+    };
+    let languages = this.props.languages.map(lang => {
+      return <MenuItem value={lang.code} primaryText={lang.name} leftIcon={languageFlag(lang.key)} />;
+    });
 
     return (
       <Toolbar style={styles.toolbar} className="toolbar">
