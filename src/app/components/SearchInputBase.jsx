@@ -27,16 +27,16 @@ class SearchInputBase extends Component {
      <TextField
         id="articleSearch"
         name="query"
-       onChange={this.onFilterChange}
+        onChange={this.onFilterChange}
         value={this.state.query}
         hintText={this.props.hintText}
         underlineShow={false}
         hintStyle={{ paddingLeft: 20 }}
         inputStyle={{ paddingLeft: 20, color: '#555' }}
         style={{
-          width: '83.333%',
+          width: '100%',
           marginRight: 'auto',
-          marginLeft: 14,
+          marginLeft: 10,
           backgroundColor: '#fff',
           fontSize: 20
         }}
