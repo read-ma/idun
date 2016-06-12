@@ -11,10 +11,6 @@ body {
   font-family: 'Helvetica Neue', Helvetica, 'Lato', sans-serif;
 }
 
-#app > div > .container {
-  position: relative;
-}
-
 pre {
   padding: 10px 5px;
   line-height: 100%;
@@ -35,13 +31,18 @@ input.selectedText {
   color: #555;
 }
 
-ul.ttsplayer {
-  margin-top: 15px;
-  li {
-    display: inline;
-  }
-}
+// ul.ttsplayer {
+//   margin-top: 15px;
+//   li {
+//     display: inline;
+//   }
+// }
 
 a {
   cursor: pointer;
+}
+
+blockquote {
+  margin-left: 0;
+  margin-right: 0;
 }

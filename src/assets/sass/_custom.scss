@@ -2,10 +2,6 @@ p {
   margin: 0 15px 0 0;
 }
 
-.article-wrapper {
-  word-spacing: 6px;
-}
-
 .clearfix:before, .clearfix:after {
   content: " ";
   display: table;
@@ -21,19 +17,5 @@ p {
 
   img {
     max-width: 40%;
-  }
-}
-
-.expand-collapse-trigger {
-  clear: both;
-  margin-top: 1em;
-  cursor: pointer;
-  i {
-    color: #26a69a;
-  }
-  &:hover {
-    i {
-      color: darken(#26a69a, 15%);
-    }
   }
 }
