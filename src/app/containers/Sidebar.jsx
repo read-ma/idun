@@ -13,18 +13,32 @@ import WordSearchInput from '../components/WordSearchInput';
 
 class Sidebar extends Component {
   render() {
-    let sidebarStyles = { width: 500 };
+    const leftIcon = isMobile() ? <IconButton onClick={this.props.closeNav}><NavigationClose /></IconButton> : <i></i>;
     let docked = true;
 
+    let styles = {
+      sidebar: {
+        width: 500
+      },
+    };
+
     if (isMobile()) {
-      sidebarStyles = { width: screenWidth(), marginTop: 175, height: 'calc(100% - 175px)' };
       docked = false;
+      styles.sidebar = {
+        width: screenWidth(),
+        marginTop: 0,
+        paddingTop: '64px',
+        height: '100%',
+        appbar: {
+          position: 'fixed',
+          top: 0,
+        },
+      };
     }
 
     return (
-      <LeftNav width={sidebarStyles.width} style={sidebarStyles} docked={docked} openRight={true} open={this.props.open}>
-        <AppBar title={<WordSearchInput />} iconElementLeft={<IconButton onClick={this.props.closeNav}><NavigationClose /></IconButton>} />
-
+      <LeftNav width={styles.sidebar.width} style={styles.sidebar} docked={docked} openRight={true} open={this.props.open}>
+        <AppBar title={<WordSearchInput />} style={styles.sidebar.appbar} iconElementLeft={leftIcon} />
         <UserCustomDefinition />
         <DefinitionBoxes />
       </LeftNav>
@@ -43,7 +57,6 @@ function mapStateToProps(state) {
     wordlists: state.wordlists,
     open: state.settings.navOpen.right,
     selectedText: state.article.selectedText,
-
   };
 }
 

@@ -13,9 +13,7 @@ class Home extends React.Component {
               <ArticleContent onTextSelected={this.props.onTextSelected} />
             </article>
           </div>
-          <div className="sidebar-wrapper">
-            <Sidebar />
-          </div>
+          <Sidebar />
         </div>
       </div>
     );

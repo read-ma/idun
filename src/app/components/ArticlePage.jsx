@@ -68,9 +68,7 @@ class ArticlePage extends Component {
             </article>
             <ConfirmLearnedButton articleId={this.props.params.id} />
           </div>
-          <div className="sidebar-wrapper">
-            <Sidebar />
-          </div>
+          <Sidebar />
       </div>
     );
   }
