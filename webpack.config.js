@@ -1,14 +1,14 @@
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
-var BrowserSyncPlugin = require('browser-sync-webpack-plugin');
-var webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
+const webpack = require('webpack');
 
 module.exports = {
-  entry: "./src/app/app.js",
+  entry: './src/app/app.js',
   output: {
-    filename: "public/bundle.js"
+    filename: 'public/bundle.js'
   },
   externals: {
-    'Config': JSON.stringify({ apiUrl: 'http://api.readma.com/api' })
+    Config: JSON.stringify({ apiUrl: 'http://api.readma.com/api' })
   },
   module: {
     loaders: [
@@ -39,7 +39,7 @@ module.exports = {
     }),
     new webpack.DefinePlugin({
       'process.env': {
-        'NODE_ENV': JSON.stringify('development')
+        NODE_ENV: JSON.stringify('development')
       }
     }),
     new BrowserSyncPlugin({
@@ -48,8 +48,7 @@ module.exports = {
       host: 'localhost',
       port: 3000,
       proxy: 'http://localhost:8080/'
-    },
-    {
+    }, {
       reload: false
     })
   ]
