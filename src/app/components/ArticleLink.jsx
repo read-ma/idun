@@ -6,22 +6,24 @@ import ListItem from 'material-ui/lib/lists/list-item';
 import NavigationCheck from 'material-ui/lib/svg-icons/navigation/check';
 import ActionLock from 'material-ui/lib/svg-icons/action/lock-outline';
 
-
-function difficultyLevel(difficulty) {
-  return <strong className={difficulty}>{l(difficulty)}</strong>;
-}
+const styles = {
+  listItem: {
+    lineHeight: '145%'
+  }
+};
 
 export default function ArticleLink({ id, title, tags, privy, difficulty, learned }) {
+  const secondaryText = (<div>
+    <strong className={difficulty}>{l(difficulty)}</strong>
+    <p>{tags}</p>
+  </div>);
+
   return (
     <ListItem
       key={id}
+      style={styles.listItem}
       primaryText={title}
-      secondaryText={
-        <div>
-          {difficultyLevel(difficulty)}
-          <p>{tags}</p>
-        </div>
-      }
+      secondaryText={secondaryText}
       rightIcon={learned ? <NavigationCheck /> : <i/>}
       leftIcon={privy ? <ActionLock /> : <i/>}
       href={`#/article/${id}`}
