@@ -65,7 +65,9 @@ function mapStateToProps(state) {
 const mapActionsToProps = (dispatch) => {
   return {
     closeNav() {
-      dispatch(closeNav('right'));
+      dispatch(
+        closeNav('right')
+      );
     }
   };
 };

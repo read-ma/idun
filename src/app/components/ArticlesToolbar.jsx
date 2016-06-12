@@ -30,7 +30,7 @@ const MenuItemFields = {
   visibility: { all: 'All articles', privy: 'My articles', open: 'Public articles' },
   visiting: { all: 'Visits - all', visited: 'Read', unvisited: 'To read' },
   learning: { all: 'Learning - all', learned: 'Learned', unlearned: 'To learn' },
-  difficulty: { all: 'All levels', advanced: 'Advanced', 'upper-intermediate': 'Upper intermediate', intermediate: 'Intermediate' },
+  difficulty: { all: 'All levels', intermediate: 'Intermediate', 'upper-intermediate': 'Upper intermediate', advanced: 'Advanced' },
 };
 
 const FilterDropDownMenu = ({ updateFilter, name, selected }) => {
