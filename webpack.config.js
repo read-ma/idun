@@ -1,5 +1,5 @@
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
+// const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 const webpack = require('webpack');
 
 module.exports = {
@@ -41,15 +41,16 @@ module.exports = {
       'process.env': {
         NODE_ENV: JSON.stringify('development')
       }
-    }),
-    new BrowserSyncPlugin({
-      // browse to http://localhost:3000/ during development,
-      // ./public directory is being served
-      host: 'localhost',
-      port: 3000,
-      proxy: 'http://localhost:8080/'
-    }, {
-      reload: false
     })
+    // ,
+    // new BrowserSyncPlugin({
+    //   // browse to http://localhost:3000/ during development,
+    //   // ./public directory is being served
+    //   host: 'localhost',
+    //   port: 3000,
+    //   proxy: 'http://localhost:8080/'
+    // }, {
+    //   reload: false
+    // })
   ]
 };
