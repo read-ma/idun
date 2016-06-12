@@ -1,10 +1,28 @@
+import _ from 'lodash';
+
+const breakpoints = [
+  { name: 'large', minWidth: 1100 },
+  { name: 'medium', minWidth: 768 },
+  { name: 'small', minWidth: 480 },
+  { name: 'extra-small', minWidth: 0 },
+];
+
+function screenWidth() {
+  return window.innerWidth;
+}
+
 function screenSize() {
   let width = screenWidth();
 
-  if (width > 1100) { return 'large' }
-  if (width > 768) { return 'medium' }
-  if (width > 480) { return 'small' }
-  else { return 'extra-small' }
+  for (let i = 0; i < breakpoints.length; i++) {
+    if (breakpoints[i].minWidth < width) {
+      return breakpoints[i].name;
+    }
+  }
+}
+
+function getMinWidthForBreakpoint(screenSize) {
+  return _.find(breakpoints, { name: screenSize }).minWidth;
 }
 
 function isDesktop() {
@@ -15,8 +33,4 @@ function isMobile() {
   return screenSize() === 'small' || screenSize() === 'extra-small';
 }
 
-function screenWidth() {
-  return window.innerWidth;
-}
-
-export { isDesktop, isMobile, screenSize, screenWidth };
+export { isDesktop, isMobile, screenSize, screenWidth, getMinWidthForBreakpoint };

@@ -13,8 +13,11 @@ import WordSearchInput from '../components/WordSearchInput';
 
 class Sidebar extends Component {
   render() {
-    const leftIcon = isMobile() ? <IconButton onClick={this.props.closeNav}><NavigationClose /></IconButton> : <i></i>;
+    const isDeviceMobile = isMobile();
+    const leftIcon = isDeviceMobile ? <IconButton onClick={this.props.closeNav}><NavigationClose /></IconButton> : <i></i>;
+    let shouldOpen = isDeviceMobile ? this.props.open : true;
     let docked = true;
+
 
     let styles = {
       sidebar: {
@@ -22,7 +25,7 @@ class Sidebar extends Component {
       },
     };
 
-    if (isMobile()) {
+    if (isDeviceMobile) {
       docked = false;
       styles.sidebar = {
         width: screenWidth(),
@@ -37,7 +40,7 @@ class Sidebar extends Component {
     }
 
     return (
-      <LeftNav width={styles.sidebar.width} style={styles.sidebar} docked={docked} openRight={true} open={this.props.open}>
+      <LeftNav width={styles.sidebar.width} style={styles.sidebar} docked={docked} openRight={true} open={shouldOpen}>
         <AppBar title={<WordSearchInput />} style={styles.sidebar.appbar} iconElementLeft={leftIcon} />
         <UserCustomDefinition />
         <DefinitionBoxes />
