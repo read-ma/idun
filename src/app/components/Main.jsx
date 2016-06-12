@@ -19,7 +19,8 @@ const styles = {
     }
   },
   mainContent: {
-    paddingTop: '120px'
+    paddingTop: '120px',
+    marginLeft: '15px'
   }
 };
 

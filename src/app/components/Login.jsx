@@ -1,29 +1,22 @@
 import React from 'react';
-import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { loginAttempt } from '../actions/auth';
 
 import TextField from 'material-ui/lib/text-field';
 import RaisedButton from 'material-ui/lib/raised-button';
-import Paper from 'material-ui/lib/paper';
-import Divider from 'material-ui/lib/divider';
-
+import FlatButton from 'material-ui/lib/flat-button';
 
 const styles = {
-  tabTitle: {
-    fontWeight: 700,
-  },
   headline: {
-    fontSize: 20,
-    paddingTop: 16,
+    fontSize: 18,
     marginBottom: 12,
     fontWeight: 500,
+    color: '#444'
   },
   loginButton: {
     marginRight: 10,
   },
   createAccountLink: {
-    marginBottom: 10,
     marginTop: 10,
   },
 };
@@ -50,41 +43,41 @@ class Login extends React.Component {
 
   render() {
     return (
-      <Paper zDepth={2} className="col-xs-10">
+      <form onSubmit={this.login.bind(this)} className="col-xs-12 col-md-8 col-lg-6">
         <h2 style={styles.headline}>If you already have an account, please log in</h2>
         <span className="error">{this.props.error}</span>
 
-        <form onSubmit={this.login.bind(this)}>
+        <TextField
+          floatingLabelText="Your email address"
+          type="email"
+          id="email"
+          name="email"
+          required="true"
+          fullWidth={true}
+          onChange={this.handleFormInputChanged}
+        />
 
-          <TextField
-            floatingLabelText="Your email address"
-            type="email"
-            id="email"
-            name="email"
-            required="true"
-            onChange={this.handleFormInputChanged}
-          />
+        <br />
 
-          <br style={{ marginBottom: '1em' }} />
+        <TextField
+          floatingLabelText="Your password"
+          type="password"
+          id="password"
+          name="password"
+          required="true"
+          fullWidth={true}
+          onChange={this.handleFormInputChanged}
+        />
 
-          <TextField
-            floatingLabelText="Enter your password"
-            type="password"
-            id="password"
-            name="password"
-            require="true"
-            onChange={this.handleFormInputChanged}
-          />
-          <br />
+        <br />
 
-          <RaisedButton label="Login" primary={true} type="submit" style={styles.loginButton} />
+        <RaisedButton label="Login" primary={true} type="submit" style={styles.loginButton} />
+          <FlatButton label="I forgot my password" linkButton={true} href="/#/forgot_password" />
 
-          <Link to="forgot_password">I forgot my password</Link>
+        <br />
 
-          <Divider />
-          <Link to="sign_up" style={styles.createAccountLink}>Create account</Link>
-        </form>
-      </Paper>
+          <FlatButton label="Create account" linkButton={true} href="/#/sign_up" primary={true} style={styles.createAccountLink}/>
+      </form>
     );
   }
 }
