@@ -1,3 +1,4 @@
+require('./Articles.scss');
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { loadArticles } from '../actions/articles';
@@ -12,7 +13,7 @@ const ArticleList = ({ articles }) => {
     return new ArticleLink(article);
   });
 
-  return <List>{articleLinks}</List>;
+  return <List className="articles">{articleLinks}</List>;
 };
 
 ArticleList.propTypes = {
