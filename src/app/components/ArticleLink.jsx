@@ -6,13 +6,15 @@ import ListItem from 'material-ui/lib/lists/list-item';
 import NavigationCheck from 'material-ui/lib/svg-icons/navigation/check';
 import ActionLock from 'material-ui/lib/svg-icons/action/lock-outline';
 
-const styles = {
-  listItem: {
-    lineHeight: '145%'
-  }
-};
 
-export default function ArticleLink({ id, title, tags, privy, difficulty, learned }) {
+export default function ArticleLink({ id, title, tags, privy, difficulty, learned, visited }) {
+  const styles = {
+    listItem: {
+      lineHeight: '145%',
+      fontWeight: visited ? 300 : 500,
+    }
+  };
+
   const secondaryText = (<div>
     <strong className={difficulty}>{l(difficulty)}</strong>
     <p>{tags}</p>
