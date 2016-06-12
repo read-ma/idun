@@ -18,11 +18,11 @@ import SocialSchool from 'material-ui/lib/svg-icons/social/school';
 import NavigationApps from 'material-ui/lib/svg-icons/navigation/apps';
 import ActionPowerSettingsNew from 'material-ui/lib/svg-icons/action/power-settings-new';
 
-const MainNavigation = ({ children, open }) => {
+const MainNavigation = ({ children, open, closeNavbar }) => {
   return (
     <LeftNav width={200} docked={true} open={open} style={{ padding: 0 }}>
       <AppBar title="ReadMa" showMenuIconButton={false} iconElementRight={
-        <IconButton onClick={closeNav}><NavigationClose /></IconButton>}
+        <IconButton onClick={closeNavbar}><NavigationClose /></IconButton>}
       />
       <List>
         <ListItem primaryText="Articles" href="#/articles" leftIcon={<ActionReorder />} />
@@ -41,7 +41,14 @@ const MainNavigation = ({ children, open }) => {
 MainNavigation.propTypes = {
   logout: React.PropTypes.func.isRequired,
   children: React.PropTypes.object,
-  open: React.PropTypes.bool
+  open: React.PropTypes.bool,
+  closeNavbar: React.PropTypes.func,
+};
+
+const mapStateToProps = state => {
+  return {
+    open: state.settings.navOpen.left
+  };
 };
 
 const mapActionsToProps = dispatch => {
@@ -49,15 +56,9 @@ const mapActionsToProps = dispatch => {
     logout() {
       dispatch(logout());
     },
-    closeNav() {
+    closeNavbar() {
       dispatch(closeNav('left'));
     }
-  };
-};
-
-const mapStateToProps = state => {
-  return {
-    open: state.settings.navOpen.left
   };
 };
 

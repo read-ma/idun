@@ -18,7 +18,6 @@ class Sidebar extends Component {
     let shouldOpen = isDeviceMobile ? this.props.open : true;
     let docked = true;
 
-
     let styles = {
       sidebar: {
         width: 500
