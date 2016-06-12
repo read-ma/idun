@@ -1,4 +1,6 @@
 import React from 'react';
+import { Route, IndexRedirect, useRouterHistory } from 'react-router';
+import { createHashHistory } from 'history';
 
 import { Home, Main, Articles, ArticlePage, UserDefinitionsLearn, UserDefinitionsList } from '../components';
 import Login from '../components/Login';
@@ -8,14 +10,15 @@ import FlashcardsQuiz from '../components/FlashcardsQuiz';
 import FlashcardsQuizResults from '../components/FlashcardsQuizResults';
 import ChangePasswordView from '../components/ChangePasswordView';
 import ArticleSearchInput from '../components/ArticleSearchInput';
-
-import { Route, IndexRedirect } from 'react-router';
+import AddArticle from '../components/AddArticleWidget';
 import { requireAuthentication } from '../utils';
 
-import AddArticle from '../components/AddArticleWidget';
+// Tried to turn off query param. But it didnt work.
+// https://github.com/reactjs/react-router/issues/1967
+const appHistory = useRouterHistory(createHashHistory)({ queryKey: false });
 
 export default (
-  <Route path="/" component={Main}>
+  <Route path="/" component={Main} history={appHistory}>
     <Route path="/login" component={Login} />
     <Route path="/home" components={{ children: Home }} />
 
@@ -32,7 +35,7 @@ export default (
                     topNavChildren: ArticleSearchInput }} />
 
     <Route path="/new-article" component={AddArticle} />
-    <Route path="/article/:id" components={{ children: requireAuthentication(ArticlePage)} } />
+    <Route path="/article/:id" components={{ children: requireAuthentication(ArticlePage) }} />
 
     <IndexRedirect to="/home" />
   </Route>
