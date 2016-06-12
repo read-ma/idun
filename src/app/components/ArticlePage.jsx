@@ -10,14 +10,29 @@ import { getSelectedText } from '../highlight';
 import PositioningWidget from './PositioningWidget';
 import ArticleToolbar from './ArticleToolbar';
 
+const styles = {
+  blockquote: {
+    fontSize: '0.65em',
+    wordWrap: 'break-word',
+    color: '#444',
+    margin: '30px 0'
+  },
+  link: {
+    color: 'inherit' // Take color from the closest parent that has color defined.
+  }
+};
+
 const ArticleFooter = ({ sourceUrl }) => {
   return (
-    <footer>
-      <blockquote>
-        <span>Source: </span>
-        <a href={sourceUrl} target="_blank" alt="Go to source article">{sourceUrl}</a>
-      </blockquote>
-    </footer>
+    <blockquote style={styles.blockquote}>
+      <span>Source: </span>
+      <a href={sourceUrl}
+        target="_blank"
+        title="Go to source article"
+        style={styles.link}>
+          {sourceUrl}
+      </a>
+    </blockquote>
   );
 };
 
