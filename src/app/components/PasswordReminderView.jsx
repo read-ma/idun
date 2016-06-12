@@ -1,8 +1,22 @@
-require('./styles/PasswordReminderView.scss');
 import React from 'react';
 import { connect } from 'react-redux';
 import { resetPassword } from '../actions/auth';
 import NotificationBox from './NotificationBox';
+
+import TextField from 'material-ui/lib/text-field';
+import RaisedButton from 'material-ui/lib/raised-button';
+
+const styles = {
+  headline: {
+    fontSize: 18,
+    marginBottom: 20,
+    fontWeight: 500,
+    color: '#444'
+  },
+  sendButton: {
+    marginTop: '1em'
+  }
+};
 
 class PasswordReminder extends React.Component {
   constructor(props) {
@@ -23,19 +37,26 @@ class PasswordReminder extends React.Component {
 
   render() {
     return (
-      <div className="card forgot-password">
-        <h1>Reset password</h1>
-        <p className="flow-text">Enter your email. We will send you instructions how to reset your password.</p>
+      <form onSubmit={this.resetPassword} className="col-xs-12 col-md-8 col-lg-6">
+        <h2 style={styles.headline}>Reset password</h2>
+        <p>Enter your email. We will send you instructions how to reset your password.</p>
+
         {NotificationBox(this.props.error, 'error')}
         {NotificationBox(this.props.message, 'green-text')}
-        <form onSubmit={this.resetPassword}>
-          <div className="input-field">
-            <input onChange={this.handleInputChange} name="email" type="email" id="emailAddress" required="required"/>
-            <label htmlFor="emailAddress">Email</label>
-          </div>
-          <input type="submit" className="btn" onClick={this.props.resetPassword} value="Send instructions" />
-        </form>
-      </div>);
+
+        <TextField
+          floatingLabelText="Your email address"
+          type="email"
+          id="email"
+          name="email"
+          required="true"
+          fullWidth={true}
+          onChange={this.handleInputChange}
+        />
+
+        <RaisedButton label="Send instructions" primary={true} type="submit" onClick={this.props.resetPassword} style={styles.sendButton} />
+      </form>
+    );
   }
 }
 

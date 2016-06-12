@@ -72,11 +72,11 @@ class Login extends React.Component {
         <br />
 
         <RaisedButton label="Login" primary={true} type="submit" style={styles.loginButton} />
-          <FlatButton label="I forgot my password" linkButton={true} href="/#/forgot_password" />
+        <FlatButton label="I forgot my password" linkButton={true} href="/#/forgot_password" />
 
         <br />
 
-          <FlatButton label="Create account" linkButton={true} href="/#/sign_up" primary={true} style={styles.createAccountLink}/>
+        <FlatButton label="Create account" linkButton={true} href="/#/sign_up" primary={true} style={styles.createAccountLink}/>
       </form>
     );
   }
