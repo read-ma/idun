@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as player from '../actions/tts';
+import AVPlayArrow from 'material-ui/lib/svg-icons/av/play-arrow';
 
 // const TTSPlayerButton = ({ handleClick, label }) => {
 //   return (
@@ -17,7 +18,7 @@ class TTSPlayer extends Component {
 
   render() {
     return (
-      <i className="material-icons grey-text tts-player-icon" onClick={this.play.bind(this)} title="Read phrase">volume_up</i>
+      <AVPlayArrow onClick={this.play.bind(this)} title="Read phrase"/>
     );
   }
 }
