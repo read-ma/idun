@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as player from '../actions/tts';
+import IconButton from 'material-ui/lib/icon-button';
 import AVPlayArrow from 'material-ui/lib/svg-icons/av/play-arrow';
 
 // const TTSPlayerButton = ({ handleClick, label }) => {
@@ -11,6 +12,12 @@ import AVPlayArrow from 'material-ui/lib/svg-icons/av/play-arrow';
 //   );
 // };
 
+const styles = {
+  tooltip: {
+    fontSize: '12px'
+  }
+};
+
 class TTSPlayer extends Component {
   play() {
     player.start(this.props.selection, this.props.language);
@@ -18,7 +25,9 @@ class TTSPlayer extends Component {
 
   render() {
     return (
-      <AVPlayArrow onClick={this.play.bind(this)} title="Read phrase"/>
+      <IconButton tooltip="Read phrase" tooltipStyles={styles.tooltip}>
+        <AVPlayArrow onClick={this.play.bind(this)}/>
+      </IconButton>
     );
   }
 }
