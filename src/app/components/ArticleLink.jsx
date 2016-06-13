@@ -2,21 +2,28 @@ require('./styles/ArticleLink.scss');
 import React from 'react';
 import l from '../I18n';
 import ListItem from 'material-ui/lib/lists/list-item';
-
+import Label from './shared/Label';
 import NavigationCheck from 'material-ui/lib/svg-icons/navigation/check';
-import ActionLock from 'material-ui/lib/svg-icons/action/lock-outline';
-
+// import ActionLock from 'material-ui/lib/svg-icons/action/lock-outline';
 
 export default function ArticleLink({ id, title, tags, privy, difficulty, learned, visited }) {
   const styles = {
     listItem: {
       lineHeight: '145%',
-      fontWeight: visited ? 300 : 500,
+      fontWeight: visited ? 300 : 500
+    },
+    secondaryText: {
+      height: '20px',
+      lineHeight: '22px'
     }
   };
 
-  const secondaryText = (<div>
-    <strong className={difficulty}>{l(difficulty)}</strong>
+  const newLabel = <Label type="new" text={visited ? "Learned" : "New"} />;
+  const privateLabel = <Label type="visibility" text={privy ? "Private" : "Public"} />;
+  const difficultyLabel = <Label type="difficulty" text={l(difficulty)} />;
+
+  const secondaryText = (<div style={styles.secondaryText}>
+    {newLabel} {privateLabel} {difficultyLabel}
     <p>{tags}</p>
   </div>);
 
@@ -24,12 +31,12 @@ export default function ArticleLink({ id, title, tags, privy, difficulty, learne
     <ListItem
       key={id}
       style={styles.listItem}
-      primaryText={title}
       secondaryText={secondaryText}
       rightIcon={learned ? <NavigationCheck /> : <i/>}
-      leftIcon={privy ? <ActionLock /> : <i/>}
       href={`#/article/${id}`}
-    />
+    >
+      {title}
+    </ListItem>
   );
 }
 
