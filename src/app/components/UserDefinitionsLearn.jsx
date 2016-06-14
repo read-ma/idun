@@ -4,7 +4,7 @@ import { loadDecks } from '../actions';
 import List from 'material-ui/lib/lists/list';
 import ListItem from 'material-ui/lib/lists/list-item';
 import Avatar from 'material-ui/lib/avatar';
-import Colors from 'material-ui/lib/styles/colors';
+import flashcardsColors from './shared/Colors';
 import NavigationChevronRight from 'material-ui/lib/svg-icons/navigation/chevron-right';
 
 function mapStateToProps(state) {
@@ -36,7 +36,7 @@ class UserDefinitionsLearn extends Component {
               <ListItem key={deck.id} onClick={this.startQuizForArticle.bind(null, deck.id)}
                 leftAvatar={
                   <Avatar
-                    color={Colors.pinkA200} backgroundColor={Colors.transparent}
+                    color={flashcardsColors.avatarColor} backgroundColor={flashcardsColors.avatarBgColor}
                     style={{ left: 8 }}
                   >
                     {deck.count}

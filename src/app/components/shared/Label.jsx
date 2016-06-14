@@ -1,5 +1,5 @@
 import React from 'react';
-import Colors from 'material-ui/lib/styles/colors';
+import { labelsColors } from './Colors';
 
 const styles = {
   marginRight: '5px',
@@ -14,17 +14,10 @@ const styles = {
   color: '#fff'
 };
 
-const typeColors = {
-  new: Colors.redA700,
-  learn_status: Colors.blueGrey200,
-  status: Colors.purple300,
-  visibility: Colors.purple200,
-  difficulty: Colors.pink200
-};
 
 const Label = ({ text, type, style }) => {
   const bgColor = {
-    backgroundColor: typeColors[type] || '#000'
+    backgroundColor: labelsColors[type] || '#000'
   };
   let css = Object.assign({}, styles, bgColor, style);
 

@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { loadDeckForArticle, markItem } from '../actions/deck';
 import Flashcard from './Flashcard';
-import FlashcardSettings from './FlashcardSettings';
 import FlashcardProgress from './FlashcardProgress';
 import moment from 'moment';
 
