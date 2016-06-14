@@ -4,7 +4,7 @@ import { loadDecks } from '../actions';
 import List from 'material-ui/lib/lists/list';
 import ListItem from 'material-ui/lib/lists/list-item';
 import Avatar from 'material-ui/lib/avatar';
-import flashcardsColors from './shared/Colors';
+import { flashcardsColors } from './shared/Colors';
 import NavigationChevronRight from 'material-ui/lib/svg-icons/navigation/chevron-right';
 
 function mapStateToProps(state) {
