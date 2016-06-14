@@ -27,7 +27,7 @@ const matchCriteria = (article, filter) => {
 const filterArticles = (articles, filter)=>{
   return articles
     .filter(article => matchCriteria(article, filter))
-    .splice(0, 50);
+    .splice(0, 100);
 };
 
 export default filterArticles;
