@@ -6,11 +6,13 @@ import Label from './shared/Label';
 import NavigationCheck from 'material-ui/lib/svg-icons/navigation/check';
 // import ActionLock from 'material-ui/lib/svg-icons/action/lock-outline';
 
-export default function ArticleLink({ id, title, tags, privy, difficulty, learned, visited }) {
+
+export default function ArticleLink({ id, title, tags, privy, difficulty, learn_status, waiting, learned }) {
   const styles = {
     listItem: {
       lineHeight: '145%',
-      fontWeight: visited ? 300 : 500
+      fontSize: 25,
+      fontWeight: waiting ? 500 : 300
     },
     secondaryText: {
       height: '20px',
@@ -18,12 +20,12 @@ export default function ArticleLink({ id, title, tags, privy, difficulty, learne
     }
   };
 
-  const newLabel = <Label type="new" text={visited ? "Learned" : "New"} />;
   const privateLabel = <Label type="visibility" text={privy ? "Private" : "Public"} />;
-  const difficultyLabel = <Label type="difficulty" text={l(difficulty)} />;
 
   const secondaryText = (<div style={styles.secondaryText}>
-    {newLabel} {privateLabel} {difficultyLabel}
+    {privateLabel}
+    <Label type='learn_status' text={ l(learn_status) } />
+    <Label type="difficulty" text={l(difficulty)} />
     <p>{tags}</p>
   </div>);
 

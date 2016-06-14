@@ -28,8 +28,7 @@ const styles = {
 
 const MenuItemFields = {
   visibility: { all: 'All articles', privy: 'My articles', open: 'Public articles' },
-  visiting: { all: 'Visits - all', visited: 'Read', unvisited: 'To read' },
-  learning: { all: 'Learning - all', learned: 'Learned', unlearned: 'To learn' },
+  learning: { all: 'Learn', waiting: 'New', pending: 'Learning', learned: 'Done' },
   difficulty: { all: 'All levels', intermediate: 'Intermediate', 'upper-intermediate': 'Upper intermediate', advanced: 'Advanced' },
 };
 
@@ -58,7 +57,6 @@ class ArticlesToolbar extends Component {
       <Toolbar style={styles.toolbar} className="toolbar">
         <ToolbarGroup>
           <FilterDropDownMenu updateFilter={this.props.updateFilter} name='visibility' selected={this.props.filter.visibility} />
-          <FilterDropDownMenu updateFilter={this.props.updateFilter} name='visiting' selected={this.props.filter.visiting} />
           <FilterDropDownMenu updateFilter={this.props.updateFilter} name='learning' selected={this.props.filter.learning} />
           <FilterDropDownMenu updateFilter={this.props.updateFilter} name='difficulty' selected={this.props.filter.difficulty} />
         </ToolbarGroup>

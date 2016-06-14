@@ -18,7 +18,7 @@ import SocialSchool from 'material-ui/lib/svg-icons/social/school';
 import NavigationApps from 'material-ui/lib/svg-icons/navigation/apps';
 import ActionPowerSettingsNew from 'material-ui/lib/svg-icons/action/power-settings-new';
 
-const MainNavigation = ({ children, open, closeNavbar }) => {
+const MainNavigation = ({ children, open, closeNavbar, logout }) => {
   return (
     <LeftNav width={200} docked={true} open={open} style={{ padding: 0 }}>
       <AppBar title="ReadMa" showMenuIconButton={false} iconElementRight={

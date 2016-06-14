@@ -7,8 +7,8 @@ const matchCriteria = (article, filter) => {
   if ( filter.learning === 'learned' )
     match = match && article.learned;
 
-  if ( filter.learning === 'unlearned' )
-    match = match && !article.learned;
+  if ( filter.learning === 'waiting' )
+    match = match && !article.learned && !article.visited;
 
   if ( filter.visibility === 'privy' )
     match = match && article.privy;
@@ -16,20 +16,18 @@ const matchCriteria = (article, filter) => {
   if ( filter.visibility === 'open' )
     match = match && !article.privy;
 
-  if ( filter.visiting === 'visited' )
-    match = match && article.visited;
-
-  if ( filter.visiting === 'unvisited' )
-    match = match && !article.visited;
+  if ( filter.learning === 'pending' )
+    match = match && article.pending;
 
   let difficultyMatch = filter.difficulty === 'all' || article.difficulty === filter.difficulty;
 
   return match && difficultyMatch;
 };
 
-
 const filterArticles = (articles, filter)=>{
-  return articles.filter(article => matchCriteria(article, filter));
+  return articles
+    .filter(article => matchCriteria(article, filter))
+    .splice(0, 50);
 };
 
 export default filterArticles;

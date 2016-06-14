@@ -16,9 +16,10 @@ const styles = {
 
 const typeColors = {
   new: Colors.redA700,
-  visibility: Colors.amber900,
-  status: Colors.lightBlueA100,
-  difficulty: Colors.pink700
+  learn_status: Colors.blueGrey200,
+  status: Colors.purple300,
+  visibility: Colors.purple200,
+  difficulty: Colors.pink200
 };
 
 const Label = ({ text, type, style }) => {

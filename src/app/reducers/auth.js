@@ -58,7 +58,7 @@ export default function auth(state = stateFromLocalStorage(), action){
       {error: action.payload}
     );
 
-  case 'USER_LOGGED_OUT':
+  case 'LOGOUT_USER':
     return Object.assign(
       {},
       state,
