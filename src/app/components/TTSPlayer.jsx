@@ -25,8 +25,8 @@ class TTSPlayer extends Component {
 
   render() {
     return (
-      <IconButton tooltip="Read phrase" tooltipStyles={styles.tooltip}>
-        <AVPlayArrow onClick={this.play.bind(this)}/>
+      <IconButton onClick={this.play.bind(this)} tooltip="Read phrase" tooltipStyles={styles.tooltip}>
+        <AVPlayArrow />
       </IconButton>
     );
   }

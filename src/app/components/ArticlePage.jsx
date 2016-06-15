@@ -9,8 +9,6 @@ import ConfirmLearnedButton from './ConfirmLearnedButton';
 import { getSelectedText } from '../highlight';
 import PositioningWidget from './PositioningWidget';
 import ArticleToolbar from './ArticleToolbar';
-import TTSPlayer from './TTSPlayer';
-
 
 const styles = {
   blockquote: {
@@ -61,7 +59,6 @@ class ArticlePage extends Component {
 
     return (
       <div>
-        <TTSPlayer />
         <ArticleToolbar />
         <PositioningWidget pageId={`article-${this.props.params.id}`} />
         <div className="article-wrapper">

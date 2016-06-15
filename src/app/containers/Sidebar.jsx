@@ -10,6 +10,7 @@ import IconButton from 'material-ui/lib/icon-button';
 import NavigationClose from 'material-ui/lib/svg-icons/navigation/close';
 import AppBar from 'material-ui/lib/app-bar';
 import WordSearchInput from '../components/WordSearchInput';
+import LanguageDropDownMenu from '../components/language/LanguageDropDownMenu';
 
 class Sidebar extends Component {
   render() {
@@ -41,6 +42,7 @@ class Sidebar extends Component {
     return (
       <LeftNav width={styles.sidebar.width} style={styles.sidebar} docked={docked} openRight={true} open={shouldOpen}>
         <AppBar title={<WordSearchInput />} style={styles.sidebar.appbar} iconElementLeft={leftIcon} />
+        <LanguageDropDownMenu type='to' />
         <UserCustomDefinition />
         <DefinitionBoxes />
       </LeftNav>
