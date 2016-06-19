@@ -57,7 +57,7 @@ const isQuoteMark = (token) => token.match(/^[\"\'\“\”\‘\’]$/);
 const detokenize = tokens => {
   let output = [];
 
-  let openningQuoteMark = false;
+  let openingQuoteMark = false;
 
   tokens.forEach(p => {
     let previous = output[output.length - 1];
@@ -65,17 +65,17 @@ const detokenize = tokens => {
     let quote = p.props.separator && isQuoteMark(p.props.word);
 
     if (quote) {
-      openningQuoteMark = !openningQuoteMark;
+      openingQuoteMark = !openingQuoteMark;
     }
 
     let spaceBefore = p.props.separator && p.props.word.match(/^[\(\“\“]$/);
-    let noSpace = previous && previous.props.separator && (previous.props.word.match(/^[\(\[]$/) || (isQuoteMark(previous.props.word) && openningQuoteMark));
+    let noSpace = previous && previous.props.separator && (previous.props.word.match(/^[\(\[]$/) || (isQuoteMark(previous.props.word) && openingQuoteMark));
 
     if (spaceBefore && !noSpace) {
       output.push(' ');
     }
 
-    if (quote && openningQuoteMark && (previous && !previous.props.word.match(/^[\(]$/))) {
+    if (quote && openingQuoteMark && (previous && !previous.props.word.match(/^[\(]$/))) {
       output.push(' ');
     }
 

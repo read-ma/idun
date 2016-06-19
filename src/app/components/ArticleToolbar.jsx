@@ -50,7 +50,7 @@ class ArticleToolbar extends Component {
         </ToolbarGroup>
         <ToolbarGroup float={"left"}>
           <ToolbarTitle text="Source language" style={styles.toolbar.title} />
-          <LanguageDropDownMenu type='from' />
+          <LanguageDropDownMenu type="from" />
         </ToolbarGroup>
 
         <ToolbarGroup float={"left"}>

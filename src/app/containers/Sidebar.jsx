@@ -42,7 +42,7 @@ class Sidebar extends Component {
     return (
       <LeftNav width={styles.sidebar.width} style={styles.sidebar} docked={docked} openRight={true} open={shouldOpen}>
         <AppBar title={<WordSearchInput />} style={styles.sidebar.appbar} iconElementLeft={leftIcon} />
-        <LanguageDropDownMenu type='to' />
+        <LanguageDropDownMenu type="to" />
         <UserCustomDefinition />
         <DefinitionBoxes />
       </LeftNav>

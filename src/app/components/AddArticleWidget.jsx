@@ -38,7 +38,7 @@ class ArticleAdd extends React.Component {
               <div className="input-field">
                 <input
                   type="url"
-                  name="sourceUrl"
+                  name="source_url"
                   className="validate"
                   ref="urlInput"
                   id="sourceUrl"
