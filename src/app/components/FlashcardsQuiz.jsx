@@ -8,7 +8,7 @@ import moment from 'moment';
 
 const DummyRow = ({ word, group, repeatedAt }) => {
   return (
-    <tr>
+    <tr key={word}>
       <td>{word}</td>
       <td>{group}</td>
       <td>{ moment(repeatedAt).fromNow() }</td>
