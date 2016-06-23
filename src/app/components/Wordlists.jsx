@@ -8,7 +8,6 @@ const Wordlists = ({ wordlists, handleSelected }) => {
   const buttons = lists.map((list) => {
     return (
       <Checkbox
-      style={{ float: 'left' }}
       key={`wordlist-${list.name}`}
       name={list.name}
       onCheck={handleSelected}

@@ -3,14 +3,8 @@ import { connect } from 'react-redux';
 import * as player from '../actions/tts';
 import IconButton from 'material-ui/lib/icon-button';
 import AVPlayArrow from 'material-ui/lib/svg-icons/av/play-arrow';
-
-// const TTSPlayerButton = ({ handleClick, label }) => {
-//   return (
-//     <a onClick={handleClick}>
-//       <i className="material-icons">{label}</i>
-//     </a>
-//   );
-// };
+import AVPause from 'material-ui/lib/svg-icons/av/pause';
+import AVStop from 'material-ui/lib/svg-icons/av/stop';
 
 const styles = {
   tooltip: {
@@ -19,15 +13,29 @@ const styles = {
 };
 
 class TTSPlayer extends Component {
+
   play() {
-    player.start(this.props.selection, this.props.language);
+    if (this.props.ttsStatus.paused) {
+      this.props.resume();
+    }
+    else {
+      this.props.play(this.props.article.content, this.props.language);
+    }
   }
 
   render() {
     return (
-      <IconButton tooltip="Read phrase" tooltipStyles={styles.tooltip}>
-        <AVPlayArrow onClick={this.play.bind(this)}/>
-      </IconButton>
+      <div style={{float: 'left'}}>
+        <IconButton onClick={this.play.bind(this)} tooltip="Read phrase" tooltipStyles={styles.tooltip}>
+          <AVPlayArrow />
+        </IconButton>
+        <IconButton onClick={this.props.pause} tooltip="Pause" tooltipStyles={styles.tooltip}>
+          <AVPause />
+        </IconButton>
+        <IconButton onClick={this.props.stop} tooltip="Stop" tooltipStyles={styles.tooltip}>
+          <AVStop />
+        </IconButton>
+      </div>
     );
   }
 }
@@ -35,8 +43,34 @@ class TTSPlayer extends Component {
 function mapStateToProps(state) {
   return {
     selection: state.article.selectedText,
-    language: state.settings.language.from
+    article: state.article,
+    language: state.settings.language.from,
+    ttsStatus: state.ttsStatus,
   };
 }
 
-export default connect(mapStateToProps)(TTSPlayer);
+const mapActionsToProps = (dispatch) => {
+  return {
+    stop() {
+      dispatch(player.stop());
+    },
+    resume() {
+      dispatch(player.resume());
+    },
+    pause() {
+      dispatch(player.pause());
+    },
+    play(content, language) {
+      dispatch(player.stop());
+
+      content.forEach( tokens => {
+        dispatch(
+          player.start(tokens.join(' '), language)
+        );
+      }
+      );
+    }
+  };
+};
+
+export default connect(mapStateToProps, mapActionsToProps)(TTSPlayer);

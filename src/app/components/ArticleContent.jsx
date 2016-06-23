@@ -79,7 +79,7 @@ class ArticleContent extends Component {
 
       this.setState({ selection: [], appending: false });
       this.props.onTextSelected(selectedText);
-    }, 1000);
+    }, 500);
   }
 
   render() {

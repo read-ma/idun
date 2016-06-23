@@ -11,7 +11,8 @@ const INTERVALS_FOR_GROUP = {
 };
 
 const moveToNewBucket = (item, { value }) => {
-  const newGroup = item.group + value;
+  const group = item.group;
+  let newGroup = (group === 0 && value < 0) ? 0 : group + value;
   return {
     group: newGroup,
     repeatedAt: moment().add(INTERVALS_FOR_GROUP[newGroup], 'minute').toDate()

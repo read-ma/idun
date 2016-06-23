@@ -1,22 +1,20 @@
 import React from 'react';
-import LinearProgress from 'material-ui/lib/linear-progress';
+import _ from 'lodash';
 
 const FlashcardProgress = (props) => {
-  const itemNumber = props.itemIndex + 1;
-  const percent = Math.round(itemNumber / props.itemsNumber * 100);
+  const stats = Object.assign({ 0: 0, 1: 0, 2: 0 }, _.countBy(props.items, 'group'));
   return (
     <div className="row center-xs">
       <div className="col-xs-4 center-xs">
-        <span>{itemNumber} of {props.itemsNumber}</span>
-         <LinearProgress mode="determinate" value={percent} />
+        <span>{stats[0]} - {stats[1]} - {stats[2]}</span>
+        <p>{props.items.length} words in lesson</p>
       </div>
     </div>
   );
 };
 
 FlashcardProgress.propTypes = {
-  itemIndex: React.PropTypes.number.isRequired,
-  itemsNumber: React.PropTypes.number.isRequired,
+  items: React.PropTypes.array.isRequired,
 };
 
 export default FlashcardProgress;

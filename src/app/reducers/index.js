@@ -54,5 +54,18 @@ const articlesFilter = (state = articlesFilterInitial, action) => {
   }
 };
 
+const ttsStatus = (state={}, action) => {
+  switch (action.type) {
+  case 'TTS_START':
+  case 'TTS_RESUME':
+    return Object.assign({}, state, { playing: true, paused: false });
+  case 'TTS_STOP':
+    return Object.assign({}, state, { playing: false, paused: false });
+  case 'TTS_PAUSE':
+    return Object.assign({}, state, { playing: false, paused: true });
+  default:
+    return state;
+  }
+};
 
-export { article, articles, deck, decks, main, wordlists, definitions, auth, settings, articlesFilter };
+export { article, articles, deck, decks, main, wordlists, definitions, auth, settings, articlesFilter, ttsStatus };

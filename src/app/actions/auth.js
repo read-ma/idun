@@ -86,7 +86,7 @@ const userSigningInError = (payload) => {
 const logout = () => {
   ls.clearAll();
   return {
-    type: 'USER_LOGGED_OUT',
+    type: 'LOGOUT_USER',
     payload: {
       auth_token: undefined,
       isAuthenticated: false

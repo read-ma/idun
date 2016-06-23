@@ -3,14 +3,15 @@ import React from 'react';
 import l from '../I18n';
 import ListItem from 'material-ui/lib/lists/list-item';
 import Label from './shared/Label';
-import NavigationCheck from 'material-ui/lib/svg-icons/navigation/check';
-// import ActionLock from 'material-ui/lib/svg-icons/action/lock-outline';
+import NavigationChevronRight from 'material-ui/lib/svg-icons/navigation/chevron-right';
 
-export default function ArticleLink({ id, title, tags, privy, difficulty, learned, visited }) {
+
+export default function ArticleLink({ id, title, tags, privy, difficulty, learn_status, waiting }) {
   const styles = {
     listItem: {
       lineHeight: '145%',
-      fontWeight: visited ? 300 : 500
+      fontSize: 25,
+      fontWeight: waiting ? 500 : 300
     },
     secondaryText: {
       height: '20px',
@@ -18,12 +19,12 @@ export default function ArticleLink({ id, title, tags, privy, difficulty, learne
     }
   };
 
-  const newLabel = <Label type="new" text={visited ? "Learned" : "New"} />;
   const privateLabel = <Label type="visibility" text={privy ? "Private" : "Public"} />;
-  const difficultyLabel = <Label type="difficulty" text={l(difficulty)} />;
 
   const secondaryText = (<div style={styles.secondaryText}>
-    {newLabel} {privateLabel} {difficultyLabel}
+    {privateLabel}
+    <Label type="learn_status" text={ l(learn_status) } />
+    <Label type="difficulty" text={l(difficulty)} />
     <p>{tags}</p>
   </div>);
 
@@ -32,7 +33,7 @@ export default function ArticleLink({ id, title, tags, privy, difficulty, learne
       key={id}
       style={styles.listItem}
       secondaryText={secondaryText}
-      rightIcon={learned ? <NavigationCheck /> : <i/>}
+      rightIcon={<NavigationChevronRight />}
       href={`#/article/${id}`}
     >
       {title}
@@ -46,6 +47,6 @@ ArticleLink.propTypes = {
   tags: React.PropTypes.string.isRequired,
   privy: React.PropTypes.bool.isRequired,
   difficulty: React.PropTypes.string.isRequired,
-  learned: React.PropTypes.bool.isRequired,
-  visited: React.PropTypes.bool.isRequired,
+  learn_status: React.PropTypes.string.isRequired,
+  waiting: React.PropTypes.bool.isRequired,
 };

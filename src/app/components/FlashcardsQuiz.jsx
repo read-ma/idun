@@ -3,13 +3,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { loadDeckForArticle, markItem } from '../actions/deck';
 import Flashcard from './Flashcard';
-import FlashcardSettings from './FlashcardSettings';
 import FlashcardProgress from './FlashcardProgress';
 import moment from 'moment';
 
 const DummyRow = ({ word, group, repeatedAt }) => {
   return (
-    <tr>
+    <tr key={word}>
       <td>{word}</td>
       <td>{group}</td>
       <td>{ moment(repeatedAt).fromNow() }</td>
@@ -48,13 +47,13 @@ class FlashcardsQuiz extends Component {
     }
     return (
       <div className="row flashcards-container">
-        <div className="col-sm-9 col-sm-offset-2">
+        <div className="col-sm-12">
           <Flashcard
           key={this.props.currentItem.id}
           item={this.props.currentItem}
           markItem={this.props.markItem}
           startWithObverse={true} />
-          <FlashcardProgress itemsNumber={this.props.items.length} itemIndex={1} />
+          <FlashcardProgress items={this.props.items} />
           <div className="row">
             <table><tbody>
               {

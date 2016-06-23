@@ -4,7 +4,7 @@ import { loadDecks } from '../actions';
 import List from 'material-ui/lib/lists/list';
 import ListItem from 'material-ui/lib/lists/list-item';
 import Avatar from 'material-ui/lib/avatar';
-import Colors from 'material-ui/lib/styles/colors';
+import { flashcardsColors } from './shared/Colors';
 import NavigationChevronRight from 'material-ui/lib/svg-icons/navigation/chevron-right';
 
 function mapStateToProps(state) {
@@ -12,10 +12,6 @@ function mapStateToProps(state) {
 }
 
 class UserDefinitionsLearn extends Component {
-  constructor(props) {
-    super(props);
-    this.startQuizForArticle = this.startQuizForArticle.bind(this);
-  }
 
   componentDidMount() {
     this.props.dispatch(
@@ -23,20 +19,16 @@ class UserDefinitionsLearn extends Component {
     );
   }
 
-  startQuizForArticle() {}
-
   renderArticles() {
     return (
       <div>
-        <h1>Learn words used in recently read articles</h1>
-        <p>Click on article title to enter quiz from an article.</p>
         <List>
           {this.props.decks.map((deck) => {
             return (
-              <ListItem key={deck.id} onClick={this.startQuizForArticle.bind(null, deck.id)}
+              <ListItem key={deck.id}
                 leftAvatar={
                   <Avatar
-                    color={Colors.pinkA200} backgroundColor={Colors.transparent}
+                    color={flashcardsColors.avatarColor} backgroundColor={flashcardsColors.avatarBgColor}
                     style={{ left: 8 }}
                   >
                     {deck.count}

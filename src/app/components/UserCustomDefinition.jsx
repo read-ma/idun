@@ -5,6 +5,7 @@ import ContentAdd from 'material-ui/lib/svg-icons/content/add';
 import List from 'material-ui/lib/lists/list';
 import ListItem from 'material-ui/lib/lists/list-item';
 import TextField from 'material-ui/lib/text-field';
+import { saveUserDefinition } from '../actions';
 
 class UserCustomDefinition extends Component {
 
