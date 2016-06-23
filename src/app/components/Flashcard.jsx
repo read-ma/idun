@@ -4,9 +4,10 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import classnames from 'classnames';
 import Paper from 'material-ui/lib/paper';
 import FlatButton from 'material-ui/lib/flat-button';
+import Divider from 'material-ui/lib/divider';
 
 const style = {
-  height: 200,
+  height: 300,
   width: '100%',
   margin: 20,
   textAlign: 'center',
@@ -51,7 +52,7 @@ class Flashcard extends Component {
   obverse() {
     return (
       <div className="card-obverse">
-        <small dangerouslySetInnerHTML={{ __html: this.props.item.word }} />
+        <h1 dangerouslySetInnerHTML={{ __html: this.props.item.word }} />
       </div>
     );
   }
@@ -59,9 +60,8 @@ class Flashcard extends Component {
   reverse() {
     return (
       <div className="card-reverse">
-        <div dangerouslySetInnerHTML={{ __html: this.props.item.translation }} />
-        <hr />
-        <small dangerouslySetInnerHTML={{ __html: this.props.item.example }} />
+        <p dangerouslySetInnerHTML={{ __html: this.props.item.translation }} />
+        <p dangerouslySetInnerHTML={{ __html: this.props.item.example }} />
       </div>
     );
   }
@@ -81,12 +81,26 @@ class Flashcard extends Component {
     return buttons;
   }
 
+  renderContent() {
+    if (this.state.reverted) {
+      return (
+        <div>
+          {this.obverse()}
+          <Divider />
+          {this.reverse()}
+        </div> 
+      );
+    } else {
+      return this[this.state.side]();
+    }
+  }
+
   render() {
-    const side = this[this.state.side]();
     const cardClassnames = classnames('card', {
       'card-obverse': this.state.side === 'obverse',
       'card-reverse': this.state.side === 'reverse'
     });
+
     return (
       <div>
         <ReactCSSTransitionGroup
@@ -97,26 +111,18 @@ class Flashcard extends Component {
         transitionAppearTimeout={500}
         style={{ width: '100%' }}>
           <div className="row card-wrap" key={this.props.item.word}>
-            <ReactCSSTransitionGroup
-            transitionName="flip"
-            transitionLeave={true}
-            transitionAppear={false}
-            transitionEnterTimeout={500}
-            transitionLeaveTimeout={500}
-            style={{ width: '100%' }}>
-              <div className={cardClassnames} key={this.state.side} onClick={this.revert}>
-                <Paper style={style} zDepth={2}>
-                  <div className="row middle-xs between-xs" style={{ height: '100%' }}>
-                    <div className="col-xs-12">
-                      {side}
-                    </div>
-                    <div className="col-xs-12">
-                      {this.renderMarkButtons()}
-                    </div>
+            <div className={cardClassnames} key={this.state.side} onClick={this.revert}>
+              <Paper style={style} zDepth={2}>
+                <div className="row middle-xs between-xs" style={{ height: '100%' }}>
+                  <div className="col-xs-12">
+                    {this.renderContent()}
                   </div>
-                </Paper>
-              </div>
-            </ReactCSSTransitionGroup>
+                  <div className="col-xs-12">
+                    {this.renderMarkButtons()}
+                  </div>
+                </div>
+              </Paper>
+            </div>
           </div>
         </ReactCSSTransitionGroup>
       </div>

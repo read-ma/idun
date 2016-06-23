@@ -47,13 +47,13 @@ class FlashcardsQuiz extends Component {
     }
     return (
       <div className="row flashcards-container">
-        <div className="col-sm-9 col-sm-offset-2">
+        <div className="col-sm-12">
           <Flashcard
           key={this.props.currentItem.id}
           item={this.props.currentItem}
           markItem={this.props.markItem}
           startWithObverse={true} />
-          <FlashcardProgress itemsNumber={this.props.items.length} itemIndex={1} />
+          <FlashcardProgress items={this.props.items} />
           <div className="row">
             <table><tbody>
               {
