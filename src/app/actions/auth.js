@@ -4,6 +4,8 @@ import {push} from 'react-router-redux';
 import ls from '../localStore';
 import _ from 'lodash';
 import map from 'lodash/map';
+import ReactGA from 'react-ga';
+
 const DEFAULT_RETURN_TO = '/articles';
 
 
@@ -69,6 +71,7 @@ const userLoggedIn = (userData) => {
   ls.set('AUTH_TOKEN', userData.auth_token);
   ls.set('IS_AUTHENTICATED', true);
   ls.set('CURRENT_USER_EMAIL', userData.email);
+  ReactGA.set({ userId: userData.email });
 
   return {
     type: 'USER_LOGGED_IN',
