@@ -7,6 +7,7 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 
 import getMuiTheme from 'material-ui/lib/styles/getMuiTheme';
 import themeDecorator from 'material-ui/lib/styles/theme-decorator';
+import setupGoogleAnalytics from './googleAnalytics';
 
 // Needed for onTouchTap
 // Can go away when react 1.0 release
@@ -15,6 +16,7 @@ import themeDecorator from 'material-ui/lib/styles/theme-decorator';
 injectTapEventPlugin();
 
 ErrorNotifier.setup();
+setupGoogleAnalytics();
 
 const Application = () => (
   <themeDecorator muiTheme={getMuiTheme()}>

@@ -10,7 +10,7 @@ const reducer = combineReducers(
     {},
     reducers,
     {routing: routerReducer}
-  ));;
+  ));
 
 const middleware = routerMiddleware(hashHistory);
 const createStoreWithMiddleware = applyMiddleware(middleware, thunk)(createStore);
