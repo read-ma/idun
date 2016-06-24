@@ -15,6 +15,7 @@ class UserDefinitionBox extends Component {
       <Paper style={style} zDepth={2}>
         <h2 className="card-title blue-text">{this.props.item.word}</h2>
         <h4 className="card-subtitle" dangerouslySetInnerHTML={{ __html: this.props.item.translation }}></h4>
+        <h5 className="card-subtitle" dangerouslySetInnerHTML={{ __html: this.props.item.example }}></h5>
         <div className="card-description">
           {this.props.item.definition}
         </div>
