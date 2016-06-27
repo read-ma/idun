@@ -5,7 +5,7 @@ import { openNav } from '../actions';
 import { screenSize } from '../Responsive';
 import MainNavigaton from './MainNavigation';
 import AppBar from 'material-ui/lib/app-bar';
-
+import AppProgressBar from './AppProgressBar';
 
 const styles = {
   appbar: {
@@ -38,6 +38,7 @@ class Main extends React.Component {
           title={this.props.topNavChildren}
           titleStyle={styles.appbar.title}
         />
+        <AppProgressBar />
         <MainNavigaton displaySearchBar={this.displaySearchBar()} isAuthenticated={this.props.isAuthenticated}>
           {this.props.navChildren}
         </MainNavigaton>
