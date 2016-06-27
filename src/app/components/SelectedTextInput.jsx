@@ -1,5 +1,5 @@
 import React from 'react';
-import TTSPlayer from '../components/TTSPlayer';
+import { TTSPlayer } from '../components/TTSPlayer';
 import { textSelected } from '../actions';
 import { connect } from 'react-redux';
 

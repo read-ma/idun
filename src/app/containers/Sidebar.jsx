@@ -11,6 +11,7 @@ import NavigationClose from 'material-ui/lib/svg-icons/navigation/close';
 import AppBar from 'material-ui/lib/app-bar';
 import WordSearchInput from '../components/WordSearchInput';
 import LanguageDropDownMenu from '../components/language/LanguageDropDownMenu';
+import { TTSQuickPlayer } from '../components/TTSPlayer';
 
 class Sidebar extends Component {
   render() {
@@ -43,6 +44,7 @@ class Sidebar extends Component {
       <LeftNav width={styles.sidebar.width} style={styles.sidebar} docked={docked} openRight={true} open={shouldOpen}>
         <AppBar title={<WordSearchInput />} style={styles.sidebar.appbar} iconElementLeft={leftIcon} />
         <LanguageDropDownMenu type="to" />
+        <TTSQuickPlayer />
         <UserCustomDefinition />
         <DefinitionBoxes />
       </LeftNav>

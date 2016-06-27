@@ -12,7 +12,7 @@ const styles = {
   }
 };
 
-class TTSPlayer extends Component {
+class Player extends Component {
 
   play() {
     if (this.props.ttsStatus.paused) {
@@ -40,6 +40,24 @@ class TTSPlayer extends Component {
   }
 }
 
+
+class QuickPlayer extends Component {
+
+  play() {
+    this.props.playSingle(this.props.selection, this.props.language);
+  }
+
+  render() {
+    return (
+      <div style={{float: 'left'}}>
+        <IconButton onClick={this.play.bind(this)} tooltip="Read phrase" tooltipStyles={styles.tooltip}>
+          <AVPlayArrow />
+        </IconButton>
+      </div>
+    );
+  }
+}
+
 function mapStateToProps(state) {
   return {
     selection: state.article.selectedText,
@@ -60,6 +78,9 @@ const mapActionsToProps = (dispatch) => {
     pause() {
       dispatch(player.pause());
     },
+    playSingle(content, language) {
+      player.start(content, language);
+    },
     play(content, language) {
       dispatch(player.stop());
 
@@ -73,4 +94,5 @@ const mapActionsToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapActionsToProps)(TTSPlayer);
+export const TTSPlayer = connect(mapStateToProps, mapActionsToProps)(Player);
+export const TTSQuickPlayer = connect(mapStateToProps, mapActionsToProps)(QuickPlayer);

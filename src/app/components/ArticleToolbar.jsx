@@ -9,7 +9,7 @@ import { toggleHighlighting } from '../actions';
 import { ShowIf } from '../components';
 import { Wordlists } from '../components';
 import { isMobile } from '../Responsive';
-import TTSPlayer from './TTSPlayer';
+import { TTSPlayer } from './TTSPlayer';
 
 import LanguageDropDownMenu from './language/LanguageDropDownMenu';
 
