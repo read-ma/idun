@@ -52,6 +52,10 @@ class Sidebar extends Component {
   }
 }
 
+Sidebar.defaultProps = {
+  open: false
+};
+
 Sidebar.propTypes = {
   open: React.PropTypes.bool.isRequired,
   closeNav: React.PropTypes.func.isRequired,
