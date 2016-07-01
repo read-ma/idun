@@ -10,15 +10,14 @@ const style = {
   zIndex: 999999
 };
 
-
-
-const LinearProgressExampleSimple = ({processesCounter}) => (
-  <LinearProgress mode="determinate" value={processesCounter} color="#bf2a5c" style={style} max={5} />
+const LinearProgressExampleSimple = ({processesCounter, max}) => (
+  <LinearProgress mode="determinate" value={processesCounter} color="#bf2a5c" style={style} max={max} />
 );
 
 const mapStateToProps = state => {
   return {
-    processesCounter: state.settings.processesCounter
+    processesCounter: state.settings.processesCounter,
+    max: 5
   };
 };
 
