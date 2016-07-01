@@ -12,6 +12,7 @@ import AppBar from 'material-ui/lib/app-bar';
 import WordSearchInput from '../components/WordSearchInput';
 import LanguageDropDownMenu from '../components/language/LanguageDropDownMenu';
 import { TTSQuickPlayer } from '../components/TTSPlayer';
+import { ShowIf } from '../components';
 
 class Sidebar extends Component {
   render() {
@@ -43,7 +44,14 @@ class Sidebar extends Component {
     return (
       <LeftNav width={styles.sidebar.width} style={styles.sidebar} docked={docked} openRight={true} open={shouldOpen}>
         <AppBar title={<WordSearchInput />} style={styles.sidebar.appbar} iconElementLeft={leftIcon} />
+        <ShowIf condition={this.props.isAdmin}>
+          <span>
+            <LanguageDropDownMenu type="from" key="language-from-selection" />
+            <span>{">>"}</span>
+          </span>
+        </ShowIf>
         <LanguageDropDownMenu type="to" />
+
         <TTSQuickPlayer />
         <UserCustomDefinition />
         <DefinitionBoxes />
@@ -67,6 +75,7 @@ function mapStateToProps(state) {
     wordlists: state.wordlists,
     open: state.settings.navOpen.right,
     selectedText: state.article.selectedText,
+    isAdmin: state.auth.isAdmin,
   };
 }
 

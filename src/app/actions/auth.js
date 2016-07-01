@@ -37,7 +37,9 @@ const signupAttempt = (email) => {
   return (dispatch) => {
     api.post(
       '/invitation_requests.json',
-      {invitation_request: {email: email}}
+      {
+        invitation_request: { email: email }
+      }
     )
       .then( (response) => {
         dispatch(invitationRequestSent(response.data));
@@ -71,11 +73,12 @@ const userLoggedIn = (userData) => {
   ls.set('AUTH_TOKEN', userData.auth_token);
   ls.set('IS_AUTHENTICATED', true);
   ls.set('CURRENT_USER_EMAIL', userData.email);
+  ls.set('IS_ADMIN', userData.su);
   ReactGA.set({ userId: userData.email });
 
   return {
     type: 'USER_LOGGED_IN',
-    payload: userData
+    payload: Object.assign({}, userData, {isAdmin: userData.su}),
   };
 };
 
@@ -144,6 +147,6 @@ const changePasswordRequetError = (error) => {
     type: 'CHANGE_PASSWORD_REQUEST_ERROR',
     payload: error.data
   };
-}
+};
 
 export { loginAttempt, signupAttempt, logout, resetPassword, updatePassword }

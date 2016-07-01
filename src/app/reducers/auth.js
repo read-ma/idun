@@ -3,7 +3,8 @@ import ls from '../localStore';
 function stateFromLocalStorage() {
   return {
     isAuthenticated: !!ls.get('IS_AUTHENTICATED'),
-    auth_token:        ls.get('AUTH_TOKEN')
+    auth_token:        ls.get('AUTH_TOKEN'),
+    isAdmin:         !!ls.get('IS_ADMIN')
   };
 };
 
@@ -55,6 +56,7 @@ export default function auth(state = stateFromLocalStorage(), action){
       {},
       state,
       {isAuthenticated: false},
+      {isAdmin: false},
       {error: action.payload}
     );
 
