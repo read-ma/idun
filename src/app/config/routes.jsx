@@ -12,6 +12,7 @@ import ChangePasswordView from '../components/ChangePasswordView';
 import ArticleSearchInput from '../components/ArticleSearchInput';
 import AddArticle from '../components/AddArticleWidget';
 import { requireAuthentication } from '../utils';
+import { TTSPlayer } from '../components/TTSPlayer';
 
 // Tried to turn off query param. But it didnt work.
 // https://github.com/reactjs/react-router/issues/1967
@@ -35,7 +36,7 @@ export default (
                     topNavChildren: ArticleSearchInput }} />
 
     <Route path="/new-article" component={AddArticle} />
-    <Route path="/article/:id" components={{ children: requireAuthentication(ArticlePage) }} />
+    <Route path="/article/:id" components={{ children: requireAuthentication(ArticlePage), topNavChildren: TTSPlayer }} />
 
     <IndexRedirect to="/home" />
   </Route>

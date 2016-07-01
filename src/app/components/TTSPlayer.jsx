@@ -9,6 +9,23 @@ import AVStop from 'material-ui/lib/svg-icons/av/stop';
 const styles = {
   tooltip: {
     fontSize: '12px'
+  },
+  header: {
+    lineHeight: '56px',
+    alignSelf: 'center',
+    margin: 0,
+    flex: '0 0 7%',
+  },
+  player: {
+    display: 'flex',
+    height: '56px',
+    alignItems: 'center',
+    flexWrap: 'nowrap',
+    flexBasis: '90%'
+  },
+  buttons: {
+    margin: 0,
+    padding: 0,
   }
 };
 
@@ -25,14 +42,15 @@ class Player extends Component {
 
   render() {
     return (
-      <div style={{float: 'left'}}>
-        <IconButton onClick={this.play.bind(this)} tooltip="Read phrase" tooltipStyles={styles.tooltip}>
+      <div style={styles.player}>
+        <h4 style={styles.header}>Read</h4>
+        <IconButton style={styles.buttons} onClick={this.play.bind(this)} tooltip="Read" tooltipStyles={styles.tooltip}>
           <AVPlayArrow />
         </IconButton>
-        <IconButton onClick={this.props.pause} tooltip="Pause" tooltipStyles={styles.tooltip}>
+        <IconButton style={styles.buttons} onClick={this.props.pause} tooltip="Pause" tooltipStyles={styles.tooltip}>
           <AVPause />
         </IconButton>
-        <IconButton onClick={this.props.stop} tooltip="Stop" tooltipStyles={styles.tooltip}>
+        <IconButton style={styles.buttons} onClick={this.props.stop} tooltip="Stop" tooltipStyles={styles.tooltip}>
           <AVStop />
         </IconButton>
       </div>
@@ -50,7 +68,7 @@ class QuickPlayer extends Component {
   render() {
     return (
       <div style={{float: 'left'}}>
-        <IconButton onClick={this.play.bind(this)} tooltip="Read phrase" tooltipStyles={styles.tooltip}>
+        <IconButton onClick={this.play.bind(this)} tooltip="Read" tooltipStyles={styles.tooltip}>
           <AVPlayArrow />
         </IconButton>
       </div>

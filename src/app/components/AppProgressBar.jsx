@@ -13,7 +13,7 @@ const style = {
 
 
 const LinearProgressExampleSimple = ({processesCounter}) => (
-  <LinearProgress mode="determinate" value={processesCounter} color="#bf2a5c" style={style} max="5"/>
+  <LinearProgress mode="determinate" value={processesCounter} color="#bf2a5c" style={style} max={5} />
 );
 
 const mapStateToProps = state => {
