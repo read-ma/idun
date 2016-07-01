@@ -7,8 +7,8 @@ $selection-bg: #f8bbd0;
 $d3k-bg: lightgreen;
 
 .article-wrapper {
-  width: 95%;
-  max-width: 55em;
+  // width: 95%;
+  width: calc(100vw - 550px);
   word-spacing: 5px;
   margin-bottom: 30px;
 
