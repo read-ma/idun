@@ -37,10 +37,14 @@ const openNav = (side) => {
   };
 };
 
-function textSelected(text) {
+function textSelected(selectedText) {
+  if (typeof selectedText !== 'string') {
+    console.info("Text should be a string type.");
+    return { type: 'TEXT_SELECTED', text: '' }
+  }
   return {
     type: 'TEXT_SELECTED',
-    text: text.trim(),
+    text: selectedText.trim(),
   };
 }
 

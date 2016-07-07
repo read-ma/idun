@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import LinearProgress from 'material-ui/lib/linear-progress';
-
 
 const style = {
   position: 'fixed',
@@ -10,9 +9,27 @@ const style = {
   zIndex: 999999
 };
 
-const LinearProgressExampleSimple = ({processesCounter, max}) => (
-  <LinearProgress mode="determinate" value={processesCounter} color="#bf2a5c" style={style} max={max} />
-);
+class AppProgressBar extends Component {
+  constructor(props) {
+    super(props);
+    this.processesCounter = props.processesCounter;
+    this.max = props.max;
+  }
+
+  render() {
+    if (this.processesCounter === 0) {
+      console.log('There are no processes in queue. Not showing progress bar.')
+      return null;
+    }
+
+    return <LinearProgress mode="determinate" value={this.processesCounter} color="#bf2a5c" style={style} max={this.max} />;
+  }
+}
+
+AppProgressBar.propTypes = {
+  processesCounter: React.PropTypes.number,
+  max: React.PropTypes.number,
+};
 
 const mapStateToProps = state => {
   return {
@@ -21,4 +38,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(LinearProgressExampleSimple);
+export default connect(mapStateToProps)(AppProgressBar);
