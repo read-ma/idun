@@ -7,22 +7,6 @@ import FlashcardProgress from './FlashcardProgress';
 import moment from 'moment';
 import { Link } from 'react-router';
 
-const DummyRow = ({ word, group, repeatedAt }) => {
-  return (
-    <tr key={word}>
-      <td>{word}</td>
-      <td>{group}</td>
-      <td>{ moment(repeatedAt).fromNow() }</td>
-    </tr>
-  );
-};
-
-DummyRow.propTypes = {
-  word: React.PropTypes.string.isRequired,
-  group: React.PropTypes.string.isRequired,
-  repeatedAt: React.PropTypes.string.isRequired,
-};
-
 class FlashcardsQuiz extends Component {
   constructor(props) {
     super(props);
@@ -66,13 +50,6 @@ class FlashcardsQuiz extends Component {
           markItem={this.props.markItem}
           startWithObverse={true} />
           <FlashcardProgress items={this.props.items} />
-          <div className="row">
-            <table><tbody>
-              {
-                this.props.items.map(item => DummyRow(item))
-              }
-            </tbody></table>
-          </div>
         </div>
       </div>
     );
