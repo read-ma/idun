@@ -1,26 +1,24 @@
 import React from 'react';
 import ArticleContent from './ArticleContent';
 import Sidebar from '../containers/Sidebar';
-import { loadArticle, textSelected, loadUserDefinitions, articlePageClosed } from '../actions';
+import { loadArticle, textSelected, loadUserDefinitions } from '../actions';
 import { connect } from 'react-redux';
 
 class Home extends React.Component {
 
   componentDidMount() {
     this.props.loadArticle(201);
-  };
+  }
 
   render() {
     return (
-      <div>
-        <div className="row">
-          <div className="article-wrapper">
-            <article className="article">
-              <ArticleContent onTextSelected={this.props.onTextSelected} />
-            </article>
-          </div>
-          <Sidebar />
+      <div className="row">
+        <div className="article-wrapper no-toolbar">
+          <article className="article">
+            <ArticleContent onTextSelected={this.props.onTextSelected} />
+          </article>
         </div>
+        <Sidebar />
       </div>
     );
   }
@@ -28,6 +26,7 @@ class Home extends React.Component {
 
 Home.propTypes = {
   onTextSelected: React.PropTypes.func,
+  loadArticle: React.PropTypes.func
 };
 
 const mapActionsToProps = (dispatch) => {
@@ -38,9 +37,9 @@ const mapActionsToProps = (dispatch) => {
     onTextSelected: (text) => {
       let selectedText = text;
 
-      if (text.type === 'mouseup') {
-        selectedText = getSelectedText().trim();
-      }
+      // if (text.type === 'mouseup') {
+      //   selectedText = getSelectedText().trim();
+      // }
 
       if (!selectedText) {
         return;

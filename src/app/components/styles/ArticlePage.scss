@@ -7,17 +7,22 @@ $selection-bg: #f8bbd0;
 $d3k-bg: lightgreen;
 
 // Mobile
-.extra-small {
-  .article-wrapper {
-    width: calc(100vw - 15px);
-  }
+.mobile .article-wrapper {
+  width: 100%;
+}
+
+.desktop .article-wrapper {
+  width: calc(100vw - 550px);
 }
 
 .article-wrapper {
-  // width: 95%;
-  width: calc(100vw - 550px);
   word-spacing: 5px;
   margin-bottom: 30px;
+  padding-top: 50px;
+
+  &.no-toolbar {
+    padding-top: 0;
+  }
 
   .article {
     font-size: 1.5em;
