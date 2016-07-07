@@ -3,6 +3,8 @@ import ArticleContent from './ArticleContent';
 import Sidebar from '../containers/Sidebar';
 import { loadArticle, textSelected, loadUserDefinitions } from '../actions';
 import { connect } from 'react-redux';
+import { getSelectedText } from '../highlight';
+
 
 class Home extends React.Component {
 

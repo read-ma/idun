@@ -38,10 +38,6 @@ const openNav = (side) => {
 };
 
 function textSelected(selectedText) {
-  if (typeof selectedText !== 'string') {
-    console.info("Text should be a string type.");
-    return { type: 'TEXT_SELECTED', text: '' }
-  }
   return {
     type: 'TEXT_SELECTED',
     text: selectedText.trim(),
