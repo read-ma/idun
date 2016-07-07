@@ -39,7 +39,7 @@ class Main extends React.Component {
           {this.props.navChildren}
         </MainNavigaton>
 
-        <div className="col-xs-12 col-sm-10 col-md-8 main-content" style={styles.mainContent}>
+        <div className="col-xs-12 col-sm-10 col-md-8 main-content">
           {this.props.children}
         </div>
       </div>
