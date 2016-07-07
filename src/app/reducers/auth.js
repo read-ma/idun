@@ -6,7 +6,7 @@ function stateFromLocalStorage() {
     auth_token:        ls.get('AUTH_TOKEN'),
     isAdmin:         !!ls.get('IS_ADMIN')
   };
-};
+}
 
 export default function auth(state = stateFromLocalStorage(), action){
   switch(action.type){
@@ -15,49 +15,49 @@ export default function auth(state = stateFromLocalStorage(), action){
     return Object.assign(
       {},
       state,
-      {message: undefined},
-      {error: undefined}
+      { message: undefined },
+      { error: undefined }
     );
 
   case 'PASSWORD_UPDATED':
     return Object.assign(
       {},
       state,
-      {error: undefined},
-      {message: 'Your password has been updated. You can now log in.' }
+      { error: undefined },
+      { message: 'Your password has been updated. You can now log in.' }
     );
 
   case 'CHANGE_PASSWORD_REQUEST_ERROR':
     return Object.assign(
       {},
       state,
-      {message: undefined},
-      {error: 'Email you entered does not exist in our database.' }
+      { message: undefined },
+      { error: 'Email you entered does not exist in our database.' }
     );
 
   case 'UPDATE_PASSWORD_ERROR':
     return Object.assign(
       {},
       state,
-      {message: undefined},
-      {error: action.payload}
+      { message: undefined },
+      { error: action.payload }
     );
 
   case 'CHANGE_PASSWORD_REQUESTED':
     return Object.assign(
       {},
       state,
-      {error: undefined},
-      {message: "Furhter instructions will be sent to your email within 10 minutes"}
+      { error: undefined },
+      { message: "Furhter instructions will be sent to your email within 10 minutes"}
     );
 
   case 'USER_SIGNING_IN_ERROR':
     return Object.assign(
       {},
       state,
-      {isAuthenticated: false},
-      {isAdmin: false},
-      {error: action.payload}
+      { isAuthenticated: false },
+      { isAdmin: false },
+      { error: action.payload }
     );
 
   case 'LOGOUT_USER':
@@ -71,7 +71,7 @@ export default function auth(state = stateFromLocalStorage(), action){
     return Object.assign(
       {},
       state,
-      {isAuthenticated: true},
+      { isAuthenticated: true },
       action.payload
     );
 
@@ -79,7 +79,7 @@ export default function auth(state = stateFromLocalStorage(), action){
     return Object.assign(
       {},
       state,
-      {signupMessage: 'Thank you! We have received your request and we will get back to you shortly!'}
+      { signupMessage: 'Thank you! We have received your request and we will get back to you shortly!' }
     );
 
   default:

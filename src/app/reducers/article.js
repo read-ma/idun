@@ -9,16 +9,16 @@ export default function article(state = initialState, action) {
     return Object.assign({}, initialState);
 
   case 'ARTICLE_LEARNED':
-    return Object.assign({}, state, {learned: true});
+    return Object.assign({}, state, { learned: true });
 
   case 'TEXT_SELECTED':
-    return Object.assign({}, state, {selectedText: action.text});
+    return Object.assign({}, state, { selectedText: action.text });
 
   case 'ARTICLE_LOADED':
-    return Object.assign({}, state, action.article );
+    return Object.assign({}, state, action.article);
 
   case 'ARTICLES_LOADED':
-    return Object.assign({}, state, {selectedText: ''});
+    return Object.assign({}, state, { selectedText: '' });
 
   default:
     return state;

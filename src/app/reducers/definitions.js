@@ -26,11 +26,11 @@ export default function definitions(state = initialState, action) {
   switch (action.type) {
 
   case 'CONTENT_LOADED':
-    return Object.assign({}, state, {data: Object.assign({}, state.data, action.data)});
+    return Object.assign({}, state, { data: Object.assign({}, state.data, action.data) });
 
   case 'ARTICLES_LOADED':
   case 'TEXT_SELECTED':
-    return Object.assign({}, state, {data: {}});
+    return Object.assign({}, state, { data: {}});
 
   default:
     return state;
