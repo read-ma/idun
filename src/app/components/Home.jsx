@@ -37,9 +37,9 @@ const mapActionsToProps = (dispatch) => {
     onTextSelected: (text) => {
       let selectedText = text;
 
-      // if (text.type === 'mouseup') {
-      //   selectedText = getSelectedText().trim();
-      // }
+      if (text.type === 'mouseup') {
+        selectedText = getSelectedText().trim();
+      }
 
       if (!selectedText) {
         return;

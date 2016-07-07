@@ -88,7 +88,7 @@ class Flashcard extends Component {
           {this.obverse()}
           <Divider />
           {this.reverse()}
-        </div> 
+        </div>
       );
     } else {
       return this[this.state.side]();
