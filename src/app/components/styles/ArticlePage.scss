@@ -6,6 +6,13 @@
 $selection-bg: #f8bbd0;
 $d3k-bg: lightgreen;
 
+// Mobile
+.extra-small {
+  .article-wrapper {
+    width: calc(100vw - 15px);
+  }
+}
+
 .article-wrapper {
   // width: 95%;
   width: calc(100vw - 550px);
@@ -15,7 +22,6 @@ $d3k-bg: lightgreen;
   .article {
     font-size: 1.5em;
     font-weight: 300;
-    padding-left: 1em;
     .content {
       line-height: 155%;
     }
@@ -39,7 +45,6 @@ $d3k-bg: lightgreen;
       .selected, .selection {
         background-color: $selection-bg;
       }
-
 
       // Handle case when word is both selected and highlighted by d3k
       .quick-selection,

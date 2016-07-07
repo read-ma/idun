@@ -95,7 +95,7 @@ class ArticleContent extends Component {
     }
 
     return (
-      <div className={classnames('content flow-text', { appending: this.state.appending })} onMouseUp={this.props.onTextSelected}>
+      <div className={classnames('content', { appending: this.state.appending })} onMouseUp={this.props.onTextSelected}>
         <h1>{title}</h1>
         {content}
       </div>

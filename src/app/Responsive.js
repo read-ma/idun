@@ -33,4 +33,8 @@ function isMobile() {
   return screenSize() === 'small' || screenSize() === 'extra-small';
 }
 
-export { isDesktop, isMobile, screenSize, screenWidth, getMinWidthForBreakpoint };
+function mobileOrDesktop() {
+  return isMobile() ? 'mobile' : 'desktop';
+}
+
+export { isDesktop, isMobile, screenSize, mobileOrDesktop, screenWidth, getMinWidthForBreakpoint };

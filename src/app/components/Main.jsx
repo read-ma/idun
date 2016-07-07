@@ -2,7 +2,7 @@ require('./styles/Main.scss');
 import React from 'react';
 import { connect } from 'react-redux';
 import { openNav } from '../actions';
-import { screenSize } from '../Responsive';
+import { screenSize, mobileOrDesktop } from '../Responsive';
 import MainNavigaton from './MainNavigation';
 import AppBar from 'material-ui/lib/app-bar';
 import AppProgressBar from './AppProgressBar';
@@ -17,10 +17,6 @@ const styles = {
       justifyContent: 'center',
       alignItems: 'center'
     }
-  },
-  mainContent: {
-    paddingTop: '120px',
-    marginLeft: '15px'
   }
 };
 
@@ -31,7 +27,7 @@ class Main extends React.Component {
 
   render() {
     return (
-      <div className={`${screenSize()}`}>
+      <div className={`${screenSize()} ${mobileOrDesktop()}`}>
         <AppBar
           onLeftIconButtonTouchTap={this.props.openNav}
           style={styles.appbar}
@@ -43,7 +39,7 @@ class Main extends React.Component {
           {this.props.navChildren}
         </MainNavigaton>
 
-        <div className="col-xs-12 col-sm-10 col-md-8" style={styles.mainContent}>
+        <div className="col-xs-12 col-sm-10 col-md-8 main-content" style={styles.mainContent}>
           {this.props.children}
         </div>
       </div>
