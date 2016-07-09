@@ -6,10 +6,23 @@ import ListItem from 'material-ui/lib/lists/list-item';
 import Avatar from 'material-ui/lib/avatar';
 import { flashcardsColors } from './shared/Colors';
 import NavigationChevronRight from 'material-ui/lib/svg-icons/navigation/chevron-right';
+import Label from './shared/Label';
 
 function mapStateToProps(state) {
   return { decks: state.decks };
 }
+
+const styles = {
+    listItem: {
+      lineHeight: '145%',
+      fontSize: 25,
+      fontWeight: 300
+    },
+    secondaryText: {
+      height: '20px',
+      lineHeight: '22px'
+    }
+  };
 
 class UserDefinitionsLearn extends Component {
 
@@ -26,14 +39,8 @@ class UserDefinitionsLearn extends Component {
           {this.props.decks.map((deck) => {
             return (
               <ListItem key={deck.id}
-                leftAvatar={
-                  <Avatar
-                    color={flashcardsColors.avatarColor} backgroundColor={flashcardsColors.avatarBgColor}
-                    style={{ left: 8 }}
-                  >
-                    {deck.count}
-                  </Avatar>
-                }
+                style={styles.listItem}
+                secondaryText={<div><Label type="difficulty" text={deck.count} /></div>}
                 rightIcon={<NavigationChevronRight />}
                 href={`#/learn/${deck.id}`}
               >

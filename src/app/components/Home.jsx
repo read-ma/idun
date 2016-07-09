@@ -9,7 +9,7 @@ import { getSelectedText } from '../highlight';
 class Home extends React.Component {
 
   componentDidMount() {
-    this.props.loadArticle(201);
+    this.props.loadArticle(280);
   }
 
   render() {
