@@ -41,7 +41,7 @@ class UserDefinitionsLearn extends Component {
             return (
               <ListItem key={deck.id}
                 style={styles.listItem}
-                secondaryText={<div><Label type="difficulty" text={deck.count} /></div>}
+                secondaryText={<div><Label type="learn_status" text="from article" /><Label type="difficulty" text={ `${deck.count} words to learn` } /></div>}
                 rightIcon={<NavigationChevronRight />}
                 leftIcon={<ActionAssignment />}
                 href={`#/learn/${deck.id}`}
