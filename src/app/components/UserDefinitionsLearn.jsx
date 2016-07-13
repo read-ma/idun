@@ -3,9 +3,10 @@ import { connect } from 'react-redux';
 import { loadDecks } from '../actions';
 import List from 'material-ui/lib/lists/list';
 import ListItem from 'material-ui/lib/lists/list-item';
-import Avatar from 'material-ui/lib/avatar';
-import { flashcardsColors } from './shared/Colors';
+// import Avatar from 'material-ui/lib/avatar';
+// import { flashcardsColors } from './shared/Colors';
 import NavigationChevronRight from 'material-ui/lib/svg-icons/navigation/chevron-right';
+import ActionAssignment from 'material-ui/lib/svg-icons/action/assignment';
 import Label from './shared/Label';
 
 function mapStateToProps(state) {
@@ -13,16 +14,16 @@ function mapStateToProps(state) {
 }
 
 const styles = {
-    listItem: {
-      lineHeight: '145%',
-      fontSize: 25,
-      fontWeight: 300
-    },
-    secondaryText: {
-      height: '20px',
-      lineHeight: '22px'
-    }
-  };
+  listItem: {
+    lineHeight: '145%',
+    fontSize: 25,
+    fontWeight: 300
+  },
+  secondaryText: {
+    height: '20px',
+    lineHeight: '22px'
+  }
+};
 
 class UserDefinitionsLearn extends Component {
 
@@ -42,7 +43,7 @@ class UserDefinitionsLearn extends Component {
                 style={styles.listItem}
                 secondaryText={<div><Label type="difficulty" text={deck.count} /></div>}
                 rightIcon={<NavigationChevronRight />}
-                leftIcon={<i className="material-icons">assignment</i>}
+                leftIcon={<ActionAssignment />}
                 href={`#/learn/${deck.id}`}
               >
                 {deck.name}
