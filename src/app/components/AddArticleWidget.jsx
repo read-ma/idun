@@ -3,6 +3,48 @@ import { addArticle } from '../actions/articles';
 import FloatingActionButton from 'material-ui/lib/floating-action-button';
 import ContentAdd from 'material-ui/lib/svg-icons/content/add';
 import { connect } from 'react-redux';
+import LeftNav from 'material-ui/lib/left-nav';
+
+const styles = {
+  sidebar: {
+    width: 350
+  },
+};
+
+const ArticleForm = ({onChange, addArticle}) => {
+  return (
+
+    <form onSubmit={addArticle}>
+    <div>
+      <h4 className="left-align">Add article</h4>
+
+      <div className="input-field">
+        <input
+          type="url"
+          name="source_url"
+          className="validate"
+          id="sourceUrl"
+          onChange={onChange}
+        />
+        <label htmlFor="sourceUrl">Enter URL for article to import</label>
+      </div>
+
+      <div className="input-field hide">
+        <input name="title" type="text" id="article-source-title" className="materialize-textarea" onChange={onChange}></input>
+        <label htmlFor="article-source-title">Title</label>
+      </div>
+
+      <div className="input-field hide">
+        <textarea name="content" id="article-source-text" className="materialize-textarea" onChange={onChange}></textarea>
+        <label htmlFor="article-source-text">Article body</label>
+      </div>
+
+    </div>
+    <div className="modal-footer">
+      <button type="submit" className="waves-effect waves-green btn-flat">Add article</button>
+    </div>
+  </form>);
+};
 
 class ArticleAdd extends React.Component {
   constructor(props) {
@@ -29,48 +71,9 @@ class ArticleAdd extends React.Component {
 
   render() {
     return (
-      <div className="row" style={{ paddingLeft: '100px' }}>
-        <div id="addArticleModal">
-          <form onSubmit={this.addArticle}>
-            <div className="modal-content">
-              <h4 className="left-align">Add article</h4>
-
-              <div className="input-field">
-                <input
-                  type="url"
-                  name="source_url"
-                  className="validate"
-                  ref="urlInput"
-                  id="sourceUrl"
-                  onChange={this.onChange}
-                  value={this.state.inputValue}
-                />
-                <label htmlFor="sourceUrl">Enter URL for article to import</label>
-              </div>
-
-              <div className="input-field hide">
-                <input name="title" type="text" id="article-source-title" className="materialize-textarea" onChange={this.onChange}></input>
-                <label htmlFor="article-source-title">Title</label>
-              </div>
-
-              <div className="input-field hide">
-                <textarea name="content" id="article-source-text" className="materialize-textarea" onChange={this.onChange}></textarea>
-                <label htmlFor="article-source-text">Article body</label>
-              </div>
-
-            </div>
-            <div className="modal-footer">
-              <button type="submit" className="waves-effect waves-green btn-flat">Add article</button>
-            </div>
-          </form>
-        </div>
-
-        <div className="col s2 offset-s10">
-          <FloatingActionButton onMouseDown={this.toggleModal}>
-            <ContentAdd />
-          </FloatingActionButton>
-        </div>
-      </div>
+      <LeftNav width={styles.sidebar.width} styles={styles.sidebar} docked={true} openRight={true} open={true}>
+        <ArticleForm />
+      </LeftNav>
     );
   }
 }

@@ -7,6 +7,7 @@ import ArticleLink from './ArticleLink';
 import ArticlesToolbar from './ArticlesToolbar';
 import filterArticles from '../articleCriteriaMatcher';
 import List from 'material-ui/lib/lists/list';
+import AddArticleWidget from './AddArticleWidget'
 
 const ArticleList = ({ articles }) => {
   const articleLinks = articles.map((article) => {
@@ -42,6 +43,7 @@ class Articles extends Component {
         <ArticlesToolbar />
         <PositioningWidget pageId="article-list-page" />
         <ArticleList articles={this.state.articles} />
+        <AddArticleWidget />
       </div>
     );
   }

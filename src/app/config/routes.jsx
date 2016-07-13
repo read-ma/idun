@@ -17,6 +17,9 @@ import { TTSPlayer } from '../components/TTSPlayer';
 // Tried to turn off query param. But it didnt work.
 // https://github.com/reactjs/react-router/issues/1967
 const appHistory = useRouterHistory(createHashHistory)({ queryKey: false });
+const LearnHeader = () => {
+  return (<span>Learn</span>);
+}
 
 export default (
   <Route path="/" component={Main} history={appHistory}>
@@ -27,7 +30,11 @@ export default (
     <Route path="forgot_password" component={PasswordReminderView} />
     <Route path="reset_password" component={ChangePasswordView} />
 
-    <Route path="/learn" component={requireAuthentication(UserDefinitionsLearn)} />
+    <Route path="/learn" components={
+      {
+        children: requireAuthentication(UserDefinitionsLearn),
+        topNavChildren: LearnHeader
+      }} />
     <Route path="/learn/:id" component={requireAuthentication(FlashcardsQuiz)} />
     <Route path="/results" component={requireAuthentication(FlashcardsQuizResults)} />
     <Route path="/definitions" component={UserDefinitionsList} />

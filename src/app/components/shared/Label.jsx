@@ -27,7 +27,7 @@ const Label = ({ text, type, style }) => {
 Label.propTypes = {
   text: React.PropTypes.string.isRequired,
   type: React.PropTypes.string.isRequired,
-  style: React.PropTypes.string.object
+  style: React.PropTypes.object
 };
 
 export default Label;
