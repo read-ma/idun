@@ -42,6 +42,7 @@ class UserDefinitionsLearn extends Component {
                 style={styles.listItem}
                 secondaryText={<div><Label type="difficulty" text={deck.count} /></div>}
                 rightIcon={<NavigationChevronRight />}
+                leftIcon={<i className="material-icons">assignment</i>}
                 href={`#/learn/${deck.id}`}
               >
                 {deck.name}
