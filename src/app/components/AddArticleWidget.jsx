@@ -4,47 +4,56 @@ import FloatingActionButton from 'material-ui/lib/floating-action-button';
 import ContentAdd from 'material-ui/lib/svg-icons/content/add';
 import { connect } from 'react-redux';
 import LeftNav from 'material-ui/lib/left-nav';
+import TextField from 'material-ui/lib/text-field';
+import RaisedButton from 'material-ui/lib/raised-button';
 
 const styles = {
   sidebar: {
     width: 350
   },
+  sendButton: {
+    marginTop: '1em'
+  }
 };
 
-const ArticleForm = ({onChange, addArticle}) => {
-  return (
 
-    <form onSubmit={addArticle}>
-    <div>
-      <h4 className="left-align">Add article</h4>
-
-      <div className="input-field">
-        <input
+class ArticleForm extends React.Component {
+  render() {
+    return (
+      <form onSubmit={this.props.addArticle}>
+        <TextField
+          floatingLabelText="Enter URL for article to import"
           type="url"
           name="source_url"
           className="validate"
           id="sourceUrl"
-          onChange={onChange}
+          onChange={this.props.onChange}
         />
-        <label htmlFor="sourceUrl">Enter URL for article to import</label>
-      </div>
 
-      <div className="input-field hide">
-        <input name="title" type="text" id="article-source-title" className="materialize-textarea" onChange={onChange}></input>
-        <label htmlFor="article-source-title">Title</label>
-      </div>
+        <TextField
+          floatingLabelText="Article Title"
+          name="title"
+          type="text"
+          id="article-source-title"
+          className="materialize-textarea"
+          onChange={this.props.onChange} />
 
-      <div className="input-field hide">
-        <textarea name="content" id="article-source-text" className="materialize-textarea" onChange={onChange}></textarea>
-        <label htmlFor="article-source-text">Article body</label>
-      </div>
+        <TextField
+          floatingLabelText="Article Body"
+          multiLine={true}
+          name="content"
+          id="article-source-text"
+          className="materialize-textarea"
+          onChange={this.props.onChange} />
 
-    </div>
-    <div className="modal-footer">
-      <button type="submit" className="waves-effect waves-green btn-flat">Add article</button>
-    </div>
-  </form>);
-};
+        <RaisedButton
+          label="Add Article"
+          primary={true}
+          type="submit"
+          style={styles.sendButton} />
+      </form>);
+  };
+}
 
 class ArticleAdd extends React.Component {
   constructor(props) {
@@ -72,7 +81,8 @@ class ArticleAdd extends React.Component {
   render() {
     return (
       <LeftNav width={styles.sidebar.width} styles={styles.sidebar} docked={true} openRight={true} open={true}>
-        <ArticleForm />
+        <h2 className="left-align">Add article</h2>
+        <ArticleForm addArticle={this.addArticle} onChange={this.onChange}/>
       </LeftNav>
     );
   }
