@@ -43,7 +43,7 @@ class FlashcardsQuiz extends Component {
 
     return (
       <div className="row flashcards-container">
-        <div className="col-sm-12">
+        <div className="col-xs-12">
           <Flashcard
           key={this.props.currentItem.id}
           item={this.props.currentItem}

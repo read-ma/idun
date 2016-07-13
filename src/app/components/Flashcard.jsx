@@ -9,9 +9,9 @@ import Divider from 'material-ui/lib/divider';
 const style = {
   height: 300,
   width: '100%',
-  margin: 20,
   textAlign: 'center',
   display: 'inline-block',
+  marginTop: 20,
 };
 
 class Flashcard extends Component {
