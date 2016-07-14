@@ -9,6 +9,7 @@ const initialState = {
     { code: 'fr-FR', key: 'fr', name: 'French' },
     { code: 'pt-BR', key: 'pt', name: 'Portuguese' },
     { code: 'nb-NO', key: 'no', name: 'Norsk' },
+    { code: 'ru-RU', key: 'ru', name: 'Russian' },
     { code: 'de-DE', key: 'de', name: 'German' }
   ],
   language: { from: 'en-GB', to: 'pl-PL' },

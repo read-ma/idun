@@ -23,7 +23,7 @@ const Wordlists = ({ wordlists, handleSelected }) => {
         toggled={list.enabled}
         label={list.label}
         labelPosition={"right"}
-        style={{ float: 'left' }}
+        style={{ width: 'auto', marginRight: '0.5em' }}
       />
     );
   });
