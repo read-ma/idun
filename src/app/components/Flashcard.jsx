@@ -6,7 +6,8 @@ import Paper from 'material-ui/lib/paper';
 import FlatButton from 'material-ui/lib/flat-button';
 
 const style = {
-  height: 300,
+  minHeight: 300,
+  padding: '20px',
   display: 'flex',
   flex: '1 1 100%',
   alignItems: 'center',

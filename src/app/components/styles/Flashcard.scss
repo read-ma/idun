@@ -1,6 +1,9 @@
 .flashcards-container {
   .card-obverse {
     align-self: flex-start;
+    h1 {
+      margin-top: 0;
+    }
   }
 
   .card-reverse {
@@ -24,6 +27,7 @@
       }
       .card-action{
         font-weight: bold;
+        margin-top: 20px;
       }
       .help-text{
         color: gray;

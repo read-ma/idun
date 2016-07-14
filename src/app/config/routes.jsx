@@ -10,7 +10,7 @@ import FlashcardsQuiz from '../components/FlashcardsQuiz';
 import FlashcardsQuizResults from '../components/FlashcardsQuizResults';
 import ChangePasswordView from '../components/ChangePasswordView';
 import ArticleSearchInput from '../components/ArticleSearchInput';
-import AddArticle from '../components/AddArticleWidget';
+import AddArticleWidget from '../components/AddArticleWidget';
 import { requireAuthentication } from '../utils';
 import { TTSPlayer } from '../components/TTSPlayer';
 
@@ -19,11 +19,6 @@ import { TTSPlayer } from '../components/TTSPlayer';
 const appHistory = useRouterHistory(createHashHistory)({ queryKey: false });
 const LearnHeader = () => {
   return <span>Learn</span>;
-};
-
-const FlashCardHeaderHelperUtil = () => {
-  // TODO: Render <FlashcardProgress items={this.props.items} />
-  return <span>Progress: 3 out of 7 words</span>
 };
 
 export default (
@@ -35,23 +30,18 @@ export default (
     <Route path="forgot_password" component={PasswordReminderView} />
     <Route path="reset_password" component={ChangePasswordView} />
 
-    <Route path="/learn" components={
-      {
-        children: requireAuthentication(UserDefinitionsLearn),
-        topNavChildren: LearnHeader
-      }} />
-    <Route path="/learn/:id" components={
-      {
-        children: requireAuthentication(FlashcardsQuiz),
-        topNavChildren: FlashCardHeaderHelperUtil
-      }} />
+    <Route path="/learn" components={{
+      children: requireAuthentication(UserDefinitionsLearn),
+      topNavChildren: LearnHeader
+    }} />
+    <Route path="/learn/:id" component={requireAuthentication(FlashcardsQuiz)} />
     <Route path="/results" component={requireAuthentication(FlashcardsQuizResults)} />
     <Route path="/definitions" component={UserDefinitionsList} />
     <Route path="/articles"
       components={{ children: requireAuthentication(Articles),
                     topNavChildren: ArticleSearchInput }} />
 
-    <Route path="/new-article" component={AddArticle} />
+    <Route path="/new-article" component={AddArticleWidget} />
     <Route path="/article/:id" components={{ children: requireAuthentication(ArticlePage), topNavChildren: TTSPlayer }} />
 
     <IndexRedirect to="/home" />
