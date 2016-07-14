@@ -1,8 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { addArticle } from '../actions/articles';
 // import FloatingActionButton from 'material-ui/lib/floating-action-button';
 // import ContentAdd from 'material-ui/lib/svg-icons/content/add';
-import { connect } from 'react-redux';
 
 import LeftNav from 'material-ui/lib/left-nav';
 import TextField from 'material-ui/lib/text-field';
@@ -14,7 +14,10 @@ import AppBar from 'material-ui/lib/app-bar';
 
 const styles = {
   sidebar: {
-    width: 350
+    width: 350,
+  },
+  articleForm: {
+    padding: '20px',
   },
   sendButton: {
     marginTop: '1em'
@@ -25,7 +28,7 @@ const styles = {
 class ArticleForm extends React.Component {
   render() {
     return (
-      <form onSubmit={this.props.addArticle}>
+      <form onSubmit={this.props.addArticle} style={styles.articleForm}>
         <TextField
           floatingLabelText="Enter URL for article to import"
           type="url"
@@ -57,8 +60,13 @@ class ArticleForm extends React.Component {
           type="submit"
           style={styles.sendButton} />
       </form>);
-  };
+  }
 }
+
+ArticleForm.propTypes = {
+  addArticle: React.PropTypes.func,
+  onChange: React.PropTypes.func
+};
 
 class ArticleAdd extends React.Component {
   constructor(props) {
@@ -87,7 +95,6 @@ class ArticleAdd extends React.Component {
     return (
       <LeftNav width={styles.sidebar.width} styles={styles.sidebar} docked={true} openRight={true} open={true}>
         <AppBar title="Add article" iconElementLeft={<IconButton><NavigationClose /></IconButton>} />
-        <h2 className="left-align">Add article</h2>
         <ArticleForm addArticle={this.addArticle} onChange={this.onChange}/>
       </LeftNav>
     );
