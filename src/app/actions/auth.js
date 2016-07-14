@@ -1,6 +1,6 @@
 import api from '../api';
 import store from '../store';
-import {push} from 'react-router-redux';
+import { push } from 'react-router-redux';
 import ls from '../localStore';
 import _ from 'lodash';
 import map from 'lodash/map';
@@ -12,10 +12,9 @@ const DEFAULT_RETURN_TO = '/articles';
 const returnTo = (state) => {
   try {
     return state.routing.locationBeforeTransitions.query.next || DEFAULT_RETURN_TO;
-  }
-  catch(e) {
+  } catch (e) {
     return DEFAULT_RETURN_TO;
-  };
+  }
 };
 
 function invitationRequestSent(data) {
@@ -23,17 +22,16 @@ function invitationRequestSent(data) {
     type: 'INVITATION_REQUEST_SENT',
     payload: data.invitation_request
   };
-};
+}
 
-function userSigningUpError(error){
+function userSigningUpError(error) {
   return {
     type: 'SIGNUP_ERROR',
     payload: error
   };
-};
+}
 
 const signupAttempt = (email) => {
-
   return (dispatch) => {
     api.post(
       '/invitation_requests.json',
@@ -41,31 +39,28 @@ const signupAttempt = (email) => {
         invitation_request: { email: email }
       }
     )
-      .then( (response) => {
+      .then((response) => {
         dispatch(invitationRequestSent(response.data));
       })
       .catch(function (response) {
         dispatch(userSigningUpError(response));
       });
-    ;
   };
-}
+};
 
 const loginAttempt = (email, password) => {
-
   return (dispatch) => {
     api.post(
       '/login.json',
-      {admin_user:{email: email, password: password}}
+      { admin_user: { email: email, password: password } }
     )
-      .then( (response) => {
-        dispatch(userLoggedIn(response.data));
-        dispatch(push(returnTo(store.getState())));
-      })
-      .catch(function (response) {
-        dispatch(userSigningInError(response));
-      });
-    ;
+    .then((response) => {
+      dispatch(userLoggedIn(response.data));
+      dispatch(push(returnTo(store.getState())));
+    })
+    .catch(function (response) {
+      dispatch(userSigningInError(response));
+    });
   };
 };
 
@@ -78,11 +73,11 @@ const userLoggedIn = (userData) => {
 
   return {
     type: 'USER_LOGGED_IN',
-    payload: Object.assign({}, userData, {isAdmin: userData.su}),
+    payload: Object.assign({}, userData, { isAdmin: userData.su }),
   };
 };
 
-const userSigningInError = (payload) => {
+const userSigningInError = () => {
   return {
     type: 'USER_SIGNING_IN_ERROR',
     payload: 'We could not let you in with entered credentials. No way.'
@@ -103,13 +98,13 @@ const logout = () => {
 const resetPassword = (email) => {
   return (dispatch) => {
     api
-      .post('/reset_password', {email})
+      .post('/reset_password', { email })
       .then((response) => dispatch(changePasswordRequeted(response)))
       .catch((error) => dispatch(changePasswordRequetError(error)));
   };
 };
 
-const humanize = str => str.replace(/_/g,' ').toLocaleLowerCase();
+const humanize = str => str.replace(/_/g, ' ').toLocaleLowerCase();
 
 const extractErrors = (errors) => {
   return _.map(errors, (err, key) => {
@@ -117,12 +112,12 @@ const extractErrors = (errors) => {
   });
 };
 
-const updatePassword = ({reset_password_token, password, password_confirmation}) => {
+const updatePassword = ({ reset_password_token, password, password_confirmation }) => {
   return (dispatch) => {
     api
-      .patch('/reset_password/by.json', {reset_password: {reset_password_token, password, password_confirmation} })
-      .then((respone) => dispatch(push('login', {q: 'updated'})))
-      .catch( ( error ) => {
+      .patch('/reset_password/by.json', { reset_password: { reset_password_token, password, password_confirmation } })
+      .then(() => dispatch(push('login', { q: 'updated' })))
+      .catch((error) => {
         dispatch (updatePasswordError(extractErrors(error.data.errors)));
       });
   };
@@ -149,4 +144,4 @@ const changePasswordRequetError = (error) => {
   };
 };
 
-export { loginAttempt, signupAttempt, logout, resetPassword, updatePassword }
+export { loginAttempt, signupAttempt, logout, resetPassword, updatePassword };
