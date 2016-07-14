@@ -13,4 +13,9 @@ const flashcardsColors = {
   avatarBgColor: Colors.transparent
 };
 
-export { labelsColors, flashcardsColors };
+const spinnerColors = {
+  default: Colors.pink200,
+  input: Colors.blueGrey200,
+};
+
+export { labelsColors, flashcardsColors, spinnerColors };
