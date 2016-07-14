@@ -2,10 +2,8 @@ import React from 'react';
 
 const FlashcardProgress = (props) => {
   return (
-    <div className="row center-xs">
-      <div className="col-xs-8">
-        <p>{props.items.length} words in lesson</p>
-      </div>
+    <div className="col-xs-8">
+      <p>Progress: {props.items.length} out of {props.items.length} words</p>
     </div>
   );
 };

@@ -42,13 +42,13 @@ class FlashcardsQuiz extends Component {
 
     return (
       <div className="row flashcards-container">
+        {/*<FlashcardProgress items={this.props.items} />*/}
         <div className="col-xs-12">
           <Flashcard
           key={this.props.currentItem.id}
           item={this.props.currentItem}
           markItem={this.props.markItem}
           startWithObverse={true} />
-          <FlashcardProgress items={this.props.items} />
         </div>
       </div>
     );

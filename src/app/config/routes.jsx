@@ -18,8 +18,13 @@ import { TTSPlayer } from '../components/TTSPlayer';
 // https://github.com/reactjs/react-router/issues/1967
 const appHistory = useRouterHistory(createHashHistory)({ queryKey: false });
 const LearnHeader = () => {
-  return (<span>Learn</span>);
-}
+  return <span>Learn</span>;
+};
+
+const FlashCardHeaderHelperUtil = () => {
+  // TODO: Render <FlashcardProgress items={this.props.items} />
+  return <span>Progress: 3 out of 7 words</span>
+};
 
 export default (
   <Route path="/" component={Main} history={appHistory}>
@@ -35,7 +40,11 @@ export default (
         children: requireAuthentication(UserDefinitionsLearn),
         topNavChildren: LearnHeader
       }} />
-    <Route path="/learn/:id" component={requireAuthentication(FlashcardsQuiz)} />
+    <Route path="/learn/:id" components={
+      {
+        children: requireAuthentication(FlashcardsQuiz),
+        topNavChildren: FlashCardHeaderHelperUtil
+      }} />
     <Route path="/results" component={requireAuthentication(FlashcardsQuizResults)} />
     <Route path="/definitions" component={UserDefinitionsList} />
     <Route path="/articles"

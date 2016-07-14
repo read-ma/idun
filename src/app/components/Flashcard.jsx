@@ -4,14 +4,14 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import classnames from 'classnames';
 import Paper from 'material-ui/lib/paper';
 import FlatButton from 'material-ui/lib/flat-button';
-import Divider from 'material-ui/lib/divider';
 
 const style = {
   height: 300,
-  width: '100%',
+  display: 'flex',
+  flex: '1 1 100%',
+  alignItems: 'center',
+  justifyContent: 'center',
   textAlign: 'center',
-  display: 'inline-block',
-  marginTop: 20,
 };
 
 class Flashcard extends Component {
@@ -60,8 +60,8 @@ class Flashcard extends Component {
   reverse() {
     return (
       <div className="card-reverse">
-        <p dangerouslySetInnerHTML={{ __html: this.props.item.translation }} />
-        <p dangerouslySetInnerHTML={{ __html: this.props.item.example }} />
+        <p><b>Definition:</b> {this.props.item.translation}</p>
+        <p><b>Example:</b> {this.props.item.example.replace('<p>', '')}</p>
       </div>
     );
   }
@@ -71,6 +71,7 @@ class Flashcard extends Component {
     if (this.state.reverted) {
       buttons = (
         <div className="card-action center-align">
+          <p>That was...</p>
           <FlatButton label="Easy" secondary={true} onClick={this.markEasy} />
           <FlatButton label="Hard" primary={true} onClick={this.markHard} />
         </div>
@@ -86,7 +87,6 @@ class Flashcard extends Component {
       return (
         <div>
           {this.obverse()}
-          <Divider />
           {this.reverse()}
         </div>
       );

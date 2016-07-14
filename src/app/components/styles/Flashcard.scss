@@ -1,16 +1,21 @@
 .flashcards-container {
-  position: relative;
+  .card-obverse {
+    align-self: flex-start;
+  }
+
+  .card-reverse {
+    p {
+      margin: 10px 0;
+      line-height: 155%;
+    }
+  }
+
   .card-wrap{
     min-height: 350px;
-    position: relative;
-    .card{
-      position: absolute;
-      backface-visibility: hidden;
+    .card {
+      width: 100%;
       min-height: 300px;
       transition: transform 0.5s ease-in-out;
-      top: 0;
-      left: 0;
-      right: 0;
       .card-content{
         cursor: pointer;
       }
