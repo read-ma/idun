@@ -23,7 +23,7 @@ export default function ArticleLink({ id, title, tags, privy, difficulty, learn_
 
   const secondaryText = (<div style={styles.secondaryText}>
     {privateLabel}
-    <Label type="learn_status" text={ l(learn_status) } />
+    <Label type="learn_status" text={l(learn_status)} />
     <Label type="difficulty" text={l(difficulty)} />
     <p>{tags}</p>
   </div>);
