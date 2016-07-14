@@ -1,4 +1,5 @@
 import api from '../api';
+import { closeNav } from '../actions';
 
 const updateArticlesFilter = (change) => {
   return {
@@ -21,6 +22,22 @@ function articlesLoaded(items) {
   };
 }
 
+function getArticles(params, handleSuccess) {
+  return api.get('/articles.json')
+    .then((response) => {
+      handleSuccess(response.data.articles);
+    })
+    .catch(err => console.log(err));
+}
+
+function loadArticles() {
+  return (dispatch) => {
+    getArticles({}, (items) => {
+      dispatch(articlesLoaded(items));
+    });
+  };
+}
+
 function postArticle(article, handleSuccess, handleFail) {
   return api.post('/articles.json', { article })
     .then((response) => {
@@ -30,14 +47,17 @@ function postArticle(article, handleSuccess, handleFail) {
 }
 
 function addArticle(article) {
-  return () => {
+  return (dispatch) => {
     postArticle(
       Object.assign({}, article, { content_type: 'article', status: 'published' }),
       () => {
-      /*
-        TODO: Add snackbar. http://www.material-ui.com/v0.14.4/#/components/snackbar
-        'Article will be added to list after a short while'
-      */
+        setTimeout(() => {
+          dispatch(
+            loadArticles());
+        }, 1400);
+
+        dispatch(
+          closeNav('right'));
       },
       (error) => {
         // TODO: Add snackbar. http://www.material-ui.com/v0.14.4/#/components/snackbar
@@ -52,22 +72,6 @@ function articleLoaded(article) {
   return {
     type: 'ARTICLE_LOADED',
     article,
-  };
-}
-
-function getArticles(params, handleSuccess) {
-  return api.get('/articles.json')
-    .then((response) => {
-      handleSuccess(response.data.articles);
-    })
-    .catch(err => console.log(err));
-}
-
-function loadArticles() {
-  return (dispatch) => {
-    getArticles({}, (items) => {
-      dispatch(articlesLoaded(items));
-    });
   };
 }
 
@@ -110,7 +114,8 @@ const articlePageClosed = () => {
 };
 
 
-export { loadArticle,
+export {
+  loadArticle,
   loadArticles,
   addArticle,
   pageScrolled,

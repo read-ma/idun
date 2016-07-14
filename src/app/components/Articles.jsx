@@ -7,8 +7,7 @@ import ArticleLink from './ArticleLink';
 import ArticlesToolbar from './ArticlesToolbar';
 import filterArticles from '../articleCriteriaMatcher';
 import AddArticleWidget from './AddArticleWidget';
-// Hidden until we actually have a way to show/hide sidebar -- me noob.
-// import AddArticleFloatingButton from './AddArticleFloatingButton';
+import AddArticleFloatingButton from './AddArticleFloatingButton';
 import List from 'material-ui/lib/lists/list';
 
 const ArticleList = ({ articles }) => {
@@ -46,7 +45,7 @@ class Articles extends Component {
         <PositioningWidget pageId="article-list-page" />
         <ArticleList articles={this.state.articles} />
         <AddArticleWidget />
-        {/*<AddArticleFloatingButton />*/}
+        <AddArticleFloatingButton />
       </div>
     );
   }

@@ -1,9 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { addArticle } from '../actions/articles';
-// import FloatingActionButton from 'material-ui/lib/floating-action-button';
-// import ContentAdd from 'material-ui/lib/svg-icons/content/add';
-
+import { closeNav } from '../actions';
 import LeftNav from 'material-ui/lib/left-nav';
 import TextField from 'material-ui/lib/text-field';
 import RaisedButton from 'material-ui/lib/raised-button';
@@ -29,7 +27,6 @@ class ArticleForm extends React.Component {
   render() {
     return (
       <form onSubmit={this.props.addArticle} style={styles.articleForm}>
-
 
         <fieldset>
           <legend>Import from URL</legend>
@@ -110,13 +107,17 @@ class ArticleAdd extends React.Component {
 
   render() {
     return (
-      <LeftNav width={styles.sidebar.width} styles={styles.sidebar} docked={true} openRight={true} open={true}>
-        <AppBar title="Add article" iconElementLeft={<IconButton><NavigationClose /></IconButton>} />
+      <LeftNav width={styles.sidebar.width} styles={styles.sidebar} docked={true} openRight={true} open={this.props.open}>
+        <AppBar title="Add article" iconElementLeft={<IconButton onClick={this.props.closeNav}><NavigationClose /></IconButton>} />
         <ArticleForm addArticle={this.addArticle} onChange={this.onChange}/>
       </LeftNav>
     );
   }
 }
+
+ArticleAdd.defaultProps = {
+  open: false
+};
 
 ArticleAdd.propTypes = {
   addArticle: React.PropTypes.func.isRequired,
@@ -124,14 +125,20 @@ ArticleAdd.propTypes = {
 
 const mapActionsToProps = (dispatch) => {
   return {
+    closeNav() {
+      dispatch(
+        closeNav('right'));
+    },
     addArticle(article) {
       dispatch(addArticle(article));
     }
   };
 };
 
-function mapStateToProps() {
-  return {};
+function mapStateToProps({ settings }) {
+  return {
+    open: settings.navOpen.right,
+};
 }
 
 export default connect(mapStateToProps, mapActionsToProps)(ArticleAdd);
