@@ -1,11 +1,16 @@
 import React from 'react';
 import { addArticle } from '../actions/articles';
-import FloatingActionButton from 'material-ui/lib/floating-action-button';
-import ContentAdd from 'material-ui/lib/svg-icons/content/add';
+// import FloatingActionButton from 'material-ui/lib/floating-action-button';
+// import ContentAdd from 'material-ui/lib/svg-icons/content/add';
 import { connect } from 'react-redux';
+
 import LeftNav from 'material-ui/lib/left-nav';
 import TextField from 'material-ui/lib/text-field';
 import RaisedButton from 'material-ui/lib/raised-button';
+import IconButton from 'material-ui/lib/icon-button';
+import NavigationClose from 'material-ui/lib/svg-icons/navigation/close';
+
+import AppBar from 'material-ui/lib/app-bar';
 
 const styles = {
   sidebar: {
@@ -81,6 +86,7 @@ class ArticleAdd extends React.Component {
   render() {
     return (
       <LeftNav width={styles.sidebar.width} styles={styles.sidebar} docked={true} openRight={true} open={true}>
+        <AppBar title="Add article" iconElementLeft={<IconButton><NavigationClose /></IconButton>} />
         <h2 className="left-align">Add article</h2>
         <ArticleForm addArticle={this.addArticle} onChange={this.onChange}/>
       </LeftNav>

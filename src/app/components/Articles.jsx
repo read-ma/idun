@@ -6,8 +6,10 @@ import PositioningWidget from './PositioningWidget';
 import ArticleLink from './ArticleLink';
 import ArticlesToolbar from './ArticlesToolbar';
 import filterArticles from '../articleCriteriaMatcher';
+import AddArticleWidget from './AddArticleWidget';
+// Hidden until we actually have a way to show/hide sidebar -- me noob.
+// import AddArticleFloatingButton from './AddArticleFloatingButton';
 import List from 'material-ui/lib/lists/list';
-import AddArticleWidget from './AddArticleWidget'
 
 const ArticleList = ({ articles }) => {
   const articleLinks = articles.map((article) => {
@@ -44,6 +46,7 @@ class Articles extends Component {
         <PositioningWidget pageId="article-list-page" />
         <ArticleList articles={this.state.articles} />
         <AddArticleWidget />
+        {/*<AddArticleFloatingButton />*/}
       </div>
     );
   }

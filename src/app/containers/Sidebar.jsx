@@ -14,6 +14,8 @@ import LanguageDropDownMenu from '../components/language/LanguageDropDownMenu';
 import { TTSQuickPlayer } from '../components/TTSPlayer';
 import { ShowIf } from '../components';
 
+// TODO: Rename to articlePageSidebar. I tried to use it anywhere else and it was impossible
+// because of hardcoded stuff
 class Sidebar extends Component {
   render() {
     const isDeviceMobile = isMobile();
@@ -61,13 +63,15 @@ class Sidebar extends Component {
 }
 
 Sidebar.defaultProps = {
-  open: false
+  open: false,
+  isAdmin: false
 };
 
 Sidebar.propTypes = {
   open: React.PropTypes.bool.isRequired,
   closeNav: React.PropTypes.func.isRequired,
-  selectedText: React.PropTypes.string.isRequired
+  selectedText: React.PropTypes.string.isRequired,
+  isAdmin: React.PropTypes.bool.isRequired
 };
 
 function mapStateToProps(state) {

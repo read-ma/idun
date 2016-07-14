@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { loadDeckForArticle, markItem } from '../actions/deck';
 import Flashcard from './Flashcard';
 import FlashcardProgress from './FlashcardProgress';
-import moment from 'moment';
 import { Link } from 'react-router';
 
 class FlashcardsQuiz extends Component {

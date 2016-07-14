@@ -5,7 +5,8 @@ import { connect } from 'react-redux';
 import { loadArticle, textSelected, loadUserDefinitions, articlePageClosed } from '../actions';
 import Sidebar from '../containers/Sidebar';
 import ArticleContent from './ArticleContent';
-import ConfirmLearnedButton from './ConfirmLearnedButton';
+// Commenting out until we dont make any sensible use of it
+// import ConfirmLearnedButton from './ConfirmLearnedButton';
 import { getSelectedText } from '../highlight';
 import PositioningWidget from './PositioningWidget';
 import ArticleToolbar from './ArticleToolbar';
@@ -18,7 +19,8 @@ const styles = {
     margin: '30px 0'
   },
   link: {
-    color: 'inherit' // Take color from the closest parent that has color defined.
+    // Take color from the closest parent that has color defined.
+    color: 'inherit'
   }
 };
 
@@ -66,7 +68,7 @@ class ArticlePage extends Component {
             <ArticleContent onTextSelected={this.props.onTextSelected} />
             <ArticleFooter sourceUrl={this.props.article.source_url} />
           </article>
-          <ConfirmLearnedButton articleId={this.props.params.id} />
+          {/*<ConfirmLearnedButton articleId={this.props.params.id} />*/}
         </div>
         <Sidebar />
       </div>
