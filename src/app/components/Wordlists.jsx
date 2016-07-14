@@ -1,5 +1,4 @@
 import React from 'react';
-// import Checkbox from 'material-ui/lib/checkbox';
 import Toggle from 'material-ui/lib/toggle';
 
 const styles = {
