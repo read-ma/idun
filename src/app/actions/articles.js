@@ -32,7 +32,7 @@ function postArticle(article, handleSuccess, handleFail) {
 function addArticle(article) {
   return () => {
     postArticle(
-      Object.assign({}, article, { content_type: 'article', state: 'published' }),
+      Object.assign({}, article, { content_type: 'article', status: 'published' }),
       () => {
       /*
         TODO: Add snackbar. http://www.material-ui.com/v0.14.4/#/components/snackbar

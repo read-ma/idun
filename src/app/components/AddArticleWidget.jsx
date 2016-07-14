@@ -29,36 +29,53 @@ class ArticleForm extends React.Component {
   render() {
     return (
       <form onSubmit={this.props.addArticle} style={styles.articleForm}>
-        <TextField
-          floatingLabelText="Enter URL for article to import"
-          type="url"
-          name="source_url"
-          className="validate"
-          id="sourceUrl"
-          onChange={this.props.onChange}
-        />
 
-        <TextField
-          floatingLabelText="Article Title"
-          name="title"
-          type="text"
-          id="article-source-title"
-          className="materialize-textarea"
-          onChange={this.props.onChange} />
 
-        <TextField
-          floatingLabelText="Article Body"
-          multiLine={true}
-          name="content"
-          id="article-source-text"
-          className="materialize-textarea"
-          onChange={this.props.onChange} />
+        <fieldset>
+          <legend>Import from URL</legend>
 
-        <RaisedButton
-          label="Add Article"
-          primary={true}
-          type="submit"
-          style={styles.sendButton} />
+          <TextField
+            floatingLabelText="Enter URL for article to import"
+            type="url"
+            name="source_url"
+            className="validate"
+            id="sourceUrl"
+            onChange={this.props.onChange}
+          />
+          <RaisedButton
+            label="Import"
+            primary={true}
+            type="submit"
+            style={styles.sendButton} />
+
+        </fieldset>
+
+        <br />
+
+        <fieldset>
+          <legend>Create New Article</legend>
+          <TextField
+            floatingLabelText="Article Title"
+            name="title"
+            type="text"
+            id="article-source-title"
+            className="materialize-textarea"
+            onChange={this.props.onChange} />
+
+          <TextField
+            floatingLabelText="Article Body"
+            multiLine={true}
+            name="content"
+            id="article-source-text"
+            className="materialize-textarea"
+            onChange={this.props.onChange} />
+
+          <RaisedButton
+            label="Save"
+            primary={true}
+            type="submit"
+            style={styles.sendButton} />
+        </fieldset>
       </form>);
   }
 }
