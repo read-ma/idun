@@ -4,6 +4,7 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import classnames from 'classnames';
 import Paper from 'material-ui/lib/paper';
 import FlatButton from 'material-ui/lib/flat-button';
+import { ShowIf } from '../components';
 
 const style = {
   minHeight: 300,
@@ -61,8 +62,12 @@ class Flashcard extends Component {
   reverse() {
     return (
       <div className="card-reverse">
-        <p><b>Definition:</b> {this.props.item.translation}</p>
-        <p><b>Example:</b> {this.props.item.example.replace('<p>', '')}</p>
+        <h2>{this.props.item.translation}</h2>
+        <ShowIf condition={!!this.props.item.example}>
+        <p>
+          <small>in sentence: </small>
+          {this.props.item.example}</p>
+        </ShowIf>
       </div>
     );
   }
