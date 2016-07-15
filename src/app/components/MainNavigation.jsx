@@ -38,7 +38,7 @@ const MainNavigation = ({ children, open, closeNavbar, logoutAction }) => {
 };
 
 MainNavigation.propTypes = {
-  logout: React.PropTypes.func.isRequired,
+  logoutAction: React.PropTypes.func.isRequired,
   children: React.PropTypes.object,
   open: React.PropTypes.bool,
   closeNavbar: React.PropTypes.func,
@@ -53,7 +53,7 @@ const mapStateToProps = state => {
 const mapActionsToProps = dispatch => {
   return {
     logoutAction() {
-      dispatch(logout(dispatch));
+      dispatch(logout());
     },
     closeNavbar() {
       dispatch(closeNav('left'));

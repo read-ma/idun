@@ -84,15 +84,21 @@ const userSigningInError = () => {
   };
 };
 
-const logout = (dispatch) => {
+const logoutUser = () => {
   ls.clearAll();
-  dispatch(push('/login'));
   return {
     type: 'LOGOUT_USER',
     payload: {
       auth_token: undefined,
       isAuthenticated: false
     }
+  };
+};
+
+const logout = () => {
+  return (dispatch) => {
+    dispatch(logoutUser());
+    dispatch(push('/login'));
   };
 };
 
