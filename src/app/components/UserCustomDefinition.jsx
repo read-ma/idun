@@ -7,6 +7,12 @@ import ListItem from 'material-ui/lib/lists/list-item';
 import TextField from 'material-ui/lib/text-field';
 import { saveUserDefinition } from '../actions';
 
+const styles = {
+  userDefinitionBox: {
+    clear: 'both'
+  }
+};
+
 class UserCustomDefinition extends Component {
 
   constructor(props) {
@@ -40,7 +46,7 @@ class UserCustomDefinition extends Component {
     let AddContent = <IconButton onClick={this.saveUserDefinition}><ContentAdd /></IconButton>;
 
     return (
-      <List>
+      <List style={styles.userDefinitionBox}>
         <ListItem rightIconButton={AddContent}>
           <TextField hintText="My definition"
             onEnterKeyDown={this.saveUserDefinition}

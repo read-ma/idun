@@ -27,8 +27,18 @@ class Sidebar extends Component {
       sidebar: {
         width: 500
       },
+      targetLanguageMenu: {
+        float: 'right',
+        header: {
+          float: 'left',
+          fontWeight: 400
+        }
+      },
+      header: {
+        float: 'left',
+        fontWeight: 400
+      },
     };
-
     if (isDeviceMobile) {
       docked = false;
       styles.sidebar = {
@@ -46,13 +56,16 @@ class Sidebar extends Component {
     return (
       <LeftNav width={styles.sidebar.width} style={styles.sidebar} docked={docked} openRight={true} open={shouldOpen}>
         <AppBar title={<WordSearchInput />} style={styles.sidebar.appbar} iconElementLeft={leftIcon} />
-        <ShowIf condition={this.props.isAdmin}>
-          <span>
+
+        <div style={styles.targetLanguageMenu}>
+          <ShowIf condition={this.props.isAdmin}>
+            <h4 style={styles.header}>Article language:</h4>
             <LanguageDropDownMenu type="from" key="language-from-selection" />
-            <span>{">>"}</span>
-          </span>
-        </ShowIf>
-        <LanguageDropDownMenu type="to" />
+          </ShowIf>
+
+          <h4 style={styles.header}>My language:</h4>
+          <LanguageDropDownMenu type="to" />
+        </div>
 
         <TTSQuickPlayer />
         <UserCustomDefinition />
