@@ -12,13 +12,6 @@ const styles = {
     backgroundSize: 'cover',
     height: 14
   },
-  targetLanguageMenu: {
-    float: 'right',
-    header: {
-      float: 'left',
-      fontWeight: 400
-    }
-  },
   dropdownIcon: {
     fill: '#000'
   },
@@ -35,6 +28,10 @@ const LanguageFlag = ({ langKey }) => {
   );
 };
 
+LanguageFlag.propTypes = {
+  langKey: React.PropTypes.string.isRequired
+};
+
 class LanguageDropDownMenu extends Component {
   onLangChange(_, index, value) {
     this.props.changeLanguage(this.props.type, value);
@@ -48,20 +45,19 @@ class LanguageDropDownMenu extends Component {
     });
 
     return (
-      <div style={styles.targetLanguageMenu}>
-      <h4 style={styles.targetLanguageMenu.header}>Translate to: </h4>
-        <DropDownMenu value={this.props.language[this.props.type]} iconStyle={styles.dropdownIcon} onChange={this.onLangChange.bind(this)}>
-          {languages}
-        </DropDownMenu>
-      </div>
+      <DropDownMenu value={this.props.language[this.props.type]} iconStyle={styles.dropdownIcon} onChange={this.onLangChange.bind(this)}>
+        {languages}
+      </DropDownMenu>
     );
   }
 }
 
 LanguageDropDownMenu.propTypes = {
   languages: React.PropTypes.array.isRequired,
+  language: React.PropTypes.object.isRequired,
+  type: React.PropTypes.string.isRequired,
+  changeLanguage: React.PropTypes.func.isRequired
 };
-
 
 function mapStateToProps(state) {
   return {

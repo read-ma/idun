@@ -40,7 +40,7 @@ const ArticleFooter = ({ sourceUrl }) => {
 };
 
 ArticleFooter.propTypes = {
-  sourceUrl: React.PropTypes.string.isRequired,
+  sourceUrl: React.PropTypes.string,
 };
 
 const LoadingArticle = () => <span>Loading...</span>;
