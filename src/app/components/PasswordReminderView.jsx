@@ -38,7 +38,7 @@ class PasswordReminder extends React.Component {
   render() {
     return (
       <form onSubmit={this.resetPassword} className="col-xs-12 col-md-8 col-lg-6">
-        <h2 style={styles.headline}>Reset password</h2>
+        <h2 style={styles.headline}>Reset password to your account</h2>
         <p>Enter your email. We will send you instructions how to reset your password.</p>
 
         <NotificationBox message={this.props.error} type="error" />
@@ -46,11 +46,7 @@ class PasswordReminder extends React.Component {
 
         <TextField
           floatingLabelText="Your email address"
-          type="email"
-          id="email"
-          name="email"
-          required="true"
-          fullWidth={true}
+          type="email" id="email" name="email" required="true" fullWidth={true}
           onChange={this.handleInputChange}
         />
 

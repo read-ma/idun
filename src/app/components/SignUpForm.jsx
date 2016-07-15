@@ -56,15 +56,11 @@ class SignUpForm extends React.Component {
 
         <TextField
           floatingLabelText="Your email address"
-          type="email"
-          id="signUpEmail"
-          name="email"
-          required="true"
-          fullWidth={true}
+          type="email" id="signUpEmail" name="email" required="true" fullWidth={true}
           onChange={this.handleFormInputChanged.bind(this)}
         />
 
-        <RaisedButton label="Create account" primary={true} type="submit" style={styles.sendButton} />
+        <RaisedButton label="Send" primary={true} type="submit" style={styles.sendButton} />
         <small style={styles.noSpamPromise}>We don't spam, promise.</small>
       </form>
     );

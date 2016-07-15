@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { loginAttempt } from '../actions/auth';
 
@@ -48,25 +49,15 @@ class Login extends React.Component {
         <span className="error">{this.props.error}</span>
 
         <TextField
-          floatingLabelText="Your email address"
-          type="email"
-          id="email"
-          name="email"
-          required="true"
-          fullWidth={true}
-          onChange={this.handleFormInputChanged}
+          floatingLabelText="Email address" type="email" id="email" name="email" required="true"
+          fullWidth={true} onChange={this.handleFormInputChanged}
         />
 
         <br />
 
         <TextField
-          floatingLabelText="Your password"
-          type="password"
-          id="password"
-          name="password"
-          required="true"
-          fullWidth={true}
-          onChange={this.handleFormInputChanged}
+          floatingLabelText="Password" type="password" id="password" name="password" required="true"
+          fullWidth={true} onChange={this.handleFormInputChanged}
         />
 
         <br />
@@ -74,9 +65,9 @@ class Login extends React.Component {
         <RaisedButton label="Login" primary={true} type="submit" style={styles.loginButton} />
         <FlatButton label="I forgot my password" linkButton={true} href="/#/forgot_password" />
 
-        <br />
+        <br /><br/>
 
-        <FlatButton label="Create account" linkButton={true} href="/#/sign_up" primary={true} style={styles.createAccountLink}/>
+        <h2 style={styles.headline}><Link to="sign_up">Please register</Link> if you don't have an account yet.</h2>
       </form>
     );
   }
