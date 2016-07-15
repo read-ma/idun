@@ -7,6 +7,7 @@ import TextField from 'material-ui/lib/text-field';
 import RaisedButton from 'material-ui/lib/raised-button';
 import IconButton from 'material-ui/lib/icon-button';
 import NavigationClose from 'material-ui/lib/svg-icons/navigation/close';
+import colors from 'material-ui/lib/styles/colors';
 
 import AppBar from 'material-ui/lib/app-bar';
 
@@ -19,16 +20,19 @@ const styles = {
   },
   sendButton: {
     marginTop: '1em'
+  },
+  fieldset: {
+    borderColor: colors.grey300,
+    borderStyle: 'solid',
   }
 };
-
 
 class ArticleForm extends React.Component {
   render() {
     return (
       <form onSubmit={this.props.addArticle} style={styles.articleForm}>
 
-        <fieldset>
+        <fieldset style={styles.fieldset}>
           <legend>Import from URL</legend>
 
           <TextField
@@ -49,7 +53,7 @@ class ArticleForm extends React.Component {
 
         <br />
 
-        <fieldset>
+        <fieldset style={styles.fieldset}>
           <legend>Create New Article</legend>
           <TextField
             floatingLabelText="Article Title"
@@ -121,6 +125,8 @@ ArticleAdd.defaultProps = {
 
 ArticleAdd.propTypes = {
   addArticle: React.PropTypes.func.isRequired,
+  closeNav: React.PropTypes.func.isRequired,
+  open: React.PropTypes.bool,
 };
 
 const mapActionsToProps = (dispatch) => {
@@ -138,7 +144,7 @@ const mapActionsToProps = (dispatch) => {
 function mapStateToProps({ settings }) {
   return {
     open: settings.navOpen.right,
-};
+  };
 }
 
 export default connect(mapStateToProps, mapActionsToProps)(ArticleAdd);
