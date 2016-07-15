@@ -15,23 +15,23 @@ export default function auth(state = stateFromLocalStorage(), action){
     return Object.assign(
       {},
       state,
-      { message: undefined },
-      { error: undefined }
+      { notice: null },
+      { error: null }
     );
 
   case 'PASSWORD_UPDATED':
     return Object.assign(
       {},
       state,
-      { error: undefined },
-      { message: 'Your password has been updated. You can now log in.' }
+      { error: null },
+      { notice: 'Your password has been updated. You can now log in.' }
     );
 
   case 'CHANGE_PASSWORD_REQUEST_ERROR':
     return Object.assign(
       {},
       state,
-      { message: undefined },
+      { notice: null },
       { error: 'Email you entered does not exist in our database.' }
     );
 
@@ -39,7 +39,7 @@ export default function auth(state = stateFromLocalStorage(), action){
     return Object.assign(
       {},
       state,
-      { message: undefined },
+      { notice: null },
       { error: action.payload }
     );
 
@@ -47,8 +47,8 @@ export default function auth(state = stateFromLocalStorage(), action){
     return Object.assign(
       {},
       state,
-      { error: undefined },
-      { message: "Furhter instructions will be sent to your email within 10 minutes"}
+      { error: null },
+      { notice: "Furhter instructions will be sent to your email within 10 minutes"}
     );
 
   case 'USER_SIGNING_IN_ERROR':

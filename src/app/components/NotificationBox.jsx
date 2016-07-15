@@ -1,13 +1,11 @@
 import React from 'react';
 
-const NotificationBox = (messages, type='notice') => {
-  if (!messages) {
-    return false;
+const NotificationBox = ({ message, type }) => {
+  if (!message) {
+    return <span />;
   }
 
-  let msgs = messages.map(m => <li key={m}>{m}</li>);
-
-  return <ul className={type}>{msgs}</ul>;
+  return <h3 className={type}>{message}</h3>;
 };
 
 export default NotificationBox;

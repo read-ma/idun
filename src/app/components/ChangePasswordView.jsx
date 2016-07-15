@@ -51,7 +51,7 @@ class ChangePasswordView extends React.Component {
       <form onSubmit={this.updatePassword.bind(this)} className="col-xs-12 col-md-8 col-lg-6">
         <h2 style={styles.headline}>Change your password</h2>
 
-        {NotificationBox(this.props.error, 'error')}
+        <NotificationBox message={this.props.error} type="error" />
 
         <TextField
           floatingLabelText="Password"

@@ -41,8 +41,8 @@ class PasswordReminder extends React.Component {
         <h2 style={styles.headline}>Reset password</h2>
         <p>Enter your email. We will send you instructions how to reset your password.</p>
 
-        {NotificationBox(this.props.error, 'error')}
-        {NotificationBox(this.props.message, 'green-text')}
+        <NotificationBox message={this.props.error} type="error" />
+        <NotificationBox message={this.props.notice} type="green-text" />
 
         <TextField
           floatingLabelText="Your email address"
@@ -63,7 +63,7 @@ class PasswordReminder extends React.Component {
 PasswordReminder.propTypes = {
   email: React.PropTypes.string,
   error: React.PropTypes.string,
-  message: React.PropTypes.string,
+  notice: React.PropTypes.string,
   resetPassword: React.PropTypes.string,
   onSubmit: React.PropTypes.func,
 };
@@ -76,19 +76,19 @@ class PasswordReminderViewBase extends React.Component {
   }
 
   render() {
-    return <PasswordReminder error={this.props.error} message={this.props.message} onSubmit={this.resetPassword.bind(this)} />;
+    return <PasswordReminder error={this.props.error} notice={this.props.notice} onSubmit={this.resetPassword.bind(this)} />;
   }
 }
 
 PasswordReminderViewBase.propTypes = {
   dispatch: React.PropTypes.func,
   error: React.PropTypes.string,
-  message: React.PropTypes.string,
+  notice: React.PropTypes.string,
 };
 
 const mapStateToProps = (state) => {
   return {
-    message: state.auth.message,
+    notice: state.auth.notice,
     error: state.auth.error
   };
 };
