@@ -47,8 +47,8 @@ function DefinitionListItem({ text, language, url, partOfSpeech, handleClick, ke
 
   if (url) {
     listItem = (
-      <ListItem style={styles.listItem} disabled={true}>
-        <img data-caption={text} src={url} alt={text} key={key}/>
+      <ListItem style={styles.listItem} disabled={true} key={key}>
+        <img data-caption={text} src={url} alt={text} />
       </ListItem>
     );
   } else {
@@ -93,8 +93,8 @@ class DefinitionList extends Component {
   }
 
   render() {
-    let items = this.props.items.slice(0, this.state.itemsToShowNumber).map((item) =>
-      DefinitionListItem(Object.assign({}, item, { handleClick: this.props.handleClick }))
+    let items = this.props.items.slice(0, this.state.itemsToShowNumber).map((item, index) =>
+      DefinitionListItem(Object.assign({}, item, { handleClick: this.props.handleClick, key: `def-list-item-${index}`}))
     );
 
     return (

@@ -13,6 +13,14 @@ const styles = {
   }
 };
 
+const TranslationBox = ({translation}) => {
+  return (
+    <ListItem>
+      <span dangerouslySetInnerHTML={{ __html: translation }} />
+    </ListItem>
+  );
+};
+
 class UserCustomDefinition extends Component {
 
   constructor(props) {
@@ -42,7 +50,7 @@ class UserCustomDefinition extends Component {
     if (!this.props.selectedText) {
       return false;
     }
-    let definitions = this.state.userDefinitions.map(def => <ListItem key={def.translation}>{def.translation}</ListItem>);
+    let definitions = this.state.userDefinitions.map((def, index) => <TranslationBox key={`translation-item-${index}`} translation={def.translation} index={index} />);
     let AddContent = <IconButton onClick={this.saveUserDefinition}><ContentAdd /></IconButton>;
 
     return (
