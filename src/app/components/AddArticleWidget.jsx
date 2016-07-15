@@ -18,7 +18,8 @@ const styles = {
     padding: '20px',
   },
   sendButton: {
-    marginTop: '1em'
+    marginTop: '1em',
+    fontWeight: 600
   }
 };
 
@@ -29,10 +30,10 @@ class ArticleForm extends React.Component {
       <form onSubmit={this.props.addArticle} style={styles.articleForm}>
 
         <fieldset>
-          <legend>Import from URL</legend>
+          <legend>Import from link</legend>
 
           <TextField
-            floatingLabelText="Enter URL for article to import"
+            floatingLabelText="Copy & paste link to the article"
             type="url"
             name="source_url"
             className="validate"
@@ -50,9 +51,9 @@ class ArticleForm extends React.Component {
         <br />
 
         <fieldset>
-          <legend>Create New Article</legend>
+          <legend>Create new</legend>
           <TextField
-            floatingLabelText="Article Title"
+            floatingLabelText="Article title"
             name="title"
             type="text"
             id="article-source-title"
@@ -60,7 +61,7 @@ class ArticleForm extends React.Component {
             onChange={this.props.onChange} />
 
           <TextField
-            floatingLabelText="Article Body"
+            floatingLabelText="Article body"
             multiLine={true}
             name="content"
             id="article-source-text"
