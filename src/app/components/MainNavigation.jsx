@@ -18,7 +18,7 @@ import SocialSchool from 'material-ui/lib/svg-icons/social/school';
 // import NavigationApps from 'material-ui/lib/svg-icons/navigation/apps';
 import ActionPowerSettingsNew from 'material-ui/lib/svg-icons/action/power-settings-new';
 
-const MainNavigation = ({ children, open, closeNavbar }) => {
+const MainNavigation = ({ children, open, closeNavbar, logoutAction }) => {
   return (
     <LeftNav width={200} docked={true} open={open} style={{ padding: 0 }}>
       <AppBar title="ReadMa" showMenuIconButton={false} iconElementRight={
@@ -31,7 +31,7 @@ const MainNavigation = ({ children, open, closeNavbar }) => {
       <Divider />
       {children}
       <List>
-        <ListItem primaryText="Sign out" leftIcon={<ActionPowerSettingsNew />} onClick={logout} />
+        <ListItem primaryText="Sign out" leftIcon={<ActionPowerSettingsNew />} onClick={logoutAction} />
       </List>
     </LeftNav>
   );
@@ -52,8 +52,8 @@ const mapStateToProps = state => {
 
 const mapActionsToProps = dispatch => {
   return {
-    logout() {
-      dispatch(logout());
+    logoutAction() {
+      dispatch(logout(dispatch));
     },
     closeNavbar() {
       dispatch(closeNav('left'));

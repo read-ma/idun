@@ -84,8 +84,9 @@ const userSigningInError = () => {
   };
 };
 
-const logout = () => {
+const logout = (dispatch) => {
   ls.clearAll();
+  dispatch(push('/login'));
   return {
     type: 'LOGOUT_USER',
     payload: {
