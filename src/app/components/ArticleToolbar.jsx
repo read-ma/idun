@@ -7,6 +7,8 @@ import ToolbarTitle from 'material-ui/lib/toolbar/toolbar-title';
 import { toggleHighlighting } from '../actions';
 import { Wordlists } from '../components';
 import { isMobile } from '../Responsive';
+import { ShowIf } from '../components';
+import LanguageDropDownMenu from '../components/language/LanguageDropDownMenu';
 
 const styles = {
   iconStyles: {
@@ -41,7 +43,10 @@ class ArticleToolbar extends Component {
       <Toolbar style={styles.toolbar} className="toolbar">
         <ToolbarGroup>
           <Wordlists handleSelected={this.props.showDictMatchingWords} wordlists={this.props.wordlists} />
-        </ToolbarGroup>
+       </ToolbarGroup>
+          <ShowIf condition={this.props.isAdmin}>
+            <LanguageDropDownMenu type="from" key="language-from-selection" />
+          </ShowIf>
       </Toolbar>
     );
   }
@@ -53,6 +58,7 @@ ArticleToolbar.propTypes = {
 function mapStateToProps(state) {
   return {
     wordlists: state.wordlists.filter((wl) => wl.toggable),
+    isAdmin: state.auth.isAdmin,
   };
 }
 

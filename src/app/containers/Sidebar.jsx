@@ -12,7 +12,6 @@ import AppBar from 'material-ui/lib/app-bar';
 import WordSearchInput from '../components/WordSearchInput';
 import LanguageDropDownMenu from '../components/language/LanguageDropDownMenu';
 import { TTSQuickPlayer } from '../components/TTSPlayer';
-import { ShowIf } from '../components';
 
 // TODO: Rename to articlePageSidebar. I tried to use it anywhere else and it was impossible
 // because of hardcoded stuff
@@ -58,11 +57,6 @@ class Sidebar extends Component {
         <AppBar title={<WordSearchInput />} style={styles.sidebar.appbar} iconElementLeft={leftIcon} />
 
         <div style={styles.targetLanguageMenu}>
-          <ShowIf condition={this.props.isAdmin}>
-            <h4 style={styles.header}>Article language:</h4>
-            <LanguageDropDownMenu type="from" key="language-from-selection" />
-          </ShowIf>
-
           <h4 style={styles.header}>My language:</h4>
           <LanguageDropDownMenu type="to" />
         </div>
@@ -92,7 +86,6 @@ function mapStateToProps(state) {
     wordlists: state.wordlists,
     open: state.settings.navOpen.right,
     selectedText: state.article.selectedText,
-    isAdmin: state.auth.isAdmin,
   };
 }
 
