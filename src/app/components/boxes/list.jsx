@@ -8,12 +8,24 @@ import ContentAdd from 'material-ui/lib/svg-icons/content/add';
 import KeyboardArrowUp from 'material-ui/lib/svg-icons/hardware/keyboard-arrow-up';
 import KeyboardArrowDown from 'material-ui/lib/svg-icons/hardware/keyboard-arrow-down';
 
+const styles = {
+  languageIcon: {
+    float: 'left',
+    marginRight: 5,
+    border: '1px solid #ccc',
+    backgroundSize: 'cover'
+  },
+  listItem: {
+    float: 'left'
+  }
+};
+
 const LanguageIcon = ({ lang }) => {
   let language = lang === 'en' ? 'gb' : lang;
   let languageIcon = <span></span>;
 
   if (language) {
-    languageIcon = (<span style={{ float: 'left', marginRight: 5, border: '1px solid #ccc' }}
+    languageIcon = (<span style={styles.languageIcon}
       className={`flag-icon flag-icon-${language}`}></span>
     );
   }
@@ -35,7 +47,7 @@ function DefinitionListItem({ text, language, url, partOfSpeech, handleClick, ke
 
   if (url) {
     listItem = (
-      <ListItem style={{ float: 'left' }} disabled={true}>
+      <ListItem style={styles.listItem} disabled={true}>
         <img data-caption={text} src={url} alt={text} key={key}/>
       </ListItem>
     );

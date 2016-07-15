@@ -3,6 +3,7 @@ require('./styles/ArticlePage.scss');
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { loadArticle, textSelected, loadUserDefinitions, articlePageClosed } from '../actions';
+import { ShowIf } from '../components';
 import Sidebar from '../containers/Sidebar';
 import ArticleContent from './ArticleContent';
 // Commenting out until we dont make any sensible use of it
@@ -39,7 +40,7 @@ const ArticleFooter = ({ sourceUrl }) => {
 };
 
 ArticleFooter.propTypes = {
-  sourceUrl: React.PropTypes.string.isRequired,
+  sourceUrl: React.PropTypes.string,
 };
 
 const LoadingArticle = () => <span>Loading...</span>;
@@ -66,7 +67,9 @@ class ArticlePage extends Component {
         <div className="article-wrapper">
           <article className="article">
             <ArticleContent onTextSelected={this.props.onTextSelected} />
-            <ArticleFooter sourceUrl={this.props.article.source_url} />
+            <ShowIf condition={!!this.props.article.source_url}>
+              <ArticleFooter sourceUrl={this.props.article.source_url} />
+            </ShowIf>
           </article>
           {/*<ConfirmLearnedButton articleId={this.props.params.id} />*/}
         </div>

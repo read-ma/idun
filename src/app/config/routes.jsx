@@ -44,7 +44,7 @@ export default (
     <Route path="/new-article" component={AddArticleWidget} />
     <Route path="/article/:id" components={{ children: requireAuthentication(ArticlePage), topNavChildren: TTSPlayer }} />
 
-    <IndexRedirect to="/home" />
+    <IndexRedirect to="/articles" />
   </Route>
 
 );

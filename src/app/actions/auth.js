@@ -84,7 +84,7 @@ const userSigningInError = () => {
   };
 };
 
-const logout = () => {
+const logoutUser = () => {
   ls.clearAll();
   return {
     type: 'LOGOUT_USER',
@@ -92,6 +92,13 @@ const logout = () => {
       auth_token: undefined,
       isAuthenticated: false
     }
+  };
+};
+
+const logout = () => {
+  return (dispatch) => {
+    dispatch(logoutUser());
+    dispatch(push('/login'));
   };
 };
 
