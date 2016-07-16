@@ -13,9 +13,9 @@ import Divider from 'material-ui/lib/divider';
 // Icons
 import IconButton from 'material-ui/lib/icon-button';
 import NavigationClose from 'material-ui/lib/svg-icons/navigation/close';
-import ActionReorder from 'material-ui/lib/svg-icons/action/reorder';
+import ActionHome from 'material-ui/lib/svg-icons/action/home';
+import MapLocalLibrary from 'material-ui/lib/svg-icons/maps/local-library';
 import SocialSchool from 'material-ui/lib/svg-icons/social/school';
-// import NavigationApps from 'material-ui/lib/svg-icons/navigation/apps';
 import ActionPowerSettingsNew from 'material-ui/lib/svg-icons/action/power-settings-new';
 
 const MainNavigation = ({ children, open, closeNavbar, logoutAction }) => {
@@ -25,8 +25,8 @@ const MainNavigation = ({ children, open, closeNavbar, logoutAction }) => {
         <IconButton onClick={closeNavbar}><NavigationClose /></IconButton>}
       />
       <List>
-        <ListItem primaryText="Home" href="#/home" leftIcon={<ActionReorder />} />
-        <ListItem primaryText="Articles" href="#/articles" leftIcon={<ActionReorder />} />
+        <ListItem primaryText="Home" href="#/home" leftIcon={<ActionHome />} />
+        <ListItem primaryText="Articles" href="#/articles" leftIcon={<MapLocalLibrary />} />
         <ListItem primaryText="Learn" href="#/learn" leftIcon={<SocialSchool />} />
       </List>
       <Divider />

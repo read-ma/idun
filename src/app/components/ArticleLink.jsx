@@ -5,34 +5,47 @@ import ListItem from 'material-ui/lib/lists/list-item';
 import Label from './shared/Label';
 import NavigationChevronRight from 'material-ui/lib/svg-icons/navigation/chevron-right';
 
+const styles = {
+  listItem: {
+    lineHeight: '145%',
+    fontSize: 25,
+    fontWeight: 300
+  },
+  newListItem: {
+    lineHeight: '145%',
+    fontSize: 25,
+    fontWeight: 500
+  },
+  secondaryText: {
+    height: '20px',
+    lineHeight: '22px'
+  }
+};
 
-export default function ArticleLink({ id, title, tags, privy, difficulty, learn_status, waiting }) {
-  const styles = {
-    listItem: {
-      lineHeight: '145%',
-      fontSize: 25,
-      fontWeight: waiting ? 500 : 300
-    },
-    secondaryText: {
-      height: '20px',
-      lineHeight: '22px'
-    }
-  };
+const ArticleStatusList= (tags, privy, difficulty, learn_status, waiting) => {
+  const items = [];
 
-  const privateLabel = <Label type="visibility" text={privy ? "Private" : "Public"} />;
+  if (privy) {
+    items.push(<Label type="visibility" text={"Private"} />);
+  }
 
-  const secondaryText = (<div style={styles.secondaryText}>
-    {privateLabel}
-    <Label type="learn_status" text={l(learn_status)} />
-    <Label type="difficulty" text={l(difficulty)} />
-    <p>{tags}</p>
-  </div>);
+  items.push(<Label type="learn_status" text={l(learn_status)} />);
+  items.push(<Label type="difficulty" text={l(difficulty)} />);
 
+  return (
+    <div style={styles.secondaryText}>
+      {items}
+      <p>{tags}</p>
+    </div>
+  );
+};
+
+export default function ArticleLink({ id, title, tags, privy, difficulty, learn_status, waiting}) {
   return (
     <ListItem
       key={id}
-      style={styles.listItem}
-      secondaryText={secondaryText}
+      style={waiting ? styles.newListItem : styles.listItem}
+      secondaryText={ArticleStatusList(tags, privy, difficulty, learn_status, waiting)}
       rightIcon={<NavigationChevronRight />}
       href={`#/article/${id}`}
     >
