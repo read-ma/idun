@@ -4,17 +4,19 @@ import Sidebar from '../containers/Sidebar';
 import { loadArticle, textSelected, loadUserDefinitions } from '../actions';
 import { connect } from 'react-redux';
 import { getSelectedText } from '../highlight';
-
+import ArticleToolbar from './ArticleToolbar';
 
 class Home extends React.Component {
 
   componentDidMount() {
     this.props.loadArticle(280);
+    this.props.loadUserDefinitions();
   }
 
   render() {
     return (
       <div className="row">
+        <ArticleToolbar />
         <div className="article-wrapper no-toolbar">
           <article className="article">
             <ArticleContent onTextSelected={this.props.onTextSelected} />

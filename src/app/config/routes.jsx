@@ -10,7 +10,6 @@ import FlashcardsQuiz from '../components/FlashcardsQuiz';
 import FlashcardsQuizResults from '../components/FlashcardsQuizResults';
 import ChangePasswordView from '../components/ChangePasswordView';
 import ArticleSearchInput from '../components/ArticleSearchInput';
-import AddArticleWidget from '../components/AddArticleWidget';
 import { requireAuthentication } from '../utils';
 import { TTSPlayer } from '../components/TTSPlayer';
 
@@ -41,7 +40,6 @@ export default (
       components={{ children: requireAuthentication(Articles),
                     topNavChildren: ArticleSearchInput }} />
 
-    <Route path="/new-article" component={AddArticleWidget} />
     <Route path="/article/:id" components={{ children: requireAuthentication(ArticlePage), topNavChildren: TTSPlayer }} />
 
     <IndexRedirect to="/articles" />
