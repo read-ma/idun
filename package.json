@@ -4,7 +4,7 @@
   "description": "* Api in rails * Website in react.js",
   "main": "index.js",
   "scripts": {
-    "test": "sh script/test.sh",
+    "test": "casperjs test test/test.js",
     "deploy:production": "NODE_ENV=production node node_modules/webpack/bin/webpack.js -p --config webpack.production.config.js",
     "deploy:staging": "NODE_ENV=production node node_modules/webpack/bin/webpack.js -p --config webpack.production.config.js",
     "dev": "webpack-dev-server --host 0.0.0.0 --progress --colors --hot --inline --content-base public",
@@ -21,6 +21,7 @@
     "babel-polyfill": "6.7.4",
     "babel-preset-es2015": "^6.5.0",
     "babel-preset-react": "^6.5.0",
+    "casperjs": "^1.1.2",
     "classnames": "^2.2.3",
     "compression-webpack-plugin": "^0.3.0",
     "css-loader": "^0.23.1",
