@@ -1,7 +1,7 @@
 import ls from '../localStore';
 
 const defaultConfig = [
-  {key: 'graphics', label: 'Pictures', component: 'RemoteList', wordLimit: [1,5]},
+  {key: 'graphics', label: 'Pictures', component: 'Graphics', wordLimit: [1,5]},
   {key: 'wiki', label: 'Wiktionary', component: 'RemoteList', wordLimit: [1,4]},
   {key: 'translation', label: 'Smart Translation', component: 'RemoteList', wordLimit: [2,20]},
   {key: 'translations', label: 'Dictionary', component: 'RemoteList', wordLimit: [1,3]},

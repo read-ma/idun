@@ -4,7 +4,29 @@ import { saveUserDefinition } from '../../actions';
 import DefinitionList from './list';
 import _ from 'lodash';
 import Divider from 'material-ui/lib/divider';
+import GridList from 'material-ui/lib/grid-list/grid-list';
+import GridTile from 'material-ui/lib/grid-list/grid-tile';
+import IconButton from 'material-ui/lib/icon-button';
 
+const styles = {
+  root: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
+    padding: 10
+  },
+  gridList: {
+    width: 500,
+    height: 400,
+    overflowY: 'auto',
+    marginBottom: 24,
+  },
+  tile: {
+    border: 'solid 1px #eee',
+    margin: 3,
+    padding: 5
+  }
+};
 
 class SimpleList extends Component {
   saveUserDefinition(selectedDefinition) {
@@ -55,21 +77,46 @@ class RemoteList extends SimpleList {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (!!nextProps.selectedText
-     && this.props.selectedText !== nextProps.selectedText
-     && this.checkWordLimit(nextProps.selectedText, this.props.wordLimit)
-    ) {
-      this.loadDefinition(nextProps);
+    if (!nextProps.selectedText || this.props.selectedText === nextProps.selectedText) {
+      return;
     }
+
+    if (!this.checkWordLimit(nextProps.selectedText, this.props.wordLimit)) {
+      return;
+    }
+
+    this.loadDefinition(nextProps);
   }
 }
 
+class Graphics extends RemoteList {
+  render() {
+    if (_.isEmpty(this.props.items)) {
+      return false;
+    }
+
+    let items = this.props.items.map(tile => (
+      <GridTile key={tile.url} style={styles.tile}>
+        <img src={tile.url} />
+      </GridTile>
+    ));
+
+    return (
+      <div style={styles.root}>
+        <GridList cellHeight={200} style={styles.gridList} >
+          {items}
+        </GridList>
+      </div>
+    );
+  }
+}
 
 class SidebarBoxRegistry {
   constructor() {
     this.registry = {
       SimpleList: SimpleList,
-      RemoteList: RemoteList
+      RemoteList: RemoteList,
+      Graphics: Graphics
     };
   }
 

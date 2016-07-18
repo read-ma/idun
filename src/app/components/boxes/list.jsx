@@ -43,32 +43,21 @@ function DefinitionListItem({ text, language, url, partOfSpeech, handleClick, ke
   }
 
   let AddContent = <IconButton onClick={add}><ContentAdd /></IconButton>;
-  let listItem = '';
 
-  if (url) {
-    listItem = (
-      <ListItem style={styles.listItem} disabled={true} key={key}>
-        <img data-caption={text} src={url} alt={text} />
-      </ListItem>
-    );
-  } else {
-    listItem = (
-      <ListItem key={key}
-                rightIconButton={AddContent}
-                secondaryText={partOfSpeech}
-                disabled={true}>
-        <LanguageIcon lang={language} />
-        <span style={{ lineHeight: '20px' }} dangerouslySetInnerHTML={{ __html: text }} />
-      </ListItem>
-    );
-  }
-  return listItem;
+  return (
+    <ListItem key={key}
+      rightIconButton={AddContent}
+      secondaryText={partOfSpeech}
+      disabled={true}>
+      <LanguageIcon lang={language} />
+      <span style={{ lineHeight: '20px' }} dangerouslySetInnerHTML={{ __html: text }} />
+    </ListItem>
+  );
 }
 
 DefinitionListItem.propTypes = {
   text: React.PropTypes.string,
   language: React.PropTypes.string,
-  url: React.PropTypes.string,
   partOfSpeech: React.PropTypes.string,
   handleClick: React.PropTypes.func,
   key: React.PropTypes.string,
