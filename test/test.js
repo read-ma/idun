@@ -1,5 +1,5 @@
 /* global casper */
-const host = 'http://beta.readma.com'; 
+const host = 'http://linguamag.eu'; 
 
 casper.test.begin('Login page', 1, function (test) {
   casper.start(host)
