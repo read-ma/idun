@@ -10,7 +10,8 @@
     "dev": "webpack-dev-server --host 0.0.0.0 --progress --colors --hot --inline --content-base public",
     "postdeploy:production": "sh script/deploy.sh",
     "postdeploy:staging": "sh script/deploy-staging.sh",
-    "maintenance": "sh script/maintenance.sh"
+    "maintenance": "sh script/maintenance.sh",
+    "build:production": "NODE_ENV=production node node_modules/webpack/bin/webpack.js -p --config webpack.production.config.js"
   },
   "author": "",
   "license": "ISC",
