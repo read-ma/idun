@@ -22,6 +22,7 @@ const LearnHeader = () => {
 
 export default (
   <Route path="/" component={Main} history={appHistory}>
+    <IndexRedirect to="/home" />
     <Route path="/login" component={Login} />
     <Route path="/home" components={{ children: Home }} />
 
@@ -41,8 +42,5 @@ export default (
                     topNavChildren: ArticleSearchInput }} />
 
     <Route path="/article/:id" components={{ children: requireAuthentication(ArticlePage), topNavChildren: TTSPlayer }} />
-
-    <IndexRedirect to="/articles" />
   </Route>
-
 );
