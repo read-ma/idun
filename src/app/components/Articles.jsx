@@ -54,7 +54,7 @@ class Articles extends Component {
 function mapStateToProps(state) {
   return {
     articles: state.articles,
-    filter: state.articlesFilter
+    filter: state.articlesFilter,
   };
 }
 

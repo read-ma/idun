@@ -8,6 +8,8 @@ import RaisedButton from 'material-ui/lib/raised-button';
 import IconButton from 'material-ui/lib/icon-button';
 import NavigationClose from 'material-ui/lib/svg-icons/navigation/close';
 import colors from 'material-ui/lib/styles/colors';
+import { ShowIf } from '../components';
+import Toggle from 'material-ui/lib/toggle';
 
 import AppBar from 'material-ui/lib/app-bar';
 
@@ -71,6 +73,10 @@ class ArticleForm extends React.Component {
             id="article-source-text"
             className="materialize-textarea"
             onChange={this.props.onChange} />
+  
+          <ShowIf condition={this.props.isAdmin}>
+            <Toggle label="Publish to everyone" labelPosition="right" name="publish" onToggle={this.props.onChange} value={true}/>
+          </ShowIf>
 
           <RaisedButton
             label="Save"
@@ -84,7 +90,8 @@ class ArticleForm extends React.Component {
 
 ArticleForm.propTypes = {
   addArticle: React.PropTypes.func,
-  onChange: React.PropTypes.func
+  onChange: React.PropTypes.func,
+  isAdmin: React.PropTypes.bool,
 };
 
 class ArticleAdd extends React.Component {
@@ -114,7 +121,7 @@ class ArticleAdd extends React.Component {
     return (
       <LeftNav width={styles.sidebar.width} styles={styles.sidebar} docked={true} openRight={true} open={this.props.open}>
         <AppBar title="Add article" iconElementLeft={<IconButton onClick={this.props.closeNav}><NavigationClose /></IconButton>} />
-        <ArticleForm addArticle={this.addArticle} onChange={this.onChange}/>
+        <ArticleForm addArticle={this.addArticle} onChange={this.onChange} isAdmin={this.props.isAdmin}/>
       </LeftNav>
     );
   }
@@ -128,6 +135,7 @@ ArticleAdd.propTypes = {
   addArticle: React.PropTypes.func.isRequired,
   closeNav: React.PropTypes.func.isRequired,
   open: React.PropTypes.bool,
+  isAdmin: React.PropTypes.bool,
 };
 
 const mapActionsToProps = (dispatch) => {
@@ -142,9 +150,10 @@ const mapActionsToProps = (dispatch) => {
   };
 };
 
-function mapStateToProps({ settings }) {
+function mapStateToProps(state) {
   return {
-    open: settings.navOpen.right,
+    open: state.settings.navOpen.right,
+    isAdmin: state.auth.isAdmin,
   };
 }
 
