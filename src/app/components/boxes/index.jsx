@@ -1,3 +1,5 @@
+require('../styles/Images.scss');
+
 import React, { Component } from 'react';
 import { findWordData } from '../../actions/definitions';
 import { saveUserDefinition } from '../../actions';
@@ -6,7 +8,6 @@ import _ from 'lodash';
 import Divider from 'material-ui/lib/divider';
 import GridList from 'material-ui/lib/grid-list/grid-list';
 import GridTile from 'material-ui/lib/grid-list/grid-tile';
-import IconButton from 'material-ui/lib/icon-button';
 
 const styles = {
   root: {
@@ -16,15 +17,9 @@ const styles = {
     padding: 10
   },
   gridList: {
-    width: 500,
-    height: 400,
+    height: 185,
     overflowY: 'auto',
     marginBottom: 24,
-  },
-  tile: {
-    border: 'solid 1px #eee',
-    margin: 3,
-    padding: 5
   }
 };
 
@@ -96,14 +91,14 @@ class Graphics extends RemoteList {
     }
 
     let items = this.props.items.map(tile => (
-      <GridTile key={tile.url} style={styles.tile}>
-        <img src={tile.url} />
+      <GridTile key={tile.url} className="sidebar-image-container">
+        <img src={tile.url} className="sidebar-image" />
       </GridTile>
     ));
 
     return (
       <div style={styles.root}>
-        <GridList cellHeight={200} style={styles.gridList} >
+        <GridList style={styles.gridList} padding={6}>
           {items}
         </GridList>
       </div>

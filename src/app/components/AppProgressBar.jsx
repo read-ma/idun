@@ -18,7 +18,7 @@ class AppProgressBar extends Component {
 
   render() {
     if (this.processesCounter === 0) {
-      console.log('There are no processes in queue. Not showing progress bar.')
+      // console.log('There are no processes in queue. Not showing progress bar.')
       return null;
     }
 
