@@ -21,7 +21,7 @@ const tokensContainingWord = (tokens, word) => {
   findAllOccurenceIndexes(tokens, words[0]).forEach(idx => {
     let matchCandidate = tokens.slice(idx, idx+words.length);
 
-    if (_.isEqual(words, matchCandidate.map(t => t.word.toLowerCase()))) {
+    if (_.isEqual(words.map(t => t.toLowerCase()), matchCandidate.map(t => t.word.toLowerCase()))) {
       result = result.concat(matchCandidate);
     }
   });

@@ -3,10 +3,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Toolbar from 'material-ui/lib/toolbar/toolbar';
 import ToolbarGroup from 'material-ui/lib/toolbar/toolbar-group';
-import ToolbarTitle from 'material-ui/lib/toolbar/toolbar-title';
 import { toggleHighlighting } from '../actions';
 import { Wordlists } from '../components';
-import { isMobile } from '../Responsive';
 import { ShowIf } from '../components';
 import LanguageDropDownMenu from '../components/language/LanguageDropDownMenu';
 
