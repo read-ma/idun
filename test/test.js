@@ -1,5 +1,6 @@
+system = require('system');
 /* global casper */
-const host = 'http://linguamag.eu'; 
+const host = system.env.READMA_URL || 'http://localhost:8080';
 
 casper.test.begin('Login page', 1, function (test) {
   casper.start(host)
