@@ -2,9 +2,9 @@ require('./styles/FlashcardsQuiz.scss');
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ReactGA from 'react-ga';
+import ls from './localStore';
 import { loadDeckForArticle, markItem } from '../actions/deck';
 import Flashcard from './Flashcard';
-// import FlashcardProgress from './FlashcardProgress';
 import { Link } from 'react-router';
 
 class FlashcardsQuiz extends Component {
@@ -34,9 +34,9 @@ class FlashcardsQuiz extends Component {
     if (this.props.done) {
       // Would be nice to have a routing for that instead of 1337 ifs
       ReactGA.event({
-        category: 'Flashcard quizk',
+        category: 'Flashcard quiz completed',
         action: 'User completed his deck',
-        value: this.props.params.id
+        userId: ls.get('CURRENT_USER_EMAIL')
       });
       return (
         <div>
@@ -49,7 +49,7 @@ class FlashcardsQuiz extends Component {
 
     return (
       <div className="row flashcards-container">
-        {/*<FlashcardProgress items={this.props.items} />*/}
+        {/* <FlashcardProgress items={this.props.items} />*/}
         <div className="col-xs-12">
           <Flashcard
           key={this.props.currentItem.id}
