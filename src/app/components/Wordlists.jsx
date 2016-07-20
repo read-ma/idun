@@ -22,7 +22,7 @@ const Wordlists = ({ wordlists, handleSelected }) => {
         onToggle={handleSelected}
         toggled={list.enabled}
         label={list.label}
-        labelPosition={"right"}
+        labelPosition="right"
         style={{ width: 'auto', marginRight: '0.5em' }}
       />
     );

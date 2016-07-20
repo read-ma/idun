@@ -1,4 +1,4 @@
-import { loadArticles, loadArticle, confirmArticleLearned, articlePageClosed } from './articles';
+import { loadArticles, loadArticle, confirmArticleLearned, articlePageClosed, deleteArticle } from './articles';
 import { findTextDefinitions } from './definitions';
 import { loadDecks, loadDeckForArticle, endQuiz } from './deck';
 import api from '../api';
@@ -106,6 +106,7 @@ export { loadArticles, loadArticle, confirmArticleLearned, articlePageClosed,
          toggleHighlighting,
          loadUserDefinitions, saveUserDefinition,
          loadDeckForArticle, loadDecks,
+         deleteArticle,
          endQuiz,
          findTextDefinitions,
          changeLanguage,

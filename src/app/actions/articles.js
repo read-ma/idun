@@ -1,5 +1,6 @@
 import api from '../api';
 import { closeNav } from '../actions';
+import { push } from 'react-router-redux';
 
 const updateArticlesFilter = (change) => {
   return {
@@ -75,6 +76,15 @@ function articleLoaded(article) {
   };
 }
 
+function deleteArticle(id) {
+  return dispatch => {
+    api.delete(`/articles/${id}.json`)
+      .then((response) => {
+        dispatch(push('/articles'));
+      });
+  }
+}
+
 function getArticle(id, handleSuccess) {
   api.get(`/articles/${id}.json`)
     .then((response) => {
@@ -122,4 +132,5 @@ export {
   confirmArticleLearned,
   updateArticlesFilter,
   articlePageClosed,
+  deleteArticle
 };
