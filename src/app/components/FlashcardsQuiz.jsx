@@ -2,7 +2,7 @@ require('./styles/FlashcardsQuiz.scss');
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ReactGA from 'react-ga';
-import ls from './localStore';
+import ls from '../localStore';
 import { loadDeckForArticle, markItem } from '../actions/deck';
 import Flashcard from './Flashcard';
 import { Link } from 'react-router';
