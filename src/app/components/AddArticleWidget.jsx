@@ -31,6 +31,16 @@ const styles = {
 };
 
 class ArticleForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.onToggle = this.onToggle.bind(this);
+  }
+
+  onToggle (event, value) {
+    event.target.value = value;
+    this.props.onChange(event);
+  }
+
   render() {
     return (
       <form onSubmit={this.props.addArticle} style={styles.articleForm}>
@@ -75,7 +85,7 @@ class ArticleForm extends React.Component {
             onChange={this.props.onChange} />
   
           <ShowIf condition={this.props.isAdmin}>
-            <Toggle label="Publish to everyone" labelPosition="right" name="publish" onToggle={this.props.onChange} value={true}/>
+            <Toggle label="Publish to everyone" labelPosition="right" name="public" onToggle={this.onToggle} />
           </ShowIf>
 
           <RaisedButton
