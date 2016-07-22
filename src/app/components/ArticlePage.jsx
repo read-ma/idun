@@ -2,7 +2,7 @@ require('./styles/ArticlePage.scss');
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { loadArticle, textSelected, loadUserDefinitions, articlePageClosed, deleteArticle } from '../actions';
+import { loadArticle, textSelected, loadUserDefinitions, articlePageClosed } from '../actions';
 import { ShowIf } from '../components';
 import Sidebar from '../containers/Sidebar';
 import ArticleContent from './ArticleContent';
@@ -11,7 +11,6 @@ import ArticleContent from './ArticleContent';
 import { getSelectedText } from '../highlight';
 import PositioningWidget from './PositioningWidget';
 import ArticleToolbar from './ArticleToolbar';
-import FlatButton from 'material-ui/lib/flat-button';
 
 const styles = {
   blockquote: {
@@ -67,13 +66,6 @@ class ArticlePage extends Component {
         <PositioningWidget pageId={`article-${this.props.params.id}`} />
         <div className="article-wrapper">
           <article className="article">
-
-            <ShowIf condition={this.props.isAdmin}>
-              <div>
-                <FlatButton primary={true} onClick={this.props.delete.bind(this)}>Delete</FlatButton>
-              </div>
-            </ShowIf>
-
             <ArticleContent onTextSelected={this.props.onTextSelected} />
             <ShowIf condition={!!this.props.article.source_url}>
               <ArticleFooter sourceUrl={this.props.article.source_url} />
@@ -92,18 +84,12 @@ ArticlePage.propTypes = {
   article: React.PropTypes.object.isRequired,
   params: React.PropTypes.object.isRequired,
   loadArticle: React.PropTypes.func.isRequired,
-  delete: React.PropTypes.func.isRequired,
   loadUserDefinitions: React.PropTypes.func,
   articlePageClosed: React.PropTypes.func,
-  isAdmin: React.PropTypes.Boolean,
 };
 
 const mapActionsToProps = (dispatch) => {
   return {
-    delete: function () {
-      dispatch(
-        deleteArticle(this.props.params.id));
-    },
     loadArticle: (id) => dispatch(loadArticle(id)),
     articlePageClosed: () => dispatch(articlePageClosed()),
     loadUserDefinitions: () => dispatch(loadUserDefinitions()),

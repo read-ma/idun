@@ -7,6 +7,8 @@ import { toggleHighlighting } from '../actions';
 import { Wordlists } from '../components';
 import { ShowIf } from '../components';
 import LanguageDropDownMenu from '../components/language/LanguageDropDownMenu';
+import FlatButton from 'material-ui/lib/flat-button';
+import { deleteArticle } from '../actions';
 
 const styles = {
   iconStyles: {
@@ -45,23 +47,35 @@ class ArticleToolbar extends Component {
           <ShowIf condition={this.props.isAdmin}>
             <LanguageDropDownMenu type="from" key="language-from-selection" />
           </ShowIf>
+          <ShowIf condition={this.props.isAdmin}>
+            <FlatButton primary={true} onClick={this.props.delete.bind(this)}>Delete</FlatButton>
+          </ShowIf>
       </Toolbar>
     );
   }
 }
 
 ArticleToolbar.propTypes = {
+  isAdmin: React.PropTypes.bool,
+  delete: React.PropTypes.func.isRequired,
+  showDictMatchingWord: React.PropTypes.func.isRequired,
+  wordlist: React.PropTypes.array.isRequired,
 };
 
 function mapStateToProps(state) {
   return {
     wordlists: state.wordlists.filter((wl) => wl.toggable),
-    isAdmin: state.auth.isAdmin,
+    isAdmin: !!state.auth.isAdmin,
+    articleId: state.article.id,
   };
 }
 
 const mapActionsToProps = (dispatch) => {
   return {
+    delete: function () {
+      dispatch(
+        deleteArticle(this.props.articleId));
+    },
     showDictMatchingWords(event) {
       dispatch(
         toggleHighlighting(event.target.name)
