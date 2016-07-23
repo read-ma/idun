@@ -11,15 +11,6 @@
   <body>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/airbrake-js/0.5.8/client.min.js"></script>
-    <script>
-     var airbrake = new airbrakeJs.Client({
-       projectId: 'b8bcbc344ad24959b949df8b47ffcc9e',
-       projectKey: 'b8bcbc344ad24959b949df8b47ffcc9e',
-       reporter: 'xhr',
-       host: 'http://errbit.logdock.com'
-     });
-     window.onerror = airbrake.onerror;
-    </script>
     <div id="app"></div>
   </body>
 </html>

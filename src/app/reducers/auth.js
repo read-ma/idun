@@ -3,8 +3,9 @@ import ls from '../localStore';
 function stateFromLocalStorage() {
   return {
     isAuthenticated: !!ls.get('IS_AUTHENTICATED'),
-    auth_token:        ls.get('AUTH_TOKEN'),
-    isAdmin:         !!ls.get('IS_ADMIN')
+    auth_token: ls.get('AUTH_TOKEN'),
+    email: ls.get('CURRENT_USER_EMAIL'),
+    isAdmin: !!ls.get('IS_ADMIN'),
   };
 }
 
