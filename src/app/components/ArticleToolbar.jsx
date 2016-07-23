@@ -58,8 +58,8 @@ class ArticleToolbar extends Component {
 ArticleToolbar.propTypes = {
   isAdmin: React.PropTypes.bool,
   delete: React.PropTypes.func.isRequired,
-  showDictMatchingWord: React.PropTypes.func.isRequired,
-  wordlist: React.PropTypes.array.isRequired,
+  showDictMatchingWords: React.PropTypes.func.isRequired,
+  wordlists: React.PropTypes.array.isRequired,
 };
 
 function mapStateToProps(state) {

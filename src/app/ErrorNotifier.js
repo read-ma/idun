@@ -6,7 +6,7 @@ class ErrorNotifier {
     let env = process.env.NODE_ENV;
 
     if (env === 'production') {
-     window.airbrake = new Airbrake({
+      window.airbrake = new Airbrake({
         projectId: 'b8bcbc344ad24959b949df8b47ffcc9e',
         projectKey: 'b8bcbc344ad24959b949df8b47ffcc9e',
         reporter: 'xhr',
