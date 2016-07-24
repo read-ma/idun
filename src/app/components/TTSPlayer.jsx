@@ -97,9 +97,11 @@ const mapActionsToProps = (dispatch) => {
       dispatch(player.pause());
     },
     playSingle(content, language) {
-      player.start(content, language);
+      dispatch({type: 'TTS_PLAY_SINGLE'});
+      dispatch(player.start(content, language));
     },
     play(content, language) {
+      dispatch({type: 'TTS_PLAY_ARTICLE'});
       dispatch(player.stop());
 
       content.forEach( tokens => {

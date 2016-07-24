@@ -83,7 +83,7 @@ class ArticleForm extends React.Component {
             id="article-source-text"
             className="materialize-textarea"
             onChange={this.props.onChange} />
-  
+
           <ShowIf condition={this.props.isAdmin}>
             <Toggle label="Publish to everyone" labelPosition="right" name="public" onToggle={this.onToggle} />
           </ShowIf>
@@ -155,6 +155,9 @@ const mapActionsToProps = (dispatch) => {
         closeNav('right'));
     },
     addArticle(article) {
+      if (!article.public){
+        dispatch({type: article.source_url ? 'IMPORT_ARTICLE' : 'ADD_ARTICLE'});
+      }
       dispatch(addArticle(article));
     }
   };
