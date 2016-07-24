@@ -6,15 +6,16 @@ function findVoice(lang) {
   return _.find(instance.getVoices(), { lang: lang });
 }
 
-function createUtterance(text, lang) {
+function createUtterance(text, lang, rate) {
   const tts = new window.SpeechSynthesisUtterance(text);
   tts.voice = findVoice(lang);
+  tts.rate  = rate;
   return tts;
 }
 
-function start(text, lang) {
+function start(text, lang, rate = 0.8) {
   instance.speak(
-    createUtterance(text, lang));
+    createUtterance(text, lang, rate));
   return {
     type: 'TTS_START'
   };
