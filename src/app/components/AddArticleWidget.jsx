@@ -10,7 +10,6 @@ import NavigationClose from 'material-ui/lib/svg-icons/navigation/close';
 import colors from 'material-ui/lib/styles/colors';
 import { ShowIf } from '../components';
 import Toggle from 'material-ui/lib/toggle';
-
 import AppBar from 'material-ui/lib/app-bar';
 
 const styles = {
@@ -41,10 +40,13 @@ class ArticleForm extends React.Component {
     this.props.onChange(event);
   }
 
+  isPublic () {
+    return this.props.public === "true";
+  }
+
   render() {
     return (
       <form onSubmit={this.props.addArticle} style={styles.articleForm}>
-
         <fieldset style={styles.fieldset}>
           <legend>Import from link</legend>
 
@@ -56,6 +58,11 @@ class ArticleForm extends React.Component {
             id="sourceUrl"
             onChange={this.props.onChange}
           />
+
+          <ShowIf condition={this.props.isAdmin}>
+            <Toggle label="Publish to everyone" labelPosition="right" name="public" onToggle={this.onToggle} toggled={this.isPublic()} />
+          </ShowIf>
+ 
           <RaisedButton
             label="Import"
             primary={true}
@@ -85,7 +92,7 @@ class ArticleForm extends React.Component {
             onChange={this.props.onChange} />
 
           <ShowIf condition={this.props.isAdmin}>
-            <Toggle label="Publish to everyone" labelPosition="right" name="public" onToggle={this.onToggle} />
+            <Toggle label="Publish to everyone" labelPosition="right" name="public" onToggle={this.onToggle} toggled={this.isPublic()} />
           </ShowIf>
 
           <RaisedButton
@@ -102,6 +109,7 @@ ArticleForm.propTypes = {
   addArticle: React.PropTypes.func,
   onChange: React.PropTypes.func,
   isAdmin: React.PropTypes.bool,
+  public: React.PropTypes.string,
 };
 
 class ArticleAdd extends React.Component {
@@ -131,7 +139,7 @@ class ArticleAdd extends React.Component {
     return (
       <LeftNav width={styles.sidebar.width} styles={styles.sidebar} docked={true} openRight={true} open={this.props.open}>
         <AppBar title="Add article" iconElementLeft={<IconButton onClick={this.props.closeNav}><NavigationClose /></IconButton>} />
-        <ArticleForm addArticle={this.addArticle} onChange={this.onChange} isAdmin={this.props.isAdmin}/>
+        <ArticleForm addArticle={this.addArticle} onChange={this.onChange} isAdmin={this.props.isAdmin} public={this.state.article.public}/>
       </LeftNav>
     );
   }
