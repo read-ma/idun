@@ -28,7 +28,7 @@ const styles = {
 
 const MenuItemFields = {
   visibility: { all: 'All articles', privy: 'My articles', open: 'Public articles' },
-  learning: { all: 'Learn', waiting: 'New', pending: 'Learning', learned: 'Done' },
+  learning: { all: 'Learn - all', waiting: 'New', pending: 'Learning', learned: 'Done' },
   difficulty: { all: 'All levels', intermediate: 'Intermediate', 'upper-intermediate': 'Upper intermediate', advanced: 'Advanced' },
 };
 
@@ -38,7 +38,7 @@ const FilterDropDownMenu = ({ updateFilter, name, selected }) => {
   };
   const items = [];
   _.forOwn(MenuItemFields[name],
-           (value, key) => items.push(<MenuItem value={key} primaryText={value} />)
+           (value, key) => items.push(<MenuItem value={key} key={key} primaryText={value} />)
   );
 
   return (
@@ -46,6 +46,12 @@ const FilterDropDownMenu = ({ updateFilter, name, selected }) => {
       {items}
     </DropDownMenu>
   );
+};
+
+FilterDropDownMenu.propTypes = {
+  updateFilter: React.PropTypes.func.isRequired,
+  name: React.PropTypes.string.isRequired,
+  selected: React.PropTypes.string
 };
 
 class ArticlesToolbar extends Component {
@@ -56,14 +62,19 @@ class ArticlesToolbar extends Component {
     return (
       <Toolbar style={styles.toolbar} className="toolbar">
         <ToolbarGroup>
-          <FilterDropDownMenu updateFilter={this.props.updateFilter} name='visibility' selected={this.props.filter.visibility} />
-          <FilterDropDownMenu updateFilter={this.props.updateFilter} name='learning' selected={this.props.filter.learning} />
-          <FilterDropDownMenu updateFilter={this.props.updateFilter} name='difficulty' selected={this.props.filter.difficulty} />
+          <FilterDropDownMenu updateFilter={this.props.updateFilter} name="visibility" selected={this.props.filter.visibility} />
+          <FilterDropDownMenu updateFilter={this.props.updateFilter} name="learning" selected={this.props.filter.learning} />
+          <FilterDropDownMenu updateFilter={this.props.updateFilter} name="difficulty" selected={this.props.filter.difficulty} />
         </ToolbarGroup>
       </Toolbar>
     );
   }
 }
+
+ArticlesToolbar.propTypes = {
+  updateFilter: React.PropTypes.func.isRequired,
+  filter: React.PropTypes.object.isRequired
+};
 
 function mapStateToProps(state) {
   return {

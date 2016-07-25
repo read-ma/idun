@@ -8,12 +8,12 @@ import NavigationChevronRight from 'material-ui/lib/svg-icons/navigation/chevron
 const styles = {
   listItem: {
     lineHeight: '145%',
-    fontSize: 25,
+    fontSize: 24,
     fontWeight: 300
   },
   newListItem: {
     lineHeight: '145%',
-    fontSize: 25,
+    fontSize: 24,
     fontWeight: 500
   },
   secondaryText: {
@@ -22,7 +22,7 @@ const styles = {
   }
 };
 
-const ArticleStatusList= (tags, privy, difficulty, learn_status, waiting) => {
+const ArticleStatusList= (tags, privy, difficulty, learn_status) => {
   const items = [];
 
   if (privy) {
@@ -35,12 +35,15 @@ const ArticleStatusList= (tags, privy, difficulty, learn_status, waiting) => {
   return (
     <div style={styles.secondaryText}>
       {items}
-      <p>{tags}</p>
+      {tags ? <p>{tags}</p> : null}
     </div>
   );
 };
 
-export default function ArticleLink({ id, title, tags, privy, difficulty, learn_status, waiting}) {
+export default function ArticleLink({ id, title, tags, privy, difficulty, learn_status, waiting }) {
+  // TODO: Fix missing key attribute in this.
+  // Warning: Each child in an array or iterator should have a unique "key" prop.
+  // Check the render method of `ArticleList`.
   return (
     <ListItem
       key={id}
