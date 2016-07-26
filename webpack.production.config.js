@@ -4,7 +4,6 @@ const path = require('path');
 const nodeModulesDir = path.resolve(__dirname, 'node_modules');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const CompressionPlugin = require('compression-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
@@ -41,11 +40,6 @@ module.exports = {
     }),
     new ExtractTextPlugin('style.css', {
       allChunks: true
-    }),
-    new CompressionPlugin({
-      asset: '[path]',
-      algorithm: 'zopfli',
-      test: /\.js$|\.css$/
     }),
     new webpack.DefinePlugin({
       'process.env': {
