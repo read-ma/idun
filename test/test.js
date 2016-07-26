@@ -1,4 +1,5 @@
-system = require('system');
+const system = require('system');
+
 /* global casper */
 const host = system.env.READMA_URL || 'http://localhost:8080';
 

@@ -1,10 +1,9 @@
 import axios from 'axios';
-import Config from 'Config';
 import store from './store';
 import { processFinished, processStarted } from './actions';
 
 var instance = axios.create({
-  baseURL: Config.apiUrl,
+  baseURL: process.env.API_URL,
   timeout: 10000,
   headers: {}
 });
@@ -24,7 +23,7 @@ instance.interceptors.response.use(function (config) {
 instance.interceptors.request.use(function (config) {
 
   if (!config.url.match(/api\/login/)) {
-    config.params = Object.assign({}, config.params, {auth_token: getAuthToken()});
+    config.params = Object.assign({}, config.params, { auth_token: getAuthToken() });
   }
   store.dispatch(processStarted());
   return config;

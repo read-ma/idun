@@ -1,3 +1,4 @@
+require('dotenv').config();
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 // const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 const webpack = require('webpack');
@@ -6,9 +7,6 @@ module.exports = {
   entry: './src/app/app.js',
   output: {
     filename: 'public/bundle.js'
-  },
-  externals: {
-    Config: JSON.stringify({ apiUrl: 'http://api.readma.com/api' })
   },
   module: {
     loaders: [
@@ -39,7 +37,11 @@ module.exports = {
     }),
     new webpack.DefinePlugin({
       'process.env': {
-        NODE_ENV: JSON.stringify('development')
+        NODE_ENV: '"development"',
+        API_URL: `"${process.env.API_URL}"`,
+        GA_ID: `"${process.env.GA_ID}"`,
+        AIRBRAKE_PROJECTID: `"${process.env.AIRBRAKE_PROJECTID}"`,
+        AIRBRAKE_URL: `"${process.env.AIRBRAKE_URL}"`,
       }
     })
     // ,

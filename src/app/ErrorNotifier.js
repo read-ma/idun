@@ -3,14 +3,12 @@ import store from './store';
 
 class ErrorNotifier {
   static setup() {
-    let env = process.env.NODE_ENV;
-
-    if (env === 'production') {
+    if (process.env.NODE_ENV === 'production') {
       window.airbrake = new Airbrake({
-        projectId: 'b8bcbc344ad24959b949df8b47ffcc9e',
-        projectKey: 'b8bcbc344ad24959b949df8b47ffcc9e',
+        projectId: process.env.AIRBRAKE_PROJECTID,
+        projectKey: process.env.AIRBRAKE_PROJECTID,
         reporter: 'xhr',
-        host: 'http://errbit.logdock.com'
+        host: process.env.AIRBRAKE_URL
       });
 
       window.airbrake.addFilter(notice => {

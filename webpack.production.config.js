@@ -1,28 +1,23 @@
+require('dotenv').config();
+
 const path = require('path');
 const nodeModulesDir = path.resolve(__dirname, 'node_modules');
+const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
-const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const config = {
+module.exports = {
   entry: path.resolve(__dirname, './src/app/app.js'),
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js'
   },
-  externals: {
-    Config: JSON.stringify({
-      apiUrl: 'http://api.readma.com/api'
-    })
-  },
-
   module: {
     loaders: [{
       test: /\.jsx?$/,
 
-      // There is not need to run the loader through
-      // vendors
+      // There is not need to run the loader through vendors
       exclude: [nodeModulesDir],
       loader: 'babel-loader',
       query: {
@@ -41,7 +36,6 @@ const config = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'ReadMa - Your learning assistant',
       template: './public/index.production.html',
       hash: true,
     }),
@@ -55,10 +49,12 @@ const config = {
     }),
     new webpack.DefinePlugin({
       'process.env': {
-        NODE_ENV: JSON.stringify('production')
+        NODE_ENV: '"production"',
+        API_URL: `"${process.env.API_URL}"`,
+        GA_ID: `"${process.env.GA_ID}"`,
+        AIRBRAKE_PROJECTID: `"${process.env.AIRBRAKE_PROJECTID}"`,
+        AIRBRAKE_URL: `"${process.env.AIRBRAKE_URL}"`,
       }
     })
   ]
 };
-
-module.exports = config;

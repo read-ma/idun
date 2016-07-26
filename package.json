@@ -32,6 +32,7 @@
     "file-loader": "^0.8.5",
     "html-webpack-plugin": "^2.16.1",
     "material-ui": "^0.14.4",
+    "node-env-file": "^0.1.8",
     "node-sass": "^3.4.2",
     "node-zopfli": "^1.4.0",
     "react-tap-event-plugin": "^0.2.0",
@@ -45,6 +46,7 @@
     "airbrake-js": "0.5.8",
     "axios": "^0.9.1",
     "chokidar": "^1.4.3",
+    "dotenv": "^2.0.0",
     "fbjs": "^0.2.1",
     "history": "^1.17.0",
     "lodash": "^4.6.1",
@@ -66,5 +68,5 @@
     "url": "git+ssh://git@bitbucket.org/readma-team/idun.git"
   },
   "keywords": [],
-  "homepage": "https://bitbucket.org/readma-team/idun#readme"
+  "homepage": "http://beta.readma.com"
 }
