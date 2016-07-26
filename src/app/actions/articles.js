@@ -47,6 +47,12 @@ function postArticle(article, handleSuccess, handleFail) {
     .catch(handleFail);
 }
 
+function articleAdded() {
+  return {
+    type: 'ARTICLE_ADDED'
+  }
+}
+
 function addArticle(article) {
   return (dispatch) => {
     postArticle(
@@ -59,6 +65,9 @@ function addArticle(article) {
 
         dispatch(
           closeNav('right'));
+
+        dispatch(
+          articleAdded());
       },
       (error) => {
         // TODO: Add snackbar. http://www.material-ui.com/v0.14.4/#/components/snackbar
@@ -67,6 +76,13 @@ function addArticle(article) {
       }
     );
   };
+}
+
+function changeArticle(articleChangeset) {
+  return {
+    type: 'ARTICLE_CHANGED',
+    payload: articleChangeset
+  }
 }
 
 function articleLoaded(article) {
@@ -132,5 +148,6 @@ export {
   confirmArticleLearned,
   updateArticlesFilter,
   articlePageClosed,
-  deleteArticle
+  deleteArticle,
+  changeArticle,
 };

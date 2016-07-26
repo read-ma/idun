@@ -6,6 +6,7 @@ import wordlists from './wordlists';
 import definitions from './definitions';
 import settings from './settings';
 import auth from './auth';
+import articleForm from './articleForm';
 
 const initialState = {
   profile: '',
@@ -68,4 +69,4 @@ const ttsStatus = (state={}, action) => {
   }
 };
 
-export { article, articles, deck, decks, main, wordlists, definitions, auth, settings, articlesFilter, ttsStatus };
+export { article, articles, deck, decks, main, wordlists, definitions, auth, settings, articlesFilter, ttsStatus, articleForm };

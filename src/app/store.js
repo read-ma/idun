@@ -16,5 +16,5 @@ const reducer = combineReducers(
 const routerMdl = routerMiddleware(hashHistory);
 const createStoreWithMiddleware = applyMiddleware(routerMdl, thunk, gaMiddleware)(createStore);
 
-const store = createStoreWithMiddleware(reducer);
+const store = createStoreWithMiddleware(reducer, process.env.NODE_ENV === "development" && window.devToolsExtension && window.devToolsExtension());
 export default store;

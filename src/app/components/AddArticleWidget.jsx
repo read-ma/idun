@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addArticle } from '../actions/articles';
+import { addArticle, changeArticle } from '../actions/articles';
 import { closeNav } from '../actions';
 import LeftNav from 'material-ui/lib/left-nav';
 import TextField from 'material-ui/lib/text-field';
@@ -41,7 +41,7 @@ class ArticleForm extends React.Component {
   }
 
   isPublic () {
-    return this.props.public === "true";
+    return this.props.article.public === "true";
   }
 
   render() {
@@ -57,6 +57,7 @@ class ArticleForm extends React.Component {
             className="validate"
             id="sourceUrl"
             onChange={this.props.onChange}
+            value={this.props.article.source_url}
           />
 
           <ShowIf condition={this.props.isAdmin}>
@@ -81,7 +82,9 @@ class ArticleForm extends React.Component {
             type="text"
             id="article-source-title"
             className="materialize-textarea"
-            onChange={this.props.onChange} />
+            onChange={this.props.onChange} 
+            value={this.props.article.title}
+          />
 
           <TextField
             floatingLabelText="Article body"
@@ -89,7 +92,9 @@ class ArticleForm extends React.Component {
             name="content"
             id="article-source-text"
             className="materialize-textarea"
-            onChange={this.props.onChange} />
+            onChange={this.props.onChange}
+            value={this.props.article.content}
+          />
 
           <ShowIf condition={this.props.isAdmin}>
             <Toggle label="Publish to everyone" labelPosition="right" name="public" onToggle={this.onToggle} toggled={this.isPublic()} />
@@ -109,37 +114,30 @@ ArticleForm.propTypes = {
   addArticle: React.PropTypes.func,
   onChange: React.PropTypes.func,
   isAdmin: React.PropTypes.bool,
-  public: React.PropTypes.string,
+  article: React.PropTypes.object,
 };
 
 class ArticleAdd extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { article: {} };
     this.addArticle = this.addArticle.bind(this);
     this.onChange = this.onChange.bind(this);
   }
 
   onChange(e) {
-    this.setState(
-      Object.assign(
-        {},
-        this.state,
-        { article: Object.assign(
-          {},
-          this.state.article, { [e.target.name]: e.target.value }) }));
+    this.props.changeArticle({ [e.target.name]: e.target.value });
   }
 
   addArticle(event) {
     event.preventDefault();
-    this.props.addArticle(this.state.article);
+    this.props.addArticle(this.props.article);
   }
 
   render() {
     return (
       <LeftNav width={styles.sidebar.width} styles={styles.sidebar} docked={true} openRight={true} open={this.props.open}>
         <AppBar title="Add article" iconElementLeft={<IconButton onClick={this.props.closeNav}><NavigationClose /></IconButton>} />
-        <ArticleForm addArticle={this.addArticle} onChange={this.onChange} isAdmin={this.props.isAdmin} public={this.state.article.public}/>
+        <ArticleForm addArticle={this.addArticle} onChange={this.onChange} isAdmin={this.props.isAdmin} article={this.props.article}/>
       </LeftNav>
     );
   }
@@ -151,9 +149,11 @@ ArticleAdd.defaultProps = {
 
 ArticleAdd.propTypes = {
   addArticle: React.PropTypes.func.isRequired,
+  changeArticle: React.PropTypes.func.isRequired,
   closeNav: React.PropTypes.func.isRequired,
   open: React.PropTypes.bool,
   isAdmin: React.PropTypes.bool,
+  article: React.PropTypes.object.isRequired,
 };
 
 const mapActionsToProps = (dispatch) => {
@@ -163,10 +163,15 @@ const mapActionsToProps = (dispatch) => {
         closeNav('right'));
     },
     addArticle(article) {
-      if (!article.public){
-        dispatch({type: article.source_url ? 'IMPORT_ARTICLE' : 'ADD_ARTICLE'});
+      if (!article.public) {
+        dispatch({ type: article.source_url ? 'IMPORT_ARTICLE' : 'ADD_ARTICLE' });
       }
       dispatch(addArticle(article));
+    },
+    changeArticle(changeset) {
+      dispatch(
+        changeArticle(changeset)
+      );
     }
   };
 };
@@ -175,6 +180,7 @@ function mapStateToProps(state) {
   return {
     open: state.settings.navOpen.right,
     isAdmin: state.auth.isAdmin,
+    article: state.articleForm,
   };
 }
 
