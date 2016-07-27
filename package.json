@@ -43,6 +43,7 @@
   "dependencies": {
     "airbrake-js": "0.5.8",
     "axios": "^0.9.1",
+    "chart.js": "^2.2.0-rc.2",
     "chokidar": "^1.4.3",
     "dotenv": "^2.0.0",
     "fbjs": "^0.2.1",

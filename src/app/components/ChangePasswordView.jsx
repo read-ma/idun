@@ -1,5 +1,3 @@
-// TODO: verify if materialui conversion went good. Did it without any preview... ;)
-
 import React from 'react';
 import { connect } from 'react-redux';
 import { updatePassword } from '../actions/auth';

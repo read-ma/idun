@@ -4,6 +4,7 @@ import { createHashHistory } from 'history';
 
 import { Home, Main, Articles, ArticlePage, UserDefinitionsLearn, UserDefinitionsList } from '../components';
 import Login from '../components/Login';
+import MyProfile from '../components/MyProfile';
 import SignUpForm from '../components/SignUpForm';
 import PasswordReminderView from '../components/PasswordReminderView';
 import FlashcardsQuiz from '../components/FlashcardsQuiz';
@@ -20,11 +21,19 @@ const LearnHeader = () => {
   return <span>Learn</span>;
 };
 
+const ProfileHeader = () => {
+  return <span>My Profile</span>;
+}
+
 export default (
   <Route path="/" component={Main} history={appHistory}>
     <IndexRedirect to="/home" />
     <Route path="/login" component={Login} />
     <Route path="/home" components={{ children: Home }} />
+    <Route path="/my_profile" components={{
+      children: requireAuthentication(MyProfile),
+      topNavChildren: ProfileHeader
+    }} />
 
     <Route path="/sign_up" component={SignUpForm} />
     <Route path="forgot_password" component={PasswordReminderView} />

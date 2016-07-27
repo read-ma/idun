@@ -16,6 +16,7 @@ import NavigationClose from 'material-ui/lib/svg-icons/navigation/close';
 import ActionHome from 'material-ui/lib/svg-icons/action/home';
 import MapLocalLibrary from 'material-ui/lib/svg-icons/maps/local-library';
 import SocialSchool from 'material-ui/lib/svg-icons/social/school';
+import SocialPerson from 'material-ui/lib/svg-icons/social/person';
 import ActionPowerSettingsNew from 'material-ui/lib/svg-icons/action/power-settings-new';
 
 const MainNavigation = ({ children, open, closeNavbar, logoutAction }) => {
@@ -28,6 +29,7 @@ const MainNavigation = ({ children, open, closeNavbar, logoutAction }) => {
         <ListItem primaryText="Home" href="#/home" leftIcon={<ActionHome />} />
         <ListItem primaryText="Articles" href="#/articles" leftIcon={<MapLocalLibrary />} />
         <ListItem primaryText="Learn" href="#/learn" leftIcon={<SocialSchool />} />
+        <ListItem primaryText="My Profile" href="#/my_profile" leftIcon={<SocialPerson />} />
       </List>
       <Divider />
       {children}
