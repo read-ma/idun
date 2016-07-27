@@ -36,7 +36,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './public/index.production.html',
-      hash: true,
+      hash: true
     }),
     new ExtractTextPlugin('style.css', {
       allChunks: true
