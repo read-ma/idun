@@ -16,4 +16,8 @@
 Run `npm test` for feature tests (phantomjs)
 Run `npm unit-test` for unit tests (jest)
 
-You can use prod api in development env so you don't need api server running
+You can use prod api in development env so you don't need api server running.
+
+# Deploy
+`export DEPLOY_USER=<SSH_username>`
+`npm run deploy:staging` / `npm run deploy:production`
