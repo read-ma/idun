@@ -33,7 +33,6 @@
     "material-ui": "^0.14.4",
     "node-env-file": "^0.1.8",
     "node-sass": "^3.4.2",
-    "node-zopfli": "^1.4.0",
     "react-tap-event-plugin": "^0.2.0",
     "sass-loader": "^3.1.2",
     "style-loader": "^0.13.0",
