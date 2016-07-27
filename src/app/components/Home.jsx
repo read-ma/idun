@@ -6,10 +6,12 @@ import { connect } from 'react-redux';
 import { getSelectedText } from '../highlight';
 import ArticleToolbar from './ArticleToolbar';
 
+const HOME_ARTICLE_ID = 847;
+
 class Home extends React.Component {
 
   componentDidMount() {
-    this.props.loadArticle(280);
+    this.props.loadArticle(HOME_ARTICLE_ID);
     this.props.loadUserDefinitions();
   }
 
@@ -30,7 +32,8 @@ class Home extends React.Component {
 
 Home.propTypes = {
   onTextSelected: React.PropTypes.func,
-  loadArticle: React.PropTypes.func
+  loadArticle: React.PropTypes.func,
+  loadUserDefinitions: React.PropTypes.func
 };
 
 const mapActionsToProps = (dispatch) => {
