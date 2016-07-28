@@ -18,4 +18,10 @@ const spinnerColors = {
   input: Colors.blueGrey200,
 };
 
-export { labelsColors, flashcardsColors, spinnerColors };
+const difficultyColors = {
+  intermediate: 'green',
+  upperIntermediate: 'orange',
+  advanced: 'red'
+};
+
+export { labelsColors, flashcardsColors, spinnerColors, difficultyColors };

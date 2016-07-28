@@ -4,6 +4,9 @@ import Chart from 'chart.js';
 import MapLocalLibrary from 'material-ui/lib/svg-icons/maps/local-library';
 import List from 'material-ui/lib/lists/list';
 import ListItem from 'material-ui/lib/lists/list-item';
+import LinearProgress from 'material-ui/lib/linear-progress';
+
+import { difficultyColors } from './shared/Colors';
 
 const ChartData = {
   labels: [
@@ -33,6 +36,10 @@ class MyProfile extends React.Component {
     super(props);
   }
 
+  percentageProgress() {
+    return 270 / 3400 * 100;
+  }
+
   drawChart() {
     return new Chart(document.getElementById('learning-progress-chart'), {
       type: 'pie',
@@ -56,7 +63,7 @@ class MyProfile extends React.Component {
   render() {
     return (<div className="row">
       <div className="col-xs-12 col-md-6">
-        <h3>Your current progress</h3>
+        <h3>Your overall progress</h3>
         <canvas id="learning-progress-chart" width="300" height="300"></canvas>
       </div>
       <div className="col-xs-12 col-md-5 col-md-offset-1">
@@ -64,6 +71,15 @@ class MyProfile extends React.Component {
         <List>
           {this.articles()}
         </List>
+      </div>
+
+      <div className="col-xs-12">
+        <h3>Intermediate progress</h3>
+        <LinearProgress mode="determinate" color={difficultyColors.intermediate} value={this.percentageProgress()} />
+        <h3>Upper-intermediate progress</h3>
+        <LinearProgress mode="determinate" color={difficultyColors.upperIntermediate} value={this.percentageProgress() / 2} />
+        <h3>Advanced progress</h3>
+        <LinearProgress mode="determinate" color={difficultyColors.advanced} value={this.percentageProgress() / 4} />
       </div>
     </div>);
   }
