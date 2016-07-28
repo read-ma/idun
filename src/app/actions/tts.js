@@ -1,5 +1,4 @@
 import _ from 'lodash';
-import { find } from 'lodash/find';
 const instance = window.speechSynthesis;
 
 function findVoice(lang) {
@@ -9,7 +8,7 @@ function findVoice(lang) {
 function createUtterance(text, lang, rate) {
   const tts = new window.SpeechSynthesisUtterance(text);
   tts.voice = findVoice(lang);
-  tts.rate  = rate;
+  tts.rate = rate;
   return tts;
 }
 

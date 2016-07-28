@@ -50,7 +50,7 @@ function postArticle(article, handleSuccess, handleFail) {
 function articleAdded() {
   return {
     type: 'ARTICLE_ADDED'
-  }
+  };
 }
 
 function addArticle(article) {
@@ -82,7 +82,7 @@ function changeArticle(articleChangeset) {
   return {
     type: 'ARTICLE_CHANGED',
     payload: articleChangeset
-  }
+  };
 }
 
 function articleLoaded(article) {
@@ -95,10 +95,10 @@ function articleLoaded(article) {
 function deleteArticle(id) {
   return dispatch => {
     api.delete(`/articles/${id}.json`)
-      .then((response) => {
+      .then(() => {
         dispatch(push('/articles'));
       });
-  }
+  };
 }
 
 function getArticle(id, handleSuccess) {

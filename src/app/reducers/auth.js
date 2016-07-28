@@ -9,10 +9,10 @@ function stateFromLocalStorage() {
   };
 }
 
-export default function auth(state = stateFromLocalStorage(), action){
-  switch(action.type){
+export default function auth(state = stateFromLocalStorage(), action) {
+  switch (action.type) {
 
-  case "@@router/LOCATION_CHANGE":
+  case '@@router/LOCATION_CHANGE':
     return Object.assign(
       {},
       state,
@@ -49,7 +49,7 @@ export default function auth(state = stateFromLocalStorage(), action){
       {},
       state,
       { error: null },
-      { notice: "Furhter instructions will be sent to your email within 10 minutes"}
+      { notice: 'Furhter instructions will be sent to your email within 10 minutes' }
     );
 
   case 'USER_SIGNING_IN_ERROR':

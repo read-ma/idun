@@ -19,10 +19,12 @@ function screenSize() {
       return breakpoints[i].name;
     }
   }
+
+  return false;
 }
 
-function getMinWidthForBreakpoint(screenSize) {
-  return _.find(breakpoints, { name: screenSize }).minWidth;
+function getMinWidthForBreakpoint(screenSizeName) {
+  return _.find(breakpoints, { name: screenSizeName }).minWidth;
 }
 
 function isDesktop() {

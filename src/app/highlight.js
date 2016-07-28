@@ -1,12 +1,12 @@
 function getSelectedText() {
-  if(window.getSelection)
+  if (window.getSelection) {
     return window.getSelection().toString();
-  else if(document.getSelection)
+  } else if (document.getSelection) {
     return document.getSelection().toString();
-  else if(document.selection)
+  } else if (document.selection) {
     return document.selection.createRange().text;
+  }
+  return '';
+}
 
-  return "";
-};
-
-export { getSelectedText }
+export { getSelectedText };

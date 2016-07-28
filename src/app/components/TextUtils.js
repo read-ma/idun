@@ -3,6 +3,9 @@ import _ from 'lodash';
 
 const isSeparator = token => token.match(/^[\,\.\?\!\)\(\)\”\"\“\'\:\;\“\‘\’]$/);
 const Separator = ({ children }) => <span>{children}</span>;
+Separator.propTypes = {
+  children: React.PropTypes.array
+};
 
 const findAllOccurenceIndexes = (arr, item) => {
   return arr.reduce((prev, current, currentIndex) => {
@@ -69,7 +72,8 @@ const detokenize = tokens => {
     }
 
     let spaceBefore = p.props.separator && p.props.word.match(/^[\(\“\“]$/);
-    let noSpace = previous && previous.props.separator && (previous.props.word.match(/^[\(\[]$/) || (isQuoteMark(previous.props.word) && openingQuoteMark));
+    let noSpace = previous && previous.props.separator
+      && (previous.props.word.match(/^[\(\[]$/) || (isQuoteMark(previous.props.word) && openingQuoteMark));
 
     if (spaceBefore && !noSpace) {
       output.push(' ');

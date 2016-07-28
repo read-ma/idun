@@ -1,7 +1,7 @@
 import ReactGA from 'react-ga';
 import ls from './localStore';
 
-const gaReporter = ({type}) => {
+const gaReporter = ({ type }) => {
   ReactGA.event({
     category: 'custom-in-page-event',
     action: type,
@@ -16,7 +16,8 @@ const isDictionaryEnabled = (state, dictName) => {
 };
 
 const dispatchGAAction = (action, state) => {
-  switch(action.type) {
+  // TODO: @godot verify
+  switch (action.type) {
   case 'TTS_PLAY_ARTICLE':
   case 'TTS_PLAY_SINGLE':
   case 'TEXT_SELECTED':
@@ -25,14 +26,18 @@ const dispatchGAAction = (action, state) => {
   case 'ADD_ARTICLE':
     return gaReporter(action);
   case 'TOGGLE_HIGHLIGHTING':
-    switch(action.wordlist) {
+    switch (action.wordlist) {
     case 'd3k':
-      return isDictionaryEnabled(state,'d3k') && gaReporter({ type: 'HIGHLIGHT_D3K'});
+      return isDictionaryEnabled(state, 'd3k') && gaReporter({ type: 'HIGHLIGHT_D3K' });
     case 'user':
-      return isDictionaryEnabled(state, 'user') && gaReporter({ type: 'HIGHLIGHT_USER_WORDS'});
+      return isDictionaryEnabled(state, 'user') && gaReporter({ type: 'HIGHLIGHT_USER_WORDS' });
+    default:
+      return false;
     }
   case 'UPDATE_ARTICLES_FILTER':
     return gaReporter({ type: action.payload.query ? 'QUERY_ARTICLES' : 'FILTER_ARTICLES' });
+  default:
+    return false;
   }
 };
 

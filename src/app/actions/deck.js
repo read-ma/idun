@@ -1,6 +1,5 @@
 import { push } from 'react-router-redux';
 import api from '../api';
-import { store } from 'react-redux';
 
 function deckLoaded(deck) {
   return {
@@ -24,11 +23,11 @@ function endQuiz(deck) {
   };
 }
 
-function closeResults() {
-  return (dispatch) => {
-    dispatch(push("/learn"));
-  };
-}
+// function closeResults() {
+//   return (dispatch) => {
+//     dispatch(push('/learn'));
+//   };
+// }
 
 function loadDeckForArticle(deckId) {
   return (dispatch) => {
@@ -36,8 +35,9 @@ function loadDeckForArticle(deckId) {
       .then((response) => {
         dispatch(deckLoaded(response.data.deck));
       })
-      .catch((error) => {
-        store.dispatch(processFinished());
+      .catch((err) => {
+        console.error('Error: ', err);
+        // store.dispatch(processFinished());
       });
   };
 }
@@ -56,17 +56,17 @@ function loadDecks() {
       .then((response) => {
         dispatch(decksLoaded(response.data.decks));
       })
-      .catch((error) => {
-        store.dispatch(processFinished());
+      .catch((err) => {
+        console.error('Error: ', err);
       });
   };
 }
 
 function markItem(id, value) {
   return {
-    type: "MARK_ITEM",
+    type: 'MARK_ITEM',
     id, value
-  }
+  };
 }
 
-export { endQuiz, loadDeckForArticle, loadDecks, markItem }
+export { endQuiz, loadDeckForArticle, loadDecks, markItem };

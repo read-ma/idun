@@ -1,7 +1,7 @@
 import api from '../api';
 import Language from '../LanguageManager';
 
-function contentLoaded(type, data){
+function contentLoaded(type, data) {
   return {
     type: 'CONTENT_LOADED',
     data: data,
@@ -9,26 +9,23 @@ function contentLoaded(type, data){
   };
 }
 
-const sanitizeText = text =>
-        (text
-               .replace(/’/g, '\'')
-               .replace(/\./g, ' '));
+const sanitizeText = text => (text.replace(/’/g, '\'').replace(/\./g, ' '));
 
-function findWordData(text, type, options={}){
+function findWordData(text, type, options={}) {
   let params = Object.assign(
     {},
     options,
-    {query: sanitizeText(text)},
-    {type: type},
+    { query: sanitizeText(text) },
+    { type: type },
     Language.keysOfCurrent());
 
   return (dispatch) => {
     api.post('/translate.json', params)
-      .then( response => dispatch(contentLoaded(type, response.data)))
-      .catch( error => {
+      .then(response => dispatch(contentLoaded(type, response.data)))
+      .catch(error => {
         console.error(error, type);
       });
   };
 }
 
-export { findWordData }
+export { findWordData };

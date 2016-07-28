@@ -46,21 +46,6 @@ const signupAttempt = (email) => {
   };
 };
 
-const loginAttempt = (email, password) => {
-  return (dispatch) => {
-    api.post(
-      '/login.json',
-      { admin_user: { email: email, password: password } }
-    )
-    .then((response) => {
-      dispatch(userLoggedIn(response.data));
-      dispatch(push(returnTo(store.getState())));
-    })
-    .catch(function (response) {
-      dispatch(userSigningInError(response));
-    });
-  };
-};
 
 const userLoggedIn = (userData) => {
   ls.set('AUTH_TOKEN', userData.auth_token);
@@ -82,6 +67,23 @@ const userSigningInError = () => {
   };
 };
 
+const loginAttempt = (email, password) => {
+  return (dispatch) => {
+    api.post(
+      '/login.json',
+      { admin_user: { email: email, password: password } }
+    )
+    .then((response) => {
+      dispatch(userLoggedIn(response.data));
+      dispatch(push(returnTo(store.getState())));
+    })
+    .catch(function (response) {
+      dispatch(userSigningInError(response));
+    });
+  };
+};
+
+
 const logoutUser = () => {
   ls.clearAll();
   return {
@@ -100,12 +102,26 @@ const logout = () => {
   };
 };
 
+const changePasswordRequested = (response) => {
+  return {
+    type: 'CHANGE_PASSWORD_REQUESTED',
+    payload: response
+  };
+};
+
+const changePasswordRequestError = (error) => {
+  return {
+    type: 'CHANGE_PASSWORD_REQUEST_ERROR',
+    payload: error.data
+  };
+};
+
 const resetPassword = (email) => {
   return (dispatch) => {
     api
       .post('/reset_password', { email })
-      .then((response) => dispatch(changePasswordRequeted(response)))
-      .catch((error) => dispatch(changePasswordRequetError(error)));
+      .then((response) => dispatch(changePasswordRequested(response)))
+      .catch((error) => dispatch(changePasswordRequestError(error)));
   };
 };
 
@@ -117,17 +133,6 @@ const extractErrors = (errors) => {
   });
 };
 
-const updatePassword = ({ reset_password_token, password, password_confirmation }) => {
-  return (dispatch) => {
-    api
-      .patch('/reset_password/by.json', { reset_password: { reset_password_token, password, password_confirmation } })
-      .then(() => dispatch(push('login', { q: 'updated' })))
-      .catch((error) => {
-        dispatch (updatePasswordError(extractErrors(error.data.errors)));
-      });
-  };
-};
-
 const updatePasswordError = (error) => {
   return {
     type: 'UPDATE_PASSWORD_ERROR',
@@ -135,18 +140,16 @@ const updatePasswordError = (error) => {
   };
 };
 
-const changePasswordRequeted = (response) => {
-  return {
-    type: 'CHANGE_PASSWORD_REQUESTED',
-    payload: response
+const updatePassword = ({ reset_password_token, password, password_confirmation }) => {
+  return (dispatch) => {
+    api
+      .patch('/reset_password/by.json', { reset_password: { reset_password_token, password, password_confirmation } })
+      .then(() => dispatch(push('login', { q: 'updated' })))
+      .catch((error) => {
+        dispatch(updatePasswordError(extractErrors(error.data.errors)));
+      });
   };
 };
 
-const changePasswordRequetError = (error) => {
-  return {
-    type: 'CHANGE_PASSWORD_REQUEST_ERROR',
-    payload: error.data
-  };
-};
 
 export { loginAttempt, signupAttempt, logout, resetPassword, updatePassword };
