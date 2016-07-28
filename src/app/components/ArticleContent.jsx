@@ -36,7 +36,7 @@ Word.propTypes = {
 
 
 const ArticlePara = ({ tokens, handleWordClick, wordlists }) => {
-  let tokens = tokens.map(p => new Token(p));
+  tokens = tokens.map(p => new Token(p));
   wordlists.forEach(list => tokens = markSelectedInDict(tokens, list));
 
   const paragraph = tokens.map((token, i) => {

@@ -32,6 +32,10 @@ module.exports = {
     extensions: ['', '.js', '.jsx', '.scss']
   },
   plugins: [
+    new HtmlWebpackPlugin({
+      template: './public/index.html',
+      hash: true
+    }),
     new ExtractTextPlugin('public/style.css', {
       allChunks: true
     }),
