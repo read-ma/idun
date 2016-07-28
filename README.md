@@ -20,4 +20,5 @@ You can use prod api in development env so you don't need api server running.
 
 # Deploy
 `export DEPLOY_USER=<SSH_username>`
-`npm run deploy:staging` / `npm run deploy:production`
+Staging deploy: `npm run deploy:staging`
+Production deploy: `npm run deploy:production`

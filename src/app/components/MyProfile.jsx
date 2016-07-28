@@ -19,6 +19,15 @@ const ChartData = {
   }]
 };
 
+
+const articles = [
+  { id: Math.random(0, 100), title: 'Instrumentation options', words: 3 },
+  { id: Math.random(0, 100), title: 'We only hire the best', words: 2 },
+  { id: Math.random(0, 100), title: 'How to make fast progressive enhancement website', words: 1 },
+  { id: Math.random(0, 100), title: 'Introduction to webpack', words: 1 }
+];
+
+
 class MyProfile extends React.Component {
   constructor(props) {
     super(props);
@@ -37,6 +46,13 @@ class MyProfile extends React.Component {
     this.drawChart();
   }
 
+  articles() {
+    return articles.map((article) => {
+      const wordsString = article.words + ' new word' + (article.words > 1 ? 's' : '');
+      return <ListItem secondaryText={wordsString} leftIcon={<MapLocalLibrary />} primaryText={article.title} key={article.id} />;
+    });
+  }
+
   render() {
     return (<div className="row">
       <div className="col-xs-12 col-md-6">
@@ -46,10 +62,7 @@ class MyProfile extends React.Component {
       <div className="col-xs-12 col-md-5 col-md-offset-1">
         <h3>Learn new words by reading articles below</h3>
         <List>
-          <ListItem secondaryText="3 new words" leftIcon={<MapLocalLibrary />}>Instrumentation options</ListItem>
-          <ListItem secondaryText="2 new words" leftIcon={<MapLocalLibrary />}>We only hire the best</ListItem>
-          <ListItem secondaryText="1 new word" leftIcon={<MapLocalLibrary />}>How to make fast progressive enhancement website</ListItem>
-          <ListItem secondaryText="1 new word" leftIcon={<MapLocalLibrary />}>Introduction to webpack</ListItem>
+          {this.articles()}
         </List>
       </div>
     </div>);
