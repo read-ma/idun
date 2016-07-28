@@ -46,9 +46,8 @@ class SimpleList extends Component {
           />
         </div>
       );
-    } else {
-      return false;
     }
+    return false;
   }
 }
 

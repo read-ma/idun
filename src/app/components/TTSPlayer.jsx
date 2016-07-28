@@ -34,8 +34,7 @@ class Player extends Component {
   play() {
     if (this.props.ttsStatus.paused) {
       this.props.resume();
-    }
-    else {
+    } else {
       this.props.play(this.props.article.content, this.props.language);
     }
   }
@@ -67,7 +66,7 @@ class QuickPlayer extends Component {
 
   render() {
     return (
-      <div style={{float: 'left'}}>
+      <div style={{ float: 'left' }}>
         <IconButton onClick={this.play.bind(this)} tooltip="Read" tooltipStyles={styles.tooltip}>
           <AVPlayArrow />
         </IconButton>
@@ -97,14 +96,14 @@ const mapActionsToProps = (dispatch) => {
       dispatch(player.pause());
     },
     playSingle(content, language) {
-      dispatch({type: 'TTS_PLAY_SINGLE'});
+      dispatch({ type: 'TTS_PLAY_SINGLE' });
       dispatch(player.start(content, language));
     },
     play(content, language) {
-      dispatch({type: 'TTS_PLAY_ARTICLE'});
+      dispatch({ type: 'TTS_PLAY_ARTICLE' });
       dispatch(player.stop());
 
-      content.forEach( tokens => {
+      content.forEach(tokens => {
         dispatch(
           player.start(tokens.join(' '), language)
         );

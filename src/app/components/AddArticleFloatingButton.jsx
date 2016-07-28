@@ -13,13 +13,8 @@ const AddArticleFloatingButton = ({ openNav, styles }) => {
 
   return (<FloatingActionButton style={style} onClick={openNav}>
     <ContentAdd />
-  </FloatingActionButton>)
+    </FloatingActionButton>);
 };
-
-function mapStateToProps(state) {
-  return {
-  };
-}
 
 const mapActionsToProps = (dispatch) => {
   return {
@@ -31,4 +26,4 @@ const mapActionsToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapActionsToProps)(AddArticleFloatingButton);
+export default connect(null, mapActionsToProps)(AddArticleFloatingButton);

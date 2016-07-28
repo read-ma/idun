@@ -35,13 +35,13 @@ class ArticleForm extends React.Component {
     this.onToggle = this.onToggle.bind(this);
   }
 
-  onToggle (event, value) {
+  onToggle(event, value) {
     event.target.value = value;
     this.props.onChange(event);
   }
 
-  isPublic () {
-    return this.props.article.public === "true";
+  isPublic() {
+    return this.props.article.public === 'true';
   }
 
   render() {
@@ -63,7 +63,7 @@ class ArticleForm extends React.Component {
           <ShowIf condition={this.props.isAdmin}>
             <Toggle label="Publish to everyone" labelPosition="right" name="public" onToggle={this.onToggle} toggled={this.isPublic()} />
           </ShowIf>
- 
+
           <RaisedButton
             label="Import"
             primary={true}
@@ -82,7 +82,7 @@ class ArticleForm extends React.Component {
             type="text"
             id="article-source-title"
             className="materialize-textarea"
-            onChange={this.props.onChange} 
+            onChange={this.props.onChange}
             value={this.props.article.title}
           />
 

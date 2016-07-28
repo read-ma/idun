@@ -37,7 +37,7 @@ LanguageIcon.propTypes = {
   lang: React.PropTypes.string
 };
 
-function DefinitionListItem({ text, language, url, partOfSpeech, handleClick, key }) {
+function DefinitionListItem({ text, language, partOfSpeech, handleClick, key }) {
   function add() {
     handleClick({ translation: text });
   }
@@ -83,7 +83,7 @@ class DefinitionList extends Component {
 
   render() {
     let items = this.props.items.slice(0, this.state.itemsToShowNumber).map((item, index) =>
-      DefinitionListItem(Object.assign({}, item, { handleClick: this.props.handleClick, key: `def-list-item-${index}`}))
+      DefinitionListItem(Object.assign({}, item, { handleClick: this.props.handleClick, key: `def-list-item-${index}` }))
     );
 
     return (

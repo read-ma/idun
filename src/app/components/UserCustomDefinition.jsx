@@ -13,7 +13,7 @@ const styles = {
   }
 };
 
-const TranslationBox = ({translation}) => {
+const TranslationBox = ({ translation }) => {
   return (
     <ListItem>
       <span dangerouslySetInnerHTML={{ __html: translation }} />

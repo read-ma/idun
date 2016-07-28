@@ -5,16 +5,16 @@ import sidebarBoxRegistry from './boxes';
 class DefinitionBoxes extends Component {
   render() {
     let boxes = this.props.boxes.map(box =>
-                          React.createElement(sidebarBoxRegistry.get(box.component), {
-                            key: box.key,
-                            boxKey: box.key,
-                            wordLimit: box.wordLimit,
-                            selectedText: this.props.selectedText,
-                            selectedTextContext: this.props.selectedTextContext,
-                            dispatch: this.props.dispatch,
-                            label: box.label,
-                            items: this.props.data[box.key]
-                          }));
+      React.createElement(sidebarBoxRegistry.get(box.component), {
+        key: box.key,
+        boxKey: box.key,
+        wordLimit: box.wordLimit,
+        selectedText: this.props.selectedText,
+        selectedTextContext: this.props.selectedTextContext,
+        dispatch: this.props.dispatch,
+        label: box.label,
+        items: this.props.data[box.key]
+      }));
 
     return (
       <div>{boxes}</div>
