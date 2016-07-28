@@ -6,6 +6,8 @@ import AVPlayArrow from 'material-ui/lib/svg-icons/av/play-arrow';
 import AVPause from 'material-ui/lib/svg-icons/av/pause';
 import AVStop from 'material-ui/lib/svg-icons/av/stop';
 
+const hasTTSsupport = (() => typeof window.SpeechSynthesisUtterance === 'function')();
+
 const styles = {
   tooltip: {
     fontSize: '12px'
@@ -40,6 +42,9 @@ class Player extends Component {
   }
 
   render() {
+    if (!hasTTSsupport) {
+      return null;
+    }
     return (
       <div style={styles.player}>
         <h4 style={styles.header}>Read</h4>
@@ -65,6 +70,9 @@ class QuickPlayer extends Component {
   }
 
   render() {
+    if (!hasTTSsupport) {
+      return null;
+    }
     return (
       <div style={{ float: 'left' }}>
         <IconButton onClick={this.play.bind(this)} tooltip="Read" tooltipStyles={styles.tooltip}>
