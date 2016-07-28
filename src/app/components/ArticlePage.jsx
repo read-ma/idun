@@ -6,8 +6,7 @@ import { loadArticle, textSelected, loadUserDefinitions, articlePageClosed } fro
 import { ShowIf } from '../components';
 import Sidebar from '../containers/Sidebar';
 import ArticleContent from './ArticleContent';
-// Commenting out until we dont make any sensible use of it
-// import ConfirmLearnedButton from './ConfirmLearnedButton';
+import ConfirmLearnedButton from './ConfirmLearnedButton';
 import { getSelectedText } from '../highlight';
 import PositioningWidget from './PositioningWidget';
 import ArticleToolbar from './ArticleToolbar';
@@ -71,7 +70,7 @@ class ArticlePage extends Component {
               <ArticleFooter sourceUrl={this.props.article.source_url} />
             </ShowIf>
           </article>
-          {/*<ConfirmLearnedButton articleId={this.props.params.id} />*/}
+          <ConfirmLearnedButton articleId={this.props.params.id} />
         </div>
         <Sidebar />
       </div>

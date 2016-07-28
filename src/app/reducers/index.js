@@ -7,6 +7,7 @@ import definitions from './definitions';
 import settings from './settings';
 import auth from './auth';
 import articleForm from './articleForm';
+import profile from './profile';
 
 const initialState = {
   profile: '',
@@ -69,4 +70,4 @@ const ttsStatus = (state={}, action) => {
   }
 };
 
-export { article, articles, deck, decks, main, wordlists, definitions, auth, settings, articlesFilter, ttsStatus, articleForm };
+export { article, articles, deck, decks, main, wordlists, definitions, auth, settings, articlesFilter, ttsStatus, articleForm, profile };
