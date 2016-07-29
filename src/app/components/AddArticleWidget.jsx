@@ -14,7 +14,7 @@ import AppBar from 'material-ui/lib/app-bar';
 
 const styles = {
   sidebar: {
-    width: 350,
+    width: 500,
   },
   articleForm: {
     padding: '20px',
