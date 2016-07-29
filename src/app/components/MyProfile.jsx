@@ -16,16 +16,10 @@ import LinearProgress from 'material-ui/lib/linear-progress';
 import { difficultyColors } from './shared/Colors';
 
 
-// const articles = [
-//   { id: Math.random(0, 100), title: 'Instrumentation options', words: 3 },
-//   { id: Math.random(0, 100), title: 'We only hire the best', words: 2 },
-//   { id: Math.random(0, 100), title: 'How to make fast progressive enhancement website', words: 1 },
-//   { id: Math.random(0, 100), title: 'Introduction to webpack', words: 1 }
-// ];
 const styles = {
   articleLink: {
     lineHeight: '150%',
-    color: 'rgba(0, 0, 0, 0.870588)'
+    color: 'rgba(0, 0, 0, 0.8705)'
   },
   progressChart: {
     maxWidth: '400px'

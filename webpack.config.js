@@ -1,13 +1,20 @@
 require('dotenv').config();
+const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-// const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackBrowserPlugin = require('webpack-browser-plugin');
+const WebpackMd5Hash = require('webpack-md5-hash');
+const ManifestPlugin = require('webpack-manifest-plugin');
+const ChunkManifestPlugin = require('chunk-manifest-webpack-plugin');
+
+
+// const HtmlWebpackPlugin = require('html-webpack-plugin');
+// const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
 module.exports = {
   entry: {
-    app: './src/app/app.js',
+    bundle: './src/app/app.js',
     vendor: [
       'react', 'redux', 'redux-thunk', 'react-router', 'react-ga', 'react-router-redux',
       'react-addons-css-transition-group', 'lodash', 'moment', 'chart.js'
@@ -15,8 +22,11 @@ module.exports = {
     ],
   },
   output: {
-    filename: 'public/bundle.js'
+    path: path.join(__dirname, 'public'),
+    filename: '[name].js',
+    chunkFilename: '[name].js'
   },
+
   module: {
     loaders: [
       {
@@ -43,7 +53,6 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './public/index.html',
-      hash: true
     }),
     new ExtractTextPlugin('public/style.css', {
       allChunks: true
@@ -62,7 +71,15 @@ module.exports = {
       port: 8080,
       url: 'http://localhost'
     }),
-    new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js')
+    new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js'),
+    new WebpackMd5Hash(),
+    new ManifestPlugin(),
+    new ChunkManifestPlugin({
+      filename: 'manifest.json',
+      manifestVariable: 'webpackManifest'
+    }),
+    new webpack.optimize.OccurenceOrderPlugin()
+
     // ,
     // new BrowserSyncPlugin({
     //   // browse to http://localhost:3000/ during development,

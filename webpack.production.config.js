@@ -4,11 +4,14 @@ const path = require('path');
 const nodeModulesDir = path.resolve(__dirname, 'node_modules');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const WebpackMd5Hash = require('webpack-md5-hash');
+const ManifestPlugin = require('webpack-manifest-plugin');
+const ChunkManifestPlugin = require('chunk-manifest-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: {
-    app: path.resolve(__dirname, './src/app/app.js'),
+    bundle: path.resolve(__dirname, './src/app/app.js'),
     vendor: [
       'react', 'redux', 'redux-thunk', 'react-router', 'react-ga', 'react-router-redux',
       'react-addons-css-transition-group', 'lodash', 'moment', 'chart.js'
@@ -17,7 +20,8 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js'
+    filename: '[name].[chunkhash].js',
+    chunkFilename: '[name].[chunkhash].js'
   },
   module: {
     loaders: [{
@@ -41,14 +45,20 @@ module.exports = {
     extensions: ['', '.js', '.jsx']
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      template: './public/index.production.html',
-      hash: true
-    }),
     new ExtractTextPlugin('style.css', {
       allChunks: true
     }),
-    new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js'),
+    new HtmlWebpackPlugin({
+      template: './public/index.html',
+    }),
+    new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.[chunkhash].js'),
+    new WebpackMd5Hash(),
+    new ManifestPlugin(),
+    new ChunkManifestPlugin({
+      filename: 'manifest.json',
+      manifestVariable: 'webpackManifest'
+    }),
+    new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: '"production"',

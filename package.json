@@ -9,7 +9,7 @@
     "deploy:staging": "NODE_ENV=production node node_modules/webpack/bin/webpack.js -p --config webpack.production.config.js",
     "dev": "webpack-dev-server --host 0.0.0.0 --progress --colors --hot --inline --content-base public",
     "maintenance": "sh script/maintenance.sh",
-    "build:production": "NODE_ENV=production node node_modules/webpack/bin/webpack.js -p --config webpack.production.config.js",
+    "build:production": "rm -rf dist && NODE_ENV=production node node_modules/webpack/bin/webpack.js -p --config webpack.production.config.js",
     "postdeploy:production": "scp dist/* $DEPLOY_USER@logdock.com:domains/beta.readma.com/public_html",
     "postdeploy:staging": "scp dist/* $DEPLOY_USER@logdock.com:domains/staging.readma.com/public_html"
   },
@@ -23,6 +23,7 @@
     "babel-preset-es2015": "^6.5.0",
     "babel-preset-react": "^6.5.0",
     "casperjs": "^1.1.2",
+    "chunk-manifest-webpack-plugin": "^0.1.0",
     "classnames": "^2.2.3",
     "css-loader": "^0.23.1",
     "eslint": "^2.4.0",
@@ -38,7 +39,9 @@
     "style-loader": "^0.13.0",
     "url-loader": "^0.5.7",
     "webpack": "^1.12.13",
-    "webpack-dev-server": "^1.14.1"
+    "webpack-dev-server": "^1.14.1",
+    "webpack-manifest-plugin": "^1.0.1",
+    "webpack-md5-hash": "0.0.5"
   },
   "dependencies": {
     "airbrake-js": "0.5.8",
