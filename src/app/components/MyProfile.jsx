@@ -15,11 +15,10 @@ import LinearProgress from 'material-ui/lib/linear-progress';
 
 import { difficultyColors } from './shared/Colors';
 
-
 const styles = {
   articleLink: {
     lineHeight: '150%',
-    color: 'rgba(0, 0, 0, 0.8705)'
+    color: 'rgba(0, 0, 0, 0.87058)'
   },
   progressChart: {
     maxWidth: '400px'
