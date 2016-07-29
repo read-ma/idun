@@ -1,4 +1,5 @@
 import ls from '../localStore.js';
+import { isMobile, isDesktop } from '../Responsive';
 
 const positions = JSON.parse(ls.get('PAGE_POSITIONS')) || {};
 
@@ -15,11 +16,13 @@ const initialState = {
   language: { from: 'en-GB', to: 'pl-PL' },
   articlePositions: positions,
   processesCounter: 0,
+  isMobile: isMobile(),
+  isDesktop: isDesktop(),
   navOpen: {
     left: false,
-    right: false
-  }
-
+    right: isDesktop()
+  },
+  sidebarDocked: isDesktop()
 };
 
 function language(state = initialState.language, action) {
@@ -42,23 +45,23 @@ function articlePositions(state = positions, action) {
   }
 }
 
-function navBarVisibility(state = initialState.navOpen, action) {
+function navBarVisibility(state, action) {
   switch (action.type) {
   case 'ARTICLE_LOADED':
     return initialState.navOpen;
 
   case 'NAV_CLOSED':
-    return Object.assign({}, state.navOpen, { [action.side]: false });
+    return Object.assign({}, state, { [action.side]: false });
 
   case '@@router/LOCATION_CHANGE':
-    return Object.assign({}, state.navOpen, { left: false });
+    return Object.assign({}, state, { left: false });
 
   case 'TEXT_SELECTED':
-    return Object.assign({}, state.navOpen, { right: !!action.text });
+    return Object.assign({}, state, { right: !!action.text });
 
   case
     'NAV_OPENED':
-    return Object.assign({}, state.navOpen, { [action.side]: true });
+    return Object.assign({}, state, { [action.side]: true });
 
   default:
     return state;
