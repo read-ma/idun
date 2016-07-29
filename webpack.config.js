@@ -3,6 +3,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 // const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const WebpackBrowserPlugin = require('webpack-browser-plugin');
 
 module.exports = {
   entry: './src/app/app.js',
@@ -48,6 +49,11 @@ module.exports = {
         AIRBRAKE_PROJECTID: `"${process.env.AIRBRAKE_PROJECTID}"`,
         AIRBRAKE_URL: `"${process.env.AIRBRAKE_URL}"`,
       }
+    }),
+    new WebpackBrowserPlugin({
+      browser: 'Chrome',
+      port: 8080,
+      url: 'http://localhost'
     })
     // ,
     // new BrowserSyncPlugin({
