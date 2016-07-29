@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
 import { updatePassword } from '../actions/auth';
 import NotificationBox from './NotificationBox';
-import { push } from 'react-router-redux';
 
 import TextField from 'material-ui/lib/text-field';
 import RaisedButton from 'material-ui/lib/raised-button';

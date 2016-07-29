@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+
 import FlatButton from 'material-ui/lib/flat-button';
 
 function mapStateToProps(state) {

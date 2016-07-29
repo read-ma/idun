@@ -1,14 +1,16 @@
 require('./styles/Toolbar.scss');
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Toolbar from 'material-ui/lib/toolbar/toolbar';
-import ToolbarGroup from 'material-ui/lib/toolbar/toolbar-group';
+
+import { deleteArticle } from '../actions';
 import { toggleHighlighting } from '../actions';
 import { Wordlists } from '../components';
 import { ShowIf } from '../components';
 import LanguageDropDownMenu from '../components/language/LanguageDropDownMenu';
+
+import Toolbar from 'material-ui/lib/toolbar/toolbar';
+import ToolbarGroup from 'material-ui/lib/toolbar/toolbar-group';
 import FlatButton from 'material-ui/lib/flat-button';
-import { deleteArticle } from '../actions';
 
 const styles = {
   iconStyles: {

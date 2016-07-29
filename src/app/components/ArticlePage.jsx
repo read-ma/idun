@@ -2,7 +2,9 @@ require('./styles/ArticlePage.scss');
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+
 import { loadArticle, textSelected, loadUserDefinitions, articlePageClosed } from '../actions';
+
 import { ShowIf } from '../components';
 import Sidebar from '../containers/Sidebar';
 import ArticleContent from './ArticleContent';

@@ -1,14 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
+
 import { addArticle, changeArticle } from '../actions/articles';
 import { closeNav } from '../actions';
+import { ShowIf } from '../components';
+
 import LeftNav from 'material-ui/lib/left-nav';
 import TextField from 'material-ui/lib/text-field';
 import RaisedButton from 'material-ui/lib/raised-button';
 import IconButton from 'material-ui/lib/icon-button';
 import NavigationClose from 'material-ui/lib/svg-icons/navigation/close';
 import colors from 'material-ui/lib/styles/colors';
-import { ShowIf } from '../components';
 import Toggle from 'material-ui/lib/toggle';
 import AppBar from 'material-ui/lib/app-bar';
 

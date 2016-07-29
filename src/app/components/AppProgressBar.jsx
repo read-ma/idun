@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+
 import LinearProgress from 'material-ui/lib/linear-progress';
 
 const style = {

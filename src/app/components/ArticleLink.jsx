@@ -1,8 +1,10 @@
 require('./styles/ArticleLink.scss');
 import React from 'react';
+
 import l from '../I18n';
-import ListItem from 'material-ui/lib/lists/list-item';
 import Label from './shared/Label';
+
+import ListItem from 'material-ui/lib/lists/list-item';
 import NavigationChevronRight from 'material-ui/lib/svg-icons/navigation/chevron-right';
 
 const styles = {

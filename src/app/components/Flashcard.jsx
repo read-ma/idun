@@ -2,9 +2,11 @@ require('./styles/Flashcard.scss');
 import React, { Component } from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import classnames from 'classnames';
+
+import { ShowIf } from '../components';
+
 import Paper from 'material-ui/lib/paper';
 import FlatButton from 'material-ui/lib/flat-button';
-import { ShowIf } from '../components';
 
 const style = {
   minHeight: 300,

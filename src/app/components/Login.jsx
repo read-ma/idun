@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
+
 import { loginAttempt } from '../actions/auth';
 
 import TextField from 'material-ui/lib/text-field';

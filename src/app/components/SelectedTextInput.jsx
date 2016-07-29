@@ -1,7 +1,8 @@
 import React from 'react';
-import { TTSPlayer } from '../components/TTSPlayer';
-import { textSelected } from '../actions';
 import { connect } from 'react-redux';
+
+import { textSelected } from '../actions';
+import { TTSPlayer } from '../components/TTSPlayer';
 
 class SelectedTextInput extends React.Component {
   constructor(props) {

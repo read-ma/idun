@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+
 import { loadUserDefinitions } from '../actions';
-import TextField from 'material-ui/lib/text-field';
 import UserDefinitionBox from './UserDefinitionBox';
+
+import TextField from 'material-ui/lib/text-field';
 
 
 function mapStateToProps(state) {

@@ -1,6 +1,7 @@
 require('./styles/Articles.scss');
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+
 import { loadArticles } from '../actions/articles';
 import PositioningWidget from './PositioningWidget';
 import ArticleLink from './ArticleLink';
@@ -8,6 +9,7 @@ import ArticlesToolbar from './ArticlesToolbar';
 import filterArticles from '../articleCriteriaMatcher';
 import AddArticleWidget from './AddArticleWidget';
 import AddArticleFloatingButton from './AddArticleFloatingButton';
+
 import List from 'material-ui/lib/lists/list';
 
 const ArticleList = ({ articles }) => {

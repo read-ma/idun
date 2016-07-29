@@ -1,14 +1,14 @@
 require('./styles/Toolbar.scss');
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import _ from 'lodash';
+
+import { updateArticlesFilter } from '../actions/articles';
 
 import Toolbar from 'material-ui/lib/toolbar/toolbar';
 import ToolbarGroup from 'material-ui/lib/toolbar/toolbar-group';
 import MenuItem from 'material-ui/lib/menus/menu-item';
 import DropDownMenu from 'material-ui/lib/DropDownMenu';
-
-import { updateArticlesFilter } from '../actions/articles';
-import _ from 'lodash';
 
 const styles = {
   toolbar: {

@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import classnames from 'classnames';
 import { connect } from 'react-redux';
-import { detokenize, isSeparator, Token, markSelectedInDict } from './TextUtils';
+import classnames from 'classnames';
+
 import { newWordSelected } from '../actions';
+import { detokenize, isSeparator, Token, markSelectedInDict } from './TextUtils';
 
 class Word extends Component {
   constructor(props) {

@@ -2,7 +2,6 @@ import { connect } from 'react-redux';
 import { updateArticlesFilter } from '../actions/articles';
 import SearchInputBase from './SearchInputBase';
 
-
 class ArticleSearchInput extends SearchInputBase {}
 
 function mapStateToProps(state) {

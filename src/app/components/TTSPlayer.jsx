@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+
 import * as player from '../actions/tts';
+
 import IconButton from 'material-ui/lib/icon-button';
 import AVPlayArrow from 'material-ui/lib/svg-icons/av/play-arrow';
 import AVPause from 'material-ui/lib/svg-icons/av/pause';

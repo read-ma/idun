@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+import { changeLanguage } from '../../actions';
+
 import DropDownMenu from 'material-ui/lib/DropDownMenu';
 import MenuItem from 'material-ui/lib/menus/menu-item';
-import { changeLanguage } from '../../actions';
-import { connect } from 'react-redux';
 
 const styles = {
   flagStyles: {

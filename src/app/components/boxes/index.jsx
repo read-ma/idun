@@ -1,10 +1,12 @@
 require('../styles/Images.scss');
 
 import React, { Component } from 'react';
+import _ from 'lodash';
+
 import { findWordData } from '../../actions/definitions';
 import { saveUserDefinition } from '../../actions';
 import DefinitionList from './list';
-import _ from 'lodash';
+
 import Divider from 'material-ui/lib/divider';
 import GridList from 'material-ui/lib/grid-list/grid-list';
 import GridTile from 'material-ui/lib/grid-list/grid-tile';

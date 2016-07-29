@@ -1,3 +1,5 @@
+import React from 'react';
+
 import Home from './Home';
 import Profile from './Profile';
 import UserDefinitionsLearn from './UserDefinitionsLearn';
@@ -7,7 +9,6 @@ import ArticlePage from './ArticlePage';
 import Wordlists from './Wordlists';
 import Main from './Main';
 import DefinitionBoxes from './DefinitionBoxes';
-import React from 'react';
 
 class ShowIf extends React.Component {
   render() {

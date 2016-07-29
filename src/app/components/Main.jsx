@@ -1,6 +1,7 @@
 require('./styles/Main.scss');
 import React from 'react';
 import { connect } from 'react-redux';
+
 import { openNav } from '../actions';
 import { screenSize, mobileOrDesktop } from '../Responsive';
 import MainNavigaton from './MainNavigation';
