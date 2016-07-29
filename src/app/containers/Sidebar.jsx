@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { DefinitionBoxes } from '../components';
 import UserCustomDefinition from '../components/UserCustomDefinition';
 import { closeNav } from '../actions';
-import { isMobile, screenWidth } from '../Responsive';
+import { screenWidth } from '../Responsive';
 
 import LeftNav from 'material-ui/lib/left-nav';
 import IconButton from 'material-ui/lib/icon-button';
@@ -13,51 +13,60 @@ import WordSearchInput from '../components/WordSearchInput';
 import LanguageDropDownMenu from '../components/language/LanguageDropDownMenu';
 import { TTSQuickPlayer } from '../components/TTSPlayer';
 
-// TODO: Rename to articlePageSidebar. I tried to use it anywhere else and it was impossible
-// because of hardcoded stuff
-class Sidebar extends Component {
-  render() {
-    const isDeviceMobile = isMobile();
-    const leftIcon = isDeviceMobile ? <IconButton onClick={this.props.closeNav}><NavigationClose /></IconButton> : <i></i>;
-    let shouldOpen = isDeviceMobile ? this.props.open : true;
-    let docked = true;
 
-    let styles = {
-      sidebar: {
-        width: 500
-      },
-      targetLanguageMenu: {
-        float: 'right',
-        header: {
-          float: 'left',
-          fontWeight: 400
-        }
-      },
+let initialCSS = {
+  desktop: {
+    sidebar: {
+      width: 500
+    },
+    targetLanguageMenu: {
+      float: 'right',
       header: {
         float: 'left',
         fontWeight: 400
+      }
+    },
+    header: {
+      float: 'left',
+      fontWeight: 400
+    },
+  },
+  mobile: {
+    sidebar: {
+      width: screenWidth(),
+      marginTop: 0,
+      paddingTop: '64px',
+      height: '100%',
+      appbar: {
+        position: 'fixed',
+        top: 0,
       },
-    };
-    if (isDeviceMobile) {
-      docked = false;
-      styles.sidebar = {
-        width: screenWidth(),
-        marginTop: 0,
-        paddingTop: '64px',
-        height: '100%',
-        appbar: {
-          position: 'fixed',
-          top: 0,
-        },
-      };
+    },
+    targetLanguageMenu: {
+      float: 'right',
+      header: {
+        float: 'left',
+        fontWeight: 400
+      }
+    },
+    header: {
+      float: 'left',
+      fontWeight: 400
     }
+  }
+};
 
+
+class Sidebar extends Component {
+  render() {
+    const leftIcon = this.props.isMobile ? <IconButton onClick={this.props.closeNav}><NavigationClose /></IconButton> : <i></i>;
+    const style = initialCSS[this.props.isMobile ? 'mobile' : 'desktop'];
     return (
-      <LeftNav width={styles.sidebar.width} style={styles.sidebar} docked={docked} openRight={true} open={shouldOpen}>
-        <AppBar title={<WordSearchInput />} style={styles.sidebar.appbar} iconElementLeft={leftIcon} />
+      <LeftNav width={style.sidebar.width} style={style.sidebar} docked={this.props.sidebarDocked} openRight={true} open={this.props.open}>
+        <AppBar title={<WordSearchInput />} style={style.appbar} iconElementLeft={leftIcon} />
 
-        <div style={styles.targetLanguageMenu}>
-          <h4 style={styles.header}>My language:</h4>
+        <div style={style.targetLanguageMenu}>
+          <h4 style={style.header}>My language:</h4>
           <LanguageDropDownMenu type="to" />
         </div>
 
@@ -78,13 +87,17 @@ Sidebar.propTypes = {
   open: React.PropTypes.bool.isRequired,
   closeNav: React.PropTypes.func.isRequired,
   selectedText: React.PropTypes.string.isRequired,
-  isAdmin: React.PropTypes.bool.isRequired
+  isAdmin: React.PropTypes.bool.isRequired,
+  isMobile: React.PropTypes.bool.isRequired,
+  sidebarDocked: React.PropTypes.bool.isRequired,
 };
 
 function mapStateToProps(state) {
   return {
+    isMobile: state.settings.isMobile,
     wordlists: state.wordlists,
     open: state.settings.navOpen.right,
+    sidebarDocked: state.settings.sidebarDocked,
     selectedText: state.article.selectedText,
   };
 }
