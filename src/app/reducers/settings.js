@@ -48,7 +48,7 @@ function articlePositions(state = positions, action) {
 function navBarVisibility(state, action) {
   switch (action.type) {
   case 'ARTICLE_LOADED':
-    return initialState;
+    return initialState.navOpen;
 
   case 'NAV_CLOSED':
     return Object.assign({}, state, { [action.side]: false });
