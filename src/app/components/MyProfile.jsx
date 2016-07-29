@@ -52,7 +52,6 @@ class MyProfile extends React.Component {
   // percentageProgress() {
   //   return 270 / 3400 * 100;
   // }
-
   drawChart() {
     this.chart = new Chart(document.getElementById('learning-progress-chart'), {
       type: 'pie',
