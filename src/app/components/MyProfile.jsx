@@ -1,6 +1,7 @@
 import React from 'react';
 import Chart from 'chart.js';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 
 import { getProfile } from '../actions/profile';
 import filterArticles from '../articleCriteriaMatcher';
@@ -82,7 +83,8 @@ class MyProfile extends React.Component {
 
     return articles.map((article) => {
       // const wordsString = article.words + ' new word' + (article.words > 1 ? 's' : '');
-      return <ListItem leftIcon={<MapLocalLibrary />} primaryText={<a href={`/#/article/${article.id}`} style={styles.articleLink}>{article.title}</a>} key={article.id} />;
+      const articleLink = <Link to={{ pathname: `/article/${article.id}` }} style={styles.articleLink}>{article.title}</Link>;
+      return <ListItem leftIcon={<MapLocalLibrary />} primaryText={articleLink} key={article.id} />;
     });
   }
 
