@@ -3,47 +3,13 @@
   margin: 0 -4px;
 }
 
-%left-aligned {
-  margin-left: 0;
-  margin-right: 0;
-}
-
-%centered {
-  margin-left: auto;
-  margin-right: auto;
-}
-
 $selection-bg: #f8bbd0;
 $d3k-bg: lightgreen;
 
-.sidebar-opened .article-wrapper {
-  max-width: 60em;
-  width: calc(95vw - 550px);
-  @extend %left-aligned;
-}
-
-.sidebar-closed .article-wrapper {
-  @extend %centered;
-}
-
-// Mobile
-.mobile .article-wrapper {
-  width: 100%;
-}
-
-@media (min-width: 1600px) {
-  .desktop .article-wrapper {
-    margin-left: auto;
-    margin-right: auto;
-    position: relative;
-    left: -250px;
-  }
-}
-
 .article-wrapper {
+  max-width: 60em;
   word-spacing: 5px;
   margin-bottom: 30px;
-  padding-top: 50px;
 
   &.no-toolbar {
     padding-top: 0;

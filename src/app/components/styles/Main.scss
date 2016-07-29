@@ -3,6 +3,16 @@
 @import "./src/assets/sass/react_animations";
 @import "./src/assets/sass/custom";
 
+%left-aligned {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+%centered {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 body {
   -webkit-font-smoothing: antialiased;
   -webkit-text-stroke: 1px rgba(0,0,0,0.1);
@@ -40,13 +50,34 @@ blockquote {
   margin-right: 0;
 }
 
-// Main content
 .main-content {
-  padding-top: 120px;
-  margin-left: 15px;
-  margin-right: 15px;
+  padding: 0 20px;
 }
 
+.sidebar-opened .main-content {
+  width: calc(95vw - 550px);
+  @extend %left-aligned;
+}
+
+.sidebar-closed .main-content {
+  @extend %centered;
+}
+
+.desktop .main-content {
+  padding-top: 120px;
+}
+
+// Mobile
 .mobile .main-content {
+  width: 100%;
   padding-top: 55px;
+}
+
+@media (min-width: 1600px) {
+  .desktop .main-content {
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    left: -250px;
+  }
 }
