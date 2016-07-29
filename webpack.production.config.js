@@ -7,7 +7,14 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: path.resolve(__dirname, './src/app/app.js'),
+  entry: {
+    app: path.resolve(__dirname, './src/app/app.js'),
+    vendor: [
+      'react', 'redux', 'redux-thunk', 'react-router', 'react-ga', 'react-router-redux',
+      'react-addons-css-transition-group', 'lodash', 'moment', 'chart.js'
+      // To include constants/d3k we need to extract it to its own npm module (it looks in node_modules)
+    ],
+  },
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js'
@@ -41,6 +48,7 @@ module.exports = {
     new ExtractTextPlugin('style.css', {
       allChunks: true
     }),
+    new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js'),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: '"production"',

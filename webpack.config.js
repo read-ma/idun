@@ -6,7 +6,14 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackBrowserPlugin = require('webpack-browser-plugin');
 
 module.exports = {
-  entry: './src/app/app.js',
+  entry: {
+    app: './src/app/app.js',
+    vendor: [
+      'react', 'redux', 'redux-thunk', 'react-router', 'react-ga', 'react-router-redux',
+      'react-addons-css-transition-group', 'lodash', 'moment', 'chart.js'
+      // To include constants/d3k we need to extract it to its own npm module (it looks in node_modules)
+    ],
+  },
   output: {
     filename: 'public/bundle.js'
   },
@@ -54,7 +61,8 @@ module.exports = {
       browser: 'Chrome',
       port: 8080,
       url: 'http://localhost'
-    })
+    }),
+    new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js')
     // ,
     // new BrowserSyncPlugin({
     //   // browse to http://localhost:3000/ during development,
