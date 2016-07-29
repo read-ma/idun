@@ -5,7 +5,8 @@ import App from './containers/App.jsx';
 import ErrorNotifier from './ErrorNotifier';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
-import getMuiTheme from 'material-ui/lib/styles/getMuiTheme';
+// import getMuiTheme from 'material-ui/lib/styles/getMuiTheme';
+import ThemeManager from 'material-ui/lib/styles/theme-manager';
 import themeDecorator from 'material-ui/lib/styles/theme-decorator';
 import setupGoogleAnalytics from './googleAnalytics';
 
@@ -19,7 +20,7 @@ ErrorNotifier.setup();
 setupGoogleAnalytics();
 
 const Application = () => (
-  <themeDecorator muiTheme={getMuiTheme()}>
+  <themeDecorator muiTheme={ThemeManager.getMuiTheme()}>
     <App />
   </themeDecorator>
 );

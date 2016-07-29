@@ -13,7 +13,6 @@ import WordSearchInput from '../components/WordSearchInput';
 import LanguageDropDownMenu from '../components/language/LanguageDropDownMenu';
 import { TTSQuickPlayer } from '../components/TTSPlayer';
 
-
 let initialCSS = {
   desktop: {
     sidebar: {
@@ -60,6 +59,7 @@ let initialCSS = {
 class Sidebar extends Component {
   render() {
     const leftIcon = this.props.isMobile ? <IconButton onClick={this.props.closeNav}><NavigationClose /></IconButton> : <i></i>;
+
     const style = initialCSS[this.props.isMobile ? 'mobile' : 'desktop'];
     return (
       <LeftNav width={style.sidebar.width} style={style.sidebar} docked={this.props.sidebarDocked} openRight={true} open={this.props.open}>
