@@ -2,6 +2,7 @@ require('dotenv').config();
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 // const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: './src/app/app.js',
