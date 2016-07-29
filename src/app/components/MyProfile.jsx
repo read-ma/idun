@@ -6,6 +6,7 @@ import { Link } from 'react-router';
 import { getProfile } from '../actions/profile';
 import filterArticles from '../articleCriteriaMatcher';
 import { loadArticles } from '../actions/articles';
+import { closeNav } from '../actions/';
 
 import MapLocalLibrary from 'material-ui/lib/svg-icons/maps/local-library';
 import List from 'material-ui/lib/lists/list';
@@ -25,8 +26,11 @@ const styles = {
   articleLink: {
     lineHeight: '150%',
     color: 'rgba(0, 0, 0, 0.870588)'
+  },
+  progressChart: {
+    maxWidth: '400px'
   }
-}
+};
 
 const chartSettings = (data) => {
   return {
@@ -45,11 +49,6 @@ const chartSettings = (data) => {
 };
 
 class MyProfile extends React.Component {
-  componentWillMount() {
-    this.props.loadArticles();
-    this.props.loadUserProfile();
-  }
-
   // percentageProgress() {
   //   return 270 / 3400 * 100;
   // }
@@ -64,6 +63,12 @@ class MyProfile extends React.Component {
         }
       }
     });
+  }
+
+  componentWillMount() {
+    this.props.closeNav();
+    this.props.loadArticles();
+    this.props.loadUserProfile();
   }
 
   componentDidMount() {
@@ -88,19 +93,19 @@ class MyProfile extends React.Component {
     });
   }
 
+  overallProgress() {
+    return (<div className="col-xs-12 col-md-6">
+      <h2>Your overall progress</h2>
+      <canvas id="learning-progress-chart" width="300" height="300" style={styles.progressChart}></canvas>
+    </div>);
+  }
+
   newWordsArticles() {
-    return (<div className="col-xs-12 col-md-5 col-md-offset-1">
+    return (<div className="col-xs-12 col-md-5">
       <h2>Learn new words by reading articles below</h2>
       <List>
         {this.articles()}
       </List>
-    </div>);
-  }
-
-  overallProgress() {
-    return (<div className="col-xs-12 col-md-6">
-      <h2>Your overall progress</h2>
-      <canvas id="learning-progress-chart" width="300" height="300"></canvas>
     </div>);
   }
 
@@ -129,7 +134,10 @@ class MyProfile extends React.Component {
 
 MyProfile.propTypes = {
   loadUserProfile: React.PropTypes.func,
-  data: React.PropTypes.array
+  data: React.PropTypes.array,
+  articles: React.PropTypes.array,
+  closeNav: React.PropTypes.func,
+  loadArticles: React.PropTypes.func,
 };
 
 const mapStateToProps = ({ profile, articles }) => {
@@ -147,6 +155,9 @@ const mapActionsToProps = (dispatch) => {
     },
     loadArticles() {
       dispatch(loadArticles());
+    },
+    closeNav() {
+      dispatch(closeNav('right'));
     }
   };
 };
