@@ -8,14 +8,17 @@ const WebpackMd5Hash = require('webpack-md5-hash');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const ChunkManifestPlugin = require('chunk-manifest-webpack-plugin');
 
-
 // const HtmlWebpackPlugin = require('html-webpack-plugin');
 // const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
 module.exports = {
   // devtool: 'inline-source-map', // Turn on for more verbose output files for debugging
   entry: {
-    bundle: './src/app/app.js',
+    bundle: [
+      // 'webpack/hot/dev-server',
+      // 'webpack-dev-server/public?http://localhost:8080/',
+      './src/app/app.js',
+    ],
     vendor: [
       'react', 'redux', 'redux-thunk', 'react-dom', 'react-router', 'react-ga', 'react-router-redux',
       'react-addons-css-transition-group', 'lodash', 'moment', 'chart.js', 'material-ui',
@@ -25,10 +28,10 @@ module.exports = {
   },
   output: {
     path: path.join(__dirname, 'public'),
+    publicPath: '/',
     filename: '[name].js',
     chunkFilename: '[name].js'
   },
-
   module: {
     loaders: [
       {
@@ -80,7 +83,8 @@ module.exports = {
       filename: 'manifest.json',
       manifestVariable: 'webpackManifest'
     }),
-    new webpack.optimize.OccurenceOrderPlugin()
+    new webpack.NoErrorsPlugin(),
+    new webpack.optimize.OccurenceOrderPlugin(),
 
     // ,
     // new BrowserSyncPlugin({

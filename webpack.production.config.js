@@ -59,6 +59,7 @@ module.exports = {
       filename: 'manifest.json',
       manifestVariable: 'webpackManifest'
     }),
+    new webpack.NoErrorsPlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.DefinePlugin({
       'process.env': {

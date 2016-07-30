@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
 const config = require('../webpack.config');
+// config.entry.bundle.unshift('webpack-dev-server/public?http://localhost:8080/');
 
 new WebpackDevServer(webpack(config), {
   publicPath: config.output.publicPath,
