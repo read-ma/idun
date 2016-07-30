@@ -34,7 +34,6 @@ const styles = {
 };
 
 class Player extends Component {
-
   play() {
     if (this.props.ttsStatus.paused) {
       this.props.resume();
@@ -44,7 +43,7 @@ class Player extends Component {
   }
 
   render() {
-    if (!hasTTSsupport) {
+    if (!hasTTSsupport || this.props.isMobile) {
       return null;
     }
     return (
@@ -64,15 +63,26 @@ class Player extends Component {
   }
 }
 
+Player.propTypes = {
+  ttsStatus: React.PropTypes.object.isRequired,
+  article: React.PropTypes.object.isRequired,
+  resume: React.PropTypes.func.isRequired,
+  play: React.PropTypes.func.isRequired,
+  pause: React.PropTypes.func.isRequired,
+  stop: React.PropTypes.func.isRequired,
+  selection: React.PropTypes.string.isRequired,
+  language: React.PropTypes.string.isRequired,
+  playSingle: React.PropTypes.func.isRequired,
+  isMobile: React.PropTypes.bool.isRequired
+};
 
 class QuickPlayer extends Component {
-
   play() {
     this.props.playSingle(this.props.selection, this.props.language);
   }
 
   render() {
-    if (!hasTTSsupport) {
+    if (!hasTTSsupport || this.props.isMobile) {
       return null;
     }
     return (
@@ -85,12 +95,20 @@ class QuickPlayer extends Component {
   }
 }
 
+QuickPlayer.propTypes = {
+  selection: React.PropTypes.string.isRequired,
+  language: React.PropTypes.string.isRequired,
+  playSingle: React.PropTypes.func.isRequired,
+  isMobile: React.PropTypes.bool.isRequired
+};
+
 function mapStateToProps(state) {
   return {
     selection: state.article.selectedText,
     article: state.article,
     language: state.settings.language.from,
     ttsStatus: state.ttsStatus,
+    isMobile: state.settings.isMobile,
   };
 }
 
