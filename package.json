@@ -7,7 +7,7 @@
     "test": "casperjs test test/test.js",
     "deploy:production": "NODE_ENV=production node node_modules/webpack/bin/webpack.js -p --config webpack.production.config.js",
     "deploy:staging": "NODE_ENV=production node node_modules/webpack/bin/webpack.js -p --config webpack.production.config.js",
-    "dev": "webpack-dev-server --host 0.0.0.0 --progress --colors --hot --inline --content-base public",
+    "dev": "node script/devserver.js",
     "maintenance": "sh script/maintenance.sh",
     "build:production": "rm -rf dist && NODE_ENV=production node node_modules/webpack/bin/webpack.js -p --config webpack.production.config.js",
     "postdeploy:production": "scp dist/* $DEPLOY_USER@logdock.com:domains/beta.readma.com/public_html",

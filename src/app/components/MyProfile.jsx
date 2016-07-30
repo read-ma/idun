@@ -12,7 +12,6 @@ import MapLocalLibrary from 'material-ui/lib/svg-icons/maps/local-library';
 import List from 'material-ui/lib/lists/list';
 import ListItem from 'material-ui/lib/lists/list-item';
 import LinearProgress from 'material-ui/lib/linear-progress';
-
 import { difficultyColors } from './shared/Colors';
 
 const styles = {
