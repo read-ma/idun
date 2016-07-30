@@ -25,6 +25,9 @@ const styles = {
     marginTop: '1em',
     fontWeight: 600
   },
+  publishToggle: {
+    marginTop: '30px'
+  },
   fieldset: {
     borderColor: colors.grey300,
     borderStyle: 'solid',
@@ -47,68 +50,58 @@ class ArticleForm extends React.Component {
   }
 
   render() {
-    return (
-      <form onSubmit={this.props.addArticle} style={styles.articleForm}>
-        <fieldset style={styles.fieldset}>
-          <legend>Import from link</legend>
+    return (<form onSubmit={this.props.addArticle} style={styles.articleForm}>
+      <fieldset style={styles.fieldset}>
+        <legend>Import from link</legend>
 
-          <TextField
-            floatingLabelText="Copy & paste link to the article"
-            type="url"
-            name="source_url"
-            className="validate"
-            id="sourceUrl"
-            onChange={this.props.onChange}
-            value={this.props.article.source_url}
-          />
+        <TextField
+          floatingLabelText="Copy & paste link to the article"
+          type="url"
+          name="source_url"
+          className="validate"
+          id="sourceUrl"
+          onChange={this.props.onChange}
+          value={this.props.article.source_url}
+        />
 
-          <ShowIf condition={this.props.isAdmin}>
-            <Toggle label="Publish to everyone" labelPosition="right" name="public" onToggle={this.onToggle} toggled={this.isPublic()} />
-          </ShowIf>
+        <br />
+        <RaisedButton label="Import" primary={true} type="submit" style={styles.sendButton}/>
+      </fieldset>
 
-          <RaisedButton
-            label="Import"
-            primary={true}
-            type="submit"
-            style={styles.sendButton} />
+      <br />
 
-        </fieldset>
+      <fieldset style={styles.fieldset}>
+        <legend>Create new</legend>
+        <TextField
+          floatingLabelText="Article title"
+          name="title"
+          type="text"
+          id="article-source-title"
+          className="materialize-textarea"
+          onChange={this.props.onChange}
+          value={this.props.article.title}
+        />
+
+        <TextField
+          floatingLabelText="Article body"
+          multiLine={true}
+          name="content"
+          id="article-source-text"
+          className="materialize-textarea"
+          onChange={this.props.onChange}
+          value={this.props.article.content}
+        />
 
         <br />
 
-        <fieldset style={styles.fieldset}>
-          <legend>Create new</legend>
-          <TextField
-            floatingLabelText="Article title"
-            name="title"
-            type="text"
-            id="article-source-title"
-            className="materialize-textarea"
-            onChange={this.props.onChange}
-            value={this.props.article.title}
-          />
+        <RaisedButton label="Save" primary={true} type="submit" style={styles.sendButton} />
+      </fieldset>
 
-          <TextField
-            floatingLabelText="Article body"
-            multiLine={true}
-            name="content"
-            id="article-source-text"
-            className="materialize-textarea"
-            onChange={this.props.onChange}
-            value={this.props.article.content}
-          />
-
-          <ShowIf condition={this.props.isAdmin}>
-            <Toggle label="Publish to everyone" labelPosition="right" name="public" onToggle={this.onToggle} toggled={this.isPublic()} />
-          </ShowIf>
-
-          <RaisedButton
-            label="Save"
-            primary={true}
-            type="submit"
-            style={styles.sendButton} />
-        </fieldset>
-      </form>);
+      <ShowIf condition={this.props.isAdmin}>
+        <Toggle label="Publish to everyone" labelPosition="right" name="public"
+          onToggle={this.onToggle} toggled={this.isPublic()} style={styles.publishToggle} />
+      </ShowIf>
+    </form>);
   }
 }
 
@@ -138,7 +131,7 @@ class ArticleAdd extends React.Component {
   render() {
     return (
       <LeftNav width={styles.sidebar.width} styles={styles.sidebar} docked={true} openRight={true} open={this.props.open}>
-        <AppBar title="Add article" iconElementLeft={<IconButton onClick={this.props.closeNav}><NavigationClose /></IconButton>} />
+        <AppBar title="New article" iconElementLeft={<IconButton onClick={this.props.closeNav}><NavigationClose /></IconButton>} />
         <ArticleForm addArticle={this.addArticle} onChange={this.onChange} isAdmin={this.props.isAdmin} article={this.props.article}/>
       </LeftNav>
     );
