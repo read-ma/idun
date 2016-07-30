@@ -13,6 +13,7 @@ const ChunkManifestPlugin = require('chunk-manifest-webpack-plugin');
 // const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
 module.exports = {
+  // devtool: 'inline-source-map', // Turn on for more verbose output files for debugging
   entry: {
     bundle: './src/app/app.js',
     vendor: [
