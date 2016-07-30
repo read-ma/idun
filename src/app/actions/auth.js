@@ -46,12 +46,14 @@ const signupAttempt = (email) => {
   };
 };
 
-
 const userLoggedIn = (userData) => {
   ls.set('AUTH_TOKEN', userData.auth_token);
   ls.set('IS_AUTHENTICATED', true);
   ls.set('CURRENT_USER_EMAIL', userData.email);
-  ls.set('IS_ADMIN', userData.su);
+
+  if (userData.su) {
+    ls.set('IS_ADMIN', userData.su);
+  }
   ReactGA.set({ userId: userData.email });
 
   return {

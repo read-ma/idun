@@ -7,8 +7,13 @@ class LocalStore {
     this.store.setItem(key, value);
   }
 
-  get(key) {
-    return this.store.getItem(key);
+  get(key, type='string') {
+    switch (type) {
+    case 'bool':
+      return this.store.getItem(key) === 'true';
+    default:
+      return this.store.getItem(key);
+    }
   }
 
   clear(key) {
