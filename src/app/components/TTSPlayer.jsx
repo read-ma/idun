@@ -49,13 +49,13 @@ class Player extends Component {
     return (
       <div style={styles.player}>
         <h4 style={styles.header}>Read</h4>
-        <IconButton style={styles.buttons} onClick={this.play.bind(this)} tooltip="Read" tooltipStyles={styles.tooltip}>
+        <IconButton style={styles.buttons} onClick={this.play.bind(this)}>
           <AVPlayArrow />
         </IconButton>
-        <IconButton style={styles.buttons} onClick={this.props.pause} tooltip="Pause" tooltipStyles={styles.tooltip}>
+        <IconButton style={styles.buttons} onClick={this.props.pause}>
           <AVPause />
         </IconButton>
-        <IconButton style={styles.buttons} onClick={this.props.stop} tooltip="Stop" tooltipStyles={styles.tooltip}>
+        <IconButton style={styles.buttons} onClick={this.props.stop}>
           <AVStop />
         </IconButton>
       </div>
@@ -87,7 +87,7 @@ class QuickPlayer extends Component {
     }
     return (
       <div style={{ float: 'left' }}>
-        <IconButton onClick={this.play.bind(this)} tooltip="Read" tooltipStyles={styles.tooltip}>
+        <IconButton onClick={this.play.bind(this)} tooltip="Read phrase" tooltipStyles={styles.tooltip}>
           <AVPlayArrow />
         </IconButton>
       </div>
