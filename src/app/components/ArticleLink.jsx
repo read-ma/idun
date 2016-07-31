@@ -37,7 +37,6 @@ const ArticleStatusList= (tags, privy, difficulty, learn_status) => {
   return (
     <div style={styles.secondaryText}>
       {items}
-      {tags ? <p>{tags}</p> : null}
     </div>
   );
 };
