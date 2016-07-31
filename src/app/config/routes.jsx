@@ -13,6 +13,7 @@ import ChangePasswordView from '../components/ChangePasswordView';
 import ArticleSearchInput from '../components/ArticleSearchInput';
 import { requireAuthentication } from '../utils';
 import { TTSPlayer } from '../components/TTSPlayer';
+import ls from '../localStore';
 
 // Tried to turn off query param. But it didnt work.
 // https://github.com/reactjs/react-router/issues/1967
@@ -22,7 +23,8 @@ const LearnHeader = () => {
 };
 
 const ProfileHeader = () => {
-  return <span>My Profile</span>;
+  const userName = ls.get('CURRENT_USER_EMAIL');
+  return <span>My Profile - {userName}</span>;
 }
 
 export default (
