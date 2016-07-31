@@ -80,6 +80,7 @@ class ArticleForm extends React.Component {
           className="materialize-textarea"
           onChange={this.props.onChange}
           value={this.props.article.title}
+          required= { !this.props.article.source_url }
         />
 
         <TextField
