@@ -1,0 +1,9 @@
+{
+  "env": {
+    "es6": true,
+    "jasmine": true
+  },
+  "globals": {
+    "jest": true
+  }
+}
