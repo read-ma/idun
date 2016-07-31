@@ -9,10 +9,11 @@
 * `cd idun`
 * `npm install`
 * in case of problems with node-sass run `npm rebuild node-sass`
-* npm run dev
+* `npm run dev`
 
 # Testing
 Run `npm test` for feature tests (phantomjs)
+
 Run `npm run unit-test` for unit tests (jest)
 
 You can use prod api in development env so you don't need api server running.
