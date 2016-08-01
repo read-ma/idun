@@ -7,9 +7,10 @@ $selection-bg: #f8bbd0;
 $d3k-bg: lightgreen;
 
 .article-wrapper {
-  max-width: 60em;
+  max-width: 65em;
   word-spacing: 5px;
   margin-bottom: 30px;
+  margin-left: 15px;
 
   &.no-toolbar {
     padding-top: 0;

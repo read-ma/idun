@@ -55,7 +55,7 @@ blockquote {
 }
 
 .sidebar-opened .main-content {
-  width: calc(95vw - 550px);
+  width: calc(95vw - 500px);
   @extend %left-aligned;
 }
 
