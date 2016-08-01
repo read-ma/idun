@@ -17,7 +17,7 @@ import ls from '../localStore';
 
 // Tried to turn off query param. But it didnt work.
 // https://github.com/reactjs/react-router/issues/1967
-const appHistory = useRouterHistory(createHashHistory)({ queryKey: false });
+const appHistory = useRouterHistory(createHashHistory)();
 const LearnHeader = () => {
   return <span>Learn</span>;
 };
