@@ -10,7 +10,8 @@ const ChunkManifestPlugin = require('chunk-manifest-webpack-plugin');
 // const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
 module.exports = {
-  // devtool: 'inline-source-map', // Turn on for more verbose output files for debugging
+  // Read more about debugging: http://webpack.github.io/docs/configuration.html#devtool
+  // devtool: 'inline-source-map',
   entry: {
     bundle: [
       'webpack/hot/dev-server',
@@ -27,6 +28,11 @@ module.exports = {
     path: path.join(__dirname, '/public'),
     filename: '[name].js',
     chunkFilename: '[name].js'
+  },
+  devServer: {
+    contentBase: './public',
+    host: 'localhost',
+    port: 8080
   },
   module: {
     loaders: [

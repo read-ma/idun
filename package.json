@@ -19,7 +19,7 @@
     "postdeploy:production": "scp dist/* $DEPLOY_USER@logdock.com:domains/beta.readma.com/public_html",
     "deploy:staging": "NODE_ENV=production node node_modules/webpack/bin/webpack.js -p --config webpack.production.config.js",
     "postdeploy:staging": "scp dist/* $DEPLOY_USER@logdock.com:domains/staging.readma.com/public_html",
-    "dev": "node node_modules/webpack-dev-server/bin/webpack-dev-server.js --host 0.0.0.0 --progress --colors --hot --inline --content-base ./public",
+    "dev": "node node_modules/webpack-dev-server/bin/webpack-dev-server.js --progress --colors --hot --inline",
     "maintenance": "sh script/maintenance.sh"
   },
   "dependencies": {
