@@ -20,6 +20,12 @@ $d3k-bg: lightgreen;
     font-weight: 300;
     .content {
       line-height: 155%;
+      img {
+        margin-bottom: 1em;
+        max-width: 90%;
+        padding: 1px;
+        border: 1px solid #aeaeae;
+      }
     }
 
     .word {
@@ -84,11 +90,6 @@ $d3k-bg: lightgreen;
 
   p, .paragraph {
     margin-bottom: 1em;
-  }
-
-  img {
-    max-width: 100%;
-    margin: 1em 0;
   }
 
   footer a {

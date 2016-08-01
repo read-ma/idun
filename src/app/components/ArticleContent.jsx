@@ -5,14 +5,6 @@ import classnames from 'classnames';
 import { newWordSelected } from '../actions';
 import { detokenize, isSeparator, Token, markSelectedInDict } from './TextUtils';
 
-const styles = {
-  image: {
-    margin: 'auto',
-    width: '89%',
-    display: 'block'
-  }
-};
-
 class Word extends Component {
   constructor(props) {
     super(props);
@@ -106,7 +98,7 @@ class ArticleContent extends Component {
     return (
       <div className={classnames('content', { appending: this.state.appending })} onMouseUp={this.props.onTextSelected}>
         <h1>{title}</h1>
-        <img src={this.props.image} style={styles.image} />
+        <img src={this.props.image} />
         {content}
       </div>
     );
@@ -118,6 +110,7 @@ ArticleContent.propTypes = {
   onTextSelected: React.PropTypes.func.isRequired,
   onWordSelected: React.PropTypes.func.isRequired,
   wordlists: React.PropTypes.array.isRequired,
+  image: React.PropTypes.string,
 };
 
 
