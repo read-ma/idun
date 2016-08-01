@@ -1,7 +1,9 @@
-require('dotenv').config();
+require('dotenv').config({ silent: true });
+
 const path = require('path');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const webpack = require('webpack');
+
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackBrowserPlugin = require('webpack-browser-plugin');
 const WebpackMd5Hash = require('webpack-md5-hash');
