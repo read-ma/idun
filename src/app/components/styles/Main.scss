@@ -51,12 +51,10 @@ blockquote {
 }
 
 .main-content {
-  padding: 0 20px;
-}
-
-.sidebar-opened .main-content {
-  width: calc(95vw - 500px);
-  @extend %left-aligned;
+  padding-left: 20px;
+  padding-right: 20px;
+  width: calc(92vw - 500px);
+  transition: all 500ms ease-in-out;
 }
 
 .sidebar-closed .main-content {
@@ -70,14 +68,19 @@ blockquote {
 // Mobile
 .mobile .main-content {
   width: 100%;
-  padding-top: 55px;
+  padding-top: 105px;
 }
 
+
+
 @media (min-width: 1600px) {
-  .desktop .main-content {
+  .main-content {
+    width: calc(75vw - 500px);
     margin-left: auto;
     margin-right: auto;
     position: relative;
-    left: -250px;
+    .article-wrapper {
+      margin-left: -250px;
+    }
   }
 }
