@@ -27,7 +27,7 @@ const styles = {
 const chartSettings = (data) => {
   return {
     labels: [
-      'Learned',
+      'Learnedee',
       'Unlearned'
     ],
     datasets: [{

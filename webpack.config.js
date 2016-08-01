@@ -7,17 +7,14 @@ const WebpackBrowserPlugin = require('webpack-browser-plugin');
 const WebpackMd5Hash = require('webpack-md5-hash');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const ChunkManifestPlugin = require('chunk-manifest-webpack-plugin');
-
-// const HtmlWebpackPlugin = require('html-webpack-plugin');
 // const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
 module.exports = {
   // devtool: 'inline-source-map', // Turn on for more verbose output files for debugging
   entry: {
     bundle: [
-      // 'webpack/hot/dev-server',
-      // 'webpack-dev-server/public?http://localhost:8080/',
-      './src/app/app.js',
+      'webpack/hot/dev-server',
+      './src/app/app',
     ],
     vendor: [
       'react', 'redux', 'redux-thunk', 'react-dom', 'react-router', 'react-ga', 'react-router-redux',
@@ -27,20 +24,16 @@ module.exports = {
     ],
   },
   output: {
-    path: path.join(__dirname, 'public'),
-    publicPath: '/',
+    path: path.join(__dirname, '/public'),
     filename: '[name].js',
     chunkFilename: '[name].js'
   },
   module: {
     loaders: [
       {
-        test: /\.jsx?$/,
+        test: /\.(jsx|js)$/,
         exclude: /(node_modules|bower_components)/,
-        loader: 'babel-loader',
-        query: {
-          presets: ['react', 'es2015']
-        }
+        loaders: ['react-hot', 'babel']
       },
       {
         test: /\.scss$/,
