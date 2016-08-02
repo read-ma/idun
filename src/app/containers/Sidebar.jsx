@@ -34,7 +34,6 @@ let initialCSS = {
     sidebar: {
       width: screenWidth(),
       marginTop: 0,
-      paddingTop: '64px',
       height: '100%',
       appbar: {
         position: 'fixed',
