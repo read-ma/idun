@@ -9,8 +9,7 @@ import ArticleToolbar from './ArticleToolbar';
 const HOME_ARTICLE_ID = 847;
 
 class Home extends React.Component {
-
-  componentDidMount() {
+  componentWillMount() {
     this.props.loadArticle(HOME_ARTICLE_ID);
     this.props.loadUserDefinitions();
   }
