@@ -101,6 +101,12 @@ function changeLanguage(type, key) {
   };
 }
 
+function windowResize() {
+  return {
+    type: 'WINDOW_RESIZE'
+  };
+}
+
 export { loadArticles, loadArticle, confirmArticleLearned, articlePageClosed,
          textSelected,
          toggleHighlighting,
@@ -113,4 +119,5 @@ export { loadArticles, loadArticle, confirmArticleLearned, articlePageClosed,
          processFinished, processStarted,
          newWordSelected,
          closeNav, openNav,
+         windowResize
        };

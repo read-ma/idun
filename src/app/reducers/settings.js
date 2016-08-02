@@ -80,6 +80,12 @@ export default function settings(state = initialState, action) {
   case 'CHANGE_LANGUAGE':
     return Object.assign({}, state, { language: language(state.language, action) });
 
+  case 'WINDOW_RESIZE':
+    return Object.assign({}, state, {
+      isMobile: isMobile(),
+      isDesktop: isDesktop()
+    });
+
   case 'ARTICLE_LOADED':
   case 'NAV_CLOSED':
   case 'TEXT_SELECTED':

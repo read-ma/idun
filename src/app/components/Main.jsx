@@ -27,10 +27,8 @@ class Main extends React.Component {
   }
 
   render() {
-    const sidebarOpenClass = this.props.sidebarOpen ? 'sidebar-opened' : 'sidebar-closed';
-
     return (
-      <div className={`${screenSize()} ${mobileOrDesktop()} ${sidebarOpenClass}`}>
+      <div className={`${this.props.screenSizeClass} ${this.props.mobileOrDesktopClass} ${this.props.sidebarOpenClass}`}>
         <AppBar
           onLeftIconButtonTouchTap={this.props.openNav}
           style={styles.appbar}
@@ -58,12 +56,17 @@ Main.propTypes = {
   navChildren: React.PropTypes.object,
   children: React.PropTypes.object,
   routes: React.PropTypes.array,
+  mobileOrDesktopClass: React.PropTypes.string,
+  sidebarOpenClass: React.PropTypes.string,
+  screenSizeClass: React.PropTypes.string,
 };
 
 function mapStateToProps(state) {
   return {
     isAuthenticated: state.auth.isAuthenticated,
-    sidebarOpen: state.settings.navOpen.right,
+    sidebarOpenClass: state.settings.navOpen.right ? 'sidebar-opened' : 'sidebar-closed',
+    mobileOrDesktopClass: mobileOrDesktop(),
+    screenSizeClass: screenSize()
   };
 }
 

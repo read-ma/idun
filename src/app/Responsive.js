@@ -1,4 +1,12 @@
 import _ from 'lodash';
+import store from './store';
+import { windowResize } from './actions';
+
+function watchResize() {
+  window.addEventListener('resize', _.throttle(function() {
+    store.dispatch(windowResize());
+  }, 500));
+}
 
 const breakpoints = [
   { name: 'large', minWidth: 1100 },
@@ -39,4 +47,4 @@ function mobileOrDesktop() {
   return isMobile() ? 'mobile' : 'desktop';
 }
 
-export { isDesktop, isMobile, screenSize, mobileOrDesktop, screenWidth, getMinWidthForBreakpoint };
+export { watchResize, isDesktop, isMobile, screenSize, mobileOrDesktop, screenWidth, getMinWidthForBreakpoint };
