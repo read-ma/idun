@@ -25,26 +25,19 @@ const styles = {
 };
 
 class SignUpForm extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {};
   }
 
-  handleFormInputChanged(event) {
-    this.setState(
-      Object.assign({}, this.state, { [event.target.name]: event.target.value })
-    );
-  }
-
   handleSignUp(event) {
     event.preventDefault();
-    this.props.dispatch(signupAttempt(this.state.email));
+    this.props.dispatch(signupAttempt(this.refs.email.getValue()));
   }
 
   render() {
     return (
-      <form onSubmit={this.handleSignUp.bind(this)} className="col-xs-12 col-md-8 col-lg-6">
+      <form onSubmit={this.handleSignUp.bind(this)} className="col-xs-12 col-md-8">
         <h2 style={styles.headline}>Create account</h2>
         <p style={{ marginBottom: '15px' }}>
           If you are interested in the beta testing of ReadMa, <br/>
@@ -52,12 +45,11 @@ class SignUpForm extends React.Component {
         </p>
         <p>We will get back to you as soon as we can.</p>
 
-        <h5 className="green-text">{this.props.signupMessage}</h5>
+        <h4>{this.props.signupMessage}</h4>
 
         <TextField
-          floatingLabelText="Your email address"
-          type="email" id="signUpEmail" name="email" required="true" fullWidth={true}
-          onChange={this.handleFormInputChanged.bind(this)}
+          floatingLabelText="Your email address" fullWidth={true}
+          type="email" id="signUpEmail" name="email" ref="email" required="true"
         />
 
         <RaisedButton label="Send" primary={true} type="submit" style={styles.sendButton} />
