@@ -7,6 +7,7 @@ import { screenSize, mobileOrDesktop } from '../Responsive';
 import MainNavigaton from './MainNavigation';
 import AppBar from 'material-ui/lib/app-bar';
 import AppProgressBar from './AppProgressBar';
+import Notify from './shared/Notify';
 
 const styles = {
   appbar: {
@@ -43,6 +44,8 @@ class Main extends React.Component {
         <div className="col-xs-12 main-content">
           {this.props.children}
         </div>
+
+        <Notify notifyMessage={this.props.notifyMessage} />
       </div>
     );
   }
@@ -59,6 +62,7 @@ Main.propTypes = {
   mobileOrDesktopClass: React.PropTypes.string,
   sidebarOpenClass: React.PropTypes.string,
   screenSizeClass: React.PropTypes.string,
+  notifyMessage: React.PropTypes.string,
 };
 
 function mapStateToProps(state) {
@@ -66,7 +70,8 @@ function mapStateToProps(state) {
     isAuthenticated: state.auth.isAuthenticated,
     sidebarOpenClass: state.settings.navOpen.right ? 'sidebar-opened' : 'sidebar-closed',
     mobileOrDesktopClass: mobileOrDesktop(),
-    screenSizeClass: screenSize()
+    screenSizeClass: screenSize(),
+    notifyMessage: state.notifyMessage
   };
 }
 

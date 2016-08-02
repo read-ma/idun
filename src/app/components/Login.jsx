@@ -26,6 +26,7 @@ const styles = {
 class Login extends React.Component {
   login(event) {
     event.preventDefault();
+
     this.props.dispatch(
       loginAttempt(this.refs.email.getValue(), this.refs.password.getValue())
     );

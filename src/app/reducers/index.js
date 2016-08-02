@@ -56,7 +56,7 @@ const articlesFilter = (state = articlesFilterInitial, action) => {
   }
 };
 
-const ttsStatus = (state={}, action) => {
+const ttsStatus = (state = {}, action) => {
   switch (action.type) {
   case 'TTS_START':
   case 'TTS_RESUME':
@@ -70,4 +70,17 @@ const ttsStatus = (state={}, action) => {
   }
 };
 
-export { article, articles, deck, decks, main, wordlists, definitions, auth, settings, articlesFilter, ttsStatus, articleForm, profile };
+const notify = (state = {}, action) => {
+  switch (action.type) {
+  case 'NOTIFY_SHOW':
+    return Object.assign({}, state, { message: action.payload.message });
+
+  default:
+    return state;
+  }
+};
+
+export { article, articles, deck, decks, main, wordlists, profile,
+  definitions, auth, settings, articlesFilter, ttsStatus, articleForm,
+  notify
+};
