@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { resetPassword } from '../actions/auth';
 import NotificationBox from './NotificationBox';
@@ -18,7 +18,7 @@ const styles = {
   }
 };
 
-class PasswordReminder extends React.Component {
+class PasswordReminder extends Component {
   constructor(props) {
     super(props);
     this.state = {};

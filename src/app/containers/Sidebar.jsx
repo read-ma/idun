@@ -61,6 +61,11 @@ const TargetLanguageMenu = ({ style }) => {
   </div>);
 };
 
+TargetLanguageMenu.propTypes = {
+  style: React.PropTypes.object.isRequired
+};
+
+
 class Sidebar extends Component {
   render() {
     const leftIcon = this.props.isMobile ? <IconButton onClick={this.props.closeNav}><NavigationClose /></IconButton> : <i></i>;
