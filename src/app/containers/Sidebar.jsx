@@ -54,21 +54,22 @@ let initialCSS = {
   }
 };
 
+const TargetLanguageMenu = ({ style }) => {
+  return (<div style={style.targetLanguageMenu}>
+    <h4 style={style.header}>My language:</h4>
+    <LanguageDropDownMenu type="to" />
+  </div>);
+};
 
 class Sidebar extends Component {
   render() {
     const leftIcon = this.props.isMobile ? <IconButton onClick={this.props.closeNav}><NavigationClose /></IconButton> : <i></i>;
-
     const style = initialCSS[this.props.isMobile ? 'mobile' : 'desktop'];
+
     return (
       <LeftNav width={style.sidebar.width} style={style.sidebar} docked={this.props.sidebarDocked} openRight={true} open={this.props.open}>
         <AppBar title={<WordSearchInput />} style={style.appbar} iconElementLeft={leftIcon} />
-
-        <div style={style.targetLanguageMenu}>
-          <h4 style={style.header}>My language:</h4>
-          <LanguageDropDownMenu type="to" />
-        </div>
-
+        <TargetLanguageMenu style={style} />
         <TTSQuickPlayer />
         <UserCustomDefinition />
         <DefinitionBoxes />
@@ -78,15 +79,13 @@ class Sidebar extends Component {
 }
 
 Sidebar.defaultProps = {
-  open: false,
-  isAdmin: false
+  open: false
 };
 
 Sidebar.propTypes = {
   open: React.PropTypes.bool.isRequired,
   closeNav: React.PropTypes.func.isRequired,
   selectedText: React.PropTypes.string.isRequired,
-  isAdmin: React.PropTypes.bool.isRequired,
   isMobile: React.PropTypes.bool.isRequired,
   sidebarDocked: React.PropTypes.bool.isRequired,
 };
