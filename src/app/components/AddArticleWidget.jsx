@@ -175,7 +175,7 @@ const mapActionsToProps = (dispatch) => {
 function mapStateToProps(state) {
   return {
     open: state.settings.navOpen.right,
-    isAdmin: state.auth.isAdmin,
+    isAdmin: !!state.auth.isAdmin,
     article: state.articleForm,
   };
 }

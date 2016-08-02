@@ -24,44 +24,32 @@ const styles = {
 };
 
 class Login extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-    this.handleFormInputChanged = this.handleFormInputChanged.bind(this);
-  }
-
-  handleFormInputChanged(event) {
-    this.setState(
-      Object.assign({}, this.state, { [event.target.name]: event.target.value })
-    );
-  }
-
   login(event) {
     event.preventDefault();
     this.props.dispatch(
-      loginAttempt(this.state.email, this.state.password)
+      loginAttempt(this.refs.email.getValue(), this.refs.password.getValue())
     );
   }
 
   render() {
     return (
-      <form onSubmit={this.login.bind(this)} className="col-xs-12 col-md-8 col-lg-6">
+      <form onSubmit={this.login.bind(this)} className="col-xs-12 col-md-8">
         <h2 style={styles.headline}>If you already have an account, please log in</h2>
         <span className="error">{this.props.error}</span>
 
         <TextField
-          floatingLabelText="Email address" type="email" id="email" name="email" required="true"
-          fullWidth={true} onChange={this.handleFormInputChanged}
+          floatingLabelText="Email address" type="email" id="email" name="email"
+          ref="email" required="true" fullWidth={true}
         />
 
         <br />
 
         <TextField
-          floatingLabelText="Password" type="password" id="password" name="password" required="true"
-          fullWidth={true} onChange={this.handleFormInputChanged}
+          floatingLabelText="Password" type="password" id="password" name="password"
+          ref="password" required="true" fullWidth={true}
         />
 
-        <br />
+        <br /><br/>
 
         <RaisedButton label="Login" primary={true} type="submit" style={styles.loginButton} />
         <FlatButton label="I forgot my password" linkButton={true} href="/#/forgot_password" />
