@@ -35,6 +35,13 @@ Home.propTypes = {
   loadUserDefinitions: React.PropTypes.func
 };
 
+const mapStateToProps = (state) => {
+  return {
+    wordlists: state.wordlists.filter(l => l.enabled),
+    text: state.article.title && [...state.article.title, ...state.article.content] || []
+  };
+};
+
 const mapActionsToProps = (dispatch) => {
   return {
     loadArticle: (id) => dispatch(loadArticle(id)),
@@ -53,13 +60,6 @@ const mapActionsToProps = (dispatch) => {
 
       dispatch(textSelected(selectedText));
     }
-  };
-};
-
-const mapStateToProps = (state) => {
-  return {
-    wordlists: state.wordlists.filter(l => l.enabled),
-    text: state.article.title && [...state.article.title, ...state.article.content] || []
   };
 };
 

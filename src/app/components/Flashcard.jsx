@@ -113,10 +113,8 @@ class Flashcard extends Component {
       <div>
         <ReactCSSTransitionGroup
         transitionName="fadein"
-        transitionAppear={true}
-        transitionLeave={false}
-        transitionEnterTimeout={500}
-        transitionAppearTimeout={500}
+        transitionAppear={true} transitionLeave={false}
+        transitionEnterTimeout={500} transitionAppearTimeout={500}
         style={{ width: '100%' }}>
           <div className="row card-wrap" key={this.props.item.word}>
             <div className={cardClassnames} key={this.state.side} onClick={this.revert}>

@@ -47,7 +47,7 @@ ArticleFooter.propTypes = {
 const LoadingArticle = () => <span>Loading...</span>;
 
 class ArticlePage extends Component {
-  componentDidMount() {
+  componentWillMount() {
     this.props.loadArticle(this.props.params.id);
     this.props.loadUserDefinitions();
   }
@@ -113,8 +113,7 @@ const mapActionsToProps = (dispatch) => {
 
 function mapStateToProps(state) {
   return {
-    article: state.article,
-    isAdmin: state.auth.isAdmin
+    article: state.article
   };
 }
 

@@ -48,6 +48,12 @@ class Articles extends Component {
   }
 }
 
+Articles.propTypes = {
+  loadArticles: React.PropTypes.func.isRequired,
+  filter: React.PropTypes.object.isRequired,
+  articles: React.PropTypes.array.isRequired,
+};
+
 function mapStateToProps(state) {
   return {
     articles: state.articles,
@@ -55,11 +61,6 @@ function mapStateToProps(state) {
   };
 }
 
-Articles.propTypes = {
-  loadArticles: React.PropTypes.func.isRequired,
-  filter: React.PropTypes.object.isRequired,
-  articles: React.PropTypes.array.isRequired,
-};
 
 const mapActionsToProps = (dispatch) => {
   return {
