@@ -4,8 +4,7 @@ import { ShowIf } from '../../components';
 
 import List from 'material-ui/lib/lists/list';
 import ListItem from 'material-ui/lib/lists/list-item';
-import IconButton from 'material-ui/lib/icon-button';
-import ContentAdd from 'material-ui/lib/svg-icons/content/add';
+import ContentAddCircleOutline from 'material-ui/lib/svg-icons/content/add-circle-outline';
 import KeyboardArrowUp from 'material-ui/lib/svg-icons/hardware/keyboard-arrow-up';
 import KeyboardArrowDown from 'material-ui/lib/svg-icons/hardware/keyboard-arrow-down';
 
@@ -43,13 +42,8 @@ function DefinitionListItem({ text, language, partOfSpeech, handleClick, key }) 
     handleClick({ translation: text });
   }
 
-  let AddContent = <IconButton onClick={add}><ContentAdd /></IconButton>;
-
   return (
-    <ListItem key={key}
-      rightIconButton={AddContent}
-      secondaryText={partOfSpeech}
-      disabled={true}>
+    <ListItem key={key} rightIcon={<ContentAddCircleOutline />} secondaryText={partOfSpeech} onClick={add}>
       <LanguageIcon lang={language} />
       <span style={{ lineHeight: '20px' }} dangerouslySetInnerHTML={{ __html: text }} />
     </ListItem>

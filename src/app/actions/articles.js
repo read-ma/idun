@@ -59,15 +59,11 @@ function addArticle(article) {
       Object.assign({}, article, { content_type: 'article', status: 'published' }),
       () => {
         setTimeout(() => {
-          dispatch(
-            loadArticles());
+          dispatch(loadArticles());
         }, 1400);
 
-        dispatch(
-          closeNav('right'));
-
-        dispatch(
-          articleAdded());
+        dispatch(closeNav('right'));
+        dispatch(articleAdded());
       },
       (error) => {
         // TODO: Add snackbar. http://www.material-ui.com/v0.14.4/#/components/snackbar

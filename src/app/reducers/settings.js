@@ -57,7 +57,7 @@ function navBarVisibility(state, action) {
     return Object.assign({}, state, { left: false });
 
   case 'TEXT_SELECTED':
-    return Object.assign({}, state, { right: !!action.text });
+    return Object.assign({}, state, { right: state.right || !!action.text });
 
   case
     'NAV_OPENED':

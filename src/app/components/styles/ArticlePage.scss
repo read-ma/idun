@@ -21,7 +21,7 @@ $d3k-bg: lightgreen;
     font-weight: 300;
     .content {
       line-height: 155%;
-      img {
+      img[src] {
         margin-bottom: 1em;
         max-width: 90%;
         padding: 1px;

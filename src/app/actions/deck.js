@@ -18,8 +18,7 @@ function deckFinished(deck) {
 function endQuiz(deck) {
   return (dispatch) => {
     dispatch(deckFinished(deck));
-    dispatch(
-      push('/results'));
+    dispatch(push('/results'));
   };
 }
 
@@ -49,7 +48,6 @@ function decksLoaded(decks) {
   };
 }
 
-
 function loadDecks() {
   return (dispatch) => {
     api.get('/decks.json')
@@ -65,7 +63,8 @@ function loadDecks() {
 function markItem(id, value) {
   return {
     type: 'MARK_ITEM',
-    id, value
+    id,
+    value
   };
 }
 
