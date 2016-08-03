@@ -40,7 +40,7 @@ const signupAttempt = (email) => {
       .then((response) => {
         dispatch(invitationRequestSent(response.data));
       })
-      .catch(function (response) {
+      .catch(function(response) {
         dispatch(userSigningUpError(response));
       });
   };
@@ -79,7 +79,7 @@ const loginAttempt = (email, password) => {
       dispatch(userLoggedIn(response.data));
       dispatch(push(returnTo(store.getState())));
     })
-    .catch(function (response) {
+    .catch(function(response) {
       dispatch(userSigningInError(response));
     });
   };
@@ -145,7 +145,9 @@ const updatePasswordError = (error) => {
 const updatePassword = ({ reset_password_token, password, password_confirmation }) => {
   return (dispatch) => {
     api
-      .patch('/reset_password/by.json', { reset_password: { reset_password_token, password, password_confirmation } })
+      .patch('/reset_password/by.json', {
+        reset_password: { reset_password_token, password, password_confirmation }
+      })
       .then(() => dispatch(push('login', { q: 'updated' })))
       .catch((error) => {
         dispatch(updatePasswordError(extractErrors(error.data.errors)));

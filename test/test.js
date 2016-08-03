@@ -39,6 +39,28 @@ casper.test.begin('Home screen and page title', 2, function(test) {
     });
 });
 
+casper.test.begin('User can add his own translation to dictionary', 1, function(test) {
+  casper
+    .start(host)
+    .waitForSelector($.articleParagraph, function() {
+      this.clickLabel('language', 'span');
+    })
+    .waitForSelector($.userCustomDefinitions, function() {
+      this.sendKeys($.newTranslationInput, 'My translation \n');
+    })
+    .waitForSelector($.userDefinitionBox, function() {
+      this.test.assertEval(function(selector) {
+        return __utils__.findAll(selector).length > 1;
+      }, 'More than one definition is present', $.userDefinitionListItem);
+    })
+    .run(function() {
+      test.done();
+    });
+});
+
+// TODO: Write test for selection (your saved words, frequently used words, selected text)
+
+
 // casper.test.begin('Left nav reacts to user authentication status', 2, function(test) {
 //   casper
 //     .start(host)
@@ -60,7 +82,7 @@ casper.test.begin('Query articles', 3, function(test) {
       const articlesNumber = 100;
 
       testHelpers.checkUrl(this, 'articles');
-      this.test.assertExists($.articleSearchInput, 'Query article input is present');
+      this.test.assertExists($.searchInput, 'Query article input is present');
       this.test.assertEvalEqual(function() {
         return __utils__.findAll('div.articles div a').length;
       }, articlesNumber, 'There is ' + articlesNumber + ' articles');
