@@ -27,7 +27,7 @@ const styles = {
 const chartSettings = (data) => {
   return {
     labels: [
-      'Learnedee',
+      'Learned',
       'Unlearned'
     ],
     datasets: [{
@@ -40,6 +40,30 @@ const chartSettings = (data) => {
   };
 };
 
+const RecommendedArticleListItem = ({ article }) => {
+  // const wordsString = article.words + ' new word' + (article.words > 1 ? 's' : '');
+  const articleLink = <Link to={{ pathname: `/article/${article.id}` }} style={styles.articleLink}>{article.title}</Link>;
+  const icon = <MapLocalLibrary />;
+
+  return (
+    <ListItem leftIcon={icon} primaryText={articleLink} key={article.id} />
+  );
+};
+
+const RecommendedArticleList = ({ list }) => {
+  let articles =
+    filterArticles(list, {learning: 'pending', difficulty: 'all'})
+      .splice(0, 5)
+      .map((article, idx) => <RecommendedArticleListItem article={article} key={`article-${idx}`} />);
+
+  return (
+    <div className="col-xs-12 col-md-5">
+      <h2>Learn new words by reading articles below</h2>
+      <List> {articles} </List>
+    </div>
+  );
+};
+
 class MyProfile extends React.Component {
   // percentageProgress() {
   //   return 270 / 3400 * 100;
@@ -50,7 +74,7 @@ class MyProfile extends React.Component {
       data: chartSettings(this.props.data),
       options: {
         tooltips: {
-          enabled: false
+          enabled: true
         }
       }
     });
@@ -71,32 +95,10 @@ class MyProfile extends React.Component {
     this.chart.update();
   }
 
-  articles() {
-    let articles = filterArticles(this.props.articles, {
-      learning: 'pending',
-      difficulty: 'all'
-    }).splice(0, 5);
-
-    return articles.map((article) => {
-      // const wordsString = article.words + ' new word' + (article.words > 1 ? 's' : '');
-      const articleLink = <Link to={{ pathname: `/article/${article.id}` }} style={styles.articleLink}>{article.title}</Link>;
-      return <ListItem leftIcon={<MapLocalLibrary />} primaryText={articleLink} key={article.id} />;
-    });
-  }
-
   overallProgress() {
     return (<div className="col-xs-12 col-md-6">
       <h2>Your overall progress</h2>
       <canvas id="learning-progress-chart" width="300" height="300" style={styles.progressChart}></canvas>
-    </div>);
-  }
-
-  newWordsArticles() {
-    return (<div className="col-xs-12 col-md-5">
-      <h2>Learn new words by reading articles below</h2>
-      <List>
-        {this.articles()}
-      </List>
     </div>);
   }
 
@@ -114,10 +116,11 @@ class MyProfile extends React.Component {
   // }
 
   render() {
-    return (<div className="row" id="my-profile-container">
-      {this.overallProgress()}
-      {this.newWordsArticles()}
-    </div>);
+    return (
+      <div className="row" id="my-profile-container">
+        {this.overallProgress()}
+        <RecommendedArticleList list={this.props.articles} />
+      </div>);
   }
 }
 

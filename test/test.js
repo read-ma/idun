@@ -88,17 +88,16 @@ casper.test.begin('Query articles', 3, function(test) {
     });
 });
 
-// For some reason on login page it is impossible to login. Dunno why. Fucked up.
-// casper.test.begin('Home screen - post login', 1, function(test) {
-//   casper
-//     .start(host + '/#/login')
-//     .waitForSelector($.loginForm, function() {
-//       helpers.logIn(this);
-//     })
-//     .waitForSelector($.myProfileContainer, function() {
-//       test.assertExists($.learningProgressChart);
-//     })
-//     .run(function() {
-//       test.done();
-//     });
-// });
+casper.test.begin('Home screen - post login', 1, function(test) {
+  casper
+    .start(host + '/#/login')
+    .waitForSelector($.loginForm, function() {
+      helpers.logIn(this);
+    })
+    .waitForSelector($.myProfileContainer, function() {
+      test.assertExists($.learningProgressChart);
+    })
+    .run(function() {
+      test.done();
+    });
+});
