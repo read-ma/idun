@@ -31,6 +31,9 @@ const styles = {
   fieldset: {
     borderColor: colors.grey300,
     borderStyle: 'solid',
+  },
+  inputs: {
+    width: '100%'
   }
 };
 
@@ -62,6 +65,7 @@ class ArticleForm extends React.Component {
           id="sourceUrl"
           onChange={this.props.onChange}
           value={this.props.article.source_url}
+          style={styles.inputs}
         />
 
         <br />
@@ -81,6 +85,7 @@ class ArticleForm extends React.Component {
           onChange={this.props.onChange}
           value={this.props.article.title}
           required= { !this.props.article.source_url }
+          style={styles.inputs}
         />
 
         <TextField
@@ -91,6 +96,7 @@ class ArticleForm extends React.Component {
           className="materialize-textarea"
           onChange={this.props.onChange}
           value={this.props.article.content}
+          style={styles.inputs}
         />
 
         <br />
