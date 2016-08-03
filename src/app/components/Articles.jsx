@@ -25,6 +25,12 @@ ArticleList.propTypes = {
 };
 
 class Articles extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = Object.assign({}, this.props);
+  }
+
   componentDidMount() {
     this.props.loadArticles();
   }
@@ -40,7 +46,7 @@ class Articles extends Component {
       <div>
         <ArticlesToolbar />
         <PositioningWidget pageId="article-list-page" />
-        <ArticleList articles={this.props.articles} />
+        <ArticleList articles={this.state.articles} />
         <AddArticleWidget />
         <AddArticleFloatingButton />
       </div>

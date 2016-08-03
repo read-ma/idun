@@ -34,7 +34,7 @@ class Login extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.login.bind(this)} className="col-xs-12 col-md-8">
+      <form id="loginForm" onSubmit={this.login.bind(this)} className="col-xs-12 col-md-8">
         <h2 style={styles.headline}>If you already have an account, please log in</h2>
         <span className="error">{this.props.error}</span>
 

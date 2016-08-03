@@ -34,7 +34,7 @@ const MainNavigation = ({ children, open, closeNavbar, logoutAction }) => {
       <Divider />
       {children}
       <List>
-        <ListItem primaryText="Sign out" leftIcon={<ActionPowerSettingsNew />} onClick={logoutAction} />
+        <ListItem id="signOutButton" primaryText="Sign out" leftIcon={<ActionPowerSettingsNew />} onClick={logoutAction} />
       </List>
     </LeftNav>
   );
