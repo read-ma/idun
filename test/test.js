@@ -1,5 +1,6 @@
 const system = require('system');
 const helpers = require('./helpers');
+const testHelpers = require('./testHelpers');
 const $ = require('./selectors');
 
 /* global casper */
@@ -10,7 +11,7 @@ casper.test.begin('User can login and logout', 3, function(test) {
   casper
     .start(host + '/#/login')
     .waitForSelector($.loginForm, function() {
-      helpers.checkUrl(this, 'login');
+      testHelpers.checkUrl(this, 'login');
       this.test.assertExists($.loginForm, 'Login form is present');
       helpers.logIn(this);
     }).then(function() {
@@ -30,7 +31,7 @@ casper.test.begin('Home screen and page title', 2, function(test) {
   casper
     .start(host)
     .then(function() {
-      helpers.checkUrl(this, 'home');
+      testHelpers.checkUrl(this, 'home');
       test.assertTitle(pageTitle, 'Page has correct title');
     })
     .run(function() {
@@ -42,7 +43,7 @@ casper.test.begin('Home screen and page title', 2, function(test) {
 //   casper
 //     .start(host)
 //     .then(function() {
-//       helpers.checkUrl(this, 'home');
+//       testHelpers.checkUrl(this, 'home');
 //     })
 //     .run(function() {
 //       test.done();
@@ -58,7 +59,7 @@ casper.test.begin('Query articles', 3, function(test) {
     .waitForSelector('.articles a', function() {
       const articlesNumber = 100;
 
-      helpers.checkUrl(this, 'articles');
+      testHelpers.checkUrl(this, 'articles');
       this.test.assertExists($.articleSearchInput, 'Query article input is present');
       this.test.assertEvalEqual(function() {
         return __utils__.findAll('div.articles div a').length;
