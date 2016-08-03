@@ -23,7 +23,7 @@ class ChangePasswordView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      resetPasswordToken: props.location.query.t
+      reset_password_token: props.location.query.t
     };
     this.handleInputChange = this.handleInputChange.bind(this);
   }
@@ -33,7 +33,7 @@ class ChangePasswordView extends React.Component {
   }
 
   componentDidMount() {
-    if (!this.state.resetPasswordToken) {
+    if (!this.state.reset_password_token) {
       this.props.dispatch(
         push('/Login'));
     }
@@ -63,7 +63,7 @@ class ChangePasswordView extends React.Component {
 
         <TextField
           floatingLabelText="Confirm password"
-          type="password_confirmation"
+          type="password"
           id="password_confirmation"
           name="password_confirmation"
           required="true"
@@ -79,7 +79,7 @@ class ChangePasswordView extends React.Component {
 ChangePasswordView.propTypes = {
   location: React.PropTypes.object,
   dispatch: React.PropTypes.func,
-  error: React.PropTypes.array.isRequired,
+  error: React.PropTypes.array
 };
 
 const mapStateToProps = (state) => {

@@ -149,8 +149,8 @@ const updatePassword = ({ reset_password_token, password, password_confirmation 
         reset_password: { reset_password_token, password, password_confirmation }
       })
       .then(() => dispatch(push('login', { q: 'updated' })))
-      .catch((error) => {
-        dispatch(updatePasswordError(extractErrors(error.data.errors)));
+      .catch(({response}) => {
+        dispatch(updatePasswordError(extractErrors(response.data.errors)));
       });
   };
 };
