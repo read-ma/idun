@@ -14,6 +14,7 @@ casper.test.begin('User can login and logout', 3, function(test) {
       testHelpers.checkUrl(this, 'login');
       this.test.assertExists($.loginForm, 'Login form is present');
       helpers.logIn(this);
+      this.capture('cap.png');
     }).then(function() {
       helpers.logOut(this);
     })
@@ -25,14 +26,23 @@ casper.test.begin('User can login and logout', 3, function(test) {
     });
 });
 
-casper.test.begin('Home screen and page title', 2, function(test) {
+casper.test.begin('Page title is correctly set', 1, function(test) {
   const pageTitle = 'ReadMa - Your learning assistant';
+  casper
+    .start(host)
+    .then(function() {
+      test.assertTitle(pageTitle, 'Page has correct title');
+    })
+    .run(function() {
+      test.done();
+    });
+});
 
+casper.test.begin('Home screen - pre login', 1, function(test) {
   casper
     .start(host)
     .then(function() {
       testHelpers.checkUrl(this, 'home');
-      test.assertTitle(pageTitle, 'Page has correct title');
     })
     .run(function() {
       test.done();
@@ -58,27 +68,13 @@ casper.test.begin('User can add his own translation to dictionary', 1, function(
     });
 });
 
-// TODO: Write test for selection (your saved words, frequently used words, selected text)
-
-
-// casper.test.begin('Left nav reacts to user authentication status', 2, function(test) {
-//   casper
-//     .start(host)
-//     .then(function() {
-//       testHelpers.checkUrl(this, 'home');
-//     })
-//     .run(function() {
-//       test.done();
-//     });
-// });
-
 casper.test.begin('Query articles', 3, function(test) {
   casper
     .start(host + '/#/articles')
     .waitForSelector($.loginForm, function() {
       helpers.logIn(this);
     })
-    .waitForSelector('.articles a', function() {
+    .waitForSelector($.articlesLinks, function() {
       const articlesNumber = 100;
 
       testHelpers.checkUrl(this, 'articles');
@@ -91,3 +87,18 @@ casper.test.begin('Query articles', 3, function(test) {
       test.done();
     });
 });
+
+// For some reason on login page it is impossible to login. Dunno why. Fucked up.
+// casper.test.begin('Home screen - post login', 1, function(test) {
+//   casper
+//     .start(host + '/#/login')
+//     .waitForSelector($.loginForm, function() {
+//       helpers.logIn(this);
+//     })
+//     .waitForSelector($.myProfileContainer, function() {
+//       test.assertExists($.learningProgressChart);
+//     })
+//     .run(function() {
+//       test.done();
+//     });
+// });

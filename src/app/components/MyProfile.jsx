@@ -11,8 +11,8 @@ import { closeNav } from '../actions/';
 import MapLocalLibrary from 'material-ui/lib/svg-icons/maps/local-library';
 import List from 'material-ui/lib/lists/list';
 import ListItem from 'material-ui/lib/lists/list-item';
-import LinearProgress from 'material-ui/lib/linear-progress';
-import { difficultyColors } from './shared/Colors';
+// import LinearProgress from 'material-ui/lib/linear-progress';
+// import { difficultyColors } from './shared/Colors';
 
 const styles = {
   articleLink: {
@@ -100,24 +100,23 @@ class MyProfile extends React.Component {
     </div>);
   }
 
-  progressBreakDown() {
-    // LinearProgress can take min and max as values and it will calculate %
-    // http://www.material-ui.com/v0.14.4/#/components/linear-progress
-    return (<div className="col-xs-12">
-      <h3>Intermediate progress</h3>
-      <LinearProgress mode="determinate" color={difficultyColors.intermediate} value={this.percentageProgress()} />
-      <h3>Upper-intermediate progress</h3>
-      <LinearProgress mode="determinate" color={difficultyColors.upperIntermediate} value={this.percentageProgress() / 2} />
-      <h3>Advanced progress</h3>
-      <LinearProgress mode="determinate" color={difficultyColors.advanced} value={this.percentageProgress() / 4} />
-    </div>);
-  }
+  // progressBreakDown() {
+  //   // LinearProgress can take min and max as values and it will calculate %
+  //   // http://www.material-ui.com/v0.14.4/#/components/linear-progress
+  //   return (<div className="col-xs-12">
+  //     <h3>Intermediate progress</h3>
+  //     <LinearProgress mode="determinate" color={difficultyColors.intermediate} value={this.percentageProgress()} />
+  //     <h3>Upper-intermediate progress</h3>
+  //     <LinearProgress mode="determinate" color={difficultyColors.upperIntermediate} value={this.percentageProgress() / 2} />
+  //     <h3>Advanced progress</h3>
+  //     <LinearProgress mode="determinate" color={difficultyColors.advanced} value={this.percentageProgress() / 4} />
+  //   </div>);
+  // }
 
   render() {
-    return (<div className="row">
+    return (<div className="row" id="my-profile-container">
       {this.overallProgress()}
       {this.newWordsArticles()}
-      {/* {this.progressBreakDown()} */}
     </div>);
   }
 }

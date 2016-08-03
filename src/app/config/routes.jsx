@@ -18,6 +18,7 @@ import ls from '../localStore';
 // Tried to turn off query param. But it didnt work.
 // https://github.com/reactjs/react-router/issues/1967
 const appHistory = useRouterHistory(createHashHistory)();
+
 const LearnHeader = () => {
   return <span>Learn</span>;
 };
@@ -25,11 +26,11 @@ const LearnHeader = () => {
 const ProfileHeader = () => {
   const userName = ls.get('CURRENT_USER_EMAIL');
   return <span>My Profile - {userName}</span>;
-}
+};
 
 export default (
   <Route path="/" component={Main} history={appHistory}>
-    <IndexRedirect to="/home" />
+    <IndexRedirect to={ls.get('IS_AUTHENTICATED') ? '/my_profile' : '/home'} />
     <Route path="/login" component={Login} />
     <Route path="/home" components={{ children: Home }} />
     <Route path="/my_profile" components={{

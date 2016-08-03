@@ -1,6 +1,10 @@
 module.exports = {
   loginForm: 'form#loginForm',
+  signOutButton: '#signOutButton',
   searchInput: 'input[id="articleSearch"]',
+
+  // Articles
+  articlesLinks: '.articles a',
 
   // Article
   homeArticle: 'article.article',
@@ -11,4 +15,8 @@ module.exports = {
   userCustomDefinitions: '#user-custom-definitions',
   userDefinitionBox: '#user-definition-box',
   userDefinitionListItem: '#user-definition-box > div',
+
+  // My Profile
+  myProfileContainer: '#my-profile-container',
+  learningProgressChart: '#learning-progress-chart',
 };
