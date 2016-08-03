@@ -1,7 +1,6 @@
 import React from 'react';
 
 import Home from './Home';
-import Profile from './Profile';
 import UserDefinitionsLearn from './UserDefinitionsLearn';
 import UserDefinitionsList from './UserDefinitionsList';
 import Articles from './Articles';
@@ -21,6 +20,6 @@ ShowIf.propTypes = {
 };
 
 export {
-  Home, Profile, Articles, ArticlePage, Main, Wordlists, UserDefinitionsLearn, UserDefinitionsList,
+  Home, Articles, ArticlePage, Main, Wordlists, UserDefinitionsLearn, UserDefinitionsList,
   DefinitionBoxes, ShowIf
 };

@@ -4,7 +4,7 @@ import { createHashHistory } from 'history';
 
 import { Home, Main, Articles, ArticlePage, UserDefinitionsLearn, UserDefinitionsList } from '../components';
 import Login from '../components/Login';
-import MyProfile from '../components/MyProfile';
+import Profile from '../components/Profile';
 import SignUpForm from '../components/SignUpForm';
 import PasswordReminderView from '../components/PasswordReminderView';
 import FlashcardsQuiz from '../components/FlashcardsQuiz';
@@ -34,7 +34,7 @@ export default (
     <Route path="/login" component={Login} />
     <Route path="/home" components={{ children: Home }} />
     <Route path="/profile" components={{
-      children: requireAuthentication(MyProfile),
+      children: requireAuthentication(Profile),
       topNavChildren: ProfileHeader
     }} />
 

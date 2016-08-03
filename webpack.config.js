@@ -15,10 +15,7 @@ module.exports = {
   // Read more about debugging: http://webpack.github.io/docs/configuration.html#devtool
   // devtool: 'inline-source-map',
   entry: {
-    bundle: [
-      'webpack/hot/dev-server',
-      './src/app/app',
-    ],
+    bundle: './src/app/app',
     vendor: [
       'react', 'redux', 'redux-thunk', 'react-dom', 'react-router', 'react-ga', 'react-router-redux',
       'react-addons-css-transition-group', 'lodash', 'moment', 'chart.js', 'material-ui',
@@ -31,17 +28,12 @@ module.exports = {
     filename: '[name].js',
     chunkFilename: '[name].js'
   },
-  devServer: {
-    contentBase: './public',
-    host: 'localhost',
-    port: 8080
-  },
   module: {
     loaders: [
       {
         test: /\.(jsx|js)$/,
-        exclude: /(node_modules|bower_components)/,
-        loaders: ['react-hot', 'babel']
+        exclude: /(node_modules)/,
+        loaders: ['babel']
       },
       {
         test: /\.scss$/,
@@ -84,7 +76,6 @@ module.exports = {
       filename: 'manifest.json',
       manifestVariable: 'webpackManifest'
     }),
-    new webpack.NoErrorsPlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),
 
     // ,
