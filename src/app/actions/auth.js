@@ -5,7 +5,7 @@ import ls from '../localStore';
 import _ from 'lodash';
 import ReactGA from 'react-ga';
 
-const DEFAULT_RETURN_TO = '/';
+const DEFAULT_RETURN_TO = '/profile';
 
 const returnTo = (state) => {
   try {

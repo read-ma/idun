@@ -29,7 +29,7 @@ const MainNavigation = ({ children, open, closeNavbar, logoutAction }) => {
         <ListItem primaryText="Home" href="#/home" leftIcon={<ActionHome />} />
         <ListItem primaryText="Articles" href="#/articles" leftIcon={<MapLocalLibrary />} />
         <ListItem primaryText="Learn" href="#/learn" leftIcon={<SocialSchool />} />
-        <ListItem primaryText="My Profile" href="#/my_profile" leftIcon={<SocialPerson />} />
+        <ListItem primaryText="My Profile" href="#/profile" leftIcon={<SocialPerson />} />
       </List>
       <Divider />
       {children}

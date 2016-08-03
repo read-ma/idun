@@ -30,10 +30,10 @@ const ProfileHeader = () => {
 
 export default (
   <Route path="/" component={Main} history={appHistory}>
-    <IndexRedirect to={ls.get('IS_AUTHENTICATED') ? '/my_profile' : '/home'} />
+    <IndexRedirect to="/home" />
     <Route path="/login" component={Login} />
     <Route path="/home" components={{ children: Home }} />
-    <Route path="/my_profile" components={{
+    <Route path="/profile" components={{
       children: requireAuthentication(MyProfile),
       topNavChildren: ProfileHeader
     }} />
