@@ -50,6 +50,10 @@ const RecommendedArticleListItem = ({ article }) => {
   );
 };
 
+RecommendedArticleListItem.propTypes = {
+  article: React.PropTypes.object
+};
+
 const RecommendedArticleList = ({ list }) => {
   let articles =
     filterArticles(list, { learning: 'pending', difficulty: 'all' })
@@ -62,6 +66,10 @@ const RecommendedArticleList = ({ list }) => {
       <List> {articles} </List>
     </div>
   );
+};
+
+RecommendedArticleList.propTypes = {
+  list: React.PropTypes.array
 };
 
 class Profile extends React.Component {

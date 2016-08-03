@@ -74,7 +74,7 @@ function mapStateToProps(state) {
 
 const mapActionsToProps = (dispatch) => {
   return {
-    delete: function () {
+    delete: function() {
       dispatch(
         deleteArticle(this.props.articleId));
     },

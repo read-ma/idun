@@ -14,7 +14,6 @@ casper.test.begin('User can login and logout', 3, function(test) {
       testHelpers.checkUrl(this, 'login');
       this.test.assertExists($.loginForm, 'Login form is present');
       helpers.logIn(this);
-      this.capture('cap.png');
     }).then(function() {
       helpers.logOut(this);
     })

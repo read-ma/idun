@@ -27,7 +27,6 @@ class Word extends Component {
   }
 }
 
-
 Word.propTypes = {
   separator: React.PropTypes.array,
   word: React.PropTypes.string.isRequired,
@@ -35,12 +34,13 @@ Word.propTypes = {
   onClick: React.PropTypes.func.isRequired,
 };
 
-
 const ArticlePara = ({ tokens, handleWordClick, wordlists }) => {
-  tokens = tokens.map(p => new Token(p));
-  wordlists.forEach(list => tokens = markSelectedInDict(tokens, list));
+  let tokensList = tokens.map(p => new Token(p));
+  wordlists.forEach(list => {
+    tokensList = markSelectedInDict(tokensList, list);
+  });
 
-  const paragraph = tokens.map((token, i) => {
+  const paragraph = tokensList.map((token, i) => {
     return (
       <Word
         className={token.className()}

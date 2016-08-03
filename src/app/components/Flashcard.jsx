@@ -98,9 +98,8 @@ class Flashcard extends Component {
           {this.reverse()}
         </div>
       );
-    } else {
-      return this[this.state.side]();
     }
+    return this[this.state.side]();
   }
 
   render() {

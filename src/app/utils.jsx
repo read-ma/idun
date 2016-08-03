@@ -1,10 +1,9 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
+/* eslint no-unused-vars: ["error", { "varsIgnorePattern": "push" }] */
 import { push } from 'react-router-redux';
 
-
 export function requireAuthentication(Component) {
-
   class AuthenticatedComponent extends React.Component {
 
     componentWillMount() {
@@ -23,17 +22,19 @@ export function requireAuthentication(Component) {
     }
 
     render() {
-
-      if (this.props.isAuthenticated)
+      if (this.props.isAuthenticated) {
         return (<div><Component {...this.props}/></div>);
-      else
-        return false;
+      }
+      return false;
     }
   }
 
-
   AuthenticatedComponent.contextTypes = {
     router: React.PropTypes.object
+  };
+
+  AuthenticatedComponent.propTypes = {
+    isAuthenticated: React.PropTypes.bool
   };
 
   const mapStateToProps = (state) => ({
@@ -43,5 +44,4 @@ export function requireAuthentication(Component) {
   });
 
   return connect(mapStateToProps)(AuthenticatedComponent);
-
 }

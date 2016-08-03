@@ -8,4 +8,9 @@ const NotificationBox = ({ message, type }) => {
   return <h3 className={type}>{message}</h3>;
 };
 
+NotificationBox.propTypes = {
+  message: React.PropTypes.string.isRequired,
+  type: React.PropTypes.string
+};
+
 export default NotificationBox;

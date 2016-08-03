@@ -12,21 +12,21 @@ function getAuthToken() {
   return store.getState().auth.auth_token;
 }
 
-instance.interceptors.response.use(function (config) {
+instance.interceptors.response.use(function(config) {
   store.dispatch(processFinished());
   return config;
-}, function (error) {
+}, function(error) {
   store.dispatch(processFinished());
   return Promise.reject(error);
 });
 
-instance.interceptors.request.use(function (config) {
+instance.interceptors.request.use(function(config) {
   if (!config.url.match(/api\/login/)) {
     config.params = Object.assign({}, config.params, { auth_token: getAuthToken() });
   }
   store.dispatch(processStarted());
   return config;
-}, function (error) {
+}, function(error) {
   return Promise.reject(error);
 });
 

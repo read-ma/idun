@@ -43,14 +43,15 @@ class FlashcardsQuiz extends Component {
         <div>
           <h2>Congratulations!</h2>
           <h3>You have accomplished your session! Do not forgot to review the words tomorrow.</h3>
-          <h4>Now you may revise some words from <Link to="learn">other decks</Link> or start reading <Link to="articles">next article</Link> to learn more new words for the victory!</h4>
+          <h4>Now you may revise some words from
+           <Link to="learn">other decks</Link> or start reading
+           <Link to="articles">next article</Link> to learn more new words for the victory!</h4>
         </div>
       );
     }
 
     return (
       <div className="row flashcards-container">
-        {/* <FlashcardProgress items={this.props.items} />*/}
         <div className="col-xs-12">
           <Flashcard
           key={this.props.currentItem.id}
@@ -70,7 +71,9 @@ FlashcardsQuiz.propTypes = {
   currentItem: React.PropTypes.object,
   params: React.PropTypes.object,
   markItem: React.PropTypes.func,
-  dispatch: React.PropTypes.func
+  dispatch: React.PropTypes.func,
+  ready: React.PropTypes.bool,
+  done: React.PropTypes.bool,
 };
 
 function getItems(state) {
