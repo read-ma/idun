@@ -22,7 +22,8 @@ $d3k-bg: lightgreen;
     .content {
       line-height: 155%;
       img[src] {
-        margin-bottom: 1em;
+        margin: 0 auto 1em auto;
+        display: block;
         max-width: 100%;
         padding: 1px;
         border: 1px solid #aeaeae;
@@ -89,7 +90,7 @@ $d3k-bg: lightgreen;
     }
   }
 
-  p {
+  .paragraph {
     margin-bottom: 1em;
   }
 
