@@ -50,12 +50,6 @@ blockquote {
   margin-right: 0;
 }
 
-.main-content {
-  padding-left: 20px;
-  padding-right: 20px;
-  width: calc(92vw - 500px);
-  transition: all 250ms ease-in-out;
-}
 
 .sidebar-closed .main-content {
   @extend %centered;
@@ -71,7 +65,12 @@ blockquote {
   padding-top: 105px;
 }
 
-
+.main-content {
+  padding-left: 20px;
+  padding-right: 20px;
+  width: calc(96vw - 510px);
+  transition: all 200ms ease-in-out;
+}
 
 @media (min-width: 1600px) {
   .main-content {
