@@ -117,13 +117,8 @@ class Sidebar extends Component {
         </AppBar>
         <TargetLanguageMenu style={style} />
 
-        <ShowIf condition={!!this.props.selectedText}>
-          <UserCustomDefinition />
-        </ShowIf>
-
-        <ShowIf condition={!!this.props.selectedText}>
-          <DefinitionBoxes />
-        </ShowIf>
+        <UserCustomDefinition />
+        <DefinitionBoxes />
 
         <ShowIf condition={!this.props.selectedText}>
           <TranslationsInstruction />
