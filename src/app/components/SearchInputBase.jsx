@@ -1,6 +1,23 @@
 import React, { Component } from 'react';
 import TextField from 'material-ui/lib/text-field';
 
+const styles = {
+  component: {
+    width: '100%',
+    marginRight: 'auto',
+    marginLeft: 10,
+    backgroundColor: '#fff',
+    fontSize: 20
+  },
+  input: {
+    paddingLeft: 20,
+    color: '#555'
+  },
+  hint: {
+    paddingLeft: 20
+  }
+};
+
 class SearchInputBase extends Component {
   constructor(props) {
     super(props);
@@ -31,15 +48,9 @@ class SearchInputBase extends Component {
         value={this.state.query}
         hintText={this.props.hintText}
         underlineShow={false}
-        hintStyle={{ paddingLeft: 20 }}
-        inputStyle={{ paddingLeft: 20, color: '#555' }}
-        style={{
-          width: '100%',
-          marginRight: 'auto',
-          marginLeft: 10,
-          backgroundColor: '#fff',
-          fontSize: 20
-        }}
+        style={styles.component}
+        inputStyle={styles.input}
+        hintStyle={styles.hint}
     />);
   }
 }

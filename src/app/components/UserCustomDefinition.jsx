@@ -38,9 +38,9 @@ const styles = {
   }
 };
 
-const TranslationBox = ({ translation }) => {
+const TranslationBox = ({ translation, key }) => {
   return (
-    <ListItem leftIcon={<SocialSchool />} disabled={true}>
+    <ListItem leftIcon={<SocialSchool />} disabled={true} key={key}>
       <span dangerouslySetInnerHTML={{ __html: translation }} />
     </ListItem>
   );
@@ -48,6 +48,7 @@ const TranslationBox = ({ translation }) => {
 
 TranslationBox.propTypes = {
   translation: React.PropTypes.string,
+  key: React.PropTypes.string,
 };
 
 const DefinitionsBox = ({ list }) => {

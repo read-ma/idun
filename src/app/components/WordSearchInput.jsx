@@ -13,8 +13,7 @@ function mapStateToProps(state) {
 const mapActionsToProps = (dispatch) => {
   return {
     onFilterChange(change) {
-      dispatch(
-        textSelected(change.query));
+      dispatch(textSelected(change.query));
     }
   };
 };
