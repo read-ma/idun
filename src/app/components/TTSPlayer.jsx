@@ -3,10 +3,14 @@ import { connect } from 'react-redux';
 
 import * as player from '../actions/tts';
 
+import FlatButton from 'material-ui/lib/flat-button';
 import IconButton from 'material-ui/lib/icon-button';
 import AVPlayArrow from 'material-ui/lib/svg-icons/av/play-arrow';
+import AVVolumeUp from 'material-ui/lib/svg-icons/av/volume-up';
 import AVPause from 'material-ui/lib/svg-icons/av/pause';
 import AVStop from 'material-ui/lib/svg-icons/av/stop';
+import colors from 'material-ui/lib/styles/colors';
+
 
 const hasTTSsupport = (() => typeof window.SpeechSynthesisUtterance === 'function')();
 
@@ -27,9 +31,18 @@ const styles = {
     flexWrap: 'nowrap',
     flexBasis: '90%'
   },
-  buttons: {
+  icon: {
     margin: 0,
     padding: 0,
+  },
+  quickPlayer: {
+    float: 'right',
+    padding: '0px 7px',
+    color: colors.grey600,
+    hoverColor: colors.grey900
+  },
+  listenIcon: {
+    marginBottom: -6
   }
 };
 
@@ -43,19 +56,19 @@ class Player extends Component {
   }
 
   render() {
-    if (!hasTTSsupport || this.props.isMobile) {
+    if (!hasTTSsupport) {
       return null;
     }
     return (
       <div style={styles.player}>
         <h4 style={styles.header}>Read</h4>
-        <IconButton style={styles.buttons} onClick={this.play.bind(this)}>
+        <IconButton style={styles.icon} onClick={this.play.bind(this)}>
           <AVPlayArrow />
         </IconButton>
-        <IconButton style={styles.buttons} onClick={this.props.pause}>
+        <IconButton style={styles.icon} onClick={this.props.pause}>
           <AVPause />
         </IconButton>
-        <IconButton style={styles.buttons} onClick={this.props.stop}>
+        <IconButton style={styles.icon} onClick={this.props.stop}>
           <AVStop />
         </IconButton>
       </div>
@@ -73,7 +86,6 @@ Player.propTypes = {
   selection: React.PropTypes.string.isRequired,
   language: React.PropTypes.string.isRequired,
   playSingle: React.PropTypes.func.isRequired,
-  isMobile: React.PropTypes.bool.isRequired
 };
 
 class QuickPlayer extends Component {
@@ -82,15 +94,13 @@ class QuickPlayer extends Component {
   }
 
   render() {
-    if (!hasTTSsupport || this.props.isMobile) {
+    if (!hasTTSsupport) {
       return null;
     }
     return (
-      <div style={{ float: 'left' }}>
-        <IconButton onClick={this.play.bind(this)} tooltip="Read phrase" tooltipStyles={styles.tooltip}>
-          <AVPlayArrow />
-        </IconButton>
-      </div>
+      <FlatButton onClick={this.play.bind(this)} style={styles.quickPlayer} disabled={!this.props.selection}>
+        <AVVolumeUp style={styles.listenIcon} color={colors.grey600} /> Listen
+      </FlatButton>
     );
   }
 }
@@ -99,7 +109,6 @@ QuickPlayer.propTypes = {
   selection: React.PropTypes.string.isRequired,
   language: React.PropTypes.string.isRequired,
   playSingle: React.PropTypes.func.isRequired,
-  isMobile: React.PropTypes.bool.isRequired
 };
 
 function mapStateToProps(state) {
@@ -108,7 +117,6 @@ function mapStateToProps(state) {
     article: state.article,
     language: state.settings.language.from,
     ttsStatus: state.ttsStatus,
-    isMobile: state.settings.isMobile,
   };
 }
 

@@ -59,7 +59,7 @@ const DefinitionsBox = ({ list }) => {
       return <TranslationBox key={`translation-item-${index}`} translation={def.translation} index={index} />;
     });
   } else {
-    definitions.push(<ListItem style={styles.instructions} disabled={true}>
+    definitions.push(<ListItem style={styles.instructions} disabled={true} key={'translations-instructions'}>
       You can add new translation using field below or by clicking translations provided by us.
     </ListItem>);
   }

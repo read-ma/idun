@@ -161,8 +161,7 @@ ArticleAdd.propTypes = {
 const mapActionsToProps = (dispatch) => {
   return {
     closeNav() {
-      dispatch(
-        closeNav('right'));
+      dispatch(closeNav('right'));
     },
     addArticle(article) {
       if (!article.public) {
@@ -171,9 +170,7 @@ const mapActionsToProps = (dispatch) => {
       dispatch(addArticle(article));
     },
     changeArticle(changeset) {
-      dispatch(
-        changeArticle(changeset)
-      );
+      dispatch(changeArticle(changeset));
     }
   };
 };

@@ -16,7 +16,10 @@ import { TTSQuickPlayer } from '../components/TTSPlayer';
 let initialCSS = {
   desktop: {
     sidebar: {
-      width: 500
+      width: 500,
+      appbar: {
+        alignItems: 'center'
+      }
     },
     targetLanguageMenu: {
       float: 'right',
@@ -38,6 +41,7 @@ let initialCSS = {
       appbar: {
         position: 'fixed',
         top: 0,
+        alignItems: 'center'
       },
     },
     targetLanguageMenu: {
@@ -73,9 +77,10 @@ class Sidebar extends Component {
 
     return (
       <LeftNav width={style.sidebar.width} style={style.sidebar} docked={this.props.sidebarDocked} openRight={true} open={this.props.open}>
-        <AppBar title={<WordSearchInput />} style={style.appbar} iconElementLeft={leftIcon} />
+        <AppBar style={style.sidebar.appbar} iconElementLeft={leftIcon}>
+          <WordSearchInput rightComponent={<TTSQuickPlayer />} />
+        </AppBar>
         <TargetLanguageMenu style={style} />
-        <TTSQuickPlayer />
         <UserCustomDefinition />
         <DefinitionBoxes />
       </LeftNav>
