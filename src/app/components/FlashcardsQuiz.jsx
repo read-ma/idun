@@ -43,9 +43,11 @@ class FlashcardsQuiz extends Component {
         <div>
           <h2>Congratulations!</h2>
           <h3>You have accomplished your session! Do not forgot to review the words tomorrow.</h3>
-          <h4>Now you may revise some words from
-           <Link to="learn">other decks</Link> or start reading
-           <Link to="articles">next article</Link> to learn more new words for the victory!</h4>
+          <h4>
+            Now you may revise some words 
+            from <Link to="learn">other decks</Link> or 
+            start reading <Link to="articles">next article</Link> to learn more new words for the victory!
+          </h4>
         </div>
       );
     }
@@ -67,7 +69,6 @@ class FlashcardsQuiz extends Component {
 FlashcardsQuiz.propTypes = {
   items: React.PropTypes.array.isRequired,
   show: React.PropTypes.bool,
-  endQuiz: React.PropTypes.func,
   currentItem: React.PropTypes.object,
   params: React.PropTypes.object,
   markItem: React.PropTypes.func,

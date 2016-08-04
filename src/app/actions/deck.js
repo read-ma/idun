@@ -1,4 +1,3 @@
-import { push } from 'react-router-redux';
 import api from '../api';
 
 function deckLoaded(deck) {
@@ -7,26 +6,6 @@ function deckLoaded(deck) {
     deck
   };
 }
-
-function deckFinished(deck) {
-  return {
-    type: 'DECK_FINISHED',
-    deck,
-  };
-}
-
-function endQuiz(deck) {
-  return (dispatch) => {
-    dispatch(deckFinished(deck));
-    dispatch(push('/results'));
-  };
-}
-
-// function closeResults() {
-//   return (dispatch) => {
-//     dispatch(push('/learn'));
-//   };
-// }
 
 function loadDeckForArticle(deckId) {
   return (dispatch) => {
@@ -68,4 +47,4 @@ function markItem(id, value) {
   };
 }
 
-export { endQuiz, loadDeckForArticle, loadDecks, markItem };
+export { loadDeckForArticle, loadDecks, markItem };

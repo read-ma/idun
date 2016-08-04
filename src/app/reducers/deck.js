@@ -23,8 +23,6 @@ export default function deck(state = initialState, action) {
   switch (action.type) {
   case 'DECK_LOADED':
     return Object.assign({}, state, action.deck);
-  case 'DECK_FINISHED':
-    return Object.assign({}, state, action.deck);
   case 'MARK_ITEM':
     return Object.assign({}, state, {
       cards: state.cards.map(item => {

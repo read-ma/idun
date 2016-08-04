@@ -1,6 +1,6 @@
 import { loadArticles, loadArticle, confirmArticleLearned, articlePageClosed, deleteArticle } from './articles';
 import { findTextDefinitions } from './definitions';
-import { loadDecks, loadDeckForArticle, endQuiz } from './deck';
+import { loadDecks, loadDeckForArticle } from './deck';
 import api from '../api';
 import { store } from 'react-redux';
 
@@ -120,7 +120,6 @@ export { loadArticles, loadArticle, confirmArticleLearned, articlePageClosed,
          loadUserDefinitions, saveUserDefinition,
          loadDeckForArticle, loadDecks,
          deleteArticle,
-         endQuiz,
          findTextDefinitions,
          changeLanguage,
          processFinished, processStarted,
