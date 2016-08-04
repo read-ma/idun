@@ -19,7 +19,7 @@ const styles = {
     lineHeight: '16px'
   },
   listItem: {
-    cursor: 'crosshair'
+    cursor: 'copy'
   },
   moreOrLessButton: {
     textAlign: 'center'
