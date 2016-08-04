@@ -14,6 +14,7 @@ const ChunkManifestPlugin = require('chunk-manifest-webpack-plugin');
 module.exports = {
   // Read more about debugging: http://webpack.github.io/docs/configuration.html#devtool
   // devtool: 'inline-source-map',
+  devtool: 'source-map',
   entry: {
     bundle: './src/app/app',
     vendor: [
@@ -26,7 +27,10 @@ module.exports = {
   output: {
     path: path.join(__dirname, '/public'),
     filename: '[name].js',
-    chunkFilename: '[name].js'
+    chunkFilename: '[name].js',
+    devtoolLineToLine: true,
+    pathinfo: true,
+    sourceMapFilename: 'public/[name].js.map',
   },
   module: {
     loaders: [
