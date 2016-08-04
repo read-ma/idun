@@ -82,10 +82,10 @@ function getItems(state) {
   }
 
   return state.deck
-              .cards
-              .filter(card => card.group < 4)
-              .map(card => card.repeatedAt ? card : Object.assign({}, card, { repeatedAt: new Date() }))
-              .sort((card_a, card_b) => new Date(card_a.repeatedAt) - new Date(card_b.repeatedAt));
+    .cards
+    .filter(card => card.group < 4)
+    .map(card => card.repeatedAt ? card : Object.assign({}, card, { repeatedAt: new Date() }))
+    .sort((card_a, card_b) => new Date(card_a.repeatedAt) - new Date(card_b.repeatedAt));
 }
 
 function mapStateToProps(state) {

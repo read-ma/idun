@@ -124,8 +124,8 @@ const confirmArticleLearned = (id) => {
     api.post('/article_actions.json', {
       article_action: { article_id: id, action: 'learned' }
     })
-    .then(() => dispatch(articleLearned(id)))
-    .catch(error => console.error(error));
+      .then(() => dispatch(articleLearned(id)))
+      .catch(error => console.error(error));
   };
 };
 
@@ -134,7 +134,6 @@ const articlePageClosed = () => {
     type: 'ARTICLE_PAGE_CLOSED',
   };
 };
-
 
 export {
   loadArticle,

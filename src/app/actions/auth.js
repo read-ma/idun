@@ -75,13 +75,13 @@ const loginAttempt = (email, password) => {
       '/login.json',
       { admin_user: { email: email, password: password } }
     )
-    .then((response) => {
-      dispatch(userLoggedIn(response.data));
-      dispatch(push(returnTo(store.getState())));
-    })
-    .catch(function(response) {
-      dispatch(userSigningInError(response));
-    });
+      .then((response) => {
+        dispatch(userLoggedIn(response.data));
+        dispatch(push(returnTo(store.getState())));
+      })
+      .catch(function(response) {
+        dispatch(userSigningInError(response));
+      });
   };
 };
 
