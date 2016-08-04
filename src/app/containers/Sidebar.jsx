@@ -1,17 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { DefinitionBoxes } from '../components';
-import UserCustomDefinition from '../components/UserCustomDefinition';
+
 import { closeNav } from '../actions';
 import { screenWidth } from '../Responsive';
+
+import UserCustomDefinition from '../components/UserCustomDefinition';
+import WordSearchInput from '../components/WordSearchInput';
+import LanguageDropDownMenu from '../components/language/LanguageDropDownMenu';
+import { TTSQuickPlayer } from '../components/TTSPlayer';
 
 import LeftNav from 'material-ui/lib/left-nav';
 import IconButton from 'material-ui/lib/icon-button';
 import NavigationClose from 'material-ui/lib/svg-icons/navigation/close';
 import AppBar from 'material-ui/lib/app-bar';
-import WordSearchInput from '../components/WordSearchInput';
-import LanguageDropDownMenu from '../components/language/LanguageDropDownMenu';
-import { TTSQuickPlayer } from '../components/TTSPlayer';
+import colors from 'material-ui/lib/styles/colors';
+
+import { DefinitionBoxes, ShowIf } from '../components';
 
 let initialCSS = {
   desktop: {
@@ -58,6 +62,23 @@ let initialCSS = {
   }
 };
 
+const styles = {
+  translationsInstruction: {
+    clear: 'both',
+    width: '75%',
+    display: 'block',
+    paddingTop: '3.5em',
+    margin: 'auto'
+  },
+  instructionParagraph: {
+    marginBottom: '1em',
+    color: colors.grey300,
+    fontSize: '1.85em',
+    lineHeight: '145%',
+    fontWeight: 200,
+  }
+};
+
 const TargetLanguageMenu = ({ style }) => {
   return (<div style={style.targetLanguageMenu}>
     <h4 style={style.header}>My language:</h4>
@@ -67,6 +88,20 @@ const TargetLanguageMenu = ({ style }) => {
 
 TargetLanguageMenu.propTypes = {
   style: React.PropTypes.object.isRequired
+};
+
+const TranslationsInstruction = () => {
+  return (<div style={styles.translationsInstruction}>
+    <p style={styles.instructionParagraph}>
+      Click on any word in the article to find translations, definitions, images, related words and examples.
+    </p>
+    <p style={styles.instructionParagraph}>
+      Once you find the best translation or definition you may want to add it to your dictionary and review later using Learn section.
+    </p>
+    <p style={styles.instructionParagraph}>
+      Learning new words is now pretty easy :)
+    </p>
+  </div>);
 };
 
 
@@ -81,8 +116,18 @@ class Sidebar extends Component {
           <WordSearchInput rightComponent={<TTSQuickPlayer />} />
         </AppBar>
         <TargetLanguageMenu style={style} />
-        <UserCustomDefinition />
-        <DefinitionBoxes />
+
+        <ShowIf condition={!!this.props.selectedText}>
+          <UserCustomDefinition />
+        </ShowIf>
+
+        <ShowIf condition={!!this.props.selectedText}>
+          <DefinitionBoxes />
+        </ShowIf>
+
+        <ShowIf condition={!this.props.selectedText}>
+          <TranslationsInstruction />
+        </ShowIf>
       </LeftNav>
     );
   }
