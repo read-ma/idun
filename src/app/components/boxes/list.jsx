@@ -13,10 +13,16 @@ const styles = {
     float: 'left',
     marginRight: 5,
     border: '1px solid #ccc',
-    backgroundSize: 'cover'
+    backgroundSize: 'cover',
+  },
+  definition: {
+    lineHeight: '16px'
   },
   listItem: {
-    float: 'left'
+    cursor: 'crosshair'
+  },
+  moreOrLessButton: {
+    textAlign: 'center'
   }
 };
 
@@ -43,9 +49,9 @@ function DefinitionListItem({ text, language, partOfSpeech, handleClick, key }) 
   }
 
   return (
-    <ListItem key={key} rightIcon={<ContentAddCircleOutline />} secondaryText={partOfSpeech} onClick={add}>
+    <ListItem key={key} rightIcon={<ContentAddCircleOutline />} secondaryText={partOfSpeech} onClick={add} style={styles.listItem}>
       <LanguageIcon lang={language} />
-      <span style={{ lineHeight: '20px' }} dangerouslySetInnerHTML={{ __html: text }} />
+      <span style={styles.definition} dangerouslySetInnerHTML={{ __html: text }} />
     </ListItem>
   );
 }
