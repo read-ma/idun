@@ -82,7 +82,7 @@ class Profile extends React.Component {
       data: chartSettings(this.props.data),
       options: {
         tooltips: {
-          enabled: true
+          enabled: false
         }
       }
     });
