@@ -55,6 +55,7 @@ casper.test.begin('User can add his own translation to dictionary', 1, function(
       this.clickLabel('language', 'span');
     })
     .waitForSelector($.userCustomDefinitions, function() {
+      this.clickLabel('No matching translation? Add yours here.', 'span');
       this.sendKeys($.newTranslationInput, 'My translation \n');
     })
     .waitForSelector($.userDefinitionBox, function() {
