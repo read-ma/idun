@@ -26,7 +26,8 @@ const styles = {
     fontWeight: 600
   },
   publishToggle: {
-    marginTop: '30px'
+    marginBottom: '30px',
+    marginTop: '10px'
   },
   fieldset: {
     borderColor: colors.grey300,
@@ -54,6 +55,12 @@ class ArticleForm extends React.Component {
 
   render() {
     return (<form onSubmit={this.props.addArticle} style={styles.articleForm}>
+
+      <ShowIf condition={this.props.isAdmin}>
+        <Toggle label="Publish to everyone" labelPosition="right" name="public"
+          onToggle={this.onToggle} toggled={this.isPublic()} style={styles.publishToggle} />
+      </ShowIf>
+
       <fieldset style={styles.fieldset}>
         <legend>Import from link</legend>
 
@@ -104,11 +111,7 @@ class ArticleForm extends React.Component {
         <RaisedButton label="Save" primary={true} type="submit" style={styles.sendButton} />
       </fieldset>
 
-      <ShowIf condition={this.props.isAdmin}>
-        <Toggle label="Publish to everyone" labelPosition="right" name="public"
-          onToggle={this.onToggle} toggled={this.isPublic()} style={styles.publishToggle} />
-      </ShowIf>
-    </form>);
+   </form>);
   }
 }
 

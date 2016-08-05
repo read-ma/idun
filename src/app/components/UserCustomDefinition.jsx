@@ -10,6 +10,9 @@ import TextField from 'material-ui/lib/text-field';
 import Paper from 'material-ui/lib/paper';
 import SocialSchool from 'material-ui/lib/svg-icons/social/school';
 import RaisedButton from 'material-ui/lib/raised-button';
+import FloatingActionButton from 'material-ui/lib/floating-action-button';
+import ContentAdd from 'material-ui/lib/svg-icons/content/add';
+import { ShowIf } from '../components';
 
 const styles = {
   userDefinitionBox: {
@@ -58,11 +61,7 @@ const DefinitionsBox = ({ list }) => {
     definitions = list.map((def, index) => {
       return <TranslationBox key={`translation-item-${index}`} translation={def.translation} index={index} />;
     });
-  } else {
-    definitions.push(<ListItem style={styles.instructions} disabled={true} key={'translations-instructions'}>
-      You can add new translation using field below or by clicking translations provided by us.
-    </ListItem>);
-  }
+  };
 
   return (
     <List style={styles.userDefinitionBox} id="user-definition-box" subheader="My dictionary">
@@ -82,6 +81,7 @@ class UserCustomDefinition extends Component {
     this.state = { userDefinitions: [] };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.saveUserDefinition = this.saveUserDefinition.bind(this);
+    this.toggleFormVisibility = this.toggleFormVisibility.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -101,6 +101,10 @@ class UserCustomDefinition extends Component {
     this.setState({ [event.target.name]: event.target.value });
   }
 
+  toggleFormVisibility() {
+    this.setState({ formVisible: !this.state.formVisible });
+  }
+
   render() {
     if (!this.props.selectedText) {
       return false;
@@ -110,16 +114,25 @@ class UserCustomDefinition extends Component {
       <Paper zDepth={1} style={styles.paper} id="user-custom-definitions">
         <DefinitionsBox list={this.state.userDefinitions} />
 
-        <ListItem disabled={true}>
-        <TextField hintText="Add new translation" name="translation"
-          id="new-translation-input"
-          onEnterKeyDown={this.saveUserDefinition}
-          onChange={this.handleInputChange}
-          value={this.state.translation}
-          style={styles.translationInput}
-        />
-        <RaisedButton label="Save" type="submit" style={styles.saveButton} onClick={this.saveUserDefinition} />
-      </ListItem>
+        <ShowIf condition={!this.state.formVisible}>
+          <ListItem disabled={true}>
+            <RaisedButton style={styles} onClick={this.toggleFormVisibility} small={true} label="No matching translation? Add yours here."/>
+          </ListItem>
+        </ShowIf>
+
+        <ShowIf condition={!!this.state.formVisible}>
+          <ListItem disabled={true}>
+            <TextField hintText="Add new translation" name="translation"
+              id="new-translation-input"
+              onEnterKeyDown={this.saveUserDefinition}
+              onChange={this.handleInputChange}
+              value={this.state.translation}
+              style={styles.translationInput}
+            />
+            <RaisedButton label="Save" type="submit" style={styles.saveButton} onClick={this.saveUserDefinition} />
+            <RaisedButton label="Cancel" type="reset" style={styles.saveButton} onClick={this.toggleFormVisibility} />
+          </ListItem>
+        </ShowIf>
       </Paper>
     );
   }

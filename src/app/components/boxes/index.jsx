@@ -85,7 +85,7 @@ class RemoteList extends SimpleList {
   }
 }
 
-class Graphics extends RemoteList {
+class GraphicList extends RemoteList {
   render() {
     if (_.isEmpty(this.props.items)) {
       return false;
@@ -112,7 +112,7 @@ class SidebarBoxRegistry {
     this.registry = {
       SimpleList: SimpleList,
       RemoteList: RemoteList,
-      Graphics: Graphics
+      GraphicList: GraphicList
     };
   }
 
