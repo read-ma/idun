@@ -13,6 +13,7 @@
   },
   "scripts": {
     "build:production": "rm -rf dist && NODE_ENV=production node node_modules/webpack/bin/webpack.js -p --config webpack.production.config.js",
+    "lint": "node ./node_modules/eslint/bin/eslint.js src/ --ext .js --ext .jsx",
     "test": "casperjs test test/test.js",
     "unit-test": "jest",
     "deploy:production": "NODE_ENV=production node node_modules/webpack/bin/webpack.js -p --config webpack.production.config.js",
@@ -22,6 +23,9 @@
     "dev": "node node_modules/webpack-dev-server/bin/webpack-dev-server.js --progress --colors --inline --content-base public/",
     "maintenance": "sh script/maintenance.sh"
   },
+  "pre-push": [
+    "lint"
+  ],
   "dependencies": {
     "airbrake-js": "0.5.9",
     "axios": "^0.13.1",
@@ -63,6 +67,7 @@
     "material-ui": "^0.14.4",
     "node-env-file": "^0.1.8",
     "node-sass": "^3.4.2",
+    "pre-push": "^0.1.1",
     "react-tap-event-plugin": "^0.2.2",
     "request": "^2.74.0",
     "sass-loader": "^4.0.0",
