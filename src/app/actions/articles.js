@@ -130,8 +130,9 @@ const confirmArticleLearned = (id) => {
 };
 
 const articlePageClosed = () => {
-  return {
-    type: 'ARTICLE_PAGE_CLOSED',
+  return (dispatch) => {
+    dispatch(closeNav('right'));
+    return { type: 'ARTICLE_PAGE_CLOSED' };
   };
 };
 
