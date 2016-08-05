@@ -25,9 +25,7 @@ const styles = {
 const LanguageFlag = ({ langKey }) => {
   let flagCode = langKey === 'en' ? 'gb' : langKey;
 
-  return (
-    <span style={styles.flagStyles} className={`flag-icon flag-icon-${flagCode}`}></span>
-  );
+  return (<span style={styles.flagStyles} className={`flag-icon flag-icon-${flagCode}`}/>);
 };
 
 LanguageFlag.propTypes = {

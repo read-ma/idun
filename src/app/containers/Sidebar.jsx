@@ -107,7 +107,7 @@ const TranslationsInstruction = () => {
 
 class Sidebar extends Component {
   render() {
-    const leftIcon = this.props.isMobile ? <IconButton onClick={this.props.closeNav}><NavigationClose /></IconButton> : <i></i>;
+    const leftIcon = this.props.isMobile ? <IconButton onClick={this.props.closeNav}><NavigationClose /></IconButton> : <i/>;
     const style = initialCSS[this.props.isMobile ? 'mobile' : 'desktop'];
 
     return (

@@ -11,7 +11,7 @@ const ConfirmLearnedButton = ({ confirmLearned, articleId, articleLearned }) => 
   };
 
   if (articleLearned || typeof articleLearned === 'undefined') {
-    return <span></span>;
+    return <span/>;
   }
 
   return (

@@ -44,8 +44,8 @@ class FlashcardsQuiz extends Component {
           <h2>Congratulations!</h2>
           <h3>You have accomplished your session! Do not forgot to review the words tomorrow.</h3>
           <h4>
-            Now you may revise some words 
-            from <Link to="learn">other decks</Link> or 
+            Now you may revise some words
+            from <Link to="learn">other decks</Link> or
             start reading <Link to="articles">next article</Link> to learn more new words for the victory!
           </h4>
         </div>

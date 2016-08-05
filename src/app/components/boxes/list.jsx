@@ -28,12 +28,10 @@ const styles = {
 
 const LanguageIcon = ({ lang }) => {
   let language = lang === 'en' ? 'gb' : lang;
-  let languageIcon = <span></span>;
+  let languageIcon = <span/>;
 
   if (language) {
-    languageIcon = (<span style={styles.languageIcon}
-      className={`flag-icon flag-icon-${language}`}></span>
-    );
+    languageIcon = (<span style={styles.languageIcon} className={`flag-icon flag-icon-${language}`} />);
   }
 
   return languageIcon;

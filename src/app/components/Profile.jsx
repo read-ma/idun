@@ -106,7 +106,7 @@ class Profile extends React.Component {
   overallProgress() {
     return (<div className="col-xs-12 col-md-6">
       <h2>Your overall progress</h2>
-      <canvas id="learning-progress-chart" width="300" height="300" style={styles.progressChart}></canvas>
+      <canvas id="learning-progress-chart" width="300" height="300" style={styles.progressChart} />
     </div>);
   }
 
