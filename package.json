@@ -24,9 +24,7 @@
     "maintenance": "sh script/maintenance.sh"
   },
   "pre-push": [
-    "lint",
-    "test",
-    "unit-test"
+    "lint"
   ],
   "dependencies": {
     "airbrake-js": "0.5.9",
