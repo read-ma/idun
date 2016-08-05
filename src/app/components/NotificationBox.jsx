@@ -9,7 +9,7 @@ const NotificationBox = ({ message, type }) => {
 };
 
 NotificationBox.propTypes = {
-  message: React.PropTypes.string.isRequired,
+  message: React.PropTypes.string,
   type: React.PropTypes.string
 };
 
