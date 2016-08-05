@@ -19,8 +19,7 @@ module.exports = {
     bundle: './src/app/app',
     vendor: [
       'react', 'redux', 'redux-thunk', 'react-dom', 'react-router', 'react-ga', 'react-router-redux',
-      'react-addons-css-transition-group', 'lodash', 'moment', 'chart.js', 'material-ui',
-      'classnames', 'history', 'axios', 'airbrake-js'
+      'lodash', 'moment', 'chart.js', 'material-ui', 'classnames', 'history', 'axios', 'airbrake-js'
       // To include constants/d3k we need to extract it to its own npm module (it looks in node_modules)
     ],
   },
