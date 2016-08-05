@@ -10,8 +10,6 @@ import TextField from 'material-ui/lib/text-field';
 import Paper from 'material-ui/lib/paper';
 import SocialSchool from 'material-ui/lib/svg-icons/social/school';
 import RaisedButton from 'material-ui/lib/raised-button';
-import FloatingActionButton from 'material-ui/lib/floating-action-button';
-import ContentAdd from 'material-ui/lib/svg-icons/content/add';
 import { ShowIf } from '../components';
 
 const styles = {
@@ -61,7 +59,7 @@ const DefinitionsBox = ({ list }) => {
     definitions = list.map((def, index) => {
       return <TranslationBox key={`translation-item-${index}`} translation={def.translation} index={index} />;
     });
-  };
+  }
 
   return (
     <List style={styles.userDefinitionBox} id="user-definition-box" subheader="My dictionary">
