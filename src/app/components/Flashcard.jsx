@@ -1,6 +1,5 @@
 require('./styles/Flashcard.scss');
 import React, { Component } from 'react';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import classnames from 'classnames';
 
 import { ShowIf } from '../components';
@@ -109,27 +108,19 @@ class Flashcard extends Component {
     });
 
     return (
-      <div>
-        <ReactCSSTransitionGroup
-        transitionName="fadein"
-        transitionAppear={true} transitionLeave={false}
-        transitionEnterTimeout={500} transitionAppearTimeout={500}
-        style={{ width: '100%' }}>
-          <div className="row card-wrap" key={this.props.item.word}>
-            <div className={cardClassnames} key={this.state.side} onClick={this.revert}>
-              <Paper style={style} zDepth={2}>
-                <div className="row middle-xs between-xs" style={{ height: '100%' }}>
-                  <div className="col-xs-12">
-                    {this.renderContent()}
-                  </div>
-                  <div className="col-xs-12">
-                    {this.renderMarkButtons()}
-                  </div>
-                </div>
-              </Paper>
+      <div className="row card-wrap" key={this.props.item.word}>
+        <div className={cardClassnames} key={this.state.side} onClick={this.revert}>
+          <Paper style={style} zDepth={2}>
+            <div className="row middle-xs between-xs" style={{ height: '100%' }}>
+              <div className="col-xs-12">
+                {this.renderContent()}
+              </div>
+              <div className="col-xs-12">
+                {this.renderMarkButtons()}
+              </div>
             </div>
-          </div>
-        </ReactCSSTransitionGroup>
+          </Paper>
+        </div>
       </div>
     );
   }
