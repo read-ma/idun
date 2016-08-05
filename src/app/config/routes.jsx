@@ -31,28 +31,37 @@ const ProfileHeader = () => {
 export default (
   <Route path="/" component={Main} history={appHistory}>
     <IndexRedirect to="/home" />
-    <Route path="/login" component={Login} />
-    <Route path="/home" components={{ children: Home }} />
-    <Route path="/profile" components={{
+    <Route path="home" components={{ children: Home }} />
+    <Route path="profile" components={{
       children: requireAuthentication(Profile),
       topNavChildren: ProfileHeader
     }} />
 
-    <Route path="/sign_up" component={SignUpForm} />
+    <Route path="login" component={Login} />
+    <Route path="sign_up" component={SignUpForm} />
+
+    {/* Group under password */}
     <Route path="forgot_password" component={PasswordReminderView} />
     <Route path="reset_password" component={ChangePasswordView} />
 
-    <Route path="/learn" components={{
+    {/* Group under /learn */}
+    <Route path="learn" components={{
       children: requireAuthentication(UserDefinitionsLearn),
       topNavChildren: LearnHeader
     }} />
-    <Route path="/learn/:id" component={requireAuthentication(FlashcardsQuiz)} />
-    <Route path="/results" component={requireAuthentication(FlashcardsQuizResults)} />
-    <Route path="/definitions" component={UserDefinitionsList} />
-    <Route path="/articles"
-      components={{ children: requireAuthentication(Articles),
-                    topNavChildren: ArticleSearchInput }} />
+    <Route path="learn/:id" component={requireAuthentication(FlashcardsQuiz)} />
+    <Route path="results" component={requireAuthentication(FlashcardsQuizResults)} />
 
-    <Route path="/article/:id" components={{ children: requireAuthentication(ArticlePage), topNavChildren: TTSPlayer }} />
+
+    <Route path="definitions" component={UserDefinitionsList} />
+    <Route path="articles" components={{
+      children: requireAuthentication(Articles),
+      topNavChildren: ArticleSearchInput
+    }} />
+
+    <Route path="article/:id" components={{
+      children: requireAuthentication(ArticlePage),
+      topNavChildren: TTSPlayer
+    }} />
   </Route>
 );
