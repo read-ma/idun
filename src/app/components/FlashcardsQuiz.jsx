@@ -101,8 +101,8 @@ function mapStateToProps(state) {
 
 const mapActionsToProps = (dispatch) => {
   return {
-    markItem(id, value) {
-      dispatch(markItem(id, value));
+    markItem(item, value) {
+      dispatch(markItem(item, value));
     }
   };
 };

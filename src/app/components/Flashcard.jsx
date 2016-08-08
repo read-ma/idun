@@ -42,7 +42,7 @@ class Flashcard extends Component {
   }
 
   mark(level) {
-    this.props.markItem(this.props.item.id, level);
+    this.props.markItem(this.props.item, level);
   }
 
   revert() {
