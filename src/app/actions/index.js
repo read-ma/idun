@@ -2,7 +2,6 @@ import { loadArticles, loadArticle, confirmArticleLearned, articlePageClosed, de
 import { findTextDefinitions } from './definitions';
 import { loadDecks, loadDeckForArticle } from './deck';
 import api from '../api';
-import { store } from 'react-redux';
 
 const processFinished = () => {
   return {
@@ -87,7 +86,7 @@ function loadUserDefinitions() {
       .then((response) => {
         dispatch(userDefinitionsLoaded(response.data.user_definitions));
       })
-      .catch((error) => {
+      .catch(() => {
         dispatch(processFinished());
       });
   };

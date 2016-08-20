@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { loadUserDefinitions } from '../actions';
 import UserDefinitionCard from './UserDefinitionCard';
-import TextField from 'material-ui/lib/text-field';
-import GridList from 'material-ui/lib/grid-list/grid-list';
 
 class UserDefinitionsList extends Component {
   constructor(props) {
