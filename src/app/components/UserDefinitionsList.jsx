@@ -1,15 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
 import { loadUserDefinitions } from '../actions';
-import UserDefinitionBox from './UserDefinitionBox';
-
+import UserDefinitionCard from './UserDefinitionCard';
 import TextField from 'material-ui/lib/text-field';
-
-
-function mapStateToProps(state) {
-  return { items: state.main.userDefinitions };
-}
+import GridList from 'material-ui/lib/grid-list/grid-list';
 
 class UserDefinitionsList extends Component {
   constructor(props) {
@@ -35,27 +29,33 @@ class UserDefinitionsList extends Component {
   }
 
   componentDidMount() {
-    this.props.dispatch(
-      loadUserDefinitions()
-    );
+    this.props.loadUserDefinitions();
   }
 
   render() {
-    const items = this.state.items.map(item => <UserDefinitionBox key={item.id} item={item} />);
+    const items = this.state.items
+                      .slice(0, 30)
+                      .map(item => <UserDefinitionCard key={item.id} item={item} />);
 
     return (
-      <div>
-        <TextField hintText="Quick Search..." onChange={this.handleFilterChange} />
-        <br />
-        {items}
-      </div>
+      <div> {items} </div>
     );
   }
 }
 
 UserDefinitionsList.propTypes = {
   items: React.PropTypes.array,
-  dispatch: React.PropTypes.func,
+  loadUserDefinitions: React.PropTypes.func,
 };
 
-export default connect(mapStateToProps)(UserDefinitionsList);
+const mapActionsToProps = (dispatch) => {
+  return {
+    loadUserDefinitions: () => dispatch(loadUserDefinitions())
+  };
+};
+
+function mapStateToProps(state) {
+  return { items: state.main.userDefinitions };
+}
+
+export default connect(mapStateToProps, mapActionsToProps)(UserDefinitionsList);

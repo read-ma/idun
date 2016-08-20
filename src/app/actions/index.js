@@ -87,8 +87,8 @@ function loadUserDefinitions() {
       .then((response) => {
         dispatch(userDefinitionsLoaded(response.data.user_definitions));
       })
-      .catch(() => {
-        store.dispatch(processFinished());
+      .catch((error) => {
+        dispatch(processFinished());
       });
   };
 }
