@@ -50,6 +50,7 @@ const TranslationBox = ({ translation, key }) => {
 TranslationBox.propTypes = {
   translation: React.PropTypes.string,
   key: React.PropTypes.string,
+  word: React.PropTypes.string,
 };
 
 const DefinitionsBox = ({ list }) => {
@@ -57,7 +58,7 @@ const DefinitionsBox = ({ list }) => {
 
   if (list.length > 0) {
     definitions = list.map((def, index) => {
-      return <TranslationBox key={`translation-item-${index}`} translation={def.translation} index={index} />;
+      return <TranslationBox key={`translation-item-${index}`} translation={def.translation} index={index} word={def.word} />;
     });
   }
 
@@ -83,7 +84,7 @@ class UserCustomDefinition extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    let definitions = nextProps.userDefinitions.filter(def => def.word === nextProps.selectedText);
+    let definitions = nextProps.userDefinitions.filter(def => def.word.toLocaleLowerCase() === nextProps.selectedText.toLocaleLowerCase());
     this.setState({ userDefinitions: definitions });
   }
 
