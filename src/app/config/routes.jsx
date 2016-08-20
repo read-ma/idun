@@ -20,7 +20,7 @@ import ls from '../localStore';
 const appHistory = useRouterHistory(createHashHistory)();
 
 const LearnHeader = () => {
-  return <span>Learn</span>;
+  return <span>Flashcards</span>;
 };
 
 const ProfileHeader = () => {

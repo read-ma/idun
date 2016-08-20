@@ -3,7 +3,7 @@ import { words as d3k } from '../constants/d3k';
 const initialState = [
   { label: 'Show selected phrase', name: 'selection', enabled: true, words: [] },
   { label: 'Temporary selection', name: 'quick-selection', enabled: true, words: [] },
-  { label: 'Your saved words', name: 'user', enabled: false, toggable: true, words: [] },
+  { label: 'Your saved words', name: 'user', enabled: true, toggable: true, words: [] },
   { label: 'Frequently used words', name: 'd3k', enabled: false, toggable: true, words: d3k.split('|') },
 ];
 

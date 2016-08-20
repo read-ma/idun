@@ -65,9 +65,10 @@ class Flashcard extends Component {
       <div className="card-reverse">
         <h2>{this.props.item.translation}</h2>
         <ShowIf condition={!!this.props.item.example}>
-        <p>
-          <small>in sentence: </small>
-          {this.props.item.example}</p>
+          <p>
+            <hr />
+            {this.props.item.example}
+          </p>
         </ShowIf>
       </div>
     );
@@ -78,7 +79,6 @@ class Flashcard extends Component {
     if (this.state.reverted) {
       buttons = (
         <div className="card-action center-align">
-          <p>That was...</p>
           <FlatButton label="Easy" secondary={true} onClick={this.markEasy} />
           <FlatButton label="Hard" primary={true} onClick={this.markHard} />
         </div>
