@@ -22,6 +22,11 @@ function main(state = initialState, action) {
       state,
       { userDefinitions: Array.from(action.userDefinitions) }
     );
+  case 'USER_DEFINITION_DELETED':
+    return Object.assign(
+      {},
+      state,
+      { userDefinitions: state.userDefinitions.filter((def => def.id !== action.definition.id)) });
 
   case 'USER_DEFINITION_SAVED':
     return Object.assign(

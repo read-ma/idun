@@ -65,10 +65,24 @@ function userDefinitionSavingFailed(error) {
 }
 
 function userDefinitionSaved(definition) {
-  // 'Definition added'
   return {
     type: 'USER_DEFINITION_SAVED',
     definition,
+  };
+}
+
+function userDefinitionDeleted(definition) {
+  return {
+    type: 'USER_DEFINITION_DELETED',
+    definition,
+  };
+}
+
+function deleteUserDefinition(definition) {
+  return dispatch => {
+    api.delete(`/user_definitions/${definition.id}.json`)
+      .then(() => dispatch(userDefinitionDeleted(definition)))
+      .catch(error => console.log(error));
   };
 }
 
@@ -117,6 +131,7 @@ export { loadArticles, loadArticle, confirmArticleLearned, articlePageClosed,
          textSelected,
          toggleHighlighting,
          loadUserDefinitions, saveUserDefinition,
+         deleteUserDefinition,
          loadDeckForArticle, loadDecks,
          deleteArticle,
          findTextDefinitions,

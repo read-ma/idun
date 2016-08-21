@@ -5,8 +5,7 @@ import CardTitle from 'material-ui/lib/card/card-title';
 import FlatButton from 'material-ui/lib/flat-button';
 import CardText from 'material-ui/lib/card/card-text';
 
-
-const UserDefinitionCard = ({ item }) => (
+const UserDefinitionCard = ({ item, onDelete }) => (
   <Card>
     <CardTitle
       title={item.word}
@@ -20,13 +19,14 @@ const UserDefinitionCard = ({ item }) => (
     </CardText>
 
     <CardActions expandable={true}>
-      <FlatButton label="delete" />
+      <FlatButton label="delete" primary={true} onClick={onDelete}/>
     </CardActions>
   </Card>
 );
 
 UserDefinitionCard.propTypes = {
   item: React.PropTypes.object,
+  onDelete: React.PropTypes.func,
 };
 
 export default UserDefinitionCard;

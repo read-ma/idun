@@ -2,38 +2,19 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { loadUserDefinitions } from '../actions';
 import UserDefinitionCard from './UserDefinitionCard';
+import { deleteUserDefinition } from '../actions';
 
 class UserDefinitionsList extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      items: props.items
-    };
-    this.handleFilterChange = this.handleFilterChange.bind(this);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      items: nextProps.items
-    });
-  }
-
-  handleFilterChange(event) {
-    this.setState({
-      items: this.props.items.filter((item) => {
-        return [item.word, item.translation, item.definition].join(' ').match(event.target.value);
-      })
-    });
-  }
 
   componentDidMount() {
-    this.props.loadUserDefinitions();
+    if (this.props.items.length === 0){
+      this.props.loadUserDefinitions();
+    }
   }
 
   render() {
-    const items = this.state.items
-                      .slice(0, 30)
-                      .map(item => <UserDefinitionCard key={item.id} item={item} />);
+    const items = this.props.items
+                      .map(item => <UserDefinitionCard key={item.id} item={item} onDelete={this.props.delete.bind(null, item)} />);
 
     return (
       <div> {items} </div>
@@ -44,16 +25,22 @@ class UserDefinitionsList extends Component {
 UserDefinitionsList.propTypes = {
   items: React.PropTypes.array,
   loadUserDefinitions: React.PropTypes.func,
+  delete: React.PropTypes.func,
 };
 
 const mapActionsToProps = (dispatch) => {
   return {
-    loadUserDefinitions: () => dispatch(loadUserDefinitions())
+    loadUserDefinitions: () => dispatch(loadUserDefinitions()),
+    delete: function(definition) {
+      dispatch(deleteUserDefinition(definition));
+    }
   };
 };
 
 function mapStateToProps(state) {
-  return { items: state.main.userDefinitions };
+  return {
+    items: state.main.userDefinitions
+  };
 }
 
 export default connect(mapStateToProps, mapActionsToProps)(UserDefinitionsList);
