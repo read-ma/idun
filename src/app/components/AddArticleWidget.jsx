@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { addArticle, changeArticle } from '../actions/articles';
 import { closeNav } from '../actions';
 import { ShowIf } from '../components';
+import { screenWidth } from '../Responsive';
+
 
 import LeftNav from 'material-ui/lib/left-nav';
 import TextField from 'material-ui/lib/text-field';
@@ -38,7 +40,7 @@ const styles = {
   }
 };
 
-class ArticleForm extends React.Component {
+class ArticleForm extends Component {
   constructor(props) {
     super(props);
     this.onToggle = this.onToggle.bind(this);
@@ -54,6 +56,10 @@ class ArticleForm extends React.Component {
   }
 
   render() {
+    if (this.props.isMobile) {
+      styles.sidebar.width = screenWidth();
+    }
+
     return (<form onSubmit={this.props.addArticle} style={styles.articleForm}>
 
       <ShowIf condition={this.props.isAdmin}>
@@ -119,6 +125,7 @@ ArticleForm.propTypes = {
   addArticle: React.PropTypes.func,
   onChange: React.PropTypes.func,
   isAdmin: React.PropTypes.bool,
+  isMobile: React.PropTypes.bool,
   article: React.PropTypes.object,
 };
 
@@ -142,7 +149,9 @@ class ArticleAdd extends React.Component {
     return (
       <LeftNav width={styles.sidebar.width} styles={styles.sidebar} docked={true} openRight={true} open={this.props.open}>
         <AppBar title="New article" iconElementLeft={<IconButton onClick={this.props.closeNav}><NavigationClose /></IconButton>} />
-        <ArticleForm addArticle={this.addArticle} onChange={this.onChange} isAdmin={this.props.isAdmin} article={this.props.article}/>
+        <ArticleForm addArticle={this.addArticle} onChange={this.onChange}
+          isAdmin={this.props.isAdmin} isMobile={this.props.isMobile} article={this.props.article}/>
+          {/* Przydalby sie refactor lekki :\ */}
       </LeftNav>
     );
   }
@@ -158,6 +167,7 @@ ArticleAdd.propTypes = {
   closeNav: React.PropTypes.func.isRequired,
   open: React.PropTypes.bool,
   isAdmin: React.PropTypes.bool,
+  isMobile: React.PropTypes.bool,
   article: React.PropTypes.object.isRequired,
 };
 
@@ -183,6 +193,7 @@ function mapStateToProps(state) {
     open: state.settings.navOpen.right,
     isAdmin: !!state.auth.isAdmin,
     article: state.articleForm,
+    isMobile: state.settings.isMobile,
   };
 }
 
