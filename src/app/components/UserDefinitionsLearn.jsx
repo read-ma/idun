@@ -8,6 +8,7 @@ import List from 'material-ui/lib/lists/list';
 import ListItem from 'material-ui/lib/lists/list-item';
 import NavigationChevronRight from 'material-ui/lib/svg-icons/navigation/chevron-right';
 import ActionAssignment from 'material-ui/lib/svg-icons/action/assignment';
+import _ from 'lodash';
 
 function mapStateToProps(state) {
   return { decks: state.decks };
@@ -43,14 +44,14 @@ class UserDefinitionsLearn extends Component {
               <ListItem key={deck.id}
                 style={styles.listItem}
                 secondaryText={<div style={styles.secondaryText}>
-                  <Label type="learn_status" text="from article" />
                   <Label type="difficulty" text={ `${deck.count} words to learn` } />
+                  from {_.truncate(deck.name)}
                 </div>}
                 rightIcon={<NavigationChevronRight />}
                 leftIcon={<ActionAssignment />}
                 href={`#/learn/${deck.id}`}
               >
-                {deck.name}
+                {_.truncate(deck.words.join(', '), { length: 40 })}
               </ListItem>
             );
           })}

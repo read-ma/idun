@@ -7,7 +7,7 @@ import { deleteUserDefinition } from '../actions';
 class UserDefinitionsList extends Component {
 
   componentDidMount() {
-    if (this.props.items.length === 0){
+    if (this.props.items.length === 0) {
       this.props.loadUserDefinitions();
     }
   }

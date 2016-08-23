@@ -77,7 +77,7 @@ function markItem(item, value) {
       .catch((err) => {
         console.error('Error: ', err);
       });
-  }
+  };
 }
 
 
