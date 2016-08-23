@@ -45,7 +45,7 @@ class UserDefinitionsLearn extends Component {
                 style={styles.listItem}
                 secondaryText={<div style={styles.secondaryText}>
                   <Label type="difficulty" text={ `${deck.count} words to learn` } />
-                  from {_.truncate(deck.name)}
+                  from {_.truncate(deck.name, { length: 65 })}
                 </div>}
                 rightIcon={<NavigationChevronRight />}
                 leftIcon={<ActionAssignment />}
