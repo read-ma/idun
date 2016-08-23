@@ -51,7 +51,7 @@ class UserDefinitionsLearn extends Component {
                 leftIcon={<ActionAssignment />}
                 href={`#/learn/${deck.id}`}
               >
-                {_.truncate(deck.words.join(', '), { length: 40 })}
+                {_.truncate(_.uniq(deck.words).join(', '), { length: 40 })}
               </ListItem>
             );
           })}
