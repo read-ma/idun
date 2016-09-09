@@ -11,6 +11,7 @@ const initialState = {
     { code: 'pt-BR', key: 'pt', name: 'Portuguese' },
     { code: 'nb-NO', key: 'no', name: 'Norsk' },
     { code: 'ru-RU', key: 'ru', name: 'Russian' },
+    { code: 'cs-CZ', key: 'cs', name: 'Czech' },
     { code: 'de-DE', key: 'de', name: 'German' }
   ],
   language: { from: 'en-GB', to: 'pl-PL' },

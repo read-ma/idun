@@ -28,6 +28,7 @@ const styles = {
 
 const LanguageIcon = ({ lang }) => {
   let language = lang === 'en' ? 'gb' : lang;
+  language = lang === 'cz' ? 'cs' : lang;
   let languageIcon = <span/>;
 
   if (language) {
