@@ -21,7 +21,7 @@ const style = {
 
 const playerStyle = {
   alignSelf: 'flex-end'
-}
+};
 
 class Flashcard extends Component {
   constructor(props) {
