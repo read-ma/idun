@@ -23,8 +23,13 @@ const styles = {
 };
 
 const LanguageFlag = ({ langKey }) => {
-  let flagCode = langKey === 'en' ? 'gb' : langKey;
-  flagCode = langKey === 'cs' ? 'cz' : langKey;
+  let flagCode = langKey;
+
+  if (langKey === 'en') {
+    flagCode = 'gb';
+  } else if (langKey === 'cs') {
+    flagCode = 'cz';
+  }
 
   return (<span style={styles.flagStyles} className={`flag-icon flag-icon-${flagCode}`}/>);
 };
