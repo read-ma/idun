@@ -7,10 +7,11 @@ function calculateItems(cards) {
   if (!cards) {
     return [];
   }
-
+  const rightNow = new Date();
   return cards
     .filter(card => card.group < 4)
-    .map(card => card.repeatAt ? card : Object.assign({}, card, { repeatAt: new Date() }))
+    .map(card => card.repeatAt ? card : Object.assign({}, card, { repeatAt: new Date(card.repeat_at) }))
+    .filter(card => card.repeatAt < rightNow)
     .sort((card_a, card_b) => new Date(card_a.repeatAt) - new Date(card_b.repeatAt));
 }
 

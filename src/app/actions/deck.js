@@ -41,8 +41,8 @@ function loadDecks() {
 }
 
 const INTERVALS_FOR_GROUP = {
-  0: 1,
-  1: 10,
+  0: 0.1,
+  1: 2,
   2: 24 * 60,
   3: 24 * 60
 };
