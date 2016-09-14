@@ -27,21 +27,19 @@ const styles = {
 };
 
 const LanguageIcon = ({ lang }) => {
-  let language = lang;
+  let flagCode = lang;
 
   if (lang === 'en') {
-    language = 'gb';
+    flagCode = 'gb';
   } else if (lang === 'cs') {
-    language = 'cz';
+    flagCode = 'cz';
   }
 
-  let languageIcon = <span/>;
-
-  if (language) {
-    languageIcon = (<span style={styles.languageIcon} className={`flag-icon flag-icon-${language}`} />);
+  if (!flagCode) {
+    return <span/>;
   }
 
-  return languageIcon;
+  return (<span style={styles.languageIcon} className={`flag-icon flag-icon-${flagCode}`} />);
 };
 
 LanguageIcon.propTypes = {
