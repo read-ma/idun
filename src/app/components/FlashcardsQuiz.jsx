@@ -77,20 +77,8 @@ FlashcardsQuiz.propTypes = {
   done: React.PropTypes.bool,
 };
 
-function getItems(state) {
-  if (!state.deck.cards) {
-    return [];
-  }
-
-  return state.deck
-    .cards
-    .filter(card => card.group < 4)
-    .map(card => card.repeatAt ? card : Object.assign({}, card, { repeatAt: new Date() }))
-    .sort((card_a, card_b) => new Date(card_a.repeatAt) - new Date(card_b.repeatAt));
-}
-
 function mapStateToProps(state) {
-  let items = getItems(state);
+  const items = state.deck.calculatedItems;
   return {
     ready: !!state.deck.cards,
     done: !items[0],

@@ -6,16 +6,22 @@ import { ShowIf } from '../components';
 
 import Paper from 'material-ui/lib/paper';
 import FlatButton from 'material-ui/lib/flat-button';
+import { TTSFlashcardQuickPlayer } from '../components/TTSPlayer';
 
 const style = {
   minHeight: 300,
   padding: '20px',
   display: 'flex',
   flex: '1 1 100%',
+  flexDirection: 'column',
   alignItems: 'center',
-  justifyContent: 'center',
+  justifyContent: 'space-between',
   textAlign: 'center',
 };
+
+const playerStyle = {
+  alignSelf: 'flex-end'
+}
 
 class Flashcard extends Component {
   constructor(props) {
@@ -117,6 +123,11 @@ class Flashcard extends Component {
               </div>
               <div className="col-xs-12">
                 {this.renderMarkButtons()}
+              </div>
+            </div>
+            <div className="row end-xs" style={playerStyle}>
+              <div className="col-xs-12">
+                <TTSFlashcardQuickPlayer word={this.props.item.word} />
               </div>
             </div>
           </Paper>

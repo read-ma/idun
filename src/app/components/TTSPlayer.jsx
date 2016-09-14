@@ -149,5 +149,46 @@ const mapActionsToProps = (dispatch) => {
   };
 };
 
+class FlashcardQuickPlayer extends Component {
+  play(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    this.props.playSingle(this.props.word, this.props.language);
+  }
+
+  render() {
+    if (!hasTTSsupport) {
+      return null;
+    }
+    return (
+      <FlatButton onClick={this.play.bind(this)} style={styles.quickPlayer} disabled={!this.props.word}>
+        <AVVolumeUp style={styles.listenIcon} color={colors.grey600} /> Listen
+      </FlatButton>
+    );
+  }
+}
+
+FlashcardQuickPlayer.propTypes = {
+  word: React.PropTypes.string.isRequired,
+  language: React.PropTypes.string.isRequired,
+  playSingle: React.PropTypes.func.isRequired,
+};
+
+function mapStateToPropsForFlashcard(state) {
+  return {
+    language: state.settings.language.from
+  };
+}
+
+const mapActionsToPropsForFlashcard = (dispatch) => {
+  return {
+    playSingle(content, language) {
+      dispatch({ type: 'TTS_PLAY_SINGLE' });
+      dispatch(player.start(content, language));
+    },
+  };
+};
+
 export const TTSPlayer = connect(mapStateToProps, mapActionsToProps)(Player);
 export const TTSQuickPlayer = connect(mapStateToProps, mapActionsToProps)(QuickPlayer);
+export const TTSFlashcardQuickPlayer = connect(mapStateToPropsForFlashcard, mapActionsToPropsForFlashcard)(FlashcardQuickPlayer);
