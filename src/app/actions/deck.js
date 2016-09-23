@@ -42,9 +42,9 @@ function loadDecks() {
 
 const INTERVALS_FOR_GROUP = {
   0: 0.1,
-  1: 2,
+  1: 10,
   2: 24 * 60,
-  3: 24 * 60
+  3: 72 * 60
 };
 
 const moveToNewBucket = (item, value) => {
@@ -69,7 +69,8 @@ function markItem(item, value) {
     let params = moveToNewBucket(item, value);
     let updateParams = {
       user_definition: {
-        repeat_at: params.repeatAt.format('YYYY-MM-DD HH:mm')
+        repeat_at: params.repeatAt.format('YYYY-MM-DD HH:mm'),
+        group: params.group
       }
     };
     api.patch(`/user_definitions/${item.id}.json`, updateParams)
