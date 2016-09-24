@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { closeNav } from '../actions';
-import { screenWidth } from '../Responsive';
 
 import UserCustomDefinition from '../components/UserCustomDefinition';
 import WordSearchInput from '../components/WordSearchInput';

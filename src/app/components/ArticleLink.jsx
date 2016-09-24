@@ -28,7 +28,7 @@ const ArticleStatusList= (tags, privy, difficulty, learn_status) => {
   const items = [];
 
   if (privy) {
-    items.push(<Label type="visibility" text={"Private"} />);
+    items.push(<Label type="visibility" text={'Private'} />);
   }
 
   items.push(<Label type="learn_status" text={l(learn_status)} />);

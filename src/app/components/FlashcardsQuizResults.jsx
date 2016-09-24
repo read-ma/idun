@@ -12,7 +12,7 @@ const FlashcardsQuizResults = () => {
     <div className="row">
       <div className="col-sm-6 col-sm-offset-2 center-xs">
         <h2>Finished</h2>
-        <FlatButton label="Continue" primary={true} href={"#/learn"} linkButton={true} />
+        <FlatButton label="Continue" primary={true} href={'#/learn'} linkButton={true} />
       </div>
     </div>
   );

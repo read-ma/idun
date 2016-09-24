@@ -54,7 +54,10 @@ class LanguageDropDownMenu extends Component {
     });
 
     return (
-      <DropDownMenu value={this.props.language[this.props.type]} style={styles.menu} iconStyle={styles.dropdownIcon} underlineStyle={{'display': 'none'}} onChange={this.onLangChange.bind(this)}>
+      <DropDownMenu value={this.props.language[this.props.type]}
+        style={styles.menu}
+        iconStyle={styles.dropdownIcon}
+        underlineStyle={ { display: 'none' } } onChange={this.onLangChange.bind(this)}>
         {languages}
       </DropDownMenu>
     );

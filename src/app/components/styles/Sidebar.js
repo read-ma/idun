@@ -31,7 +31,7 @@ module.exports = {
   subheader: {
     fontSize: '18px',
     fontWeight: 600,
-    color: "#000"
+    color: '#000'
   },
   languageHeader: {
     float: 'left',
@@ -51,4 +51,4 @@ module.exports = {
     lineHeight: '145%',
     fontWeight: 200,
   }
-}
+};
