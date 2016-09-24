@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { saveUserDefinition } from '../actions';
+import sidebarStyles from './styles/Sidebar';
 
 import colors from 'material-ui/lib/styles/colors';
 import List from 'material-ui/lib/lists/list';
@@ -63,7 +64,7 @@ const DefinitionsBox = ({ list }) => {
   }
 
   return (
-    <List style={styles.userDefinitionBox} id="user-definition-box" subheader="My dictionary">
+    <List style={styles.userDefinitionBox} id="user-definition-box" subheader="My dictionary" subheaderStyle={sidebarStyles.subheader}>
       {definitions}
     </List>
   );

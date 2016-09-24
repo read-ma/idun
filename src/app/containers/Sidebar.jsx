@@ -9,79 +9,19 @@ import WordSearchInput from '../components/WordSearchInput';
 import LanguageDropDownMenu from '../components/language/LanguageDropDownMenu';
 import { TTSQuickPlayer } from '../components/TTSPlayer';
 
+import styles from '../components/styles/Sidebar';
+
 import LeftNav from 'material-ui/lib/left-nav';
 import IconButton from 'material-ui/lib/icon-button';
 import NavigationClose from 'material-ui/lib/svg-icons/navigation/close';
 import AppBar from 'material-ui/lib/app-bar';
-import colors from 'material-ui/lib/styles/colors';
 
 import { DefinitionBoxes, ShowIf } from '../components';
 
-let initialCSS = {
-  desktop: {
-    sidebar: {
-      width: 500,
-      appbar: {
-        alignItems: 'center'
-      }
-    },
-    targetLanguageMenu: {
-      float: 'right',
-      header: {
-        float: 'left',
-        fontWeight: 400
-      }
-    },
-    header: {
-      float: 'left',
-      fontWeight: 400
-    },
-  },
-  mobile: {
-    sidebar: {
-      width: screenWidth(),
-      marginTop: 0,
-      height: '100%',
-      appbar: {
-        position: 'fixed',
-        top: 0,
-        alignItems: 'center'
-      },
-    },
-    targetLanguageMenu: {
-      float: 'right',
-      header: {
-        float: 'left',
-        fontWeight: 400
-      }
-    },
-    header: {
-      float: 'left',
-      fontWeight: 400
-    }
-  }
-};
-
-const styles = {
-  translationsInstruction: {
-    clear: 'both',
-    width: '75%',
-    display: 'block',
-    paddingTop: '3.5em',
-    margin: 'auto'
-  },
-  instructionParagraph: {
-    marginBottom: '1em',
-    color: colors.grey300,
-    fontSize: '1.85em',
-    lineHeight: '145%',
-    fontWeight: 200,
-  }
-};
-
 const TargetLanguageMenu = ({ style }) => {
+  const languageMenuHeader = Object.assign({}, styles.subheader, styles.languageHeader);
   return (<div style={style.targetLanguageMenu}>
-    <h4 style={style.header}>My language:</h4>
+    <h4 style={languageMenuHeader}>My language:</h4>
     <LanguageDropDownMenu type="to" />
   </div>);
 };
@@ -104,18 +44,17 @@ const TranslationsInstruction = () => {
   </div>);
 };
 
-
 class Sidebar extends Component {
   render() {
     const leftIcon = this.props.isMobile ? <IconButton onClick={this.props.closeNav}><NavigationClose /></IconButton> : <i/>;
-    const style = initialCSS[this.props.isMobile ? 'mobile' : 'desktop'];
+    const stylez = styles.sidebar(this.props.isMobile ? 'mobile' : 'desktop'); // some day...
 
     return (
-      <LeftNav width={style.sidebar.width} style={style.sidebar} docked={this.props.sidebarDocked} openRight={true} open={this.props.open}>
-        <AppBar style={style.sidebar.appbar} iconElementLeft={leftIcon}>
+      <LeftNav width={stylez.width} style={stylez} docked={this.props.sidebarDocked} openRight={true} open={this.props.open}>
+        <AppBar style={stylez.appbar} iconElementLeft={leftIcon}>
           <WordSearchInput rightComponent={<TTSQuickPlayer />} />
         </AppBar>
-        <TargetLanguageMenu style={style} />
+        <TargetLanguageMenu style={stylez} />
 
         <UserCustomDefinition />
         <DefinitionBoxes />

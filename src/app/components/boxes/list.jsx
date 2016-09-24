@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 import { ShowIf } from '../../components';
 
+import sidebarStyles from '../styles/Sidebar';
+
 import List from 'material-ui/lib/lists/list';
 import ListItem from 'material-ui/lib/lists/list-item';
 import ContentAddCircleOutline from 'material-ui/lib/svg-icons/content/add-circle-outline';
@@ -16,7 +18,7 @@ const styles = {
     backgroundSize: 'cover',
   },
   definition: {
-    lineHeight: '16px'
+    lineHeight: '155%',
   },
   listItem: {
     cursor: 'copy'
@@ -91,7 +93,7 @@ class DefinitionList extends Component {
     );
 
     return (
-      <List subheader={this.props.label}>
+      <List subheader={this.props.label} subheaderStyle={sidebarStyles.subheader}>
         {items}
         <br style={{ clear: 'both' }} />
         <ShowIf condition={this.props.items.length > LOW_LIMIT}>

@@ -10,15 +10,18 @@ const styles = {
   flagStyles: {
     border: '1px solid #ccc',
     padding: 0,
-    width: 19,
+    width: 23,
+    height: 17,
     backgroundSize: 'cover',
-    height: 14
   },
   dropdownIcon: {
     fill: '#000'
   },
   flagItem: {
     verticalAlign: 'middle'
+  },
+  menu: {
+    marginTop: '10px'
   }
 };
 
@@ -51,7 +54,7 @@ class LanguageDropDownMenu extends Component {
     });
 
     return (
-      <DropDownMenu value={this.props.language[this.props.type]} iconStyle={styles.dropdownIcon} onChange={this.onLangChange.bind(this)}>
+      <DropDownMenu value={this.props.language[this.props.type]} style={styles.menu} iconStyle={styles.dropdownIcon} underlineStyle={{'display': 'none'}} onChange={this.onLangChange.bind(this)}>
         {languages}
       </DropDownMenu>
     );
