@@ -44,7 +44,9 @@ const INTERVALS_FOR_GROUP = {
   0: 0.1,
   1: 10,
   2: 24 * 60,
-  3: 72 * 60
+  3: 3 * 24 * 60,
+  4: 5 * 24 * 60,
+  5: 7 * 24 * 60
 };
 
 const moveToNewBucket = (item, value) => {
