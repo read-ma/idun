@@ -46,6 +46,7 @@ module.exports = {
     extensions: ['', '.js', '.jsx']
   },
   plugins: [
+    new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en-gb/),
     new ExtractTextPlugin('style.css', {
       allChunks: true
     }),

@@ -1,4 +1,6 @@
 import _ from 'lodash';
+import { throttle } from 'lodash/throttle';
+import { find } from 'lodash/find';
 import store from './store';
 import { windowResize } from './actions';
 

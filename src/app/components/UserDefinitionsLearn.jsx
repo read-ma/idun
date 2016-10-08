@@ -9,6 +9,8 @@ import ListItem from 'material-ui/lib/lists/list-item';
 import NavigationChevronRight from 'material-ui/lib/svg-icons/navigation/chevron-right';
 import ActionAssignment from 'material-ui/lib/svg-icons/action/assignment';
 import _ from 'lodash';
+import { truncate } from 'lodash/truncate';
+import { uniq } from 'lodash/uniq';
 
 function mapStateToProps(state) {
   return { decks: state.decks };

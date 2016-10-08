@@ -1,5 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
+import { isEqual } from 'lodash/isEqual';
 
 const isSeparator = token => token.match(/^[\,\.\?\!\)\(\)\”\"\“\'\:\;\“\‘\’]$/);
 const Separator = ({ children }) => <span>{children}</span>;

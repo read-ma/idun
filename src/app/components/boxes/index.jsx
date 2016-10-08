@@ -2,6 +2,7 @@ require('../styles/Images.scss');
 
 import React, { Component } from 'react';
 import _ from 'lodash';
+import { isEmpty } from 'lodash/isEmpty';
 
 import { findWordData } from '../../actions/definitions';
 import { saveUserDefinition } from '../../actions';

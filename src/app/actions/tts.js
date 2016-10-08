@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import { find } from 'lodash/find';
 const instance = window.speechSynthesis;
 
 function findVoice(lang) {

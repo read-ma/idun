@@ -3,6 +3,7 @@ import store from '../store';
 import { push } from 'react-router-redux';
 import ls from '../localStore';
 import _ from 'lodash';
+import { map } from 'lodash/map';
 import ReactGA from 'react-ga';
 
 const DEFAULT_RETURN_TO = '/profile';
