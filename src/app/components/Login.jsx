@@ -37,6 +37,8 @@ class Login extends React.Component {
       <form id="loginForm" onSubmit={this.login.bind(this)} className="col-xs-12 col-md-8">
         <h2 style={styles.headline}>If you already have an account, please log in</h2>
         <span className="error">{this.props.error}</span>
+        <span className="error">{this.props.message}</span>
+
 
         <TextField
           floatingLabelText="Email address" type="email" id="email" name="email"
@@ -66,12 +68,13 @@ class Login extends React.Component {
 Login.propTypes = {
   dispatch: React.PropTypes.func,
   error: React.PropTypes.string,
+  message: React.PropTypes.string,
 };
 
 let mapStateToProps = (state) => {
   return {
     auth: state.auth,
-    signupMessage: state.auth.signupMessage,
+    message: state.auth.message,
     error: state.auth.error
   };
 };

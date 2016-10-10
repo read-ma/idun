@@ -30,43 +30,54 @@ class SignUpForm extends React.Component {
     this.state = {};
   }
 
+  userAttributes({ email, password }) {
+    return {
+      email: email.getValue(),
+      password: password.getValue(),
+      password_confirmation: password.getValue()
+    };
+  }
+
   handleSignUp(event) {
     event.preventDefault();
-    this.props.dispatch(signupAttempt(this.refs.email.getValue()));
+
+    this.props.dispatch(
+      signupAttempt(this.userAttributes(this.refs))
+    );
   }
 
   render() {
     return (
       <form onSubmit={this.handleSignUp.bind(this)} className="col-xs-12 col-md-8">
         <h2 style={styles.headline}>Create account</h2>
-        <p style={{ marginBottom: '15px' }}>
-          If you are interested in the beta testing of ReadMa, <br/>
-          let us know using the form below.
-        </p>
-        <p>We will get back to you as soon as we can.</p>
-
-        <h4>{this.props.signupMessage}</h4>
+        <h4>{this.props.message}</h4>
+        <h4>{this.props.error}</h4>
 
         <TextField
           floatingLabelText="Your email address" fullWidth={true}
           type="email" id="signUpEmail" name="email" ref="email" required="true"
         />
 
-        <RaisedButton label="Send" primary={true} type="submit" style={styles.sendButton} />
-        <small style={styles.noSpamPromise}>We don't spam, promise.</small>
+        <TextField
+          floatingLabelText="Password" fullWidth={true}
+          type="password" id="password" name="password" ref="password" required="true"
+        />
+
+        <RaisedButton label="Create account" primary={true} type="submit" style={styles.sendButton} />
       </form>
     );
   }
 }
 
 SignUpForm.propTypes = {
-  signupMessage: React.PropTypes.string,
+  message: React.PropTypes.string,
   dispatch: React.PropTypes.func,
+  error: React.PropTypes.string
 };
 
 const mapStateToProps = (state) => {
   return {
-    signupMessage: state.auth.signupMessage,
+    message: state.auth.message,
     error: state.auth.error,
   };
 };

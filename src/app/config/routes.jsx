@@ -10,6 +10,7 @@ import PasswordReminderView from '../components/PasswordReminderView';
 import FlashcardsQuiz from '../components/FlashcardsQuiz';
 import FlashcardsQuizResults from '../components/FlashcardsQuizResults';
 import ChangePasswordView from '../components/ChangePasswordView';
+import ConfirmationView from '../components/Confirmation';
 import ArticleSearchInput from '../components/ArticleSearchInput';
 import { requireAuthentication } from '../utils';
 import { TTSPlayer } from '../components/TTSPlayer';
@@ -43,6 +44,7 @@ export default (
     {/* Group under password */}
     <Route path="forgot_password" component={PasswordReminderView} />
     <Route path="reset_password" component={ChangePasswordView} />
+    <Route path="confirmation_token" component={ConfirmationView} />
 
     {/* Group under /learn */}
     <Route path="learn" components={{

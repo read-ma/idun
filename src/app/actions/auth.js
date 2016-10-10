@@ -16,10 +16,9 @@ const returnTo = (state) => {
   }
 };
 
-function invitationRequestSent(data) {
+function userAccountCreated() {
   return {
-    type: 'INVITATION_REQUEST_SENT',
-    payload: data.invitation_request
+    type: 'USER_ACCOUNT_CREATED'
   };
 }
 
@@ -30,16 +29,14 @@ function userSigningUpError(error) {
   };
 }
 
-const signupAttempt = (email) => {
+const signupAttempt = (user) => {
   return (dispatch) => {
-    api.post(
-      '/invitation_requests.json',
-      {
-        invitation_request: { email: email }
-      }
-    )
-      .then((response) => {
-        dispatch(invitationRequestSent(response.data));
+    api
+      .post(
+        '/users.json', { user }
+      )
+      .then(() => {
+        dispatch(userAccountCreated());
       })
       .catch(function(response) {
         dispatch(userSigningUpError(response));
@@ -149,7 +146,24 @@ const updatePassword = ({ reset_password_token, password, password_confirmation 
       .patch('/reset_password/by.json', {
         reset_password: { reset_password_token, password, password_confirmation }
       })
-      .then(() => dispatch(push('login', { q: 'updated' })))
+      .then(() => {
+        dispatch({ type: 'PASSWORD_UPDATED' });
+        dispatch(push('login', { q: 'updated' }));
+      })
+      .catch(({ response }) => {
+        dispatch(updatePasswordError(extractErrors(response.data.errors)));
+      });
+  };
+};
+
+const confirmEmail = ({ confirmation_token }) => {
+  return (dispatch) => {
+    api
+      .get(`/confirmations.json?confirmation_token=${confirmation_token}`)
+      .then(() => {
+        dispatch(push('login', { q: 'confirmed' }));
+        dispatch({ type: 'EMAIL_CONFIRMED' });
+      })
       .catch(({ response }) => {
         dispatch(updatePasswordError(extractErrors(response.data.errors)));
       });
@@ -157,4 +171,4 @@ const updatePassword = ({ reset_password_token, password, password_confirmation 
 };
 
 
-export { loginAttempt, signupAttempt, logout, resetPassword, updatePassword };
+export { loginAttempt, signupAttempt, logout, resetPassword, updatePassword, confirmEmail };

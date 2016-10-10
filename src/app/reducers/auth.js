@@ -12,27 +12,35 @@ function stateFromLocalStorage() {
 export default function auth(state = stateFromLocalStorage(), action) {
   switch (action.type) {
 
-  case '@@router/LOCATION_CHANGE':
-    return Object.assign(
-      {},
-      state,
-      { notice: null },
-      { error: null }
-    );
+  // case '@@router/LOCATION_CHANGE':
+  //   return Object.assign(
+  //     {},
+  //     state,
+  //     { message: null },
+  //     { error: null }
+  //   );
 
   case 'PASSWORD_UPDATED':
     return Object.assign(
       {},
       state,
       { error: null },
-      { notice: 'Your password has been updated. You can now log in.' }
+      { message: 'Your password has been updated. You can now log in.' }
+    );
+
+  case 'EMAIL_CONFIRMED':
+    return Object.assign(
+      {},
+      state,
+      { error: null },
+      { message: 'Thank you! You have confirmed your email. Please log in and start using the app.' }
     );
 
   case 'CHANGE_PASSWORD_REQUEST_ERROR':
     return Object.assign(
       {},
       state,
-      { notice: null },
+      { message: null },
       { error: 'Email you entered does not exist in our database.' }
     );
 
@@ -40,7 +48,7 @@ export default function auth(state = stateFromLocalStorage(), action) {
     return Object.assign(
       {},
       state,
-      { notice: null },
+      { message: null },
       { error: action.payload }
     );
 
@@ -49,16 +57,17 @@ export default function auth(state = stateFromLocalStorage(), action) {
       {},
       state,
       { error: null },
-      { notice: 'Furhter instructions will be sent to your email within 10 minutes' }
+      { message: 'Furhter instructions will be sent to your email within 10 minutes' }
     );
 
   case 'USER_SIGNING_IN_ERROR':
+  case 'SIGNUP_ERROR':
     return Object.assign(
       {},
       state,
       { isAuthenticated: false },
       { isAdmin: false },
-      { error: action.payload }
+      { error: JSON.stringify(action.payload.response.data.errors) }
     );
 
   case 'LOGOUT_USER':
@@ -76,11 +85,14 @@ export default function auth(state = stateFromLocalStorage(), action) {
       action.payload
     );
 
-  case 'INVITATION_REQUEST_SENT':
+  case 'USER_ACCOUNT_CREATED':
     return Object.assign(
       {},
       state,
-      { signupMessage: 'Thank you! We have received your request and we will get back to you shortly!' }
+      {
+        error: null,
+        message: 'Thank you! Please check your email box for a message from us! See you soon!'
+      }
     );
 
   default:
