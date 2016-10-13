@@ -9,6 +9,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackMd5Hash = require('webpack-md5-hash');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const ChunkManifestPlugin = require('chunk-manifest-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -46,6 +47,7 @@ module.exports = {
     extensions: ['', '.js', '.jsx']
   },
   plugins: [
+    new CleanWebpackPlugin(['dist'], { verbose: true }),
     new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en-gb/),
     new ExtractTextPlugin('style.css', {
       allChunks: true
