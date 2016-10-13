@@ -3,6 +3,7 @@ import React from 'react';
 
 import l from '../I18n';
 import Label from './shared/Label';
+import { difficultyColors, labelsColors } from './shared/Colors';
 
 import ListItem from 'material-ui/lib/lists/list-item';
 import NavigationChevronRight from 'material-ui/lib/svg-icons/navigation/chevron-right';
@@ -31,8 +32,8 @@ const ArticleStatusList= (tags, privy, difficulty, learn_status) => {
     items.push(<Label type="visibility" text={'Private'} />);
   }
 
-  items.push(<Label type="learn_status" text={l(learn_status)} />);
-  items.push(<Label type="difficulty" text={l(difficulty)} />);
+  items.push(<Label type="learn_status" text={l(learn_status)} color={labelsColors.learn_status} />);
+  items.push(<Label type="difficulty" text={l(difficulty)} color={difficultyColors[difficulty]} />);
 
   return (
     <div style={styles.secondaryText}>

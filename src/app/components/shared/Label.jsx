@@ -1,5 +1,4 @@
 import React from 'react';
-import { labelsColors } from './Colors';
 
 const styles = {
   marginRight: '5px',
@@ -7,19 +6,18 @@ const styles = {
   fontSize: '12px',
   lineHeight: '17px',
   fontWeight: 600,
-  borderRadius: '3px',
-  display: 'inline-block',
   position: 'relative',
-  top: '-2px',
-  color: '#fff'
+  backgroundColor: 'transparent'
 };
 
+const DEFAULT_COLOR = '#666';
 
-const Label = ({ text, type, style }) => {
-  const bgColor = {
-    backgroundColor: labelsColors[type] || '#000'
+const Label = ({ text, type, color }) => {
+  const textColor = {
+    color: color || DEFAULT_COLOR
   };
-  let css = Object.assign({}, styles, bgColor, style);
+
+  let css = Object.assign({}, styles, textColor);
 
   return <span style={css}>{text}</span>;
 };
@@ -27,7 +25,7 @@ const Label = ({ text, type, style }) => {
 Label.propTypes = {
   text: React.PropTypes.string.isRequired,
   type: React.PropTypes.string.isRequired,
-  style: React.PropTypes.object
+  color: React.PropTypes.string
 };
 
 export default Label;

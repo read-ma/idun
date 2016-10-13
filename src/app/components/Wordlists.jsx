@@ -23,6 +23,7 @@ const Wordlists = ({ wordlists, handleSelected }) => {
         toggled={list.enabled}
         label={list.label}
         labelPosition="right"
+        labelStyle={{ color: '#fff', fontWeight: 'bold' }}
         style={{ width: 'auto', marginRight: '0.5em' }}
       />
     );

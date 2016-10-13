@@ -12,6 +12,7 @@
     "url": "git+ssh://git@bitbucket.org/readma-team/idun.git"
   },
   "scripts": {
+    "start": "npm run dev",
     "build:production": "rm -rf dist && NODE_ENV=production node node_modules/webpack/bin/webpack.js -p --config webpack.production.config.js",
     "lint": "node ./node_modules/eslint/bin/eslint.js src/ --ext .js --ext .jsx",
     "test": "casperjs test test/test.js",

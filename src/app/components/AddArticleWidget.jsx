@@ -6,6 +6,7 @@ import { closeNav } from '../actions';
 import { ShowIf } from '../components';
 import { screenWidth } from '../Responsive';
 
+require('./styles/Forms');
 
 import LeftNav from 'material-ui/lib/left-nav';
 import TextField from 'material-ui/lib/text-field';
@@ -30,10 +31,6 @@ const styles = {
   publishToggle: {
     marginBottom: '30px',
     marginTop: '10px'
-  },
-  fieldset: {
-    borderColor: colors.grey300,
-    borderStyle: 'solid',
   },
   inputs: {
     width: '100%'

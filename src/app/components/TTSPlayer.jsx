@@ -31,9 +31,12 @@ const styles = {
     flexWrap: 'nowrap',
     flexBasis: '90%'
   },
-  icon: {
+  iconButton: {
     margin: 0,
     padding: 0,
+  },
+  icon: {
+    fill: colors.white
   },
   quickPlayer: {
     float: 'right',
@@ -62,13 +65,13 @@ class Player extends Component {
     return (
       <div style={styles.player}>
         <h4 style={styles.header}>Read</h4>
-        <IconButton style={styles.icon} onClick={this.play.bind(this)}>
+        <IconButton style={styles.iconButton} iconStyle={styles.icon} onClick={this.play.bind(this)}>
           <AVPlayArrow />
         </IconButton>
-        <IconButton style={styles.icon} onClick={this.props.pause}>
+        <IconButton style={styles.iconButton} iconStyle={styles.icon} onClick={this.props.pause}>
           <AVPause />
         </IconButton>
-        <IconButton style={styles.icon} onClick={this.props.stop}>
+        <IconButton style={styles.iconButton} iconStyle={styles.icon} onClick={this.props.stop}>
           <AVStop />
         </IconButton>
       </div>
@@ -99,7 +102,7 @@ class QuickPlayer extends Component {
     }
     return (
       <FlatButton onClick={this.play.bind(this)} style={styles.quickPlayer} disabled={!this.props.selection}>
-        <AVVolumeUp style={styles.listenIcon} color={colors.grey600} /> Listen
+        <AVVolumeUp style={styles.listenIcon} color={colors.pinkA400} /> Listen
       </FlatButton>
     );
   }

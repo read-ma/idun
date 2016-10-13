@@ -17,7 +17,7 @@ class AppProgressBar extends React.Component {
       return null;
     }
 
-    return <LinearProgress mode="indeterminate" color="#bf2a5c" style={style} />;
+    return <LinearProgress mode="indeterminate" color="#000" style={style} />;
   }
 }
 

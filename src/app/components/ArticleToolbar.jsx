@@ -1,4 +1,3 @@
-require('./styles/Toolbar.scss');
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
@@ -14,7 +13,6 @@ import FlatButton from 'material-ui/lib/flat-button';
 
 const styles = {
   iconStyles: {
-    border: '1px solid #ccc',
     padding: 0,
     width: 19,
     height: 16,
@@ -25,17 +23,10 @@ const styles = {
     top: 64,
     left: 0,
     right: 0,
-    zIndex: 2,
-    padding: '0',
-    backgroundColor: '#fff',
-    borderBottom: '1px solid #eee',
     title: {
       fontSize: '16px',
       margin: '0 20px'
     }
-  },
-  icon: {
-    fill: '#000'
   }
 };
 

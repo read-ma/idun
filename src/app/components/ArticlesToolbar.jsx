@@ -23,7 +23,10 @@ const styles = {
     borderBottom: '1px solid #eee'
   },
   icon: {
-    fill: '#000'
+    fill: '#fff'
+  },
+  labelStyle: {
+    color: '#fff'
   }
 };
 
@@ -43,7 +46,7 @@ const FilterDropDownMenu = ({ updateFilter, name, selected }) => {
   );
 
   return (
-    <DropDownMenu value={selected} iconStyle={styles.icon} onChange={onChange}>
+    <DropDownMenu value={selected} iconStyle={styles.icon} onChange={onChange} labelStyle={styles.labelStyle}>
       {items}
     </DropDownMenu>
   );
