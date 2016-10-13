@@ -4,8 +4,6 @@ import { merge } from 'lodash/merge';
 import rawTheme from './rawTheme';
 import getMuiTheme from 'material-ui/lib/styles/getMuiTheme';
 
-
-
 import Colors from 'material-ui/lib/styles/Colors';
 import ColorManipulator from 'material-ui/lib/utils/color-manipulator';
 
@@ -164,7 +162,7 @@ const componentDerivates = {
   toggle: {
     trackRequiredColor: ColorManipulator.fade(componentsColors.toggle.thumbRequiredColor, 0.5)
   }
-}
+};
 
 const muiTheme = _.merge(componentsColors, componentDerivates); // Using lodash for deep merge.
 const readmaTheme = getMuiTheme(rawTheme, muiTheme);
