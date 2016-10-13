@@ -4,7 +4,7 @@ import { merge } from 'lodash/merge';
 import rawTheme from './rawTheme';
 import getMuiTheme from 'material-ui/lib/styles/getMuiTheme';
 
-import Colors from 'material-ui/lib/styles/Colors';
+import Colors from 'material-ui/lib/styles/colors';
 import ColorManipulator from 'material-ui/lib/utils/color-manipulator';
 
 const { palette, spacing } = rawTheme;
