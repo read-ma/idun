@@ -13,15 +13,15 @@
   },
   "scripts": {
     "start": "npm run dev",
-    "build:production": "rm -rf dist && NODE_ENV=production node node_modules/webpack/bin/webpack.js -p --config webpack.production.config.js",
-    "lint": "node ./node_modules/eslint/bin/eslint.js src/ --ext .js --ext .jsx",
+    "build:production": "rm -rf dist && NODE_ENV=production ./node_modules/.bin/webpack -p --config webpack.production.config.js",
+    "lint": "./node_modules/.bin/eslint src/ --ext .js --ext .jsx",
     "test": "casperjs test test/test.js",
     "unit-test": "jest",
-    "deploy:production": "NODE_ENV=production node node_modules/webpack/bin/webpack.js -p --config webpack.production.config.js",
+    "deploy:production": "NODE_ENV=production ./node_modules/.bin/webpack -p --config webpack.production.config.js",
     "postdeploy:production": "scp dist/* $DEPLOY_USER@logdock.com:domains/beta.readma.com/public_html",
-    "deploy:staging": "NODE_ENV=production node node_modules/webpack/bin/webpack.js -p --config webpack.production.config.js",
+    "deploy:staging": "NODE_ENV=production ./node_modules/.bin/webpack -p --config webpack.production.config.js",
     "postdeploy:staging": "scp dist/* $DEPLOY_USER@logdock.com:domains/staging.readma.com/public_html",
-    "dev": "node node_modules/webpack-dev-server/bin/webpack-dev-server.js --progress --colors --inline --content-base public/",
+    "dev": "webpack-dashboard -- ./node_modules/.bin/webpack-dev-server --progress --colors --inline --content-base public/ --config webpack.config.js",
     "maintenance": "sh script/maintenance.sh"
   },
   "pre-push": [

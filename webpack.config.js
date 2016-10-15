@@ -9,15 +9,15 @@ const WebpackBrowserPlugin = require('webpack-browser-plugin');
 const WebpackMd5Hash = require('webpack-md5-hash');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const ChunkManifestPlugin = require('chunk-manifest-webpack-plugin');
-const Dashboard = require('webpack-dashboard');
 const DashboardPlugin = require('webpack-dashboard/plugin');
-
-const dash = new Dashboard();
 
 module.exports = {
   // Read more about debugging: http://webpack.github.io/docs/configuration.html#devtool
   // devtool: 'inline-source-map',
   devtool: 'source-map',
+  devServer: {
+    quiet: true
+  },
   entry: {
     bundle: './src/app/app',
     vendor: [
@@ -55,7 +55,7 @@ module.exports = {
     extensions: ['', '.js', '.jsx', '.scss']
   },
   plugins: [
-    new DashboardPlugin(dash.setData),
+    new DashboardPlugin(),
     new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en-gb/),
     new HtmlWebpackPlugin({
       template: './public/index.html',
@@ -75,7 +75,7 @@ module.exports = {
     new WebpackBrowserPlugin({
       browser: 'Chrome',
       port: 8080,
-      url: 'http://localhost'
+      url: 'http://localhost',
     }),
     new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js'),
     new WebpackMd5Hash(),
