@@ -9,7 +9,10 @@ const WebpackBrowserPlugin = require('webpack-browser-plugin');
 const WebpackMd5Hash = require('webpack-md5-hash');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const ChunkManifestPlugin = require('chunk-manifest-webpack-plugin');
-// const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
+const Dashboard = require('webpack-dashboard');
+const DashboardPlugin = require('webpack-dashboard/plugin');
+
+const dash = new Dashboard();
 
 module.exports = {
   // Read more about debugging: http://webpack.github.io/docs/configuration.html#devtool
@@ -52,6 +55,7 @@ module.exports = {
     extensions: ['', '.js', '.jsx', '.scss']
   },
   plugins: [
+    new DashboardPlugin(dash.setData),
     new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en-gb/),
     new HtmlWebpackPlugin({
       template: './public/index.html',
