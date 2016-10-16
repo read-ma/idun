@@ -47,7 +47,7 @@ module.exports = {
       },
       {
         test: /\.(eot|woff|woff2|ttf|svg|png|jpg)$/,
-        loader: 'url-loader?limit=20000&name=[name]-[hash].[ext]'
+        loader: 'url-loader?limit=20000&name=[name].[ext]'
       }
     ]
   },
@@ -58,7 +58,6 @@ module.exports = {
     new DashboardPlugin(),
     new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en-gb/),
     new HtmlWebpackPlugin({
-      // template: './public/index.html',
       template: './public/index.ejs'
     }),
     new ExtractTextPlugin('public/style.css', {
@@ -86,16 +85,5 @@ module.exports = {
       manifestVariable: 'webpackManifest'
     }),
     new webpack.optimize.OccurenceOrderPlugin(),
-
-    // ,
-    // new BrowserSyncPlugin({
-    //   // browse to http://localhost:3000/ during development,
-    //   // ./public directory is being served
-    //   host: 'localhost',
-    //   port: 3000,
-    //   proxy: 'http://localhost:8080/'
-    // }, {
-    //   reload: false
-    // })
   ]
 };
