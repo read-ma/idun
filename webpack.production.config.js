@@ -27,14 +27,9 @@ module.exports = {
   },
   module: {
     loaders: [{
-      test: /\.jsx?$/,
-
-      // There is not need to run the loader through vendors
-      exclude: [nodeModulesDir],
-      loader: 'babel-loader',
-      query: {
-        presets: ['react', 'es2015']
-      }
+      test: /\.(jsx|js)$/,
+      exclude: /(node_modules)/,
+      loaders: ['babel']
     }, {
       test: /\.scss$/,
       loader: ExtractTextPlugin.extract('css!sass')
@@ -44,22 +39,16 @@ module.exports = {
     }]
   },
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    extensions: ['', '.js', '.jsx', '.scss']
   },
   plugins: [
     new CleanWebpackPlugin(['dist'], { verbose: true }),
     new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en-gb/),
-    new ExtractTextPlugin('style.css', {
+    new ExtractTextPlugin('[name].[contenthash].css', {
       allChunks: true
     }),
     new HtmlWebpackPlugin({
-      template: './public/index.ejs',
-      minify: false
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      }
+      template: './public/index.ejs'
     }),
     new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.[chunkhash].js'),
     new WebpackMd5Hash(),
