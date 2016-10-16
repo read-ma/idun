@@ -58,7 +58,8 @@ module.exports = {
     new DashboardPlugin(),
     new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en-gb/),
     new HtmlWebpackPlugin({
-      template: './public/index.html',
+      // template: './public/index.html',
+      template: './public/index.ejs'
     }),
     new ExtractTextPlugin('public/style.css', {
       allChunks: true
