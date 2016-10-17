@@ -19,8 +19,11 @@ import SocialSchool from 'material-ui/lib/svg-icons/social/school';
 import SocialPerson from 'material-ui/lib/svg-icons/social/person';
 import ActionBook from 'material-ui/lib/svg-icons/action/book';
 import ActionPowerSettingsNew from 'material-ui/lib/svg-icons/action/power-settings-new';
+import { ShowIf } from '../components';
+import ContentAddCircle from 'material-ui/lib/svg-icons/content/add-circle';
+import NavigationArrowForward from 'material-ui/lib/svg-icons/navigation/arrow-forward';
 
-const MainNavigation = ({ children, open, closeNavbar, logoutAction }) => {
+const MainNavigation = ({ children, open, closeNavbar, logoutAction, authenticated }) => {
   return (
     <LeftNav width={200} docked={true} open={open} style={{ padding: 0 }}>
       <AppBar title="ReadMa" showMenuIconButton={false} iconElementRight={
@@ -30,13 +33,25 @@ const MainNavigation = ({ children, open, closeNavbar, logoutAction }) => {
         <ListItem primaryText="Home" href="#/home" leftIcon={<ActionHome />} />
         <ListItem primaryText="Articles" href="#/articles" leftIcon={<MapLocalLibrary />} />
         <ListItem primaryText="Flashcards" href="#/learn" leftIcon={<SocialSchool />} />
-        <ListItem primaryText="Dictionary" href="#/definitions" leftIcon={<ActionBook />} />
-        <ListItem primaryText="My Profile" href="#/profile" leftIcon={<SocialPerson />} />
+        <ShowIf condition={authenticated}>
+          <ListItem primaryText="Dictionary" href="#/definitions" leftIcon={<ActionBook />} />
+        </ShowIf>
+        <ShowIf condition={authenticated}>
+          <ListItem primaryText="My Profile" href="#/profile" leftIcon={<SocialPerson />} />
+        </ShowIf>
       </List>
       <Divider />
       {children}
       <List>
-        <ListItem id="signOutButton" primaryText="Sign out" leftIcon={<ActionPowerSettingsNew />} onClick={logoutAction} />
+        <ShowIf condition={authenticated}>
+          <ListItem id="signOutButton" primaryText="Sign out" leftIcon={<ActionPowerSettingsNew />} onClick={logoutAction} />
+        </ShowIf>
+        <ShowIf condition={!authenticated}>
+          <ListItem primaryText="Sign up" href="#/sign_up" leftIcon={<ContentAddCircle />} />
+        </ShowIf>
+        <ShowIf condition={!authenticated}>
+          <ListItem primaryText="Login" href="#/login" leftIcon={<NavigationArrowForward />} />
+        </ShowIf>
       </List>
     </LeftNav>
   );
@@ -47,11 +62,13 @@ MainNavigation.propTypes = {
   children: React.PropTypes.object,
   open: React.PropTypes.bool,
   closeNavbar: React.PropTypes.func,
+  authenticated: React.PropTypes.bool,
 };
 
 const mapStateToProps = state => {
   return {
-    open: state.settings.navOpen.left
+    open: state.settings.navOpen.left,
+    authenticated: state.auth.isAuthenticated
   };
 };
 
