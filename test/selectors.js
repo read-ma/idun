@@ -1,5 +1,6 @@
 module.exports = {
   loginForm: 'form#loginForm',
+  loginButton: '#loginButton',
   signOutButton: '#signOutButton',
   searchInput: 'input[id="articleSearch"]',
 

@@ -50,7 +50,7 @@ const MainNavigation = ({ children, open, closeNavbar, logoutAction, authenticat
           <ListItem primaryText="Sign up" href="#/sign_up" leftIcon={<ContentAddCircle />} />
         </ShowIf>
         <ShowIf condition={!authenticated}>
-          <ListItem primaryText="Login" href="#/login" leftIcon={<NavigationArrowForward />} />
+          <ListItem id="loginButton" primaryText="Login" href="#/login" leftIcon={<NavigationArrowForward />} />
         </ShowIf>
       </List>
     </LeftNav>

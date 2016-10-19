@@ -7,20 +7,26 @@ const $ = require('./selectors');
 /* global __utils__ */
 const host = system.env.READMA_URL || 'http://localhost:8080';
 
-casper.test.begin('User can login and logout', 3, function(test) {
-  casper
-    .start(host + '/#/login')
+casper.test.begin('User can login and logout', 4, function(test) {
+  casper.start()
+    .thenOpen(host + '/#/home')
+    .then(function() {
+      helpers.goToLogin(this);
+    })
     .waitForSelector($.loginForm, function() {
       testHelpers.checkUrl(this, 'login');
-      this.test.assertExists($.loginForm, 'Login form is present');
+      test.assertExists($.loginForm, 'Login form is present');
       helpers.logIn(this);
-    }).then(function() {
+    })
+    .waitForSelector($.signOutButton, function() {
+      test.assertTextExists("Your overall progress");
       helpers.logOut(this);
     })
     .waitForSelector($.loginForm, function() {
-      this.test.assertExists($.loginForm, 'User has logged out successfully');
+      test.assertExists($.loginForm, 'User has logged out successfully');
     })
     .run(function() {
+      helpers.tearDown(casper);
       test.done();
     });
 });
