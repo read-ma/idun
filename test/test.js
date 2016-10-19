@@ -39,6 +39,7 @@ casper.test.begin('Page title is correctly set', 1, function(test) {
       test.assertTitle(pageTitle, 'Page has correct title');
     })
     .run(function() {
+      helpers.tearDown(casper);
       test.done();
     });
 });
@@ -50,6 +51,7 @@ casper.test.begin('Home screen - pre login', 1, function(test) {
       testHelpers.checkUrl(this, 'home');
     })
     .run(function() {
+      helpers.tearDown(casper);
       test.done();
     });
 });
@@ -70,6 +72,7 @@ casper.test.begin('User can add his own translation to dictionary', 1, function(
       }, 'More than one definition is present', $.userDefinitionListItem);
     })
     .run(function() {
+      helpers.tearDown(casper);
       test.done();
     });
 });
@@ -90,6 +93,7 @@ casper.test.begin('Query articles', 3, function(test) {
       }, articlesNumber, 'There is ' + articlesNumber + ' articles');
     })
     .run(function() {
+      helpers.tearDown(casper);
       test.done();
     });
 });
@@ -104,6 +108,7 @@ casper.test.begin('Home screen - post login', 1, function(test) {
       test.assertExists($.learningProgressChart);
     })
     .run(function() {
+      helpers.tearDown(casper);
       test.done();
     });
 });
