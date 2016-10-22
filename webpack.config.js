@@ -1,7 +1,6 @@
 require('dotenv').config({ silent: true });
 
 const webpack = require('webpack');
-const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackBrowserPlugin = require('webpack-browser-plugin');
@@ -52,7 +51,6 @@ module.exports = {
   },
   plugins: [
     new DashboardPlugin(),
-    new LodashModuleReplacementPlugin(),
     new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en-gb/),
     new CopyWebpackPlugin([{ from: 'src/assets/images' }]),
     new HtmlWebpackPlugin({

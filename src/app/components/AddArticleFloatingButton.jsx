@@ -4,20 +4,13 @@ import ContentAdd from 'material-ui/lib/svg-icons/content/add';
 import { openNav } from '../actions';
 import { connect } from 'react-redux';
 
-const AddArticleFloatingButton = ({ openRightNav, styles }) => {
-  const style = Object.assign({}, styles, {
-    right: '25px',
-    bottom: '25px',
-    position: 'fixed',
-  });
-
-  return (<FloatingActionButton style={style} onClick={openRightNav}>
+const AddArticleFloatingButton = ({ openRightNav }) => {
+  return (<FloatingActionButton className="AddArticleFloatingButton" onClick={openRightNav}>
     <ContentAdd />
     </FloatingActionButton>);
 };
 
 AddArticleFloatingButton.propTypes = {
-  styles: React.PropTypes.object,
   openRightNav: React.PropTypes.func.isRequired
 };
 

@@ -1,7 +1,6 @@
 require('dotenv').config({ silent: true });
 
 const webpack = require('webpack');
-const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackMd5Hash = require('webpack-md5-hash');
@@ -46,7 +45,6 @@ module.exports = {
     new ExtractTextPlugin('[name].[contenthash].css', {
       allChunks: true
     }),
-    new LodashModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
       template: './src/templates/index.ejs'
     }),

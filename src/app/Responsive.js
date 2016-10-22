@@ -39,12 +39,12 @@ function getMinWidthForBreakpoint(screenSizeName) {
 
 function isDesktop() {
   return true;
-  return screenSize() === 'large' || screenSize() === 'medium';
+  // return screenSize() === 'large' || screenSize() === 'medium';
 }
 
 function isMobile() {
   return false;
-  return screenSize() === 'small' || screenSize() === 'extra-small';
+  // return screenSize() === 'small' || screenSize() === 'extra-small';
 }
 
 function mobileOrDesktop() {

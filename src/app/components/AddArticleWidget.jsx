@@ -18,20 +18,6 @@ import AppBar from 'material-ui/lib/app-bar';
 const styles = {
   sidebar: {
     width: 500,
-  },
-  articleForm: {
-    padding: '20px',
-  },
-  sendButton: {
-    marginTop: '1em',
-    fontWeight: 600
-  },
-  publishToggle: {
-    marginBottom: '30px',
-    marginTop: '10px'
-  },
-  inputs: {
-    width: '100%'
   }
 };
 
@@ -55,11 +41,11 @@ class ArticleForm extends Component {
       styles.sidebar.width = screenWidth();
     }
 
-    return (<form onSubmit={this.props.addArticle} style={styles.articleForm}>
+    return (<form onSubmit={this.props.addArticle} className="AddArticleWidget-articleForm" >
 
       <ShowIf condition={this.props.isAdmin}>
         <Toggle label="Publish to everyone" labelPosition="right" name="public"
-          onToggle={this.onToggle} toggled={this.isPublic()} style={styles.publishToggle} />
+          onToggle={this.onToggle} toggled={this.isPublic()} className="AddArticleWidget-publishToggle" />
       </ShowIf>
 
       <fieldset style={styles.fieldset}>
@@ -73,11 +59,11 @@ class ArticleForm extends Component {
           id="sourceUrl"
           onChange={this.props.onChange}
           value={this.props.article.source_url}
-          style={styles.inputs}
+          className="AddArticleWidget-input"
         />
 
         <br />
-        <RaisedButton label="Import" primary={true} type="submit" style={styles.sendButton}/>
+        <RaisedButton label="Import" primary={true} type="submit" className="AddArticleWidget-sendButton" />
       </fieldset>
 
       <br />
@@ -93,7 +79,7 @@ class ArticleForm extends Component {
           onChange={this.props.onChange}
           value={this.props.article.title}
           required= { !this.props.article.source_url }
-          style={styles.inputs}
+          className="AddArticleWidget-input"
         />
 
         <TextField
@@ -104,12 +90,11 @@ class ArticleForm extends Component {
           className="materialize-textarea"
           onChange={this.props.onChange}
           value={this.props.article.content}
-          style={styles.inputs}
         />
 
         <br />
 
-        <RaisedButton label="Save" primary={true} type="submit" style={styles.sendButton} />
+        <RaisedButton label="Save" primary={true} type="submit" className="AddArticleWidget-sendButton" />
       </fieldset>
 
    </form>);
@@ -142,7 +127,7 @@ class ArticleAdd extends React.Component {
 
   render() {
     return (
-      <LeftNav width={styles.sidebar.width} styles={styles.sidebar} docked={true} openRight={true} open={this.props.open}>
+      <LeftNav className="AddArticleWidget" width={styles.sidebar.width} docked={true} openRight={true} open={this.props.open}>
         <AppBar title="New article" iconElementLeft={<IconButton onClick={this.props.closeNav}><NavigationClose /></IconButton>} />
         <ArticleForm addArticle={this.addArticle} onChange={this.onChange}
           isAdmin={this.props.isAdmin} isMobile={this.props.isMobile} article={this.props.article}/>

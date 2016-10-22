@@ -1,0 +1,67 @@
+@import "./vendor/flexboxgrid.min"
+@import "./flags/flag-icon"
+
+%left-aligned
+  margin-left: 0
+  margin-right: 0
+
+%centered
+  margin-left: auto
+  margin-right: auto
+
+body
+  -webkit-font-smoothing: antialiased
+  -webkit-text-stroke: 1px rgba(0,0,0,0.1)
+  margin: 0
+  overflow-x: hidden
+  font-family: Roboto, sans-serif
+
+pre
+  padding: 10px 5px
+  line-height: 100%
+  border: solid 1px #eee
+  background-color: #f5f5f5
+
+code
+  font-size: 0.7em
+
+.error
+  color: red
+
+input.selectedText
+  font-weight: bold
+  color: #555
+
+a
+  cursor: pointer
+
+blockquote
+  margin-left: 0
+  margin-right: 0
+
+.sidebar-closed .main-content
+  @extend %centered
+
+.desktop .main-content
+  padding-top: 120px
+
+// Mobile
+.mobile .main-content
+  width: 100%
+  padding-top: 105px
+
+.main-content
+  padding-left: 20px
+  padding-right: 20px
+  width: calc(96vw - 510px)
+  transition: all 200ms ease-in-out
+
+@media (min-width: 1600px)
+  .main-content
+    width: 60em
+    margin-left: auto
+    margin-right: auto
+    position: relative
+
+  .sidebar-opened .main-content
+    left: -250px
