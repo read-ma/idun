@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { logout } from '../actions/auth';
 import { closeNav } from '../actions';
+import { ShowIf } from '../components';
 
 import LeftNav from 'material-ui/lib/left-nav';
 import AppBar from 'material-ui/lib/app-bar';
@@ -18,13 +19,12 @@ import SocialSchool from 'material-ui/lib/svg-icons/social/school';
 import SocialPerson from 'material-ui/lib/svg-icons/social/person';
 import ActionBook from 'material-ui/lib/svg-icons/action/book';
 import ActionPowerSettingsNew from 'material-ui/lib/svg-icons/action/power-settings-new';
-import { ShowIf } from '../components';
 import ContentAddCircle from 'material-ui/lib/svg-icons/content/add-circle';
 import NavigationArrowForward from 'material-ui/lib/svg-icons/navigation/arrow-forward';
 
 const MainNavigation = ({ children, open, closeNavbar, logoutAction, authenticated }) => {
   return (
-    <LeftNav width={200} docked={true} open={open} style={{ padding: 0 }}>
+    <LeftNav width={200} docked={true} open={open}>
       <AppBar title="ReadMa" showMenuIconButton={false} iconElementRight={
         <IconButton onClick={closeNavbar}><NavigationClose /></IconButton>}
       />

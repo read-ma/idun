@@ -11,27 +11,13 @@ import { getSelectedText } from '../highlight';
 import PositioningWidget from './PositioningWidget';
 import ArticleToolbar from './ArticleToolbar';
 
-const styles = {
-  blockquote: {
-    fontSize: '0.65em',
-    wordWrap: 'break-word',
-    color: '#444',
-    margin: '30px 0'
-  },
-  link: {
-    // Take color from the closest parent that has color defined.
-    color: 'inherit'
-  }
-};
-
 const ArticleFooter = ({ sourceUrl }) => {
   return (
-    <blockquote style={styles.blockquote}>
+    <blockquote>
       <span>Source: </span>
       <a href={sourceUrl}
         target="_blank"
-        title="Go to source article"
-        style={styles.link}>
+        title="Go to source article">
           {sourceUrl}
       </a>
     </blockquote>
@@ -60,11 +46,11 @@ class ArticlePage extends Component {
     }
 
     return (
-      <div>
+      <div className="ArticlePage">
         <ArticleToolbar />
         <PositioningWidget pageId={`article-${this.props.params.id}`} />
-        <div className="article-wrapper">
-          <article className="article">
+        <div className="ArticlePage-articleWrapper">
+          <article>
             <ArticleContent onTextSelected={this.props.onTextSelected} />
             <ShowIf condition={!!this.props.article.source_url}>
               <ArticleFooter sourceUrl={this.props.article.source_url} />

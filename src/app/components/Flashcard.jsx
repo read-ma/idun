@@ -7,21 +7,6 @@ import Paper from 'material-ui/lib/paper';
 import FlatButton from 'material-ui/lib/flat-button';
 import { TTSFlashcardQuickPlayer } from '../components/TTSPlayer';
 
-const style = {
-  minHeight: 300,
-  padding: '20px',
-  display: 'flex',
-  flex: '1 1 100%',
-  flexDirection: 'column',
-  alignItems: 'center',
-  justifyContent: 'space-between',
-  textAlign: 'center',
-};
-
-const playerStyle = {
-  alignSelf: 'flex-end'
-};
-
 class Flashcard extends Component {
   constructor(props) {
     super(props);
@@ -70,10 +55,10 @@ class Flashcard extends Component {
       <div className="card-reverse">
         <h2>{this.props.item.translation}</h2>
         <ShowIf condition={!!this.props.item.example}>
-          <p>
+          <div>
             <hr />
             {this.props.item.example}
-          </p>
+          </div>
         </ShowIf>
       </div>
     );
@@ -115,8 +100,8 @@ class Flashcard extends Component {
     return (
       <div className="row card-wrap" key={this.props.item.word}>
         <div className={cardClassnames} key={this.state.side} onClick={this.revert}>
-          <Paper style={style} zDepth={2}>
-            <div className="row middle-xs between-xs" style={{ height: '100%' }}>
+          <Paper className="Flashcard-PaperContainer" zDepth={2}>
+            <div className="row middle-xs between-xs Flashcard-Paper">
               <div className="col-xs-12">
                 {this.renderContent()}
               </div>
@@ -124,7 +109,7 @@ class Flashcard extends Component {
                 {this.renderMarkButtons()}
               </div>
             </div>
-            <div className="row end-xs" style={playerStyle}>
+            <div className="row end-xs Flashcard-TTSPlayer">
               <div className="col-xs-12">
                 <TTSFlashcardQuickPlayer word={this.props.item.word} />
               </div>

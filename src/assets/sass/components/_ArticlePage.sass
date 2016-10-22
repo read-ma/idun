@@ -1,0 +1,80 @@
+$selection-bg: #f8bbd0
+$d3k-bg: lightgreen
+
+%highlight-padding
+  padding: 1px 4px
+  margin: 0 -4px
+
+.ArticlePage
+  &-articleWrapper
+    max-width: 60em
+    word-spacing: 5px
+    margin-bottom: 30px
+    margin-left: 15px
+    font-family: 'Cambria', 'Georgia', 'Helvetica Neue', Helvetica, 'Lato', sans-serif
+
+    &.no-toolbar
+      padding-top: 0
+
+    article
+      font-size: 1.5em
+      font-weight: 300
+      .content
+        line-height: 155%
+        img[src]
+          margin: 0 auto 1em auto
+          display: block
+          max-width: 100%
+          padding: 1px
+          border: 1px solid #aeaeae
+
+      .word
+        cursor: pointer
+
+      .appending .word
+        cursor: copy
+
+      .content
+        .word, .selected, .selection, .d3k
+          @extend %highlight-padding
+
+        .selected, .selection
+          background-color: $selection-bg
+
+        .quick-selection,
+        .selection.d3k
+          border-bottom: 3px solid $selection-bg
+
+        .word:hover
+          background-color: lighten($selection-bg, 10%)
+
+        .selection .word, .word.selected
+          &:hover
+            background-color: $selection-bg
+
+        .marked, .d3k
+          background-color: $d3k-bg
+          &:hover
+            background-color: darken($d3k-bg, 10%)
+
+        .user-selected, .user
+          @extend %highlight-padding
+          border-bottom: solid 3px #ef5350
+
+      mark
+        background-color: inherit
+        color: inherit
+
+    blockquote
+      font-size: 0.65em
+      word-wrap: break-word
+      color: #444
+      margin: 30px 0
+      a
+        color: inherit
+
+    .paragraph
+      margin-bottom: 1em
+
+    footer a
+      word-wrap: break-word

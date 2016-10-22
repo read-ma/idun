@@ -7,23 +7,6 @@ import { difficultyColors, labelsColors } from './shared/Colors';
 import ListItem from 'material-ui/lib/lists/list-item';
 import NavigationChevronRight from 'material-ui/lib/svg-icons/navigation/chevron-right';
 
-const styles = {
-  listItem: {
-    lineHeight: '145%',
-    fontSize: 24,
-    fontWeight: 300
-  },
-  newListItem: {
-    lineHeight: '145%',
-    fontSize: 24,
-    fontWeight: 500
-  },
-  secondaryText: {
-    height: '20px',
-    lineHeight: '22px'
-  }
-};
-
 const ArticleStatusList= (tags, privy, difficulty, learn_status) => {
   const items = [];
 
@@ -35,7 +18,7 @@ const ArticleStatusList= (tags, privy, difficulty, learn_status) => {
   items.push(<Label type="difficulty" text={l(difficulty)} color={difficultyColors[difficulty]} />);
 
   return (
-    <div style={styles.secondaryText}>
+    <div className="ArticleLink-secondaryText">
       {items}
     </div>
   );
@@ -48,7 +31,7 @@ export default function ArticleLink({ id, title, tags, privy, difficulty, learn_
   return (
     <ListItem
       key={id}
-      style={waiting ? styles.newListItem : styles.listItem}
+      className={`ArticleLink-${waiting ? 'newListItem' : 'listItem'}`}
       secondaryText={ArticleStatusList(tags, privy, difficulty, learn_status, waiting)}
       rightIcon={<NavigationChevronRight />}
       href={`#/article/${id}`}

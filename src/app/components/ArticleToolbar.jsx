@@ -11,29 +11,10 @@ import Toolbar from 'material-ui/lib/toolbar/toolbar';
 import ToolbarGroup from 'material-ui/lib/toolbar/toolbar-group';
 import FlatButton from 'material-ui/lib/flat-button';
 
-const styles = {
-  iconStyles: {
-    padding: 0,
-    width: 19,
-    height: 16,
-    top: 6
-  },
-  toolbar: {
-    position: 'fixed',
-    top: 64,
-    left: 0,
-    right: 0,
-    title: {
-      fontSize: '16px',
-      margin: '0 20px'
-    }
-  }
-};
-
 class ArticleToolbar extends Component {
   render() {
     return (
-      <Toolbar style={styles.toolbar} className="toolbar">
+      <Toolbar className="Toolbar ToolbarArticle">
         <ToolbarGroup>
           <Wordlists handleSelected={this.props.showDictMatchingWords} wordlists={this.props.wordlists} />
        </ToolbarGroup>

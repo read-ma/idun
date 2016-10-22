@@ -16,7 +16,7 @@ const ArticleList = ({ articles }) => {
     return new ArticleLink(article);
   });
 
-  return <List className="articles">{articleLinks}</List>;
+  return <List className="Articles-list">{articleLinks}</List>;
 };
 
 ArticleList.propTypes = {
@@ -42,7 +42,7 @@ class Articles extends Component {
 
   render() {
     return (
-      <div>
+      <div className="Articles">
         <ArticlesToolbar />
         <PositioningWidget pageId="article-list-page" />
         <ArticleList articles={this.state.articles} />

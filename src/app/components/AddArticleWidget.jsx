@@ -15,11 +15,7 @@ import colors from 'material-ui/lib/styles/colors';
 import Toggle from 'material-ui/lib/toggle';
 import AppBar from 'material-ui/lib/app-bar';
 
-const styles = {
-  sidebar: {
-    width: 500,
-  }
-};
+let sidebarWidth = 500;
 
 class ArticleForm extends Component {
   constructor(props) {
@@ -38,7 +34,7 @@ class ArticleForm extends Component {
 
   render() {
     if (this.props.isMobile) {
-      styles.sidebar.width = screenWidth();
+      sidebarWidth = screenWidth();
     }
 
     return (<form onSubmit={this.props.addArticle} className="AddArticleWidget-articleForm" >
@@ -48,7 +44,7 @@ class ArticleForm extends Component {
           onToggle={this.onToggle} toggled={this.isPublic()} className="AddArticleWidget-publishToggle" />
       </ShowIf>
 
-      <fieldset style={styles.fieldset}>
+      <fieldset>
         <legend>Import from link</legend>
 
         <TextField
@@ -63,18 +59,17 @@ class ArticleForm extends Component {
         />
 
         <br />
-        <RaisedButton label="Import" primary={true} type="submit" className="AddArticleWidget-sendButton" />
+        <RaisedButton label="Import" primary={true} type="submit" />
       </fieldset>
 
       <br />
 
-      <fieldset style={styles.fieldset}>
+      <fieldset>
         <legend>Create new</legend>
         <TextField
           floatingLabelText="Article title"
           name="title"
           type="text"
-          id="article-source-title"
           className="materialize-textarea"
           onChange={this.props.onChange}
           value={this.props.article.title}
@@ -86,15 +81,14 @@ class ArticleForm extends Component {
           floatingLabelText="Article body"
           multiLine={true}
           name="content"
-          id="article-source-text"
-          className="materialize-textarea"
+          className="AddArticleWidget-input"
           onChange={this.props.onChange}
           value={this.props.article.content}
         />
 
         <br />
 
-        <RaisedButton label="Save" primary={true} type="submit" className="AddArticleWidget-sendButton" />
+        <RaisedButton label="Save" primary={true} type="submit" />
       </fieldset>
 
    </form>);
@@ -127,7 +121,7 @@ class ArticleAdd extends React.Component {
 
   render() {
     return (
-      <LeftNav className="AddArticleWidget" width={styles.sidebar.width} docked={true} openRight={true} open={this.props.open}>
+      <LeftNav className="AddArticleWidget" width={sidebarWidth} docked={true} openRight={true} open={this.props.open}>
         <AppBar title="New article" iconElementLeft={<IconButton onClick={this.props.closeNav}><NavigationClose /></IconButton>} />
         <ArticleForm addArticle={this.addArticle} onChange={this.onChange}
           isAdmin={this.props.isAdmin} isMobile={this.props.isMobile} article={this.props.article}/>

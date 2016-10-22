@@ -16,10 +16,10 @@ class Home extends React.Component {
 
   render() {
     return (
-      <div className="row">
+      <div className="ArticlePage">
         <ArticleToolbar />
-        <div className="article-wrapper no-toolbar">
-          <article className="article">
+        <div className="ArticlePage-articleWrapper no-toolbar">
+          <article>
             <ArticleContent onTextSelected={this.props.onTextSelected} />
           </article>
         </div>

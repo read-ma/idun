@@ -10,24 +10,7 @@ import ToolbarGroup from 'material-ui/lib/toolbar/toolbar-group';
 import MenuItem from 'material-ui/lib/menus/menu-item';
 import DropDownMenu from 'material-ui/lib/DropDownMenu';
 
-const styles = {
-  toolbar: {
-    position: 'fixed',
-    top: 64,
-    left: 0,
-    right: 0,
-    zIndex: 2,
-    padding: '0',
-    backgroundColor: '#fff',
-    borderBottom: '1px solid #eee'
-  },
-  icon: {
-    fill: '#fff'
-  },
-  labelStyle: {
-    color: '#fff'
-  }
-};
+const styles = { icon: {}, labelStyle: {} };
 
 const MenuItemFields = {
   visibility: { all: 'All articles', privy: 'My articles', open: 'Public articles' },
@@ -41,11 +24,11 @@ const FilterDropDownMenu = ({ updateFilter, name, selected }) => {
   };
   const items = [];
   _.forOwn(MenuItemFields[name],
-           (value, key) => items.push(<MenuItem value={key} key={key} primaryText={value} />)
+    (value, key) => items.push(<MenuItem value={key} key={key} primaryText={value} />)
   );
 
   return (
-    <DropDownMenu value={selected} iconStyle={styles.icon} onChange={onChange} labelStyle={styles.labelStyle}>
+    <DropDownMenu value={selected} onChange={onChange}>
       {items}
     </DropDownMenu>
   );
@@ -63,7 +46,7 @@ class ArticlesToolbar extends Component {
   }
   render() {
     return (
-      <Toolbar style={styles.toolbar} className="toolbar">
+      <Toolbar className="Toolbar ToolbarArticles">
         <ToolbarGroup>
           <FilterDropDownMenu updateFilter={this.props.updateFilter} name="visibility" selected={this.props.filter.visibility} />
           <FilterDropDownMenu updateFilter={this.props.updateFilter} name="learning" selected={this.props.filter.learning} />

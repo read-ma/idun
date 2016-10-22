@@ -37,9 +37,9 @@ class SelectedTextInput extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.triggerSearch} className="right col s8 m4 main-navigation">
+      <form onSubmit={this.triggerSearch} className="right col s8 m4 MainNavigation">
         <div className="input-field black-text">
-          <input id="search" className="search-input" type="search" required name="text"
+          <input id="search" type="search" required name="text"
             value={this.state.text}
             onKeyUp={this.handleInputKeyUp}
             onChange={this.handleInputChange}
@@ -54,12 +54,12 @@ class SelectedTextInput extends React.Component {
 
 SelectedTextInput.propTypes = {
   text: React.PropTypes.string.isRequired,
-  search: React.PropTypes.func.isRequired,
+  search: React.PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => {
   return {
-    text: state.article.selectedText,
+    text: state.article.selectedText
   };
 };
 
