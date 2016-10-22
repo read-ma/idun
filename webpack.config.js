@@ -1,23 +1,15 @@
 require('dotenv').config({ silent: true });
 
-const path = require('path');
 const webpack = require('webpack');
-
+const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackBrowserPlugin = require('webpack-browser-plugin');
 const WebpackMd5Hash = require('webpack-md5-hash');
-const ManifestPlugin = require('webpack-manifest-plugin');
-const ChunkManifestPlugin = require('chunk-manifest-webpack-plugin');
 const DashboardPlugin = require('webpack-dashboard/plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-  // Read more about debugging: http://webpack.github.io/docs/configuration.html#devtool
-  // devtool: 'inline-source-map',
-  devtool: 'source-map',
-  devServer: {
-    quiet: true
-  },
   entry: {
     bundle: './src/app/app',
     vendor: [
@@ -26,23 +18,27 @@ module.exports = {
       // To include constants/d3k we need to extract it to its own npm module (it looks in node_modules)
     ],
   },
+  devtool: 'eval-source-map',
+  devServer: {
+    quiet: true
+  },
   output: {
-    path: path.join(__dirname, '/public'),
+    path: 'public',
     filename: '[name].js',
     chunkFilename: '[name].js',
     devtoolLineToLine: true,
     pathinfo: true,
-    sourceMapFilename: 'public/[name].js.map',
+    sourceMapFilename: '[name].map',
   },
   module: {
     loaders: [
       {
-        test: /\.(jsx|js)$/,
+        test: /\.(jsx?)$/,
         exclude: /(node_modules)/,
         loaders: ['babel']
       },
       {
-        test: /\.scss$/,
+        test: /\.sass$/,
         loader: ExtractTextPlugin.extract('css!sass')
       },
       {
@@ -52,15 +48,17 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['', '.js', '.jsx', '.scss']
+    extensions: ['', '.js', '.jsx', '.sass']
   },
   plugins: [
     new DashboardPlugin(),
+    new LodashModuleReplacementPlugin(),
     new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en-gb/),
+    new CopyWebpackPlugin([{ from: 'src/assets/images' }]),
     new HtmlWebpackPlugin({
-      template: './public/index.ejs'
+      template: './src/templates/index.ejs'
     }),
-    new ExtractTextPlugin('public/style.css', {
+    new ExtractTextPlugin('style.css', {
       allChunks: true
     }),
     new webpack.DefinePlugin({
@@ -79,11 +77,6 @@ module.exports = {
     }),
     new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js'),
     new WebpackMd5Hash(),
-    new ManifestPlugin(),
-    new ChunkManifestPlugin({
-      filename: 'manifest.json',
-      manifestVariable: 'webpackManifest'
-    }),
     new webpack.optimize.OccurenceOrderPlugin(),
   ]
 };

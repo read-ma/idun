@@ -1,27 +1,27 @@
 require('dotenv').config({ silent: true });
 
-const path = require('path');
-const nodeModulesDir = path.resolve(__dirname, 'node_modules');
-
 const webpack = require('webpack');
+const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackMd5Hash = require('webpack-md5-hash');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const ChunkManifestPlugin = require('chunk-manifest-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+
 
 module.exports = {
   entry: {
-    bundle: path.resolve(__dirname, './src/app/app.js'),
+    bundle: './src/app/app.js',
     vendor: [
       'react', 'redux', 'redux-thunk', 'react-dom', 'react-router', 'react-ga', 'react-router-redux',
       'lodash', 'moment', 'chart.js', 'material-ui', 'classnames', 'history', 'axios', 'airbrake-js'
       // To include constants/d3k we need to extract it to its own npm module (it looks in node_modules)
     ],
   },
+  devtool: 'source-map',
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: 'dist',
     filename: '[name].[chunkhash].js',
     chunkFilename: '[name].[chunkhash].js'
   },
@@ -31,25 +31,26 @@ module.exports = {
       exclude: /(node_modules)/,
       loaders: ['babel']
     }, {
-      test: /\.scss$/,
-      loader: ExtractTextPlugin.extract('css!sass')
+      test: /\.sass$/,
+      loader: ExtractTextPlugin.extract('css?sourceMap!sass?sourceMap')
     }, {
       test: /\.(eot|woff|woff2|ttf|svg|png|jpg)$/,
       loader: 'url-loader?limit=30000&name=[name]-[hash].[ext]'
     }]
   },
   resolve: {
-    extensions: ['', '.js', '.jsx', '.scss']
+    extensions: ['', '.js', '.jsx', '.sass']
   },
   plugins: [
-    new CleanWebpackPlugin(['dist'], { verbose: true }),
     new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en-gb/),
     new ExtractTextPlugin('[name].[contenthash].css', {
       allChunks: true
     }),
+    new LodashModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
-      template: './public/index.ejs'
+      template: './src/templates/index.ejs'
     }),
+    new CopyWebpackPlugin([{ from: 'src/assets/images' }]),
     new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.[chunkhash].js'),
     new WebpackMd5Hash(),
     new webpack.NoErrorsPlugin(),

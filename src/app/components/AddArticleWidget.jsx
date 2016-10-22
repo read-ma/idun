@@ -6,8 +6,6 @@ import { closeNav } from '../actions';
 import { ShowIf } from '../components';
 import { screenWidth } from '../Responsive';
 
-require('./styles/Forms.scss');
-
 import LeftNav from 'material-ui/lib/left-nav';
 import TextField from 'material-ui/lib/text-field';
 import RaisedButton from 'material-ui/lib/raised-button';

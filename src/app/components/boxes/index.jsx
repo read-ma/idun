@@ -1,5 +1,3 @@
-require('../styles/Images.scss');
-
 import React, { Component } from 'react';
 import _ from 'lodash';
 import { isEmpty } from 'lodash/isEmpty';

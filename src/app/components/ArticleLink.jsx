@@ -1,4 +1,3 @@
-require('./styles/ArticleLink.scss');
 import React from 'react';
 
 import l from '../I18n';
