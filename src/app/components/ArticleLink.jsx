@@ -18,7 +18,7 @@ const ArticleStatusList= (tags, privy, difficulty, learn_status) => {
   items.push(<Label type="difficulty" text={l(difficulty)} color={difficultyColors[difficulty]} />);
 
   return (
-    <div className="ArticleLink-secondaryText">
+    <div className="ArticleLink-SecondaryText">
       {items}
     </div>
   );
@@ -31,7 +31,7 @@ export default function ArticleLink({ id, title, tags, privy, difficulty, learn_
   return (
     <ListItem
       key={id}
-      className={`ArticleLink-${waiting ? 'newListItem' : 'listItem'}`}
+      className={`ArticleLink-${waiting ? 'NewListItem' : 'ListItem'}`}
       secondaryText={ArticleStatusList(tags, privy, difficulty, learn_status, waiting)}
       rightIcon={<NavigationChevronRight />}
       href={`#/article/${id}`}

@@ -11,18 +11,7 @@ import { closeNav } from '../actions/';
 import MapLocalLibrary from 'material-ui/lib/svg-icons/maps/local-library';
 import List from 'material-ui/lib/lists/list';
 import ListItem from 'material-ui/lib/lists/list-item';
-// import LinearProgress from 'material-ui/lib/linear-progress';
-// import { difficultyColors } from './shared/Colors';
 
-const styles = {
-  articleLink: {
-    lineHeight: '150%',
-    color: 'rgba(0, 0, 0, 0.87058)'
-  },
-  progressChart: {
-    maxWidth: '400px'
-  }
-};
 
 const chartSettings = (data) => {
   return {
@@ -41,8 +30,7 @@ const chartSettings = (data) => {
 };
 
 const RecommendedArticleListItem = ({ article }) => {
-  // const wordsString = article.words + ' new word' + (article.words > 1 ? 's' : '');
-  const articleLink = <Link to={{ pathname: `/article/${article.id}` }} style={styles.articleLink}>{article.title}</Link>;
+  const articleLink = <Link to={{ pathname: `/article/${article.id}` }} className="Profile-ArticleLink">{article.title}</Link>;
   const icon = <MapLocalLibrary />;
 
   return (
@@ -73,9 +61,6 @@ RecommendedArticleList.propTypes = {
 };
 
 class Profile extends React.Component {
-  // percentageProgress() {
-  //   return 270 / 3400 * 100;
-  // }
   drawChart() {
     this.chart = new Chart(document.getElementById('learning-progress-chart'), {
       type: 'pie',
@@ -106,7 +91,7 @@ class Profile extends React.Component {
   overallProgress() {
     return (<div className="col-xs-12 col-md-6">
       <h2>Your overall progress</h2>
-      <canvas id="learning-progress-chart" width="300" height="300" style={styles.progressChart} />
+      <canvas id="learning-progress-chart" width="300" height="300" className="Profile-ProgressChart" />
     </div>);
   }
 

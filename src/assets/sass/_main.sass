@@ -1,6 +1,8 @@
 @import "./vendor/flexboxgrid.min"
 @import "./flags/flag-icon"
 
+
+
 %left-aligned
   margin-left: 0
   margin-right: 0
@@ -42,26 +44,23 @@ blockquote
 .sidebar-closed .main-content
   @extend %centered
 
-.desktop .main-content
-  padding-top: 120px
-
-// Mobile
-.mobile .main-content
-  width: 100%
-  padding-top: 105px
-
 .main-content
-  padding-left: 20px
-  padding-right: 20px
-  width: calc(96vw - 510px)
+  width: 100%
   transition: all 200ms ease-in-out
+  padding:
+    left: 20px
+    top: 105px
+    right: 20px
+  @include desktop
+    width: calc(96vw - 510px)
+    padding-top: 120px
 
-@media (min-width: 1600px)
-  .main-content
-    width: 60em
-    margin-left: auto
-    margin-right: auto
-    position: relative
+// @media (min-width: 1600px)
+//   .main-content
+//     width: 60em
+//     margin-left: auto
+//     margin-right: auto
+//     position: relative
 
-  .sidebar-opened .main-content
-    left: -250px
+  // .sidebar-opened .main-content
+    // left: -250px

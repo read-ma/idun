@@ -10,20 +10,6 @@ import Divider from 'material-ui/lib/divider';
 import GridList from 'material-ui/lib/grid-list/grid-list';
 import GridTile from 'material-ui/lib/grid-list/grid-tile';
 
-const styles = {
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'space-around',
-    padding: 10
-  },
-  gridList: {
-    height: 185,
-    overflowY: 'auto',
-    marginBottom: 24,
-  }
-};
-
 class SimpleList extends Component {
   saveUserDefinition(selectedDefinition) {
     this.props.dispatch(
@@ -34,7 +20,7 @@ class SimpleList extends Component {
     );
   }
 
-  render() {
+  render(x) {
     if (!_.isEmpty(this.props.items)) {
       return (
         <div>
@@ -97,8 +83,8 @@ class GraphicList extends RemoteList {
     ));
 
     return (
-      <div style={styles.root}>
-        <GridList style={styles.gridList} padding={6}>
+      <div className="BoxIndex">
+        <GridList className="BoxIndex-GridList">
           {items}
         </GridList>
       </div>

@@ -1,28 +1,6 @@
 import React, { Component } from 'react';
 import TextField from 'material-ui/lib/text-field';
 
-const styles = {
-  component: {
-    width: '100%',
-    marginRight: 'auto',
-    marginLeft: 10,
-    backgroundColor: '#fff',
-    fontSize: 20,
-    display: 'flex',
-    flexWrap: 'wrap'
-  },
-  textfield: {
-    flex: '1 1 auto',
-  },
-  input: {
-    paddingLeft: 10,
-    color: '#555'
-  },
-  hint: {
-    paddingLeft: 10
-  }
-};
-
 class SearchInputBase extends Component {
   constructor(props) {
     super(props);
@@ -45,12 +23,11 @@ class SearchInputBase extends Component {
   }
 
   render() {
-    return (<div style={styles.component}>
+    return (<div className="SearchInput">
       <TextField
         id="articleSearch" name="query" onChange={this.onFilterChange}
         value={this.state.query} hintText={this.props.hintText}
-        underlineShow={false} style={styles.textfield} inputStyle={styles.input}
-        hintStyle={styles.hint}
+        underlineShow={false} className="SearchInput-TextField"
       />
       {this.props.rightComponent}
     </div>);

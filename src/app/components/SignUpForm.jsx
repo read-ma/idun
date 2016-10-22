@@ -1,28 +1,9 @@
-// TODO: Extract pre-login form styles.
-
 import React from 'react';
 import { connect } from 'react-redux';
 
 import { signupAttempt } from '../actions/auth';
 import TextField from 'material-ui/lib/text-field';
 import RaisedButton from 'material-ui/lib/raised-button';
-
-const styles = {
-  headline: {
-    fontSize: 18,
-    marginBottom: 20,
-    fontWeight: 500,
-    color: '#444'
-  },
-  sendButton: {
-    marginTop: '1em',
-    marginRight: '1em'
-  },
-  noSpamPromise: {
-    color: '#bbb',
-    fontSize: '11px'
-  }
-};
 
 class SignUpForm extends React.Component {
   constructor(props) {
@@ -48,8 +29,8 @@ class SignUpForm extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSignUp.bind(this)} className="col-xs-12 col-md-8">
-        <h2 style={styles.headline}>Create account</h2>
+      <form onSubmit={this.handleSignUp.bind(this)} className="col-xs-12 col-md-8 SignUp">
+        <h2>Create account</h2>
         <h4>{this.props.message}</h4>
         <h4>{this.props.error}</h4>
 
@@ -63,7 +44,10 @@ class SignUpForm extends React.Component {
           type="password" id="password" name="password" ref="password" required="true"
         />
 
-        <RaisedButton label="Create account" primary={true} type="submit" style={styles.sendButton} />
+        <br/>
+        <br/>
+
+        <RaisedButton label="Create account" primary={true} type="submit" />
       </form>
     );
   }

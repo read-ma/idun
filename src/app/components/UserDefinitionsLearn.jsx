@@ -16,21 +16,7 @@ function mapStateToProps(state) {
   return { decks: state.decks };
 }
 
-const styles = {
-  listItem: {
-    lineHeight: '145%',
-    fontSize: 25,
-    fontWeight: 300
-  },
-  secondaryText: {
-    height: '20px',
-    lineHeight: '22px',
-    padding: '1px 0'
-  }
-};
-
 class UserDefinitionsLearn extends Component {
-
   componentDidMount() {
     this.props.dispatch(
       loadDecks()
@@ -44,8 +30,8 @@ class UserDefinitionsLearn extends Component {
           {this.props.decks.map((deck) => {
             return (
               <ListItem key={deck.id}
-                style={styles.listItem}
-                secondaryText={<div style={styles.secondaryText}>
+                className="UserDefinitionsLearn-ListItem"
+                secondaryText={<div className="UserDefinitionsLearn-SecondaryText">
                   <Label type="difficulty" text={ `${deck.count} words to learn` } />
                   from {_.truncate(deck.name, { length: 65 })}
                 </div>}
@@ -79,6 +65,5 @@ UserDefinitionsLearn.propTypes = {
   decks: React.PropTypes.array,
   dispatch: React.PropTypes.func
 };
-
 
 export default connect(mapStateToProps)(UserDefinitionsLearn);

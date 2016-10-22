@@ -2,31 +2,12 @@ import React, { Component } from 'react';
 
 import { ShowIf } from '../../components';
 
-import sidebarStyles from '../styles/Sidebar';
-
 import List from 'material-ui/lib/lists/list';
 import ListItem from 'material-ui/lib/lists/list-item';
 import ContentAddCircleOutline from 'material-ui/lib/svg-icons/content/add-circle-outline';
 import KeyboardArrowUp from 'material-ui/lib/svg-icons/hardware/keyboard-arrow-up';
 import KeyboardArrowDown from 'material-ui/lib/svg-icons/hardware/keyboard-arrow-down';
 
-const styles = {
-  languageIcon: {
-    float: 'left',
-    marginRight: 5,
-    border: '1px solid #ccc',
-    backgroundSize: 'cover',
-  },
-  definition: {
-    lineHeight: '155%',
-  },
-  listItem: {
-    cursor: 'copy'
-  },
-  moreOrLessButton: {
-    textAlign: 'center'
-  }
-};
 
 const LanguageIcon = ({ lang }) => {
   let flagCode = lang;
@@ -41,7 +22,7 @@ const LanguageIcon = ({ lang }) => {
     return <span/>;
   }
 
-  return (<span style={styles.languageIcon} className={`flag-icon flag-icon-${flagCode}`} />);
+  return (<span className={`flag-icon flag-icon-${flagCode} BoxesList-LanguageIcon`} />);
 };
 
 LanguageIcon.propTypes = {
@@ -54,9 +35,10 @@ function DefinitionListItem({ text, language, partOfSpeech, handleClick, key }) 
   }
 
   return (
-    <ListItem key={key} rightIcon={<ContentAddCircleOutline />} secondaryText={partOfSpeech} onClick={add} style={styles.listItem}>
+    <ListItem key={key} rightIcon={<ContentAddCircleOutline />} secondaryText={partOfSpeech}
+        onClick={add} className="BoxesList-ListItem">
       <LanguageIcon lang={language} />
-      <span style={styles.definition} dangerouslySetInnerHTML={{ __html: text }} />
+      <span className="BoxesList-Definition" dangerouslySetInnerHTML={{ __html: text }} />
     </ListItem>
   );
 }
@@ -93,7 +75,7 @@ class DefinitionList extends Component {
     );
 
     return (
-      <List subheader={this.props.label} subheaderStyle={sidebarStyles.subheader}>
+      <List subheader={this.props.label}>
         {items}
         <br style={{ clear: 'both' }} />
         <ShowIf condition={this.props.items.length > LOW_LIMIT}>
@@ -115,7 +97,7 @@ const MoreLessButton = ({ collapsed, onClick }) => {
   let icon = collapsed ? <KeyboardArrowUp /> : <KeyboardArrowDown />;
 
   return (
-    <ListItem onClick={onClick} style={{ textAlign: 'center' }}>{icon}</ListItem>
+    <ListItem onClick={onClick} className="BoxesList-MoreOrLessButton">{icon}</ListItem>
   );
 };
 

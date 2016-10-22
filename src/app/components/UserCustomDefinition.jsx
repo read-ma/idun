@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { saveUserDefinition } from '../actions';
-import sidebarStyles from './styles/Sidebar';
 
 import colors from 'material-ui/lib/styles/colors';
 import List from 'material-ui/lib/lists/list';
@@ -12,33 +11,6 @@ import Paper from 'material-ui/lib/paper';
 import SocialSchool from 'material-ui/lib/svg-icons/social/school';
 import RaisedButton from 'material-ui/lib/raised-button';
 import { ShowIf } from '../components';
-
-const styles = {
-  userDefinitionBox: {
-    clear: 'both'
-  },
-  paper: {
-    clear: 'both',
-    paddingTop: 10,
-    marginBottom: 10
-  },
-  fieldset: {
-    borderColor: colors.grey300,
-    borderStyle: 'solid',
-    margin: '15px 10px 0 10px'
-  },
-  translationInput: {
-    width: '100%'
-  },
-  saveButton: {
-    marginBottom: 25,
-    marginTop: 10
-  },
-  instructions: {
-    color: colors.grey600,
-    lineHeight: '160%',
-  }
-};
 
 const TranslationBox = ({ translation, key }) => {
   return (
@@ -64,7 +36,7 @@ const DefinitionsBox = ({ list }) => {
   }
 
   return (
-    <List style={styles.userDefinitionBox} id="user-definition-box" subheader="My dictionary" subheaderStyle={sidebarStyles.subheader}>
+    <List className="UserCustomDefinition" subheader="My dictionary" >
       {definitions}
     </List>
   );
@@ -75,7 +47,6 @@ DefinitionsBox.propTypes = {
 };
 
 class UserCustomDefinition extends Component {
-
   constructor(props) {
     super(props);
     this.state = { userDefinitions: [] };
@@ -111,12 +82,13 @@ class UserCustomDefinition extends Component {
     }
 
     return (
-      <Paper zDepth={1} style={styles.paper} id="user-custom-definitions">
+      <Paper zDepth={1} className="UserCustomDefinition-Paper" id="user-custom-definitions">
         <DefinitionsBox list={this.state.userDefinitions} />
 
         <ShowIf condition={!this.state.formVisible}>
           <ListItem disabled={true}>
-            <RaisedButton style={styles} onClick={this.toggleFormVisibility} small={true} label="No matching translation? Add yours here."/>
+            <RaisedButton className="UserCustomDefinition-SaveButton" onClick={this.toggleFormVisibility}
+                small={true} label="No matching translation? Add yours here."/>
           </ListItem>
         </ShowIf>
 
@@ -127,10 +99,12 @@ class UserCustomDefinition extends Component {
               onEnterKeyDown={this.saveUserDefinition}
               onChange={this.handleInputChange}
               value={this.state.translation}
-              style={styles.translationInput}
+              className="UserCustomDefinition-TranslationInput"
             />
-            <RaisedButton label="Save" type="submit" style={styles.saveButton} onClick={this.saveUserDefinition} />
-            <RaisedButton label="Cancel" type="reset" style={styles.saveButton} onClick={this.toggleFormVisibility} />
+            <RaisedButton label="Save" type="submit" className="UserCustomDefinition-SaveButton"
+                onClick={this.saveUserDefinition} />
+            <RaisedButton label="Cancel" type="reset" className="UserCustomDefinition-SaveButton"
+                onClick={this.toggleFormVisibility} />
           </ListItem>
         </ShowIf>
       </Paper>

@@ -10,8 +10,6 @@ import ToolbarGroup from 'material-ui/lib/toolbar/toolbar-group';
 import MenuItem from 'material-ui/lib/menus/menu-item';
 import DropDownMenu from 'material-ui/lib/DropDownMenu';
 
-const styles = { icon: {}, labelStyle: {} };
-
 const MenuItemFields = {
   visibility: { all: 'All articles', privy: 'My articles', open: 'Public articles' },
   learning: { all: 'Learn - all', waiting: 'New', pending: 'Learning', learned: 'Done' },

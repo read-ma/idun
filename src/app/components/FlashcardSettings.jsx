@@ -3,15 +3,6 @@ import React, { Component } from 'react';
 import RadioButton from 'material-ui/lib/radio-button';
 import RadioButtonGroup from 'material-ui/lib/radio-button-group';
 
-const styles = {
-  block: {
-    maxWidth: 250,
-  },
-  radioButton: {
-    marginBottom: 16,
-  },
-};
-
 class FlashcardSettings extends Component {
   constructor(props) {
     super(props);
@@ -30,12 +21,12 @@ class FlashcardSettings extends Component {
           <RadioButton
             value="definition"
             label="Definition"
-            style={styles.radioButton}
+            className="FlashcardSettings-RadioButton"
           />
           <RadioButton
             value="word"
             label="Word"
-            style={styles.radioButton}
+            className="FlashcardSettings-RadioButton"
           />
         </RadioButtonGroup>
       </div>

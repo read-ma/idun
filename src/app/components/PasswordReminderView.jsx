@@ -6,18 +6,6 @@ import NotificationBox from './NotificationBox';
 import TextField from 'material-ui/lib/text-field';
 import RaisedButton from 'material-ui/lib/raised-button';
 
-const styles = {
-  headline: {
-    fontSize: 18,
-    marginBottom: 20,
-    fontWeight: 500,
-    color: '#444'
-  },
-  sendButton: {
-    marginTop: '1em'
-  }
-};
-
 class PasswordReminder extends Component {
   constructor(props) {
     super(props);
@@ -37,8 +25,8 @@ class PasswordReminder extends Component {
 
   render() {
     return (
-      <form onSubmit={this.resetPassword} className="col-xs-12 col-md-8 col-lg-6">
-        <h2 style={styles.headline}>Reset password to your account</h2>
+      <form onSubmit={this.resetPassword} className="col-xs-12 col-md-8">
+        <h2>Reset password to your account</h2>
         <p>Enter your email. We will send you instructions how to reset your password.</p>
 
         <NotificationBox message={this.props.error} type="error" />
@@ -50,7 +38,8 @@ class PasswordReminder extends Component {
           onChange={this.handleInputChange}
         />
 
-        <RaisedButton label="Send instructions" primary={true} type="submit" onClick={this.props.resetPassword} style={styles.sendButton} />
+        <RaisedButton label="Send instructions" primary={true} type="submit"
+            onClick={this.props.resetPassword} className="PasswordReminder-SendButton" />
       </form>
     );
   }

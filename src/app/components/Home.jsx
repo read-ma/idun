@@ -18,7 +18,7 @@ class Home extends React.Component {
     return (
       <div className="ArticlePage">
         <ArticleToolbar />
-        <div className="ArticlePage-articleWrapper no-toolbar">
+        <div className="ArticlePage-ArticleWrapper no-toolbar">
           <article>
             <ArticleContent onTextSelected={this.props.onTextSelected} />
           </article>

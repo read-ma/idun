@@ -49,7 +49,7 @@ class ArticlePage extends Component {
       <div className="ArticlePage">
         <ArticleToolbar />
         <PositioningWidget pageId={`article-${this.props.params.id}`} />
-        <div className="ArticlePage-articleWrapper">
+        <div className="ArticlePage-ArticleWrapper">
           <article>
             <ArticleContent onTextSelected={this.props.onTextSelected} />
             <ShowIf condition={!!this.props.article.source_url}>

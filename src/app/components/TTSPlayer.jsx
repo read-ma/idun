@@ -14,41 +14,6 @@ import colors from 'material-ui/lib/styles/colors';
 
 const hasTTSsupport = (() => typeof window.SpeechSynthesisUtterance === 'function')();
 
-const styles = {
-  tooltip: {
-    fontSize: '12px'
-  },
-  header: {
-    lineHeight: '56px',
-    alignSelf: 'center',
-    margin: 0,
-    flex: '0 0 7%',
-  },
-  player: {
-    display: 'flex',
-    height: '56px',
-    alignItems: 'center',
-    flexWrap: 'nowrap',
-    flexBasis: '90%'
-  },
-  iconButton: {
-    margin: 0,
-    padding: 0,
-  },
-  icon: {
-    fill: colors.white
-  },
-  quickPlayer: {
-    float: 'right',
-    padding: '0px 7px',
-    color: colors.grey600,
-    hoverColor: colors.grey900
-  },
-  listenIcon: {
-    marginBottom: -6
-  }
-};
-
 class Player extends Component {
   play() {
     if (this.props.ttsStatus.paused) {
@@ -63,15 +28,15 @@ class Player extends Component {
       return null;
     }
     return (
-      <div style={styles.player}>
-        <h4 style={styles.header}>Read</h4>
-        <IconButton style={styles.iconButton} iconStyle={styles.icon} onClick={this.play.bind(this)}>
+      <div className="TTSPlayer-Player">
+        <h4>Read</h4>
+        <IconButton className="TTSPlayer-IconButton" onClick={this.play.bind(this)}>
           <AVPlayArrow />
         </IconButton>
-        <IconButton style={styles.iconButton} iconStyle={styles.icon} onClick={this.props.pause}>
+        <IconButton className="TTSPlayer-IconButton" onClick={this.props.pause}>
           <AVPause />
         </IconButton>
-        <IconButton style={styles.iconButton} iconStyle={styles.icon} onClick={this.props.stop}>
+        <IconButton className="TTSPlayer-IconButton" onClick={this.props.stop}>
           <AVStop />
         </IconButton>
       </div>
@@ -101,8 +66,8 @@ class QuickPlayer extends Component {
       return null;
     }
     return (
-      <FlatButton onClick={this.play.bind(this)} style={styles.quickPlayer} disabled={!this.props.selection}>
-        <AVVolumeUp style={styles.listenIcon} color={colors.pinkA400} /> Listen
+      <FlatButton onClick={this.play.bind(this)} className="TTSPlayer-QuickPlayer" disabled={!this.props.selection}>
+        <AVVolumeUp className="TTSPlayer-ListenIcon" /> Listen
       </FlatButton>
     );
   }
@@ -164,8 +129,8 @@ class FlashcardQuickPlayer extends Component {
       return null;
     }
     return (
-      <FlatButton onClick={this.play.bind(this)} style={styles.quickPlayer} disabled={!this.props.word}>
-        <AVVolumeUp style={styles.listenIcon} color={colors.grey600} /> Listen
+      <FlatButton onClick={this.play.bind(this)} className="TTSPlayer-QuickPlayer" disabled={!this.props.word}>
+        <AVVolumeUp className="TTSPlayer-ListenIcon" /> Listen
       </FlatButton>
     );
   }

@@ -7,19 +7,6 @@ import MainNavigaton from './MainNavigation';
 import AppBar from 'material-ui/lib/app-bar';
 import Notify from './shared/Notify';
 
-const styles = {
-  appbar: {
-    position: 'fixed',
-    width: '100%',
-    top: 0,
-    title: {
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center'
-    }
-  }
-};
-
 class Main extends React.Component {
   displaySearchBar() {
     return this.props.routes && this.props.routes[this.props.routes.length-1].displaySearchBar;
@@ -30,9 +17,8 @@ class Main extends React.Component {
       <div className={`${this.props.screenSizeClass} ${this.props.mobileOrDesktopClass} ${this.props.sidebarOpenClass}`}>
         <AppBar
           onLeftIconButtonTouchTap={this.props.openNav}
-          style={styles.appbar}
+          className="Appbar"
           title={this.props.topNavChildren}
-          titleStyle={styles.appbar.title}
         />
         <MainNavigaton displaySearchBar={this.displaySearchBar()} isAuthenticated={this.props.isAuthenticated}>
           {this.props.navChildren}

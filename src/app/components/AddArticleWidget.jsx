@@ -37,11 +37,11 @@ class ArticleForm extends Component {
       sidebarWidth = screenWidth();
     }
 
-    return (<form onSubmit={this.props.addArticle} className="AddArticleWidget-articleForm" >
+    return (<form onSubmit={this.props.addArticle} className="AddArticleWidget-ArticleForm" >
 
       <ShowIf condition={this.props.isAdmin}>
         <Toggle label="Publish to everyone" labelPosition="right" name="public"
-          onToggle={this.onToggle} toggled={this.isPublic()} className="AddArticleWidget-publishToggle" />
+          onToggle={this.onToggle} toggled={this.isPublic()} className="AddArticleWidget-PublishToggle" />
       </ShowIf>
 
       <fieldset>
@@ -55,7 +55,7 @@ class ArticleForm extends Component {
           id="sourceUrl"
           onChange={this.props.onChange}
           value={this.props.article.source_url}
-          className="AddArticleWidget-input"
+          className="AddArticleWidget-Input"
         />
 
         <br />
@@ -74,14 +74,14 @@ class ArticleForm extends Component {
           onChange={this.props.onChange}
           value={this.props.article.title}
           required= { !this.props.article.source_url }
-          className="AddArticleWidget-input"
+          className="AddArticleWidget-Input"
         />
 
         <TextField
           floatingLabelText="Article body"
           multiLine={true}
           name="content"
-          className="AddArticleWidget-input"
+          className="AddArticleWidget-Input"
           onChange={this.props.onChange}
           value={this.props.article.content}
         />

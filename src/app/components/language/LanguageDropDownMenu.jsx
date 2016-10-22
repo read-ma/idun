@@ -6,25 +6,6 @@ import { changeLanguage } from '../../actions';
 import DropDownMenu from 'material-ui/lib/DropDownMenu';
 import MenuItem from 'material-ui/lib/menus/menu-item';
 
-const styles = {
-  flagStyles: {
-    border: '1px solid #ccc',
-    padding: 0,
-    width: 23,
-    height: 17,
-    backgroundSize: 'cover',
-  },
-  dropdownIcon: {
-    fill: '#000'
-  },
-  flagItem: {
-    verticalAlign: 'middle'
-  },
-  menu: {
-    marginTop: '10px'
-  }
-};
-
 const LanguageFlag = ({ langKey }) => {
   let flagCode = langKey;
 
@@ -34,7 +15,7 @@ const LanguageFlag = ({ langKey }) => {
     flagCode = 'cz';
   }
 
-  return (<span style={styles.flagStyles} className={`flag-icon flag-icon-${flagCode}`}/>);
+  return (<span className={`flag-icon flag-icon-${flagCode} LanguageDropdownMenu-FlagStyles`}/>);
 };
 
 LanguageFlag.propTypes = {
@@ -50,13 +31,12 @@ class LanguageDropDownMenu extends Component {
     const languages = this.props.languages.map(lang => {
       const flag = <LanguageFlag langKey={lang.key} />;
 
-      return <MenuItem key={lang.code} primaryText={flag} value={lang.code} style={styles.flagItem} />;
+      return <MenuItem key={lang.code} primaryText={flag} value={lang.code} className="LanguageDropdownMenu-FlagItem" />;
     });
 
     return (
       <DropDownMenu value={this.props.language[this.props.type]}
-        style={styles.menu}
-        iconStyle={styles.dropdownIcon}
+        className="LanguageDropdownMenu-Menu"
         underlineStyle={ { display: 'none' } } onChange={this.onLangChange.bind(this)}>
         {languages}
       </DropDownMenu>

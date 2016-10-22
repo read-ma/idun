@@ -16,7 +16,7 @@ const ArticleList = ({ articles }) => {
     return new ArticleLink(article);
   });
 
-  return <List className="Articles-list">{articleLinks}</List>;
+  return <List className="Articles-List">{articleLinks}</List>;
 };
 
 ArticleList.propTypes = {
