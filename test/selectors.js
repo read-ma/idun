@@ -5,7 +5,7 @@ module.exports = {
   searchInput: '.SearchInput input',
 
   // Articles
-  articlesLinks: '.Article-Link a',
+  articlesLinks: '.ArticleLink',
 
   // Article
   homeArticle: '.ArticlePage article',
