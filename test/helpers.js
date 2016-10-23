@@ -6,8 +6,8 @@ module.exports = {
   },
   logIn: function(context) {
     context.fill($.loginForm, {
-      email: 'demo@readma.com',
-      password: 'demo@readma.com'
+      email: 'help@readma.com',
+      password: 'help@readma.com'
     }, true);
   },
   logOut: function(context) {
@@ -16,6 +16,6 @@ module.exports = {
   tearDown: function(casper) {
     casper.evaluate(function() {
       localStorage.clear();
-    }, {})
+    }, {});
   }
 };
