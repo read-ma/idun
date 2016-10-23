@@ -1,15 +1,15 @@
 module.exports = {
-  loginForm: 'form#loginForm',
+  loginForm: '#loginForm',
   loginButton: '#loginButton',
   signOutButton: '#signOutButton',
-  searchInput: 'input[id="articleSearch"]',
+  searchInput: '.SearchInput input',
 
   // Articles
-  articlesLinks: '.articles a',
+  articlesLinks: '.Article-Link a',
 
   // Article
-  homeArticle: 'article.article',
-  articleParagraph: '.article .paragraph',
+  homeArticle: '.ArticlePage article',
+  articleParagraph: 'article .paragraph',
 
   // Sidebar
   newTranslationInput: '#new-translation-input',

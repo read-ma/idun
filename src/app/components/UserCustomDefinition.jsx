@@ -36,7 +36,7 @@ const DefinitionsBox = ({ list }) => {
   }
 
   return (
-    <List className="UserCustomDefinition" subheader="My dictionary" >
+    <List className="UserCustomDefinition" subheader="My dictionary" id="user-definition-box">
       {definitions}
     </List>
   );

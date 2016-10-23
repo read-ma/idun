@@ -31,7 +31,7 @@ export default function ArticleLink({ id, title, tags, privy, difficulty, learn_
   return (
     <ListItem
       key={id}
-      className={`ArticleLink-${waiting ? 'NewListItem' : 'ListItem'}`}
+      className={`ArticleLink ArticleLink-${waiting ? 'NewListItem' : 'ListItem'}`}
       secondaryText={ArticleStatusList(tags, privy, difficulty, learn_status, waiting)}
       rightIcon={<NavigationChevronRight />}
       href={`#/article/${id}`}
