@@ -8,6 +8,7 @@ const ManifestPlugin = require('webpack-manifest-plugin');
 const ChunkManifestPlugin = require('chunk-manifest-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
+const BUILD_DIR = 'dist';
 
 module.exports = {
   entry: {
@@ -20,7 +21,7 @@ module.exports = {
   },
   devtool: 'source-map',
   output: {
-    path: 'dist',
+    path: BUILD_DIR,
     filename: '[name].[chunkhash].js',
     chunkFilename: '[name].[chunkhash].js'
   },
@@ -48,7 +49,10 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './src/templates/index.ejs'
     }),
-    new CopyWebpackPlugin([{ from: 'src/assets/images' }]),
+    new CopyWebpackPlugin([
+      { from: 'src/assets/images' },
+      { from: 'src/assets/root' }
+    ]),
     new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.[chunkhash].js'),
     new WebpackMd5Hash(),
     new webpack.NoErrorsPlugin(),

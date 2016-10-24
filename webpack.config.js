@@ -8,6 +8,8 @@ const WebpackMd5Hash = require('webpack-md5-hash');
 const DashboardPlugin = require('webpack-dashboard/plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
+const BUILD_DIR = 'public';
+
 module.exports = {
   entry: {
     bundle: './src/app/app',
@@ -22,7 +24,7 @@ module.exports = {
     quiet: true
   },
   output: {
-    path: 'public',
+    path: BUILD_DIR,
     filename: '[name].js',
     chunkFilename: '[name].js',
     devtoolLineToLine: true,
@@ -52,7 +54,10 @@ module.exports = {
   plugins: [
     new DashboardPlugin(),
     new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en-gb/),
-    new CopyWebpackPlugin([{ from: 'src/assets/images' }]),
+    new CopyWebpackPlugin([
+      { from: 'src/assets/images' },
+      { from: 'src/assets/root' }
+    ]),
     new HtmlWebpackPlugin({
       template: './src/templates/index.ejs'
     }),
