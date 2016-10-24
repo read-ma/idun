@@ -114,7 +114,7 @@ class ArticleAdd extends React.Component {
 
   render() {
     return (
-      <LeftNav className="AddArticleWidget" width={'100%'} docked={true} openRight={true} open={this.props.open}>
+      <LeftNav className="AddArticleWidget Sidebar-Right" width={100} docked={true} openRight={true} open={this.props.open}>
         <AppBar title="New article" iconElementLeft={<IconButton onClick={this.props.closeNav}><NavigationClose /></IconButton>} />
         <ArticleForm addArticle={this.addArticle} onChange={this.onChange}
           isAdmin={this.props.isAdmin} isMobile={this.props.isMobile} article={this.props.article}/>
