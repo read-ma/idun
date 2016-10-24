@@ -5,6 +5,6 @@ node_modules
 .tern-port
 .projectile
 .env
-
+.DS_Store
 
 npm-debug.log

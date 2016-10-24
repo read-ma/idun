@@ -36,7 +36,7 @@ class Sidebar extends Component {
     const leftIcon = <IconButton className="Sidebar-AppbarCloseButton" onClick={this.props.closeNav}><NavigationClose /></IconButton>;
 
     return (
-      <LeftNav width={500} docked={this.props.sidebarDocked} openRight={true} open={this.props.open}>
+      <LeftNav width={500} docked={this.props.sidebarDocked} openRight={true} open={this.props.open} className="Sidebar-Right">
         <AppBar className="Sidebar-Appbar" iconElementLeft={leftIcon}>
           <WordSearchInput rightComponent={<TTSQuickPlayer />} />
         </AppBar>

@@ -4,51 +4,24 @@ import { find } from 'lodash/find';
 import store from './store';
 import { windowResize } from './actions';
 
-function watchResize() {
-  window.addEventListener('resize', _.throttle(function() {
-    store.dispatch(windowResize());
-  }, 500));
-}
-
-const breakpoints = [
-  { name: 'large', minWidth: 1100 },
-  { name: 'medium', minWidth: 768 },
-  { name: 'small', minWidth: 480 },
-  { name: 'extra-small', minWidth: 0 },
-];
+const Breakpoint = {
+  mobile: 767
+};
 
 function screenWidth() {
   return window.innerWidth;
 }
 
-function screenSize() {
-  let width = screenWidth();
-
-  for (let i = 0; i < breakpoints.length; i++) {
-    if (breakpoints[i].minWidth < width) {
-      return breakpoints[i].name;
-    }
-  }
-
-  return false;
-}
-
-function getMinWidthForBreakpoint(screenSizeName) {
-  return _.find(breakpoints, { name: screenSizeName }).minWidth;
-}
-
 function isDesktop() {
-  return true;
-  // return screenSize() === 'large' || screenSize() === 'medium';
+  return screenWidth() > Breakpoint.mobile;
 }
 
 function isMobile() {
-  return false;
-  // return screenSize() === 'small' || screenSize() === 'extra-small';
+  return screenWidth() >= Breakpoint.mobile;
 }
 
 function mobileOrDesktop() {
   return isMobile() ? 'mobile' : 'desktop';
 }
 
-export { watchResize, isDesktop, isMobile, screenSize, mobileOrDesktop, screenWidth, getMinWidthForBreakpoint };
+export { isDesktop, isMobile, mobileOrDesktop, screenWidth };

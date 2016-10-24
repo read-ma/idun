@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { addArticle, changeArticle } from '../actions/articles';
 import { closeNav } from '../actions';
 import { ShowIf } from '../components';
-import { screenWidth } from '../Responsive';
 
 import LeftNav from 'material-ui/lib/left-nav';
 import TextField from 'material-ui/lib/text-field';
@@ -14,8 +13,6 @@ import NavigationClose from 'material-ui/lib/svg-icons/navigation/close';
 import colors from 'material-ui/lib/styles/colors';
 import Toggle from 'material-ui/lib/toggle';
 import AppBar from 'material-ui/lib/app-bar';
-
-let sidebarWidth = 500;
 
 class ArticleForm extends Component {
   constructor(props) {
@@ -33,10 +30,6 @@ class ArticleForm extends Component {
   }
 
   render() {
-    if (this.props.isMobile) {
-      sidebarWidth = screenWidth();
-    }
-
     return (<form onSubmit={this.props.addArticle} className="AddArticleWidget-ArticleForm" >
 
       <ShowIf condition={this.props.isAdmin}>
@@ -121,7 +114,7 @@ class ArticleAdd extends React.Component {
 
   render() {
     return (
-      <LeftNav className="AddArticleWidget" width={sidebarWidth} docked={true} openRight={true} open={this.props.open}>
+      <LeftNav className="AddArticleWidget" width={'100%'} docked={true} openRight={true} open={this.props.open}>
         <AppBar title="New article" iconElementLeft={<IconButton onClick={this.props.closeNav}><NavigationClose /></IconButton>} />
         <ArticleForm addArticle={this.addArticle} onChange={this.onChange}
           isAdmin={this.props.isAdmin} isMobile={this.props.isMobile} article={this.props.article}/>

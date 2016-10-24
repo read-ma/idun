@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { openNav } from '../actions';
-import { screenSize, mobileOrDesktop } from '../Responsive';
+import { mobileOrDesktop } from '../Responsive';
 import MainNavigaton from './MainNavigation';
 import AppBar from 'material-ui/lib/app-bar';
 import Notify from './shared/Notify';
@@ -14,7 +14,7 @@ class Main extends React.Component {
 
   render() {
     return (
-      <div className={`${this.props.screenSizeClass} ${this.props.mobileOrDesktopClass} ${this.props.sidebarOpenClass}`}>
+      <div className={`${this.props.mobileOrDesktopClass} ${this.props.sidebarOpenClass}`}>
         <AppBar
           onLeftIconButtonTouchTap={this.props.openNav}
           className="Appbar"
@@ -44,7 +44,6 @@ Main.propTypes = {
   routes: React.PropTypes.array,
   mobileOrDesktopClass: React.PropTypes.string,
   sidebarOpenClass: React.PropTypes.string,
-  screenSizeClass: React.PropTypes.string,
   notifyMessage: React.PropTypes.string,
 };
 
@@ -53,7 +52,6 @@ function mapStateToProps(state) {
     isAuthenticated: state.auth.isAuthenticated,
     sidebarOpenClass: state.settings.navOpen.right ? 'sidebar-opened' : 'sidebar-closed',
     mobileOrDesktopClass: mobileOrDesktop(),
-    screenSizeClass: screenSize(),
     notifyMessage: state.notifyMessage
   };
 }
