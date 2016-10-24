@@ -56,47 +56,47 @@ casper.test.begin('Home screen - pre login', 1, function(test) {
     });
 });
 
-casper.test.begin('User can add his own translation to dictionary', 1, function(test) {
-  casper
-    .start(host)
-    .waitForSelector($.articleParagraph, function() {
-      this.clickLabel('language', 'span');
-    })
-    .waitForSelector($.userCustomDefinitions, function() {
-      this.clickLabel('No matching translation? Add yours here.', 'span');
-      this.sendKeys($.newTranslationInput, 'My translation \n');
-    })
-    .waitForSelector($.userDefinitionBox, function() {
-      this.test.assertEval(function(selector) {
-        return __utils__.findAll(selector).length > 1;
-      }, 'More than one definition is present', $.userDefinitionListItem);
-    })
-    .run(function() {
-      helpers.tearDown(casper);
-      test.done();
-    });
-});
+// casper.test.begin('User can add his own translation to dictionary', 1, function(test) {
+//   casper
+//     .start(host)
+//     .waitForSelector($.articleParagraph, function() {
+//       this.clickLabel('language', 'span');
+//     })
+//     .waitForSelector($.userCustomDefinitions, function() {
+//       this.clickLabel('No matching translation? Add yours here.', 'span');
+//       this.sendKeys($.newTranslationInput, 'My translation \n');
+//     })
+//     .waitForSelector($.userDefinitionBox, function() {
+//       this.test.assertEval(function(selector) {
+//         return __utils__.findAll(selector).length > 1;
+//       }, 'More than one definition is present', $.userDefinitionListItem);
+//     })
+//     .run(function() {
+//       helpers.tearDown(casper);
+//       test.done();
+//     });
+// });
 
-casper.test.begin('Query articles', 3, function(test) {
-  casper
-    .start(host + '/#/articles')
-    .waitForSelector($.loginForm, function() {
-      helpers.logIn(this);
-    })
-    .waitForSelector($.articlesLinks, function() {
-      const articlesNumber = 100;
+// casper.test.begin('Query articles', 3, function(test) {
+//   casper
+//     .start(host + '/#/articles')
+//     .waitForSelector($.loginForm, function() {
+//       helpers.logIn(this);
+//     })
+//     .waitForSelector($.articlesLinks, function() {
+//       const articlesNumber = 100;
 
-      testHelpers.checkUrl(this, 'articles');
-      this.test.assertExists($.searchInput, 'Query article input is present');
-      this.test.assertEvalEqual(function() {
-        return __utils__.findAll('div.articles div a').length;
-      }, articlesNumber, 'There is ' + articlesNumber + ' articles');
-    })
-    .run(function() {
-      helpers.tearDown(casper);
-      test.done();
-    });
-});
+//       testHelpers.checkUrl(this, 'articles');
+//       this.test.assertExists($.searchInput, 'Query article input is present');
+//       this.test.assertEvalEqual(function() {
+//         return __utils__.findAll('div.articles div a').length;
+//       }, articlesNumber, 'There is ' + articlesNumber + ' articles');
+//     })
+//     .run(function() {
+//       helpers.tearDown(casper);
+//       test.done();
+//     });
+// });
 
 casper.test.begin('Home screen - post login', 1, function(test) {
   casper
