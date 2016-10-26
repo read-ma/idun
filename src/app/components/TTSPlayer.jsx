@@ -10,47 +10,25 @@ import AVVolumeUp from 'material-ui/lib/svg-icons/av/volume-up';
 import AVPause from 'material-ui/lib/svg-icons/av/pause';
 import AVStop from 'material-ui/lib/svg-icons/av/stop';
 import colors from 'material-ui/lib/styles/colors';
-
+import AudioPlayer from '../components/AudioPlayer';
 
 const hasTTSsupport = (() => typeof window.SpeechSynthesisUtterance === 'function')();
 
 class Player extends Component {
-  play() {
-    if (this.props.ttsStatus.paused) {
-      this.props.resume();
-    } else {
-      this.props.play(this.props.article.content, this.props.language);
-    }
-  }
-
   render() {
-    if (!hasTTSsupport) {
-      return null;
+    if (!this.props.audioTrack) {
+      return <button>want to listen!</button>;
     }
+
     return (
-      <div className="TTSPlayer-Player">
-        <h4>Read</h4>
-        <IconButton className="TTSPlayer-IconButton" onClick={this.play.bind(this)}>
-          <AVPlayArrow />
-        </IconButton>
-        <IconButton className="TTSPlayer-IconButton" onClick={this.props.pause}>
-          <AVPause />
-        </IconButton>
-        <IconButton className="TTSPlayer-IconButton" onClick={this.props.stop}>
-          <AVStop />
-        </IconButton>
-      </div>
+      <AudioPlayer src={this.props.audioTrack.url} />
     );
   }
 }
 
 Player.propTypes = {
   ttsStatus: React.PropTypes.object.isRequired,
-  article: React.PropTypes.object.isRequired,
-  resume: React.PropTypes.func.isRequired,
-  play: React.PropTypes.func.isRequired,
-  pause: React.PropTypes.func.isRequired,
-  stop: React.PropTypes.func.isRequired,
+  audioTrack: React.PropTypes.object,
   selection: React.PropTypes.string.isRequired,
   language: React.PropTypes.string.isRequired,
   playSingle: React.PropTypes.func.isRequired,
@@ -82,7 +60,7 @@ QuickPlayer.propTypes = {
 function mapStateToProps(state) {
   return {
     selection: state.article.selectedText,
-    article: state.article,
+    audioTrack: state.article.audio_track,
     language: state.settings.language.from,
     ttsStatus: state.ttsStatus,
   };
@@ -90,30 +68,10 @@ function mapStateToProps(state) {
 
 const mapActionsToProps = (dispatch) => {
   return {
-    stop() {
-      dispatch(player.stop());
-    },
-    resume() {
-      dispatch(player.resume());
-    },
-    pause() {
-      dispatch(player.pause());
-    },
     playSingle(content, language) {
       dispatch({ type: 'TTS_PLAY_SINGLE' });
       dispatch(player.start(content, language));
     },
-    play(content, language) {
-      dispatch({ type: 'TTS_PLAY_ARTICLE' });
-      dispatch(player.stop());
-
-      content.forEach(tokens => {
-        dispatch(
-          player.start(tokens.join(' '), language)
-        );
-      }
-      );
-    }
   };
 };
 
