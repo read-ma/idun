@@ -1,8 +1,25 @@
 machine:
   pre:
     - sudo curl --output /usr/local/bin/phantomjs https://s3.amazonaws.com/circle-downloads/phantomjs-2.1.1
+    - mkdir ~/.yarn-cache
   node:
     version: 6.9.1
+
+dependencies:
+  pre:
+    - curl -o- -L https://yarnpkg.com/install.sh | bash
+  cache_directories:
+    - ~/.yarn-cache
+  override:
+    - yarn install
+  post:
+    - ./node_modules/.bin/eslint src/ --ext .js --ext .jsx
+    - npm run deploy:staging
+
+test:
+  override:
+    - npm run unit-test
+    - npm test
 
 deployment:
   production:
