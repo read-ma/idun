@@ -19,7 +19,6 @@ module.exports = {
       // To include constants/d3k we need to extract it to its own npm module (it looks in node_modules)
     ],
   },
-  devtool: 'source-map',
   output: {
     path: BUILD_DIR,
     filename: '[name].[chunkhash].js',
@@ -32,7 +31,7 @@ module.exports = {
       loaders: ['babel']
     }, {
       test: /\.sass$/,
-      loader: ExtractTextPlugin.extract('css?sourceMap!sass?sourceMap')
+      loader: ExtractTextPlugin.extract('css!sass')
     }, {
       test: /\.(eot|woff|woff2|ttf|svg|png|jpg)$/,
       loader: 'url-loader?limit=30000&name=[name]-[hash].[ext]'
