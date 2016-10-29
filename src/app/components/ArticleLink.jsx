@@ -21,7 +21,7 @@ const cardTitle = (title, difficulty, audio_track) => {
   let articleTitle = title;
 
   if (audio_track && audio_track.url) {
-    articleTitle = `${audioPresent} ${title} ${audioPresent}`;
+    articleTitle = `${audioPresent}${title}${audioPresent}`;
   }
 
   return (
