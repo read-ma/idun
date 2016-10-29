@@ -24,7 +24,7 @@ function articlesLoaded(items) {
 }
 
 function getArticles(params, handleSuccess) {
-  return api.get('/articles.json')
+  return api.get('/articles.json?limit=200')
     .then((response) => {
       handleSuccess(response.data.articles);
     })
