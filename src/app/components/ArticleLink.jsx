@@ -1,52 +1,72 @@
 import React from 'react';
 
 import l from '../I18n';
-import Label from './shared/Label';
-import { difficultyColors, labelsColors } from './shared/Colors';
 
-import ListItem from 'material-ui/lib/lists/list-item';
-import NavigationChevronRight from 'material-ui/lib/svg-icons/navigation/chevron-right';
+import Card from 'material-ui/lib/card/card';
+import CardMedia from 'material-ui/lib/card/card-media';
+import CardTitle from 'material-ui/lib/card/card-title';
+import CardText from 'material-ui/lib/card/card-text';
+import CardActions from 'material-ui/lib/card/card-actions';
 
-const ArticleStatusList= (tags, privy, difficulty, learn_status) => {
-  const items = [];
+const defaultImageUrl = 'http://placekitten.com.s3.amazonaws.com/homepage-samples/408/287.jpg';
 
-  if (privy) {
-    items.push(<Label type="visibility" text={'Private'} />);
-  }
-
-  items.push(<Label type="learn_status" text={l(learn_status)} color={labelsColors.learn_status} />);
-  items.push(<Label type="difficulty" text={l(difficulty)} color={difficultyColors[difficulty]} />);
-
+const difficultyText = (difficulty) => {
   return (
-    <div className="ArticleLink-SecondaryText">
-      {items}
-    </div>
+    <span className={`Difficulty-${l(difficulty)}`}>{l(difficulty)}</span>
   );
 };
 
-export default function ArticleLink({ id, title, tags, privy, difficulty, learn_status, waiting }) {
-  // TODO: Fix missing key attribute in this.
-  // Warning: Each child in an array or iterator should have a unique "key" prop.
-  // Check the render method of `ArticleList`.
+const cardTitle = (title, difficulty, audio_track) => {
+  const audioPresent = '🔈';
+  let articleTitle = title;
+
+  if (audio_track && audio_track.url) {
+    articleTitle = `${audioPresent} ${title}`;
+  }
+
   return (
-    <ListItem
-      key={id}
-      className={`ArticleLink ArticleLink-${waiting ? 'NewListItem' : 'ListItem'}`}
-      secondaryText={ArticleStatusList(tags, privy, difficulty, learn_status, waiting)}
-      rightIcon={<NavigationChevronRight />}
-      href={`#/article/${id}`}
-    >
-      {title}
-    </ListItem>
+    <CardTitle title={articleTitle} subtitle={difficultyText(difficulty)} className="ArticleLink-CardTitle" />
   );
-}
+};
+
+const cardImage = (image, title) => {
+  const image_url = image || defaultImageUrl;
+  return (
+    <CardMedia className="ArticleLink-CardMedia">
+      <img src={image_url} alt={title} />
+    </CardMedia>
+  );
+};
+
+const cardSource = (source_url) => {
+  let source = source_url || 'Pasted by the user';
+  return (
+    <CardText className="ArticleLink-CardText">
+      <a href={source_url}>Source: {source}</a>
+    </CardText>
+  );
+};
+
+const ArticleLink = ({ id, title, difficulty, image, source_url, audio_track }) => {
+  return (
+    <Card className="col-xs-12 col-md-6 col-lg-4 ArticleLink" key={id}>
+      <a href={`#/article/${id}`}>
+        {cardTitle(title, difficulty, audio_track)}
+        {cardImage(image, title)}
+      </a>
+
+      {cardSource(source_url)}
+    </Card>
+  );
+};
 
 ArticleLink.propTypes = {
   id: React.PropTypes.string.isRequired,
   title: React.PropTypes.string.isRequired,
-  tags: React.PropTypes.string.isRequired,
-  privy: React.PropTypes.bool.isRequired,
   difficulty: React.PropTypes.string.isRequired,
-  learn_status: React.PropTypes.string.isRequired,
-  waiting: React.PropTypes.bool.isRequired,
+  image: React.PropTypes.string,
+  source_url: React.PropTypes.string,
+  audio_track: React.PropTypes.object,
 };
+
+export default ArticleLink;

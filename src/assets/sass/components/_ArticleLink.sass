@@ -1,18 +1,50 @@
+$normal-gaps: 1.5em
+$big-gaps: 2.5em
+
 .ArticleLink
-  &-ListItem span
-    line-height: 145%
-    font-size: 24
-    font-weight: 300
-  &-NewListItem span
-    line-height: 145%
-    font-size: 24
-    font-weight: 500
-  &-SecondaryText
-    height: 19px !important
-    span
-      font-weight: 400
-      height: 24px
-      line-height: 22px
-  &-Icon-private
-    position: relative
-    bottom: -2px
+  margin-top: $normal-gaps
+  padding-bottom: $normal-gaps
+  padding-right: $normal-gaps
+  box-shadow: none !important
+  border: 1px solid #eee
+  border-width: 0 1px 1px 0
+  +desktop
+    margin-top: $big-gaps
+    padding-bottom: $big-gaps
+    padding-right: $big-gaps
+  &:hover
+    border-color: #bbb
+    background-color: #efefef !important
+  > div
+    height: 100%
+    display: flex
+    flex-wrap: wrap
+    align-items: scape-between
+  &:last-child
+    padding-right: 0
+  a
+    text-decoration: none !important
+
+  &-CardTitle
+    height: auto !important
+    > span
+      line-height: 135% !important
+      &:first-child // title
+        font-size: 110% !important
+      &:last-child // difficulty
+        text-transform: capitalize
+        font-size: 90%
+        margin-top: .5em
+  &-CardMedia
+    padding-left: 16px !important
+    img
+      width: 100%
+  &-CardActions
+    padding-left: 16px !important
+    svg
+      fill: #666 !important
+  &-CardText
+    align-self: flex-end
+    a
+      color: #ccc !important
+      font-size: 80% !important

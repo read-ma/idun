@@ -9,14 +9,12 @@ import filterArticles from '../articleCriteriaMatcher';
 import AddArticleWidget from './AddArticleWidget';
 import AddArticleFloatingButton from './AddArticleFloatingButton';
 
-import List from 'material-ui/lib/lists/list';
-
 const ArticleList = ({ articles }) => {
   const articleLinks = articles.map((article) => {
     return new ArticleLink(article);
   });
 
-  return <List className="Articles-List">{articleLinks}</List>;
+  return <div className="Articles-List row">{articleLinks}</div>;
 };
 
 ArticleList.propTypes = {
