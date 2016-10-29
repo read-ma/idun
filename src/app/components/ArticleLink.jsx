@@ -8,7 +8,7 @@ import CardTitle from 'material-ui/lib/card/card-title';
 import CardText from 'material-ui/lib/card/card-text';
 import CardActions from 'material-ui/lib/card/card-actions';
 
-const defaultImageUrl = 'http://placekitten.com.s3.amazonaws.com/homepage-samples/408/287.jpg';
+const defaultImageUrl = '/kitten.jpg';
 
 const difficultyText = (difficulty) => {
   return (
