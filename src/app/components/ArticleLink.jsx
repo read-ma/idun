@@ -39,10 +39,10 @@ const cardImage = (image, title) => {
 };
 
 const cardSource = (source_url) => {
-  let source = source_url || 'Pasted by the user';
+  let sourceDisplayText = source_url ? `${source_url.substring(0, 75)}...` : 'Pasted by the user';
   return (
     <CardText className="ArticleLink-CardText">
-      <a href={source_url}>Source: {source}</a>
+      <a href={source_url}>Source: {sourceDisplayText}</a>
     </CardText>
   );
 };
