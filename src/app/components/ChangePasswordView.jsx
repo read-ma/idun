@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import { updatePassword } from '../actions/auth';
@@ -7,7 +7,15 @@ import NotificationBox from './NotificationBox';
 import TextField from 'material-ui/lib/text-field';
 import RaisedButton from 'material-ui/lib/raised-button';
 
-class ChangePasswordView extends React.Component {
+const errors = (error) => {
+  if (!error) {
+    return false;
+  }
+
+  return <NotificationBox message={error} type="error" />;
+};
+
+class ChangePasswordView extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -34,32 +42,30 @@ class ChangePasswordView extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.updatePassword.bind(this)} className="col-xs-12 col-md-8 ChangePassword">
-        <h2>Change your password</h2>
+      <form onSubmit={this.updatePassword.bind(this)} className="MaterialForm ChangePassword">
+       <div className="row MaterialForm-Header">
+          <h2 className="col-xs-12">Change your password</h2>
+       </div>
 
-        <NotificationBox message={this.props.error} type="error" />
+      {errors(this.props.error)}
 
-        <TextField
-          floatingLabelText="Password"
-          type="password"
-          id="password"
-          name="password"
-          required="true"
-          fullWidth={true}
-          onChange={this.handleInputChange}
-        />
+       <div className="row">
+        <TextField className="col-xs-12 col-md-7 col-lg-5"
+          floatingLabelText="Password" type="password" id="password" name="password"
+          required="true" fullWidth={true} onChange={this.handleInputChange} />
+      </div>
 
-        <TextField
-          floatingLabelText="Confirm password"
-          type="password"
-          id="password_confirmation"
-          name="password_confirmation"
-          required="true"
-          fullWidth={true}
-          onChange={this.handleInputChange}
-        />
+       <div className="row">
+        <TextField className="col-xs-12 col-md-7 col-lg-5"
+          floatingLabelText="Confirm password" type="password" id="password_confirmation" name="password_confirmation"
+          required="true" fullWidth={true} onChange={this.handleInputChange} />
+        </div>
 
-        <RaisedButton label="Update password" primary={true} type="submit" className="ChangePassword-SensButton" />
+       <div className="row MaterialForm-Actions">
+        <div className="col-xs-12">
+          <RaisedButton label="Update password" primary={true} type="submit" className="MaterialForm-SubmitButton" />
+        </div>
+      </div>
     </form>);
   }
 }
