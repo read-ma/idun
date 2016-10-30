@@ -20,7 +20,7 @@ class SimpleList extends Component {
     );
   }
 
-  render(x) {
+  render() {
     if (!_.isEmpty(this.props.items)) {
       return (
         <div>
@@ -77,8 +77,8 @@ class GraphicList extends RemoteList {
     }
 
     let items = this.props.items.map(tile => (
-      <GridTile key={tile.url} className="sidebar-image-container">
-        <img src={tile.url} className="sidebar-image" />
+      <GridTile key={tile.url} className="SidebarImage">
+        <img src={tile.url} className="SidebarImage-Image" height="135" width="135" />
       </GridTile>
     ));
 
