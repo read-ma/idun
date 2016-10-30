@@ -21,7 +21,7 @@ const initialState = {
   isDesktop: isDesktop(),
   navOpen: {
     left: false,
-    right: isDesktop()
+    right: false
   },
   sidebarDocked: isDesktop()
 };
