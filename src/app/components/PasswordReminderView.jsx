@@ -6,6 +6,34 @@ import NotificationBox from './NotificationBox';
 import TextField from 'material-ui/lib/text-field';
 import RaisedButton from 'material-ui/lib/raised-button';
 
+const errors = (errorText) => {
+  if (!errorText) {
+    return false;
+  }
+
+  return (
+    <div className="row">
+      <div className="col-xs-12 col-md-7 col-lg-5">
+        <NotificationBox message={errorText} type="error" />
+      </div>
+    </div>
+  );
+};
+
+const notice = (noticeText) => {
+  if (!noticeText) {
+    return false;
+  }
+
+  return (
+      <div className="row">
+        <div className="col-xs-12 col-md-7 col-lg-5">
+          <NotificationBox message={noticeText} type="green-text" />
+        </div>
+      </div>
+    );
+};
+
 class PasswordReminder extends Component {
   constructor(props) {
     super(props);
@@ -25,21 +53,30 @@ class PasswordReminder extends Component {
 
   render() {
     return (
-      <form onSubmit={this.resetPassword} className="col-xs-12 col-md-8">
-        <h2>Reset password to your account</h2>
-        <p>Enter your email. We will send you instructions how to reset your password.</p>
+      <form onSubmit={this.resetPassword} className="PasswordReminder MaterialForm">
+        <div className="row MaterialForm-Header">
+          <h2>Reset password to your account</h2>
+        </div>
 
-        <NotificationBox message={this.props.error} type="error" />
-        <NotificationBox message={this.props.notice} type="green-text" />
+        <div className="row MaterialForm-Info">
+          <p>Enter your email. We will send you instructions how to reset your password.</p>
+        </div>
 
-        <TextField
-          floatingLabelText="Your email address"
-          type="email" id="email" name="email" required="true" fullWidth={true}
-          onChange={this.handleInputChange}
-        />
+        {errors(this.props.error)}
+        {notice(this.props.notice)}
 
-        <RaisedButton label="Send instructions" primary={true} type="submit"
-            onClick={this.props.resetPassword} className="PasswordReminder-SendButton" />
+        <div className="row">
+          <TextField className="col-xs-12 col-md-7 col-lg-5"
+            floatingLabelText="Your email address"
+            type="email" id="email" name="email" required="true" fullWidth={true}
+            onChange={this.handleInputChange}
+          />
+        </div>
+
+        <div className="row MaterialForm-Actions">
+          <RaisedButton label="Send instructions" primary={true} type="submit"
+            onClick={this.props.resetPassword} className="MaterialForm-SubmitButton" />
+        </div>
       </form>
     );
   }
@@ -53,7 +90,7 @@ PasswordReminder.propTypes = {
   onSubmit: React.PropTypes.func,
 };
 
-class PasswordReminderViewBase extends React.Component {
+class PasswordReminderViewBase extends Component {
   resetPassword(email) {
     this.props.dispatch(
       resetPassword(email)

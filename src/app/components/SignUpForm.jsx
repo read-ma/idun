@@ -5,6 +5,22 @@ import { signupAttempt } from '../actions/auth';
 import TextField from 'material-ui/lib/text-field';
 import RaisedButton from 'material-ui/lib/raised-button';
 
+
+const errors = (error, message) => {
+  if (!error || !message) {
+    return false;
+  }
+
+  return (
+    <div className="row">
+      <div className="col-xs-12">
+        <span className="error">{this.props.error}</span>
+        <span className="error">{this.props.message}</span>
+      </div>
+    </div>
+  );
+};
+
 class SignUpForm extends React.Component {
   constructor(props) {
     super(props);
@@ -29,26 +45,34 @@ class SignUpForm extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSignUp.bind(this)} className="col-xs-12 col-md-8 SignUp">
-        <h2>Create account</h2>
-        <h4>{this.props.message}</h4>
-        <h4>{this.props.error}</h4>
+      <form onSubmit={this.handleSignUp.bind(this)} className="MaterialForm SignUp">
 
-        <TextField
-          floatingLabelText="Your email address" fullWidth={true}
-          type="email" id="signUpEmail" name="email" ref="email" required="true"
-        />
+       <div className="row MaterialForm-Header">
+         <h2 className="col-xs-12">Create account</h2>
+       </div>
 
-        <TextField
-          floatingLabelText="Password" fullWidth={true}
-          type="password" id="password" name="password" ref="password" required="true"
-        />
+       {errors(this.props.error, this.props.message)}
 
-        <br/>
-        <br/>
+       <div className="row">
+          <TextField className="col-xs-12 col-md-7 col-lg-5"
+            floatingLabelText="Your email address" fullWidth={true}
+            type="email" id="signUpEmail" name="email" ref="email" required="true"
+          />
+      </div>
 
-        <RaisedButton label="Create account" primary={true} type="submit" />
-      </form>
+       <div className="row">
+          <TextField className="col-xs-12 col-md-7 col-lg-5"
+            floatingLabelText="Password" fullWidth={true}
+            type="password" id="password" name="password" ref="password" required="true"
+          />
+      </div>
+
+       <div className="row MaterialForm-Actions">
+        <div className="col-xs-12">
+          <RaisedButton label="Create account" primary={true} type="submit" />
+        </div>
+      </div>
+    </form>
     );
   }
 }
