@@ -4,13 +4,14 @@ import { connect } from 'react-redux';
 import { loadDecks } from '../actions';
 import Label from './shared/Label';
 
+import _ from 'lodash';
+import { truncate } from 'lodash/truncate';
+import { uniq } from 'lodash/uniq';
+
 import List from 'material-ui/lib/lists/list';
 import ListItem from 'material-ui/lib/lists/list-item';
 import NavigationChevronRight from 'material-ui/lib/svg-icons/navigation/chevron-right';
 import ActionAssignment from 'material-ui/lib/svg-icons/action/assignment';
-import _ from 'lodash';
-import { truncate } from 'lodash/truncate';
-import { uniq } from 'lodash/uniq';
 
 function mapStateToProps(state) {
   return { decks: state.decks };
@@ -25,26 +26,24 @@ class UserDefinitionsLearn extends Component {
 
   renderArticles() {
     return (
-      <div>
-        <List>
-          {this.props.decks.map((deck) => {
-            return (
-              <ListItem key={deck.id}
-                className="UserDefinitionsLearn-ListItem"
-                secondaryText={<div className="UserDefinitionsLearn-SecondaryText">
-                  <Label type="difficulty" text={ `${deck.count} words to learn` } />
-                  from {_.truncate(deck.name, { length: 65 })}
-                </div>}
-                rightIcon={<NavigationChevronRight />}
-                leftIcon={<ActionAssignment />}
-                href={`#/learn/${deck.id}`}
-              >
-                {_.truncate(_.uniq(deck.words).join(', '), { length: 40 })}
-              </ListItem>
-            );
-          })}
-        </List>
-      </div>
+      <List>
+        {this.props.decks.map((deck) => {
+          return (
+            <ListItem key={deck.id}
+              className="UserDefinitionsLearn-ListItem"
+              secondaryText={<div className="UserDefinitionsLearn-SecondaryText">
+                <Label type="difficulty" text={ `${deck.count} words to learn` } />
+                from {_.truncate(deck.name, { length: 65 })}
+              </div>}
+              rightIcon={<NavigationChevronRight />}
+              leftIcon={<ActionAssignment />}
+              href={`#/learn/${deck.id}`}
+            >
+              {_.truncate(_.uniq(deck.words).join(', '), { length: 40 })}
+            </ListItem>
+          );
+        })}
+      </List>
     );
   }
 
