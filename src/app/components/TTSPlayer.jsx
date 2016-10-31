@@ -21,7 +21,7 @@ class Player extends Component {
     }
 
     return (
-      <AudioPlayer src={this.props.audioTrack.url} />
+      <AudioPlayer src={this.props.audioTrack.url} playing={this.props.playing} articleStartedPlaying={this.props.articleStartedPlaying} />
     );
   }
 }
@@ -32,6 +32,8 @@ Player.propTypes = {
   selection: React.PropTypes.string.isRequired,
   language: React.PropTypes.string.isRequired,
   playSingle: React.PropTypes.func.isRequired,
+  articleStartedPlaying: React.PropTypes.func,
+  playing: React.PropTypes.bool
 };
 
 class QuickPlayer extends Component {
@@ -63,6 +65,7 @@ function mapStateToProps(state) {
     audioTrack: state.article.audio_track,
     language: state.settings.language.from,
     ttsStatus: state.ttsStatus,
+    playing: state.articlePlayer.playing,
   };
 }
 
@@ -71,6 +74,9 @@ const mapActionsToProps = (dispatch) => {
     playSingle(content, language) {
       dispatch({ type: 'TTS_PLAY_SINGLE' });
       dispatch(player.start(content, language));
+    },
+    articleStartedPlaying() {
+      dispatch({ type: 'TTS_PLAY_ARTICLE' });
     },
   };
 };
