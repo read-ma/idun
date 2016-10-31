@@ -3,7 +3,7 @@ machine:
     - sudo curl --output /usr/local/bin/phantomjs https://s3.amazonaws.com/circle-downloads/phantomjs-2.1.1
     - mkdir ~/.yarn-cache
   node:
-    version: 6.9.1
+    version: 7
 
 dependencies:
   pre:
