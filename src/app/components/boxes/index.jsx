@@ -77,14 +77,14 @@ class GraphicList extends RemoteList {
     }
 
     let items = this.props.items.map(tile => (
-      <GridTile key={tile.url} className="SidebarImage">
-        <img src={tile.url} className="SidebarImage-Image" height="135" width="135" />
+      <GridTile key={tile.url} className="SidebarImages-Item">
+        <img src={tile.url} className="SidebarImages-Image" />
       </GridTile>
     ));
 
     return (
-      <div className="BoxIndex">
-        <GridList className="BoxIndex-GridList">
+      <div className="SidebarImages">
+        <GridList className="SidebarImages-Grid">
           {items}
         </GridList>
       </div>
