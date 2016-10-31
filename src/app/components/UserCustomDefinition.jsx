@@ -14,7 +14,7 @@ import { ShowIf } from '../components';
 
 const TranslationBox = ({ translation, key }) => {
   return (
-    <ListItem leftIcon={<SocialSchool />} disabled={true} key={key}>
+    <ListItem leftIcon={<SocialSchool />} disabled={true} key={key} className="UserCustomDefinition-UserTranslation">
       <span dangerouslySetInnerHTML={{ __html: translation }} />
     </ListItem>
   );

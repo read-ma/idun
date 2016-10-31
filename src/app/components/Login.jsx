@@ -8,6 +8,19 @@ import TextField from 'material-ui/lib/text-field';
 import RaisedButton from 'material-ui/lib/raised-button';
 import FlatButton from 'material-ui/lib/flat-button';
 
+const errors = (error, message) => {
+  if (!error || !message) {
+    return false;
+  }
+
+  return (
+    <div className="row">
+      <span className="error">{this.props.error}</span>
+      <span className="error">{this.props.message}</span>
+    </div>
+  );
+};
+
 class Login extends React.Component {
   login(event) {
     event.preventDefault();
@@ -19,31 +32,39 @@ class Login extends React.Component {
 
   render() {
     return (
-      <form id="loginForm" onSubmit={this.login.bind(this)} className="col-xs-12 col-md-8 Login">
-        <h2>If you already have an account, please log in</h2>
-        <span className="error">{this.props.error}</span>
-        <span className="error">{this.props.message}</span>
+      <form id="loginForm" onSubmit={this.login.bind(this)} className="MaterialForm Login">
+       <div className="row MaterialForm-Header">
+          <h2 className="col-xs-12">Please log in</h2>
+       </div>
 
-        <TextField
-          floatingLabelText="Email address" type="email" id="email" name="email"
-          ref="email" required="true" fullWidth={true}
-        />
+       {errors(this.props.error, this.props.message)}
 
-        <br />
+       <div className="row">
+          <TextField className="col-xs-12 col-md-7 col-lg-5"
+            floatingLabelText="Email address" type="email" id="email" name="email"
+            ref="email" required="true" fullWidth={true} underlineShow={false}
+          />
+       </div>
 
-        <TextField
-          floatingLabelText="Password" type="password" id="password" name="password"
-          ref="password" required="true" fullWidth={true}
-        />
+       <div className="row">
+          <TextField className="col-xs-12 col-md-7 col-lg-5"
+            floatingLabelText="Password" type="password" id="password" name="password"
+            ref="password" required="true" fullWidth={true} underlineShow={false}
+          />
+       </div>
 
-        <br /><br/>
+       <div className="row MaterialForm-Actions">
+          <div className="col-xs-12">
+            <RaisedButton label="Login" primary={true} type="submit" className="MaterialForm-SubmitButton" />
+            <FlatButton label="I forgot my password" linkButton={true} href="/#/forgot_password" />
+          </div>
+       </div>
 
-        <RaisedButton label="Login" primary={true} type="submit" className="Login-LoginButton" />
-        <FlatButton label="I forgot my password" linkButton={true} href="/#/forgot_password" />
-
-        <br /><br/>
-
-        <h2><Link to="sign_up">Please register</Link> if you don't have an account yet.</h2>
+       <div className="row MaterialForm-Info">
+          <div className="col-xs-12">
+            <Link to="sign_up">Please register </Link>  if you don't have an account yet.
+          </div>
+       </div>
       </form>
     );
   }

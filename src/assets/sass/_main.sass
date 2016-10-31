@@ -1,16 +1,6 @@
 @import "./vendor/flexboxgrid.min"
 @import "./flags/flag-icon"
 
-
-
-%left-aligned
-  margin-left: 0
-  margin-right: 0
-
-%centered
-  margin-left: auto
-  margin-right: auto
-
 body
   -webkit-font-smoothing: antialiased
   -webkit-text-stroke: 1px rgba(0,0,0,0.1)
@@ -36,13 +26,11 @@ input.selectedText
 
 a
   cursor: pointer
+  text-decoration: none !important
 
 blockquote
   margin-left: 0
   margin-right: 0
-
-.sidebar-closed .main-content
-  @extend %centered
 
 .main-content
   width: 100%
@@ -51,16 +39,3 @@ blockquote
     left: 20px
     top: 105px
     right: 20px
-  @include desktop
-    width: calc(96vw - 510px)
-    padding-top: 120px
-
-// @media (min-width: 1600px)
-//   .main-content
-//     width: 60em
-//     margin-left: auto
-//     margin-right: auto
-//     position: relative
-
-  // .sidebar-opened .main-content
-    // left: -250px

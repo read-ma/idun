@@ -100,11 +100,11 @@ class Profile extends React.Component {
   //   // http://www.material-ui.com/v0.14.4/#/components/linear-progress
   //   return (<div className="col-xs-12">
   //     <h3>Intermediate progress</h3>
-  //     <LinearProgress mode="determinate" color={difficultyColors.intermediate} value={this.percentageProgress()} />
+  //     <LinearProgress mode="determinate" value={this.percentageProgress()} />
   //     <h3>Upper-intermediate progress</h3>
-  //     <LinearProgress mode="determinate" color={difficultyColors.upperIntermediate} value={this.percentageProgress() / 2} />
+  //     <LinearProgress mode="determinate" value={this.percentageProgress() / 2} />
   //     <h3>Advanced progress</h3>
-  //     <LinearProgress mode="determinate" color={difficultyColors.advanced} value={this.percentageProgress() / 4} />
+  //     <LinearProgress mode="determinate" value={this.percentageProgress() / 4} />
   //   </div>);
   // }
 

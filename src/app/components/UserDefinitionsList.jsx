@@ -16,9 +16,7 @@ class UserDefinitionsList extends Component {
     const items = this.props.items
                       .map(item => <UserDefinitionCard key={item.id} item={item} onDelete={this.props.delete.bind(null, item)} />);
 
-    return (
-      <div> {items} </div>
-    );
+    return <div className="row"> {items} </div>;
   }
 }
 
