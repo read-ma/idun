@@ -10,22 +10,31 @@ import CardActions from 'material-ui/lib/card/card-actions';
 
 const defaultImageUrl = '/kitten.jpg';
 
-const difficultyText = (difficulty) => {
-  return (
+const audioLabel = (audio_track) => {
+  if (!audio_track) {
+    return false;
+  }
+
+  const audioIcon = '🔈';
+
+  return (<span className="ArticleLink-AudioBadge">
+    <span>{audioIcon}</span>
+    Audio
+    <span className="Flipped">{audioIcon}</span>
+  </span>);
+};
+
+const articleBadges = (difficulty, audio_track) => {
+  return (<div className="ArticleLink-Badges">
     <span className={`Difficulty-${l(difficulty)}`}>{l(difficulty)}</span>
+    {audioLabel(audio_track)}
+  </div>
   );
 };
 
 const cardTitle = (title, difficulty, audio_track) => {
-  const audioPresent = '🔈';
-  let articleTitle = title;
-
-  if (audio_track && audio_track.url) {
-    articleTitle = `${audioPresent}${title}${audioPresent}`;
-  }
-
   return (
-    <CardTitle title={articleTitle} subtitle={difficultyText(difficulty)} className="ArticleLink-CardTitle" />
+    <CardTitle title={title} subtitle={articleBadges(difficulty, audio_track)} className="ArticleLink-CardTitle" />
   );
 };
 
