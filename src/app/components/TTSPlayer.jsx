@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
 import * as player from '../actions/tts';
 
 import FlatButton from 'material-ui/lib/flat-button';
@@ -13,28 +12,6 @@ import colors from 'material-ui/lib/styles/colors';
 import AudioPlayer from '../components/AudioPlayer';
 
 const hasTTSsupport = (() => typeof window.SpeechSynthesisUtterance === 'function')();
-
-class Player extends Component {
-  render() {
-    if (!this.props.audioTrack) {
-      return <button>want to listen!</button>;
-    }
-
-    return (
-      <AudioPlayer src={this.props.audioTrack.url} playing={this.props.playing} articleStartedPlaying={this.props.articleStartedPlaying} />
-    );
-  }
-}
-
-Player.propTypes = {
-  ttsStatus: React.PropTypes.object.isRequired,
-  audioTrack: React.PropTypes.object,
-  selection: React.PropTypes.string.isRequired,
-  language: React.PropTypes.string.isRequired,
-  playSingle: React.PropTypes.func.isRequired,
-  articleStartedPlaying: React.PropTypes.func,
-  playing: React.PropTypes.bool
-};
 
 class QuickPlayer extends Component {
   play() {
@@ -65,7 +42,6 @@ function mapStateToProps(state) {
     audioTrack: state.article.audio_track,
     language: state.settings.language.from,
     ttsStatus: state.ttsStatus,
-    playing: state.articlePlayer.playing,
   };
 }
 
@@ -74,9 +50,6 @@ const mapActionsToProps = (dispatch) => {
     playSingle(content, language) {
       dispatch({ type: 'TTS_PLAY_SINGLE' });
       dispatch(player.start(content, language));
-    },
-    articleStartedPlaying() {
-      dispatch({ type: 'TTS_PLAY_ARTICLE' });
     },
   };
 };
@@ -121,6 +94,5 @@ const mapActionsToPropsForFlashcard = (dispatch) => {
   };
 };
 
-export const TTSPlayer = connect(mapStateToProps, mapActionsToProps)(Player);
 export const TTSQuickPlayer = connect(mapStateToProps, mapActionsToProps)(QuickPlayer);
 export const TTSFlashcardQuickPlayer = connect(mapStateToPropsForFlashcard, mapActionsToPropsForFlashcard)(FlashcardQuickPlayer);

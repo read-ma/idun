@@ -13,7 +13,7 @@ import ChangePasswordView from '../components/ChangePasswordView';
 import ConfirmationView from '../components/Confirmation';
 import ArticleSearchInput from '../components/ArticleSearchInput';
 import { requireAuthentication } from '../utils';
-import { TTSPlayer } from '../components/TTSPlayer';
+import AudioPlayer from '../components/AudioPlayer';
 import ls from '../localStore';
 
 // Tried to turn off query param. But it didnt work.
@@ -63,7 +63,7 @@ export default (
 
     <Route path="article/:id" components={{
       children: requireAuthentication(ArticlePage),
-      topNavChildren: TTSPlayer
+      topNavChildren: AudioPlayer
     }} />
   </Route>
 );
