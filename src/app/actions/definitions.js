@@ -20,10 +20,7 @@ function findWordData(text, type, options={}) {
 
   return (dispatch) => {
     api.post('/translate.json', params)
-      .then(response => dispatch(contentLoaded(type, response.data)))
-      .catch(error => {
-        console.error(error, type);
-      });
+      .then(response => dispatch(contentLoaded(type, response.data)));
   };
 }
 

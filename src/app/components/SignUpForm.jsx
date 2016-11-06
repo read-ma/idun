@@ -4,22 +4,8 @@ import { connect } from 'react-redux';
 import { signupAttempt } from '../actions/auth';
 import TextField from 'material-ui/lib/text-field';
 import RaisedButton from 'material-ui/lib/raised-button';
+import FormMessages from '../containers/FormMessages';
 
-
-const errors = (error, message) => {
-  if (!error || !message) {
-    return false;
-  }
-
-  return (
-    <div className="row">
-      <div className="col-xs-12">
-        <span className="error">{this.props.error}</span>
-        <span className="error">{this.props.message}</span>
-      </div>
-    </div>
-  );
-};
 
 class SignUpForm extends React.Component {
   constructor(props) {
@@ -48,10 +34,10 @@ class SignUpForm extends React.Component {
       <form onSubmit={this.handleSignUp.bind(this)} className="MaterialForm SignUp">
 
        <div className="row MaterialForm-Header">
-         <h2 className="col-xs-12">Create account</h2>
+         <h2>Create account</h2>
        </div>
 
-       {errors(this.props.error, this.props.message)}
+       <FormMessages />
 
        <div className="row">
           <TextField className="col-xs-12 col-md-7 col-lg-5"
@@ -78,16 +64,7 @@ class SignUpForm extends React.Component {
 }
 
 SignUpForm.propTypes = {
-  message: React.PropTypes.string,
-  dispatch: React.PropTypes.func,
-  error: React.PropTypes.string
+  dispatch: React.PropTypes.func
 };
 
-const mapStateToProps = (state) => {
-  return {
-    message: state.auth.message,
-    error: state.auth.error,
-  };
-};
-
-export default connect(mapStateToProps)(SignUpForm);
+export default connect()(SignUpForm);

@@ -2,18 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import { updatePassword } from '../actions/auth';
-import NotificationBox from './NotificationBox';
+import FormMessages from '../containers/FormMessages';
 
 import TextField from 'material-ui/lib/text-field';
 import RaisedButton from 'material-ui/lib/raised-button';
-
-const errors = (error) => {
-  if (!error) {
-    return false;
-  }
-
-  return <NotificationBox message={error} type="error" />;
-};
 
 class ChangePasswordView extends Component {
   constructor(props) {
@@ -44,10 +36,10 @@ class ChangePasswordView extends Component {
     return (
       <form onSubmit={this.updatePassword.bind(this)} className="MaterialForm ChangePassword">
        <div className="row MaterialForm-Header">
-          <h2 className="col-xs-12">Change your password</h2>
+          <h2>Change your password</h2>
        </div>
 
-      {errors(this.props.error)}
+      <FormMessages />
 
        <div className="row">
         <TextField className="col-xs-12 col-md-7 col-lg-5"
@@ -72,15 +64,7 @@ class ChangePasswordView extends Component {
 
 ChangePasswordView.propTypes = {
   location: React.PropTypes.object,
-  dispatch: React.PropTypes.func,
-  error: React.PropTypes.array
+  dispatch: React.PropTypes.func
 };
 
-const mapStateToProps = (state) => {
-  return {
-    message: state.auth.message,
-    error: state.auth.error
-  };
-};
-
-export default connect(mapStateToProps)(ChangePasswordView);
+export default connect()(ChangePasswordView);

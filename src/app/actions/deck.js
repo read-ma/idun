@@ -13,10 +13,6 @@ function loadDeckForArticle(deckId) {
     api.get(`/decks/${deckId}.json`)
       .then((response) => {
         dispatch(deckLoaded(response.data.deck));
-      })
-      .catch((err) => {
-        console.error('Error: ', err);
-        // store.dispatch(processFinished());
       });
   };
 }
@@ -33,9 +29,6 @@ function loadDecks() {
     api.get('/decks.json')
       .then((response) => {
         dispatch(decksLoaded(response.data.decks));
-      })
-      .catch((err) => {
-        console.error('Error: ', err);
       });
   };
 }
@@ -76,10 +69,7 @@ function markItem(item, value) {
       }
     };
     api.patch(`/user_definitions/${item.id}.json`, updateParams)
-      .then(() => dispatch(updateDeckItem(item.id, params)))
-      .catch((err) => {
-        console.error('Error: ', err);
-      });
+      .then(() => dispatch(updateDeckItem(item.id, params)));
   };
 }
 

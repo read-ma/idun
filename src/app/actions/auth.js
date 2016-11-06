@@ -38,8 +38,21 @@ const signupAttempt = (user) => {
       .then(() => {
         dispatch(userAccountCreated());
       })
-      .catch(function(response) {
-        dispatch(userSigningUpError(response));
+      .catch(function(error) {
+        let emailErrors = '';
+        let passwordErrors = '';
+
+        if (error.response.data.errors) {
+          if (error.response.data.errors.email) {
+            emailErrors = `E-mail ${error.response.data.errors.email}.`;
+          }
+
+          if (error.response.data.errors.password) {
+            passwordErrors = `Password ${error.response.data.errors.password}.`;
+          }
+        }
+
+        dispatch(userSigningUpError([emailErrors, passwordErrors]));
       });
   };
 };
@@ -49,21 +62,21 @@ const userLoggedIn = (userData) => {
   ls.set('IS_AUTHENTICATED', true);
   ls.set('CURRENT_USER_EMAIL', userData.email);
 
-  if (userData.su) {
-    ls.set('IS_ADMIN', userData.su);
+  if (userData.isAdmin) {
+    ls.set('IS_ADMIN', userData.isAdmin);
   }
   ReactGA.set({ userId: userData.email });
 
   return {
     type: 'USER_LOGGED_IN',
-    payload: Object.assign({}, userData, { isAdmin: userData.su }),
+    payload: Object.assign({}, userData, { isAdmin: userData.isAdmin }),
   };
 };
 
-const userSigningInError = () => {
+const userSigningInError = (error) => {
   return {
     type: 'USER_SIGNING_IN_ERROR',
-    payload: 'We could not let you in with entered credentials. No way.'
+    payload: error
   };
 };
 
@@ -73,13 +86,13 @@ const loginAttempt = (email, password) => {
       '/login.json',
       { admin_user: { email: email, password: password } }
     )
-      .then((response) => {
-        dispatch(userLoggedIn(response.data));
-        dispatch(push(returnTo(store.getState())));
-      })
-      .catch(function(response) {
-        dispatch(userSigningInError(response));
-      });
+    .then((response) => {
+      dispatch(userLoggedIn(response.data));
+      dispatch(push(returnTo(store.getState())));
+    })
+    .catch(function(error) {
+      dispatch(userSigningInError([error.response.data.error]));
+    });
   };
 };
 
@@ -125,6 +138,13 @@ const resetPassword = (email) => {
   };
 };
 
+
+/*
+  TODO:
+    Change API responses so that this is not needed.
+    OR
+    Unify API responses so that all of them look like this and extract this logic to its own module
+*/
 const humanize = str => str.replace(/_/g, ' ').toLocaleLowerCase();
 
 const extractErrors = (errors) => {

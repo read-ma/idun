@@ -12,52 +12,56 @@ function stateFromLocalStorage() {
 export default function auth(state = stateFromLocalStorage(), action) {
   switch (action.type) {
 
-  // case '@@router/LOCATION_CHANGE':
-  //   return Object.assign(
-  //     {},
-  //     state,
-  //     { message: null },
-  //     { error: null }
-  //   );
+  // TODO: Make error/notice/info keys configurable
+  // Allow "keep: true" when route changes instead of clearing errors
+  case '@@router/LOCATION_CHANGE':
+    return Object.assign(
+      {},
+      state,
+      { error: [] }
+    );
 
   case 'PASSWORD_UPDATED':
     return Object.assign(
       {},
       state,
-      { error: null },
-      { message: 'Your password has been updated. You can now log in.' }
+      { notice: ['Your password has been changed. You can now log in.'] },
+      { info: [] }
     );
 
   case 'EMAIL_CONFIRMED':
     return Object.assign(
       {},
       state,
-      { error: null },
-      { message: 'Thank you! You have confirmed your email. Please log in and start using the app.' }
-    );
-
-  case 'CHANGE_PASSWORD_REQUEST_ERROR':
-    return Object.assign(
-      {},
-      state,
-      { message: null },
-      { error: 'Email you entered does not exist in our database.' }
-    );
-
-  case 'UPDATE_PASSWORD_ERROR':
-    return Object.assign(
-      {},
-      state,
-      { message: null },
-      { error: action.payload }
+      { notice: ['Thank you! You have confirmed your email.', 'Please log in and start using the app.'] },
+      { info: [] }
     );
 
   case 'CHANGE_PASSWORD_REQUESTED':
     return Object.assign(
       {},
       state,
-      { error: null },
-      { message: 'Furhter instructions will be sent to your email within 10 minutes' }
+      { error: [] },
+      { notice: ['Further instructions will be sent to your email within 5 minutes.'] },
+      { info: ['If you don\'t receive email from us in couple minutes, please try again.'] }
+    );
+
+  case 'CHANGE_PASSWORD_REQUEST_ERROR':
+    return Object.assign(
+      {},
+      state,
+      { error: ['Email you entered does not exist in our database.'] },
+      { notice: [] },
+      { info: [] }
+    );
+
+  case 'UPDATE_PASSWORD_ERROR':
+    return Object.assign(
+      {},
+      state,
+      { error: action.payload },
+      { notice: [] },
+      { info: [] }
     );
 
   case 'USER_SIGNING_IN_ERROR':
@@ -67,13 +71,18 @@ export default function auth(state = stateFromLocalStorage(), action) {
       state,
       { isAuthenticated: false },
       { isAdmin: false },
-      { error: JSON.stringify(action.payload.response.data.errors) }
+      { error: action.payload },
+      { notice: [] },
+      { info: [] }
     );
 
   case 'LOGOUT_USER':
     return Object.assign(
       {},
       state,
+      { error: [] },
+      { notice: [] },
+      { info: ['You are now logged out.'] },
       action.payload
     );
 
@@ -82,6 +91,9 @@ export default function auth(state = stateFromLocalStorage(), action) {
       {},
       state,
       { isAuthenticated: true },
+      { error: [] },
+      { notice: [] },
+      { info: [] },
       action.payload
     );
 
@@ -89,10 +101,9 @@ export default function auth(state = stateFromLocalStorage(), action) {
     return Object.assign(
       {},
       state,
-      {
-        error: null,
-        message: 'Thank you! Please check your email box for a message from us! See you soon!'
-      }
+      { error: [] },
+      { notice: ['Thank you! Please check your email box for a notice from us! See you soon!'] },
+      { info: [] }
     );
 
   default:

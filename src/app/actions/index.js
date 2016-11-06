@@ -3,18 +3,6 @@ import { findTextDefinitions } from './definitions';
 import { loadDecks, loadDeckForArticle } from './deck';
 import api from '../api';
 
-const processFinished = () => {
-  return {
-    type: 'PROCESS_FINISHED',
-  };
-};
-
-const processStarted = () => {
-  return {
-    type: 'PROCESS_STARTED',
-  };
-};
-
 const newWordSelected = (text) => {
   return {
     type: 'NEW_WORD_SELECTED',
@@ -81,16 +69,14 @@ function userDefinitionDeleted(definition) {
 function deleteUserDefinition(definition) {
   return dispatch => {
     api.delete(`/user_definitions/${definition.id}.json`)
-      .then(() => dispatch(userDefinitionDeleted(definition)))
-      .catch(error => console.log(error));
+      .then(() => dispatch(userDefinitionDeleted(definition)));
   };
 }
 
 function saveUserDefinition(definition) {
   return dispatch => {
     api.post('/user_definitions.json', { user_definition: definition })
-      .then(response => dispatch(userDefinitionSaved(response.data.user_definition)))
-      .catch(error => dispatch(userDefinitionSavingFailed(error)));
+      .then(response => dispatch(userDefinitionSaved(response.data.user_definition)));
   };
 }
 
@@ -99,9 +85,6 @@ function loadUserDefinitions() {
     api.get('/user_definitions.json')
       .then((response) => {
         dispatch(userDefinitionsLoaded(response.data.user_definitions));
-      })
-      .catch(() => {
-        dispatch(processFinished());
       });
   };
 }
@@ -136,7 +119,6 @@ export { loadArticles, loadArticle, confirmArticleLearned, articlePageClosed,
          deleteArticle,
          findTextDefinitions,
          changeLanguage,
-         processFinished, processStarted,
          newWordSelected,
          closeNav, openNav,
          windowResize,

@@ -5,21 +5,21 @@ import { push } from 'react-router-redux';
 const updateArticlesFilter = (change) => {
   return {
     type: 'UPDATE_ARTICLES_FILTER',
-    payload: change,
+    payload: change
   };
 };
 
 function pageScrolled(pageId, position) {
   return {
     type: 'PAGE_SCROLLED',
-    payload: { position, pageId },
+    payload: { position, pageId }
   };
 }
 
 function articlesLoaded(items) {
   return {
     type: 'ARTICLES_LOADED',
-    items,
+    items
   };
 }
 
@@ -27,8 +27,7 @@ function getArticles(params, handleSuccess) {
   return api.get('/articles.json?limit=200')
     .then((response) => {
       handleSuccess(response.data.articles);
-    })
-    .catch(err => console.log(err));
+    });
 }
 
 function loadArticles() {
@@ -39,12 +38,11 @@ function loadArticles() {
   };
 }
 
-function postArticle(article, handleSuccess, handleFail) {
+function postArticle(article, handleSuccess) {
   return api.post('/articles.json', { article })
     .then((response) => {
       handleSuccess(response.data);
-    })
-    .catch(handleFail);
+    });
 }
 
 function articleAdded() {
@@ -64,11 +62,6 @@ function addArticle(article) {
 
         dispatch(closeNav('right'));
         dispatch(articleAdded());
-      },
-      (error) => {
-        // TODO: Add snackbar. http://www.material-ui.com/v0.14.4/#/components/snackbar
-        // 'There was a problem with adding your article'
-        throw new Error(`READMA: article not added ${error.message}`);
       }
     );
   };
@@ -84,7 +77,7 @@ function changeArticle(articleChangeset) {
 function articleLoaded(article) {
   return {
     type: 'ARTICLE_LOADED',
-    article,
+    article
   };
 }
 
@@ -115,7 +108,7 @@ function loadArticle(articleId) {
 const articleLearned = (articleId) => {
   return {
     type: 'ARTICLE_LEARNED',
-    payload: { articleId },
+    payload: { articleId }
   };
 };
 
@@ -124,8 +117,7 @@ const confirmArticleLearned = (id) => {
     api.post('/article_actions.json', {
       article_action: { article_id: id, action: 'learned' }
     })
-      .then(() => dispatch(articleLearned(id)))
-      .catch(error => console.error(error));
+    .then(() => dispatch(articleLearned(id)));
   };
 };
 

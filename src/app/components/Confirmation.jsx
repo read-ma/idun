@@ -1,14 +1,15 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { confirmEmail } from '../actions/auth';
+import FormMessage from './FormMessage';
 
-class ConfirmationView extends React.Component {
+class ConfirmationView extends Component {
   componentDidMount() {
     this.props.confirm({ confirmation_token: this.props.location.query.t });
   }
 
   render() {
-    return <h3>redirecting ...</h3>;
+    return <FormMessage message={['Loading...']} type="info" />;
   }
 }
 
@@ -17,17 +18,10 @@ ConfirmationView.propTypes = {
   location: React.PropTypes.object,
 };
 
-const mapStateToProps = (state) => {
-  return {
-    message: state.auth.message,
-    error: state.auth.error
-  };
-};
-
 const mapActionsToProps = (dispatch) => {
   return {
     confirm: (payload) => dispatch(confirmEmail(payload))
   };
 };
 
-export default connect(mapStateToProps, mapActionsToProps)(ConfirmationView);
+export default connect(null, mapActionsToProps)(ConfirmationView);

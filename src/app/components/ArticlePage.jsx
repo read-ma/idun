@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 
 import { loadArticle, textSelected, loadUserDefinitions, articlePageClosed } from '../actions';
 
+import FormMessage from './FormMessage';
+
 import { ShowIf } from '../components';
 import Sidebar from '../containers/Sidebar';
 import ArticleContent from './ArticleContent';
@@ -15,11 +17,7 @@ const ArticleFooter = ({ sourceUrl }) => {
   return (
     <blockquote>
       <span>Source: </span>
-      <a href={sourceUrl}
-        target="_blank"
-        title="Go to source article">
-          {sourceUrl}
-      </a>
+      <a href={sourceUrl} target="_blank"title="Go to source article">{sourceUrl}</a>
     </blockquote>
   );
 };
@@ -27,8 +25,6 @@ const ArticleFooter = ({ sourceUrl }) => {
 ArticleFooter.propTypes = {
   sourceUrl: React.PropTypes.string,
 };
-
-const LoadingArticle = () => <span>Loading...</span>;
 
 class ArticlePage extends Component {
   componentWillMount() {
@@ -42,7 +38,7 @@ class ArticlePage extends Component {
 
   render() {
     if (!this.props.article.id) {
-      return <LoadingArticle />;
+      return <FormMessage message={['Loading...']} type="info" />;
     }
 
     return (

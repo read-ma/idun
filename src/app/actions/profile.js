@@ -13,8 +13,7 @@ function getProfile() {
     api.get('/profile.json')
       .then((response) => {
         dispatch(profileLoaded(response.data.stats));
-      })
-      .catch(err => console.log(err));
+      });
   };
 }
 
