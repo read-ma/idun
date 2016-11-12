@@ -42,7 +42,11 @@ const articleImage = (imageUrl, title) => {
   let image = '';
 
   if (imageUrl) {
-    image = <img src={imageUrl} alt={title} />;
+    const style = {
+      backgroundImage: `url(${imageUrl})`
+    };
+
+    image = <div className="ArticleLink-CardMedia-Image" style={style} title={title} />;
   } else {
     image = <div className="ArticleLink-CardMedia-Placeholder"><PhotoCamera /></div>;
   }
@@ -53,7 +57,7 @@ const articleImage = (imageUrl, title) => {
 };
 
 const cardSource = (source_url) => {
-  let sourceDisplayText = source_url ? `${source_url.substring(0, 75)}...` : 'Pasted by the user';
+  let sourceDisplayText = source_url ? `${source_url.substring(0, 75)}...` : 'Added by the community';
   return (
     <CardText className="ArticleLink-CardText">
       <a href={source_url}>Source: {sourceDisplayText}</a>
