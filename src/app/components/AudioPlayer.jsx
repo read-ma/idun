@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import RaisedButton from 'material-ui/lib/raised-button';
+
+
 class Audio extends Component {
   componentDidMount() {
     const audio = this.refs.audio;
@@ -41,11 +44,12 @@ Audio.propTypes = {
 class AudioPlayer extends Component {
   render() {
     if (!this.props.audioTrack) {
-      return <button>want to listen!</button>;
+      return <RaisedButton label="Create mp3 from this article" onClick={this.props.createAudio()} className="AudioPlayer-CreateMp3" />;
     }
 
     return (
-      <Audio src={this.props.audioTrack.url} playing={this.props.playing} articleStartedPlaying={this.props.articleStartedPlaying} />
+      <Audio src={this.props.audioTrack.url} playing={this.props.playing} articleStartedPlaying={this.props.articleStartedPlaying}
+        className="AudioPlayer" />
     );
   }
 }
@@ -54,6 +58,7 @@ AudioPlayer.propTypes = {
   audioTrack: React.PropTypes.object,
   articleStartedPlaying: React.PropTypes.func,
   playing: React.PropTypes.bool,
+  createAudio: React.PropTypes.func,
 };
 
 function mapStateToProps(state) {
@@ -68,6 +73,9 @@ const mapActionsToProps = (dispatch) => {
     articleStartedPlaying() {
       dispatch({ type: 'TTS_PLAY_ARTICLE' });
     },
+    createAudio() {
+      // TODO: Implement creating order for mp3 creation
+    }
   };
 };
 

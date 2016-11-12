@@ -18,7 +18,8 @@ class Main extends React.Component {
         <AppBar
           onLeftIconButtonTouchTap={this.props.openNav}
           className="Appbar"
-          title={this.props.topNavChildren}
+          title="ReadMa"
+          children={this.props.topNavChildren}
         />
         <MainNavigaton displaySearchBar={this.displaySearchBar()} isAuthenticated={this.props.isAuthenticated}>
           {this.props.navChildren}
