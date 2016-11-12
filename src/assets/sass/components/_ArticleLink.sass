@@ -37,6 +37,17 @@
     max-height: 350px
     img
       width: 100%
+    &-Placeholder
+      display: flex
+      width: 100%
+      height: 100%
+      justify-content: center
+      align-items: center
+      svg
+        width: 40% !important
+        height: 40% !important
+        *
+          fill: #dedede
   &-CardActions
     padding-left: 16px !important
     svg
@@ -47,3 +58,6 @@
       color: #ccc !important
       font-size: 80% !important
       word-wrap: break-all
+
+  &:hover .ArticleLink-CardMedia svg *
+    fill: #999

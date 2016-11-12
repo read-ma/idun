@@ -8,7 +8,7 @@ import CardTitle from 'material-ui/lib/card/card-title';
 import CardText from 'material-ui/lib/card/card-text';
 import CardActions from 'material-ui/lib/card/card-actions';
 
-const defaultImageUrl = '/kitten.jpg';
+import PhotoCamera from 'material-ui/lib/svg-icons/image/photo-camera';
 
 const audioLabel = (audio_track) => {
   if (!audio_track) {
@@ -38,13 +38,18 @@ const cardTitle = (title, difficulty, audio_track) => {
   );
 };
 
-const cardImage = (image, title) => {
-  const image_url = image || defaultImageUrl;
-  return (
-    <CardMedia className="ArticleLink-CardMedia">
-      <img src={image_url} alt={title} />
-    </CardMedia>
-  );
+const articleImage = (imageUrl, title) => {
+  let image = '';
+
+  if (imageUrl) {
+    image = <img src={imageUrl} alt={title} />;
+  } else {
+    image = <div className="ArticleLink-CardMedia-Placeholder"><PhotoCamera /></div>;
+  }
+
+  return (<CardMedia className="ArticleLink-CardMedia">
+    {image}
+  </CardMedia>);
 };
 
 const cardSource = (source_url) => {
@@ -61,7 +66,7 @@ const ArticleLink = ({ id, title, difficulty, image, source_url, audio_track }) 
     <Card className="col-xs-12 col-md-6 col-lg-4 ArticleLink" key={id}>
       <a href={`#/article/${id}`}>
         {cardTitle(title, difficulty, audio_track)}
-        {cardImage(image, title)}
+        {articleImage(image, title)}
       </a>
 
       {cardSource(source_url)}
