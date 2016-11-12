@@ -5,10 +5,13 @@ import { forOwn } from 'lodash/forOwn';
 
 import { updateArticlesFilter } from '../actions/articles';
 
+import { openNav } from '../actions';
+
 import Toolbar from 'material-ui/lib/toolbar/toolbar';
 import ToolbarGroup from 'material-ui/lib/toolbar/toolbar-group';
 import MenuItem from 'material-ui/lib/menus/menu-item';
 import DropDownMenu from 'material-ui/lib/DropDownMenu';
+import RaisedButton from 'material-ui/lib/raised-button';
 
 const MenuItemFields = {
   visibility: { all: 'All articles', privy: 'My articles', open: 'Public articles' },
@@ -26,7 +29,7 @@ const FilterDropDownMenu = ({ updateFilter, name, selected }) => {
   );
 
   return (
-    <DropDownMenu value={selected} onChange={onChange}>
+    <DropDownMenu value={selected} onChange={onChange} className="ToolbarArticles-DropdownMenu">
       {items}
     </DropDownMenu>
   );
@@ -49,6 +52,7 @@ class ArticlesToolbar extends Component {
           <FilterDropDownMenu updateFilter={this.props.updateFilter} name="visibility" selected={this.props.filter.visibility} />
           <FilterDropDownMenu updateFilter={this.props.updateFilter} name="learning" selected={this.props.filter.learning} />
           <FilterDropDownMenu updateFilter={this.props.updateFilter} name="difficulty" selected={this.props.filter.difficulty} />
+          <RaisedButton label="Add new article" onClick={this.props.openRightNav} className="ToolbarArticles-AddNew" />
         </ToolbarGroup>
       </Toolbar>
     );
@@ -57,8 +61,10 @@ class ArticlesToolbar extends Component {
 
 ArticlesToolbar.propTypes = {
   updateFilter: React.PropTypes.func.isRequired,
-  filter: React.PropTypes.object.isRequired
+  filter: React.PropTypes.object.isRequired,
+  openRightNav: React.PropTypes.func.isRequired
 };
+
 
 function mapStateToProps(state) {
   return {
@@ -70,6 +76,11 @@ const mapActionsToProps = (dispatch) => {
   return {
     updateFilter(payload) {
       dispatch(updateArticlesFilter(payload));
+    },
+    openRightNav() {
+      dispatch(
+        openNav('right')
+      );
     }
   };
 };

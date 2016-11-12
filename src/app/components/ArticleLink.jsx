@@ -64,7 +64,7 @@ const cardSource = (source_url) => {
 const ArticleLink = ({ id, title, difficulty, image, source_url, audio_track }) => {
   return (
     <Card className="col-xs-12 col-md-6 col-lg-4 ArticleLink" key={id}>
-      <a href={`#/article/${id}`}>
+      <a href={`#/article/${id}`} className="ArticleLink-Content">
         {cardTitle(title, difficulty, audio_track)}
         {articleImage(image, title)}
       </a>
