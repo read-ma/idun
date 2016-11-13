@@ -81,7 +81,7 @@ function saveUserDefinition(definition) {
 }
 
 function loadUserDefinitions() {
-  return (dispatch) => {
+  return dispatch => {
     api.get('/user_definitions.json')
       .then((response) => {
         dispatch(userDefinitionsLoaded(response.data.user_definitions));
@@ -110,7 +110,10 @@ function showNotify(notifyMessage) {
   };
 }
 
-export { loadArticles, loadArticle, confirmArticleLearned, articlePageClosed,
+export { loadArticles,
+         loadArticle,
+         confirmArticleLearned,
+         articlePageClosed,
          textSelected,
          toggleHighlighting,
          loadUserDefinitions, saveUserDefinition,
@@ -123,4 +126,4 @@ export { loadArticles, loadArticle, confirmArticleLearned, articlePageClosed,
          closeNav, openNav,
          windowResize,
          showNotify
-       };
+      };

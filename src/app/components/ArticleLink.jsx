@@ -65,9 +65,11 @@ const cardSource = (source_url) => {
   );
 };
 
-const ArticleLink = ({ id, title, difficulty, image, source_url, audio_track }) => {
+const ArticleLink = ({ id, title, difficulty, image, source_url, audio_track, placeholder }) => {
+  const placeholderClass = () => placeholder ? 'ArticleLink-Placeholder' : '';
+
   return (
-    <Card className="col-xs-12 col-md-6 col-lg-4 ArticleLink" key={id}>
+    <Card className={`col-xs-12 col-md-6 col-lg-4 ArticleLink ${placeholderClass()}`} key={id}>
       <a href={`#/article/${id}`} className="ArticleLink-Content">
         {cardTitle(title, difficulty, audio_track)}
         {articleImage(image, title)}
@@ -85,6 +87,7 @@ ArticleLink.propTypes = {
   image: React.PropTypes.string,
   source_url: React.PropTypes.string,
   audio_track: React.PropTypes.object,
+  placeholder: React.PropTypes.bool,
 };
 
 export default ArticleLink;
