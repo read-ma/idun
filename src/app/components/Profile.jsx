@@ -3,6 +3,7 @@ import Chart from 'chart.js';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
+import ArticleList from './ArticleList';
 import { getProfile } from '../actions/profile';
 import filterArticles from '../articleCriteriaMatcher';
 import { loadArticles } from '../actions/articles';
@@ -11,7 +12,6 @@ import { closeNav } from '../actions/';
 import MapLocalLibrary from 'material-ui/lib/svg-icons/maps/local-library';
 import List from 'material-ui/lib/lists/list';
 import ListItem from 'material-ui/lib/lists/list-item';
-
 
 const chartSettings = (data) => {
   return {
@@ -29,29 +29,13 @@ const chartSettings = (data) => {
   };
 };
 
-const RecommendedArticleListItem = ({ article }) => {
-  const articleLink = <Link to={{ pathname: `/article/${article.id}` }} className="Profile-ArticleLink">{article.title}</Link>;
-  const icon = <MapLocalLibrary />;
-
-  return (
-    <ListItem leftIcon={icon} primaryText={articleLink} key={article.id} />
-  );
-};
-
-RecommendedArticleListItem.propTypes = {
-  article: React.PropTypes.object
-};
-
 const RecommendedArticleList = ({ list }) => {
-  let articles =
-    filterArticles(list, { learning: 'pending', difficulty: 'all' })
-      .splice(0, 5)
-      .map((article, idx) => <RecommendedArticleListItem article={article} key={`article-${idx}`} />);
+  let articles = filterArticles(list, { learning: 'pending', difficulty: 'all' }).splice(0, 4);
 
   return (
-    <div className="col-xs-12 col-md-5">
-      <h2>Learn new words by reading articles below</h2>
-      <List> {articles} </List>
+    <div className="col-xs-12 col-md-7 Profile-Articles">
+      <h2>Proposed articles</h2>
+      <ArticleList articles={articles} />
     </div>
   );
 };
@@ -89,8 +73,8 @@ class Profile extends React.Component {
   }
 
   overallProgress() {
-    return (<div className="col-xs-12 col-md-6">
-      <h2>Your overall progress</h2>
+    return (<div className="col-xs-12 col-md-5">
+      <h2>My progress</h2>
       <canvas id="learning-progress-chart" width="300" height="300" className="Profile-ProgressChart" />
     </div>);
   }
@@ -110,7 +94,7 @@ class Profile extends React.Component {
 
   render() {
     return (
-      <div className="row" id="my-profile-container">
+      <div className="row Profile" id="my-profile-container">
         {this.overallProgress()}
         <RecommendedArticleList list={this.props.articles} />
       </div>);
@@ -132,7 +116,6 @@ const mapStateToProps = ({ profile, articles }) => {
     articles
   };
 };
-
 
 const mapActionsToProps = (dispatch) => {
   return {

@@ -1,3 +1,5 @@
+// TODO: Add has audio filter
+
 const matchCriteria = (article, filter) => {
   let match = true;
 

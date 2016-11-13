@@ -21,12 +21,12 @@ import ls from '../localStore';
 const appHistory = useRouterHistory(createHashHistory)();
 
 const LearnHeader = () => {
-  return <span>Flashcards</span>;
+  return <h3>Flashcards</h3>;
 };
 
 const ProfileHeader = () => {
   const userName = ls.get('CURRENT_USER_EMAIL');
-  return <span>My Profile - {userName}</span>;
+  return <h3>My Profile - {userName}</h3>;
 };
 
 export default (

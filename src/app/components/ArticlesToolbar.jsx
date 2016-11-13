@@ -52,7 +52,7 @@ class ArticlesToolbar extends Component {
           <FilterDropDownMenu updateFilter={this.props.updateFilter} name="visibility" selected={this.props.filter.visibility} />
           <FilterDropDownMenu updateFilter={this.props.updateFilter} name="learning" selected={this.props.filter.learning} />
           <FilterDropDownMenu updateFilter={this.props.updateFilter} name="difficulty" selected={this.props.filter.difficulty} />
-          <RaisedButton label="Add new article" onClick={this.props.openRightNav} className="ToolbarArticles-AddNew" />
+          <RaisedButton label="Add article" onClick={this.props.openRightNav} className="ToolbarArticles-AddNew" />
         </ToolbarGroup>
       </Toolbar>
     );
