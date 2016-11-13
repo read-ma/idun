@@ -19,7 +19,7 @@ casper.test.begin('User can login and logout', 4, function(test) {
       helpers.logIn(this);
     })
     .waitForSelector($.signOutButton, function() {
-      test.assertTextExists("Your overall progress");
+      test.assertTextExists("My progress");
       helpers.logOut(this);
     })
     .waitForSelector($.loginForm, function() {
