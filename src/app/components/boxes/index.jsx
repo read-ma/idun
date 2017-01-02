@@ -45,6 +45,7 @@ SimpleList.propTypes = {
   selectedText: React.PropTypes.string,
   selectedTextContext: React.PropTypes.object,
   dispatch: React.PropTypes.func,
+  collapsable: React.PropTypes.bool,
 };
 
 class RemoteList extends SimpleList {

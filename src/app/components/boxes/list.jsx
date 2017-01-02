@@ -95,6 +95,7 @@ DefinitionList.propTypes = {
   itemsToShowNumber: React.PropTypes.number,
   handleClick: React.PropTypes.func,
   label: React.PropTypes.string,
+  collapsable: React.PropTypes.bool,
 };
 
 const MoreLessButton = ({ collapsed, onClick }) => {
