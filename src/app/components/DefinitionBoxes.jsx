@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import sidebarBoxRegistry from './boxes';
+import SidebarBoxRegistry from './boxes';
 
 class DefinitionBoxes extends Component {
   render() {
     let boxes = this.props.boxes.map(box =>
-      React.createElement(sidebarBoxRegistry.get(box.component), {
+      React.createElement(SidebarBoxRegistry.get(box.component), {
         key: box.key,
         boxKey: box.key,
         wordLimit: box.wordLimit,
         selectedText: this.props.selectedText,
         selectedTextContext: this.props.selectedTextContext,
         dispatch: this.props.dispatch,
+        collapsable: box.collapsable,
         label: box.label,
         items: this.props.data[box.key]
       }));

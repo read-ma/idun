@@ -52,14 +52,18 @@ DefinitionListItem.propTypes = {
 };
 
 const LOW_LIMIT = 2;
-const TOP_LIMIT = 8;
+const TOP_LIMIT = 10;
 
 class DefinitionList extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { collapsed: false, itemsToShowNumber: LOW_LIMIT };
+    this.state = { collapsed: !props.collapsable, itemsToShowNumber: this.determineRowLimit() };
     this.toggle = this.toggle.bind(this);
+  }
+
+  determineRowLimit() {
+    return this.props.collapsable ? LOW_LIMIT : TOP_LIMIT;
   }
 
   toggle() {

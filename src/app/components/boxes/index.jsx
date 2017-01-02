@@ -29,6 +29,7 @@ class SimpleList extends Component {
             key={this.props.label}
             items={this.props.items}
             label={this.props.label}
+            collapsable={this.props.collapsable}
             handleClick={this.saveUserDefinition.bind(this)}
           />
         </div>
