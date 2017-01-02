@@ -99,7 +99,7 @@ DefinitionList.propTypes = {
 };
 
 const MoreLessButton = ({ collapsed, onClick }) => {
-  let icon = collapsed ? <KeyboardArrowUp /> : <KeyboardArrowDown />;
+  let icon = collapsed ? <small>less</small> : <small>more</small>;
 
   return (
     <ListItem onClick={onClick} className="BoxesList-MoreOrLessButton">{icon}</ListItem>
