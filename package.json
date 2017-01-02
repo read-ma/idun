@@ -19,9 +19,9 @@
     "test": "casperjs test test/test.js",
     "unit-test": "jest",
     "deploy:production": "npm run build:production",
-    "postdeploy:production": "rsync -azP --delete dist/* $DEPLOY_USER@logdock.com:domains/beta.readma.com/public_html",
+    "postdeploy:production": "rsync -azP --delete dist/* $DEPLOY_USER@api.readma.com:domains/beta.readma.com/public_html",
     "deploy:staging": "npm run build:production",
-    "postdeploy:staging": "rsync -azP --delete dist/* $DEPLOY_USER@logdock.com:domains/staging.readma.com/public_html",
+    "postdeploy:staging": "rsync -azP --delete dist/* $DEPLOY_USER@api.readma.com:domains/staging.readma.com/public_html",
     "dev": "webpack-dashboard -- ./node_modules/.bin/webpack-dev-server --progress --colors --inline --content-base public/ --config webpack.config.js",
     "maintenance": "sh script/maintenance.sh"
   },
