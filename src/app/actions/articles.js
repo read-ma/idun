@@ -1,5 +1,5 @@
 import api from '../api';
-import { closeNav } from '../actions';
+import { closeNav, changeLanguage } from '../actions';
 import { push } from 'react-router-redux';
 
 const updateArticlesFilter = (change) => {
@@ -101,6 +101,7 @@ function loadArticle(articleId) {
   return (dispatch) => {
     getArticle(articleId, (article) => {
       dispatch(articleLoaded(article));
+      dispatch(changeLanguage('from', article.source_lang));
     });
   };
 }

@@ -26,6 +26,10 @@ class LanguageManager {
     return _.find(this.all(), { key: key });
   }
 
+  find(codeOrKey) {
+    return this.byKey(codeOrKey) || this.byCode(codeOrKey);
+  }
+
 }
 
 export default new LanguageManager();

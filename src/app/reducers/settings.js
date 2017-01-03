@@ -1,5 +1,6 @@
 import ls from '../localStore.js';
 import { isMobile, isDesktop } from '../Responsive';
+import LanguageManager from '../LanguageManager';
 
 const positions = JSON.parse(ls.get('PAGE_POSITIONS')) || {};
 
@@ -29,7 +30,7 @@ const initialState = {
 function language(state = initialState.language, action) {
   switch (action.type) {
   case 'CHANGE_LANGUAGE':
-    return Object.assign({}, state, { [action.langType]: action.key });
+    return Object.assign({}, state, { [action.langType]: LanguageManager.find(action.key).code });
 
   default:
     return state;
