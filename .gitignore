@@ -6,5 +6,5 @@ node_modules
 .projectile
 .env
 .DS_Store
-
+.happypack
 npm-debug.log

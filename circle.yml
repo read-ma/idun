@@ -13,7 +13,7 @@ dependencies:
   cache_directories:
     - ~/.yarn-cache
   override:
-    - yarn install
+    - yarn install --force
   post:
     - ./node_modules/.bin/eslint src/ --ext .js --ext .jsx
     - npm run deploy:staging

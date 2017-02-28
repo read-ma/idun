@@ -116,6 +116,7 @@ UserCustomDefinition.propTypes = {
   saveUserDefinition: React.PropTypes.func,
   selectedText: React.PropTypes.string,
   articleId: React.PropTypes.number,
+  userDefinitions: React.PropTypes.array
 };
 
 function mapStateToProps(state) {

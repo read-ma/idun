@@ -1,4 +1,10 @@
 {
-  "plugins": ["lodash"],
-  "presets": ["es2015", "react"]
+  "plugins": ["lodash", "transform-es2015-modules-commonjs"],
+  "presets": [["es2015", { "modules": false }], "react"],
+  "env": {
+    "production": {
+      "plugins": ["transform-dev-warning", "add-module-exports"]
+    }
+  },
+  "compact": false
 }
