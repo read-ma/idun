@@ -5,7 +5,6 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackBrowserPlugin = require('webpack-browser-plugin');
 const WebpackMd5Hash = require('webpack-md5-hash');
-const DashboardPlugin = require('webpack-dashboard/plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const BUILD_DIR = 'public';
@@ -52,7 +51,6 @@ module.exports = {
     extensions: ['', '.js', '.jsx', '.sass']
   },
   plugins: [
-    new DashboardPlugin(),
     new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en-gb/),
     new CopyWebpackPlugin([
       { from: 'src/assets/images' },

@@ -5,7 +5,6 @@ import { closeNav } from '../actions';
 
 import UserCustomDefinition from '../components/UserCustomDefinition';
 import WordSearchInput from '../components/WordSearchInput';
-import LanguageDropDownMenu from '../components/language/LanguageDropDownMenu';
 import { TTSQuickPlayer } from '../components/TTSPlayer';
 
 import LeftNav from 'material-ui/lib/left-nav';
@@ -15,18 +14,11 @@ import AppBar from 'material-ui/lib/app-bar';
 
 import { DefinitionBoxes, ShowIf } from '../components';
 
-const TargetLanguageMenu = () => {
-  return (<div className="Sidebar-TargetLanguageMenu">
-    <h4>My language:</h4>
-    <LanguageDropDownMenu type="to" />
-  </div>);
-};
 
 const TranslationsInstruction = () => {
   return (<div className="Sidebar-TranslationsInstruction">
     <p>Click on any word in the article to find translations, definitions, images, related words and examples.</p>
-    <p>Once you find the best translation or definition you may want to
-            add it to your dictionary and review later using Learn section.</p>
+    <p>Once you find the best translation or definition you may want to add it to your dictionary and review later using Learn section.</p>
     <p>Learning new words is now pretty easy :)</p>
   </div>);
 };
@@ -41,7 +33,6 @@ class Sidebar extends Component {
           <WordSearchInput rightComponent={<TTSQuickPlayer />} />
         </AppBar>
 
-        <TargetLanguageMenu />
         <UserCustomDefinition />
         <DefinitionBoxes />
 

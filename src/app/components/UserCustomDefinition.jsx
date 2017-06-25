@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 
 import { saveUserDefinition } from '../actions';
 
+import LanguageDropDownMenu from '../components/language/LanguageDropDownMenu';
+
 import colors from 'material-ui/lib/styles/colors';
 import List from 'material-ui/lib/lists/list';
 import ListItem from 'material-ui/lib/lists/list-item';
@@ -11,6 +13,14 @@ import Paper from 'material-ui/lib/paper';
 import SocialSchool from 'material-ui/lib/svg-icons/social/school';
 import RaisedButton from 'material-ui/lib/raised-button';
 import { ShowIf } from '../components';
+
+
+const TargetLanguageMenu = () => {
+  return (<div className="Sidebar-TargetLanguageMenu">
+    <h4>My language:</h4>
+    <LanguageDropDownMenu type="to" />
+  </div>);
+};
 
 const TranslationBox = ({ translation, key }) => {
   return (
@@ -83,6 +93,9 @@ class UserCustomDefinition extends Component {
 
     return (
       <Paper zDepth={1} className="UserCustomDefinition-Paper" id="user-custom-definitions">
+
+        <TargetLanguageMenu />
+
         <DefinitionsBox list={this.state.userDefinitions} />
 
         <ShowIf condition={!this.state.formVisible}>
@@ -91,6 +104,7 @@ class UserCustomDefinition extends Component {
                 small={true} label="No matching translation? Add yours here."/>
           </ListItem>
         </ShowIf>
+
 
         <ShowIf condition={!!this.state.formVisible}>
           <ListItem disabled={true}>
@@ -103,7 +117,7 @@ class UserCustomDefinition extends Component {
             />
             <RaisedButton label="Save" type="submit" className="UserCustomDefinition-SaveButton"
                 onClick={this.saveUserDefinition} />
-            <RaisedButton label="Cancel" type="reset" className="UserCustomDefinition-SaveButton"
+            <RaisedButton label="Cancel" type="reset" className="UserCustomDefinition-CancelButton"
                 onClick={this.toggleFormVisibility} />
           </ListItem>
         </ShowIf>
