@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { requestArticleTrack } from '../actions/articles';
 
 import RaisedButton from 'material-ui/lib/raised-button';
 
@@ -42,9 +43,17 @@ Audio.propTypes = {
 };
 
 class AudioPlayer extends Component {
+  requestArticleTrack() {
+    this.props.createAudio({ id: this.props.article.id });
+  }
+
   render() {
     if (!this.props.audioTrack) {
-      return <RaisedButton label="Create mp3 from this article" onClick={this.props.createAudio()} className="AudioPlayer-CreateMp3" />;
+      return (
+        <RaisedButton label="Create mp3 from this article"
+                      onClick={this.requestArticleTrack.bind(this)}
+                      className="AudioPlayer-CreateMp3" />
+      );
     }
 
     return (
@@ -56,6 +65,7 @@ class AudioPlayer extends Component {
 
 AudioPlayer.propTypes = {
   audioTrack: React.PropTypes.object,
+  article: React.PropTypes.object,
   articleStartedPlaying: React.PropTypes.func,
   playing: React.PropTypes.bool,
   createAudio: React.PropTypes.func,
@@ -65,6 +75,7 @@ function mapStateToProps(state) {
   return {
     audioTrack: state.article.audio_track,
     playing: state.articlePlayer.playing,
+    article: state.article,
   };
 }
 
@@ -73,9 +84,7 @@ const mapActionsToProps = (dispatch) => {
     articleStartedPlaying() {
       dispatch({ type: 'TTS_PLAY_ARTICLE' });
     },
-    createAudio() {
-      // TODO: Implement creating order for mp3 creation
-    }
+    createAudio: (article) => dispatch(requestArticleTrack(article))
   };
 };
 

@@ -129,6 +129,24 @@ const articlePageClosed = () => {
   };
 };
 
+function createAudioTrack(article, handleSuccess) {
+  return api.post('/audio_tracks.json', article)
+    .then((response) => {
+      handleSuccess(response.data);
+    });
+}
+
+function requestArticleTrack(article) {
+  return (dispatch) => {
+    createAudioTrack(
+      Object.assign({}, { article_id: article.id }),
+      (data) => {
+        console.log(data);
+      }
+    );
+  };
+}
+
 export {
   loadArticle,
   loadArticles,
@@ -139,4 +157,5 @@ export {
   articlePageClosed,
   deleteArticle,
   changeArticle,
+  requestArticleTrack,
 };

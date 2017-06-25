@@ -24,6 +24,7 @@ const dispatchGAAction = (action, state) => {
   case 'USER_DEFINITION_SAVED':
   case 'IMPORT_ARTICLE':
   case 'ADD_ARTICLE':
+  case 'ARTICLE_TRACK_REQUESTED':
     return gaReporter(action);
   case 'TOGGLE_HIGHLIGHTING':
     switch (action.wordlist) {
