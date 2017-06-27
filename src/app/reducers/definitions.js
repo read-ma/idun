@@ -15,7 +15,6 @@ const initialState = {
 
 export default function definitions(state = initialState, action) {
   switch (action.type) {
-
   case 'CONTENT_LOADED':
     return Object.assign({}, state, { data: Object.assign({}, state.data, action.data) });
 

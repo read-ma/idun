@@ -17,13 +17,13 @@ class ArticleToolbar extends Component {
       <Toolbar className="Toolbar ToolbarArticle">
         <ToolbarGroup>
           <Wordlists handleSelected={this.props.showDictMatchingWords} wordlists={this.props.wordlists} />
-       </ToolbarGroup>
-          <ShowIf condition={this.props.isAdmin}>
-            <LanguageDropDownMenu type="from" key="language-from-selection" />
-          </ShowIf>
-          <ShowIf condition={this.props.isAdmin}>
-            <FlatButton primary={true} onClick={this.props.delete.bind(this)}>Delete</FlatButton>
-          </ShowIf>
+        </ToolbarGroup>
+        <ShowIf condition={this.props.isAdmin}>
+          <LanguageDropDownMenu type="from" key="language-from-selection" />
+        </ShowIf>
+        <ShowIf condition={this.props.isAdmin}>
+          <FlatButton primary={true} onClick={this.props.delete.bind(this)}>Delete</FlatButton>
+        </ShowIf>
       </Toolbar>
     );
   }

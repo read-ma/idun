@@ -9,7 +9,6 @@ const initialState = [
 
 export default function wordlists(state = initialState, action) {
   switch (action.type) {
-
   case 'ARTICLE_LOADED':
     return state.map((list) => {
       if (list.name === 'd3k') {

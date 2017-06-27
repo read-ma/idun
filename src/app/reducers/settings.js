@@ -72,7 +72,6 @@ function navBarVisibility(state, action) {
 
 export default function settings(state = initialState, action) {
   switch (action.type) {
-
   case 'PROCESS_STARTED':
     return Object.assign({}, state, { processesCounter: state.processesCounter + 1 });
 

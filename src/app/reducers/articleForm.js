@@ -2,7 +2,6 @@ const initialState = { content: '' };
 
 export default function articleForm(state = initialState, action) {
   switch (action.type) {
-
   case 'ARTICLE_ADDED':
     return Object.assign({}, initialState);
 

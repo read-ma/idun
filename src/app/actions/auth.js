@@ -86,13 +86,13 @@ const loginAttempt = (email, password) => {
       '/login.json',
       { admin_user: { email: email, password: password } }
     )
-    .then((response) => {
-      dispatch(userLoggedIn(response.data));
-      dispatch(push(returnTo(store.getState())));
-    })
-    .catch(function(error) {
-      dispatch(userSigningInError([error.response.data.error]));
-    });
+      .then((response) => {
+        dispatch(userLoggedIn(response.data));
+        dispatch(push(returnTo(store.getState())));
+      })
+      .catch(function(error) {
+        dispatch(userSigningInError([error.response.data.error]));
+      });
   };
 };
 

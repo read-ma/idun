@@ -4,7 +4,6 @@ const initialState = {
 
 export default function article(state = initialState, action) {
   switch (action.type) {
-
   case 'ARTICLE_PAGE_CLOSED':
     return Object.assign({}, initialState);
 

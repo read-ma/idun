@@ -118,7 +118,7 @@ const confirmArticleLearned = (id) => {
     api.post('/article_actions.json', {
       article_action: { article_id: id, action: 'learned' }
     })
-    .then(() => dispatch(articleLearned(id)));
+      .then(() => dispatch(articleLearned(id)));
   };
 };
 

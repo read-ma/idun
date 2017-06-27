@@ -36,7 +36,7 @@ function DefinitionListItem({ text, language, partOfSpeech, handleClick, key }) 
 
   return (
     <ListItem key={key} rightIcon={<ContentAddCircleOutline />} secondaryText={partOfSpeech}
-        onClick={add} className="BoxesList-ListItem">
+      onClick={add} className="BoxesList-ListItem">
       <LanguageIcon lang={language} />
       <span className="BoxesList-Definition" dangerouslySetInnerHTML={{ __html: text }} />
     </ListItem>
@@ -55,7 +55,6 @@ const LOW_LIMIT = 2;
 const TOP_LIMIT = 10;
 
 class DefinitionList extends Component {
-
   constructor(props) {
     super(props);
     this.state = { collapsed: !props.collapsable, itemsToShowNumber: this.determineRowLimit() };

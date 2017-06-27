@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 const AddArticleFloatingButton = ({ openRightNav }) => {
   return (<FloatingActionButton className="AddArticleFloatingButton" onClick={openRightNav}>
     <ContentAdd />
-    </FloatingActionButton>);
+  </FloatingActionButton>);
 };
 
 AddArticleFloatingButton.propTypes = {

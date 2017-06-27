@@ -21,38 +21,38 @@ class Login extends Component {
   render() {
     return (
       <form id="loginForm" onSubmit={this.login.bind(this)} className="MaterialForm Login">
-       <div className="row MaterialForm-Header">
+        <div className="row MaterialForm-Header">
           <h2 className="col-xs-12">Please log in</h2>
-       </div>
+        </div>
 
-       <FormMessages />
+        <FormMessages />
 
-       <div className="row">
+        <div className="row">
           <TextField className="col-xs-12 col-md-7 col-lg-5"
             floatingLabelText="Email address" type="email" id="email" name="email"
             ref="email" required="true" fullWidth={true} underlineShow={false}
           />
-       </div>
+        </div>
 
-       <div className="row">
+        <div className="row">
           <TextField className="col-xs-12 col-md-7 col-lg-5"
             floatingLabelText="Password" type="password" id="password" name="password"
             ref="password" required="true" fullWidth={true} underlineShow={false}
           />
-       </div>
+        </div>
 
-       <div className="row MaterialForm-Actions">
+        <div className="row MaterialForm-Actions">
           <div className="col-xs-12">
             <RaisedButton label="Login" primary={true} type="submit" className="MaterialForm-SubmitButton" />
             <FlatButton label="I forgot my password" linkButton={true} href="/#/forgot_password" />
           </div>
-       </div>
+        </div>
 
-       <div className="row MaterialForm-Info">
+        <div className="row MaterialForm-Info">
           <div className="col-xs-12">
             <Link to="sign_up">Please register </Link> if you don't have an account yet.
           </div>
-       </div>
+        </div>
       </form>
     );
   }

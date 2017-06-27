@@ -51,8 +51,8 @@ class AudioPlayer extends Component {
     if (!this.props.audioTrack) {
       return (
         <RaisedButton label="Create mp3 from this article"
-                      onClick={this.requestArticleTrack.bind(this)}
-                      className="AudioPlayer-CreateMp3" />
+          onClick={this.requestArticleTrack.bind(this)}
+          className="AudioPlayer-CreateMp3" />
       );
     }
 
