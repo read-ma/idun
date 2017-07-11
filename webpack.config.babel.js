@@ -2,8 +2,8 @@ import path from 'path';
 import os from 'os';
 
 // Build performance boosts
-import aliases from './webpack.aliases.js';
-import plugins from './webpack.plugins.js';
+import aliases from './webpack.aliases.babel.js';
+import plugins from './webpack.plugins.babel.js';
 
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 const extractCSS = new ExtractTextPlugin('[name].[contenthash:5].css');
@@ -29,6 +29,9 @@ module.exports = {
       ignored: /node_modules/
     }
   },
+  externals: {
+    'airbrakeJs': 'airbrakeJs'
+  },
   module: {
     rules: [
       {
@@ -36,10 +39,10 @@ module.exports = {
         use: ['babel-loader?cacheDirectory'],
         exclude: /node_modules/
       },
-
       {
         test: /(\.css|\.scss|\.sass)$/,
         exclude: /node_modules/,
+        include: path.join(__dirname, 'src', 'assets', 'sass'),
         use: extractCSS.extract({
           fallback: 'style-loader',
           use: ['css-loader', 'postcss-loader', 'sass-loader']
@@ -52,7 +55,7 @@ module.exports = {
     ]
   },
   resolve: {
-    modules: [path.join(__dirname, 'src'), 'node_modules'],
+    modules: [path.join(__dirname, 'src'), path.join(__dirname, 'node_modules')],
     extensions: ['.js', '.jsx', '.sass'],
     alias: aliases
   },

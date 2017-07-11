@@ -11,7 +11,7 @@ import CopyWebpackPlugin from 'copy-webpack-plugin';
 import PurifyCSSPlugin from 'purifycss-webpack';
 import PurifyCSSConfig from './purifycss.config.js';
 
-import LodashModuleReplacementPlugin from 'lodash-webpack-plugin';
+// import LodashModuleReplacementPlugin from 'lodash-webpack-plugin';
 import BellOnBundlerErrorPlugin from 'bell-on-bundler-error-plugin';
 
 
@@ -29,6 +29,9 @@ const getPlugins = function(extractCSS) {
         return module.context && module.context.indexOf("node_modules") !== -1;
       }
     }),
+    new webpack.ProvidePlugin({
+      airbrakeJs: "airbrakeJs"
+    }),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify(NODE_ENV),
@@ -44,11 +47,11 @@ const getPlugins = function(extractCSS) {
     log.warn('Running in production env.');
 
     plugins.push(
-      new webpack.optimize.UglifyJsPlugin(),
+      // new LodashModuleReplacementPlugin, // TODO: Investigate, fix
       new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en-gb/),
-      new LodashModuleReplacementPlugin(),
       new PurifyCSSPlugin(PurifyCSSConfig()),
-      new WebpackMd5Hash()
+      new WebpackMd5Hash(),
+      new webpack.optimize.UglifyJsPlugin(),
     );
   }
   return plugins;
