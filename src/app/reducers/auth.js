@@ -11,7 +11,6 @@ function stateFromLocalStorage() {
 
 export default function auth(state = stateFromLocalStorage(), action) {
   switch (action.type) {
-
   // TODO: Make error/notice/info keys configurable
   // Allow "keep: true" when route changes instead of clearing errors
   case '@@router/LOCATION_CHANGE':

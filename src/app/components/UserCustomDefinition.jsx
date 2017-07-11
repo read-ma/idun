@@ -88,7 +88,7 @@ class UserCustomDefinition extends Component {
         <ShowIf condition={!this.state.formVisible}>
           <ListItem disabled={true}>
             <RaisedButton className="UserCustomDefinition-SaveButton" onClick={this.toggleFormVisibility}
-                small={true} label="No matching translation? Add yours here."/>
+              small={true} label="No matching translation? Add yours here."/>
           </ListItem>
         </ShowIf>
 
@@ -102,9 +102,9 @@ class UserCustomDefinition extends Component {
               className="UserCustomDefinition-TranslationInput"
             />
             <RaisedButton label="Save" type="submit" className="UserCustomDefinition-SaveButton"
-                onClick={this.saveUserDefinition} />
+              onClick={this.saveUserDefinition} />
             <RaisedButton label="Cancel" type="reset" className="UserCustomDefinition-SaveButton"
-                onClick={this.toggleFormVisibility} />
+              onClick={this.toggleFormVisibility} />
           </ListItem>
         </ShowIf>
       </Paper>

@@ -55,10 +55,10 @@ class FlashcardsQuiz extends Component {
       <div className="row flashcards-container">
         <div className="col-xs-12">
           <Flashcard
-          key={this.props.currentItem.id}
-          item={this.props.currentItem}
-          markItem={this.props.markItem}
-          startWithObverse={true} />
+            key={this.props.currentItem.id}
+            item={this.props.currentItem}
+            markItem={this.props.markItem}
+            startWithObverse={true} />
         </div>
       </div>
     );

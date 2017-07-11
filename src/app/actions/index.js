@@ -111,19 +111,19 @@ function showNotify(notifyMessage) {
 }
 
 export { loadArticles,
-         loadArticle,
-         confirmArticleLearned,
-         articlePageClosed,
-         textSelected,
-         toggleHighlighting,
-         loadUserDefinitions, saveUserDefinition,
-         deleteUserDefinition,
-         loadDeckForArticle, loadDecks,
-         deleteArticle,
-         findTextDefinitions,
-         changeLanguage,
-         newWordSelected,
-         closeNav, openNav,
-         windowResize,
-         showNotify
-      };
+  loadArticle,
+  confirmArticleLearned,
+  articlePageClosed,
+  textSelected,
+  toggleHighlighting,
+  loadUserDefinitions, saveUserDefinition,
+  deleteUserDefinition,
+  loadDeckForArticle, loadDecks,
+  deleteArticle,
+  findTextDefinitions,
+  changeLanguage,
+  newWordSelected,
+  closeNav, openNav,
+  windowResize,
+  showNotify
+};

@@ -35,30 +35,30 @@ class ChangePasswordView extends Component {
   render() {
     return (
       <form onSubmit={this.updatePassword.bind(this)} className="MaterialForm ChangePassword">
-       <div className="row MaterialForm-Header">
+        <div className="row MaterialForm-Header">
           <h2>Change your password</h2>
-       </div>
-
-      <FormMessages />
-
-       <div className="row">
-        <TextField className="col-xs-12 col-md-7 col-lg-5"
-          floatingLabelText="Password" type="password" id="password" name="password"
-          required="true" fullWidth={true} onChange={this.handleInputChange} />
-      </div>
-
-       <div className="row">
-        <TextField className="col-xs-12 col-md-7 col-lg-5"
-          floatingLabelText="Confirm password" type="password" id="password_confirmation" name="password_confirmation"
-          required="true" fullWidth={true} onChange={this.handleInputChange} />
         </div>
 
-       <div className="row MaterialForm-Actions">
-        <div className="col-xs-12">
-          <RaisedButton label="Update password" primary={true} type="submit" className="MaterialForm-SubmitButton" />
+        <FormMessages />
+
+        <div className="row">
+          <TextField className="col-xs-12 col-md-7 col-lg-5"
+            floatingLabelText="Password" type="password" id="password" name="password"
+            required="true" fullWidth={true} onChange={this.handleInputChange} />
         </div>
-      </div>
-    </form>);
+
+        <div className="row">
+          <TextField className="col-xs-12 col-md-7 col-lg-5"
+            floatingLabelText="Confirm password" type="password" id="password_confirmation" name="password_confirmation"
+            required="true" fullWidth={true} onChange={this.handleInputChange} />
+        </div>
+
+        <div className="row MaterialForm-Actions">
+          <div className="col-xs-12">
+            <RaisedButton label="Update password" primary={true} type="submit" className="MaterialForm-SubmitButton" />
+          </div>
+        </div>
+      </form>);
   }
 }
 

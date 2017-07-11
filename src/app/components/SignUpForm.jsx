@@ -33,32 +33,32 @@ class SignUpForm extends React.Component {
     return (
       <form onSubmit={this.handleSignUp.bind(this)} className="MaterialForm SignUp">
 
-       <div className="row MaterialForm-Header">
-         <h2>Create account</h2>
-       </div>
+        <div className="row MaterialForm-Header">
+          <h2>Create account</h2>
+        </div>
 
-       <FormMessages />
+        <FormMessages />
 
-       <div className="row">
+        <div className="row">
           <TextField className="col-xs-12 col-md-7 col-lg-5"
             floatingLabelText="Your email address" fullWidth={true}
             type="email" id="signUpEmail" name="email" ref="email" required="true"
           />
-      </div>
+        </div>
 
-       <div className="row">
+        <div className="row">
           <TextField className="col-xs-12 col-md-7 col-lg-5"
             floatingLabelText="Password" fullWidth={true}
             type="password" id="password" name="password" ref="password" required="true"
           />
-      </div>
-
-       <div className="row MaterialForm-Actions">
-        <div className="col-xs-12">
-          <RaisedButton label="Create account" primary={true} type="submit" />
         </div>
-      </div>
-    </form>
+
+        <div className="row MaterialForm-Actions">
+          <div className="col-xs-12">
+            <RaisedButton label="Create account" primary={true} type="submit" />
+          </div>
+        </div>
+      </form>
     );
   }
 }

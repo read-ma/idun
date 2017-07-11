@@ -5,7 +5,6 @@ import UserDefinitionCard from './UserDefinitionCard';
 import { deleteUserDefinition } from '../actions';
 
 class UserDefinitionsList extends Component {
-
   componentDidMount() {
     if (this.props.items.length === 0) {
       this.props.loadUserDefinitions();
@@ -14,7 +13,7 @@ class UserDefinitionsList extends Component {
 
   render() {
     const items = this.props.items
-                      .map(item => <UserDefinitionCard key={item.id} item={item} onDelete={this.props.delete.bind(null, item)} />);
+      .map(item => <UserDefinitionCard key={item.id} item={item} onDelete={this.props.delete.bind(null, item)} />);
 
     return <div className="row"> {items} </div>;
   }

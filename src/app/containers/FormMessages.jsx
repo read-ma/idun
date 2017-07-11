@@ -6,7 +6,7 @@ import FormMessage from '../components/FormMessage';
 class FormMessages extends Component {
   render() {
     return (
-     <div className="col-xs-12 col-md-7">
+      <div className="col-xs-12 col-md-7">
         <FormMessage message={this.props.error} type="error" />
         <FormMessage message={this.props.notice} type="notice" />
         <FormMessage message={this.props.info} type="info" />

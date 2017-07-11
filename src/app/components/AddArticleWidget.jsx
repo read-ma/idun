@@ -84,7 +84,7 @@ class ArticleForm extends Component {
         <RaisedButton label="Save" primary={true} type="submit" />
       </fieldset>
 
-   </form>);
+    </form>);
   }
 }
 
@@ -118,7 +118,7 @@ class ArticleAdd extends React.Component {
         <AppBar title="New article" iconElementLeft={<IconButton onClick={this.props.closeNav}><NavigationClose /></IconButton>} />
         <ArticleForm addArticle={this.addArticle} onChange={this.onChange}
           isAdmin={this.props.isAdmin} isMobile={this.props.isMobile} article={this.props.article}/>
-          {/* Przydalby sie refactor lekki :\ */}
+        {/* Przydalby sie refactor lekki :\ */}
       </LeftNav>
     );
   }
