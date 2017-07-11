@@ -29,7 +29,6 @@
     "unit-test": "jest"
   },
   "dependencies": {
-    "airbrake-js": "^0.9.4",
     "chart.js": "^2.6.0",
     "classnames": "^2.2.5",
     "es6-promise": "^4.1.1",

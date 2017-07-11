@@ -9,7 +9,6 @@ module.exports = {
     'react-router-redux': path.join(MODULES, 'react-router-redux', 'dist', 'ReactRouterRedux'),
     'react-ga': path.join(MODULES, 'react-ga', 'src', 'index'),
     'chart.js': path.join(MODULES, 'chart.js', 'dist', 'Chart'),
-    'airbrake-js': path.join(MODULES, 'airbrake-js', 'dist', 'client'),
     React: path.join(MODULES, 'react', 'dist', 'react.min'),
     redux: path.join(MODULES, 'redux', 'dist', 'redux.min'),
     history: path.join(MODULES, 'history', 'umd', 'history'),
