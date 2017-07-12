@@ -1,5 +1,6 @@
-// import 'babel-polyfill';
-// import es6promise from 'es6-promise';
+// import 'es6-promise/auto';
+import 'es6-object-assign/auto';
+
 
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -12,8 +13,6 @@ import App from './containers/App';
 
 import '../assets/sass/app.sass';
 
-
-// es6promise.polyfill();
 injectTapEventPlugin(); // Needed for onTouchTap, more info:  https://github.com/zilverline/react-tap-event-plugin
 ErrorNotifier.setup();
 setupGoogleAnalytics();
