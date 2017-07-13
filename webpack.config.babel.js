@@ -59,5 +59,5 @@ module.exports = {
     extensions: ['.js', '.jsx', '.sass'],
     alias: aliases
   },
-  plugins: plugins(extractCSS)
+  plugins: plugins({ extractCSS, BUILD_DIR })
 };

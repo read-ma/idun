@@ -1,5 +1,6 @@
 require('dotenv').config({ silent: true });
 
+import path from 'path';
 import log from 'npmlog';
 
 import webpack from 'webpack';
@@ -7,6 +8,9 @@ import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import WebpackMd5Hash from 'webpack-md5-hash';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
+import workboxPlugin from 'workbox-webpack-plugin';
+
+
 
 import PurifyCSSPlugin from 'purifycss-webpack';
 import PurifyCSSConfig from './purifycss.config.js';
@@ -18,9 +22,9 @@ import BellOnBundlerErrorPlugin from 'bell-on-bundler-error-plugin';
 const NODE_ENV = process.env.NODE_ENV ? process.env.NODE_ENV.toLowerCase() : 'development';
 const is_production = NODE_ENV === 'production';
 
-const getPlugins = function(extractCSS) {
+const getPlugins = function(opts) {
   let plugins = [
-    extractCSS,
+    opts.extractCSS,
     new HtmlWebpackPlugin({ template: './src/templates/index.ejs' }),
     new CopyWebpackPlugin([{ from: 'src/assets/images' }, { from: 'src/assets/root' }]),
     new webpack.optimize.CommonsChunkPlugin({
@@ -54,6 +58,15 @@ const getPlugins = function(extractCSS) {
       new webpack.optimize.UglifyJsPlugin(),
     );
   }
+
+  plugins.push(
+    new workboxPlugin({
+      globDirectory: opts.BUILD_DIR,
+      globPatterns: ['**/*.{html,js,css}'],
+      swDest: path.join(opts.BUILD_DIR, 'sw.js')
+     })
+  )
+
   return plugins;
 }
 
