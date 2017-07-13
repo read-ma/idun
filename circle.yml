@@ -14,17 +14,19 @@ dependencies:
     - ~/.yarn-cache
   override:
     - yarn install --force
+    - node nightwatch.conf.js
   post:
     - ./node_modules/.bin/eslint src/ --ext .js --ext .jsx
-    - npm run deploy:staging
+    - yarn deploy:staging
 
 test:
   override:
-    - npm run unit-test
-    - npm test
+    - yarn unit-test
+    - yarn test
+    - yarn e2e
 
 deployment:
   production:
     branch: master
     commands:
-      - npm run deploy:production
+      - yarn deploy:production
