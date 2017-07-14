@@ -27,6 +27,11 @@ const getPlugins = function(opts) {
     opts.extractCSS,
     new HtmlWebpackPlugin({ template: './src/templates/index.ejs' }),
     new CopyWebpackPlugin([{ from: 'src/assets/images' }, { from: 'src/assets/root' }]),
+    /*
+      TODO:
+        Make more chunks
+        - split commons into couple more + async
+    */
     new webpack.optimize.CommonsChunkPlugin({
       name: "commons",
       minChunks: function(module) {
