@@ -1,3 +1,4 @@
+require('dotenv').config();
 const SCREENSHOT_PATH = "./e2e/screenshots/";
 const BINPATH = './node_modules/.bin/';
 
@@ -8,7 +9,7 @@ module.exports = {
   ],
   "output_folder": "./reports",
   "selenium": {
-    "start_process": true, // tells nightwatch to start/stop the selenium process
+    "start_process": false, // tells nightwatch to start/stop the selenium process
     "server_path": "./node_modules/.bin/selenium.jar",
     "port": 4444,
     "cli_args": {
@@ -18,15 +19,18 @@ module.exports = {
   },
   "test_settings": {
     "default": {
+      "launch_url": 'http://ondemand.saucelabs.com:80',
       "selenium_port": 80,
-      "selenium_host": "ondemand.saucelabs.com",
-      "launch_url": "http://localhost",
+      "selenium_host": 'ondemand.saucelabs.com',
+      "silent": true,
+      "username": process.env.SAUCE_USERNAME,
+      "access_key": process.env.SAUCE_ACCESS_KEY,
       "screenshots": {
         "enabled": true,
         "path": SCREENSHOT_PATH
       },
       "globals": {
-        "waitForConditionTimeout": 5000
+        "waitForConditionTimeout": 10000
       },
       "desiredCapabilities": {
         "browserName": "chrome"
