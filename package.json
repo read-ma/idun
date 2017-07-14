@@ -26,7 +26,6 @@
     "postdeploy:staging": "rsync -azP --delete dist/* $DEPLOY_USER@api.readma.com:domains/staging.readma.com/public_html",
     "lint": "eslint src/ --ext .js --ext .jsx",
     "maintenance": "sh script/maintenance.sh",
-    "test": "casperjs test test/test.js",
     "unit-test": "jest",
     "e2e": "nightwatch --config nightwatch.conf.js"
   },
@@ -65,7 +64,6 @@
     "babel-preset-stage-1": "^6.24.1",
     "babel-register": "^6.24.1",
     "bell-on-bundler-error-plugin": "^2.0.0",
-    "casperjs": "^1.1.4",
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.28.4",
     "css-mqpacker": "^6.0.1",
