@@ -27,7 +27,8 @@
     "lint": "eslint src/ --ext .js --ext .jsx",
     "maintenance": "sh script/maintenance.sh",
     "unit-test": "jest",
-    "e2e": "nightwatch --config nightwatch.conf.js"
+    "e2e": "nightwatch --config nightwatch.conf.js",
+    "e2eCI": "nightwatch --config nightwatch.conf.js --env chrome,safari,firefox"
   },
   "dependencies": {
     "chart.js": "^2.6.0",

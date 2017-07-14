@@ -32,20 +32,35 @@ module.exports = {
       "globals": {
         "waitForConditionTimeout": 10000
       },
-      "desiredCapabilities": {
-        "browserName": "chrome"
+      desiredCapabilities: {
+        browserName: "chrome"
       }
     },
-    "chrome": {
-      "desiredCapabilities": {
-        "browserName": "chrome"
+    chrome: {
+      desiredCapabilities: {
+        browserName: "chrome",
+        platform: 'Windows 7'
+      }
+    },
+    firefox: {
+      desiredCapabilities : {
+        browserName : "firefox",
+        platform: 'Windows 7'
+      }
+    },
+    edge: { // TODO: Add to the stack after investigation
+      desiredCapabilities: {
+        browserName: 'microsoftedge',
+        platform: 'Windows 10'
+      }
+    },
+    safari: {
+      desiredCapabilities: {
+        browserName: 'safari',
+        version: '10',
+        platform: 'OS X 10.11'
       }
     }
-    // "firefox": {
-    //   "desiredCapabilities" : {
-    //     "browserName" : "firefox"
-    //   }
-    // },
   },
   "custom_commands_path": "./node_modules/nightwatch-commands/commands",
   "custom_assertions_path": "./node_modules/nightwatch-commands/assertions"

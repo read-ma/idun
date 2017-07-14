@@ -16,7 +16,7 @@ dependencies:
 test:
   override:
     - yarn unit-test
-    - yarn e2e
+    - yarn e2eCI
 
 deployment:
   production:
