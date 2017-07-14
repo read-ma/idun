@@ -18,8 +18,8 @@ module.exports = {
   },
   "test_settings": {
     "default": {
-      "selenium_port": 4444,
-      "selenium_host": "localhost",
+      "selenium_port": 80,
+      "selenium_host": "ondemand.saucelabs.com:80",
       "launch_url": "http://localhost",
       "screenshots": {
         "enabled": true,
