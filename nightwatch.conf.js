@@ -1,39 +1,43 @@
-require('env2')('.env'); // optionally store your Evironment Variables in .env
 const SCREENSHOT_PATH = "./e2e/screenshots/";
 const BINPATH = './node_modules/.bin/';
 
 // we use a nightwatch.conf.js file so we can include comments and helper functions
 module.exports = {
   "src_folders": [
-    "e2e"// Where you are storing your Nightwatch e2e tests
+    "e2e/index.js"
   ],
-  "output_folder": "./reports", // reports (test outcome) output by nightwatch
-  "selenium": { // downloaded by selenium-download module (see readme)
+  "output_folder": "./reports",
+  "selenium": {
     "start_process": true, // tells nightwatch to start/stop the selenium process
     "server_path": "./node_modules/.bin/selenium.jar",
-    "host": "127.0.0.1",
-    "port": 4444, // standard selenium port
-    "cli_args": { // chromedriver is downloaded by selenium-download (see readme)
+    "host": "http://localhost",
+    "port": 4444,
+    "cli_args": {
       "webdriver.chrome.driver" : "./node_modules/.bin/chromedriver",
+      "webdriver.firefox.profile" : ""
     }
   },
   "test_settings": {
     "default": {
       "screenshots": {
-        "enabled": true, // if you want to keep screenshots
-        "path": SCREENSHOT_PATH // save screenshots here
+        "enabled": true,
+        "path": SCREENSHOT_PATH
       },
       "globals": {
-        "waitForConditionTimeout": 5000 // sometimes internet is slow so wait.
+        "waitForConditionTimeout": 5000
       },
-      "desiredCapabilities": { // use Chrome as the default browser for tests
-        "browserName": "chrome"
+      "desiredCapabilities": {
+        "browserName": "firefox"
+      }
+    },
+    "firefox": {
+      "desiredCapabilities" : {
+        "browserName" : "firefox"
       }
     },
     "chrome": {
       "desiredCapabilities": {
-        "browserName": "chrome",
-        "javascriptEnabled": true // turn off to test progressive enhancement
+        "browserName": "chrome"
       }
     }
   },

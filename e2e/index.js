@@ -41,7 +41,7 @@ module.exports = {
       .assert.visible($.signOutButton)
       .click($.signOutButton)
       .assert.containsText('.FormMessage-info', 'You are now logged out.')
-      .saveScreenshot('test/e2e/screenshots/screen.png')
+      // .saveScreenshot('e2e/screenshots/screen.png')
       .end();
   }
 };
