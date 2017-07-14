@@ -10,7 +10,7 @@ module.exports = {
   "selenium": {
     "start_process": true, // tells nightwatch to start/stop the selenium process
     "server_path": "./node_modules/.bin/selenium.jar",
-    "host": "http://localhost",
+    // "host": "http://localhost",
     "port": 4444,
     "cli_args": {
       "webdriver.chrome.driver" : "./node_modules/.bin/chromedriver",
