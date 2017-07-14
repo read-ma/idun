@@ -1,5 +1,5 @@
-const url = require('../lib/url');
-const $ = require('../lib/selectors');
+const url = require('./lib/url');
+const $ = require('./lib/selectors');
 
 const user = {
   login: process.env.TEST_LOGIN,
