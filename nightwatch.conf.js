@@ -10,15 +10,17 @@ module.exports = {
   "selenium": {
     "start_process": true, // tells nightwatch to start/stop the selenium process
     "server_path": "./node_modules/.bin/selenium.jar",
-    // "host": "http://localhost",
     "port": 4444,
     "cli_args": {
       "webdriver.chrome.driver" : "./node_modules/.bin/chromedriver",
-      "webdriver.firefox.profile" : ""
+      // "webdriver.gecko.driver" : "./node_modules/.bin/geckodriver",
     }
   },
   "test_settings": {
     "default": {
+      "selenium_port": 4444,
+      "selenium_host": "localhost",
+      "launch_url": "http://localhost",
       "screenshots": {
         "enabled": true,
         "path": SCREENSHOT_PATH
@@ -27,12 +29,7 @@ module.exports = {
         "waitForConditionTimeout": 5000
       },
       "desiredCapabilities": {
-        "browserName": "firefox"
-      }
-    },
-    "firefox": {
-      "desiredCapabilities" : {
-        "browserName" : "firefox"
+        "browserName": "chrome"
       }
     },
     "chrome": {
@@ -40,6 +37,11 @@ module.exports = {
         "browserName": "chrome"
       }
     }
+    // "firefox": {
+    //   "desiredCapabilities" : {
+    //     "browserName" : "firefox"
+    //   }
+    // },
   },
   "custom_commands_path": "./node_modules/nightwatch-commands/commands",
   "custom_assertions_path": "./node_modules/nightwatch-commands/assertions"
