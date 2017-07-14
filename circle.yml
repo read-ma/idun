@@ -13,7 +13,7 @@ dependencies:
     - ./node_modules/.bin/eslint src/ --ext .js --ext .jsx
     - yarn deploy:staging
     - node nightwatch.conf.js
-    - bash scripts/get-latest-chrome.sh
+    - bash script/get-latest-chrome.sh
 
 test:
   override:
