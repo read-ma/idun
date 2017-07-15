@@ -1,10 +1,12 @@
-import Airbrake from 'airbrake-js';
+/* global airbrakeJs */
+
 import store from './store';
 
 class ErrorNotifier {
   static setup() {
     if (process.env.NODE_ENV === 'production') {
-      window.airbrake = new Airbrake({
+      // Airbrake is provided from CDN
+      window.airbrake = new airbrakeJs.Client({
         projectId: process.env.AIRBRAKE_PROJECTID,
         projectKey: process.env.AIRBRAKE_PROJECTID,
         reporter: 'xhr',

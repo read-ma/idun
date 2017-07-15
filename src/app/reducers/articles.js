@@ -10,7 +10,6 @@ const initialState = [
 export default function articles(state = initialState, action) {
   switch (action.type) {
   case 'ARTICLES_LOADED':
-    console.log(action.items);
     return action.items;
 
   default:
