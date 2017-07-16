@@ -9,9 +9,9 @@ module.exports = {
   defaultSubmitButton: '.MaterialForm-SubmitButton',
 
   // Account inputs
-  signupEmailField: 'input[type="email"]#signUpEmail',
-  emailField: 'input[type="email"]#email',
-  passwordField: 'input[type="password"]#password',
+  signupEmailField: '#signUpEmail',
+  emailField: '#email',
+  passwordField: '#password',
 
   // Flash messages
   noticeFlashMessage: '.FormMessage-notice',
