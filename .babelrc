@@ -8,27 +8,9 @@
         "add-module-exports",
         "transform-react-constant-elements",
         "transform-react-inline-elements",
-        "transform-react-remove-prop-types"
-      ]
-    },
-    "react-debugging": {
-      "plugins": [
-        ["react-transform", {
-          "transforms": [{
-              "transform": "react-transform-catch-errors",
-              "imports": ["react", "redbox-react"]
-            },
-            {
-              "transform": "react-transform-count-renders",
-            },
-            {
-              "transform": "react-transform-render-visualizer"
-            },
-            {
-              "transform": "react-transform-log-render"
-            }
-          ]
-        }]
+        "transform-react-remove-prop-types",
+        "transform-react-pure-class-to-function",
+        "transform-react-binding"
       ]
     }
   },
