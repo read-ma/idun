@@ -855,6 +855,12 @@ babel-plugin-transform-react-display-name@^6.23.0:
   dependencies:
     babel-runtime "^6.22.0"
 
+babel-plugin-transform-react-inline-elements@^6.22.0:
+  version "6.22.0"
+  resolved "https://registry.yarnpkg.com/babel-plugin-transform-react-inline-elements/-/babel-plugin-transform-react-inline-elements-6.22.0.tgz#6687211a32b49a52f22c573a2b5504a25ef17c53"
+  dependencies:
+    babel-runtime "^6.22.0"
+
 babel-plugin-transform-react-jsx-self@^6.22.0:
   version "6.22.0"
   resolved "https://registry.yarnpkg.com/babel-plugin-transform-react-jsx-self/-/babel-plugin-transform-react-jsx-self-6.22.0.tgz#df6d80a9da2612a121e6ddd7558bcbecf06e636e"
@@ -4513,9 +4519,9 @@ netmask@~1.0.4:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/netmask/-/netmask-1.0.6.tgz#20297e89d86f6f6400f250d9f4f6b4c1945fcd35"
 
-nightwatch-commands@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/nightwatch-commands/-/nightwatch-commands-2.1.0.tgz#4b461423aa3383fef9827d8bce878642ba9d0d03"
+nightwatch-commands@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/nightwatch-commands/-/nightwatch-commands-3.0.0.tgz#ce7109125e066411824f5d07edbefc41771ce7c4"
   dependencies:
     async "0.2.10"
     chalk "0.4.0"
@@ -4555,10 +4561,6 @@ node-emoji@^1.4.1:
   dependencies:
     lodash.toarray "^4.4.0"
     string.prototype.codepointat "^0.2.0"
-
-node-env-file@^0.1.8:
-  version "0.1.8"
-  resolved "https://registry.yarnpkg.com/node-env-file/-/node-env-file-0.1.8.tgz#fccb7b050f735b5a33da9eb937cf6f1ab457fb69"
 
 node-fetch@^1.0.1:
   version "1.7.1"

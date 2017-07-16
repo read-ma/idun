@@ -3,7 +3,12 @@
   "presets": [["es2015", { "modules": false }], "react"],
   "env": {
     "production": {
-      "plugins": ["lodash", "transform-dev-warning", "add-module-exports"]
+      "plugins": [
+        "lodash",
+        "transform-dev-warning",
+        "add-module-exports",
+        "transform-react-inline-elements"
+      ]
     }
   },
   "compact": false
