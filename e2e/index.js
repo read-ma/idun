@@ -1,5 +1,6 @@
 const url = require('./lib/url');
 const $ = require('./lib/selectors');
+const sauceLabsReporter = require('./lib/sauceLabsReporter');
 
 const user = {
   login: process.env.TEST_LOGIN,
@@ -14,6 +15,7 @@ module.exports = {
       .execute(() => { localStorage.clear() }, {})
       .refresh()
   },
+  tearDown: sauceLabsReporter,
   'User can\'t register on taken email': (browser) => {
     browser
       .url(url.sign_up)
