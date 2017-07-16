@@ -6,8 +6,7 @@
       "plugins": [
         "transform-dev-warning",
         "add-module-exports",
-        "transform-react-constant-elements",
-        "transform-react-inline-elements"
+        "transform-react-constant-elements"
       ]
     }
   },
