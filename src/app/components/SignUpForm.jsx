@@ -55,7 +55,7 @@ class SignUpForm extends React.Component {
 
         <div className="row MaterialForm-Actions">
           <div className="col-xs-12">
-            <RaisedButton label="Create account" primary={true} type="submit" />
+            <RaisedButton label="Create account" primary={true} type="submit" className="MaterialForm-SubmitButton" />
           </div>
         </div>
       </form>

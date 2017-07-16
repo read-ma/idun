@@ -1,6 +1,13 @@
+/*
+  TODO:
+
+    Create page_objects to increase readability and maintainability
+    Test removal of an account (need endpoint)
+*/
+
 const url = require('./lib/url');
-const $ = require('./lib/selectors');
 const sauceLabsReporter = require('./lib/sauceLabsReporter');
+const $ = require('./lib/elements');
 
 const user = {
   login: process.env.TEST_LOGIN,
@@ -11,6 +18,9 @@ module.exports = {
   before: (browser) => {
     console.log('Running tests @ :', browser.options.desiredCapabilities.browserName);
 
+    this.tempUserEmail = `test-${+new Date()}@readma.com`;
+    this.nonExistentEmail = `${+new Date()}@readma.com`
+
     browser
       .execute(() => { localStorage.clear() }, {})
       .refresh()
@@ -19,19 +29,19 @@ module.exports = {
   'User can\'t register on taken email': (browser) => {
     browser
       .url(url.sign_up)
-      .setValue('#signUpEmail', user.login)
-      .setValue('#password', user.password)
-      .click('.MaterialForm-Actions button')
-      .waitForElementPresent('.FormMessage-error')
-      .assert.containsText('.FormMessage-error', 'E-mail has already been taken.')
+      .setValue($.signupEmailField, user.login)
+      .setValue($.passwordField, user.password)
+      .click($.defaultSubmitButton)
+      .waitForElementPresent($.errorFlashMessage)
+      .assert.containsText($.errorFlashMessage, 'E-mail has already been taken.')
   },
   'User can register': (browser) => {
     browser
-      .clearValue('#signUpEmail')
-      .setValue('#signUpEmail', `test-${+new Date()}@readma.com`)
-      .click('.MaterialForm-Actions button')
-      .waitForElementPresent('.FormMessage-notice')
-      .assert.containsText('.FormMessage-notice', 'Thank you! Please check your email box for a notice from us! See you soon!')
+      .clearValue($.signupEmailField)
+      .setValue($.signupEmailField, this.tempUserEmail)
+      .click($.defaultSubmitButton)
+      .waitForElementPresent($.noticeFlashMessage)
+      .assert.containsText($.noticeFlashMessage, 'Thank you! Please check your email box for a notice from us! See you soon!')
       .end()
   },
   'User is redirected to home article if not logged in': (browser) => {
@@ -47,9 +57,9 @@ module.exports = {
   },
   'User can login': (browser) => {
     browser
-      .setValue('#email', user.login)
-      .setValue('#password', user.password)
-      .click('.MaterialForm-SubmitButton')
+      .setValue($.emailField, user.login)
+      .setValue($.passwordField, user.password)
+      .click($.defaultSubmitButton)
       .waitForAnimation()
       .assert.urlContains('profile')
   },
@@ -64,8 +74,8 @@ module.exports = {
     browser
       .click($.toggleLeftNavButton)
       .click($.signOutButton)
-      .waitForElementPresent('.FormMessage-info')
-      .assert.containsText('.FormMessage-info', 'You are now logged out.')
+      .waitForElementPresent($.infoFlashMessage)
+      .assert.containsText($.infoFlashMessage, 'You are now logged out.')
   },
   'User is redirected to login page after logout': (browser) => {
     browser
@@ -73,9 +83,9 @@ module.exports = {
   },
   'User can login after logout': (browser) => {
     browser
-      .setValue('#email', user.login)
-      .setValue('#password', user.password)
-      .click('.MaterialForm-SubmitButton')
+      .setValue($.emailField, user.login)
+      .setValue($.passwordField, user.password)
+      .click($.defaultSubmitButton)
       .waitForAnimation()
       .assert.urlContains('profile')
       .end()
@@ -83,20 +93,20 @@ module.exports = {
   'User can\'t remind password of non existent email': (browser) => {
     browser
       .url(url.forgot_password)
-      .setValue('#email', `test-${+new Date()}@readma.com`)
-      .click('.MaterialForm-SubmitButton')
-      .waitForElementPresent('.FormMessage-error')
-      .assert.containsText('.FormMessage-error', 'Email you entered does not exist in our database.')
+      .setValue($.emailField, this.nonExistentEmail)
+      .click($.defaultSubmitButton)
+      .waitForElementPresent($.errorFlashMessage)
+      .assert.containsText($.errorFlashMessage, 'Email you entered does not exist in our database.')
   },
   'User can remind forgotten password': (browser) => {
     browser
-      .clearValue('#email')
-      .setValue('#email', user.login)
-      .click('.MaterialForm-SubmitButton')
-      .waitForElementPresent('.FormMessage-notice')
-      .waitForElementPresent('.FormMessage-info')
-      .assert.containsText('.FormMessage-notice', 'Further instructions will be sent to your email within 5 minutes.')
-      .assert.containsText('.FormMessage-info', 'If you don\'t receive email from us in couple minutes, please try again.')
+      .clearValue($.emailField)
+      .setValue($.emailField, user.login)
+      .click($.defaultSubmitButton)
+      .waitForElementPresent($.noticeFlashMessage)
+      .waitForElementPresent($.infoFlashMessage)
+      .assert.containsText($.noticeFlashMessage, 'Further instructions will be sent to your email within 5 minutes.')
+      .assert.containsText($.infoFlashMessage, 'If you don\'t receive email from us in couple minutes, please try again.')
       .end();
   },
 };
