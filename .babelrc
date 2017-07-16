@@ -9,8 +9,7 @@
         "transform-react-constant-elements",
         "transform-react-inline-elements",
         "transform-react-remove-prop-types",
-        "transform-react-pure-class-to-function",
-        "transform-react-binding"
+        "transform-react-pure-class-to-function"
       ]
     }
   },
