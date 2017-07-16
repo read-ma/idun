@@ -10,8 +10,6 @@ import WebpackMd5Hash from 'webpack-md5-hash';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 import workboxPlugin from 'workbox-webpack-plugin';
 
-
-
 import PurifyCSSPlugin from 'purifycss-webpack';
 import PurifyCSSConfig from './purifycss.config.js';
 
