@@ -27,7 +27,7 @@
     "lint": "eslint src/ --ext .js --ext .jsx",
     "maintenance": "sh script/maintenance.sh",
     "unit-test": "jest",
-    "e2e": "nightwatch --config nightwatch-local.conf.js",
+    "e2e": "node nightwatch-local.conf.js; nightwatch --config nightwatch-local.conf.js",
     "e2eCI": "nightwatch --config nightwatch-saucelabs.conf.js --env chrome,firefox",
     "e2e-edge": "nightwatch --config nightwatch-saucelabs.conf.js --env edge"
   },

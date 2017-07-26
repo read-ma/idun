@@ -8,6 +8,7 @@ node_modules
 .DS_Store
 .happypack
 npm-debug.log
-e2e/screenshots
 selenium-debug.log
-reports
+test/screenshots
+test/selenium
+test/reports
