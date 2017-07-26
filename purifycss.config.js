@@ -9,9 +9,9 @@ const getConfig = () => {
     ]),
     purifyOptions: {
       minify: true,
-      info: true // Show summary of size reduction after build
+      info: false // Show summary of size reduction after build
     }
-  }
-}
+  };
+};
 
 export default getConfig;

@@ -41,17 +41,16 @@
     "material-ui": "^0.14.4",
     "moment": "^2.18.1",
     "nightwatch": "^0.9.16",
+    "offline-plugin": "^4.8.3",
     "react": "^0.14.8",
     "react-dom": "^0.14.7",
     "react-ga": "^2.2.0",
     "react-redux": "^4.4.0",
     "react-router": "^2.6.1",
     "react-router-redux": "^4.0.8",
+    "react-tap-event-plugin": "^0.2.2",
     "redux": "^3.7.1",
-    "redux-thunk": "^2.2.0",
-    "material-ui": "^0.14.4",
-    "classnames": "^2.2.5",
-    "react-tap-event-plugin": "^0.2.2"
+    "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",

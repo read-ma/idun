@@ -1,6 +1,18 @@
 // import 'es6-promise/auto';
 import 'es6-object-assign/auto';
 
+import runtime from 'offline-plugin/runtime';
+
+runtime.install({
+  onUpdateReady: () => {
+    console.log('SW Event:', 'onUpdateReady');
+    runtime.applyUpdate();
+  },
+  onUpdated: () => {
+    console.log('SW Event:', 'onUpdated');
+    window.location.reload();
+  },
+});
 
 import React from 'react';
 import ReactDOM from 'react-dom';

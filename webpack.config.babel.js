@@ -17,7 +17,7 @@ module.exports = {
   output: {
     path: BUILD_DIR,
     filename: '[name].[chunkhash:5].js',
-    chunkFilename: '[name].[chunkhash:5].js',
+    chunkFilename: '[name].[chunkhash:5].js'
   },
   devServer: {
     host: '0.0.0.0',
@@ -30,7 +30,7 @@ module.exports = {
     }
   },
   externals: {
-    'airbrakeJs': 'airbrakeJs'
+    airbrakeJs: 'airbrakeJs'
   },
   module: {
     rules: [
