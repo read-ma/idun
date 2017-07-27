@@ -3,7 +3,7 @@ const BINPATH = './node_modules/.bin/';
 
 module.exports = {
   src_folders: ['e2e/index.js'],
-  output_folder: './reports',
+  output_folder: './test/reports',
   selenium: {
     start_process: true,
     server_path: './node_modules/.bin/selenium.jar',
