@@ -18,8 +18,8 @@ module.exports = {
   before: browser => {
     console.log('Running tests @ :', browser.options.desiredCapabilities.browserName);
 
-    this.tempUserEmail = `test-${+new Date()}@readma.com`;
-    this.nonExistentEmail = `${+new Date()}@readma.com`;
+    this.tempUserEmail = `test-${+new Date()}@readma.eu`;
+    this.nonExistentEmail = `${+new Date()}@readma.eu`;
 
     browser
       .execute(() => {

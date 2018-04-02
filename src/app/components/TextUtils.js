@@ -55,7 +55,7 @@ class Token {
 
 const isQuoteMark = (token) => token.match(/^[\"\'\“\”\‘\’]$/);
 
-// http://beta.readma.com/#/article/484?_k=f3vxra
+// http://beta.readma.eu/#/article/484?_k=f3vxra
 // TODO to cover with unit tests ;)
 
 const detokenize = tokens => {
